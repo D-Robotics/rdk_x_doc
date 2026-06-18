@@ -174,9 +174,113 @@ cat /sys/bus/iio/devices/iio:device1/gyr_val
 </TabItem>
 </Tabs>
 
+### 3. 使用 Input 事件接口读取数据
+
+上文用 IIO 节点做了「驱动有没有起来、能不能读到数」的检查。如果你要做 **SLAM、防抖（EIS）、AR/VR、多传感器融合** 这类应用，光 `cat` sysfs 往往不够——你需要知道**每一块数据对应硬件上的哪个采样时刻**。
+
+为此，BMI088 驱动除了 IIO，还提供 **Linux Input EVENT 接口**：数据通过 `/dev/input/eventX` **连续推送**，每帧自带**硬件时间戳**。板端示例程序 `sample_imu_input` 用于演示这套接口的读取与校验。
+
+#### 数据格式说明
+
+可以把一帧 IMU 数据理解成「**9 个小包 + 1 个结束信号**」：
+
+1. 驱动依次上报 9 个 `EV_MSC` 事件（code 固定为 `0x04`），分别携带加速度 XYZ、陀螺仪 XYZ、时间戳高低 32 位、中断计数；
+2. 最后来一个 `EV_SYN / SYN_REPORT`，表示这一帧结束，应用侧此时把 9 个字段拼成完整一帧。
+
+各字段含义如下：
+
+| 顺序 | 内容 | 说明 |
+|------|------|------|
+| 0–2 | ACC X/Y/Z | 加速度原始值（16 位有符号，单位 LSB） |
+| 3–5 | GYRO X/Y/Z | 陀螺仪原始值（16 位有符号，单位 LSB） |
+| 6–7 | 时间戳高/低 32 位 | 拼成 64 位整数，单位 **纳秒（ns）**，表示硬件采样时刻 |
+| 8 | 中断计数 | 驱动侧累计中断次数，可用来观察采样是否连续 |
+
+:::info 注意区分两种时间
+- `input_event` 结构体里的 `ev.time`：内核收到事件的时间，**不是** IMU 采样时间；
+- 硬件采样时间戳：在 MSC 字段的 `ev.value` 里，由驱动打包上报。
+:::
+
+BMI088 与 ICM42688 采用**同一套**上报协议；下文以 RDK IMU Module（BMI088）为例说明。
+
+#### 1. 查找 IMU 对应的 event 节点
+
+驱动注册的 Input 设备名为 **`bmi088-sensor`**。在板端执行：
+
+```shell
+grep -A5 bmi088-sensor /proc/bus/input/devices
+```
+
+示例输出：
+
+```shell
+N: Name="bmi088-sensor"
+P: Phys=bmi088/input0
+S: Sysfs=/devices/virtual/input/input1
+U: Uniq=
+H: Handlers=event1
+B: PROP=0
+```
+
+看 `H: Handlers=` 一行：这里是 **`event1`**，对应设备路径 **`/dev/input/event1`**。
+
+不同板子、不同外设挂载顺序下，`event` 编号可能变化，**请以 `grep` 结果为准，不要照搬文档编号**。
+
+#### 2. 运行示例程序
+
+示例程序预置在板端以下路径：
+
+```shell
+/app/platform_samples/sample_imu/sample_imu_input/sample_imu_input
+```
+
+进入目录并运行（将 `event1` 替换为上一步得到的实际节点）：
+
+```shell
+cd /app/platform_samples/sample_imu/sample_imu_input
+./sample_imu_input /dev/input/event1
+```
+
+也可省略参数，程序默认打开 `/dev/input/event1`（仅当该节点确实对应 IMU 时适用）。
+
+程序启动后会**持续打印**每一帧数据。轻轻晃动 IMU，观察 ACC、GYRO 数值是否随之变化。按 **`Ctrl + C`** 退出；退出时会打印帧间隔统计和累计丢包数。
+
+#### 3. 查看输出
+
+每帧一行，格式类似：
+
+```text
+ACC(ax,ay,az) | GYRO(gx,gy,gz) | TS:1234567890 ns | Lost: 0 | EventCount: 10 | up_count: 100 | lower_count: -
+```
+
+| 字段 | 含义 |
+|------|------|
+| `ACC` / `GYRO` | 六轴**原始 LSB**，不是 m/s² 或 rad/s |
+| `TS` | 本帧**硬件采样时间戳**（纳秒） |
+| `Lost` | 累计丢帧次数 |
+| `up_count` | 驱动中断计数（对应协议第 9 个字段） |
+
+示例程序内置丢包检测：若相邻两帧硬件时间戳间隔 **超过 3.5 ms**，会打印 `[ERROR] IMU data lost` 并将 `Lost` 加 1。偶发告警可先观察；若持续大量出现，建议检查接线、供电，或尝试断电重启后再测。
+
+#### 4. 自行开发参考
+
+若要在自己的 C/C++ 程序里读取，核心流程是：
+
+1. `open("/dev/input/eventX", O_RDONLY)` 打开设备；
+2. 循环 `read(fd, &ev, sizeof(ev))`；
+3. `ev.type == EV_MSC && ev.code == 0x04` 时按顺序缓存 `ev.value`；
+4. `ev.type == EV_SYN && ev.code == SYN_REPORT` 且已收满 9 个字段时，解析六轴、拼时间戳、处理下一帧。
+
+参考实现：
+
+板端位置 ：`/app/multimedia_samples/sample_imu/sample_imu_input/sample_imu_input.c`。
+
+源码位置 ：`/source/hobot-multimedia-samples/debian/app/multimedia_samples/sample_imu/sample_imu_input/sample_imu_input.c`。
+
 ## 常见问题排查
 
 - **i2cdetect 出现一个 UU、一个 69**：断电重启开发板后再扫描。
 - **找不到 IIO 设备**：确认 `srpi-config` 已选择正确接口类型并已重启。
 - **device 序号与文档示例不一致**：以板上实际注册的结果为准。
+- **sample_imu_input 打开失败或没有数据**：确认 `srpi-config` 已启用 BMI088（I2C/SPI）并已重启；用 `grep -A5 bmi088-sensor /proc/bus/input/devices` 核对 `event` 编号是否与命令一致。
 
