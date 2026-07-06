@@ -93,8 +93,8 @@ tinymix -D 0 set 'Left Input Boost Mixer LINPUT1 Volume' 1
 tinymix -D 0 set 'Right Input Boost Mixer RINPUT1 Volume' 1
 
 # 设置录音音量
-tinymix -D 0 set 'Capture Volume' 40,40
-tinymix -D 0 set 'ADC PCM Capture Volume' 200,200
+tinymix -D 0 set 'Capture Volume' 40 40
+tinymix -D 0 set 'ADC PCM Capture Volume' 200 200
 
 # 打开输入通路开关
 tinymix -D 0 set 'Left Boost Mixer LINPUT1 Switch' 1
@@ -103,7 +103,7 @@ tinymix -D 0 set 'Left Input Mixer Boost Switch' 1
 tinymix -D 0 set 'Right Input Mixer Boost Switch' 1
 
 # 打开录音开关
-tinymix -D 0 set 'Capture Switch' 1,1
+tinymix -D 0 set 'Capture Switch' 1 1
 ```
 
 #### 1.2 开始录音
@@ -131,8 +131,8 @@ tinymix -D 0 set 'Right Output Mixer PCM Playback Switch' 1
 # 设置喇叭音量
 tinymix -D 0 set 'Speaker DC Volume' 3
 tinymix -D 0 set 'Speaker AC Volume' 3
-tinymix -D 0 set 'Speaker Playback Volume' 127, 127
-tinymix -D 0 set 'Playback Volume' 255, 255
+tinymix -D 0 set 'Speaker Playback Volume' 127 127
+tinymix -D 0 set 'Playback Volume' 255 255
 
 # 再次确保输出开关已打开
 tinymix -D 0 set 'Left Output Mixer PCM Playback Switch' 1
@@ -145,8 +145,8 @@ tinyplay ./2chn_test.wav -D 0 -d 0
 #### 2.2 耳机与喇叭同时播放
 
 ```shell
-tinymix -D 0 set 'Headphone Playback Volume' 80,80
-tinymix -D 0 set 'Playback Volume' 220,220
+tinymix -D 0 set 'Headphone Playback Volume' 80 80
+tinymix -D 0 set 'Playback Volume' 220 220
 tinymix -D 0 set 'Speaker DC Volume' 4
 tinymix -D 0 set 'Left Output Mixer PCM Playback Switch' 1
 tinymix -D 0 set 'Right Output Mixer PCM Playback Switch' 1
@@ -156,9 +156,9 @@ tinyplay ./2chn_test.wav -D 0 -d 0
 #### 2.3 仅耳机播放（喇叭静音）
 
 ```shell
-tinymix -D 0 set 'Headphone Playback Volume' 115,115
-tinymix -D 0 set 'Speaker Playback Volume' 0,0
-tinymix -D 0 set 'Playback Volume' 244,244
+tinymix -D 0 set 'Headphone Playback Volume' 115 115
+tinymix -D 0 set 'Speaker Playback Volume' 0 0
+tinymix -D 0 set 'Playback Volume' 244 244
 tinymix -D 0 set 'Speaker DC Volume' 4
 tinymix -D 0 set 'Left Output Mixer PCM Playback Switch' 1
 tinymix -D 0 set 'Right Output Mixer PCM Playback Switch' 1
@@ -172,6 +172,10 @@ tinyplay ./2chn_test.wav -D 0 -d 0
 Q1 : 硬件、软件都运行正常，Audio 通路也正常，喇叭有声音，但是耳机没有声音。
 
 A1 : 可能耳机音量比较小，将耳机音量调大。\
-比如使用 `tinymix -D  0 set 'Headphone Playback Volume' 115,115` 命令。
+比如使用 `tinymix -D  0 set 'Headphone Playback Volume' 115 115` 命令。
+
+Q2 : 使用 tinymix 设置了，但发现不符合预期
+
+A2 ：可能是 tinymix 命令没有生效，或者 tinymix 版本不对，导致参数设置异常。可以检查 tinymix 版本和对应版本的使用方法
 
 [更多问题可以查看如下链接](../../../08_FAQ/04_multimedia.md#audio-常见问题)
