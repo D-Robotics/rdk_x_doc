@@ -2,6 +2,10 @@
 sidebar_position: 3
 ---
 
+```mdx-code-block
+import DocScope from '@site/src/components/DocScope';
+```
+
 # 微雪 Audio Driver HAT REV2
 
 ## 产品简介
@@ -102,24 +106,40 @@ by-path  controlC0  controlC1  pcmC0D0p  pcmC0D1c  pcmC1D0c  pcmC1D0p  timer
 
 ### 4. 音频回采测试
 
-音频回采功能可用于采集播放通道的信号，便于后续分析。
+<DocScope versions=">= 3.6.0" products="RDK-X5">
+音频回采功能可用于采集播放通道的信号，便于算法或者后续应用中进行处理。做回采时需要保证录制与播放格式对齐（例如 16 kHz、8 通道、16-bit）。
 
+由于 ES8156 仅支持 2 通道播放，无法直接用 `tinyplay` 播放 8 通道数据做格式对齐回采。板端在 `/app/cdev_demo/audio_echo_test` 提供了参考示例，安装与使用方法请参阅 [audio_echo_test 示例介绍](../../02_cdev_demo_sample/audio_echo_test.md)。
+</DocScope>
+
+
+<DocScope versions=">= 3.5.0" products="RDK-X5">
 - **8通道麦克风录音（含回采）**  
-  该音频板的回采信号映射在录音通道 7 和 8 。需使用 8 通道录音命令（如果使用同一个 I2S ，需要保持通道数、位深、采样率对齐，这款转接板根据拨码开关固定了一路 I2S）：
+  该音频板的回采信号映射在录音通道 7 和 8 。需使用 8 通道录音命令（如果使用同一个 I2S ，需要保持通道数、位深、采样率对齐，这款转接板根据拨码开关固定了一路 I2S）, 再进行回采的时候，要保持 palyback 和 capture 的格式对齐：
+
+  我们首先录制一段 16k、8ch、16bit 格式的音频数据，这一段用做回采时候的 playback 数据。
 
   ```shell
-  tinycap ./8chn_test.wav -D 0 -d 1 -c 8 -b 16 -r 48000 -p 256 -n 4 -t 5
+  tinycap ./8chn_echo_data.wav -D 0 -d 1 -c 8 -b 16 -r 16000 -p 256 -n 4 -t 5
   ```
 
-- **同时启动格式对齐的8通道音频播放**
+  然后我们打开一个终端，开启录制进程，注意这里的格式对齐，我们这里设置了 50 秒的时间，这样可以有充足的时间来切换终端
 
   ```shell
-  tinyplay ./8chn_test.wav -D 0 -d 0
+  tinycap ./8chn_capture.wav -D 0 -d 1 -c 8 -b 16 -r 16000 -p 256 -n 4 -t 50
+  ```
+
+- **在刚才的终端同时启动格式对齐的8通道音频播放**
+
+  ```shell
+  tinyplay ./8chn_echo_data.wav -D 0 -d 0
   ```
   这个 8ch_test.wav 可以是自己制作的格式对齐的正弦波音频文件，这样方便分析。
 
 - **分析回采信号**  
   录制完成后，可使用如 Audacity 等音频分析软件，打开 `8chn_test.wav`，查看第 7 、 8 通道的波形或频谱，验证回采功能是否正常。
+
+</DocScope>
 
 ## 常见问题排查
 
