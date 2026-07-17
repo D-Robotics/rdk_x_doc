@@ -1,4 +1,3 @@
-```markdown
 ---
 sidebar_position: 6
 ---
@@ -536,4 +535,3 @@ sudo ./decode_rtsp_stream.py -a
 - Currently, the RTSP video stream only supports 1080P resolution.
 
 - Using VLC software for RTSP streaming is not supported because VLC does not allow adding `PPS` and `SPS` information.
-```

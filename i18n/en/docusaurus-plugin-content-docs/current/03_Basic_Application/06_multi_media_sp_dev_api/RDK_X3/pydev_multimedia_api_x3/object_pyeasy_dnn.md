@@ -20,17 +20,17 @@ Refer to the `01_basic_sample/test_efficientnasnet_m.py` example for an introduc
 
 ## API Reference
 
-### I. Module-Level Methods
+### Module-Level Methods
 | API Interface | Function Description |
 | ---- | ----- |
 | load | **Loads a model file and returns a Model inference object** |
 
-### II. Model Object Methods
+### Model Object Methods
 | API Interface | Function Description |
 | ---- | ----- |
 | forward | **Executes model inference, inputs tensor data, and returns output tensor objects** |
 
-### III. TensorProperties Tensor Attributes (Read-Only)
+### TensorProperties Tensor Attributes (Read-Only)
 | API Interface | Function Description |
 | ---- | ----- |
 | tensor_type | **Gets the tensor type (e.g., input/output tensor, intermediate tensor, etc.)** |
@@ -41,7 +41,7 @@ Refer to the `01_basic_sample/test_efficientnasnet_m.py` example for an introduc
 | validShape | **Gets the tensor's valid shape (effective dimensions actually used in computation, distinct from the aligned shape)** |
 | scale_data | **Gets the tensor's quantization scaling factor (specific to quantized models; for floating-point models, it is usually 1.0)** |
 
-### I. Module-Level Methods
+### Module-Level Methods
 
 #### load
 
@@ -82,7 +82,7 @@ models = dnn.load('../models/efficientnasnet_m_300x300_nv12.bin')
 - A `RuntimeError` exception is thrown if loading fails; it should be caught and handled;
 - Optional parameters (`kwargs`) must match the keyword argument definitions of the underlying `Dnnpy_load` function; they can be omitted if no special requirements exist.
 
-### II. Model Object Methods
+### Model Object Methods
 #### forward
 
 <font color='Blue'>【Function Description】</font>
@@ -114,7 +114,7 @@ For multi-input models, the `inputs` list must be passed in the order of the inp
 Inference time depends on model complexity and the number of hardware cores; it is recommended to use asynchronous calls to avoid blocking the main thread.
 :::
 
-### III. TensorProperties Tensor Attributes (Read-Only)
+### TensorProperties Tensor Attributes (Read-Only)
 `TensorProperties` is an object that encapsulates tensor metadata. It exposes the following read-only attributes via getter functions, with no independent methods; they are accessed directly by attribute name.
 
 | Attribute Name | Function Description | Data Type |

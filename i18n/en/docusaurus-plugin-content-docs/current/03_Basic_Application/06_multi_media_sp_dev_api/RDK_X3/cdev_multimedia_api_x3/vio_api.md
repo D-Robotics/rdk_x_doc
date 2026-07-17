@@ -224,6 +224,27 @@ Get the image frame data with the specified resolution (the resolution needs to 
 
 Returns 0 on success, -1 on failure.
 
+## sp_vio_set_frame  
+
+**【Function Prototype】**  
+
+`int32_t sp_vio_set_frame(void *obj, void *frame_buffer, int32_t size)`
+
+**【Function Description】**  
+
+When using the functionality of the `vps` module, the raw data needs to be passed in through this interface. The data in `frame_buffer` must be in the `NV12` format and have the same resolution as the original frame resolution when calling the `sp_open_vps` interface.
+
+**【Parameters】**
+
+- `obj`: Initialized pointer to the `VIO` object
+- `image_buffer`: Image frame data to be processed. It must be in the `NV12` format and have the same resolution as the original frame resolution when calling the `sp_open_vps` interface.
+- `size`: Size of the frame
+
+**【Return Type】**  
+
+Returns 0 on success, -1 on failure.
+
+
 ## sp_vio_get_raw  
 
 **【Function Prototype】**  
@@ -268,22 +289,3 @@ Get the YUV data from the ISP module of the camera.
 
 Returns 0 on success, -1 on failure.
 
-## sp_vio_set_frame  
-
-**【Function Prototype】**  
-
-`int32_t sp_vio_set_frame(void *obj, void *frame_buffer, int32_t size)`
-
-**【Function Description】**  
-
-When using the functionality of the `vps` module, the raw data needs to be passed in through this interface. The data in `frame_buffer` must be in the `NV12` format and have the same resolution as the original frame resolution when calling the `sp_open_vps` interface.
-
-**【Parameters】**
-
-- `obj`: Initialized pointer to the `VIO` object
-- `image_buffer`: Image frame data to be processed. It must be in the `NV12` format and have the same resolution as the original frame resolution when calling the `sp_open_vps` interface.
-- `size`: Size of the frame
-
-**【Return Type】**  
-
-Returns 0 on success, -1 on failure.

@@ -231,6 +231,27 @@ sidebar_position: 1
 
 成功返回 0，失败返回 -1 
 
+## sp_vio_set_frame  
+
+**【函数原型】**  
+
+`int32_t sp_vio_set_frame(void *obj, void *frame_buffer, int32_t size)`
+
+**【功能描述】**  
+
+在使用`vps`模块功能时，源数据需要通过调用本接口送入，`frame_buffer`里面的数据必须是 `NV12` 格式的图像数据，分辨率必须和调用`sp_open_vps`接口是的原始帧分辨率一致。
+
+**【参数】**
+
+- `obj`： 已经初始化的`VIO`对象指针
+- `frame_buffer`：需要处理的图像帧数据，必须是 `NV12` 格式的图像数据，分辨率必须和调用`sp_open_vps`接口是的原始帧分辨率一致。
+- `size`: 帧大小
+
+**【返回类型】**  
+
+成功返回 0，失败返回 -1
+
+
 ## sp_vio_get_raw  
 
 **【函数原型】**  
@@ -275,23 +296,4 @@ sidebar_position: 1
 
 成功返回 0，失败返回 -1 
 
-## sp_vio_set_frame  
-
-**【函数原型】**  
-
-`int32_t sp_vio_set_frame(void *obj, void *frame_buffer, int32_t size)`
-
-**【功能描述】**  
-
-在使用`vps`模块功能时，源数据需要通过调用本接口送入，`frame_buffer`里面的数据必须是 `NV12` 格式的图像数据，分辨率必须和调用`sp_open_vps`接口是的原始帧分辨率一致。
-
-**【参数】**
-
-- `obj`： 已经初始化的`VIO`对象指针
-- `frame_buffer`：需要处理的图像帧数据，必须是 `NV12` 格式的图像数据，分辨率必须和调用`sp_open_vps`接口是的原始帧分辨率一致。
-- `size`: 帧大小
-
-**【返回类型】**  
-
-成功返回 0，失败返回 -1
 
