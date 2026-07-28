@@ -105,7 +105,7 @@ For example, to modify the operating speed of the i2c4 controller:
 ...
 ```
 
-<font color="red">Note:</font> The parameters "i2c-scl-falling-time-ns" and "i2c-sda-falling-time-ns" may need to be adjusted using an oscilloscope depending on the PCB design. The above configurations assume that the I2C IO has pull-up enabled and that a 1k pull-up resistor is used on the board.
+**Note:** The parameters "i2c-scl-falling-time-ns" and "i2c-sda-falling-time-ns" may need to be adjusted using an oscilloscope depending on the PCB design. The above configurations assume that the I2C IO has pull-up enabled and that a 1k pull-up resistor is used on the board.
 
 **I2C DMA Configuration**
 

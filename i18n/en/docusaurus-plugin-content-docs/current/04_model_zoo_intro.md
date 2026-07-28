@@ -21,4 +21,4 @@ Through this repository you can access:
 
 ## User manual
 
-[Model Zoo user manual](https://developer.d-robotics.cc/model_zoo_x_doc/en/model_zoo_intro/)
+[Model Zoo user manual](https://developer.d-robotics.cc/model_zoo_doc/en/model_zoo_intro)

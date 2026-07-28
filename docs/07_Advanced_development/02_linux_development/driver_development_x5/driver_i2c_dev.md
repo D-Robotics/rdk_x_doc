@@ -100,7 +100,7 @@ X3J3 I2C驱动在Kernel Space下提供了可以设置I2C传输频率的接口，
 ...
 ```
 
-<font color="red">备注：</font>“i2c-scl-falling-time-ns”及“i2c-sda-falling-time-ns”两个参数在不同的PCB设计上可能需要通过示波器来调整。上述配置基于I2C IO使能上拉并且板端配置1k上拉电阻的硬件条件。
+**备注：** “i2c-scl-falling-time-ns” 及 “i2c-sda-falling-time-ns” 两个参数在不同的PCB设计上可能需要通过示波器来调整。上述配置基于I2C IO使能上拉并且板端配置1k上拉电阻的硬件条件。
 
 **I2C DMA配置**
 
