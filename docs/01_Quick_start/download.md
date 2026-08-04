@@ -413,7 +413,138 @@ RDK X3/X5 相关配件、扩展产品的完整规格书资料，提供详细的�
 </div>
 
 <style>
-{ PH0 }
+{`
+.table-wrapper {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.no-wrap-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.no-wrap-table th,
+.no-wrap-table td {
+  white-space: nowrap;
+  padding: 12px 8px;
+  border: 1px solid #e1e1e1;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.no-wrap-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.no-wrap-table td:last-child {
+  white-space: normal;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.no-wrap-table a {
+  color: #ff6900 !important;
+  text-decoration: none;
+}
+
+.no-wrap-table a:hover {
+  color: #e55a00 !important;
+  text-decoration: underline;
+}
+
+.hardware-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.doc-card {
+  border: 1px solid #e1e1e1;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fafafa;
+  transition: all 0.3s ease;
+}
+
+.doc-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.doc-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.doc-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.doc-header h4 {
+  margin: 0;
+  color: #2e8b57;
+  font-size: 18px;
+}
+
+.doc-content p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.doc-content strong {
+  color: #333;
+}
+
+.doc-link {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.download-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(45deg, #ff6900, #e55a00);
+  color: white !important;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.download-link:hover {
+  background: linear-gradient(45deg, #e55a00, #cc4f00);
+  transform: scale(1.02);
+  color: white !important;
+}
+
+@media (max-width: 768px) {
+  .table-wrapper {
+    margin: 10px -20px;
+  }
+
+  .no-wrap-table {
+    min-width: 600px;
+  }
+
+  .no-wrap-table th,
+  .no-wrap-table td {
+    padding: 8px 6px;
+    font-size: 14px;
+  }
+}
+`}
 </style>
 
 :::warning 注意事项
@@ -618,7 +749,7 @@ RDK X3/X5 相关配件、扩展产品的完整规格书资料，提供详细的�
 
 :::info 烧录建议
 - **RDK Module 系列**：首次使用建议通过 [烧录工具](https://archive.d-robotics.cc/downloads/hbupdate/) 升级系统
-- **系统版本查询**：使用命令  PH1  或  PH2 
+- **系统版本查询**：使用命令 `cat /etc/version` 或 `rdkos_info`
 :::
 
 ### 🔓 3. 开源资源
