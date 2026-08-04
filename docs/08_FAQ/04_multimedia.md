@@ -116,12 +116,12 @@ sidebar_position: 4
 2.  **使用 `amixer` 或 `tinymix` 指定声卡进行操作：**
     * 当您使用 `amixer` (ALSA Mixer command-line utility) 或 `tinymix` 等工具来查看或调整音频参数时，如果不指定声卡（ card）和设备（ device）编号，它们通常会默认操作序号为 0 的声卡。
     * 要操作特定的声卡，需要使用 `-c <card_number>` ( 或 `-c<card_number>`) 参数指定声卡序号，以及可能需要的 `-D hw:<card_number>` 或 `-d <device_number>` 参数。
-    * **查看特定声卡（如上述示例中的板载声卡，序号为1）的控件 (controls)：**
+    * **查看特定声卡（如上述示例中的板载声卡，序号为 1）的控件 (controls)：**
         ```bash
         amixer -c 1 controls
         # 或者使用硬件设备名 : amixer -D hw:1 controls
         ```
-    * **获取或设置特定声卡上控件的值 (例如，获取板载声卡序号1上名为 'ADC PGA Gain' 的第一个控件的值)：**
+    * **获取或设置特定声卡上控件的值 (例如，获取板载声卡序号 1 上名为 'ADC PGA Gain' 的第一个控件的值)：**
         ```bash
         amixer -c 1 sget 'ADC PGA Gain',0
         ```

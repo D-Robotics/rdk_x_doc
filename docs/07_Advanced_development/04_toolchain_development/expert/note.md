@@ -447,8 +447,8 @@ compile_quantized_model(torch.device('cuda'))
 |torch.atan|	horizon.nn.Atan|	不支持| | |参考 torch.acos| | |
 |torch.atanh|	horizon.nn.Atanh|	不支持| | |参考 torch.acos| | |
 | torch.cat | torch.nn.quantized.FloatFunctional 或 horizon.nn.quantized.FloatFunctional | qint8, qint16 | qint8, qint16 |  |qint8, qint16 | qint8, qint16 | input shape: [N, C, H, W], `N<=4096, HWC<=65536, 2<=input number<=1024` |
-| torch.ceil | horizon.nn.Ceil | 不支持 |  | | qint8, qint16 |  同输入 |int8下输入数量级不要超过1e6, int16 下输入数量级不要超过 1e8。 | 
-| torch.clamp |  | 不支持 | | | qint8, qint16 |  同输入 |支持min和max的输入为Tensor/常量Tensor/标量/None。 为常量Tensor时，min 和 max 的输入数据范围最好和 input 一致，否则有精度风险 |
+| torch.ceil | horizon.nn.Ceil | 不支持 |  | | qint8, qint16 |  同输入 |int8 下输入数量级不要超过 1e6, int16 下输入数量级不要超过 1e8。 | 
+| torch.clamp |  | 不支持 | | | qint8, qint16 |  同输入 |支持 min 和 max 的输入为 Tensor/常量 Tensor/标量/None。 为常量 Tensor 时，min 和 max 的输入数据范围最好和 input 一致，否则有精度风险 |
 | torch.clip |  | 不支持 |  | | 参考 torch.clamp |  | |
 | torch.cos | horizon.nn.Cos  |不支持 | | |  参考 torch.acos |  | |
 |torch.cosh |horizon.nn.Cosh |不支持 | | |参考 torch.acos | | |
@@ -456,7 +456,7 @@ compile_quantized_model(torch.device('cuda'))
 |torch.eq | |不支持 | | |qint8, qint16 |qbool | |
 |torch.erf |horizon.nn.Erf |不支持 | | |参考 torch.acos | | |
 |torch.exp |horizon.nn.Exp |qint8 |qint8 |使用查表拼凑，有精度风险 | 参考 torch.acos| | |
-|torch.floor |horizon.nn.Floor |不支持 | | |qint8, qint16 | 同输入|int8下输入数量级不要超过1e6, int16 下输入数量级不要超过 1e8。 |
+|torch.floor |horizon.nn.Floor |不支持 | | |qint8, qint16 | 同输入|int8 下输入数量级不要超过 1e6, int16 下输入数量级不要超过 1e8。 |
 |torch.gather | |不支持 | | |qint8, qint16, qint32 | 同输入| |
 |torch.ge | |不支持 | | |参考 torch.eq | | |
 |torch.greater | |不支持 | | |参考 torch.eq | | |
@@ -468,7 +468,7 @@ compile_quantized_model(torch.device('cuda'))
 |torch.log |horizon.nn.HardLog |不支持 | | |参考 torch.acos | | |
 |torch.lt | |不支持 | | |参考 torch.eq | | |
 |torch.matmul |horizon.nn.quantized.FloatFunctional	 |qint8 |qint8, qint32 | | |qint8, qint16, qint32 |input shape: [N, C, H, W], `input_size<1 G bytes, N<=4096, C, H, W<=8192.` |
-|torch.max | |qint8 |同输入 |只能作为模型输出。 输出格式和 torch 不同: 编译器支持的输出是一个 Tensor，其中一个 channel 中的值是 max_value， 另一个 channel 中的值是 max_value_index |qint8, qint16 |out: qint8, qint16 index: int32 |index 只能作为模型输出。 input_shape: [N, C, H, W], `1<=N<=4096, 1<=H, W, C<=65535` 支持min和max的输入为Tensor/常量Tensor/标量/None。为常量Tensor时，min 和 max 的输入数据范围最好和 input 一致，否则有精度风险 |
+|torch.max | |qint8 |同输入 |只能作为模型输出。 输出格式和 torch 不同: 编译器支持的输出是一个 Tensor，其中一个 channel 中的值是 max_value， 另一个 channel 中的值是 max_value_index |qint8, qint16 |out: qint8, qint16 index: int32 |index 只能作为模型输出。 input_shape: [N, C, H, W], `1<=N<=4096, 1<=H, W, C<=65535` 支持 min 和 max 的输入为 Tensor/常量 Tensor/标量/None。为常量 Tensor 时，min 和 max 的输入数据范围最好和 input 一致，否则有精度风险 |
 |torch.maximum |horizon.nn.quantized.FloatFunctional |不支持 | | |input: qint8, qint16 <br/> other: qint8, qint16 |qint8, qint16 | |
 |torch.mean |horizon.nn.quantized.FloatFunctional |qint8, qint16 |qint8, qint16 |只支持在 channel 方向的 mean。QAT 有训练参数，不要单独在预测中使用。 |qint8, qint16 |qint8, qint16 |支持在 CHW 上求 mean.QAT 有量化参数 |
 |torch.min | |不支持 | | |参考 torch.max | | |

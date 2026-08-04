@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# PTQ原理及步骤详解
+# PTQ 原理及步骤详解
 
 ```mdx-code-block
 import DocScope from '@site/src/components/DocScope';
@@ -10,87 +10,87 @@ import DocScope from '@site/src/components/DocScope';
 
 ### 简介{#PTQ_introduction}
 
-模型转换是指将原始浮点模型转换为D-Robotics 混合异构模型的过程。原始浮点模型（文中部分地方也称为浮点模型）是指您通过TensorFlow/PyTorch等DL框架训练得到的可用模型，这个模型的计算精度为float32；混合异构模型是一种适合在D-Robotics 处理器上运行的模型格式。
+模型转换是指将原始浮点模型转换为 D-Robotics 混合异构模型的过程。原始浮点模型（文中部分地方也称为浮点模型）是指您通过 TensorFlow/PyTorch 等 DL 框架训练得到的可用模型，这个模型的计算精度为 float32；混合异构模型是一种适合在 D-Robotics 处理器上运行的模型格式。
 本章节将反复使用到这两种模型名词，为避免理解歧义，请先理解这个概念再阅读下文。
 
-配合D-Robotics 算法工具链的模型完整开发过程，需要经过 **浮点模型准备**、 **模型验证**、 **模型转换**、 **性能评估** 和 **精度评估** 共五个重要阶段，如下图:
+配合 D-Robotics 算法工具链的模型完整开发过程，需要经过 **浮点模型准备**、 **模型验证**、 **模型转换**、 **性能评估** 和 **精度评估** 共五个重要阶段，如下图:
 
 ![model_conversion_flowchart](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/model_conversion_flowchart.png)
 
 
-**浮点模型准备** 本阶段用来确保原始浮点模型的格式为D-Robotics 模型转换工具支持的格式，原始浮点模型来自于您通过TensorFlow/PyTorch等DL框架训练得到可用模型。具体的浮点模型要求与建议，请阅读[**浮点模型准备**](#model_preparation)章节内容。
+**浮点模型准备** 本阶段用来确保原始浮点模型的格式为 D-Robotics 模型转换工具支持的格式，原始浮点模型来自于您通过 TensorFlow/PyTorch 等 DL 框架训练得到可用模型。具体的浮点模型要求与建议，请阅读[**浮点模型准备**](#model_preparation)章节内容。
 
-**模型验证** 本阶段用来校验原始浮点模型是否满足D-Robotics 算法工具链的要求。D-Robotics 提供 ``hb_mapper checker`` 检查工具来完成浮点模型的检查。具体使用方法，请阅读[**验证模型**](#model_check) 章节内容。
+**模型验证** 本阶段用来校验原始浮点模型是否满足 D-Robotics 算法工具链的要求。D-Robotics 提供 ``hb_mapper checker`` 检查工具来完成浮点模型的检查。具体使用方法，请阅读[**验证模型**](#model_check) 章节内容。
 
-**模型转换** 本阶段用来完成浮点模型到D-Robotics 混合异构模型的转换，经过这个阶段，您将得到一个可以在D-Robotics 处理器上运行的模型。D-Robotics 提供 ``hb_mapper makertbin`` 转换工具来完成模型优化、量化和编译等关键步骤。具体使用方法，请阅读[**模型转换**](#model_conversion)章节内容。
+**模型转换** 本阶段用来完成浮点模型到 D-Robotics 混合异构模型的转换，经过这个阶段，您将得到一个可以在 D-Robotics 处理器上运行的模型。D-Robotics 提供 ``hb_mapper makertbin`` 转换工具来完成模型优化、量化和编译等关键步骤。具体使用方法，请阅读[**模型转换**](#model_conversion)章节内容。
 
-**性能评估** 本阶段主要用于测评D-Robotics 混合异构模型的推理性能情况，D-Robotics 提供了模型性能评估的工具，您可以使用这些工具验证模型性能是否达到应用要求。具体使用说明，请阅读 [**模型性能分析与调优**](#performance_evaluation)章节内容。
+**性能评估** 本阶段主要用于测评 D-Robotics 混合异构模型的推理性能情况，D-Robotics 提供了模型性能评估的工具，您可以使用这些工具验证模型性能是否达到应用要求。具体使用说明，请阅读 [**模型性能分析与调优**](#performance_evaluation)章节内容。
 
-**精度评估** 本阶段主要用于测评D-Robotics 混合异构模型的推理精度情况，D-Robotics 提供了模型精度评估的工具。具体使用说明，请阅读[**模型精度分析与调优**](#accuracy_evaluation)章节内容。
+**精度评估** 本阶段主要用于测评 D-Robotics 混合异构模型的推理精度情况，D-Robotics 提供了模型精度评估的工具。具体使用说明，请阅读[**模型精度分析与调优**](#accuracy_evaluation)章节内容。
 
 
 
 ### 模型准备{#model_preparation}
 
 
-基于公开DL框架训练得到的浮点模型是D-Robotics 模型转换工具的输入，目前转换工具支持的DL框架如下：
+基于公开 DL 框架训练得到的浮点模型是 D-Robotics 模型转换工具的输入，目前转换工具支持的 DL 框架如下：
 
 
   | **框架**         | Caffe | PyTorch | TensorFlow | MXNet | PaddlePaddle |
   |-------|------------|--------------|--------------|--------------|--------------|
-  | **D-Robotics 工具链** | 支持  |   支持（转ONNX）|支持（转ONNX）|支持（转ONNX）|支持（转ONNX）|
+  | **D-Robotics 工具链** | 支持  |   支持（转 ONNX）|支持（转 ONNX）|支持（转 ONNX）|支持（转 ONNX）|
 
 
-以上框架中， Caffe框架导出的caffemodel是直接支持的，PyTorch、TensorFlow和MXNet等DL框架通过转换到ONNX格式间接支持。
+以上框架中， Caffe 框架导出的 caffemodel 是直接支持的，PyTorch、TensorFlow 和 MXNet 等 DL 框架通过转换到 ONNX 格式间接支持。
 
-对于不同框架到ONNX的转换，目前都有对应的标准化方案，参考如下：
+对于不同框架到 ONNX 的转换，目前都有对应的标准化方案，参考如下：
 
--    Pytorch2Onnx：PytTorch官方API支持直接将模型导出为ONNX模型，参考链接：
+-    Pytorch2Onnx：PytTorch 官方 API 支持直接将模型导出为 ONNX 模型，参考链接：
          https://pytorch.org/tutorials/advanced/super_resolution_with_onnxruntime.html
 
--    Tensorflow2Onnx：基于ONNX社区的onnx/tensorflow-onnx 进行转换，参考链接：
+-    Tensorflow2Onnx：基于 ONNX 社区的 onnx/tensorflow-onnx 进行转换，参考链接：
          https://github.com/onnx/tensorflow-onnx
 
--    MXNet2Onnx：MXNet官方API支持直接将模型导出为ONNX模型，参考链接：
+-    MXNet2Onnx：MXNet 官方 API 支持直接将模型导出为 ONNX 模型，参考链接：
          https://github.com/dotnet/machinelearning/blob/main/test/Microsoft.ML.Tests/OnnxConversionTest.cs
 
--    更多框架的ONNX转换支持，参考链接：
+-    更多框架的 ONNX 转换支持，参考链接：
          https://github.com/onnx/tutorials#converting-to-onnx-format
 
 
 :::tip 小技巧
 
-  关于Pytorch、PaddlePaddle、TensorFlow2框架的模型，我们也提供了如何导出ONNX及模型可视化的教程，请参考：
+  关于 Pytorch、PaddlePaddle、TensorFlow2 框架的模型，我们也提供了如何导出 ONNX 及模型可视化的教程，请参考：
 
-  - [**Pytorch导出ONNX及模型可视化教程**](https://developer.d-robotics.cc/forumDetail/146177165367615499) ；
+  - [**Pytorch 导出 ONNX 及模型可视化教程**](https://developer.d-robotics.cc/forumDetail/146177165367615499) ；
 
-  - [**PaddlePaddle导出ONNX及模型可视化教程**](https://developer.d-robotics.cc/forumDetail/146177165367615500) ；
+  - [**PaddlePaddle 导出 ONNX 及模型可视化教程**](https://developer.d-robotics.cc/forumDetail/146177165367615500) ；
 
-  - [**TensorFlow2导出ONNX及模型可视化教程**](https://developer.d-robotics.cc/forumDetail/146177165367615501) ；
+  - [**TensorFlow2 导出 ONNX 及模型可视化教程**](https://developer.d-robotics.cc/forumDetail/146177165367615501) ；
 :::
 
 :::caution 注意
 
-  - 浮点模型中所使用的算子需要符合D-Robotics 算法工具链的算子约束条件，具体请阅读 [**模型算子支持列表**](./supported_op_list) 章节进行查询。
+  - 浮点模型中所使用的算子需要符合 D-Robotics 算法工具链的算子约束条件，具体请阅读 [**模型算子支持列表**](./supported_op_list) 章节进行查询。
 
-  - 目前转换工具仅支持输出个数小于或等于32的模型进行转换。
+  - 目前转换工具仅支持输出个数小于或等于 32 的模型进行转换。
   
-  - 支持 ``caffe 1.0`` 版本的caffe浮点模型和 ``ir_version≤7`` , ``opset=10`` 、 ``opset=11`` 版本的onnx浮点模型量化成D-Robotics 支持的定点模型, onnx模型的ir_version与onnx版本的对应关系请参考[**onnx官方文档**](https://github.com/onnx/onnx/blob/main/docs/Versioning.md) ；
+  - 支持 ``caffe 1.0`` 版本的caffe浮点模型和 ``ir_version≤7`` , ``opset=10`` 、 ``opset=11`` 版本的 onnx 浮点模型量化成 D-Robotics 支持的定点模型, onnx 模型的 ir_version 与 onnx 版本的对应关系请参考[**onnx 官方文档**](https://github.com/onnx/onnx/blob/main/docs/Versioning.md) ；
 
-  - 模型输入维度只支持 ``固定4维`` 输入NCHW或NHWC（N维度只能为1），例如：1x3x224x224或1x224x224x3， 不支持动态维度及非4维输入；
+  - 模型输入维度只支持 ``固定4维`` 输入 NCHW 或 NHWC（N 维度只能为 1），例如：1x3x224x224 或 1x224x224x3， 不支持动态维度及非 4 维输入；
 
-  - 浮点模型中不要包含有 ``后处理算子``，例如：nms算子。
+  - 浮点模型中不要包含有 ``后处理算子``，例如：nms 算子。
 
 :::
 
 ### 模型验证{#model_check}
 
 
-模型正式转换前，请先使用 ``hb_mapper checker`` 工具进行模型验证，确保其符合D-Robotics 处理器的支持约束。
+模型正式转换前，请先使用 ``hb_mapper checker`` 工具进行模型验证，确保其符合 D-Robotics 处理器的支持约束。
 
 :::tip 小技巧
 
-  建议参考使用D-Robotics 模型转换 ``horizon_model_convert_sample`` 示例包中的caffe、onnx等示例模型的脚本方法: ``01_check_X3.sh``。
+  建议参考使用 D-Robotics 模型转换 ``horizon_model_convert_sample`` 示例包中的caffe、onnx等示例模型的脚本方法: ``01_check_X3.sh``。
 :::
 #### 使用 ``hb_mapper checker`` 工具验证模型
 ```
@@ -111,28 +111,28 @@ hb_mapper checker 参数解释：
   用于指定检查输入的模型类型，目前只支持设置 ``caffe`` 或者 ``onnx``。
 
 --march
-  用于指定需要适配的D-Robotics 处理器类型，可设置值为 ``bernoulli2`` 和 ``bayes``；RDK X3设置为 ``bernoulli2``，RDK X5设置为 ``bayes-e``。
+  用于指定需要适配的 D-Robotics 处理器类型，可设置值为 ``bernoulli2`` 和 ``bayes``；RDK X3设置为 ``bernoulli2``，RDK X5设置为 ``bayes-e``。
 
 --proto<br/>
-  此参数仅在 ``model-type`` 指定 ``caffe`` 时有效，取值为Caffe模型的prototxt文件名称。
+  此参数仅在 ``model-type`` 指定 ``caffe`` 时有效，取值为 Caffe 模型的 prototxt 文件名称。
 
 --model<br/>
-  在 ``model-type`` 被指定为 ``caffe`` 时，取值为Caffe模型的caffemodel文件名称。
-  在 ``model-type``  被指定为 ``onnx`` 时，取值为ONNX模型文件名称。
+  在 ``model-type`` 被指定为 ``caffe`` 时，取值为 Caffe 模型的 caffemodel 文件名称。
+  在 ``model-type``  被指定为 ``onnx`` 时，取值为 ONNX 模型文件名称。
 
 --input-shape<br/>
-  可选参数，明确指定模型的输入shape。
-  取值为 ``{input_name} {NxHxWxC/NxCxHxW}`` ，``input_name`` 与shape之间以空格分隔。
+  可选参数，明确指定模型的输入 shape。
+  取值为 ``{input_name} {NxHxWxC/NxCxHxW}`` ，``input_name`` 与 shape 之间以空格分隔。
   例如模型输入名称为 ``data1``，输入shape为 ``[1,224,224,3]``，
   则配置应该为 ``--input-shape data1 1x224x224x3``。
-  如果此处配置shape与模型内shape信息不一致，以此处配置为准。
+  如果此处配置 shape 与模型内 shape 信息不一致，以此处配置为准。
 :::info 备注
-  注意一个 ``--input-shape`` 只接受一个name和shape组合，如果您的模型有多个输入节点，
+  注意一个 ``--input-shape`` 只接受一个 name 和 shape 组合，如果您的模型有多个输入节点，
   在命令中多次配置 ``--input-shape`` 参数即可。
 :::
 
 :::caution
-  -\-output参数已经废弃，log信息默认存储于 ``hb_mapper_checker.log`` 中。
+  -\-output 参数已经废弃，log 信息默认存储于 ``hb_mapper_checker.log`` 中。
 :::
 
 
@@ -185,13 +185,13 @@ hb_mapper checker 参数解释：
 
 :::caution 注意
 
-  - 如果模型检查步骤异常终止或者出现报错信息，则说明模型验证不通过，请根据终端打印或在当前路径下生成的 ``hb_mapper_checker.log`` 日志文件确认报错信息和修改建议，错误信息可以在 [**模型量化错误及解决方法**](../../../08_FAQ/05_toolchain.md#model_convert_errors_and_solutions) 章节来查找错误的解决方法，若以上步骤仍不能排除问题，请联系D-Robotics 技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，我们将在24小时内给您提供支持。
+  - 如果模型检查步骤异常终止或者出现报错信息，则说明模型验证不通过，请根据终端打印或在当前路径下生成的 ``hb_mapper_checker.log`` 日志文件确认报错信息和修改建议，错误信息可以在 [**模型量化错误及解决方法**](../../../08_FAQ/05_toolchain.md#model_convert_errors_and_solutions) 章节来查找错误的解决方法，若以上步骤仍不能排除问题，请联系 D-Robotics 技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，我们将在 24 小时内给您提供支持。
 :::
 
 
 #### 检查结果解读{#check_result}
 
-如果不存在ERROR，则顺利通过校验。 ``hb_mapper checker`` 工具将直接输出如下信息：
+如果不存在 ERROR，则顺利通过校验。 ``hb_mapper checker`` 工具将直接输出如下信息：
 
 ```
   ==============================================
@@ -207,14 +207,14 @@ hb_mapper checker 参数解释：
   ...
 ```
 
-结果中每行都代表一个模型节点的check情况，每行含Node、ON、Subgraph和Type四列，分别为节点名称、执行节点计算的硬件、节点所属子图和节点映射到的D-Robotics 算子名称。
-如果模型在网络结构中出现了CPU计算的算子，hb_mapper checker工具将把这个算子前后连续在BPU计算的部分拆分为两个Subgraph（子图）。
+结果中每行都代表一个模型节点的 check 情况，每行含 Node、ON、Subgraph 和 Type 四列，分别为节点名称、执行节点计算的硬件、节点所属子图和节点映射到的 D-Robotics 算子名称。
+如果模型在网络结构中出现了 CPU 计算的算子，hb_mapper checker 工具将把这个算子前后连续在 BPU 计算的部分拆分为两个 Subgraph（子图）。
 
 #### 检查结果的调优指导
 
-在最理想的情况下，模型网络结构中的算子都应该在BPU上运行，也就是只有一个子图。 如果出现了CPU算子导致拆分多个子图， ``hb_mapper checker`` 工具会给出导致CPU算子出现的具体原因，以下给出了在RDK X3 上示例模型验证的情况；
+在最理想的情况下，模型网络结构中的算子都应该在 BPU 上运行，也就是只有一个子图。 如果出现了 CPU 算子导致拆分多个子图， ``hb_mapper checker`` 工具会给出导致 CPU 算子出现的具体原因，以下给出了在 RDK X3 上示例模型验证的情况；
 
-- 以下在 **RDK X3** 上运行的Caffe模型出现了Reshape + Pow + Reshape 的结构, 从 **RDK X3** 的算子约束列表中我们可以看到, Reshape 算子目前为在CPU上运行的算子, 而Pow的shape也是非4维的，不符合X3 BPU算子约束条件。
+- 以下在 **RDK X3** 上运行的 Caffe 模型出现了 Reshape + Pow + Reshape 的结构, 从 **RDK X3** 的算子约束列表中我们可以看到, Reshape 算子目前为在 CPU 上运行的算子, 而 Pow 的 shape 也是非 4 维的，不符合 X3 BPU 算子约束条件。
 
 ![model_reshape](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/model_reshape.png)
 
@@ -247,14 +247,14 @@ hb_mapper checker 参数解释：
 ```
 
 
-根据 hb_mapper checker 给出的提示，一般来说算子运行在BPU上会有更好的性能表现，这里可以将pow、reshape 这类CPU算子从模型中移除，将对应算子的功能放入后处理中计算，从而减少子图数量。
+根据 hb_mapper checker 给出的提示，一般来说算子运行在 BPU 上会有更好的性能表现，这里可以将 pow、reshape 这类 CPU 算子从模型中移除，将对应算子的功能放入后处理中计算，从而减少子图数量。
 
-当然，多个子图也不会影响整个转换流程，但会较大程度地影响模型性能，建议尽量调整模型算子到BPU上执行，可参考D-Robotics 处理器算子支持列表中的BPU算子支持列表来做同功能的算子替换或者将模型中的CPU算子移到模型推理的前、后处理中去做CPU计算。
+当然，多个子图也不会影响整个转换流程，但会较大程度地影响模型性能，建议尽量调整模型算子到 BPU 上执行，可参考 D-Robotics 处理器算子支持列表中的 BPU 算子支持列表来做同功能的算子替换或者将模型中的 CPU 算子移到模型推理的前、后处理中去做 CPU 计算。
 
 
 ### 模型转换{#model_conversion}
 
-模型转换阶段会完成浮点模型到D-Robotics 混合异构模型的转换，经过这个阶段，您将得到一个可以在D-Robotics 处理器上运行的模型。
+模型转换阶段会完成浮点模型到 D-Robotics 混合异构模型的转换，经过这个阶段，您将得到一个可以在 D-Robotics 处理器上运行的模型。
 在进行转换之前，请确保已经顺利通过了上文的验证模型过程。
 
 模型转换使用 ``hb_mapper makertbin`` 工具完成，转换期间会完成模型优化和校准量化等重要过程，校准需要依照模型预处理要求准备校准数据。
@@ -263,35 +263,35 @@ hb_mapper checker 参数解释：
 
 #### 准备校准数据
 
-在进行模型转换时，校准阶段会需要 **100份左右** 标定样本输入，每一份样本都是一个独立的数据文件。
+在进行模型转换时，校准阶段会需要 **100 份左右** 标定样本输入，每一份样本都是一个独立的数据文件。
 为了确保转换后模型的精度效果，我们希望这些校准样本来自于您训练模型使用的 **训练集或验证集** ，不要使用非常少见的异常样本，例如 **纯色图片、不含任何检测或分类目标的图片等**。
 
 转换配置文件中的 ``preprocess_on`` 参数，该参数启用和关闭状态下分别对应了两种不同的预处理样本要求。
 (有关参数的详细配置可参考下文校准参数组中相关说明)
 ``preprocess_on`` 关闭状态下，您需要把取自训练集/验证集的样本做与模型推理（inference）前一样的前处理，
 处理完后的校准样本会与原始模型具备一样的数据类型( ``input_type_train`` )、尺寸( ``input_shape`` )和
-layout( ``input_layout_train`` )，对于featuremap输入的模型，您可以通过 ``numpy.tofile`` 命令将数据保存为float32格式的二进制文件，
+layout( ``input_layout_train`` )，对于featuremap输入的模型，您可以通过 ``numpy.tofile`` 命令将数据保存为 float32 格式的二进制文件，
 工具链校准时会基于 ``numpy.fromfile`` 命令进行读取。
-例如，使用ImageNet训练的用于分类的原始浮点模型，它只有一个输入节点，输入信息描述如下：
+例如，使用 ImageNet 训练的用于分类的原始浮点模型，它只有一个输入节点，输入信息描述如下：
 
 - 输入类型：``BGR``
-- 输入layout：``NCHW``
+- 输入 layout：``NCHW``
 - 输入尺寸：``1x3x224x224``
 
 使用验证集做模型推理（inference）时的数据预处理如下：
 
-1. 图像长宽等比scale,短边缩放到256。
-2. ``center_crop`` 方法获取224x224大小图像。
-3. 按通道减mean。
-4. 数据乘以scale系数。
+1. 图像长宽等比 scale,短边缩放到 256。
+2. ``center_crop`` 方法获取 224x224 大小图像。
+3. 按通道减 mean。
+4. 数据乘以 scale 系数。
 
 针对上述举例模型的样本处理代码如下：
 
-为避免过长代码篇幅，各种简单transformer实现代码未贴出，具体使用请参考[**transformer使用方法**](../../../08_FAQ/05_toolchain.md#transposetransformer) 章节内容。
+为避免过长代码篇幅，各种简单 transformer 实现代码未贴出，具体使用请参考[**transformer 使用方法**](../../../08_FAQ/05_toolchain.md#transposetransformer) 章节内容。
 
 :::tip 小技巧
 
-  建议参考使用D-Robotics 模型转换 ``horizon_model_convert_sample`` 示例包中的caffe、onnx等示例模型的预处理步骤方法: ``02_preprocess.sh`` 和 ``preprocess.py`` 。
+  建议参考使用 D-Robotics 模型转换 ``horizon_model_convert_sample`` 示例包中的caffe、onnx等示例模型的预处理步骤方法: ``02_preprocess.sh`` 和 ``preprocess.py`` 。
 :::
 ```
   # 本示例使用skimage，如果是opencv会有所区别
@@ -337,36 +337,36 @@ layout( ``input_layout_train`` )，对于featuremap输入的模型，您可以�
 ```
 
 :::info
-  ``preprocess_on`` 启用状态下，标定样本使用skimage支持读取的图片格式文件即可。
+  ``preprocess_on`` 启用状态下，标定样本使用 skimage 支持读取的图片格式文件即可。
   转换工具读取这些图片后，会将其缩放到模型输入节点要求的尺寸大小，以此结果作为校准的输入。
   这样的操作会简单，但是对于量化的精度没有保障，因此我们强烈建议您使用关闭 ``preprocess_on`` 的方式。
 
 :::caution 注意
-  请注意，yaml文件中input_shape参数作用为指定原始浮点模型的输入数据尺寸。若为动态输入模型则可通过这个参数设置转换后的输入大小，而校准数据的shape大小应与input_shape保持一致。
+  请注意，yaml 文件中 input_shape 参数作用为指定原始浮点模型的输入数据尺寸。若为动态输入模型则可通过这个参数设置转换后的输入大小，而校准数据的 shape 大小应与 input_shape 保持一致。
   
-  例如：若原始浮点模型输入节点shape为?x3x224x224（“?”号代表占位符，即该模型第一维为动态输入）, 转换配置文件中设置input_shape: 8x3x224x224，则用户需要准备的每份校准数据大小为 8x3x224x224。
-  （请知悉，此类输入shape第一维不等于1的模型，不支持通过input_batch参数修改模型batch信息。）
+  例如：若原始浮点模型输入节点 shape 为?x3x224x224（“?”号代表占位符，即该模型第一维为动态输入）, 转换配置文件中设置 input_shape: 8x3x224x224，则用户需要准备的每份校准数据大小为 8x3x224x224。
+  （请知悉，此类输入 shape 第一维不等于 1 的模型，不支持通过 input_batch 参数修改模型 batch 信息。）
 :::
 
 
 #### 使用 hb_mapper makertbin 工具转换模型{#makertbin}
 
-hb_mapper makertbin提供两种模式，开启 ``fast-perf`` 模式和不开启 ``fast-perf`` 模式。
+hb_mapper makertbin 提供两种模式，开启 ``fast-perf`` 模式和不开启 ``fast-perf`` 模式。
 
-``fast-perf`` 模式开启后，会在转换过程中生成可以在板端运行最高性能的bin模型，工具内部主要进行以下操作：
+``fast-perf`` 模式开启后，会在转换过程中生成可以在板端运行最高性能的 bin 模型，工具内部主要进行以下操作：
 
-- 将BPU可执行算子尽可能运行在BPU上（若使用``RDK X5`` 则可以通过yaml文件中node_info参数指定在BPU上运行的算子， ``RDK X3`` 是自动优化，无法通过yaml配置文件指定算子）。
+- 将 BPU 可执行算子尽可能运行在 BPU 上（若使用``RDK X5`` 则可以通过yaml文件中node_info参数指定在BPU上运行的算子， ``RDK X3`` 是自动优化，无法通过 yaml 配置文件指定算子）。
 
-- 删除模型首尾不可删除的CPU算子，包括：Quantize/Dequantize、Transpose、Cast、Reshape等。
+- 删除模型首尾不可删除的 CPU 算子，包括：Quantize/Dequantize、Transpose、Cast、Reshape 等。
 
-- 以性能最高的O3优化等级编译模型。
+- 以性能最高的 O3 优化等级编译模型。
 
 :::tip 小技巧
 
-  建议参考使用D-Robotics 模型转换 ``horizon_model_convert_sample`` 示例包中的caffe、onnx等示例模型的脚本方法: ``03_build_X3.sh``。
+  建议参考使用 D-Robotics 模型转换 ``horizon_model_convert_sample`` 示例包中的caffe、onnx等示例模型的脚本方法: ``03_build_X3.sh``。
 :::
 
-hb_mapper makertbin命令使用方式如下：
+hb_mapper makertbin 命令使用方式如下：
 
 不开启 ``fast-perf`` 模式：
 
@@ -385,47 +385,47 @@ hb_mapper makertbin命令使用方式如下：
                       --march ${march}
 ```
 
-hb_mapper makertbin参数解释：
+hb_mapper makertbin 参数解释：
 
 --help<br/>
   显示帮助信息并退出。
 
 -c, --config<br/>
-  模型编译的配置文件，为yaml格式，文件名使用.yaml后缀，完整的配置文件模板参考如下章节内容。
+  模型编译的配置文件，为 yaml 格式，文件名使用.yaml 后缀，完整的配置文件模板参考如下章节内容。
 
 --model-type<br/>
   用于指定转换输入的模型类型，目前支持设置 ``caffe`` 或者 ``onnx``。
 
 --fast-perf<br/>
-  开启fast-perf模式，该模式开启后，会在转换过程中生成可以在板端运行最高性能的bin模型，方便您用于后续的模型性能评测。
+  开启 fast-perf 模式，该模式开启后，会在转换过程中生成可以在板端运行最高性能的 bin 模型，方便您用于后续的模型性能评测。
 
-  如您开启了fast-perf模式，还需要进行如下配置：
+  如您开启了 fast-perf 模式，还需要进行如下配置：
 
   --model<br/>
-  Caffe或ONNX浮点模型文件。
+  Caffe 或 ONNX 浮点模型文件。
 
   --proto<br/>
-  用于指定Caffe模型prototxt文件。
+  用于指定 Caffe 模型 prototxt 文件。
 
   --march<br/>
-  BPU的微架构。若使用 ``RDK X3`` 则设置为 ``bernoulli2``，若使用 ``RDK X5`` 则设置为 ``bayes-e``。
+  BPU 的微架构。若使用 ``RDK X3`` 则设置为 ``bernoulli2``，若使用 ``RDK X5`` 则设置为 ``bayes-e``。
 
 
 :::caution 注意
 
-  - ``RDK X3 yaml配置文件``，可直接使用[**RDK X3 Caffe模型量化yaml文件模板**](../../../08_FAQ/05_toolchain.md#rdk_x3_caffe_yaml_template) 和[**RDK X3 ONNX模型量化yaml文件模板**](../../../08_FAQ/05_toolchain.md#rdk_x3_onnx_yaml_template)模板文件进行填写。
+  - ``RDK X3 yaml配置文件``，可直接使用[**RDK X3 Caffe 模型量化 yaml 文件模板**](../../../08_FAQ/05_toolchain.md#rdk_x3_caffe_yaml_template) 和[**RDK X3 ONNX 模型量化 yaml 文件模板**](../../../08_FAQ/05_toolchain.md#rdk_x3_onnx_yaml_template)模板文件进行填写。
 
 
-  - ``RDK X5 yaml配置文件``，可直接使用[**RDK X5 Caffe模型量化yaml文件模板**](../../../08_FAQ/05_toolchain.md#rdk_x5_caffe_yaml_template) 和[**RDK X5 ONNX模型量化yaml文件模板**](../../../08_FAQ/05_toolchain.md#rdk_x5_onnx_yaml_template)模板文件进行填写。 
+  - ``RDK X5 yaml配置文件``，可直接使用[**RDK X5 Caffe 模型量化 yaml 文件模板**](../../../08_FAQ/05_toolchain.md#rdk_x5_caffe_yaml_template) 和[**RDK X5 ONNX 模型量化 yaml 文件模板**](../../../08_FAQ/05_toolchain.md#rdk_x5_onnx_yaml_template)模板文件进行填写。 
 
-  - 若 hb_mapper makertbin 步骤异常终止或者出现报错信息，则说明模型转换失败，请根据终端打印或在当前路径下生成的 ``hb_mapper_makertbin.log`` 日志文件确认报错信息和修改建议，错误信息可以在 [**模型量化错误及解决方法**](../../../08_FAQ/05_toolchain.md#model_convert_errors_and_solutions)章节来查找错误的解决方法，若以上步骤仍不能排除问题，请联系D-Robotics 技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，我们将在24小时内给您提供支持。
+  - 若 hb_mapper makertbin 步骤异常终止或者出现报错信息，则说明模型转换失败，请根据终端打印或在当前路径下生成的 ``hb_mapper_makertbin.log`` 日志文件确认报错信息和修改建议，错误信息可以在 [**模型量化错误及解决方法**](../../../08_FAQ/05_toolchain.md#model_convert_errors_and_solutions)章节来查找错误的解决方法，若以上步骤仍不能排除问题，请联系 D-Robotics 技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，我们将在 24 小时内给您提供支持。
 :::
 
-#### 模型转换yaml配置参数说明{#yaml_config}
+#### 模型转换 yaml 配置参数说明{#yaml_config}
 
 :::info 备注
-  要么是Caffe模型，要么是ONNX模型。即 ``caffe_model`` + ``prototxt`` 或者 ``onnx_model`` 二选一。
-  即，要么是Caffe模型，要么是ONNX模型。
+  要么是 Caffe 模型，要么是 ONNX 模型。即 ``caffe_model`` + ``prototxt`` 或者 ``onnx_model`` 二选一。
+  即，要么是 Caffe 模型，要么是 ONNX 模型。
 :::
 ```
   # 模型参数组
@@ -570,14 +570,14 @@ hb_mapper makertbin参数解释：
   - 当模型为多输入模型时, 建议用户将可选参数（ ``input_name``, ``input_shape`` 等）显式的写出, 以免造成参数对应顺序上的错误。
 
 
-  - 在配置march为bayes-e，即在进行RDK X5模型转换时，如您将优化等级optimize_level配置为O3，hb_mapper makerbin默认提供缓存能力。即在您第一次使用hb_mapper makerbin对模型进行编译时，会自动创建缓存文件，后续在您的working_dir不变的情况下，在重复编译时会自动调用此文件，降低您的编译时间。
+  - 在配置 march 为 bayes-e，即在进行 RDK X5 模型转换时，如您将优化等级 optimize_level 配置为 O3，hb_mapper makerbin 默认提供缓存能力。即在您第一次使用 hb_mapper makerbin 对模型进行编译时，会自动创建缓存文件，后续在您的 working_dir 不变的情况下，在重复编译时会自动调用此文件，降低您的编译时间。
 :::
 
 :::caution 注意
 
   - 请注意，如果设置 ``input_type_rt`` 为 ``nv12`` 或 ``yuv444`` ，则模型的输入尺寸中不能出现奇数。
-  - 请注意，目前RDK X3上暂不支持 ``input_type_rt`` 为 ``yuv444`` 且 ``input_layout_rt`` 为 ``NCHW`` 组合的场景。
-  - 模型转换成功后，若出现符合D-Robotics BPU算子约束条件的OP仍然运行在CPU上，其主要原因是该OP属于被动量化OP，关于被动量化相关内容，请阅读 [**算法工具链中的主动量化和被动量化逻辑**](https://developer.d-robotics.cc/forumDetail/118364000835765793) 章节。
+  - 请注意，目前 RDK X3 上暂不支持 ``input_type_rt`` 为 ``yuv444`` 且 ``input_layout_rt`` 为 ``NCHW`` 组合的场景。
+  - 模型转换成功后，若出现符合 D-Robotics BPU 算子约束条件的 OP 仍然运行在 CPU 上，其主要原因是该 OP 属于被动量化 OP，关于被动量化相关内容，请阅读 [**算法工具链中的主动量化和被动量化逻辑**](https://developer.d-robotics.cc/forumDetail/118364000835765793) 章节。
 :::
 
 以下是具体参数信息，参数会比较多，我们依照上述的参数组次序介绍。
@@ -597,16 +597,16 @@ hb_mapper makertbin参数解释：
 |``output_nodes``| **参数作用**：指定模型的输出节点。<br/>**参数说明**：一般情况下，转换工具会自动识别模型的输出节点。此参数用于支持您指定一些中间层次作为输出。设置值为模型中的具体节点名称，多个值的配置方法请参考前文对 ``param_value`` 配置描述。需要您注意的是，一旦设置此参数后，工具将不再自动识别输出节点，您通过此参数指定的节点就是全部的输出。| **取值范围**：无。<br/> **默认配置**：无。|可选 |
 |``remove_node_type``| **参数作用**：设置删除节点的类型。<br/>**参数说明**：该参数为隐藏参数，不设置或设置为空不影响模型转换过程。此参数用于支持您设置待删除节点的类型信息。被删除的节点必须在模型的开头或者末尾, 与模型的输入或输出连接。注意：待删除节点会按顺序依次删除，并动态更新模型结构；同时在节点删除前还会判断该节点是否位于模型的输入输出处。因此节点的删除顺序很重要。| **取值范围**：”Quantize”, “Transpose”, “Dequantize”, “Cast”, “Reshape”。不同类型用”;”分割。<br/> **默认配置**：无。|可选 |
 |``remove_node_name``| **参数作用**：设置删除节点的名称。<br/>**参数说明**：该参数为隐藏参数， 不设置或设置为空不影响模型转换过程。 此参数用于支持您设置待删除节点的名称。被删除的节点必须在模型的开头或者末尾, 与模型的输入或输出连接。注意：待删除节点会按顺序依次删除，并动态更新模型结构；同时在节点删除前还会判断该节点是否位于模型的输入输出处。因此节点的删除顺序很重要。| **取值范围**：无。不同类型用";"分割。<br/> **默认配置**：无。|可选 |
-|``set_node_data_type``| **参数作用**：配置指定op的输出数据类型为int16，此参数 **只支持RDK Ultra和RDK X5配置！** <br/> **参数说明**：在模型转换过程中，大多数op的默认输入输出数据类型为int8，通过该参数可以指定特定op的输出数据类型为int16（在满足一定的约束条件下）。int16相关说明详见：[**int16配置说明**](#int16_config)部分的描述。 <br/> **注意：** 该参数相关功能已合并至 ``node_info`` 参数中，后续版本计划废弃。 | **取值范围**：支持配置int16的算子范围您可参考[**模型算子支持列表**](./supported_op_list)中RDK Ultra 和 RDK X5算子支持约束列表。<br/> **默认配置**：无。|可选 |
+|``set_node_data_type``| **参数作用**：配置指定op的输出数据类型为int16，此参数 **只支持RDK Ultra和RDK X5配置！** <br/> **参数说明**：在模型转换过程中，大多数op的默认输入输出数据类型为int8，通过该参数可以指定特定op的输出数据类型为int16（在满足一定的约束条件下）。int16相关说明详见：[**int16配置说明**](#int16_config)部分的描述。 <br/> **注意：** 该参数相关功能已合并至 ``node_info`` 参数中，后续版本计划废弃。 | **取值范围**：支持配置 int16 的算子范围您可参考[**模型算子支持列表**](./supported_op_list)中 RDK Ultra 和 RDK X5 算子支持约束列表。<br/> **默认配置**：无。|可选 |
 |``debug_mode``| **参数作用**：保存用于精度debug分析的校准数据。<br/>**参数说明**：该参数作用为保存用于精度debug分析的校准数据，数据格式为.npy。该数据通过np.load()可直接送入模型进行推理。若不设置此参数，您也可自行保存数据并使用精度debug工具进行精度分析。 | **取值范围**：``"dump_calibration_data"``<br/> **默认配置**：无。|可选 |
 |``node_info``| **参数作用**：支持配置指定OP的输入输出数据类型为int16以及强制指定算子在CPU或BPU上运行。此参数 **只支持RDK Ultra和RDK X5配置！** <br/>**参数说明**：基于减少yaml中的参数的原则，我们将 ``set_node_data_type`` 、``run_on_cpu`` 和 ``run_on_bpu`` 三个参数的能力融合到本参数中，并在此基础上扩充支持配置指定op输入数据类型为int16的能力。<br/> ``node_info`` 参数使用方式：  <br/>- 仅指定OP运行在BPU/CPU上（下以BPU为例，CPU方法一致）：<br/> node_info:<br/> `{ "node_name" { 'ON': 'BPU',} }` <br/> - 指定OP运行在BPU上，同时配置OP的输入输出数据类型：<br/> node_info:<br/> `{ "node_name": { 'ON': 'BPU', 'InputType': 'int16', 'OutputType': 'int16'}} ` <br/> - 指定多个算子运行:<br/> node_info:<br/>`{"/model.0/conv/Conv": {"ON": "BPU","InputType": "int16","OutputType": "int16"},`<br/>`"/model.0/act/Mul": {"ON": "BPU","InputType": "int16","OutputType": "int16"},`<br/>`"/model.2/Concat": {"ON": "BPU","InputType": "int16","OutputType": "int16"}}`
-'InputType': 'int16'代表指定算子的所有输入数据类型为int16。 <br/>如需指定算子特定输入的InputType，可在InputType后通过指定数字来进行配置。如：<br/>'InputType0': 'int16'代表指定算子的第一个输入数据类型为int16，<br/>'InputType1': 'int16'代表指定算子的第二个输入数据类型为int16，以此类推。<br/>**注意：** 'OutputType' 不支持指定算子特定输出的OutputType，配置后对算子的所有输出生效，不支持配置 'OutputType0' 、 'OutputType1'等。 | **取值范围**：支持配置int16的算子范围您可参考[模型算子支持列表](./supported_op_list)中RDK Ultra 和 RDK X5算子支持约束列表。可指定在CPU或BPU运行的算子需为模型中包含的算子。<br/> **默认配置**：无。|可选 |
+'InputType': 'int16'代表指定算子的所有输入数据类型为 int16。 <br/>如需指定算子特定输入的 InputType，可在 InputType 后通过指定数字来进行配置。如：<br/>'InputType0': 'int16'代表指定算子的第一个输入数据类型为 int16，<br/>'InputType1': 'int16'代表指定算子的第二个输入数据类型为 int16，以此类推。<br/>**注意：** 'OutputType' 不支持指定算子特定输出的 OutputType，配置后对算子的所有输出生效，不支持配置 'OutputType0' 、 'OutputType1'等。 | **取值范围**：支持配置 int16 的算子范围您可参考[模型算子支持列表](./supported_op_list)中 RDK Ultra 和 RDK X5 算子支持约束列表。可指定在 CPU 或 BPU 运行的算子需为模型中包含的算子。<br/> **默认配置**：无。|可选 |
 
 - ###### 输入信息参数组
 
 | 参数名称 | 参数配置说明   | 取值范围说明 |    可选/必选     |
 |------------|----------|----------|--------|
-|``input_name``| **参数作用**：指定原始浮点模型的输入节点名称。<br/>**参数说明**：浮点模型只有一个输入节点情况时不需要配置。多于一个输入节点时必须配置以保证后续类型及校准数据输入顺序的准确性。多个值的配置方法请参考前文对param_value配置描述。| **取值范围**：无。<br/> **默认配置**：无。|可选 |
+|``input_name``| **参数作用**：指定原始浮点模型的输入节点名称。<br/>**参数说明**：浮点模型只有一个输入节点情况时不需要配置。多于一个输入节点时必须配置以保证后续类型及校准数据输入顺序的准确性。多个值的配置方法请参考前文对 param_value 配置描述。| **取值范围**：无。<br/> **默认配置**：无。|可选 |
 |``input_type_train``| **参数作用**：指定原始浮点模型的输入数据类型。<br/>**参数说明**：每一个输入节点都需要配置一个确定的输入数据类型。存在多个输入节点时，设置的节点顺序需要与``input_name``里的顺序严格保持一致。多个值的配置方法请参考前文对``param_value``配置描述。数据类型的选择请参考： 转换内部过程解读 部分的介绍。| **取值范围**：``rgb``、``bgr``、``yuv444``、``gray``、``featuremap``。<br/> **默认配置**：无。|必选 |
 |``input_layout_train``| **参数作用**：指定原始浮点模型的输入数据排布。<br/>**参数说明**：每一个输入节点都需要配置一个确定的输入数据排布， 这个排布必须与原始浮点模型所采用的数据排布相同。存在多个输入节点时， 设置的节点顺序需要与 ``input_name`` 里的顺序严格保持一致。多个值的配置方法请参考前文对``param_value``配置描述。什么是数据排布请参考： 转换内部过程解读 部分的介绍。| **取值范围**：NHWC 、 NCHW。<br/> **默认配置**：无。|必选 |
 |``input_type_rt``| **参数作用**：转换后混合异构模型需要适配的输入数据格式。<br/>**参数说明**：这里是指明您需要使用的数据格式， 不要求与原始模型的数据格式一致， 但是需要注意在平台喂给模型的数据是使用这个格式。每一个输入节点都需要配置一个确定的输入数据类型，存在多个输入节点时， 设置的节点顺序需要与``input_name``里的顺序严格保持一致。多个值的配置方法请参考前文对``param_value``配置描述。数据类型的选择请参考： 转换内部过程解读 部分的介绍。| **取值范围**：``rgb``、``bgr``、``yuv444``、``nv12``、``gray``、``featuremap``。<br/> **默认配置**：无。|必选 |
@@ -618,15 +618,15 @@ hb_mapper makertbin参数解释：
 |``mean_value``| **参数作用**：指定预处理方法的图像减去的均值。<br/>**参数说明**：当 ``norm_type`` 存在 ``data_mean_and_scale`` 或 data_mean 时需要配置该参数。对于每一个输入节点而言，存在两种配置方式。第一种是仅配置一个数值，表示所有通道都减去这个均值；第二种是提供与通道数量一致的数值（这些数值以空格分隔开）， 表示每个通道都会减去不同的均值。配置的输入节点数量必须与 norm_type 配置的节点数量一致， 如果存在某个节点不需要 mean 处理，则为该节点配置 ``'None'``。多个值的配置方法请参考前文对``param_value``配置描述。| **取值范围**：无。<br/> **默认配置**：无。|可选 |
 |``scale_value``| **参数作用**：指定预处理方法的数值scale系数。<br/>**参数说明**：当 ``norm_type`` 存在 ``data_mean_and_scale`` 或 ``data_scale`` 时需要配置该参数。对于每一个输入节点而言，存在两种配置方式。第一种是仅配置一个数值，表示所有通道都乘以这个系数；第二种是提供与通道数量一致的数值（这些数值以空格分隔开）， 表示每个通道都会乘以不同的系数。配置的输入节点数量必须与 ``norm_type`` 配置的节点数量一致， 如果存在某个节点不需要 ``scale`` 处理，则为该节点配置 ``'None'``。多个值的配置方法请参考前文对 ``param_value`` 配置描述。| **取值范围**：无。<br/> **默认配置**：无。|可选 |
 
-**input_type_rt/input_type_train补充说明**
+**input_type_rt/input_type_train 补充说明**
 
-RDK X5的计算平台架构，在设计时为了提升性能，做了两点假设：
+RDK X5 的计算平台架构，在设计时为了提升性能，做了两点假设：
 
-1. 假设输入的数据都是int8的量化数据。
+1. 假设输入的数据都是 int8 的量化数据。
 
-2. 摄像头获取到的数据是nv12。
+2. 摄像头获取到的数据是 nv12。
 
-因此，如果您在模型训练时使用rgb(NCHW)输入格式，但是想使这个模型能够高效处理nv12数据，只需要在模型转换时做如下配置：
+因此，如果您在模型训练时使用 rgb(NCHW)输入格式，但是想使这个模型能够高效处理 nv12 数据，只需要在模型转换时做如下配置：
 
 ```bash
   input_parameters:
@@ -636,13 +636,13 @@ RDK X5的计算平台架构，在设计时为了提升性能，做了两点假�
 ```
 
 **小技巧：**
-- 若您在训练模型时使用gray格式，而实际使用中输入的数据格式为nv12格式，则可以将模型转换时的 ``input_type_rt`` 及 ``input_type_train`` 均配置为 ``gray``，在嵌入式应用开发时仅使用nv12的y通道地址作为输入即可。
+- 若您在训练模型时使用 gray 格式，而实际使用中输入的数据格式为 nv12 格式，则可以将模型转换时的 ``input_type_rt`` 及 ``input_type_train`` 均配置为 ``gray``，在嵌入式应用开发时仅使用 nv12 的 y 通道地址作为输入即可。
 
 - ###### 校准参数组
 
 | 参数名称 | 参数配置说明   | 取值范围说明 |    可选/必选     |
 |------------|----------|----------|--------|
-|``cal_data_dir``| **参数作用**：指定模型校准使用的标定样本的存放目录。<br/>**参数说明**：目录内校准数据需要符合输入配置的要求。具体请参考 准备校准数据 部分的介绍。配置多个输入节点时， 设置的节点顺序需要与 ``input_name`` 里的顺序严格保持一致。多个值的配置方法请参考前文对 ``param_value`` 配置描述。当calibration_type为 ``load``, ``skip`` 时，cal_data_dir不用填。注意： 为了方便您的使用，如果未发现cal_data_type的配置，我们将根据文件夹 后缀对数据类型进行配置。如果文件夹后缀以 ``_f32`` 结尾，则认为数据 类型是float32，否则认为数据类型是uint8。当然，我们强烈建议您通过cal_data_type参数对数据类型进行约束。| **取值范围**：无。<br/> **默认配置**：无。|可选 |
+|``cal_data_dir``| **参数作用**：指定模型校准使用的标定样本的存放目录。<br/>**参数说明**：目录内校准数据需要符合输入配置的要求。具体请参考 准备校准数据 部分的介绍。配置多个输入节点时， 设置的节点顺序需要与 ``input_name`` 里的顺序严格保持一致。多个值的配置方法请参考前文对 ``param_value`` 配置描述。当calibration_type为 ``load``, ``skip`` 时，cal_data_dir不用填。注意： 为了方便您的使用，如果未发现cal_data_type的配置，我们将根据文件夹 后缀对数据类型进行配置。如果文件夹后缀以 ``_f32`` 结尾，则认为数据 类型是 float32，否则认为数据类型是 uint8。当然，我们强烈建议您通过 cal_data_type 参数对数据类型进行约束。| **取值范围**：无。<br/> **默认配置**：无。|可选 |
 |``cal_data_type``| **参数作用**：指定校准数据二进制文件的数据存储类型。<br/>**参数说明**：指定模型校准时使用的二进制文件的数据存储类型。没有指定值的情况下将会使用文件夹名字后缀来做判断。| **取值范围**：``float32``、``uint8``。<br/> **默认配置**：无。|可选 |
 |``preprocess_on``| **参数作用**：开启图片校准样本自动处理。<br/>**参数说明**：该选项仅适用于4维图像输入的模型， 非4维模型不要打开该选项。在启动该功能时，cal_data_dir 目录下存放的都是jpg/bmp/png 等图片数据，工具会使用skimage读取图片， 并resize到输入节点需要的尺寸。为了保证校准的效果，建议您保持该参数关闭。使用的影响请参考 准备校准数据 部分的介绍。| **取值范围**：``True`` 、 ``False``。<br/> **默认配置**： ``False``。|可选 |
 |``calibration_type``| **参数作用**：校准使用的算法类型。<br/>**参数说明**：每 ``kl`` 和 ``max`` 都是公开的校准量化算法， 其基本原理可以通过网络资料查阅。使用 ``load`` 方式校准时, qat模型必须是通过plugin导出的的模型。``mix`` 是一个集成多种校准方法的搜索策略，能够自动确定量化敏感节点，并在节点粒度上从不同的校准方法中挑选出最佳方法，最终构建一个融合了多种校准方法优势的组合校准方式。``default`` 是一个自动搜索的策略， 会尝试从系列校准量化参数中获得一个相对效果较好的组合。建议您先尝试 ``default``， 如果最终的精度结果不满足预期， 再根据 精度调优 部分建议配置不同的校准参数。若您只想尝试对模型性能进行验证，但对精度没有要求， 则可以尝试 “skip” 方式进行校准。该方式会使用随机数进行校准， 不需要您准备校准数据，比较适合初次尝试对模型结构进行验证。注意： 使用skip方式时，因使用随机数校准, 得到的模型不可用于精度验证。| **取值范围**：``default``、``mix`、```kl``、``max``、``load`` 和 ``skip``。<br/> **默认配置**：``default``。|必选 |
@@ -936,14 +936,14 @@ D-Robotics 处理器不会限制使用的数据排布，但是有两条要求：
   ...    ...     ...     ...       0.996656           4.495638
 ```
 
-上面列举的输出内容中，Node、ON、Subgraph、Type与 ``hb_mapper checker`` 工具的解读是一致的，
+上面列举的输出内容中，Node、ON、Subgraph、Type 与 ``hb_mapper checker`` 工具的解读是一致的，
 请参考前文 [**检查结果解读**](#check_result)；
-Threshold是每个层次的校准阈值，用于异常状态下向D-Robotics 技术支持反馈信息，正常状况下不需要关注；
-Cosine Similarity一列反映的是Node列中对应算子的原始浮点模型与量化模型输出结果的余弦相似度。
+Threshold 是每个层次的校准阈值，用于异常状态下向 D-Robotics 技术支持反馈信息，正常状况下不需要关注；
+Cosine Similarity 一列反映的是 Node 列中对应算子的原始浮点模型与量化模型输出结果的余弦相似度。
 
 :::tip 小技巧
 
-  一般情况下， **模型的输出节点 Cosine Similarity >= 0.99 可认为此模型量化正常**，输出节点的相似度低于0.8就有了较明显的精度损失， 当然Cosine Similarity只是指明量化后数据稳定性的一种参考方式，对于模型精度的影响不存在明显的直接关联关系，
+  一般情况下， **模型的输出节点 Cosine Similarity >= 0.99 可认为此模型量化正常**，输出节点的相似度低于 0.8 就有了较明显的精度损失， 当然 Cosine Similarity 只是指明量化后数据稳定性的一种参考方式，对于模型精度的影响不存在明显的直接关联关系，
   完全准确的精度情况还需要您阅读[**模型精度分析与调优**](#accuracy_evaluation)的内容。
 :::
 
@@ -964,7 +964,7 @@ Cosine Similarity一列反映的是Node列中对应算子的原始浮点模型�
 
 如果以上验证模型转换成功的三个方面中，有任一个出现缺失都说明模型转换出现了错误。
 一般情况下，``makertbin`` 工具会在出现错误时将错误信息输出至控制台，
-例如：我们在Caffe模型转换时不配置yaml文件中的 ``prototxt`` 和 ``caffe_model`` 参数，模型转换工具给出如下提示。
+例如：我们在 Caffe 模型转换时不配置 yaml 文件中的 ``prototxt`` 和 ``caffe_model`` 参数，模型转换工具给出如下提示。
 
 ```bash
 2021-04-21 14:45:34,085 ERROR Key 'model_parameters' error:
@@ -972,7 +972,7 @@ Missing keys: 'caffe_model', 'prototxt'
 2021-04-21 14:45:34,085 ERROR yaml file parse failed. Please double check your input
 2021-04-21 14:45:34,085 ERROR exception in command: makertbin
 ```
-如果控制台输出日志信息不能帮助您发现问题，请参考[**模型量化错误及解决方法**](../../../08_FAQ/05_toolchain.md#model_convert_errors_and_solutions)章节内容进行查找，若以上步骤仍不能排除问题，请联系D-Robotics 技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，我们将在24小时内给您提供支持。
+如果控制台输出日志信息不能帮助您发现问题，请参考[**模型量化错误及解决方法**](../../../08_FAQ/05_toolchain.md#model_convert_errors_and_solutions)章节内容进行查找，若以上步骤仍不能排除问题，请联系 D-Robotics 技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，我们将在 24 小时内给您提供支持。
 
 
 #### 转换产出物解读{#conversion_output}
@@ -985,38 +985,38 @@ Missing keys: 'caffe_model', 'prototxt'
 - \*\*\*_quantized_model.onnx
 - \*\*\*.bin
 
-\*\*\*_original_float_model.onnx的产出过程可以参考[**转换内部过程解读**](#conversion_interpretation)的介绍，
-这个模型计算精度与转换输入的原始浮点模型是一模一样的，有个重要的变化就是为了适配D-Robotics 平台添加了一些数据预处理计算（增加了一个预处理算子节点 ``HzPreprocess``, 可以使用netron工具打开onnx模型查看,此算子的详情可查看[**预处理HzPreprocess算子说明**](#pre_process) 内容）。
-一般情况下，您不需要使用这个模型，若在转换结果出现异常时，通过上文介绍的定位方法仍不能解决您的问题，请将这个模型提供给D-Robotics 的技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，将有助于帮助您快速解决问题。
+\*\*\*_original_float_model.onnx 的产出过程可以参考[**转换内部过程解读**](#conversion_interpretation)的介绍，
+这个模型计算精度与转换输入的原始浮点模型是一模一样的，有个重要的变化就是为了适配 D-Robotics 平台添加了一些数据预处理计算（增加了一个预处理算子节点 ``HzPreprocess``, 可以使用 netron 工具打开 onnx 模型查看,此算子的详情可查看[**预处理 HzPreprocess 算子说明**](#pre_process) 内容）。
+一般情况下，您不需要使用这个模型，若在转换结果出现异常时，通过上文介绍的定位方法仍不能解决您的问题，请将这个模型提供给 D-Robotics 的技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，将有助于帮助您快速解决问题。
 
-\*\*\*_calibrated_model.onnx的产出过程可以参考[**转换内部过程解读**](#conversion_interpretation)的介绍，
+\*\*\*_calibrated_model.onnx 的产出过程可以参考[**转换内部过程解读**](#conversion_interpretation)的介绍，
 这个模型是模型转换工具链将浮点模型经过结构优化后，通过校准数据计算得到的每个节点对应的量化参数并将其保存在校准节点中得到的中间产物。
 
-\*\*\*_optimized_float_model.onnx的产出过程可以参考[**转换内部过程解读**](#conversion_interpretation) 的介绍，
+\*\*\*_optimized_float_model.onnx 的产出过程可以参考[**转换内部过程解读**](#conversion_interpretation) 的介绍，
 这个模型经过一些算子级别的优化操作，常见的就是算子融合。
-通过与original_float模型的可视化对比，您可以明显看到一些算子结构级别的变化，不过这些都不影响模型的计算精度。
-一般情况下，您不需要使用这个模型，若在转换结果出现异常时，通过上文介绍的定位方法仍不能解决您的问题，请将这个模型提供给D-Robotics 的技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，将有助于帮助您快速解决问题。
+通过与 original_float 模型的可视化对比，您可以明显看到一些算子结构级别的变化，不过这些都不影响模型的计算精度。
+一般情况下，您不需要使用这个模型，若在转换结果出现异常时，通过上文介绍的定位方法仍不能解决您的问题，请将这个模型提供给 D-Robotics 的技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，将有助于帮助您快速解决问题。
 
-\*\*\*_quantized_model.onnx的产出过程可以参考[**转换内部过程解读**](#conversion_interpretation) 的介绍，
+\*\*\*_quantized_model.onnx 的产出过程可以参考[**转换内部过程解读**](#conversion_interpretation) 的介绍，
 这个模型已经完成了校准和量化过程，量化后的模型精度损失情况，可以阅读下文模型精度分析与调优内容来评估此模型。
 这个模型是精度验证过程中必须要使用的模型，具体使用方式请参考[**模型精度分析与调优**](#accuracy_evaluation)的介绍。
 
-\*\*\*.bin就是可以用于在D-Robotics 处理器上加载运行的模型，
+\*\*\*.bin 就是可以用于在 D-Robotics 处理器上加载运行的模型，
 配合 上板运行(runtime)应用开发说明 章节介绍的内容，
-您就可以将模型快速在D-Robotics 处理器上部署运行。不过为了确保模型的性能与精度效果是符合您的预期的，
+您就可以将模型快速在 D-Robotics 处理器上部署运行。不过为了确保模型的性能与精度效果是符合您的预期的，
 我们建议完成[**模型转换**](#model_conversion)和[**模型精度分析与调优**](#accuracy_evaluation)
 介绍的性能和精度分析过程后再进入到应用开发和部署。
 
 :::caution 注意
 
-  通常在模型转换阶段完成后就可以得到在D-Robotics 处理器上运行的模型，但是为了确保您得到的模型性能和精度都是符合应用要求的，D-Robotics 建议每次转换后都完成后续的性能评估与精度评估步骤。
+  通常在模型转换阶段完成后就可以得到在 D-Robotics 处理器上运行的模型，但是为了确保您得到的模型性能和精度都是符合应用要求的，D-Robotics 建议每次转换后都完成后续的性能评估与精度评估步骤。
 
-  模型转换过程会生成onnx模型, 该模型均为中间产物, 只是便于用户验证模型精度情况, 因此不保证其在版本间的兼容性。 若使用示例中的评测脚本对onnx模型进行单张图片评测或在测试集上评测时, 请用当前版本工具重新生成的onnx模型进行操作。
+  模型转换过程会生成 onnx 模型, 该模型均为中间产物, 只是便于用户验证模型精度情况, 因此不保证其在版本间的兼容性。 若使用示例中的评测脚本对 onnx 模型进行单张图片评测或在测试集上评测时, 请用当前版本工具重新生成的 onnx 模型进行操作。
 :::
 
 ### 模型性能分析{#performance_evaluation}
 
-本节介绍如何使用D-Robotics 提供的工具来评估模型性能，使用这些工具可以得到与实际上板执行基本一致的性能效果，如果发现评估结果不符合预期，建议您尽量根据D-Robotics 提供的优化建议解决性能问题，不要将模型的性能问题延伸到应用开发阶段。
+本节介绍如何使用 D-Robotics 提供的工具来评估模型性能，使用这些工具可以得到与实际上板执行基本一致的性能效果，如果发现评估结果不符合预期，建议您尽量根据 D-Robotics 提供的优化建议解决性能问题，不要将模型的性能问题延伸到应用开发阶段。
 
 #### 开发机评测性能{#hb_perf}
 
@@ -1030,8 +1030,8 @@ Missing keys: 'caffe_model', 'prototxt'
   关于模型 ``pack``，请查看其他模型工具(可选)部分的介绍。
 :::
 
-命令中的 \*\*\*.bin是模型转换步骤生成的定点模型，命令执行完成后，在当前目录下生成 `hb_perf_result` 文件夹，里边包含具体的模型分析结果。
-以下是示例模型MobileNetv1的评测结果：
+命令中的 \*\*\*.bin 是模型转换步骤生成的定点模型，命令执行完成后，在当前目录下生成 `hb_perf_result` 文件夹，里边包含具体的模型分析结果。
+以下是示例模型 MobileNetv1 的评测结果：
 
 ```bash
   hb_perf_result/
@@ -1047,42 +1047,42 @@ Missing keys: 'caffe_model', 'prototxt'
 
 ![hb_mapper_perf_2](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/hb_mapper_perf_2.png)
 
-分析结果主要由Model Performance Summary、Details和BIN Model Structure三个部分组成。
-Model Performance Summary是bin模型的整体性能评估结果，其中各项指标为:
+分析结果主要由 Model Performance Summary、Details 和 BIN Model Structure 三个部分组成。
+Model Performance Summary 是 bin 模型的整体性能评估结果，其中各项指标为:
 
 - Model Name——模型名称。
-- Model Latency(ms)——模型整体单帧计算耗时(单位为ms)。
-- Total DDR (loaded+stored) bytes per frame(MB per frame)——模型整体BPU部分数据加载和存储所占用的DDR总量（单位为MB/frame）。
+- Model Latency(ms)——模型整体单帧计算耗时(单位为 ms)。
+- Total DDR (loaded+stored) bytes per frame(MB per frame)——模型整体 BPU 部分数据加载和存储所占用的 DDR 总量（单位为 MB/frame）。
 - Loaded Bytes per Frame——模型运行每帧读取数据量。
 - Stored Bytes per Frame——模型运行每帧存储数据量。
 
-BIN Model Structure部分提供的是bin模型的子图级可视化结果，图中深青色节点表示运行在BPU上的节点，灰色节点表示在CPU上计算的节点。
+BIN Model Structure 部分提供的是 bin 模型的子图级可视化结果，图中深青色节点表示运行在 BPU 上的节点，灰色节点表示在 CPU 上计算的节点。
 
-在查看Details和BIN Model Structure时，您需要了解子图（subgraph）的概念。
-如果模型网络结构中出现CPU计算的算子，模型转换工具会将CPU算子前后连续在BPU计算的部分拆分为两个独立的子图（subgraph）。
+在查看 Details 和 BIN Model Structure 时，您需要了解子图（subgraph）的概念。
+如果模型网络结构中出现 CPU 计算的算子，模型转换工具会将 CPU 算子前后连续在 BPU 计算的部分拆分为两个独立的子图（subgraph）。
 具体可以参考 [**验证模型**](#model_check) 部分的介绍。
 
-Details是每个模型BPU子图的具体信息，在 ``mobilenetv1_224x224_nv12.html`` 主页面中，子图的各项指标为：
+Details 是每个模型 BPU 子图的具体信息，在 ``mobilenetv1_224x224_nv12.html`` 主页面中，子图的各项指标为：
 
 - Model Subgraph Name——子图名称。
 - Model Subgraph Calculation Load (OPpf)——子图的单帧计算量。
-- Model Subgraph DDR Occupation(Mbpf)——子图的单帧读写数据量（单位为MB）。
-- Model Subgraph Latency(ms)——子图的单帧计算耗时（单位为ms）。
+- Model Subgraph DDR Occupation(Mbpf)——子图的单帧读写数据量（单位为 MB）。
+- Model Subgraph Latency(ms)——子图的单帧计算耗时（单位为 ms）。
 
 每个子图结果都提供了详细的参考信息说明。
 
 :::caution 注意
 
   参考信息说明页面会根据您是否启用调试配置，从而有所区别，
-  下图中的Layer Details仅当在yaml配置文件中设置 ``debug`` 参数为 ``True`` 时才可以拿到，
+  下图中的 Layer Details 仅当在 yaml 配置文件中设置 ``debug`` 参数为 ``True`` 时才可以拿到，
   这个 ``debug`` 参数配置方法请参考[**使用 hb_mapper makertbin 工具转换模型**](#makertbin)部分的介绍。
 :::
-Layer Details提供具体算子级别的分析，在模型调试分析阶段可以作为参考，例如：如果是某些BPU算子导致模型性能低，通过分析结果帮助您定位到具体的算子。
+Layer Details 提供具体算子级别的分析，在模型调试分析阶段可以作为参考，例如：如果是某些 BPU 算子导致模型性能低，通过分析结果帮助您定位到具体的算子。
 
 ![layer_details](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/layer_details.png)
 
 :::caution 注意
-  ``hb_perf`` 工具分析的结果可以帮助您了解bin模型的子图结构，以及模型中的BPU计算部分的静态分析指标；需要特别注意分析结果中不含CPU部分的计算评估，如果需要CPU计算的性能情况，请在开发板上实测模型性能。
+  ``hb_perf`` 工具分析的结果可以帮助您了解 bin 模型的子图结构，以及模型中的 BPU 计算部分的静态分析指标；需要特别注意分析结果中不含 CPU 部分的计算评估，如果需要 CPU 计算的性能情况，请在开发板上实测模型性能。
 :::
 
 #### 开发板实测性能
@@ -1094,8 +1094,8 @@ Layer Details提供具体算子级别的分析，在模型调试分析阶段可�
 
 1. 确保您已经参考系统更新章节完成了开发板系统的更新。
 
-2. 需要将Ubuntu开发机上得到的bin模型拷贝到开发板上（建议放在/userdata目录），
-   开发板上是一个Linux系统，可以通过 ``scp`` 等Linux系统常用方式完成这个拷贝过程。
+2. 需要将 Ubuntu 开发机上得到的 bin 模型拷贝到开发板上（建议放在/userdata 目录），
+   开发板上是一个 Linux 系统，可以通过 ``scp`` 等 Linux 系统常用方式完成这个拷贝过程。
 
 ``hrt_model_exec perf`` 工具命令如下（**注意是在开发板上执行**）：
 
@@ -1108,13 +1108,13 @@ Layer Details提供具体算子级别的分析，在模型调试分析阶段可�
                       --thread_num=1 \
                       --profile_path="."
 ```
-hrt_model_exec perf参数解析：
+hrt_model_exec perf 参数解析：
 
   model_file：<br/>
-    需要分析性能的bin模型名称。
+    需要分析性能的 bin 模型名称。
 
   model_name:<br/>
-    需要分析性能的bin模型名字。若 ``model_file`` 只含一个模型，则可以省略。
+    需要分析性能的 bin 模型名字。若 ``model_file`` 只含一个模型，则可以省略。
 
   core_id:<br/>
     默认值 ``0``，运行模型使用的核心id，``0`` 代表任意核心，``1`` 代表核心0，``2`` 代表核心1。若要分析双核极限帧率，请将此处设为 ``0``。
@@ -1129,7 +1129,7 @@ hrt_model_exec perf参数解析：
     默认值 ``1``，设置运行的线程数，取值范围 ``[1,8]``。若要分析极限帧率，请将线程数改大。
 
   profile_path：<br/>
-    默认关闭，统计工具日志产生路径。该参数引入的分析结果会存放在指定目录下的profiler.log和profiler.csv文件中。
+    默认关闭，统计工具日志产生路径。该参数引入的分析结果会存放在指定目录下的 profiler.log 和 profiler.csv 文件中。
 
 下述示例是在 **RDK X3** 开发板实测结果，命令执行完成后，您将在控制台得到如下日志：
 
@@ -1149,7 +1149,7 @@ Perf result:
   如果想获得模型在板子上运行的极限帧率，请尝试调节 ``thread_num`` 的数值，并调节出最优线程数值，不同的数值会输出不同的性能结果。
 :::
 
-控制台得到的信息只有整体情况，通过设置 ``profile_path`` 参数产生的node_profiler.log文件记录了更加丰富的模型性能信息：
+控制台得到的信息只有整体情况，通过设置 ``profile_path`` 参数产生的 node_profiler.log 文件记录了更加丰富的模型性能信息：
 
 ```bash
 {
@@ -1260,35 +1260,35 @@ Perf result:
   }
 }
 ```
-上述日志内容对应到[**使用hb_perf工具估计性能**](#hb_perf)中的BIN Model Structure部分介绍的bin可视化图中，
-图中每个节点都有对应的节点在profiler.log文件中，可以通过 ``name`` 对应起来，另外，profiler.log文件中也记录出每个节点的执行时间，对优化模型算子提供参考，由于模型中的BPU节点对输入输出有特殊要求，如特殊的layout和padding对齐要求，因此需要对BPU节点的输入、输出数据进行处理。
+上述日志内容对应到[**使用 hb_perf 工具估计性能**](#hb_perf)中的 BIN Model Structure 部分介绍的 bin 可视化图中，
+图中每个节点都有对应的节点在 profiler.log 文件中，可以通过 ``name`` 对应起来，另外，profiler.log 文件中也记录出每个节点的执行时间，对优化模型算子提供参考，由于模型中的 BPU 节点对输入输出有特殊要求，如特殊的 layout 和 padding 对齐要求，因此需要对 BPU 节点的输入、输出数据进行处理。
 
-- ``Preprocess``：表示对模型输入数据进行padding和layout转换操作，其耗时统计在Preprocess中。
-- ``xxxx_input_layout_convert``： 表示对BPU节点的输入数据进行padding和layout转换的操作，其耗时统计在xxxx_input_layout_convert中。
-- ``xxxx_output_layout_convert``： 表示对BPU节点输出数据进行去掉padding和layout转换的操作，其耗时统计在xxxx_output_layout_convert中。
-``profiler`` 分析是模型性能调优中经常使用的操作，前文 [**检查结果解读**](#check_result) 部分提到检查阶段不用过于关注CPU算子，此阶段可以看到CPU算子的具体耗时情况，可以根据对应算子的耗时情况来进行模型性能调优。
+- ``Preprocess``：表示对模型输入数据进行 padding 和 layout 转换操作，其耗时统计在 Preprocess 中。
+- ``xxxx_input_layout_convert``： 表示对 BPU 节点的输入数据进行 padding 和 layout 转换的操作，其耗时统计在 xxxx_input_layout_convert 中。
+- ``xxxx_output_layout_convert``： 表示对 BPU 节点输出数据进行去掉 padding 和 layout 转换的操作，其耗时统计在 xxxx_output_layout_convert 中。
+``profiler`` 分析是模型性能调优中经常使用的操作，前文 [**检查结果解读**](#check_result) 部分提到检查阶段不用过于关注 CPU 算子，此阶段可以看到 CPU 算子的具体耗时情况，可以根据对应算子的耗时情况来进行模型性能调优。
 
 :::tip 小技巧
 
   若模型耗时比较严重，也可以通过以下几种方法来进行性能优化：
   1. 单帧单核：一帧数据进来，在一个核上启用模型去运行推理；
-  2. 单帧双核：模型在编译时就指定为双核模型（yaml配置文件中的 core_num：2），运行后会自动占用两个核的资源，然后一帧数据进来，会拆成两部分分别计算，最后再拼起来。这种模式在一些大模型上优化效果才有比较明显，会降低一定的延迟，小模型反而可能会因为这种双核的调度变慢；
-  3. 双帧双核：两个核分别启用一个模型，独立处理各自的数据帧，时延不会降低，但帧率差不多可以达到2倍
+  2. 单帧双核：模型在编译时就指定为双核模型（yaml 配置文件中的 core_num：2），运行后会自动占用两个核的资源，然后一帧数据进来，会拆成两部分分别计算，最后再拼起来。这种模式在一些大模型上优化效果才有比较明显，会降低一定的延迟，小模型反而可能会因为这种双核的调度变慢；
+  3. 双帧双核：两个核分别启用一个模型，独立处理各自的数据帧，时延不会降低，但帧率差不多可以达到 2 倍
 :::
 
 
 
 #### 模型性能优化
 
-通过以上性能分析结果，您可能发现模型性能结果不及预期，本章节内容介绍D-Robotics 对提升模型性能的建议与措施，包括检查yaml配置参数、处理CPU算子、高性能模型设计建议、使用D-Robotics 平台友好结构&模型几个方面。
+通过以上性能分析结果，您可能发现模型性能结果不及预期，本章节内容介绍 D-Robotics 对提升模型性能的建议与措施，包括检查 yaml 配置参数、处理 CPU 算子、高性能模型设计建议、使用 D-Robotics 平台友好结构&模型几个方面。
 
 :::caution 注意
   本章节中部分修改建议可能会影响原始浮点模型的参数空间，因此需要您重训模型，为了避免在性能调优过程中反复调整并训练模型，建议您在得到满意模型性能前，使用随机参数导出模型来验证性能。
 :::
 
-##### 检查影响模型性能的yaml参数
+##### 检查影响模型性能的 yaml 参数
 
-在模型转换的yaml配置文件中，部分参数会实际影响模型的最终性能，请先检查是否已正确按照模型预期配置，
+在模型转换的 yaml 配置文件中，部分参数会实际影响模型的最终性能，请先检查是否已正确按照模型预期配置，
 各参数的具体含义和作用，请参考[**编译参数组**](#编译参数组)章节内容。
 
 - ``layer_out_dump``：指定模型转换过程中是否输出模型的中间结果，一般仅用于调试功能。
@@ -1297,52 +1297,52 @@ Perf result:
 - ``compile_mode``：该参数用于选择模型编译时的优化方向为带宽还是时延，关注性能时请配置为 ``latency``。
 - ``optimize_level``：该参数用于选择编译器的优化等级，实际使用中应配置为 ``O3`` 获取最佳性能。
 - ``core_num``：**注意：** 此参数只适用于 **RDK X3**，配置为 ``2`` 时可同时调用两个核运行，降低单帧推理延迟，但是也会影响整体的吞吐率。
-- ``debug``：配置为 ``True`` 将打开编译器的debug模式，能够输出性能仿真的相关信息，如帧率、DDR 带宽占用等。
+- ``debug``：配置为 ``True`` 将打开编译器的 debug 模式，能够输出性能仿真的相关信息，如帧率、DDR 带宽占用等。
   一般用于性能评估阶段，在产品化交付时候，可关闭该参数减小模型大小，提高模型执行效率。
-- ``max_time_per_fc``：该参数用于控制编译后的模型数据指令的function-call的执行时长，从而实现模型优先级抢占功能。
-  设置此参数更改被抢占模型的function-call执行时长会影响该模型的上板性能。
+- ``max_time_per_fc``：该参数用于控制编译后的模型数据指令的 function-call 的执行时长，从而实现模型优先级抢占功能。
+  设置此参数更改被抢占模型的 function-call 执行时长会影响该模型的上板性能。
 
-##### 处理CPU算子
+##### 处理 CPU 算子
 
-根据 ``hrt_model_exec perf`` 工具的评估，若可以确认模型的性能瓶颈是CPU算子导致的，此种情况下，建议您查看[**模型算子支持列表**](./supported_op_list)的内容，确认当前运行在CPU上的算子是否具备BPU支持的能力。
+根据 ``hrt_model_exec perf`` 工具的评估，若可以确认模型的性能瓶颈是 CPU 算子导致的，此种情况下，建议您查看[**模型算子支持列表**](./supported_op_list)的内容，确认当前运行在 CPU 上的算子是否具备 BPU 支持的能力。
 
-如果该算子在模型算子支持列表中具备BPU支持能力，应该是该算子参数超过了BPU支持的参数约束范围，建议您将相应原始浮点模型计算参数调整到约束范围内。
-为了方便您快速知晓超出约束的具体参数，建议您再使用 [**验证模型**](#model_check) 部分介绍的方法做一遍检查，工具将会直接给出超出BPU支持范围的参数提示。
+如果该算子在模型算子支持列表中具备 BPU 支持能力，应该是该算子参数超过了 BPU 支持的参数约束范围，建议您将相应原始浮点模型计算参数调整到约束范围内。
+为了方便您快速知晓超出约束的具体参数，建议您再使用 [**验证模型**](#model_check) 部分介绍的方法做一遍检查，工具将会直接给出超出 BPU 支持范围的参数提示。
 
 :::info 备注
-  修改原始浮点模型参数对模型计算精度的影响需要您自己把控，例如：Convolution的 ``input_channel`` 或 ``output_channel`` 超出范围就是一种较典型的情况，减少channel后，使该算子被BPU支持，但只做这一处修改也可能对模型精度产生影响。
+  修改原始浮点模型参数对模型计算精度的影响需要您自己把控，例如：Convolution 的 ``input_channel`` 或 ``output_channel`` 超出范围就是一种较典型的情况，减少 channel 后，使该算子被 BPU 支持，但只做这一处修改也可能对模型精度产生影响。
 :::
 
-如果算子并不具备BPU支持能力，就需要您根据以下情况做出对应优化操作：
+如果算子并不具备 BPU 支持能力，就需要您根据以下情况做出对应优化操作：
 
 - CPU 算子处于模型中部
 
-  对于CPU 算子处于模型中部的情况，建议您优先尝试参数调整、算子替换或修改模型。
+  对于 CPU 算子处于模型中部的情况，建议您优先尝试参数调整、算子替换或修改模型。
 
-- CPU算子处于模型首尾部
+- CPU 算子处于模型首尾部
 
-  对于CPU算子处于模型首尾部的情况，请参考以下示例，下面以量化/反量化节点为例：
+  对于 CPU 算子处于模型首尾部的情况，请参考以下示例，下面以量化/反量化节点为例：
 
-  - 对于与模型输入输出相连的节点，可以在yaml文件model_parameters配置组（模型参数组）中增加 ``remove_node_type`` 参数，并重新编译模型。
+  - 对于与模型输入输出相连的节点，可以在 yaml 文件 model_parameters 配置组（模型参数组）中增加 ``remove_node_type`` 参数，并重新编译模型。
 
     ```bash
 
       remove_node_type: "Quantize; Dequantize"
     ```
 
-    或使用hb_model_modifier 工具对bin模型进行修改：
+    或使用 hb_model_modifier 工具对 bin 模型进行修改：
 
     ```bash
 
       hb_model_modifier x.bin -a Quantize -a Dequantize
     ```
 
-  - 对于下图这种没有与输入输出节点相连的模型，则需要使用hb_model_modifier工具判断相连节点是否支持删除后按照顺序逐个进行删除。
+  - 对于下图这种没有与输入输出节点相连的模型，则需要使用 hb_model_modifier 工具判断相连节点是否支持删除后按照顺序逐个进行删除。
 
     ![nodes_connected](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/nodes_connected.png)
 
-    先使用hb_perf工具获取模型结构图片，然后使用以下两条命令可以自上而下移除Quantize节点,
-    对于Dequantize节点自下而上逐个删除即可，每一步可删除节点的名称可以通过 ``hb_model_modifier x.bin`` 进行查看。
+    先使用 hb_perf 工具获取模型结构图片，然后使用以下两条命令可以自上而下移除 Quantize 节点,
+    对于 Dequantize 节点自下而上逐个删除即可，每一步可删除节点的名称可以通过 ``hb_model_modifier x.bin`` 进行查看。
 
     ```bash
 
@@ -1353,25 +1353,25 @@ Perf result:
 
 ##### 高性能模型设计建议
 
-根据性能评估结果，CPU上耗时占比可能很小，那模型的性能瓶颈就是BPU推理时间过长。
-出现这种情况时，表明模型已经使用了所有的BPU的计算器件，因此下一步的可以提升计算资源的利用率来进行性能优化。
+根据性能评估结果，CPU 上耗时占比可能很小，那模型的性能瓶颈就是 BPU 推理时间过长。
+出现这种情况时，表明模型已经使用了所有的 BPU 的计算器件，因此下一步的可以提升计算资源的利用率来进行性能优化。
 因为每种处理器都有自己的硬件特性，算法模型的计算参数是否很好地符合了相应的硬件特性，这些直接决定了模型的计算资源利用率，符合度越高则利用率越高，反之则越低。
 
-本节内容重点介绍D-Robotics 处理器的硬件特性：D-Robotics 提供的是旨在加速CNN（卷积神经网络）的处理器，主要的计算资源都集中在处理各种卷积计算；建议您的模型是以卷积计算为主的模型，因为卷积之外的算子都会导致计算资源的利用率降低，不同OP的造成的性能影响程度不一样。
+本节内容重点介绍 D-Robotics 处理器的硬件特性：D-Robotics 提供的是旨在加速 CNN（卷积神经网络）的处理器，主要的计算资源都集中在处理各种卷积计算；建议您的模型是以卷积计算为主的模型，因为卷积之外的算子都会导致计算资源的利用率降低，不同 OP 的造成的性能影响程度不一样。
 
 - **其他建议**
 
-  D-Robotics 处理器上的 ``depthwise convolution`` 的计算效率接近100%，所以对于 ``MobileNet类`` 的模型，BPU具有效率优势。
+  D-Robotics 处理器上的 ``depthwise convolution`` 的计算效率接近100%，所以对于 ``MobileNet类`` 的模型，BPU 具有效率优势。
 
-  建议您在模型设计时，尽量让模型BPU段的输入输出维度降低，以减少量化、反量化节点的耗时和硬件的带宽压力。
-  以典型的分割模型为例，建议将Argmax算子直接合入模型本身，但需注意，只有满足以下条件，Argmax才支持BPU加速：
+  建议您在模型设计时，尽量让模型 BPU 段的输入输出维度降低，以减少量化、反量化节点的耗时和硬件的带宽压力。
+  以典型的分割模型为例，建议将 Argmax 算子直接合入模型本身，但需注意，只有满足以下条件，Argmax 才支持 BPU 加速：
 
-    1. Caffe中的Softmax层默认axis=1，而ArgMax层则默认axis=0，算子替换时要保持axis的一致
-    2. Argmax的Channel需小于等于64，否则只能在CPU上计算
+    1. Caffe 中的 Softmax 层默认 axis=1，而 ArgMax 层则默认 axis=0，算子替换时要保持 axis 的一致
+    2. Argmax 的 Channel 需小于等于 64，否则只能在 CPU 上计算
 
-- **BPU面向高效率模型优化**
+- **BPU 面向高效率模型优化**
 
-  D-Robotics 处理器的BPU对于 ``Depthwise Convolution`` 和 ``Group Convolution`` 都做了针对性的优化，所以我们更推荐采用Depthwise+Pointwise 结构的MobileNetv2、EfficientNet_lite， 以及D-Robotics 基于 GroupConv 手工设计自研的 VarGNet 作为模型的 Backbone，以便获得更高的性能收益。
+  D-Robotics 处理器的 BPU 对于 ``Depthwise Convolution`` 和 ``Group Convolution`` 都做了针对性的优化，所以我们更推荐采用 Depthwise+Pointwise 结构的 MobileNetv2、EfficientNet_lite， 以及 D-Robotics 基于 GroupConv 手工设计自研的 VarGNet 作为模型的 Backbone，以便获得更高的性能收益。
 
   更多的模型结构和业务模型都在持续探索中，我们将提供更加丰富的模型给您作为直接的参考，这些产出将不定期更新至 https://github.com/D-Robotics/rdk_model_zoo 。
   如果以上依然不能满足您的需要，欢迎在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc)发帖与我们取得联系，我们将根据您的具体问题提供更具针对性的指导建议。
@@ -1379,8 +1379,8 @@ Perf result:
 
 ### 模型精度分析{#accuracy_evaluation}
 
-基于几十或上百张校准数据实现浮点模型到定点模型转换的PTQ后量化方式，不可避免地会存在一定的精度损失。
-D-Robotics 的PTQ转换工具经过大量实际使用经验验证，在筛选出最优的量化参数组合时，大部分情况下，都可以将模型的精度损失保持在 ``1%`` 以内。
+基于几十或上百张校准数据实现浮点模型到定点模型转换的 PTQ 后量化方式，不可避免地会存在一定的精度损失。
+D-Robotics 的 PTQ 转换工具经过大量实际使用经验验证，在筛选出最优的量化参数组合时，大部分情况下，都可以将模型的精度损失保持在 ``1%`` 以内。
 
 本节先介绍如何正确地进行模型精度分析，如果通过评估发现不及预期，则可以参考 **精度调优** 小节的内容进行模型精度调优。
 
@@ -1393,14 +1393,14 @@ D-Robotics 的PTQ转换工具经过大量实际使用经验验证，在筛选出
 - \*\*\*_quantized_model.onnx
 - \*\*\*.bin
 
-虽然最后的bin模型才是部署到D-Robotics 处理器上的模型，但考虑到方便在Ubuntu/CentOS开发机上快速得到模型精度，我们同时支持使用 \*\*\*_quantized_model.onnx 来完成模型的精度测试； \*\*\*_quantized_model.onnxquantized模型和X3处理器运行的bin模型具有一致的精度效果。
+虽然最后的 bin 模型才是部署到 D-Robotics 处理器上的模型，但考虑到方便在 Ubuntu/CentOS 开发机上快速得到模型精度，我们同时支持使用 \*\*\*_quantized_model.onnx 来完成模型的精度测试； \*\*\*_quantized_model.onnxquantized 模型和 X3 处理器运行的 bin 模型具有一致的精度效果。
 
-建议您使用D-Robotics 开发库加载ONNX模型来完成推理，基本流程如下所示：
+建议您使用 D-Robotics 开发库加载 ONNX 模型来完成推理，基本流程如下所示：
 
 :::caution 注意
-  1. 示例代码不仅适用于quantized模型，对original和optimized模型同样适用，可以根据不同模型的输入类型和layout要求准备数据进行模型推理。
+  1. 示例代码不仅适用于 quantized 模型，对 original 和 optimized 模型同样适用，可以根据不同模型的输入类型和 layout 要求准备数据进行模型推理。
 
-  2. 建议参考使用D-Robotics 模型转换 ``horizon_model_convert_sample`` 示例包中的caffe、onnx等示例模型的精度验证方法: ``04_inference.sh`` 和 ``postprocess.py`` 。
+  2. 建议参考使用 D-Robotics 模型转换 ``horizon_model_convert_sample`` 示例包中的caffe、onnx等示例模型的精度验证方法: ``04_inference.sh`` 和 ``postprocess.py`` 。
 :::
 
 ```
@@ -1440,33 +1440,33 @@ if __name__ == '__main__':
 
 ```
 
-上述代码中，``input_offset`` 参数默认值为128。 对于有前处理节点的模型, 这里都需要做-128的操作。 如果模型输入前并未添加前处理节点, 则需要将 ``input_offset`` 设置为0。
+上述代码中，``input_offset`` 参数默认值为128。 对于有前处理节点的模型, 这里都需要做-128的操作。 如果模型输入前并未添加前处理节点, 则需要将 ``input_offset`` 设置为 0。
 
 :::info 备注
   对于多输入模型：
 
-  - 如果输入input_type_rt均属于（RGB/BGR/NV12/YUV444/GRAY），可以采用 sess.run 方法做推理。
+  - 如果输入 input_type_rt 均属于（RGB/BGR/NV12/YUV444/GRAY），可以采用 sess.run 方法做推理。
 
-  - 如果输入input_type_rt均属于（FEATUREMAP），可以采用 sess.run_feature 方法做推理。
+  - 如果输入 input_type_rt 均属于（FEATUREMAP），可以采用 sess.run_feature 方法做推理。
 
-  - 请注意，目前暂不支持输入input_type_rt为FEATUREMAP与非FEATUREMAP的混合类型使用 sess.* 方法做推理。
+  - 请注意，目前暂不支持输入 input_type_rt 为 FEATUREMAP 与非 FEATUREMAP 的混合类型使用 sess.* 方法做推理。
 :::
 此外, ``your_custom_data_prepare`` 函数所代表的输入数据准备过程是最容易出现误操作的部分。
-相对于您设计&训练原始浮点模型的精度验证过程，建议您在数据预处理后将推理输入数据进行调整：主要是数据格式（RGB、NV12等）、数据精度（int8、float32等）和数据排布（NCHW或NHWC）。
-调整方法是您在模型转换时yaml配置文件中设置的 ``input_type_train``、 ``input_layout_train``、 ``input_type_rt`` 和 ``input_layout_rt`` 四个参数共同决定，其详细规则请参考[**转换内部过程解读**](#conversion_interpretation) 章节介绍。
+相对于您设计&训练原始浮点模型的精度验证过程，建议您在数据预处理后将推理输入数据进行调整：主要是数据格式（RGB、NV12 等）、数据精度（int8、float32 等）和数据排布（NCHW 或 NHWC）。
+调整方法是您在模型转换时 yaml 配置文件中设置的 ``input_type_train``、 ``input_layout_train``、 ``input_type_rt`` 和 ``input_layout_rt`` 四个参数共同决定，其详细规则请参考[**转换内部过程解读**](#conversion_interpretation) 章节介绍。
 
-例如：使用ImageNet训练的用于分类的原始浮点模型，它只有一个输入节点。这个节点接受BGR顺序的三通道图片，输入数据排布为NCHW。
+例如：使用 ImageNet 训练的用于分类的原始浮点模型，它只有一个输入节点。这个节点接受 BGR 顺序的三通道图片，输入数据排布为 NCHW。
 那么，在原始浮点模型设计&训练阶段，验证集推理模型前做的数据预处理如下：
 
-1. 图像长宽等比scale,短边缩放到256。
-2. ``center_crop`` 方法获取224x224大小图像。
-3. 按通道减mean。
-4. 数据乘以scale系数。
+1. 图像长宽等比 scale,短边缩放到 256。
+2. ``center_crop`` 方法获取 224x224 大小图像。
+3. 按通道减 mean。
+4. 数据乘以 scale 系数。
 
-使用D-Robotics 转换这个原始浮点模型时，
+使用 D-Robotics 转换这个原始浮点模型时，
 ``input_type_train`` 设置 ``bgr``、 ``input_layout_train`` 设置 ``NCHW``、 ``input_type_rt`` 设置 ``bgr``、
 ``input_layout_rt`` 设置 ``NHWC``。
-根据[**转换内部过程解读**](#conversion_interpretation) 部分介绍的规则， \*\*\*_quantized_model.onnx接受的输入应该为bgr_128、NHWC排布。
+根据[**转换内部过程解读**](#conversion_interpretation) 部分介绍的规则， \*\*\*_quantized_model.onnx 接受的输入应该为 bgr_128、NHWC 排布。
 对应到前文的示例代码， ``your_custom_data_prepare`` 部分提供的数据处理过程如下：
 
 ```
@@ -1500,13 +1500,13 @@ def your_custom_data_prepare_sample(image_file):
 
 基于前文的精度分析工作，如果确定模型的量化精度不符合预期，则主要可分为以下两种情况进行解决：
 
-- 1. 精度有较明显损失（损失大于4%）。
-  这种问题往往是由于yaml配置不当，校验数据集不均衡等导致的，建议根据D-Robotics 接下来提供的建议逐一排查。
+- 1. 精度有较明显损失（损失大于 4%）。
+  这种问题往往是由于 yaml 配置不当，校验数据集不均衡等导致的，建议根据 D-Robotics 接下来提供的建议逐一排查。
 
 - 2. 精度损失较小（1.5%~3%）。
-  排除1导致的精度问题后，如果仍然出现精度有小幅度损失，往往是由于模型自身的敏感性导致，建议使用D-Robotics 提供的精度调优工具进行调优。
+  排除 1 导致的精度问题后，如果仍然出现精度有小幅度损失，往往是由于模型自身的敏感性导致，建议使用 D-Robotics 提供的精度调优工具进行调优。
 
-- 3. 在尝试1和2后，如果精度仍无法满足预期，可以尝试使用我们提供的精度debug工具进行进一步尝试。
+- 3. 在尝试 1 和 2 后，如果精度仍无法满足预期，可以尝试使用我们提供的精度 debug 工具进行进一步尝试。
 
 整体精度问题解决流程示意如下图：
 
@@ -1515,34 +1515,34 @@ def your_custom_data_prepare_sample(image_file):
 ##### 精度有明显损失（4%以上）
 
 
-若模型精度损失大于4%，通常是因为yaml配置不当，校验数据集不均衡等导致的，建议依次从pipeline、模型转换配置、一致性检查几个方面进行排查。
+若模型精度损失大于 4%，通常是因为 yaml 配置不当，校验数据集不均衡等导致的，建议依次从 pipeline、模型转换配置、一致性检查几个方面进行排查。
 
-**pipeline检查**
+**pipeline 检查**
 
-pipeline是指您完成数据预处理、模型转换、模型推理、后处理、精度评测的全过程，这些步骤请根据上文对应章节来进行检查。
+pipeline 是指您完成数据预处理、模型转换、模型推理、后处理、精度评测的全过程，这些步骤请根据上文对应章节来进行检查。
 在以往的实际问题跟进经验中，我们发现大部分情况是在原始浮点模型训练阶段中有变动，却没有及时更新到模型转换步骤，从而精度验证时导致异常。
 
 **模型转换配置检查**
 
-- ``input_type_rt`` 和 ``input_type_train`` 该参数用来区分转后混合异构模型与原始浮点模型需要的数据格式，需要认真检查是否符合预期，尤其是BGR和RGB通道顺序是否正确。
+- ``input_type_rt`` 和 ``input_type_train`` 该参数用来区分转后混合异构模型与原始浮点模型需要的数据格式，需要认真检查是否符合预期，尤其是 BGR 和 RGB 通道顺序是否正确。
 
-- ``norm_type``、 ``mean_value``、 ``scale_value`` 等参数是否配置正确。通过转换配置可以直接在模型中插入mean和scale操作节点，需要确认是否对校验/测试图片进行了重复的mean和scale操作 **重复预处理是错误的易发区**。
+- ``norm_type``、 ``mean_value``、 ``scale_value`` 等参数是否配置正确。通过转换配置可以直接在模型中插入 mean 和 scale 操作节点，需要确认是否对校验/测试图片进行了重复的 mean 和 scale 操作 **重复预处理是错误的易发区**。
 
 **数据处理一致性检查**
 
 该部分检查主要针对参考算法工具链开发包示例准备校准数据以及评测代码的用户，主要有以下常见错误：
 
 - 未正确指定 ``read_mode``：02_preprocess.sh中可通过--read_mode参数指定读图方式，支持 ``opencv`` 及 ``skimage``。
-  此外preprocess.py中亦是通过imread_mode参数设定读图方式，也需要做出修改。使用 skimage的图片读取，得到的是 ``RGB`` 通道顺序，取值范围为 ``0~1``，数值类型为 ``float``； 而使用 opencv，得到的是 ``BGR`` 通道顺序，取值范围为 ``0~255``，数据类型为 ``uint8``。
+  此外 preprocess.py 中亦是通过 imread_mode 参数设定读图方式，也需要做出修改。使用 skimage 的图片读取，得到的是 ``RGB`` 通道顺序，取值范围为 ``0~1``，数值类型为 ``float``； 而使用 opencv，得到的是 ``BGR`` 通道顺序，取值范围为 ``0~255``，数据类型为 ``uint8``。
 
-- 校准数据集的存储格式设置不正确：目前D-Robotics 采用的是 ``numpy.tofile`` 来保存校准数据，这种方式不会保存shape和类型信息；如果input_type_train为 ``非featuremap`` 格式，则会通过校准数据存放路径是否包含 “f32” 来判断数据dtype，若包含f32关键字，则按float32解析数据；反之则按uint8解析数据。
-  此外，为方便用户设置校准数据的解析方式，在X3算法工具链v2.2.3a版本之后，在yaml中新增了参数 ``cal_data_type`` 来设置二进制文件的数据存储类型。
+- 校准数据集的存储格式设置不正确：目前 D-Robotics 采用的是 ``numpy.tofile`` 来保存校准数据，这种方式不会保存shape和类型信息；如果input_type_train为 ``非featuremap`` 格式，则会通过校准数据存放路径是否包含 “f32” 来判断数据 dtype，若包含 f32 关键字，则按 float32 解析数据；反之则按 uint8 解析数据。
+  此外，为方便用户设置校准数据的解析方式，在 X3 算法工具链 v2.2.3a 版本之后，在 yaml 中新增了参数 ``cal_data_type`` 来设置二进制文件的数据存储类型。
 
-- transformer实现方式不一致：D-Robotics 提供了一系列常见预处理函数，存放在 ``/horizon_model_convert_sample/01_common/python/data/transformer.py`` 文件中，部分预处理操作的实现方式可能会有所区别，例如ResizeTransformer，采用的是opencv默认插值方式（linear），
-  若为其他插值方式可直接修改transformer.py源码，确保与训练时预处理代码保持一致, 具体使用请参考[**transformer使用方法**](../../../08_FAQ/05_toolchain.md#transposetransformer)章节内容。
+- transformer 实现方式不一致：D-Robotics 提供了一系列常见预处理函数，存放在 ``/horizon_model_convert_sample/01_common/python/data/transformer.py`` 文件中，部分预处理操作的实现方式可能会有所区别，例如 ResizeTransformer，采用的是 opencv 默认插值方式（linear），
+  若为其他插值方式可直接修改 transformer.py 源码，确保与训练时预处理代码保持一致, 具体使用请参考[**transformer 使用方法**](../../../08_FAQ/05_toolchain.md#transposetransformer)章节内容。
 
-- 建议您在D-Robotics 算法工具链使用过程中，依然使用原始浮点模型训练验证阶段依赖的数据处理库。
-  对于鲁棒性较差的模型，不同库实现的功能resize、crop等典型功能都可能引起扰动，进而影响模型精度。
+- 建议您在 D-Robotics 算法工具链使用过程中，依然使用原始浮点模型训练验证阶段依赖的数据处理库。
+  对于鲁棒性较差的模型，不同库实现的功能 resize、crop 等典型功能都可能引起扰动，进而影响模型精度。
 
 - 校验图片集是否合理设置。校准图片集数量应该在 ``一百张`` 左右，同时最好可以覆盖到数据分布的各种场合，例如在多任务或多分类时，校验图片集可以覆盖到各个预测分支或者各个类别。
   同时避免偏离数据分布的异常图片（过曝光等）。
@@ -1552,14 +1552,14 @@ pipeline是指您完成数据预处理、模型转换、模型推理、后处理
 
 ##### 较小精度损失提升
 
-一般情况下，为降低模型精度调优的难度，建议您优先尝试将 ``calibration_type`` 配置为 ``default``。default为自动搜索功能，以第一张校准数据输出节点余弦相似度为依据，从max、max-Percentile 0.99995和KL等校准方法中选取最优的方案，
+一般情况下，为降低模型精度调优的难度，建议您优先尝试将 ``calibration_type`` 配置为 ``default``。default 为自动搜索功能，以第一张校准数据输出节点余弦相似度为依据，从 max、max-Percentile 0.99995 和 KL 等校准方法中选取最优的方案，
 最终选取的校准方法可关注转换日志中类似 ``“Select kl method.”`` 的提示。若自动搜索的精度结果仍然与预期有差距，可尝试以下建议进行调优：
 
 **调整校准方式**
 
 - 手动指定 calibration_type，可以选择 ``kl/max``；
 
-- 将 calibration_type 配置为 max，并配置 max_percentile 为不同的分位数（取值范围是0-1之间），我们推荐您优先尝试 0.99999、0.99995、0.9999、0.9995、0.999，通过这五个配置观察模型精度的变化趋势，最终找到一个最佳的分位数；
+- 将 calibration_type 配置为 max，并配置 max_percentile 为不同的分位数（取值范围是 0-1 之间），我们推荐您优先尝试 0.99999、0.99995、0.9999、0.9995、0.999，通过这五个配置观察模型精度的变化趋势，最终找到一个最佳的分位数；
   
 - 尝试启用 ``per_channel``，可与之前任意校准方式配合使用。
 
@@ -1573,24 +1573,24 @@ pipeline是指您完成数据预处理、模型转换、模型推理、后处理
 
 - 一般我们仅会尝试将模型输出层的 ``1～2`` 个算子回退至 ``CPU``，太多的算子会较大程度影响模型最终性能，判断依据可通过观察模型的 ``余弦相似度``；
 
-- 指定算子运行在 CPU 上请通过yaml文件中的 ``run_on_cpu`` 参数，通过指定节点名称将对应算子运行在cpu上（参考示例：run_on_cpu: conv_0）。
+- 指定算子运行在 CPU 上请通过 yaml 文件中的 ``run_on_cpu`` 参数，通过指定节点名称将对应算子运行在 cpu 上（参考示例：run_on_cpu: conv_0）。
 
-- 若run_on_cpu之后模型编译报错，请联系D-Robotics 技术支持团队。
+- 若 run_on_cpu 之后模型编译报错，请联系 D-Robotics 技术支持团队。
 
 
-##### 精度Debug工具
+##### 精度 Debug 工具
 
-在尝试了上述两种精度调优方法后，如果您的精度仍无法满足预期，为了方便您定位问题，我们提供了精度debug工具用于协助您定位问题。
+在尝试了上述两种精度调优方法后，如果您的精度仍无法满足预期，为了方便您定位问题，我们提供了精度 debug 工具用于协助您定位问题。
 该工具能够协助您对校准模型进行节点粒度的量化误差分析，快速定位出现精度异常的节点。
 
 :::tip 小技巧
 
-  若您使用的是 **RDK Ultra 和 RDK X5** 产品，那么您也可以通过配置部分op以int16计算来进行尝试精度调优（**RDK X3** 不支持算子int16计算）：
+  若您使用的是 **RDK Ultra 和 RDK X5** 产品，那么您也可以通过配置部分 op 以 int16 计算来进行尝试精度调优（**RDK X3** 不支持算子 int16 计算）：
 
-  在模型转换过程中，大部分op默认会以int8的数据计算，在一些场景下部分op使用int8计算会导致精度损失明显。
-  针对 **RDK Ultra 和 RDK X5** 产品，目前算法工具链已经提供了指定特定op以int16 bit计算的能力，
-  详情可参考 [**int16配置说明**](#int16_config) 参数配置的说明。
-  通过配置量化精度损失敏感op（以余弦相似度为参考）以int16 bit计算，一些场景下可以解决精度损失问题。
+  在模型转换过程中，大部分 op 默认会以 int8 的数据计算，在一些场景下部分 op 使用 int8 计算会导致精度损失明显。
+  针对 **RDK Ultra 和 RDK X5** 产品，目前算法工具链已经提供了指定特定 op 以 int16 bit 计算的能力，
+  详情可参考 [**int16 配置说明**](#int16_config) 参数配置的说明。
+  通过配置量化精度损失敏感 op（以余弦相似度为参考）以 int16 bit 计算，一些场景下可以解决精度损失问题。
 :::
 
 在模型转换的过程中，难免会因为浮点到定点的量化过程而引入精度损失，通常情况下造成精度损失的主要原因可能有以下几点：
@@ -1599,10 +1599,10 @@ pipeline是指您完成数据预处理、模型转换、模型推理、后处理
 
 2. 模型中各个节点的误差累积导致模型整体出现较大的校准误差，主要包含：权重量化导致的误差累积、激活量化导致的误差累积以及全量量化导致的误差累积。
 
-针对该情况，D-Robotics 提供了精度debug工具用以协助您自主定位模型量化过程中产生的精度问题。
+针对该情况，D-Robotics 提供了精度 debug 工具用以协助您自主定位模型量化过程中产生的精度问题。
 该工具能够协助您对校准模型进行节点粒度的量化误差分析，最终帮助您快速定位出现精度异常的节点。
 
-精度debug工具提供多种分析功能供您使用，例如：
+精度 debug 工具提供多种分析功能供您使用，例如：
 
 - 获取节点量化敏感度。
 
@@ -1614,17 +1614,17 @@ pipeline是指您完成数据预处理、模型转换、模型推理、后处理
 
 ###### 使用方法说明
 
-使用精度debug工具主要有以下几个步骤：
+使用精度 debug 工具主要有以下几个步骤：
 
-1. 在yaml中的 **模型参数组(model_parameters)** 配置参数 ``debug_mode="dump_calibration_data"`` ，保存校准数据。
+1. 在 yaml 中的 **模型参数组(model_parameters)** 配置参数 ``debug_mode="dump_calibration_data"`` ，保存校准数据。
 
-2. 导入debug模块，加载校准模型和数据。
+2. 导入 debug 模块，加载校准模型和数据。
 
-3. 通过精度debug工具提供的API或命令行，对精度损失明显的模型进行分析。
+3. 通过精度 debug 工具提供的 API 或命令行，对精度损失明显的模型进行分析。
 
 :::caution 注意
 
-  对于当前版本的精度debug调试工具： **RDK Ultra** 对应的 ``bayes`` 架构模型支持命令行和API方式，**RDK X5** 对应的 ``bayes-e`` 架构模型支持命令行和API方式， **RDK X3** 对应的 ``bernoulli2`` 架构模型只支持API方式进行debug调试。
+  对于当前版本的精度 debug 调试工具： **RDK Ultra** 对应的 ``bayes`` 架构模型支持命令行和API方式，**RDK X5** 对应的 ``bayes-e`` 架构模型支持命令行和API方式， **RDK X3** 对应的 ``bernoulli2`` 架构模型只支持 API 方式进行 debug 调试。
 :::
 
 整体流程如下图所示：
@@ -1633,7 +1633,7 @@ pipeline是指您完成数据预处理、模型转换、模型推理、后处理
 
 - **校准模型与数据的保存**
 
-首先需要在yaml文件中配置 ``debug_mode="dump_calibration_data"`` ，以开启精度debug功能，
+首先需要在 yaml 文件中配置 ``debug_mode="dump_calibration_data"`` ，以开启精度 debug 功能，
 并保存校准数据(calibration_data)，对应的校准模型(calibrated_model.onnx)为常态化保存。其中：
 
 1. 校准数据(calibration_data)：在校准阶段，模型通过对这些数据进行前向推理来获取每个被量化节点的量化参数，包括：缩放因子(scale)和阈值(threshold)。
@@ -1642,10 +1642,10 @@ pipeline是指您完成数据预处理、模型转换、模型推理、后处理
 
 :::caution 注意
 
-  **此处保存的校准数据与02_preprocess.sh生成的校准数据的区别？**
+  **此处保存的校准数据与 02_preprocess.sh 生成的校准数据的区别？**
 
-  ``02_preprocess.sh`` 得到的校准数据是bgr颜色空间的数据，在工具链内部会将数据从bgr转换到yuv444/gray等模型实际输入的格式。
-  而此处保存的校准数据则是经过颜色空间转换以及预处理之后保存的.npy格式的数据，该数据可以通过np.load()直接送入模型进行推理。
+  ``02_preprocess.sh`` 得到的校准数据是 bgr 颜色空间的数据，在工具链内部会将数据从 bgr 转换到 yuv444/gray 等模型实际输入的格式。
+  而此处保存的校准数据则是经过颜色空间转换以及预处理之后保存的.npy 格式的数据，该数据可以通过 np.load()直接送入模型进行推理。
 :::
 
 :::caution 注意
@@ -1653,20 +1653,20 @@ pipeline是指您完成数据预处理、模型转换、模型推理、后处理
   **校准模型(calibrated_model.onnx)解读**
 
   校准模型是模型转换工具链将浮点模型经过结构优化后，通过校准数据计算得到的每个节点对应的量化参数并将其保存在校准节点中得到的中间产物。
-  校准模型的主要特点是模型中包含校准节点，校准节点的节点类型为HzCalibration。
+  校准模型的主要特点是模型中包含校准节点，校准节点的节点类型为 HzCalibration。
   这些校准节点主要分为两类： **激活(activation)校准节点** 和 **权重(weight)校准节点** 。
 
-  **激活校准节点** 的输入是当前节点的上一个节点的输出，并基于当前激活校准节点中保存的量化参数(scales和thresholds)对输入数据进行量化及反量化后输出。
+  **激活校准节点** 的输入是当前节点的上一个节点的输出，并基于当前激活校准节点中保存的量化参数(scales 和 thresholds)对输入数据进行量化及反量化后输出。
 
-  **权重校准节点** 的输入为模型的原始浮点权重，基于当前权重校准节点中保存的量化参数(scales和thresholds)对输入的原始浮点权重进行量化及反量化后输出。
+  **权重校准节点** 的输入为模型的原始浮点权重，基于当前权重校准节点中保存的量化参数(scales 和 thresholds)对输入的原始浮点权重进行量化及反量化后输出。
 
-  除却上述的校准节点，校准模型中的其他节点，精度debug工具将其称为 **普通节点(node)** 。
-  **普通节点** 的类型包括：Conv、Mul、Add等。
+  除却上述的校准节点，校准模型中的其他节点，精度 debug 工具将其称为 **普通节点(node)** 。
+  **普通节点** 的类型包括：Conv、Mul、Add 等。
 :::
 
 ![debug_node](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/debug_node.png)
 
-calibration_data的文件夹结构如下：
+calibration_data 的文件夹结构如下：
 
 ```shell
 
@@ -1681,9 +1681,9 @@ calibration_data的文件夹结构如下：
   |-------- ...
 ```
 
-- **精度debug模块导入与使用**
+- **精度 debug 模块导入与使用**
 
-接下来需要在代码中导入debug模块，并通过 ``get_sensitivity_of_nodes`` 接口获取节点量化敏感度（默认使用模型输出的余弦相似度）。
+接下来需要在代码中导入 debug 模块，并通过 ``get_sensitivity_of_nodes`` 接口获取节点量化敏感度（默认使用模型输出的余弦相似度）。
 ``get_sensitivity_of_nodes`` 的详细参数说明可见 ``get_sensitivity_of_nodes`` 章节内容。
 
 ```shell
@@ -1729,7 +1729,7 @@ calibration_data的文件夹结构如下：
   Gemm_17     0.9999913985912616  0.0002379088904350423
 ```
 
-除此之外，该API会以字典(Dict)的形式将节点量化敏感度信息返回给您以供后续使用分析。
+除此之外，该 API 会以字典(Dict)的形式将节点量化敏感度信息返回给您以供后续使用分析。
 
 ```shell
 
@@ -1751,7 +1751,7 @@ calibration_data的文件夹结构如下：
 
 :::tip 小技巧
 
-  精度debug工具还可以通过命令行 ``hmct-debugger -h/--help`` 查看每个功能对应的子命令。
+  精度 debug 工具还可以通过命令行 ``hmct-debugger -h/--help`` 查看每个功能对应的子命令。
   各个子命令的详细参数和用法详见 **功能说明** 章节。
 :::
 
@@ -1777,11 +1777,11 @@ calibration_data的文件夹结构如下：
 |``model_or_file``| **参数作用**：指定校准模型。<br/>**参数说明**：必选，指定需要分析的校准模型。| **取值范围**：无。<br/> **默认配置**：无。|必选 |
 |``metrics 或 - m``| **参数作用**：节点量化敏感度的度量方式。   <br/>**参数说明**：指定节点量化敏感度的计算方式，该参数可以为列表(List)，即以多种方式计算量化敏感度，但是输出结果仅以列表中第一位的计算方式进行排序，排名越靠前说明量化该节点引入的误差越大。| **取值范围**：``'cosine-similarity'`` , ``'mse'`` , ``'mre'`` , ``'sqnr'`` , ``'chebyshev'`` 。<br/> **默认配置**：``'cosine-similarity'``。|可选 |
 |``calibrated_data``| **参数作用**：指定校准数据。<br/>**参数说明**：必选，指定分析所需要的校准数据。| **取值范围**：无 。<br/> **默认配置**：无。|必选 |
-|``output_node 或 -o``| **参数作用**：指定输出节点。<br/>**参数说明**：此参数支持您指定中间节点作为输出并计算节点量化敏感度。若保持默认参数None，则精度debug工具会获取模型的最终输出，并在此基础上计算节点的量化敏感度。| **取值范围**：校准模型中的具有对应校准节点的普通节点。<br/> **默认配置**：None。|可选 |
+|``output_node 或 -o``| **参数作用**：指定输出节点。<br/>**参数说明**：此参数支持您指定中间节点作为输出并计算节点量化敏感度。若保持默认参数 None，则精度 debug 工具会获取模型的最终输出，并在此基础上计算节点的量化敏感度。| **取值范围**：校准模型中的具有对应校准节点的普通节点。<br/> **默认配置**：None。|可选 |
 |``node_type 或 -n``| **参数作用**：节点类型。<br/>**参数说明**：需要计算量化敏感度的节点类型，包括：node（普通节点）、weight（权重校准节点）、activation（激活校准节点）。| **取值范围**：``'node'`` , ``'weight'`` , ``'activation'``。<br/> **默认配置**：``'node'``。 |可选 |
-|``data_num 或 -d``| **参数作用**：计算量化敏感度需要的数据数量。<br/>**参数说明**：设置计算节点量化敏感度时所需要的数据数量。默认为None，此时默认使用calibration_data中的所有数据进行计算。最小设置为1，最大为 calibration_data中的数据数量。| **取值范围**：大于0，小于等于calibration_data中数据的总数。 <br/> **默认配置**：None|可选 |
+|``data_num 或 -d``| **参数作用**：计算量化敏感度需要的数据数量。<br/>**参数说明**：设置计算节点量化敏感度时所需要的数据数量。默认为 None，此时默认使用 calibration_data 中的所有数据进行计算。最小设置为 1，最大为 calibration_data 中的数据数量。| **取值范围**：大于 0，小于等于 calibration_data 中数据的总数。 <br/> **默认配置**：None|可选 |
 |``verbose 或 -v``| **参数作用**：选择是否将信息打印在终端上。<br/>**参数说明**：若为True，则将量化敏感度信息打印在终端上。若metrics包含多种度量方式，则按照第一位进行排序。| **取值范围**：``True`` 、 ``False``。<br/> **默认配置**：``False``。|可选 |
-|``interested_nodes 或 -i``| **参数作用**：设置感兴趣节点。<br/>**参数说明**：若指定则只获取该节点的量化敏感度，其余节点不获取。同时，若该参数被指定，将忽视node_type指定的节点类型，也就是说该参数的优先级要高于node_type。若保持默认参数None，则计算模型中所有可被量化节点的量化敏感度。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
+|``interested_nodes 或 -i``| **参数作用**：设置感兴趣节点。<br/>**参数说明**：若指定则只获取该节点的量化敏感度，其余节点不获取。同时，若该参数被指定，将忽视 node_type 指定的节点类型，也就是说该参数的优先级要高于 node_type。若保持默认参数 None，则计算模型中所有可被量化节点的量化敏感度。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
 
 函数使用方法：
 
@@ -1815,10 +1815,10 @@ calibration_data的文件夹结构如下：
 
 **分析结果展示**：
 
-**描述**：首先您通过node_type设置需要计算敏感度的节点类型，然后工具获取校准模型中所有符合node_type的节点，并获取这些节点的量化敏感度。
-当verbose设置为True时，工具会将节点量化敏感度进行排序后打印在终端，排序越靠前，说明该节点量化引入的量化误差越大。
+**描述**：首先您通过 node_type 设置需要计算敏感度的节点类型，然后工具获取校准模型中所有符合 node_type 的节点，并获取这些节点的量化敏感度。
+当 verbose 设置为 True 时，工具会将节点量化敏感度进行排序后打印在终端，排序越靠前，说明该节点量化引入的量化误差越大。
 
-verbose=True时，打印结果如下：
+verbose=True 时，打印结果如下：
 
 ```shell
 
@@ -1840,7 +1840,7 @@ verbose=True时，打印结果如下：
 
 函数返回值：
 
-  函数返回值为以字典格式（Key为节点名称，Value为节点的量化敏感度信息）保存的量化敏感度，格式如下：
+  函数返回值为以字典格式（Key 为节点名称，Value 为节点的量化敏感度信息）保存的量化敏感度，格式如下：
 
 ```shell
 
@@ -1878,8 +1878,8 @@ verbose=True时，打印结果如下：
 |``save_dir 或 -s``| **参数作用**：保存路径。<br/>**参数说明**：可选，指定分析结果的保存路径。 | **取值范围**：无。<br/> **默认配置**：无。|可选 |
 |``calibrated_data``| **参数作用**：指定校准数据。 <br/>**参数说明**：必选，指定需要分析的校准数据。| **取值范围**：无。<br/> **默认配置**： 无。|必选 |
 |``model_or_file``| **参数作用**：指定校准模型。<br/>**参数说明**：必选，指定需要分析的校准模型。 | **取值范围**：无 。<br/> **默认配置**：无。|必选 |
-|``quantize_node 或 -q``| **参数作用**：只量化模型中指定的节点，查看误差累积曲线。<br/>**参数说明**：可选参数。指定模型中需要量化的节点，同时保证其余节点均不量化。<br/>通过判断该参数是否为嵌套列表进而决定是单节点量化还是部分量化。<br/>例如：<br/>- quantize_node=['Conv_2','Conv_9']：分别只量化Conv_2和Conv_9，同时保证其余节点不量化。<br/>- quantize_node=[['Conv_2'],['Conv_9','Conv_2']]：只量化Conv_2以及同时量化Conv_2和Conv_9，分别测试模型累积误差。<br/>- quantize_node 包含两个特殊参数：'weight' 和 'activation'。<br/>当：<br/>- quantize_node = ['weight']：只量化权重，不量化激活。<br/>- quantize_node = ['activation']：只量化激活，不量化权重。<br/>- quantize_node = ['weight','activation']：权重和激活分别量化。<br/>注：quantize_node和non_quantize_node不可同时为None，必须指定其一。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
-|``non_quantize_node 或 -nq``| **参数作用**：指定累积误差的类型。<br/>**参数说明**：可选参数。指定模型中不量化的节点，同时保证其余节点全都量化。<br/>通过判断该参数是否为嵌套列表进而决定是单节点不量化还是部分量化。<br/>例如：<br/>- non_quantize_node=['Conv_2','Conv_9']：分别解除Conv_2和Conv_9节点的量化，同时保证其余节点全部量化。<br/>- non_quantize_node=[['Conv_2'],['Conv_9','Conv_2']]：只解除Conv_2量化以及同时解除Conv_2和Conv_9量化，分别测试模型累积误差。 <br/>注：quantize_node和non_quantize_node不可同时为None，必须指定其一。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
+|``quantize_node 或 -q``| **参数作用**：只量化模型中指定的节点，查看误差累积曲线。<br/>**参数说明**：可选参数。指定模型中需要量化的节点，同时保证其余节点均不量化。<br/>通过判断该参数是否为嵌套列表进而决定是单节点量化还是部分量化。<br/>例如：<br/>- quantize_node=['Conv_2','Conv_9']：分别只量化 Conv_2 和 Conv_9，同时保证其余节点不量化。<br/>- quantize_node=[['Conv_2'],['Conv_9','Conv_2']]：只量化 Conv_2 以及同时量化 Conv_2 和 Conv_9，分别测试模型累积误差。<br/>- quantize_node 包含两个特殊参数：'weight' 和 'activation'。<br/>当：<br/>- quantize_node = ['weight']：只量化权重，不量化激活。<br/>- quantize_node = ['activation']：只量化激活，不量化权重。<br/>- quantize_node = ['weight','activation']：权重和激活分别量化。<br/>注：quantize_node 和 non_quantize_node 不可同时为 None，必须指定其一。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
+|``non_quantize_node 或 -nq``| **参数作用**：指定累积误差的类型。<br/>**参数说明**：可选参数。指定模型中不量化的节点，同时保证其余节点全都量化。<br/>通过判断该参数是否为嵌套列表进而决定是单节点不量化还是部分量化。<br/>例如：<br/>- non_quantize_node=['Conv_2','Conv_9']：分别解除 Conv_2 和 Conv_9 节点的量化，同时保证其余节点全部量化。<br/>- non_quantize_node=[['Conv_2'],['Conv_9','Conv_2']]：只解除 Conv_2 量化以及同时解除 Conv_2 和 Conv_9 量化，分别测试模型累积误差。 <br/>注：quantize_node 和 non_quantize_node 不可同时为 None，必须指定其一。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
 |``metric 或 -m``| **参数作用**：误差度量方式。<br/>**参数说明**：设置计算模型误差的计算方式。| **取值范围**：``'cosine-similarity'`` , ``'mse'`` , ``'mre'`` , ``'sqnr'`` , ``'chebyshev'``<br/> **默认配置**：``'cosine-similarity'``。|可选 |
 |``average_mode 或 -a``| **参数作用**：指定累积误差曲线的输出模式。<br/>**参数说明**：默认为False。若为True，那么获取累积误差的平均值作为结果。| **取值范围**：``True`` 、 ``False``。<br/> **默认配置**：``False``。|可选 |
 
@@ -1904,9 +1904,9 @@ verbose=True时，打印结果如下：
 
 - 指定单节点量化
 
-**配置方式**：quantize_node=['Conv_2', 'Conv_90']，quantize_node为单列表。
+**配置方式**：quantize_node=['Conv_2', 'Conv_90']，quantize_node 为单列表。
 
-API函数使用方法：
+API 函数使用方法：
 
 ```shell
 
@@ -1929,15 +1929,15 @@ API函数使用方法：
   hmct-debugger plot-acc-error calibrated_model.onnx calibrated_data -q ['Conv_2','Conv_90']
 ```
 
-**描述**：当quantize_node为单列表时，针对您设置的quantize_node，
-分别单独量化quantize_node中的节点并保持模型中其他节点不量化，得到对应的模型后，
+**描述**：当 quantize_node 为单列表时，针对您设置的 quantize_node，
+分别单独量化 quantize_node 中的节点并保持模型中其他节点不量化，得到对应的模型后，
 对该模型中每个节点的输出计算其与浮点模型中对应节点输出的之间的误差，并得到对应的累积误差曲线。
 
-average_mode = False时：
+average_mode = False 时：
 
 ![average_mode_false_1](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/average_mode_false_1.png)
 
-average_mode = True时：
+average_mode = True 时：
 
 ![average_mode_true_1](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/average_mode_true_1.png)
 
@@ -1945,21 +1945,21 @@ average_mode = True时：
 
   **average_mode**
 
-  average_mode默认为False。对于一些模型，此时无法通过累积误差曲线判断哪种量化策略更加有效，
-  因此需要将average_mode设置为True，此时会对前n个节点的累积误差求均值作为第n个节点的累积误差。
+  average_mode 默认为 False。对于一些模型，此时无法通过累积误差曲线判断哪种量化策略更加有效，
+  因此需要将 average_mode 设置为 True，此时会对前 n 个节点的累积误差求均值作为第 n 个节点的累积误差。
 
   具体计算方式如下，例如：
 
-  average_mode=False时，accumulate_error=[1.0, 0.9, 0.9, 0.8]。
+  average_mode=False 时，accumulate_error=[1.0, 0.9, 0.9, 0.8]。
 
-  而将average_mode=True后，accumulate_error=[1.0, 0.95, 0.933, 0.9]。
+  而将 average_mode=True 后，accumulate_error=[1.0, 0.95, 0.933, 0.9]。
 :::
 
 - 指定多个节点量化
 
-**配置方式**：quantize_node=[['Conv_2'], ['Conv_2', 'Conv_90']]，quantize_node为嵌套列表
+**配置方式**：quantize_node=[['Conv_2'], ['Conv_2', 'Conv_90']]，quantize_node 为嵌套列表
 
-API使用方法：
+API 使用方法：
 
 ```shell
 
@@ -1982,19 +1982,19 @@ API使用方法：
   hmct-debugger plot-acc-error calibrated_model.onnx calibration_data -q [['Conv_2'],['Conv_2','Conv_90']]
 ```
 
-**描述**：当quantize_node为嵌套列表时，针对您设置的quantize_node，分别量化quantize_node中的
+**描述**：当 quantize_node 为嵌套列表时，针对您设置的 quantize_node，分别量化 quantize_node 中的
 每个单列表指定的节点并保持模型中其他节点不量化，得到对应的模型后，对该模型中每个节点的输出计算
 其与浮点模型中对应节点输出的之间的误差，并得到对应的累积误差曲线。
 
-- partial_qmodel_0：只量化Conv_2节点，其余节点不量化；
+- partial_qmodel_0：只量化 Conv_2 节点，其余节点不量化；
 
-- partial_qmodel_1：只量化Conv_2和Conv_90节点，其余节点不量化。
+- partial_qmodel_1：只量化 Conv_2 和 Conv_90 节点，其余节点不量化。
 
-average_mode=False时：
+average_mode=False 时：
 
 ![new_average_mode_false_1](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/new_average_mode_false_1.png)
 
-average_mode=True时：
+average_mode=True 时：
 
 ![new_average_mode_true_1](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/new_average_mode_true_1.png)
 
@@ -2002,9 +2002,9 @@ average_mode=True时：
 
 - 指定单节点不量化
 
-**配置方式**：non_quantize_node=['Conv_2', 'Conv_90']，non_quantize_node为单列表。
+**配置方式**：non_quantize_node=['Conv_2', 'Conv_90']，non_quantize_node 为单列表。
 
-API使用方法：
+API 使用方法：
 
 ```shell
 
@@ -2027,23 +2027,23 @@ API使用方法：
   hmct-debugger plot-acc-error calibrated_model.onnx calibration_data -nq ['Conv_2','Conv_90'] -a True
 ```
 
-**描述**：当non_quantize_node为单列表时，针对您设置的non_quantize_node，
-分别解除non_quantize_node中各个节点的量化同时保持其他节点全部量化，得到对应的模型后，
+**描述**：当 non_quantize_node 为单列表时，针对您设置的 non_quantize_node，
+分别解除 non_quantize_node 中各个节点的量化同时保持其他节点全部量化，得到对应的模型后，
 对该模型中每个节点的输出计算其与浮点模型中对应节点输出的之间的误差，并得到对应的累积误差曲线。
 
-average_mode = False时：
+average_mode = False 时：
 
 ![average_mode_false_2](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/average_mode_false_2.png)
 
-average_mode = True时：
+average_mode = True 时：
 
 ![average_mode_true_2](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/average_mode_true_2.png)
 
 - 指定多个节点不量化
 
-**配置方式**：non_quantize_node=[['Conv_2'], ['Conv_2', 'Conv_90']]，non_quantize_node为嵌套列表。
+**配置方式**：non_quantize_node=[['Conv_2'], ['Conv_2', 'Conv_90']]，non_quantize_node 为嵌套列表。
 
-API使用方法：
+API 使用方法：
 
 ```shell
 
@@ -2066,20 +2066,20 @@ API使用方法：
   hmct-debugger plot-acc-error calibrated_model.onnx calibration_data -nq [['Conv_2'],['Conv_2','Conv_90']]
 ```
 
-**描述**：当non_quantize_node为嵌套列表时，针对您设置的non_quantize_node，
-分别不量化non_quantize_node中的每个单列表指定的节点并保持模型中其他节点均量化，
+**描述**：当 non_quantize_node 为嵌套列表时，针对您设置的 non_quantize_node，
+分别不量化 non_quantize_node 中的每个单列表指定的节点并保持模型中其他节点均量化，
 得到对应的模型后，对该模型中每个节点的输出计算其与浮点模型中对应节点输出的之间的误差，
 并得到对应的累积误差曲线。
 
-- partial_qmodel_0：不量化Conv_2节点，其余节点量化；
+- partial_qmodel_0：不量化 Conv_2 节点，其余节点量化；
 
-- partial_qmodel_1：不量化Conv_2和Conv_90节点，其余节点量化。
+- partial_qmodel_1：不量化 Conv_2 和 Conv_90 节点，其余节点量化。
 
-average_mode = False时：
+average_mode = False 时：
 
 ![new_average_mode_false_2](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/new_average_mode_false_2.png)
 
-average_mode = True时：
+average_mode = True 时：
 
 ![new_average_mode_true_2](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/new_average_mode_true_2.png)
 
@@ -2119,7 +2119,7 @@ average_mode = True时：
 
 **配置方式**：quantize_node=['weight','activation']。
 
-API使用方法：
+API 使用方法：
 
 ```shell
 
@@ -2141,7 +2141,7 @@ API使用方法：
   hmct-debugger plot_acc_error calibrated_model.onnx calibration_data -q ['weight','activation']
 ```
 
-**描述**：quantize_node也可直接指定'weight'或者'activation'。当：
+**描述**：quantize_node 也可直接指定'weight'或者'activation'。当：
 
 - quantize_node = ['weight']：只量化权重，不量化激活。
 
@@ -2171,7 +2171,7 @@ API使用方法：
 |``save_dir 或 -s``| **参数作用**：保存路径。<br/>**参数说明**：可选，指定分析结果的保存路径。| **取值范围**：无。<br/> **默认配置**：无。|可选 |
 |``model_or_file``| **参数作用**：指定校准模型。<br/>**参数说明**：必选，指定需要分析的校准模型。| **取值范围**：无。<br/> **默认配置**： 无。|必选 |
 |``calibrated_data``| **参数作用**：指定校准数据。<br/>**参数说明**：必选，指定分析所需要的校准数据。| **取值范围**：无 。<br/> **默认配置**：无。|必选 |
-|``nodes_list 或 -n``| **参数作用**：指定需要分析的节点。<br/>**参数说明**：必选，指定需要分析的节点。<br/>若nodes_list中的节点类型为：<br/>- 权重校准节点：绘制原始权重和经过校准之后的权重的数据分布。 <br/>- 激活校准节点：绘制激活校准节点的输入数据分布。<br/>- 普通节点：绘制该节点在量化前后的输出数据分布，同时绘制二者之间的误差分布。<br/>注：nodes_list为 list 类型，可指定一系列节点，并且上述三种类型节点可同时指定。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：无。|必选 |
+|``nodes_list 或 -n``| **参数作用**：指定需要分析的节点。<br/>**参数说明**：必选，指定需要分析的节点。<br/>若 nodes_list 中的节点类型为：<br/>- 权重校准节点：绘制原始权重和经过校准之后的权重的数据分布。 <br/>- 激活校准节点：绘制激活校准节点的输入数据分布。<br/>- 普通节点：绘制该节点在量化前后的输出数据分布，同时绘制二者之间的误差分布。<br/>注：nodes_list 为 list 类型，可指定一系列节点，并且上述三种类型节点可同时指定。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：无。|必选 |
 
 ```shell
 
@@ -2187,7 +2187,7 @@ API使用方法：
 
 **分析结果展示**：
 
-API使用方法：
+API 使用方法：
 
 ```shell
 
@@ -2248,7 +2248,7 @@ activation：
 |``model_or_file``| **参数作用**：指定校准模型。 <br/>**参数说明**：必选，指定需要分析的校准模型。| **取值范围**：无。<br/> **默认配置**： 无。|必选 |
 |``calibrated_data``| **参数作用**：指定校准数据。<br/>**参数说明**：必选，指定分析所需要的校准数据。 | **取值范围**：无 。<br/> **默认配置**：无。|必选 |
 |``nodes_list 或 -n``| **参数作用**：指定校准节点。<br/>**参数说明**：必选，指定校准节点。| **取值范围**：校准模型中的所有权重校准节点和激活校准节点。<br/> **默认配置**：无。|必选 |
-|``axis 或 -a``| **参数作用**：指定channel所在的维度。<br/>**参数说明**：channel信息所在shape中的位置。参数默认为None，此时对于激活校准节点，默认认为节点输入数据的第二个维度表示channel信息，即axis=1；对于权重校准节点，会读取该节点属性中的axis参数作为channel信息。 | **取值范围**：小于节点输入数据的维度。 <br/> **默认配置**：None。|可选 |
+|``axis 或 -a``| **参数作用**：指定 channel 所在的维度。<br/>**参数说明**：channel 信息所在 shape 中的位置。参数默认为 None，此时对于激活校准节点，默认认为节点输入数据的第二个维度表示 channel 信息，即 axis=1；对于权重校准节点，会读取该节点属性中的 axis 参数作为 channel 信息。 | **取值范围**：小于节点输入数据的维度。 <br/> **默认配置**：None。|可选 |
 
 ```shell
 
@@ -2265,8 +2265,8 @@ activation：
 
 **分析结果展示**：
 
-**描述**：针对用户设置的校准节点列表node_list，从参数axis中获取channel所在的维度，获取节点输入数据通道间的数据分布。
-其中axis默认为None，此时若节点为权重校准节点，则channel所在的维度默认为0；若节点为激活校准节点，则channel所在的维度默认为1。
+**描述**：针对用户设置的校准节点列表 node_list，从参数 axis 中获取 channel 所在的维度，获取节点输入数据通道间的数据分布。
+其中 axis 默认为 None，此时若节点为权重校准节点，则 channel 所在的维度默认为 0；若节点为激活校准节点，则 channel 所在的维度默认为 1。
 
 权重校准节点：
 
@@ -2282,9 +2282,9 @@ activation：
 
 图中：
 
-  - 横坐标表示节点输入数据的通道数，图例中输入数据有96个通道。
+  - 横坐标表示节点输入数据的通道数，图例中输入数据有 96 个通道。
 
-  - 纵坐标表示每个channel的数据分布范围，其中红色实线表示该channel数据的中位数，蓝色虚线表示均值。
+  - 纵坐标表示每个 channel 的数据分布范围，其中红色实线表示该 channel 数据的中位数，蓝色虚线表示均值。
 
 
 - **runall**
@@ -2294,7 +2294,7 @@ activation：
   当前版本 runall 功能只适用于 **RDK Ultra 和 RDK X5** 产品。
 :::
 
-**功能**：一键运行原本debug工具中的所有功能。
+**功能**：一键运行原本 debug 工具中的所有功能。
 
 **命令行格式**：
 
@@ -2313,21 +2313,21 @@ activation：
 |``calibrated_data``| **参数作用**：指定校准数据。<br/>**参数说明**：必选，指定分析所需要的校准数据。| **取值范围**：无。<br/> **默认配置**： 无。|必选 |
 |``save_dir 或 -s``| **参数作用**：保存路径。<br/>**参数说明**：指定分析结果的保存路径。| **取值范围**：无 。<br/> **默认配置**：无。|可选 |
 |``ns_metrics 或 -nm``| **参数作用**：节点量化敏感度的度量方式。<br/>**参数说明**：指定节点量化敏感度的计算方式，该参数可以为列表(List)，即以多种方式计算量化敏感度，但是输出结果仅以列表中第一位的计算方式进行排序，排名越靠前说明量化该节点引入的误差越大。| **取值范围**：``'cosine-similarity'`` , ``'mse'`` , ``'mre'`` , ``'sqnr'`` , ``'chebyshev'`` 。<br/> **默认配置**：``'cosine-similarity'``。|可选 |
-|``output_node 或 -o``| **参数作用**：指定输出节点。<br/>**参数说明**：此参数支持您指定中间节点作为输出并计算节点量化敏感度。若保持默认参数None，则精度debug工具会获取模型的最终输出, 并在此基础上计算节点的量化敏感度。| **取值范围**：校准模型中的具有对应校准节点的普通节点。<br/> **默认配置**：None。|可选 |
+|``output_node 或 -o``| **参数作用**：指定输出节点。<br/>**参数说明**：此参数支持您指定中间节点作为输出并计算节点量化敏感度。若保持默认参数 None，则精度 debug 工具会获取模型的最终输出, 并在此基础上计算节点的量化敏感度。| **取值范围**：校准模型中的具有对应校准节点的普通节点。<br/> **默认配置**：None。|可选 |
 |``node_type 或 -nt``| **参数作用**：节点类型。<br/>**参数说明**：需要计算量化敏感度的节点类型，包括：node（普通节点）、weight（权重校准节点）、activation（激活校准节点）。| **取值范围**：``'node'`` , ``'weight'`` , ``'activation'``。<br/> **默认配置**：``'node'``。|可选 |
-|``data_num 或 -dn``| **参数作用**：计算量化敏感度需要的数据数量。<br/>**参数说明**：设置计算节点量化敏感度时所需要的数据数量。默认为None，此时默认使用calibration_data中的所有数据进行计算。 最小设置为1，最大为 calibration_data中的数据数量。| **取值范围**：大于0，小于等于calibration_data中数据的总数。<br/> **默认配置**：None 。|可选 |
+|``data_num 或 -dn``| **参数作用**：计算量化敏感度需要的数据数量。<br/>**参数说明**：设置计算节点量化敏感度时所需要的数据数量。默认为 None，此时默认使用 calibration_data 中的所有数据进行计算。 最小设置为 1，最大为 calibration_data 中的数据数量。| **取值范围**：大于 0，小于等于 calibration_data 中数据的总数。<br/> **默认配置**：None 。|可选 |
 |``verbose 或 -v``| **参数作用**：选择是否将信息打印在终端上。<br/>**参数说明**：若为True，则将量化敏感度信息打印在终端上。若metrics包含多种度量方式，则按照第一位进行排序。| **取值范围**：``True`` 、 ``False``。<br/> **默认配置**：``False``。|可选 |
-|``interested_nodes 或 -i``| **参数作用**：设置感兴趣节点。<br/>**参数说明**：若指定则只获取该节点的量化敏感度，其余节点不获取。同时，若该参数被指定，将忽视node_type指定的节点类型，也就是说该参数的优先级要高于node_type。若保持默认参数None，则计算模型中所有可被量化节点的量化敏感度。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
-|``dis_nodes_list 或 -dnl``| **参数作用**：指定需要分析的节点。<br/>**参数说明**：指定需要分析的节点。<br/>若nodes_list中的节点类型为： <br/>- 权重校准节点：绘制原始权重和经过校准之后的权重的数据分布。<br/>- 激活校准节点：绘制激活校准节点的输入数据分布。<br/>- 普通节点：绘制该节点在量化前后的输出数据分布，同时绘制二者之间的误差分布。 <br/>注：nodes_list为 list 类型，可指定一系列节点，并且上述三种类型节点可同时指定。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：无。|可选 |
+|``interested_nodes 或 -i``| **参数作用**：设置感兴趣节点。<br/>**参数说明**：若指定则只获取该节点的量化敏感度，其余节点不获取。同时，若该参数被指定，将忽视 node_type 指定的节点类型，也就是说该参数的优先级要高于 node_type。若保持默认参数 None，则计算模型中所有可被量化节点的量化敏感度。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
+|``dis_nodes_list 或 -dnl``| **参数作用**：指定需要分析的节点。<br/>**参数说明**：指定需要分析的节点。<br/>若 nodes_list 中的节点类型为： <br/>- 权重校准节点：绘制原始权重和经过校准之后的权重的数据分布。<br/>- 激活校准节点：绘制激活校准节点的输入数据分布。<br/>- 普通节点：绘制该节点在量化前后的输出数据分布，同时绘制二者之间的误差分布。 <br/>注：nodes_list 为 list 类型，可指定一系列节点，并且上述三种类型节点可同时指定。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：无。|可选 |
 |``cw_nodes_list 或 -cn``| **参数作用**：指定校准节点。<br/>**参数说明**：指定校准节点。| **取值范围**：校准模型中的所有权重校准节点和激活校准节点。<br/> **默认配置**：无。|可选 |
-|``axis 或 -a``| **参数作用**：指定channel所在的维度。 <br/>**参数说明**：channel信息所在shape中的位置。参数默认为None，此时对于激活校准节点，默认认为节点输入数据的第二个维度表示channel信息，即axis=1；对于权重校准节点，会读取该节点属性中的axis参数作为channel信息。| **取值范围**：小于节点输入数据的维度。<br/> **默认配置**：None。|可选 |
-|``quantize_node 或 -qn``| **参数作用**：只量化模型中指定的节点，查看误差累积曲线。<br/>**参数说明**：可选参数。指定模型中需要量化的节点，同时保证其余节点均不量化。<br/>通过判断该参数是否为嵌套列表进而决定是单节点量化还是部分量化。<br/>例如：<br/>- quantize_node=['Conv_2','Conv_9']：分别只量化Conv_2和Conv_9，同时保证其余节点不量化。<br/>- quantize_node=[['Conv_2'],['Conv_9','Conv_2']]：只量化Conv_2以及同时量化Conv_2和Conv_9，分别测试模型累积误差。 <br/>- quantize_node 包含两个特殊参数：'weight' 和 'activation'。<br/>当：<br/>- quantize_node = ['weight']：只量化权重，不量化激活。<br/>- quantize_node = ['activation']：只量化激活，不量化权重。<br/>- quantize_node = ['weight','activation']：权重和激活分别量化。<br/>注：quantize_node和non_quantize_node不可同时为None，必须指定其一。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
-|``non_quantize_node 或 -nqn``| **参数作用**：指定累积误差的类型。<br/>**参数说明**：可选参数。指定模型中不量化的节点，同时保证其余节点全都量化。<br/>通过判断该参数是否为嵌套列表进而决定是单节点不量化还是部分量化。<br/>例如：<br/>- non_quantize_node=['Conv_2','Conv_9']：分别解除Conv_2和Conv_9节点的量化，同时保证其余节点全部量化。<br/>- non_quantize_node=[['Conv_2'],['Conv_9','Conv_2']]：只解除Conv_2量化以及同时解除Conv_2和Conv_9量化，分别测试模型累积误差。 <br/>注：quantize_node和non_quantize_node不可同时为None，必须指定其一。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
+|``axis 或 -a``| **参数作用**：指定 channel 所在的维度。 <br/>**参数说明**：channel 信息所在 shape 中的位置。参数默认为 None，此时对于激活校准节点，默认认为节点输入数据的第二个维度表示 channel 信息，即 axis=1；对于权重校准节点，会读取该节点属性中的 axis 参数作为 channel 信息。| **取值范围**：小于节点输入数据的维度。<br/> **默认配置**：None。|可选 |
+|``quantize_node 或 -qn``| **参数作用**：只量化模型中指定的节点，查看误差累积曲线。<br/>**参数说明**：可选参数。指定模型中需要量化的节点，同时保证其余节点均不量化。<br/>通过判断该参数是否为嵌套列表进而决定是单节点量化还是部分量化。<br/>例如：<br/>- quantize_node=['Conv_2','Conv_9']：分别只量化 Conv_2 和 Conv_9，同时保证其余节点不量化。<br/>- quantize_node=[['Conv_2'],['Conv_9','Conv_2']]：只量化 Conv_2 以及同时量化 Conv_2 和 Conv_9，分别测试模型累积误差。 <br/>- quantize_node 包含两个特殊参数：'weight' 和 'activation'。<br/>当：<br/>- quantize_node = ['weight']：只量化权重，不量化激活。<br/>- quantize_node = ['activation']：只量化激活，不量化权重。<br/>- quantize_node = ['weight','activation']：权重和激活分别量化。<br/>注：quantize_node 和 non_quantize_node 不可同时为 None，必须指定其一。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
+|``non_quantize_node 或 -nqn``| **参数作用**：指定累积误差的类型。<br/>**参数说明**：可选参数。指定模型中不量化的节点，同时保证其余节点全都量化。<br/>通过判断该参数是否为嵌套列表进而决定是单节点不量化还是部分量化。<br/>例如：<br/>- non_quantize_node=['Conv_2','Conv_9']：分别解除 Conv_2 和 Conv_9 节点的量化，同时保证其余节点全部量化。<br/>- non_quantize_node=[['Conv_2'],['Conv_9','Conv_2']]：只解除 Conv_2 量化以及同时解除 Conv_2 和 Conv_9 量化，分别测试模型累积误差。 <br/>注：quantize_node 和 non_quantize_node 不可同时为 None，必须指定其一。| **取值范围**：校准模型中的所有节点。<br/> **默认配置**：None。|可选 |
 |``ae_metric 或 -am``| **参数作用**：累积误差度量方式。<br/>**参数说明**：设置计算模型误差的计算方式。| **取值范围**：``'cosine-similarity'`` , ``'mse'`` , ``'mre'`` , ``'sqnr'`` , ``'chebyshev'`` <br/> **默认配置**：``'cosine-similarity'``。|可选 |
 |``average_mode 或 -avm``| **参数作用**：指定累积误差曲线的输出模式。<br/>**参数说明**：默认为False。若为True，那么获取累积误差的平均值作为结果。| **取值范围**：``True`` 、 ``False``。<br/> **默认配置**：``False``。|可选 |
 
 
-API使用方法：
+API 使用方法：
 
 ```shell
 
@@ -2345,7 +2345,7 @@ API使用方法：
   hmct-debugger runall calibrated_model.onnx calibration_data
 ```
 
-runall流程：
+runall 流程：
 
 ![runall](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/runall.png)
 
@@ -2353,23 +2353,23 @@ runall流程：
 
 1.分别获取权重校准节点和激活校准节点的量化敏感度.
 
-2.根据step1的结果，分别取权重校准节点的top5和激活校准节点的top5绘制其数据分布。
+2.根据 step1 的结果，分别取权重校准节点的 top5 和激活校准节点的 top5 绘制其数据分布。
 
-3.针对step2获取的节点，分别绘制其通道间数据分布的箱线图。
+3.针对 step2 获取的节点，分别绘制其通道间数据分布的箱线图。
 
 4.绘制分别只量化权重和只量化激活的累积误差曲线。
 
-当指定 ``node_type='node'`` 时，工具会获取top5节点，并分别找到每个节点对应的校准节点，并获取校准节点的数据分布和箱线图。
+当指定 ``node_type='node'`` 时，工具会获取 top5 节点，并分别找到每个节点对应的校准节点，并获取校准节点的数据分布和箱线图。
 
 
 根据以往的使用调优经验，以上策略已经可以应对各种实际问题。
 
-如果经过以上尝试仍然未能解决您的问题，请根据[**精度调优checklist**](../../../08_FAQ/05_toolchain.md#checklist)文档步骤填写模型配置的具体信息来进行检查，确保每一步排查都已完成，并根据checklist锁定是在模型转换的那个具体步骤出现异常，然后将填写完整的 **精度调优checklist** 信息、原始f浮点模型文件、模型量化相关的配置文件等一起反馈给D-Robotics 技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，我们将在24小时内给您提供支持。
+如果经过以上尝试仍然未能解决您的问题，请根据[**精度调优 checklist**](../../../08_FAQ/05_toolchain.md#checklist)文档步骤填写模型配置的具体信息来进行检查，确保每一步排查都已完成，并根据 checklist 锁定是在模型转换的那个具体步骤出现异常，然后将填写完整的 **精度调优 checklist** 信息、原始 f 浮点模型文件、模型量化相关的配置文件等一起反馈给 D-Robotics 技术支持团队或在[**D-Robotics 官方技术社区**](https://developer.d-robotics.cc/)提出您的问题，我们将在 24 小时内给您提供支持。
 
 
 ### 其它工具使用说明
 
-本章节主要介绍模型转换工具以外的其他debug工具的使用方法，这些工具可以协助开发者进行模型修改、模型分析、数据预处理等操作，工具列表如下：
+本章节主要介绍模型转换工具以外的其他 debug 工具的使用方法，这些工具可以协助开发者进行模型修改、模型分析、数据预处理等操作，工具列表如下：
 
 - hb_perf
 
@@ -2386,7 +2386,7 @@ runall流程：
 
 #### ``hb_perf`` 工具
 
-``hb_perf`` 是用于分析D-Robotics 量化混合模型性能的分析工具。
+``hb_perf`` 是用于分析 D-Robotics 量化混合模型性能的分析工具。
 
 - 使用方法
 
@@ -2395,13 +2395,13 @@ hb_perf [OPTIONS] BIN_FILE
 ```
 - 命令行参数
 
-hb_perf的命令行参数:
+hb_perf 的命令行参数:
 
   --version<br/>
     显示版本并退出。
 
   -m<br/>
-    后接模型名称。当指定BIN_FILE为pack模型时, 仅输出指定模型的模型编译信息。
+    后接模型名称。当指定 BIN_FILE 为 pack 模型时, 仅输出指定模型的模型编译信息。
     
   --help<br/>
     显示帮助信息。
@@ -2422,7 +2422,7 @@ hb_perf的命令行参数:
       └── temp.hbm
 ```
 
-若该模型在编译时未设置为debug模式(``compiler_parameters.debug:True``) 则 ``hb_perf`` 工具会产生如下提示，
+若该模型在编译时未设置为 debug 模式(``compiler_parameters.debug:True``) 则 ``hb_perf`` 工具会产生如下提示，
 该提示仅表明子图信息中不包括逐层信息, 对模型整体信息的生成没有影响。
 ```
 2021-01-12 10:41:40,000 WARNING bpu model don't have per-layer perf info.
@@ -2441,13 +2441,13 @@ hb_pack [OPTIONS] BIN_FILE1 BIN_FILE2 BIN_FILE3 -o comb.bin
 
 - 命令行参数
 
-hb_pack的命令行参数
+hb_pack 的命令行参数
 
   --version<br/>
     显示版本并退出。
 
   -o, --output_name<br/>
-    pack模型的输出名称        
+    pack 模型的输出名称        
 
   --help<br/>
     显示帮助信息。
@@ -2476,13 +2476,13 @@ ERROR model: xxx.bin is a packed model, it can not be packed again!
 ```
 - 命令行参数
 
-hb_model_info的命令行参数
+hb_model_info 的命令行参数
 
   --version<br/>
     显示版本并退出。
 
   -m<br/>
-    后接模型名称。当指定BIN_FILE为pack模型时, 仅输出指定模型的模型编译信息。
+    后接模型名称。当指定 BIN_FILE 为 pack 模型时, 仅输出指定模型的模型编译信息。
 
   --help<br/>
     显示帮助信息。
@@ -2556,11 +2556,11 @@ deleted nodes: spconvretinanethead0_conv109_fwd_chw_HzDequantize
 
 #### ``hb_model_modifier`` 工具
 
-``hb_model_modifier`` 工具用于对 ``*.bin`` 模型中输入端的Transpose、Quantize节点和输出端的Transpose、Dequanti、Cast、Reshape、Softmax节点进行删除操作，
-并将删除节点的信息存放在BIN模型中，可以通过 ``hb_model_info`` 进行查看。
+``hb_model_modifier`` 工具用于对 ``*.bin`` 模型中输入端的 Transpose、Quantize 节点和输出端的 Transpose、Dequanti、Cast、Reshape、Softmax 节点进行删除操作，
+并将删除节点的信息存放在 BIN 模型中，可以通过 ``hb_model_info`` 进行查看。
 
 :::info 备注
-  1. hb_model_modifier工具只能删除紧挨着模型输入或输出的节点。如果待删除节点后面接的是其他节点，则不能进行删除操作。
+  1. hb_model_modifier 工具只能删除紧挨着模型输入或输出的节点。如果待删除节点后面接的是其他节点，则不能进行删除操作。
   2. 模型节点名称需要注意不要包括 ";" "," 等特殊符号，否则可能会影响工具的使用。
   3. 工具不支持对打包的模型进行处理，否则将提示： ``ERROR pack model is not supported``。
   4. 待删除节点会按顺序依次删除, 并且会动态更新模型结构; 同时在节点删除前还会判断该节点是否位于模型的输入输出处, 因此节点的删除顺序很重要。
@@ -2577,23 +2577,23 @@ deleted nodes: spconvretinanethead0_conv109_fwd_chw_HzDequantize
   hb_model_modifier model.bin
 ```
 
-2. 删除单个指定节点（以node1为例）：
+2. 删除单个指定节点（以 node1 为例）：
 
 ```bash
   hb_model_modifier model.bin -r node1
 ```
 
-3. 删除多个指定节点（以node1、node2、node3为例）：
+3. 删除多个指定节点（以 node1、node2、node3 为例）：
 
 ```bash
   hb_model_modifier model.bin -r node1 -r node2 -r node3
 ```
-4. 删除某类节点（以Dequantize为例）：
+4. 删除某类节点（以 Dequantize 为例）：
 
 ```bash
   hb_model_modifier model.bin --all Dequantize
 ```
-5. 删除多种类型节点（以Reshape、Cast、Dequantize为例）：
+5. 删除多种类型节点（以 Reshape、Cast、Dequantize 为例）：
 
 ```bash
   hb_model_modifier model.bin -a Reshape -a Cast -a Dequantize
@@ -2605,7 +2605,7 @@ deleted nodes: spconvretinanethead0_conv109_fwd_chw_HzDequantize
 ```
 - 命令行参数
 
-hb_model_modifier的命令行参数
+hb_model_modifier 的命令行参数
 
   --model_file<br/>
     runtime 模型文件名称。
@@ -2621,9 +2621,9 @@ hb_model_modifier的命令行参数
 
 - 输出内容说明
 
-若工具后不接任何参数，则工具会打印出可供候选的可删除节点（即模型中的位于输入输出位置的所有Transpose、Quantize、Dequantize、Cast、Reshape、Softmax节点）。
+若工具后不接任何参数，则工具会打印出可供候选的可删除节点（即模型中的位于输入输出位置的所有 Transpose、Quantize、Dequantize、Cast、Reshape、Softmax 节点）。
 
-其中Quantize节点用于将模型 float 类型的输入数据量化至 int8 类型，其计算公式如下：
+其中 Quantize 节点用于将模型 float 类型的输入数据量化至 int8 类型，其计算公式如下：
 
 ```bash
   qx = clamp(round(x / scale) + zero\_point, -128, 127)
@@ -2636,7 +2636,7 @@ C++的参考实现如下：
       static_cast/<int64_t/>(std::round(value / static_cast/<double/(scale)));
   quantized_value = std::min(std::max(quantized_value, min_int_value), max_int_value);
 ```
-Dequantize节点则用于将模型 ``int8`` 或 ``int32`` 类型的输出数据反量化回 ``float`` 或 ``double`` 类型，其计算公式如下：
+Dequantize 节点则用于将模型 ``int8`` 或 ``int32`` 类型的输出数据反量化回 ``float`` 或 ``double`` 类型，其计算公式如下：
 
 ```bash
   deqx = (x - zero\_point) * scale
@@ -2650,8 +2650,8 @@ C++的参考实现如下：
 
   目前工具支持删除：
 
-  1. 输入部位的节点为Quantize或Transpose节点；
-  2. 输出部位的节点为Transpose、Dequanti、Cast、Reshape、Softmax节点。
+  1. 输入部位的节点为 Quantize 或 Transpose 节点；
+  2. 输出部位的节点为 Transpose、Dequanti、Cast、Reshape、Softmax 节点。
 :::
 
 工具打印信息如下：
@@ -2660,7 +2660,7 @@ C++的参考实现如下：
 hb_model_modifier resnet50_64x56x56_featuremap.bin
 2022-04-21 18:22:30,207 INFO Nodes that can be deleted: ['data_res2a_branch1_HzQuantize_TransposeInput0', 'fc1000_reshape_0']
 ```
-在指定 ``-r`` 选项后，工具会打印模型中该节点的类型，储存在bin文件中的节点信息以及告知指定节点已被删除：
+在指定 ``-r`` 选项后，工具会打印模型中该节点的类型，储存在 bin 文件中的节点信息以及告知指定节点已被删除：
 
 ```bash
 hb_model_modifier resnet50_64x56x56_featuremap.bin -r data_res2a_branch1_HzQuantize_TransposeInput0
@@ -2682,9 +2682,9 @@ deleted nodes: data_res2a_branch1_HzQuantize_TransposeInput0
 
 #### ``hb_model_verifier`` 工具
 
-``hb_model_verifier`` 工具是用于对指定的定点模型和runtime模型进行结果验证的工具。
-该工具会使用指定图片，进行定点模型推理，runtime模型板端和x86端模拟器上的推理， runtime模型在板端的推理(如果给定ip可以ping通且板端已经安装 ``hrt_tools``, 若无则可以使用工具链SDK包中 ``package/board`` 下的 ``install.sh`` 脚本进行安装) runtime模型在x86端的推理(确保host端已经安装 ``hrt_tools``,
-若无则可以使用工具链SDK包中 ``package/host`` 下的 ``install.sh`` 脚本进行安装)， 并对其三方的结果进行两两比较，给出是否通过的结论。 若未指定图片，则工具会用默认图片进行推理(featuremap模型会随机生成tensor数据)。
+``hb_model_verifier`` 工具是用于对指定的定点模型和 runtime 模型进行结果验证的工具。
+该工具会使用指定图片，进行定点模型推理，runtime 模型板端和 x86 端模拟器上的推理， runtime 模型在板端的推理(如果给定 ip 可以 ping 通且板端已经安装 ``hrt_tools``, 若无则可以使用工具链SDK包中 ``package/board`` 下的 ``install.sh`` 脚本进行安装) runtime模型在x86端的推理(确保host端已经安装 ``hrt_tools``,
+若无则可以使用工具链 SDK 包中 ``package/host`` 下的 ``install.sh`` 脚本进行安装)， 并对其三方的结果进行两两比较，给出是否通过的结论。 若未指定图片，则工具会用默认图片进行推理(featuremap 模型会随机生成 tensor 数据)。
 
 :::caution 注意
   ``package`` 资料包获取方式，请参考[**交付物说明**](../intermediate/environment_config.md#交付物使用说明)。
@@ -2700,19 +2700,19 @@ deleted nodes: data_res2a_branch1_HzQuantize_TransposeInput0
 ```
 - 命令行参数
 
-hb_model_verifier的命令行参数
+hb_model_verifier 的命令行参数
 
   -quanti_model, -q<br/>
     定点模型名称。
 
   --bin_model, -b<br/>
-    bin模型名称。
+    bin 模型名称。
 
   --arm-board-ip, -a<br/>
-    上板测试使用的arm board ip地址。
+    上板测试使用的 arm board ip 地址。
 
   --input-img, -i<br/>
-    推理测试时使用的图片。 若不指定则会使用默认图片或随机tensor。 对于二进制形式的图片文件需要后缀名为 ``.bin`` 形式。
+    推理测试时使用的图片。 若不指定则会使用默认图片或随机 tensor。 对于二进制形式的图片文件需要后缀名为 ``.bin`` 形式。
 
   --compare_digits, -d<br/>
     比较推理结果数值精度，若不指定则会默认比较小数点后五位。
@@ -2720,18 +2720,18 @@ hb_model_verifier的命令行参数
 
 - 输出内容说明
 
-结果对比最终会在终端展示, 工具会对比ONNX模型运行结果, 模拟器运行及上板结果的两两对比情况, 若无问题应显示如下:
+结果对比最终会在终端展示, 工具会对比 ONNX 模型运行结果, 模拟器运行及上板结果的两两对比情况, 若无问题应显示如下:
 
 ```bash
   Quanti onnx and Arm result Strict check PASSED
 ```
-在定点模型和runtime模型精度不一致时会输出不一致结果的具体信息。
+在定点模型和 runtime 模型精度不一致时会输出不一致结果的具体信息。
 
 ``mismatch line num`` 为两种模型精度不一致结果的个数，包括三种不一致情况： 
 
 ``mismatch.line_miss num`` 为输出结果数量不一致个数； 
 ``mismatch.line_diff num`` 为输出结果差距过大个数； 
-``mismatch.line_nan num`` 为输出为nan的个数。 
+``mismatch.line_nan num`` 为输出为 nan 的个数。 
 
 ``total line num`` 为输出数据总个数。 
 
@@ -2751,7 +2751,7 @@ hb_model_verifier的命令行参数
 
   1. ``hb_model_verifier`` 目前只支持单输入模型。
   2. 若模型有多个输出，则只会比较第一个输出的结果情况。
-  3. 暂时不支持对已打包的*.bin模型进行验证，否则工作台将产生以下提示：
+  3. 暂时不支持对已打包的*.bin 模型进行验证，否则工作台将产生以下提示：
 :::
 
 ```bash
@@ -2760,9 +2760,9 @@ hb_model_verifier的命令行参数
 
 #### ``hb_eval_preprocess`` 工具{#hb_eval_preprocess}
 
-用于对模型精度进行评估时，在x86环境下对图片数据进行预处理。
+用于对模型精度进行评估时，在 x86 环境下对图片数据进行预处理。
 所谓预处理是指图片数据在送入模型之前的特定处理操作。
-比如：图片resize、crop和padding等。
+比如：图片 resize、crop 和 padding 等。
 
 - 使用方法
 ```
@@ -2770,7 +2770,7 @@ hb_model_verifier的命令行参数
 ```
 - 命令行参数
 
-hb_eval_preprocess的命令行参数
+hb_eval_preprocess 的命令行参数
 
   --version<br/>
     显示版本并退出。

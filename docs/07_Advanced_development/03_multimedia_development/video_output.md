@@ -14,29 +14,29 @@ VOT（视频输出）模块主动从内存中读取图像和图形数据，并�
 ### 基本概念
 - 高清显示设备
 
-  SDK将高清设备标示为DHVx，其中x为索引号，从0开始取值，标示第几路高清设备。X3有一个高清设备DHV0。
+  SDK 将高清设备标示为 DHVx，其中 x 为索引号，从 0 开始取值，标示第几路高清设备。X3 有一个高清设备 DHV0。
 
 - 视频层
 
-  - 对于固定在每个显示设备上的视频层，SDK对应采取VHVx来标示。X3 DHV0 有一个视频层VHV0。
-  - VHV0 支持放大，支持2个通道
+  - 对于固定在每个显示设备上的视频层，SDK 对应采取 VHVx 来标示。X3 DHV0 有一个视频层 VHV0。
+  - VHV0 支持放大，支持 2 个通道
   - X3 输出接口支持 RGB、BT1120/BT656、MIPI，三种接口都支持最大输出时序 1080P@60fps
 
 - 视频回写
 
-​		回写设备称之为WD。回写功能：X3只支持设备级的回写，捕获设备级输出的视频数据，可用于显示和编码。
+​		回写设备称之为 WD。回写功能：X3 只支持设备级的回写，捕获设备级输出的视频数据，可用于显示和编码。
 
 - 通道
 
-​		通道由视频层管理，X3每个视频层支持2个通道。
+​		通道由视频层管理，X3 每个视频层支持 2 个通道。
 
 - 图形层
 
-​		X3有2个图形层，固定绑定到DHV0。
+​		X3 有 2 个图形层，固定绑定到 DHV0。
 
 - 输入输出数据格式
 
-​		VOT支持输入和输出指定格式的数据，其中输出是指回写数据到DDR。X3支持的输入输出数据格式见下表。
+​		VOT 支持输入和输出指定格式的数据，其中输出是指回写数据到 DDR。X3 支持的输入输出数据格式见下表。
 
 | 输入格式 | 输出格式 |
 | :----------------: | :----------------: |
@@ -53,11 +53,11 @@ VOT（视频输出）模块主动从内存中读取图像和图形数据，并�
 | FORMAT_YUV420P_UV  |                    |
 
 
-## API参考
+## API 参考
 
 视频输出（VOT）实现启用视频输出设备或通道、发送视频数据到输出通道等功能。
 
-VOT提供如下API：
+VOT 提供如下 API：
 
 ```C
 HB_VOT_SetPubAttr：设置视频输出设备公共属性。
@@ -115,7 +115,7 @@ int HB_VOT_SetPubAttr(uint8_t dev, const VOT_PUB_ATTR_S *pstPubAttr);
 
 |  参数名称  |             描述              | 输入/输出 |
 | :--------: | :---------------------------: | :-------: |
-|    dev     | 视频输出设备id。取值范围：0。 |   输入    |
+|    dev     | 视频输出设备 id。取值范围：0。 |   输入    |
 | pstPubAttr |    视频输出设备公共属性。     |   输入    |
 
 【返回值】
@@ -123,7 +123,7 @@ int HB_VOT_SetPubAttr(uint8_t dev, const VOT_PUB_ATTR_S *pstPubAttr);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -143,7 +143,7 @@ int HB_VOT_GetPubAttr(uint8_t dev, VOT_PUB_ATTR_S *pstPubAttr);
 
 |  参数名称  |                描述                | 输入/输出 |
 | :--------: | :--------------------------------: | :-------: |
-|    dev     | 视频输出设备id。<br/>取值范围：0。 |   输入    |
+|    dev     | 视频输出设备 id。<br/>取值范围：0。 |   输入    |
 | pstPubAttr |       视频输出设备公共属性。       |   输出    |
 
 【返回值】
@@ -151,7 +151,7 @@ int HB_VOT_GetPubAttr(uint8_t dev, VOT_PUB_ATTR_S *pstPubAttr);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -171,14 +171,14 @@ int HB_VOT_Enable(uint8_t dev);
 
 | 参数名称 |                描述                | 输入/输出 |
 | :------: | :--------------------------------: | :-------: |
-|   dev    | 视频输出设备id。<br/>取值范围：0。 |   输入    |
+|   dev    | 视频输出设备 id。<br/>取值范围：0。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -220,14 +220,14 @@ int HB_VOT_Disable(uint8_t dev);
 
 | 参数名称 |                描述                | 输入/输出 |
 | :------: | :--------------------------------: | :-------: |
-|   dev    | 视频输出设备id。<br/>取值范围：0。 |   输入    |
+|   dev    | 视频输出设备 id。<br/>取值范围：0。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -241,21 +241,21 @@ int HB_VOT_Disable(uint8_t dev);
 int HB_VOT_SetLcdBackLight (uint8_t dev, uint32_t backlight);
 ```
 【功能描述】
-> 设置LCD背光亮度。
+> 设置 LCD 背光亮度。
 
 【参数描述】
 
 | 参数名称  |                             描述                             | 输入/输出 |
 | :-------: | :----------------------------------------------------------: | :-------: |
-|    dev    |              视频输出设备id。<br/>取值范围：0。              |   输入    |
-| backlight | 背光亮度值。<br/>取值范围0-10，值越大越亮。<br/>亮度值为0，则屏幕全黑。 |   输入    |
+|    dev    |              视频输出设备 id。<br/>取值范围：0。              |   输入    |
+| backlight | 背光亮度值。<br/>取值范围 0-10，值越大越亮。<br/>亮度值为 0，则屏幕全黑。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -275,7 +275,7 @@ int HB_VOT_SetVideoLayerAttr(uint8_t layer, const VOT_VIDEO_LAYER_ATTR_S *pstLay
 
 |   参数名称   |                描述                 | 输入/输出 |
 | :----------: | :---------------------------------: | :-------: |
-|    layer     | 视频输出视频层id。<br/>取值范围：0. |   输入    |
+|    layer     | 视频输出视频层 id。<br/>取值范围：0. |   输入    |
 | pstLayerAttr |        视频输出视频层属性。         |   输入    |
 
 【返回值】
@@ -283,13 +283,13 @@ int HB_VOT_SetVideoLayerAttr(uint8_t layer, const VOT_VIDEO_LAYER_ATTR_S *pstLay
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 需要先使能设备
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_GetVideoLayerAttr
 【函数声明】
@@ -303,7 +303,7 @@ int HB_VOT_GetVideoLayerAttr(uint8_t layer,  VOT_VIDEO_LAYER_ATTR_S *pstLayerAtt
 
 |   参数名称   |                描述                 | 输入/输出 |
 | :----------: | :---------------------------------: | :-------: |
-|    layer     | 视频输出视频层id。<br/>取值范围：0. |   输入    |
+|    layer     | 视频输出视频层 id。<br/>取值范围：0. |   输入    |
 | pstLayerAttr |        视频输出视频层属性。         |   输出    |
 
 【返回值】
@@ -311,13 +311,13 @@ int HB_VOT_GetVideoLayerAttr(uint8_t layer,  VOT_VIDEO_LAYER_ATTR_S *pstLayerAtt
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_EnableVideoLayer
 【函数声明】
@@ -331,14 +331,14 @@ int HB_VOT_EnableVideoLayer(uint8_t layer);
 
 | 参数名称 |                 描述                 | 输入/输出 |
 | :------: | :----------------------------------: | :-------: |
-|  layer   | 视频输出视频层id。<br/>取值范围：0。 |   输入    |
+|  layer   | 视频输出视频层 id。<br/>取值范围：0。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -484,20 +484,20 @@ int HB_VOT_DisableVideoLayer(uint8_t layer);
 
 | 参数名称 |                 描述                 | 输入/输出 |
 | :------: | :----------------------------------: | :-------: |
-|  layer   | 视频输出视频层id。<br/>取值范围：0。 |   输入    |
+|  layer   | 视频输出视频层 id。<br/>取值范围：0。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_SetVideoLayerCSC
 【函数声明】
@@ -511,7 +511,7 @@ int HB_VOT_SetVideoLayerCSC(uint8_t layer, const VOT_CSC_S *pstVideoCSC);
 
 |  参数名称   |                 描述                 | 输入/输出 |
 | :---------: | :----------------------------------: | :-------: |
-|    layer    | 视频输出视频层id。<br/>取值范围：0。 |   输入    |
+|    layer    | 视频输出视频层 id。<br/>取值范围：0。 |   输入    |
 | pstVideoCSC |        视频输出图像输出效果。        |   输入    |
 
 【返回值】
@@ -519,13 +519,13 @@ int HB_VOT_SetVideoLayerCSC(uint8_t layer, const VOT_CSC_S *pstVideoCSC);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_GetVideoLayerCSC
 【函数声明】
@@ -539,7 +539,7 @@ int HB_VOT_GetVideoLayerCSC(uint8_t layer, VOT_CSC_S *pstVideoCSC);
 
 |  参数名称   |                 描述                 | 输入/输出 |
 | :---------: | :----------------------------------: | :-------: |
-|    layer    | 视频输出视频层id。<br/>取值范围：0。 |   输入    |
+|    layer    | 视频输出视频层 id。<br/>取值范围：0。 |   输入    |
 | pstVideoCSC |        视频输出图像输出效果。        |   输出    |
 
 【返回值】
@@ -547,13 +547,13 @@ int HB_VOT_GetVideoLayerCSC(uint8_t layer, VOT_CSC_S *pstVideoCSC);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_SetVideoLayerUpScale
 【函数声明】
@@ -567,7 +567,7 @@ int HB_VOT_SetVideoLayerUpScale(uint8_t layer, const VOT_UPSCALE_ATTR_S *pstUpSc
 
 |    参数名称    |                 描述                 | 输入/输出 |
 | :------------: | :----------------------------------: | :-------: |
-|     layer      | 视频输出视频层id。<br/>取值范围：0。 |   输入    |
+|     layer      | 视频输出视频层 id。<br/>取值范围：0。 |   输入    |
 | pstUpScaleAttr |           视频层放大属性。           |   输入    |
 
 【返回值】
@@ -575,13 +575,13 @@ int HB_VOT_SetVideoLayerUpScale(uint8_t layer, const VOT_UPSCALE_ATTR_S *pstUpSc
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_GetVideoLayerUpScale
 【函数声明】
@@ -595,7 +595,7 @@ int HB_VOT_GetVideoLayerUpScale(uint8_t layer, VOT_UPSCALE_ATTR_S *pstUpScaleAtt
 
 |    参数名称    |                 描述                 | 输入/输出 |
 | :------------: | :----------------------------------: | :-------: |
-|     layer      | 视频输出视频层id。<br/>取值范围：0。 |   输入    |
+|     layer      | 视频输出视频层 id。<br/>取值范围：0。 |   输入    |
 | pstUpScaleAttr |           视频层放大属性。           |   输出    |
 
 【返回值】
@@ -603,13 +603,13 @@ int HB_VOT_GetVideoLayerUpScale(uint8_t layer, VOT_UPSCALE_ATTR_S *pstUpScaleAtt
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_BatchBegin
 【函数声明】
@@ -623,14 +623,14 @@ int HB_VOT_BatchBegin(uint8_t layer);
 
 | 参数名称 |                 描述                 | 输入/输出 |
 | :------: | :----------------------------------: | :-------: |
-|  layer   | 视频输出视频层id。<br/>取值范围：0。 |   输入    |
+|  layer   | 视频输出视频层 id。<br/>取值范围：0。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -650,14 +650,14 @@ int HB_VOT_BatchEnd(uint8_t layer);
 
 | 参数名称 |                 描述                 | 输入/输出 |
 | :------: | :----------------------------------: | :-------: |
-|  layer   | 视频输出视频层id。<br/>取值范围：0。 |   输入    |
+|  layer   | 视频输出视频层 id。<br/>取值范围：0。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -677,7 +677,7 @@ int HB_VOT_GetScreenFrame(uint8_t layer, void *pstVFrame, int millisec);
 
 | 参数名称  |                 描述                 | 输入/输出 |
 | :-------: | :----------------------------------: | :-------: |
-|   layer   | 视频输出视频层id。<br/>取值范围：0。 |   输入    |
+|   layer   | 视频输出视频层 id。<br/>取值范围：0。 |   输入    |
 | pstVFrame |        输出屏幕图像数据信息。        |   输出    |
 | millisec  |          超时时间。单位：ms          |   输入    |
 
@@ -686,7 +686,7 @@ int HB_VOT_GetScreenFrame(uint8_t layer, void *pstVFrame, int millisec);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 需要在使能设备、视频层、通道后使用。
@@ -719,7 +719,7 @@ int HB_VOT_ReleaseScreenFrame(uint8_t layer, const void *pstVFrame);
 
 | 参数名称  |                 描述                 | 输入/输出 |
 | :-------: | :----------------------------------: | :-------: |
-|   layer   | 视频输出视频层id。<br/>取值范围：0。 |   输入    |
+|   layer   | 视频输出视频层 id。<br/>取值范围：0。 |   输入    |
 | pstVFrame |        输出屏幕图像数据信息。        |   输入    |
 
 【返回值】
@@ -727,13 +727,13 @@ int HB_VOT_ReleaseScreenFrame(uint8_t layer, const void *pstVFrame);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_ReleaseScreenFrame
+> 见 HB_VOT_ReleaseScreenFrame
 
 ### HB_VOT_SetChnAttr
 【函数声明】
@@ -747,8 +747,8 @@ int HB_VOT_SetChnAttr(uint8_t layer, uint8_t chn, const VOT_CHN_ATTR_S *pstChnAt
 
 |  参数名称  |                                      描述                                      | 输入/输出 |
 | :--------: | :----------------------------------------------------------------------------: | :-------: |
-|   layer    |                        视频输出视频层id。取值范围：0。                         |   输入    |
-|    chn     | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|   layer    |                        视频输出视频层 id。取值范围：0。                         |   输入    |
+|    chn     | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 | pstChnAttr |                               视频输出通道属性。                               |   输入    |
 
 【返回值】
@@ -756,13 +756,13 @@ int HB_VOT_SetChnAttr(uint8_t layer, uint8_t chn, const VOT_CHN_ATTR_S *pstChnAt
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_GetChnAttr
 【函数声明】
@@ -776,8 +776,8 @@ int HB_VOT_GetChnAttr(uint8_t layer, uint8_t chn, VOT_CHN _ATTR_S *pstChnAttr);
 
 |  参数名称  |                                      描述                                      | 输入/输出 |
 | :--------: | :----------------------------------------------------------------------------: | :-------: |
-|   layer    |                        视频输出视频层id。取值范围：0。                         |   输入    |
-|    chn     | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|   layer    |                        视频输出视频层 id。取值范围：0。                         |   输入    |
+|    chn     | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 | pstChnAttr |                               视频输出通道属性。                               |   输出    |
 
 【返回值】
@@ -785,13 +785,13 @@ int HB_VOT_GetChnAttr(uint8_t layer, uint8_t chn, VOT_CHN _ATTR_S *pstChnAttr);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_SetChnAttrEx
 【函数声明】
@@ -805,8 +805,8 @@ int HB_VOT_SetChnAttrEx(uint8_t layer, uint8_t chn, const VOT_CHN_ATTR_EX_S *pst
 
 |   参数名称   |                                      描述                                      | 输入/输出 |
 | :----------: | :----------------------------------------------------------------------------: | :-------: |
-|    layer     |                        视频输出视频层id。取值范围：0。                         |   输入    |
-|     chn      | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|    layer     |                        视频输出视频层 id。取值范围：0。                         |   输入    |
+|     chn      | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 | pstChnAttrEx |                             视频输出通道高级属性。                             |   输入    |
 
 【返回值】
@@ -814,13 +814,13 @@ int HB_VOT_SetChnAttrEx(uint8_t layer, uint8_t chn, const VOT_CHN_ATTR_EX_S *pst
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_GetChnAttrEx
 【函数声明】
@@ -834,8 +834,8 @@ int HB_VOT_GetChnAttrEx(uint8_t layer, uint8_t chn, VOT_CHN _ATTR_EX_S *pstChnAt
 
 |   参数名称   |                                      描述                                      | 输入/输出 |
 | :----------: | :----------------------------------------------------------------------------: | :-------: |
-|    layer     |                        视频输出视频层id。取值范围：0。                         |   输入    |
-|     chn      | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|    layer     |                        视频输出视频层 id。取值范围：0。                         |   输入    |
+|     chn      | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 | pstChnAttrEx |                             视频输出通道高级属性。                             |   输出    |
 
 【返回值】
@@ -843,13 +843,13 @@ int HB_VOT_GetChnAttrEx(uint8_t layer, uint8_t chn, VOT_CHN _ATTR_EX_S *pstChnAt
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_EnableChn
 【函数声明】
@@ -863,21 +863,21 @@ int HB_VOT_EnableChn(uint8_t layer, uint8_t chn);
 
 | 参数名称 |                                      描述                                      | 输入/输出 |
 | :------: | :----------------------------------------------------------------------------: | :-------: |
-|  layer   |                        视频输出视频层id。取值范围：0。                         |   输入    |
-|   chn    | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|  layer   |                        视频输出视频层 id。取值范围：0。                         |   输入    |
+|   chn    | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_DisableChn
 【函数声明】
@@ -891,21 +891,21 @@ int HB_VOT_DisableChn(uint8_t layer, uint8_t chn);
 
 | 参数名称 | 描述                                                                           | 输入/输出 |
 | :------: | :----------------------------------------------------------------------------- | :-------: |
-|  layer   | 视频输出视频层id。取值范围：0。                                                |   输入    |
-|   chn    | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|  layer   | 视频输出视频层 id。取值范围：0。                                                |   输入    |
+|   chn    | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_SetChnCrop
 【函数声明】
@@ -919,8 +919,8 @@ int HB_VOT_SetChnCrop(uint8_t layer, uint8_t chn,  const VOT_CROP_INFO_S *pstCro
 
 |  参数名称   | 描述                                                                           | 输入/输出 |
 | :---------: | :----------------------------------------------------------------------------- | :-------: |
-|    layer    | 视频输出视频层id。取值范围：0。                                                |   输入    |
-|     chn     | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|    layer    | 视频输出视频层 id。取值范围：0。                                                |   输入    |
+|     chn     | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 | pstCropInfo | 视频输出通道裁剪属性。                                                         |   输入    |
 
 【返回值】
@@ -928,13 +928,13 @@ int HB_VOT_SetChnCrop(uint8_t layer, uint8_t chn,  const VOT_CROP_INFO_S *pstCro
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_GetChnCrop
 【函数声明】
@@ -948,8 +948,8 @@ int HB_VOT_GetChnCrop(uint8_t layer, uint8_t chn, VOT_CROP_INFO_S *pstCropInfo);
 
 |  参数名称   | 描述                                                                           | 输入/输出 |
 | :---------: | :----------------------------------------------------------------------------- | :-------: |
-|    layer    | 视频输出视频层id。取值范围：0。                                                |   输入    |
-|     chn     | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|    layer    | 视频输出视频层 id。取值范围：0。                                                |   输入    |
+|     chn     | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 | pstCropInfo | 视频输出通道裁剪属性。                                                         |   输出    |
 
 【返回值】
@@ -957,13 +957,13 @@ int HB_VOT_GetChnCrop(uint8_t layer, uint8_t chn, VOT_CROP_INFO_S *pstCropInfo);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_SetChnDisplayPosition
 【函数声明】
@@ -977,8 +977,8 @@ int HB_VOT_SetChnDisplayPosition(uint8_t layer, uint8_t chn, const POINT_S *pstD
 
 |  参数名称  | 描述                                                                           | 输入/输出 |
 | :--------: | :----------------------------------------------------------------------------- | :-------: |
-|   layer    | 视频输出视频层id。取值范围：0。                                                |   输入    |
-|    chn     | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|   layer    | 视频输出视频层 id。取值范围：0。                                                |   输入    |
+|    chn     | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 | pstDispPos | 视频输出通道显示坐标。                                                         |   输入    |
 
 【返回值】
@@ -986,13 +986,13 @@ int HB_VOT_SetChnDisplayPosition(uint8_t layer, uint8_t chn, const POINT_S *pstD
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_GetChnDisplayPosition
 【函数声明】
@@ -1006,8 +1006,8 @@ int HB_VOT_GetChnDisplayPosition(uint8_t layer, uint8_t chn, POINT_S *pstDispPos
 
 |  参数名称  | 描述                                                                           | 输入/输出 |
 | :--------: | :----------------------------------------------------------------------------- | :-------: |
-|   layer    | 视频输出视频层id。取值范围：0。                                                |   输入    |
-|    chn     | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|   layer    | 视频输出视频层 id。取值范围：0。                                                |   输入    |
+|    chn     | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 | pstDispPos | 视频输出通道显示坐标。                                                         |   输出    |
 
 【返回值】
@@ -1015,13 +1015,13 @@ int HB_VOT_GetChnDisplayPosition(uint8_t layer, uint8_t chn, POINT_S *pstDispPos
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableVideoLayer
+> 见 HB_VOT_EnableVideoLayer
 
 ### HB_VOT_SetChnFrameRate
 【函数声明】
@@ -1035,8 +1035,8 @@ int HB_VOT_SetChnFrameRate(uint8_t layer, uint8_t chn, int frame_rate);
 
 |  参数名称  | 描述                                                                           | 输入/输出 |
 | :--------: | :----------------------------------------------------------------------------- | :-------: |
-|   layer    | 视频输出视频层id。取值范围：0。                                                |   输入    |
-|    chn     | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|   layer    | 视频输出视频层 id。取值范围：0。                                                |   输入    |
+|    chn     | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 | frame_rate | 视频通道显示帧率。                                                             |   输入    |
 
 【返回值】
@@ -1044,7 +1044,7 @@ int HB_VOT_SetChnFrameRate(uint8_t layer, uint8_t chn, int frame_rate);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -1064,8 +1064,8 @@ int HB_VOT_GetChnFrameRate(uint8_t layer, uint8_t chn, int *pframe_rate);
 
 |  参数名称   | 描述                                                                           | 输入/输出 |
 | :---------: | :----------------------------------------------------------------------------- | :-------: |
-|    layer    | 视频输出视频层id。取值范围：0。                                                |   输入    |
-|     chn     | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|    layer    | 视频输出视频层 id。取值范围：0。                                                |   输入    |
+|     chn     | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 | pframe_rate | 视频通道显示帧率。                                                             |   输出    |
 
 【返回值】
@@ -1073,7 +1073,7 @@ int HB_VOT_GetChnFrameRate(uint8_t layer, uint8_t chn, int *pframe_rate);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -1093,15 +1093,15 @@ int HB_VOT_ShowChn(uint8_t layer, uint8_t chn);
 
 | 参数名称 |                                      描述                                      | 输入/输出 |
 | :------: | :----------------------------------------------------------------------------: | :-------: |
-|  layer   |                        视频输出视频层id。取值范围：0。                         |   输入    |
-|   chn    | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|  layer   |                        视频输出视频层 id。取值范围：0。                         |   输入    |
+|   chn    | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -1121,15 +1121,15 @@ int HB_VOT_HideChn(uint8_t layer, uint8_t chn);
 
 | 参数名称 | 描述                                                                           | 输入/输出 |
 | :------: | :----------------------------------------------------------------------------- | :-------: |
-|  layer   | 视频输出视频层id。取值范围：0。                                                |   输入    |
-|   chn    | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
+|  layer   | 视频输出视频层 id。取值范围：0。                                                |   输入    |
+|   chn    | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -1149,8 +1149,8 @@ int HB_VOT_SendFrame(uint8_t layer, uint8_t chn, void *pstVFrame, int millisec);
 
 | 参数名称  | 描述                                                      | 输入/输出 |
 | :-------: | :-------------------------------------------------------- | :-------: |
-|   layer   | 视频输出视频层id。取值范围：0。                           |   输入    |
-|    chn    | 视频输出通道id。取值范围：[0, 2)。<br/>0、1表示视频通道。 |   输入    |
+|   layer   | 视频输出视频层 id。取值范围：0。                           |   输入    |
+|    chn    | 视频输出通道 id。取值范围：[0, 2)。<br/>0、1 表示视频通道。 |   输入    |
 | pstVFrame | 视频数据信息。                                            |   输入    |
 | millisec  | 超时时间。单位：ms                                        |   输入    |
 
@@ -1159,7 +1159,7 @@ int HB_VOT_SendFrame(uint8_t layer, uint8_t chn, void *pstVFrame, int millisec);
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -1173,22 +1173,22 @@ int HB_VOT_SendFrame(uint8_t layer, uint8_t chn, void *pstVFrame, int millisec);
 int HB_VOT_ClearChnBuf(uint8_t layer, uint8_t chn, HB_BOOL bClrAll);
 ```
 【功能描述】
-> 清空指定输出通道的缓存buffer数据。
+> 清空指定输出通道的缓存 buffer 数据。
 
 【参数描述】
 
 | 参数名称 | 描述                                                                           | 输入/输出 |
 | :------: | :----------------------------------------------------------------------------- | :-------: |
-|  layer   | 视频输出视频层id。取值范围：0。                                                |   输入    |
-|   chn    | 视频输出通道id。取值范围：[0, 4)。<br/>0、1表示视频通道；<br/>2、3是图形通道。 |   输入    |
-| bClrAll  | 是否将通道buffer中的数据清空。                                                 |   输入    |
+|  layer   | 视频输出视频层 id。取值范围：0。                                                |   输入    |
+|   chn    | 视频输出通道 id。取值范围：[0, 4)。<br/>0、1 表示视频通道；<br/>2、3 是图形通道。 |   输入    |
+| bClrAll  | 是否将通道 buffer 中的数据清空。                                                 |   输入    |
 
 【返回值】
 
 | 返回值 |  描述  |
 | :----: | :----: |
 |   0    | 成功。 |
-|  非0   | 失败。 |
+|  非 0   | 失败。 |
 
 【注意事项】
 > 无
@@ -1202,23 +1202,23 @@ int HB_VOT_ClearChnBuf(uint8_t layer, uint8_t chn, HB_BOOL bClrAll);
 int HB_VOT_BindVps(uint8_t vpsGroup, uint8_t vpsChn, uint8_t layer, uint8_t chn);
 ```
 【功能描述】
-> 视频输出的输入源绑定vps模块的输出。
+> 视频输出的输入源绑定 vps 模块的输出。
 
 【参数描述】
 
 | 参数名称 |                  描述                   | 输入/输出 |
 | :------: | :-------------------------------------: | :-------: |
-| vpsGroup | 绑定的VPS模块的Group，取值范围：[0,4)。 |   输入    |
-|  vpsChn  | 绑定的VPS模块的通道，取值范围：[0,39)。 |   输入    |
-|  layer   |    绑定的VOT模块的layer，取值范围0。    |   输入    |
-|   chn    | 绑定的VOT模块的通道，取值范围：[0,2)。  |   输入    |
+| vpsGroup | 绑定的 VPS 模块的 Group，取值范围：[0,4)。 |   输入    |
+|  vpsChn  | 绑定的 VPS 模块的通道，取值范围：[0,39)。 |   输入    |
+|  layer   |    绑定的 VOT 模块的 layer，取值范围 0。    |   输入    |
+|   chn    | 绑定的 VOT 模块的通道，取值范围：[0,2)。  |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1238,14 +1238,14 @@ int HB_VOT_EnableWB(VOT_WB votWb);
 
 | 参数名称 |              描述              | 输入/输出 |
 | :------: | :----------------------------: | :-------: |
-|  votWb   | 回写设备id。<br/>取值范围：0。 |   输入    |
+|  votWb   | 回写设备 id。<br/>取值范围：0。 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1280,14 +1280,14 @@ int HB_VOT_DisableWB(VOT_WB votWb);
 
 | 参数名称 |              描述              | 输入/输出 |
 | :------: | :----------------------------: | :-------: |
-|  votWb   | 回写设备id。<br/>取值范围：0。 |   输入    |
+|  votWb   | 回写设备 id。<br/>取值范围：0。 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1307,7 +1307,7 @@ int HB_VOT_GetWBAttr (VOT_WB votWb, VOT_WB_ATTR_S *pstWBAttr);
 
 | 参数名称  |              描述              | 输入/输出 |
 | :-------: | :----------------------------: | :-------: |
-|   votWb   | 回写设备id。<br/>取值范围：0。 |   输入    |
+|   votWb   | 回写设备 id。<br/>取值范围：0。 |   输入    |
 | pstWBAttr |            回写属性            |   输出    |
 
 【返回值】
@@ -1315,7 +1315,7 @@ int HB_VOT_GetWBAttr (VOT_WB votWb, VOT_WB_ATTR_S *pstWBAttr);
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1335,7 +1335,7 @@ int HB_VOT_SetWBAttr (VOT_WB votWb, VOT_WB_ATTR_S *pstWBAttr);
 
 | 参数名称  |              描述              | 输入/输出 |
 | :-------: | :----------------------------: | :-------: |
-|   votWB   | 回写设备id。<br/>取值范围：0。 |   输入    |
+|   votWB   | 回写设备 id。<br/>取值范围：0。 |   输入    |
 | pstWBAttr |            回写属性            |   输入    |
 
 【返回值】
@@ -1343,13 +1343,13 @@ int HB_VOT_SetWBAttr (VOT_WB votWb, VOT_WB_ATTR_S *pstWBAttr);
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 见HB_VOT_EnableWB
+> 见 HB_VOT_EnableWB
 
 ### HB_VOT_GetWBFrame
 【函数声明】
@@ -1363,8 +1363,8 @@ int HB_VOT_GetWBFrame (VOT_WB votWb, void* pstVFrame, int millisec);
 
 | 参数名称  |                          描述                           | 输入/输出 |
 | :-------: | :-----------------------------------------------------: | :-------: |
-|   votWb   |             回写设备id。<br/>取值范围：0。              |   输入    |
-| pstVFrame | 获取到的回写图像帧(传入的指针类型应为hb_vio_buffer_t *) |   输入    |
+|   votWb   |             回写设备 id。<br/>取值范围：0。              |   输入    |
+| pstVFrame | 获取到的回写图像帧(传入的指针类型应为 hb_vio_buffer_t *) |   输入    |
 | millisec  |                  超时，本版本不可用。                   |   输入    |
 
 【返回值】
@@ -1372,7 +1372,7 @@ int HB_VOT_GetWBFrame (VOT_WB votWb, void* pstVFrame, int millisec);
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1392,7 +1392,7 @@ int HB_VOT_ReleaseWBFrame (VOT_WB votWb, void* pstVFrame)；
 
 | 参数名称  |              描述              | 输入/输出 |
 | :-------: | :----------------------------: | :-------: |
-|   votWb   | 回写设备id。<br/>取值范围：0。 |   输入    |
+|   votWb   | 回写设备 id。<br/>取值范围：0。 |   输入    |
 | pstVFrame |       获取到的回写图像帧       |   输入    |
 
 【返回值】
@@ -1400,7 +1400,7 @@ int HB_VOT_ReleaseWBFrame (VOT_WB votWb, void* pstVFrame)；
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1414,7 +1414,7 @@ int HB_VOT_ReleaseWBFrame (VOT_WB votWb, void* pstVFrame)；
 int HB_VOT_ShutDownHDMI(void)；
 ```
 【功能描述】
-> 关闭HDMI输出到目标设备，例如显示器等，目标设备显示黑屏，但是显示硬件模块仍然正常工作。
+> 关闭 HDMI 输出到目标设备，例如显示器等，目标设备显示黑屏，但是显示硬件模块仍然正常工作。
 
 【参数描述】
 
@@ -1427,10 +1427,10 @@ int HB_VOT_ShutDownHDMI(void)；
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 限于HDMI显示时使用
+> 限于 HDMI 显示时使用
 
 【参考代码】
 
@@ -1440,7 +1440,7 @@ int HB_VOT_ShutDownHDMI(void)；
 int HB_VOT_StartHDMI (void)；
 ```
 【功能描述】
-> 使能HDMI输出图像到目标显示设备，需要与HB_VOT_ShutDownHDMI成对使用。
+> 使能 HDMI 输出图像到目标显示设备，需要与 HB_VOT_ShutDownHDMI 成对使用。
 
 【参数描述】
 
@@ -1453,14 +1453,14 @@ int HB_VOT_StartHDMI (void)；
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 用于HB_VOT_ShutDownHDMI后，重新启动图像输出
+> 用于 HB_VOT_ShutDownHDMI 后，重新启动图像输出
 
 【参考代码】
 
-### API调用流程示例
+### API 调用流程示例
 ```C
 int sample_vot_init()
 {
@@ -1625,9 +1625,9 @@ typedef enum HB_VOT_OUTPUT_MODE_E {
 
 |          成员           | 含义                     |
 | :---------------------: | :----------------------- |
-|   HB_VOT_OUTPUT_MIPI    | MIPI输出                 |
-|  HB_VOT_OUTPUT_BT1120   | BT1120输出(用于HDMI显示) |
-|  HB_VOT_OUTPUT_RGB888   | RGB输出                  |
+|   HB_VOT_OUTPUT_MIPI    | MIPI 输出                 |
+|  HB_VOT_OUTPUT_BT1120   | BT1120 输出(用于 HDMI 显示) |
+|  HB_VOT_OUTPUT_RGB888   | RGB 输出                  |
 | HB_VOT_OUTPUT_MODE_BUTT | 支持的输出方式总数       |
 
 ### HB_VOT_INTF_SYNC_E
@@ -1719,7 +1719,7 @@ typedef struct HB_VOT_SYNC_INFO_S {
 |   vbp   | 帧前沿                           |
 |   vfp   | 帧后沿                           |
 |   vs    | 帧同步信号                       |
-| vfp_cnt | 目前固定为0xa（bt656 field 为0） |
+| vfp_cnt | 目前固定为 0xa（bt656 field 为 0） |
 |  width  | 屏幕分辨率宽                     |
 | height  | 屏幕分辨率高                     |
 
@@ -1761,29 +1761,29 @@ typedef struct HB_VOT_VIDEO_LAYER_ATTR_S {
  | 成员                     | 含义                                     |
  | :----------------------- | :--------------------------------------- |
  | stImageSize              | 视频层画布大小                           |
- | big_endian               | 通道2，3输入图像格式大小端方式配置       |
- | display_addr_type        | 通道0显示类型                            |
- | display_cam_no           | 通道0显示源                              |
- | display_addr_type_layer1 | 通道1显示类型                            |
- | display_cam_no_layer1    | 通道1显示源                              |
- | dithering_flag           | dithering类型                            |
- | dithering_en             | dithering是否使能                        |
- | gamma_en                 | gamma是否使能                            |
- | hue_en                   | hue是否使能                              |
- | sat_en                   | sat是否使能                              |
- | con_en                   | con是否使能                              |
- | bright_en                | bright是否使能                           |
+ | big_endian               | 通道 2，3 输入图像格式大小端方式配置       |
+ | display_addr_type        | 通道 0 显示类型                            |
+ | display_cam_no           | 通道 0 显示源                              |
+ | display_addr_type_layer1 | 通道 1 显示类型                            |
+ | display_cam_no_layer1    | 通道 1 显示源                              |
+ | dithering_flag           | dithering 类型                            |
+ | dithering_en             | dithering 是否使能                        |
+ | gamma_en                 | gamma 是否使能                            |
+ | hue_en                   | hue 是否使能                              |
+ | sat_en                   | sat 是否使能                              |
+ | con_en                   | con 是否使能                              |
+ | bright_en                | bright 是否使能                           |
  | theta_sign               | hue angle                                |
- | contrast                 | contrast值，和off_contrast共同控制对比度 |
- | gamma                    | gamma值                                  |
- | theta_abs                | hue angle绝对值，范围0-8d180             |
- | saturation               | sat值                                    |
+ | contrast                 | contrast 值，和 off_contrast 共同控制对比度 |
+ | gamma                    | gamma 值                                  |
+ | theta_abs                | hue angle 绝对值，范围 0-8d180             |
+ | saturation               | sat 值                                    |
  | off_contrast             | contrast offset 0 - 255                  |
  | off_bright               | bright offset -128-127                   |
  | panel_type               | 输出类型                                 |
  | rotate                   | 是否使能旋转                             |
- | user_control_disp        | 通道0是否使能用户输入控制                |
- | user_control_disp_layer1 | 通道1是否使能用户输入控制                |
+ | user_control_disp        | 通道 0 是否使能用户输入控制                |
+ | user_control_disp_layer1 | 通道 1 是否使能用户输入控制                |
 
 ### HB_VOT_CSC_S
 
@@ -1803,10 +1803,10 @@ typedef struct HB_VOT_CSC_S {
 
 | 成员         | 含义         |
 | :----------- | :----------- |
-| u32Luma      | 设置VO亮度   |
-| u32Contrast  | 设置VO对比度 |
-| u32Hue       | 设置VO色度   |
-| u32Satuature | 设置VO饱和度 |
+| u32Luma      | 设置 VO 亮度   |
+| u32Contrast  | 设置 VO 对比度 |
+| u32Hue       | 设置 VO 色度   |
+| u32Satuature | 设置 VO 饱和度 |
 
 ### HB_VOT_UPSCALE_ATTR_S
 【结构定义】
@@ -1832,8 +1832,8 @@ typedef struct HB_VOT_UPSCALE_ATTR_S {
 | src_height | 放大原图高度         |
 | tgt_width  | 放大后的目标图像宽度 |
 | tgt_height | 放大后的目标图像高度 |
-| pos_x      | 放大后的x坐标        |
-| pos_y      | 放大后的y坐标        |
+| pos_x      | 放大后的 x 坐标        |
+| pos_y      | 放大后的 y 坐标        |
 | upscale_en | 放大功能是否使能     |
 
 ### HB_VOT_CHN_ATTR_S
@@ -1856,11 +1856,11 @@ typedef struct HB_VOT_CHN_ATTR_S {
 
 |     成员     | 含义                                                         |
 | :----------: | :----------------------------------------------------------- |
-| u32Priority  | 视频通道叠加优先级，0优先级最高，3优先级最低，注意任何两个通道优先级不能重复，重复了所有通道都不能显示 |
+| u32Priority  | 视频通道叠加优先级，0 优先级最高，3 优先级最低，注意任何两个通道优先级不能重复，重复了所有通道都不能显示 |
 | u32SrcWidth  | 视频通道原图宽度                                             |
 | u32SrcHeight | 视频通道原图高度                                             |
-|     s32X     | 视频通道x坐标                                                |
-|     s32Y     | 视频通道y坐标                                                |
+|     s32X     | 视频通道 x 坐标                                                |
+|     s32Y     | 视频通道 y 坐标                                                |
 | u32DstWidth  | 视频通道目标图像宽度                                         |
 | u32DstHeight | 视频通道目标图像高度                                         |
 
@@ -1884,12 +1884,12 @@ typedef struct HB_VOT_CHN_ATTR_EX_S {
 
 |   成员    | 含义|
 | :-------: | :--------- |
-|  format   | 输入视频YUV格式         |
-|   alpha   | Alpha值                |
-| keycolor  | 通道key-color          |
-| alpha_sel | Aphpa叠加算法选择<br/>0: Result image = (layer A * (~BR + 1) + layer B*BR) >> 8<br/>1: Result image = (layer A * (~BR + 1) + layer B*BR) >> 8<br/>Layer A is merged result output by the pipeline backwards.<br/>Layer B is the higher priority layer of current pipeline.<br/>BR is Layer B Alpha ratio(0~255) and may be from image pixel data(ARGB/RGBA) or programmable register. |
+|  format   | 输入视频 YUV 格式         |
+|   alpha   | Alpha 值                |
+| keycolor  | 通道 key-color          |
+| alpha_sel | Aphpa 叠加算法选择<br/>0: Result image = (layer A * (~BR + 1) + layer B*BR) >> 8<br/>1: Result image = (layer A * (~BR + 1) + layer B*BR) >> 8<br/>Layer A is merged result output by the pipeline backwards.<br/>Layer B is the higher priority layer of current pipeline.<br/>BR is Layer B Alpha ratio(0~255) and may be from image pixel data(ARGB/RGBA) or programmable register. |
 |  ov_mode  | 叠加模式<br/>00: transparent<br/>01: and<br/>10: or<br/>11: inv  |
-| alpha_en  | 是否是能alpha叠加  |
+| alpha_en  | 是否是能 alpha 叠加  |
 
 ### VOT_WB_ATTR_S
 【结构定义】
@@ -1906,8 +1906,8 @@ typedef struct HB_VOT_WBC_ATTR_S{
 
 |   成员    | 含义        |
 | :-------: | :------------------------- |
-|  wb_src   | 回写源<br/>0 overlay-alphablend输出<br/>1 upscaling 输出<br/>2 de-output输出    |
-| wb_format | 回写格式<br/>0 FORMAT_YUV422_UYVY<br/>1 FORMAT_YUV422_VYUY<br/>2 FORMAT_YUV422_YVYU<br/>3 FORMAT_YUV422_YUYV<br/>4 FORMAT_YUV420SP_UV<br/>5 FORMAT_YUV420SP_VU<br/>6 FORMAT_BGR0<br/>wb_src为2时，vot输出为RGB模式时，只支持FORMAT_BGR0 |
+|  wb_src   | 回写源<br/>0 overlay-alphablend 输出<br/>1 upscaling 输出<br/>2 de-output 输出    |
+| wb_format | 回写格式<br/>0 FORMAT_YUV422_UYVY<br/>1 FORMAT_YUV422_VYUY<br/>2 FORMAT_YUV422_YVYU<br/>3 FORMAT_YUV422_YUYV<br/>4 FORMAT_YUV420SP_UV<br/>5 FORMAT_YUV420SP_VU<br/>6 FORMAT_BGR0<br/>wb_src 为 2 时，vot 输出为 RGB 模式时，只支持 FORMAT_BGR0 |
 
 ### VOT_CROP_INFO_S
 【结构定义】
@@ -1918,14 +1918,14 @@ typedef struct HB_VOT_CROP_INFO_S{
     }VOT_CROP_INFO_S;
 ```
 【功能描述】
-> 定义crop属性
+> 定义 crop 属性
 
 【成员说明】
 
 |   成员    | 含义               |
 | :-------: | :----------------- |
-| u32Width  | Crop图像的目标宽度 |
-| u32Height | Crop图像的目标高度 |
+| u32Width  | Crop 图像的目标宽度 |
+| u32Height | Crop 图像的目标高度 |
 
 ### VOT_FRAME_INFO_S
 【结构定义】
@@ -1940,8 +1940,8 @@ void *addr_uv;   unsigned int size; }VOT_FRAME_INFO_S;
 
 |  成员   | 含义                     |
 | :-----: | :----------------------- |
-|  addr   | 图像的Y分量起始虚拟地址  |
-| addr_uv | 图像的UV分量起始虚拟地址 |
+|  addr   | 图像的 Y 分量起始虚拟地址  |
+| addr_uv | 图像的 UV 分量起始虚拟地址 |
 |  size   | 图像大小                 |
 
 ### HB_POINT_S
@@ -1959,8 +1959,8 @@ typedef struct HB_POINT_S {
 
 | 成员  | 含义        |
 | :---: | :---------- |
-| s32X  | 像素点x坐标 |
-| s32Y  | 像素点y坐标 |
+| s32X  | 像素点 x 坐标 |
+| s32Y  | 像素点 y 坐标 |
 
 ### VOT_WB
 【结构定义】
@@ -1968,7 +1968,7 @@ typedef struct HB_POINT_S {
 typedef uint32_t VOT_WB;
 ```
 【功能描述】
-> 定义VOT回写变量。
+> 定义 VOT 回写变量。
 
 ### HB_PIXEL_FORMAT_YUV_E
 【结构定义】
@@ -2024,7 +2024,7 @@ typedef struct HB_SIZE_S {
 | u32Height | 图像的高 |
 
 ## 错误码
-VOT错误码如下表所示。
+VOT 错误码如下表所示。
 
 | 错误码 | 宏定义                                   | 描述                        |
 | :----: | :--------------------------------------- | :-------------------------- |
@@ -2032,16 +2032,16 @@ VOT错误码如下表所示。
 | 0xa402 | HB_ERR_VOT_NO_MEM                        | 内存不足                    |
 | 0xa403 | HB_ERR_VOT_NULL_PTR                      | 函数参数中有空指针          |
 | 0xa404 | HB_ERR_VOT_SYS_NOTREADY                  | 系统未初始化                |
-| 0xa405 | HB_ERR_VOT_INVALID_DEVID                 | 设备ID超出合法范围          |
-| 0xa406 | HB_ERR_VOT_INVALID_CHNID                 | 通道ID超出合法范围          |
+| 0xa405 | HB_ERR_VOT_INVALID_DEVID                 | 设备 ID 超出合法范围          |
+| 0xa406 | HB_ERR_VOT_INVALID_CHNID                 | 通道 ID 超出合法范围          |
 | 0xa407 | HB_ERR_VOT_ILLEGAL_PARAM                 | 参数超出合法范围            |
 | 0xa408 | HB_ERR_VOT_NOT_SUPPORT                   | 不支持的操作                |
 | 0xa409 | HB_ERR_VOT_NOT_PERMIT                    | 操作不允许                  |
-| 0xa40a | HB_ERR_VOT_INVALID_WBCID                 | WBC号超出范围               |
+| 0xa40a | HB_ERR_VOT_INVALID_WBCID                 | WBC 号超出范围               |
 | 0xa40b | HB_ERR_VOT_INVALID_LAYERID               | 视频层号超出范围            |
 | 0xa40c | HB_ERR_VOT_INVALID_VIDEO_CHNID           | 视频层通道号超出范围        |
-| 0xa40d | HB_ERR_VOT_INVALID_BIND_VPSGROUPID       | 绑定VPS GROUP号超出范围     |
-| 0xa40e | HB_ERR_VOT_INVALID_BIND_VPSCHNID         | 绑定VPS CHN号超出范围       |
+| 0xa40d | HB_ERR_VOT_INVALID_BIND_VPSGROUPID       | 绑定 VPS GROUP 号超出范围     |
+| 0xa40e | HB_ERR_VOT_INVALID_BIND_VPSCHNID         | 绑定 VPS CHN 号超出范围       |
 | 0xa40f | HB_ERR_VOT_INVALID_FRAME_RATE            | 不支持的帧率                |
 | 0xa410 | HB_ERR_VOT_DEV_NOT_CONFIG                | 设备未配置                  |
 | 0xa411 | HB_ERR_VOT_DEV_NOT_ENABLE                | 设备未使能                  |
@@ -2066,21 +2066,21 @@ VOT错误码如下表所示。
 | 0xa441 | HB_ERR_VOT_CHN_NOT_ENABLE                | 通道未使能                  |
 | 0xa442 | HB_ERR_VOT_CHN_NOT_CONFIG                | 通道未配置                  |
 | 0xa443 | HB_ERR_VOT_CHN_NOT_ALLOC                 | 通道未分配资源              |
-| 0xa444 | HB_ERR_VOT_CHN_AREA_OVERLAP              | VO通道区域重叠              |
+| 0xa444 | HB_ERR_VOT_CHN_AREA_OVERLAP              | VO 通道区域重叠              |
 | 0xa450 | HB_ERR_VOT_INVALID_PATTERN               | 无效样式                    |
 | 0xa451 | HB_ERR_VOT_INVALID_POSITION              | 无效级联位置                |
 | 0xa460 | HB_ERR_VOT_WAIT_TIMEOUT                  | 等待超时                    |
 | 0xa461 | HB_ERR_VOT_INVALID_VFRAME                | 无效视频帧                  |
 | 0xa462 | HB_ERR_VOT_INVALID_RECT_PARA             | 无效矩形参数                |
-| 0xa463 | HB_ERR_VOT_SETBEGIN_ALREADY              | BEGIN已设置                 |
-| 0xa464 | HB_ERR_VOT_SETBEGIN_NOTYET               | BEGIN未设置                 |
-| 0xa465 | HB_ERR_VOT_SETEND_ALREADY                | END已设置                   |
-| 0xa466 | HB_ERR_VOT_SETEND_NOTYET                 | END未设置                   |
+| 0xa463 | HB_ERR_VOT_SETBEGIN_ALREADY              | BEGIN 已设置                 |
+| 0xa464 | HB_ERR_VOT_SETBEGIN_NOTYET               | BEGIN 未设置                 |
+| 0xa465 | HB_ERR_VOT_SETEND_ALREADY                | END 已设置                   |
+| 0xa466 | HB_ERR_VOT_SETEND_NOTYET                 | END 未设置                   |
 | 0xa470 | HB_ERR_VOT_GFX_NOT_DISABLE               | 图形层未关闭                |
 | 0xa471 | HB_ERR_VOT_GFX_NOT_BIND                  | 图形层未绑定                |
 | 0xa472 | HB_ERR_VOT_GFX_NOT_UNBIND                | 图形层未解绑定              |
-| 0xa473 | HB_ERR_VOT_GFX_INVALID_ID                | 图形层ID超出范围            |
-| 0xa480 | HB_ERR_VOT_BUF_MANAGER_ILLEGAL_OPERATION | Buffer manger非法的工作状态 |
+| 0xa473 | HB_ERR_VOT_GFX_INVALID_ID                | 图形层 ID 超出范围            |
+| 0xa480 | HB_ERR_VOT_BUF_MANAGER_ILLEGAL_OPERATION | Buffer manger 非法的工作状态 |
 
 ## 参考代码
-VO部分示例代码可以参考，[sample_vot](./multimedia_samples#sample_vot)和[sample_lcd](./multimedia_samples#sample_lcd)。
+VO 部分示例代码可以参考，[sample_vot](./multimedia_samples#sample_vot)和[sample_lcd](./multimedia_samples#sample_lcd)。

@@ -86,7 +86,7 @@ root@ubuntu:/app/pydev_demo/06_segment_sample/01_mobilenet_unet#
 | `--model-path` | BPU 量化模型路径（`.bin`） | str | `/app/model/basic/mobilenet_unet_1024x2048_nv12.bin` |
 | `--test-img` | 输入测试图像路径 | str | `segmentation.png` |
 | `--save-path` | 分割结果图像保存路径 | str | `segmentation_result.png` |
-| `--priority` | 推理优先级（0~255，255为最高） | int | `0` |
+| `--priority` | 推理优先级（0~255，255 为最高） | int | `0` |
 | `--bpu-cores` | BPU 核心索引列表（如 `0 1`） | int list | `[0]` |
 
 ### 软件架构说明

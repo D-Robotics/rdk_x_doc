@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# I2C应用
+# I2C 应用
 
 ```mdx-code-block
 import DocScope from '@site/src/components/DocScope';
@@ -10,16 +10,16 @@ import DocScope from '@site/src/components/DocScope';
 
 <DocScope versions=">= 3.0.0" products="RDK-X3">
 
-RDK X3 在 40PIN 上默认使能 I2C0，物理管脚号 3 和 5，IO电压3.3V。
+RDK X3 在 40PIN 上默认使能 I2C0，物理管脚号 3 和 5，IO 电压 3.3V。
 
 </DocScope>
 
 <DocScope versions=">= 3.5.0" products="RDK-X5">
-RDK X5 在 40PIN 上默认使能 I2C5（物理管脚号 3 和 5）和 I2C0（物理管脚号 27 和 28），IO电压3.3V。
+RDK X5 在 40PIN 上默认使能 I2C5（物理管脚号 3 和 5）和 I2C0（物理管脚号 27 和 28），IO 电压 3.3V。
 
 </DocScope>
 
-请参阅 `/app/40pin_samples/test_i2c.py`了解如何使用I2C的详细信息。
+请参阅 `/app/40pin_samples/test_i2c.py`了解如何使用 I2C 的详细信息。
 
 ## 测试方法
 
@@ -27,7 +27,7 @@ RDK X5 在 40PIN 上默认使能 I2C5（物理管脚号 3 和 5）和 I2C0（物
 
 - 首先列出当前系统使能的 I2C 总线
 - 通过输入总线号扫描得到当前总线上连接了哪些外设
-- 输入外设地址（16进制数），测试程序会从该外设上读取一个字节的数据
+- 输入外设地址（16 进制数），测试程序会从该外设上读取一个字节的数据
 
 ## 运行效果
 

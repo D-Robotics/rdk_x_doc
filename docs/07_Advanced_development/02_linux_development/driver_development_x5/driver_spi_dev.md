@@ -2,24 +2,24 @@
 sidebar_position: 8
 ---
 
-# SPI调试指南
+# SPI 调试指南
 
-## SPI硬件支持
+## SPI 硬件支持
 
-X5共支持7路SPI控制器，其中6路(spi0-spi5)位于LSIO子系统，1路(spi6)位于DSP子系统。 所有SPI控制器均支持主/从模式。
-RDK X5 上留出来的引脚主要是在 40pin 中，分别是**SPI1**和**SPI2**，可以参考RDK X5 [40pin介绍](../../../03_Basic_Application/01_40pin_user_sample/40pin_define.md#40pin-管脚定义40pin_define)
+X5 共支持 7 路 SPI 控制器，其中 6 路(spi0-spi5)位于 LSIO 子系统，1 路(spi6)位于 DSP 子系统。 所有 SPI 控制器均支持主/从模式。
+RDK X5 上留出来的引脚主要是在 40pin 中，分别是**SPI1**和**SPI2**，可以参考 RDK X5 [40pin 介绍](../../../03_Basic_Application/01_40pin_user_sample/40pin_define.md#40pin-管脚定义40pin_define)
 其他的 SPI 口并不在 40pin 上。
 
-## Linux SPI驱动框架介绍
+## Linux SPI 驱动框架介绍
 
-- spi driver层：主要实现对SPI硬件IP的操作，另外还实现了spi framework定义的接口。
-- spi framework层：可以理解为spi driver的适配层，对下层定义了一组driver层需要实现的接口，对上提供了通用接口屏蔽了硬件细节。
-- spi char device层：为用户空间提供节点，方便用户空间与内核空间进行数据交换。
+- spi driver 层：主要实现对 SPI 硬件 IP 的操作，另外还实现了 spi framework 定义的接口。
+- spi framework 层：可以理解为 spi driver 的适配层，对下层定义了一组 driver 层需要实现的接口，对上提供了通用接口屏蔽了硬件细节。
+- spi char device 层：为用户空间提供节点，方便用户空间与内核空间进行数据交换。
 
 
 ### 代码路径
 
-X5使用新思的ssi控制器，驱动代码位于：drivers/spi目录下，主要有三个文件：
+X5 使用新思的 ssi 控制器，驱动代码位于：drivers/spi 目录下，主要有三个文件：
 
 ```bash
 drivers/spi/spi-dw-core.c
@@ -29,27 +29,27 @@ drivers/spi/spi-dw-dma.c
 
 ### 控制器硬件说明
 
-X5的所有SPI均控制器可以运行Master/Slave模式。Master及Slave的运行限制如下：
+X5 的所有 SPI 均控制器可以运行 Master/Slave 模式。Master 及 Slave 的运行限制如下：
 
-- SPI-Master：最高频率50MHz
-- SPI-Slave：最高频率32MHz
+- SPI-Master：最高频率 50MHz
+- SPI-Slave：最高频率 32MHz
 
-X5的所有SPI控制器均可以运行在中断/DMA模式。中断模式运行限制如下：
+X5 的所有 SPI 控制器均可以运行在中断/DMA 模式。中断模式运行限制如下：
 
 - SPI-Slave：
-    - Rx：CPU定频在1.5GHz时，可以达到32MHz
-    - Tx：CPU定频在1.5GHz时，可以达到16MHz
+    - Rx：CPU 定频在 1.5GHz 时，可以达到 32MHz
+    - Tx：CPU 定频在 1.5GHz 时，可以达到 16MHz
 - SPI-Master：均可正常通讯。
 
-### DTS配置说明
+### DTS 配置说明
 
-X5 SPI控制器的设备树定义位于SDK包的kernel文件夹下的`arch/arm64/boot/dts/hobot/x5.dtsi`文件内。
+X5 SPI 控制器的设备树定义位于 SDK 包的 kernel 文件夹下的`arch/arm64/boot/dts/hobot/x5.dtsi`文件内。
 
-<font color="red">注意：</font>x5.dtsi中的节点主要声明SoC共有特性，和具体电路板无关，一般情况下不用修改。
+<font color="red">注意：</font>x5.dtsi 中的节点主要声明 SoC 共有特性，和具体电路板无关，一般情况下不用修改。
 
-X5 SPI控制器默认关闭，请根据实际硬件情况，在对应的DTS文件内使能相应的SPI控制器。
+X5 SPI 控制器默认关闭，请根据实际硬件情况，在对应的 DTS 文件内使能相应的 SPI 控制器。
 
-以使能SPI2为例：
+以使能 SPI2 为例：
 
 ```c
 &spi2 {
@@ -59,9 +59,9 @@ X5 SPI控制器默认关闭，请根据实际硬件情况，在对应的DTS文�
 };
 ```
 
-### DTS配置SPI使用DMA
+### DTS 配置 SPI 使用 DMA
 
-如果需要使用DMA，则需要在对应的DTS文件内绑定对应的DMA握手，以SPI2为例：
+如果需要使用 DMA，则需要在对应的 DTS 文件内绑定对应的 DMA 握手，以 SPI2 为例：
 
 ```c
 &spi2 {
@@ -73,7 +73,7 @@ X5 SPI控制器默认关闭，请根据实际硬件情况，在对应的DTS文�
 };
 ```
 
-SPI6绑定时需要指定dsp_axi_dma，如下所示：
+SPI6 绑定时需要指定 dsp_axi_dma，如下所示：
 
 ```c
 &spi6 {
@@ -85,7 +85,7 @@ SPI6绑定时需要指定dsp_axi_dma，如下所示：
 };
 ```
 
-SPI DMA握手列表如下：
+SPI DMA 握手列表如下：
 
 | SPI  | DMA TX | DMA RX |
 | ---- | ------ | ------ |
@@ -97,13 +97,13 @@ SPI DMA握手列表如下：
 | SPI5 | 30 | 31 |
 | SPI6 | 21 | 22 |
 
-## SPI功能验证
+## SPI 功能验证
 
-本小节主要介绍X5 SPI的功能验证，主要包括环境配置，测试命令执行及测试代码等。
+本小节主要介绍 X5 SPI 的功能验证，主要包括环境配置，测试命令执行及测试代码等。
 
 ### 测试环境准备
 
-确认内核的CONFIG_SPI_SPIDEV为使能状态:
+确认内核的 CONFIG_SPI_SPIDEV 为使能状态:
 
 ```c
 /* arch/arm64/configs/hobot_x5_soc_defconfig */
@@ -112,7 +112,7 @@ CONFIG_SPI_SPIDEV=m
 ...
 ```
 
-确认在当前硬件的DTS内需要测试的SPI控制器节点下创建了一个dummy从设备：
+确认在当前硬件的 DTS 内需要测试的 SPI 控制器节点下创建了一个 dummy 从设备：
 
 ```c
 &spi2 {
@@ -125,7 +125,7 @@ CONFIG_SPI_SPIDEV=m
 ```
 
 ### SPI 内部回环测试
-SPI内部回环测试仅SPI Master支持，其原理是SPI硬件IP的tx fifo将数据发给rx fifo从而形成回环。
+SPI 内部回环测试仅 SPI Master 支持，其原理是 SPI 硬件 IP 的 tx fifo 将数据发给 rx fifo 从而形成回环。
 
 测试命令及结果参考如下：
 
@@ -144,7 +144,7 @@ SPI内部回环测试仅SPI Master支持，其原理是SPI硬件IP的tx fifo将�
 
 ### SPI 外部回环测试
 
-SPI 外部回环测试是指定一个SPI Slave，一个SPI Master，对应线连接进行的测试。 我们基于 RDK X5 的硬件以SPI2作为Slave，SPI1作为Master（使用双片选中的SPI1.1）为例： 修改SPI2 DTS以支持Slave功能：
+SPI 外部回环测试是指定一个 SPI Slave，一个 SPI Master，对应线连接进行的测试。 我们基于 RDK X5 的硬件以 SPI2 作为 Slave，SPI1 作为 Master（使用双片选中的 SPI1.1）为例： 修改 SPI2 DTS 以支持 Slave 功能：
 
 ```c
 &spi2 {
@@ -161,7 +161,7 @@ SPI 外部回环测试是指定一个SPI Slave，一个SPI Master，对应线连
 };
 ```
 
-修改SPI1 DTS以支持Master功能：（SPI1具有两个片选，所以这里我们定义了两个设备子节点，系统正常启动之后，体现在文件系统中，就会有两个设备，/dev/spi1.0 和 /dev/spi1.1）
+修改 SPI1 DTS 以支持 Master 功能：（SPI1 具有两个片选，所以这里我们定义了两个设备子节点，系统正常启动之后，体现在文件系统中，就会有两个设备，/dev/spi1.0 和 /dev/spi1.1）
 
 ```c
 &spi1 {
@@ -183,7 +183,7 @@ SPI 外部回环测试是指定一个SPI Slave，一个SPI Master，对应线连
 };
 ```
 
-测试命令及结果参考如下(以SPI2为Slave，SPI1.1为Master)：
+测试命令及结果参考如下(以 SPI2 为 Slave，SPI1.1 为 Master)：
 
 ```c
 
@@ -231,12 +231,12 @@ root@ubuntu:~#
 ```
 
 :::info 备注
-在进行外部回环测试时，需要先执行SPI Slave程序，再执行SPI Master程序。假如先执行SPI Master程序，后执行SPI Slave程序，可能会由于Master与Slave不同步导致SPI接收数据出现丢失。如果想进行多次测试，可以写脚本多次执行测试程序，来保证Master与Slave之间的同步。
+在进行外部回环测试时，需要先执行 SPI Slave 程序，再执行 SPI Master 程序。假如先执行 SPI Master 程序，后执行 SPI Slave 程序，可能会由于 Master 与 Slave 不同步导致 SPI 接收数据出现丢失。如果想进行多次测试，可以写脚本多次执行测试程序，来保证 Master 与 Slave 之间的同步。
 :::
 
 ## 附录
 
-**附录1 测试用例源码：spidev_tc.c**
+**附录 1 测试用例源码：spidev_tc.c**
 
 ```c
 // Copyright (c) 2024，D-Robotics.
@@ -829,7 +829,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-**附录2 测试用例源码：Makefile**
+**附录 2 测试用例源码：Makefile**
 
 ```shell
 OUT_DIR = $(shell pwd)/_build/

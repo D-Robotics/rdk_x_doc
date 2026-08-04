@@ -11,7 +11,7 @@ import DocScope from '@site/src/components/DocScope';
 <DocScope versions=">= 3.0.0" products="RDK-X3">
 ## RDK X3
 
-本节为您介绍 Horizon Plugin Pytorch 所需的环境依赖条件；建议使用D-Robotics 提供的Docker环境，获取方式可参考 [**开发机环境部署**](../intermediate/environment_config#machine_deploy) 文档内容。
+本节为您介绍 Horizon Plugin Pytorch 所需的环境依赖条件；建议使用 D-Robotics 提供的 Docker 环境，获取方式可参考 [**开发机环境部署**](../intermediate/environment_config#machine_deploy) 文档内容。
 
 |             | gpu                      | cpu         |
 | ----------- | ------------------------ | ----------- |
@@ -28,7 +28,7 @@ import DocScope from '@site/src/components/DocScope';
 
 ## RDK X5
 
-本节为您介绍 Horizon Plugin Pytorch 所需的环境依赖条件；建议使用D-Robotics 提供的Docker环境，获取方式可参考 [**开发机环境部署**](../intermediate/environment_config#machine_deploy) 文档内容。
+本节为您介绍 Horizon Plugin Pytorch 所需的环境依赖条件；建议使用 D-Robotics 提供的 Docker 环境，获取方式可参考 [**开发机环境部署**](../intermediate/environment_config#machine_deploy) 文档内容。
 
 | 依赖         | GPU                       | CPU          |
 |------------- |-------------------------- |------------- |

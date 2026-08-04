@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# API手册
+# API 手册
 
 ```mdx-code-block
 import DocScope from '@site/src/components/DocScope';

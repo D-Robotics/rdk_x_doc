@@ -6,7 +6,7 @@ sidebar_position: 6
 
 Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=17
 
-开发板上安装了`test_mobilenetv1.py` 程序用于测试mobilenet v1图像分类算法功能，该程序读取 `zebra_cls.jpg` 静态图片作为模型的输入，并在命令行终端输出分类结果`cls id: 340 Confidence: 0.991851`
+开发板上安装了`test_mobilenetv1.py` 程序用于测试 mobilenet v1 图像分类算法功能，该程序读取 `zebra_cls.jpg` 静态图片作为模型的输入，并在命令行终端输出分类结果`cls id: 340 Confidence: 0.991851`
 
 
 执行 `test_mobilenetv1.py` 程序
@@ -17,9 +17,9 @@ Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=17
   ```
 
 ### 预期效果
-输出图像分类算法的预测结果，id和confidence。
+输出图像分类算法的预测结果，id 和 confidence。
 
-`zebra_cls.jpg`是一张斑马的图片，按照`ImageNet`数据集的分类，返回结果id为340， 置信度为0.991851。
+`zebra_cls.jpg`是一张斑马的图片，按照`ImageNet`数据集的分类，返回结果 id 为 340， 置信度为 0.991851。
 
 ```shell
 ========== Classification result ==========

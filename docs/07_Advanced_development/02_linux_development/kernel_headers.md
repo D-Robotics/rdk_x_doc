@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # 7.2.5 内核头文件
 
-如果你需要在开发板上编译内核模块或类似的代码，你需要安装 Linux 内核头文件。这些头文件包含Linux内核的各种常量定义、宏定义、函数接口定义和数据结构定义，是完成内核模块代码编译所必须的依赖代码。
+如果你需要在开发板上编译内核模块或类似的代码，你需要安装 Linux 内核头文件。这些头文件包含 Linux 内核的各种常量定义、宏定义、函数接口定义和数据结构定义，是完成内核模块代码编译所必须的依赖代码。
 
 ## 安装
 
@@ -25,13 +25,13 @@ block  crypto  drivers        fs        init     Kconfig  lib     mm        net 
 我们用一个简单的 `Hello World` 内核模块的开发介绍如何使用内核头文件。步骤概要如下:
 
 - 准备程序代码
-- 编写Makefile,完成驱动模块的编译
+- 编写 Makefile,完成驱动模块的编译
 - (可选)对驱动模块进行签名(仅旧版本需要)
 - 测试加载、卸载模块
 - (可选)配置开机自动加载
 
-### 编写Hello World程序
-打开你熟悉的编辑器（比如VIM），创建文件 `hello.c`，输入下面的内容：
+### 编写 Hello World 程序
+打开你熟悉的编辑器（比如 VIM），创建文件 `hello.c`，输入下面的内容：
 ```c
 #include <linux/module.h>
 #include <linux/kernel.h>
@@ -56,8 +56,8 @@ module_exit(hello_exit);
 ```
 模块加载时打印`Hello, World!`, 模块卸载时打印`Goodbye, World!`。
 
-### 编写Makefile
-打开你熟悉的编辑器（比如VIM），创建文件 `Makefile`，输入下面的内容：
+### 编写 Makefile
+打开你熟悉的编辑器（比如 VIM），创建文件 `Makefile`，输入下面的内容：
 ```c
 ifneq ($(KERNELRELEASE),)
 	obj-m := hello.o
@@ -71,9 +71,9 @@ clean:
 	rm -rf *.ko *.o *.mod.o *.mod.c *.symvers  modul* .*.ko.cmd .*.o.cmd .tmp_versions
 endif
 ```
-- `PWD`指定源码路径，即hello.c的路径。
+- `PWD`指定源码路径，即 hello.c 的路径。
 - `KDIR`指定内核源码路径。
-- `KERNELRELEASE`是在内核源码的顶层Makefile里定义的变量。
+- `KERNELRELEASE`是在内核源码的顶层 Makefile 里定义的变量。
 
 保存`Makefile`后，执行`make`命令完成模块的编译，生成`hello.ko`文件。
 ```bash
@@ -92,13 +92,13 @@ make[1]: Leaving directory '/usr/src/linux-headers-6.1.83'
 
 :::info 注意
 - **RDK X5**: 没有启用内核模块签名机制,驱动模块可以直接加载
-- **RDK X3**: 自系统版本3.0.1开始已取消内核模块签名机制,驱动模块可以直接加载
-- **RDK X3 旧版本** (3.0.1之前): 需要使用`hobot-sign-file`命令对驱动模块进行签名后才能加载
+- **RDK X3**: 自系统版本 3.0.1 开始已取消内核模块签名机制,驱动模块可以直接加载
+- **RDK X3 旧版本** (3.0.1 之前): 需要使用`hobot-sign-file`命令对驱动模块进行签名后才能加载
 :::
 
-对于当前版本的RDK X5和RDK X3,编译好的驱动模块可以直接加载使用,无需额外的签名步骤。
+对于当前版本的 RDK X5 和 RDK X3,编译好的驱动模块可以直接加载使用,无需额外的签名步骤。
 
-如果你使用的是RDK X3旧版本(3.0.1之前),需要对模块进行签名:
+如果你使用的是 RDK X3 旧版本(3.0.1 之前),需要对模块进行签名:
 ```bash
 root@ubuntu:~# hobot-sign-file hello.ko
 Sign Kernel Module File Done.
@@ -110,18 +110,18 @@ insmod: ERROR: could not insert module hello.ko: Required key not available
 
 ### 加载模块
 
-加载ko：`insmod hello.ko`
+加载 ko：`insmod hello.ko`
 ```bash
 root@ubuntu:~# insmod hello.ko
 [ 3104.480703] Hello, World!
 ```
-卸载ko：`rmmod hello`
+卸载 ko：`rmmod hello`
 ```bash
 root@ubuntu:~# rmmod hello
 [ 3136.909409] Goodbye, World!
 ```
 
-查看ko是否加载：`lsmod | grep hello`
+查看 ko 是否加载：`lsmod | grep hello`
 ```bash
 root@ubuntu:~# lsmod | grep hello
 hello                  16384  0

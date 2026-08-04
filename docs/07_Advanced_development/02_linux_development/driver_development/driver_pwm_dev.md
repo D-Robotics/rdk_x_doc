@@ -4,11 +4,11 @@ sidebar_position: 8
 
 # PWM 驱动调试指南
 
-X3有两类控制器：一类是标准PWM，有3组，每组三个，共9个，另一类是LPWM，主要用于支持Sensor的同步曝光。
+X3 有两类控制器：一类是标准 PWM，有 3 组，每组三个，共 9 个，另一类是 LPWM，主要用于支持 Sensor 的同步曝光。
 
-- PWM 默认支持频率范围是192MHz到46.8KHz，每组PWM的占空比寄存器RATIO精度为8bit。
-- LPWM 默认支持频率范围是100KHz到24.4Hz，没有占空比寄存器，只有一个高电平持续时间HIGH，HIGH寄存器配置单位是us，最大支持设置高电平为160us，所以LPWM的占空比与频率有关。
-- LPWM是为了Sensor 同步设计的，不是一个通用的PWM，**单纯PWM功能建议使用PWM。**
+- PWM 默认支持频率范围是 192MHz 到 46.8KHz，每组 PWM 的占空比寄存器 RATIO 精度为 8bit。
+- LPWM 默认支持频率范围是 100KHz 到 24.4Hz，没有占空比寄存器，只有一个高电平持续时间 HIGH，HIGH 寄存器配置单位是 us，最大支持设置高电平为 160us，所以 LPWM 的占空比与频率有关。
+- LPWM 是为了 Sensor 同步设计的，不是一个通用的 PWM，**单纯 PWM 功能建议使用 PWM。**
 
 ## 驱动代码
 
@@ -27,7 +27,7 @@ Device Drivers
         ->  Hobot lite PWM controller support
 ```
 
-### DTS节点配置
+### DTS 节点配置
 
 在`hobot-xj3.dtsi`这个文件里面有`pwm`和`lpwm`的配置，一般来讲不需要做任何修改。
 

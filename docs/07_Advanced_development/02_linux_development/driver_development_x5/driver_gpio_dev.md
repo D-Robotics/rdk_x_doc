@@ -2,13 +2,13 @@
 sidebar_position: 5
 ---
 
-# GPIO调试指南
+# GPIO 调试指南
 
-X5 芯片共有308个IO功能管脚，其中129个管脚都可以配置工作在gpio模式下，但是需要注意和其他功能管脚的复用关系。
+X5 芯片共有 308 个 IO 功能管脚，其中 129 个管脚都可以配置工作在 gpio 模式下，但是需要注意和其他功能管脚的复用关系。
 
 ## 管脚查询
 
-IO管脚的复用和配置，以及上电默认状态、复用、驱动能力、上下拉、施密特触发配置和对应管脚的gpio寄存器信息可以在 [datasheets](https://archive.d-robotics.cc/downloads/datasheets/) 查阅《X5 PIN SW Reg-V1.1.xlsx》（以下统称为“表格”）。
+IO 管脚的复用和配置，以及上电默认状态、复用、驱动能力、上下拉、施密特触发配置和对应管脚的 gpio 寄存器信息可以在 [datasheets](https://archive.d-robotics.cc/downloads/datasheets/) 查阅《X5 PIN SW Reg-V1.1.xlsx》（以下统称为“表格”）。
 
 ### 示例
 
@@ -17,35 +17,35 @@ IO管脚的复用和配置，以及上电默认状态、复用、驱动能力、
 **功能复用寄存器说明：**
 
 - 打开表格，选择  `PIN Mux List` 的数据表。
-- 第B列是PinName，找到`LSIO_UART3_RXD`所在的行，第F列表示默认function，为`LSIO_GPIO0_PIN10`，即功能为GPIO，GPIO名为`LSIO_GPIO0_PIN10`。第I, K, M, O列表示每种function对应的功能，如下图所示：
+- 第 B 列是 PinName，找到`LSIO_UART3_RXD`所在的行，第 F 列表示默认 function，为`LSIO_GPIO0_PIN10`，即功能为 GPIO，GPIO 名为`LSIO_GPIO0_PIN10`。第 I, K, M, O 列表示每种 function 对应的功能，如下图所示：
 ![image-LSIO_UART3_RXD_func](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/LSIO_UART3_RXD_func.png)
 
-- 配置PIN功能：选择`LSIO PIN Control Register`数据表，如下图所示：
+- 配置 PIN 功能：选择`LSIO PIN Control Register`数据表，如下图所示：
 ![image-LSIO_UART3_RXD_mux](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/LSIO_UART3_RXD_mux.png)
     - 数据表的第一行记录了寄存器的基地址，也就是`0x34180000`；
-    - 数据表的第A列记录了各个寄存器的偏移；
-    - 数据表的第G列描述了寄存器的功能；
-    - 在数据表G列找到“`lsio_uart3_rxd PIN mux selector`”所在的行，可以看到`LSIO_UART3_RXD`的`PIN mux`寄存器偏移为`0x84`，完整地址可由`基地址 + 偏移`得到：`0x34180000 + 0x84 = 0x34180084`；
-    - 找到以上配置项后，就可以设置对应PIN的function，Function[x]代表了如果想要配置为该功能，需要在寄存器内的对应偏移写入对应的[x]。例如在寄存器`0x34180084`的`bit20-21`置为`0x0`，表示`LSIO_UART3_RXD`引脚被配置为`uart3 rx`功能，也就是`Function 0`；配置为`0x1`，表示`LSIO_UART3_RXD`引脚被配置为`i2c5 scl`功能，也就是`Function 1`；配置为`0x2`，表示`LSIO_UART3_RXD`引脚被配置为`GPIO`功能，也就是`Function 2`；
+    - 数据表的第 A 列记录了各个寄存器的偏移；
+    - 数据表的第 G 列描述了寄存器的功能；
+    - 在数据表 G 列找到“`lsio_uart3_rxd PIN mux selector`”所在的行，可以看到`LSIO_UART3_RXD`的`PIN mux`寄存器偏移为`0x84`，完整地址可由`基地址 + 偏移`得到：`0x34180000 + 0x84 = 0x34180084`；
+    - 找到以上配置项后，就可以设置对应 PIN 的 function，Function[x]代表了如果想要配置为该功能，需要在寄存器内的对应偏移写入对应的[x]。例如在寄存器`0x34180084`的`bit20-21`置为`0x0`，表示`LSIO_UART3_RXD`引脚被配置为`uart3 rx`功能，也就是`Function 0`；配置为`0x1`，表示`LSIO_UART3_RXD`引脚被配置为`i2c5 scl`功能，也就是`Function 1`；配置为`0x2`，表示`LSIO_UART3_RXD`引脚被配置为`GPIO`功能，也就是`Function 2`；
 
-- 配置PIN属性：选择`LSIO PIN Control Register`数据表，如下图所示：
+- 配置 PIN 属性：选择`LSIO PIN Control Register`数据表，如下图所示：
 ![image-LSIO_UART3_RXD_IO_ctr_no_ms](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/LSIO_UART3_RXD_IO_ctr_no_ms.png)
     - 数据表的第一行记录了寄存器的基地址，也就是`0x34180000`；
-    - 数据表的第A列记录了各个寄存器的偏移；
-    - 数据表的第G列描述了寄存器的功能；
-    - 在数据表G列找到“`lsio_uart3_rxd pull up enable`”所在的行，可以看到`LSIO_UART3_RXD`的PU/PD/施密特开关/PIN驱动力的寄存器偏移为`0x3C`，完整地址可由基地址 + 偏移得到：`0x34180000 + 0x3C = 0x3418003C`;
-    - PIN的驱动力具体数值请参考`Description for GPlO App`.数据表的驱动力表格;
-    - PIN的电源域请搜索`mode select`并在G列确认当前寄存器控制的PIN包含了`LSIO_UART3_RXD`，可以看到控制PIN电源域的寄存器偏移为`0x38`，完整地址可由`基地址 + 偏移`得到：`0x34180000 + 0x38 = 0x34180038`如下图所示：
+    - 数据表的第 A 列记录了各个寄存器的偏移；
+    - 数据表的第 G 列描述了寄存器的功能；
+    - 在数据表 G 列找到“`lsio_uart3_rxd pull up enable`”所在的行，可以看到`LSIO_UART3_RXD`的 PU/PD/施密特开关/PIN 驱动力的寄存器偏移为`0x3C`，完整地址可由基地址 + 偏移得到：`0x34180000 + 0x3C = 0x3418003C`;
+    - PIN 的驱动力具体数值请参考`Description for GPlO App`.数据表的驱动力表格;
+    - PIN 的电源域请搜索`mode select`并在 G 列确认当前寄存器控制的 PIN 包含了`LSIO_UART3_RXD`，可以看到控制 PIN 电源域的寄存器偏移为`0x38`，完整地址可由`基地址 + 偏移`得到：`0x34180000 + 0x38 = 0x34180038`如下图所示：
     ![image-LSIO_UART3_RXD_IO_ctr_ms](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/LSIO_UART3_RXD_IO_ctr_ms.png)
 
 - 配置寄存器时，建议先把该值先读出来，然后只修改所需寄存器比特后再写回。
 
-**GPIO控制和数据寄存器：**
+**GPIO 控制和数据寄存器：**
 
-- 在表格的`DW_apb_gpio8_mem_map_v1.0`和`DW_apb_gpio32_mem_map_v1.0`数据表，描述了引脚对应的GPIO方向寄存器和数值寄存器，如下图（`DW_apb_gpio32_mem_map_v1.0`）所示：
+- 在表格的`DW_apb_gpio8_mem_map_v1.0`和`DW_apb_gpio32_mem_map_v1.0`数据表，描述了引脚对应的 GPIO 方向寄存器和数值寄存器，如下图（`DW_apb_gpio32_mem_map_v1.0`）所示：
 ![image-LSIO_UART3_RXD_gpio_reg](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/LSIO_UART3_RXD_gpio_reg.png)
 
-- 例如引脚`LSIO_UART3_RXD`对应的GPIO为`LSIO_GPIO0_PIN10`，如上图所示，`LSIO_GPIO0`的控制器的基地址为`0x34120000`，那么数值寄存器地址就是`0x34120000`，方向寄存器地址就是`0x34120004`。`LSIO_UART3_RXD`引脚在这两个寄存器中对应的bit偏移为GPIO的序号。引脚`LSIO_UART3_RXD`所对应的GPIO为`LSIO_GPIO0_PIN10`，那么bit偏移就是10。
+- 例如引脚`LSIO_UART3_RXD`对应的 GPIO 为`LSIO_GPIO0_PIN10`，如上图所示，`LSIO_GPIO0`的控制器的基地址为`0x34120000`，那么数值寄存器地址就是`0x34120000`，方向寄存器地址就是`0x34120004`。`LSIO_UART3_RXD`引脚在这两个寄存器中对应的 bit 偏移为 GPIO 的序号。引脚`LSIO_UART3_RXD`所对应的 GPIO 为`LSIO_GPIO0_PIN10`，那么 bit 偏移就是 10。
 
 ## 驱动代码
 
@@ -59,22 +59,22 @@ GPIO_DWAPB
 
 ![image-GPIO_MENUCONFIG](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/GPIO_MENUCONFIG.png)
 
-### 内核DTS配置
+### 内核 DTS 配置
 
-X5 GPIO控制器的设备树定义位于SDK包的kernel文件夹下的arch/arm64/boot/dts/hobot/x5.dtsi文件内。
+X5 GPIO 控制器的设备树定义位于 SDK 包的 kernel 文件夹下的 arch/arm64/boot/dts/hobot/x5.dtsi 文件内。
 
 :::info 备注
-x5.dtsi中的节点主要声明SoC共有特性，和具体电路板无关，一般情况下不用修改。
+x5.dtsi 中的节点主要声明 SoC 共有特性，和具体电路板无关，一般情况下不用修改。
 :::
 
-## GPIO使用
+## GPIO 使用
 
 ### Kernel Space
 
-#### DTS配置
+#### DTS 配置
 
-X5所有引脚的GPIO配置位于SDK包的kernel文件夹下路径为`arch/arm64/boot/dts/hobot/pinmux-gpio.dtsi`的文件内。
-用户需要配置特定引脚为GPIO功能时，可以直接引用预定义GPIO配置：
+X5 所有引脚的 GPIO 配置位于 SDK 包的 kernel 文件夹下路径为`arch/arm64/boot/dts/hobot/pinmux-gpio.dtsi`的文件内。
+用户需要配置特定引脚为 GPIO 功能时，可以直接引用预定义 GPIO 配置：
 
 ```c
 /* arch/arm64/boot/dts/hobot/hobot/x5-som.dtsi */
@@ -111,19 +111,19 @@ int gpio_to_irq(unsigned int gpio);
 
 #### X5 GPIO IRQ
 
-X5 GPIO共有129个pin，所有的GPIO均可以被配置为中断功能。
+X5 GPIO 共有 129 个 pin，所有的 GPIO 均可以被配置为中断功能。
 
 :::info 备注 
-X5的GPIO控制器支持上升沿/下降沿/高电平/低电平作为中断触发条件，每个作为中断的GPIO的触发条件可以独立配置;
+X5 的 GPIO 控制器支持上升沿/下降沿/高电平/低电平作为中断触发条件，每个作为中断的 GPIO 的触发条件可以独立配置;
 
-X5 GPIO在Kernel Space的接口都是Linux的标准接口，更多使用方法请参考Documentation/driver-api/gpio/consumer.rst。
+X5 GPIO 在 Kernel Space 的接口都是 Linux 的标准接口，更多使用方法请参考 Documentation/driver-api/gpio/consumer.rst。
 :::
 
 ### User Space{#user-space}
 
 #### 控制接口
 
-<font color="red">注意：</font>X5使用的Linux-V6.1基线中，Linux已经将GPIO的sysfs节点标记为“Obsolete”，详情请参考Linux文档
+<font color="red">注意：</font>X5 使用的 Linux-V6.1 基线中，Linux 已经将 GPIO 的 sysfs 节点标记为“Obsolete”，详情请参考 Linux 文档
 
 ```bash
 /sys/class/gpio/export # 用户空间可以通过写入gpio号申请将gpio的控制权导出到用户空间，比如 echo 356 > export
@@ -133,15 +133,15 @@ X5 GPIO在Kernel Space的接口都是Linux的标准接口，更多使用方法�
 
 #### 调用接口
 
-使用export导出gpio的控制权以后会有路径`/sys/class/gpio/gpio356/`，路径下有如下属性：
+使用 export 导出 gpio 的控制权以后会有路径`/sys/class/gpio/gpio356/`，路径下有如下属性：
 
--   direction：表示GPIO端口方向，读取为"in"或"out"，写入"in"或者"out"可以设置输入或输出
--   value：表示GPIO的电平，0为低电平，1为高电平，如果GPIO配置为输出，则value值可写
--   edge：表示中断触发方式，有"none" "rising" "falling" "both" 4种类型，"none"表示GPIO不为中断引脚，"rising"表示引脚为上升沿触发的中断，"falling"表示引脚为下降沿触发的中断，"both"表示引脚为边沿触发的中断。
+-   direction：表示 GPIO 端口方向，读取为"in"或"out"，写入"in"或者"out"可以设置输入或输出
+-   value：表示 GPIO 的电平，0 为低电平，1 为高电平，如果 GPIO 配置为输出，则 value 值可写
+-   edge：表示中断触发方式，有"none" "rising" "falling" "both" 4 种类型，"none"表示 GPIO 不为中断引脚，"rising"表示引脚为上升沿触发的中断，"falling"表示引脚为下降沿触发的中断，"both"表示引脚为边沿触发的中断。
 
 #### 调用示例
 
-以下示例演示导出LSIO_UART3_RXD管脚，设置为输出模式，输出高电平，最后反导出。
+以下示例演示导出 LSIO_UART3_RXD 管脚，设置为输出模式，输出高电平，最后反导出。
 
 ```bash
 echo 356 > /sys/class/gpio/export
@@ -153,21 +153,21 @@ echo 356 > /sys/class/gpio/unexport
 
 #### 调试接口
 
-如果在内核配置中打开了Linux Kernel的CONFIG_DEBUG_FS选项，并且挂载了debugfs文件系统，内核已提供了GPIO的debugfs接口。
+如果在内核配置中打开了 Linux Kernel 的 CONFIG_DEBUG_FS 选项，并且挂载了 debugfs 文件系统，内核已提供了 GPIO 的 debugfs 接口。
 
-首先，检查内核是否已经挂载了debugfs，如果下列命令输出不为空，则代表当前已挂载debugfs：
+首先，检查内核是否已经挂载了 debugfs，如果下列命令输出不为空，则代表当前已挂载 debugfs：
 
 ```
 mount | grep debugfs
 ```
 
-如果输出为空，则执行以下命令挂载debugfs：
+如果输出为空，则执行以下命令挂载 debugfs：
 
 ```
 mount -t debugfs none /sys/kernel/debug
 ```
 
-确保debugfs已挂载后则可以通过如下节点查看GPIO的申请列表。
+确保 debugfs 已挂载后则可以通过如下节点查看 GPIO 的申请列表。
 
 ```bash
 # cat /sys/kernel/debug/gpio
@@ -201,26 +201,26 @@ gpiochip0: GPIOs 511-511, parent: platform/31040000.aon_iomuxc, 31040000.aon_iom
 ```
 
 :::info 备注  
-上述输出仅为示例，实际输出与板端实际的DTS配置相关；
+上述输出仅为示例，实际输出与板端实际的 DTS 配置相关；
 
-X5 GPIO在User Space的接口都是Linux的标准接口，更多使用方法请参考Documentation/gpio/sysfs.txt。
+X5 GPIO 在 User Space 的接口都是 Linux 的标准接口，更多使用方法请参考 Documentation/gpio/sysfs.txt。
 :::
 
-## Linux GPIO序号与芯片Pin脚的映射关系
+## Linux GPIO 序号与芯片 Pin 脚的映射关系
 
-<font color="red">注意：</font>Linux内的GPIO序号为纯软件概念，会随着软件改变而发生变化，GPIO序号与芯片Pin脚没有物理意义上的绑定关系；
+<font color="red">注意：</font>Linux 内的 GPIO 序号为纯软件概念，会随着软件改变而发生变化，GPIO 序号与芯片 Pin 脚没有物理意义上的绑定关系；
 
-推荐用户使用<font color="red">hb_gpioinfo工具</font>，查看当前开发板的的PinName和PinNum和PinFunc的对应关系。
+推荐用户使用<font color="red">hb_gpioinfo 工具</font>，查看当前开发板的的 PinName 和 PinNum 和 PinFunc 的对应关系。
 
-如果板卡上还没有hb_gpioinfo工具，可以通过apt更新hobot-io；
+如果板卡上还没有 hb_gpioinfo 工具，可以通过 apt 更新 hobot-io；
 
-**hb_gpioinfo使用实例**
+**hb_gpioinfo 使用实例**
 
-PinName：指的是Soc上的管脚名字，原理图上X5 Soc管脚命名一致
+PinName：指的是 Soc 上的管脚名字，原理图上 X5 Soc 管脚命名一致
 
-PinNum：指的是X5实际的对应的管脚gpio编号
+PinNum：指的是 X5 实际的对应的管脚 gpio 编号
 
-PinFunc：指的是X5实际的设备树中已经使用的管脚对应的复用功能 查看PinFunc时需要注意,如果为Default时，代表设备树中没有使用该复用功能,需要查看pinlist的默认功能是什么
+PinFunc：指的是 X5 实际的设备树中已经使用的管脚对应的复用功能 查看 PinFunc 时需要注意,如果为 Default 时，代表设备树中没有使用该复用功能,需要查看 pinlist 的默认功能是什么
 
 
 ```bash

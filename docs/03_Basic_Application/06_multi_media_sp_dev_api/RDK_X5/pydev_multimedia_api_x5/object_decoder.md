@@ -2,11 +2,11 @@
 sidebar_position: 4
 ---
 
-# Decoder对象
+# Decoder 对象
 
 ## 模块描述
 
-Decoder对象实现了对视频数据的解码功能，包含了`decode`、`set_img`、`get_img`、`close`等几种方法，详细说明如下：
+Decoder 对象实现了对视频数据的解码功能，包含了`decode`、`set_img`、`get_img`、`close`等几种方法，详细说明如下：
 
 ## 基础规格
 - RDK 支持 H.265/HEVC 编码器 、 H.264/AVC 编码器 、 H.265/HEVC 解码器 、 H.264/AVC 解码器 、 JPEG 与 MJPEG 编／解码器 。
@@ -28,7 +28,7 @@ Decoder对象实现了对视频数据的解码功能，包含了`decode`、`set_
 
 <font color='Blue'>【功能描述】</font>
 
-使能decode解码模块，并对视频文件进行解码
+使能 decode 解码模块，并对视频文件进行解码
 
 <font color='Blue'>【函数声明】</font>  
 
@@ -41,10 +41,10 @@ Decoder.decode(file, video_chn, decode_type, width, height)
 | 参数名称  | 描述           | 取值范围                    |
 | --------- | --------------- | ------------------- |
 | file      | 需要解码的文件名     |       无       |
-| video_chn | 指定视频解码器的通道号   | 范围0~31 |
-| decode_type | 视频解码类型  | 范围1~3，分别对应`H264`、`H265`、`MJPEG` |
-| width     | 输入解码模块的图像宽度      | 不超过4096              |
-| height    | 输入解码模块的图像高度      | 不超过4096              |
+| video_chn | 指定视频解码器的通道号   | 范围 0~31 |
+| decode_type | 视频解码类型  | 范围 1~3，分别对应`H264`、`H265`、`MJPEG` |
+| width     | 输入解码模块的图像宽度      | 不超过 4096              |
+| height    | 输入解码模块的图像高度      | 不超过 4096              |
 
 <font color='Blue'>【使用方法】</font> 
 
@@ -58,7 +58,7 @@ ret = dec.decode("encode.h264", 0, 1, 1920, 1080)
 
  <font color='Blue'>【返回值】</font>  
 
-返回值为2个成员的`list`数据
+返回值为 2 个成员的`list`数据
 
 | 返回值                | 定义描述      |
 | ---------------- | ----------- |
@@ -193,7 +193,7 @@ Decoder.set_img(img, chn, eos)
 | 参数名称 | 定义描述         | 取值范围 |
 | -------- | ------------- | --- | 
 | img      | 需要解码的单帧数据 | 无 |
-| chn      | 解码器通道号      | 范围0~31 |
+| chn      | 解码器通道号      | 范围 0~31 |
 | eos      | 解码数据是否结束   | 0：未结束，1：结束 |
 
 <font color='Blue'>【使用方法】</font> 

@@ -77,16 +77,16 @@ Place the mouse in the display window and press 'q' to quit
 | 参数 | 说明 | 类型 | 默认值 |
 |------|------|------|--------|
 | `--model-path` | BPU 量化模型路径（`.bin`） | str | `/app/model/basic/yolov5s_672x672_nv12.bin` |
-| `--priority` | 推理优先级（0~255，255最高） | int | `0` |
+| `--priority` | 推理优先级（0~255，255 最高） | int | `0` |
 | `--bpu-cores` | BPU 核心索引列表（如 `0 1`） | int list | `[0]` |
 | `--label-file` | 类别标签路径 | str | `coco_classes.names` |
-| `--resize-type` | 预处理缩放方式（0直接缩放，1信箱缩放） | int | `1` |
+| `--resize-type` | 预处理缩放方式（0 直接缩放，1 信箱缩放） | int | `1` |
 | `--classes-num` | 检测类别数 | int | `80` |
 | `--nms-thres` | NMS IoU 阈值 | float | `0.45` |
 | `--score-thres` | 置信度阈值 | float | `0.25` |
 
 ### 软件架构说明
-本部分介绍usb 摄像头示例的软件架构和工作流程，说明程序从模型加载到结果输出的完整执行过程，帮助开发者理解代码的整体结构和数据流向。
+本部分介绍 usb 摄像头示例的软件架构和工作流程，说明程序从模型加载到结果输出的完整执行过程，帮助开发者理解代码的整体结构和数据流向。
 
 <center>
 ![software_arch](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_09_usb_camera_software_arch.png)
@@ -148,7 +148,7 @@ Place the mouse in the display window and press 'q' to quit
 
 11. `filter_classification(cls_output, conf_thres)`
 
-      过滤预测结果，输入：分类输出、置信度阈值, 返回：置信度、类别ID、有效索引
+      过滤预测结果，输入：分类输出、置信度阈值, 返回：置信度、类别 ID、有效索引
 
 12. `NMS(dbboxes, scores, ids, nms_thresh)`
 
@@ -160,7 +160,7 @@ Place the mouse in the display window and press 'q' to quit
 
 14. `draw_boxes(img, boxes, ids, scores, coco_names, rdk_colors)`
 
-    绘制检测结果，输入：图像、检测框、类别ID、置信度、类别列表、颜色映射
+    绘制检测结果，输入：图像、检测框、类别 ID、置信度、类别列表、颜色映射
 
 15. `cv2.imshow(...)` / `cv2.waitKey(1)`  
     显示与按键退出

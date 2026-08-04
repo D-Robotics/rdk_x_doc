@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-# SPI应用
+# SPI 应用
 
 ```mdx-code-block
 import DocScope from '@site/src/components/DocScope';
@@ -10,23 +10,23 @@ import DocScope from '@site/src/components/DocScope';
 
 <DocScope versions=">= 3.0.0" products="RDK-X3">
 
-RDK X3 在 40PIN 上物理管脚 `19, 21, 23, 24`引出了芯片的 `SPI2` 总线，支持一个片选，IO电压3.3V。
+RDK X3 在 40PIN 上物理管脚 `19, 21, 23, 24`引出了芯片的 `SPI2` 总线，支持一个片选，IO 电压 3.3V。
 
 </DocScope>
 
 <DocScope versions=">= 3.5.0" products="RDK-X5">
 
-RDK X5 在 40PIN 上物理管脚 `19, 21, 23, 24, 26`引出了芯片的 `SPI1` 总线，支持两个片选，IO电压3.3V。
+RDK X5 在 40PIN 上物理管脚 `19, 21, 23, 24, 26`引出了芯片的 `SPI1` 总线，支持两个片选，IO 电压 3.3V。
 
 </DocScope>
 
-请参阅 `/app/40pin_samples/test_spi.py`了解如何使用SPI的详细信息。
+请参阅 `/app/40pin_samples/test_spi.py`了解如何使用 SPI 的详细信息。
 
 ## 回环测试
 把 MISO 和 MOSI 在硬件上进行连接，然后运行 SPI 测试程序，进行写和读操作，预期结果是读出的数据要完全等于写入的数据
 
 ### 硬件连接
-把MISO和MOSI通过跳线帽直接硬件上连接在一起：
+把 MISO 和 MOSI 通过跳线帽直接硬件上连接在一起：
 
 ![image-20220512101915524](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/01_40pin_user_sample/image/40pin_user_sample/image-20220512101915524.png)
 
@@ -34,7 +34,7 @@ RDK X5 在 40PIN 上物理管脚 `19, 21, 23, 24, 26`引出了芯片的 `SPI1` �
 
 <DocScope versions=">= 3.0.0" products="RDK-X3">
 - 运行 `python3 /app/40pin_samples/test_spi.py`
-- 从打印的spi控制器中选择总线号和片选号作为输入选项，例如选择测试 `spidev0.0`，则`bus num` 和 `cs num`都是`0`，按回车键确认：
+- 从打印的 spi 控制器中选择总线号和片选号作为输入选项，例如选择测试 `spidev0.0`，则`bus num` 和 `cs num`都是`0`，按回车键确认：
 
 ```
 List of enabled spi controllers:
@@ -56,7 +56,7 @@ Please input SPI cs num:0
 ```
 </DocScope>
 
-- 程序正确运行起来后会持续打印 `0x55 0xAA`，如果打印的是 `0x00 0x00`，那么就说明spi的回环测试失败。
+- 程序正确运行起来后会持续打印 `0x55 0xAA`，如果打印的是 `0x00 0x00`，那么就说明 spi 的回环测试失败。
 
 ```
 Starting demo now! Press CTRL+C to exit

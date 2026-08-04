@@ -2,27 +2,27 @@
 sidebar_position: 12
 ---
 
-# LCD驱动调试指南
+# LCD 驱动调试指南
 
 ## 1.规格参数
 
-X5的MIPI-DSI接口规格如下：
+X5 的 MIPI-DSI 接口规格如下：
 
 - 最大支持四路数据通路
 - 每一路最高速率为<font color="red">2.5Gbps</font>
-- 支持<font color="red">Non-Burst-Sync-Pulse</font>同步脉冲模式和<font color="red">Non-Burst-Sync-Even</font>同步事件模式以及Burst突发模式
+- 支持<font color="red">Non-Burst-Sync-Pulse</font>同步脉冲模式和<font color="red">Non-Burst-Sync-Even</font>同步事件模式以及 Burst 突发模式
 - 支持<font color="red">MIPI_DSI_CLOCK_NON_CONTINUOUS</font>非连续时钟模式和<font color="red">MIPI_DSI_CLOCK_CONTINUOUS</font>连续时钟模式
 
 ## 2.调试流程
 在添加新屏幕驱动之前，需要确定以下信息：
 
-屏幕的时序，即hbp、hfp、hsa、vbp、vfp、vsa
+屏幕的时序，即 hbp、hfp、hsa、vbp、vfp、vsa
 
 屏幕的初始化序列
 
-屏幕支持的传输模式，是burst还是non-burst
+屏幕支持的传输模式，是 burst 还是 non-burst
 
-屏幕支持的时钟模式，是continuous还是non-continuous
+屏幕支持的时钟模式，是 continuous 还是 non-continuous
 
 以`JC050HD134`这款屏幕为例，从厂家提供的配置中得知以下信息：
 
@@ -39,13 +39,13 @@ X5的MIPI-DSI接口规格如下：
 #define HSA 20
 ```
 ### Kernel 驱动层面
-kernel里面有一份已经调试好的参考代码：panel-atk-md0550.c，后续的屏幕驱动可以从这份驱动上面派生出来。
+kernel 里面有一份已经调试好的参考代码：panel-atk-md0550.c，后续的屏幕驱动可以从这份驱动上面派生出来。
 
-将kernel/drivers/gpu/drm/panel/panel-atk-md0550.c拷贝一份，并重命名为panel-jc-050hd134.c。
+将 kernel/drivers/gpu/drm/panel/panel-atk-md0550.c 拷贝一份，并重命名为 panel-jc-050hd134.c。
 
-以下修改都是基于panel-jc-050hd134.c。
+以下修改都是基于 panel-jc-050hd134.c。
 
-修改的panel_simple_dsi_driver的name属性字段为panel-jc-050hd134：
+修改的 panel_simple_dsi_driver 的 name 属性字段为 panel-jc-050hd134：
 ```
 static struct mipi_dsi_driver panel_simple_dsi_driver = {
 	.driver =
@@ -59,7 +59,7 @@ static struct mipi_dsi_driver panel_simple_dsi_driver = {
 };
 ```
 
-修改drm_display_mode结构体：
+修改 drm_display_mode 结构体：
 ```
 static const struct drm_display_mode jc_050hd134_mode = { // 修改结构体名字为 jc_050hd134_mode
 	.clock	     = 65000, //像素时钟 单位为khz，计算公式为：fps * (htotal + vtotal)
@@ -75,7 +75,7 @@ static const struct drm_display_mode jc_050hd134_mode = { // 修改结构体名�
 };
 ```
 
-修改panel_desc_dsi结构体：
+修改 panel_desc_dsi 结构体：
 ```
 static const struct panel_desc_dsi jc_050hd134 = { //结构体重命名为 jc_050hd134
 	.desc =
@@ -97,7 +97,7 @@ static const struct panel_desc_dsi jc_050hd134 = { //结构体重命名为 jc_05
 };
 ```
 
-修改dsi_of_match，为了绑定设备树做准备：
+修改 dsi_of_match，为了绑定设备树做准备：
 ```
 static const struct of_device_id dsi_of_match[] = {
 	{.compatible = "jc-050hd134", .data = &jc_050hd134},
@@ -107,7 +107,7 @@ static const struct of_device_id dsi_of_match[] = {
 MODULE_DEVICE_TABLE(of, dsi_of_match);
 ```
 
-修改panel_simple_dsi_init函数，这个函数实际上调用dsi_dcs_write_seq这个函数往面板里面写入mipi初始化序列。
+修改 panel_simple_dsi_init 函数，这个函数实际上调用 dsi_dcs_write_seq 这个函数往面板里面写入 mipi 初始化序列。
 
 如果您从屏幕厂商拿到的初始化参数形如下面这种：
 ```
@@ -178,16 +178,16 @@ panel-init-sequence-zero = [
 	dsi_dcs_write_seq(dsi, 0xb1, 0x48, 0x12, 0x72, 0x09, 0x32, 0x54, 0x71, 0x71, 0x57, 0x47);
 ```
 
-在这里，我们以第一组序列39 00 04 B9 FF 83 94为例，进行解释：
+在这里，我们以第一组序列 39 00 04 B9 FF 83 94 为例，进行解释：
 
-39 表示本组初始化序列是按照MIPI_DSI_DCS_LONG_WRITE (0x39)数据类型写入，转换为驱动代码时不需要填写，会根据本组参数长度自动生成
-00 表示本次写入之后，睡眠0ms，可以调用msleep(ms)函数实现
+39 表示本组初始化序列是按照 MIPI_DSI_DCS_LONG_WRITE (0x39)数据类型写入，转换为驱动代码时不需要填写，会根据本组参数长度自动生成
+00 表示本次写入之后，睡眠 0ms，可以调用 msleep(ms)函数实现
 04 标识本次写入序列的长度，会自动生成不用填写
 后续的就是初始化序列了
 
-对于上电-复位时序有要求的屏幕，可以修改panel_simple_prepare和panel_simple_unprepare这两个函数中的gpio行为，这两个函数分别对应初始化和反初始化状态。
+对于上电-复位时序有要求的屏幕，可以修改 panel_simple_prepare 和 panel_simple_unprepare 这两个函数中的 gpio 行为，这两个函数分别对应初始化和反初始化状态。
 
-修改kernel/drivers/gpu/drm/panel/Kconfig和kernel/drivers/gpu/drm/panel/Makefile
+修改 kernel/drivers/gpu/drm/panel/Kconfig 和 kernel/drivers/gpu/drm/panel/Makefile
 
 Kconfig:
 ```
@@ -210,9 +210,9 @@ obj-$(CONFIG_DRM_PANEL_JC_050HD134) += panel-jc-050hd134.o
 
 ### Kernel 设备树层面
 
-在板级设备树，此处以kernel/arch/arm64/boot/dts/hobot/x5-evb.dts为例
+在板级设备树，此处以 kernel/arch/arm64/boot/dts/hobot/x5-evb.dts 为例
 
-在mipi_dsi0节点添加下列属性：
+在 mipi_dsi0 节点添加下列属性：
 ```
 &mipi_dsi0 {
 
@@ -237,7 +237,7 @@ obj-$(CONFIG_DRM_PANEL_JC_050HD134) += panel-jc-050hd134.o
 };
 ```
 
-添加dsi_backlight节点：
+添加 dsi_backlight 节点：
 ```
 &dsi_backlight {
 	status = "okay";
@@ -247,40 +247,40 @@ obj-$(CONFIG_DRM_PANEL_JC_050HD134) += panel-jc-050hd134.o
 ```
 
 ## 3.编译
-请先参考7.2.1章搭建好编译环境，并能成功编译出镜像之后再做下面操作！
+请先参考 7.2.1 章搭建好编译环境，并能成功编译出镜像之后再做下面操作！
 
-执行`./mk_kernel.sh menuconfig`进入内核的配置菜单，按照以下路径进入Panels编译选项：
+执行`./mk_kernel.sh menuconfig`进入内核的配置菜单，按照以下路径进入 Panels 编译选项：
 ```
 Device Drivers  --->
     Graphics support  --->
         Display Panels  --->
 ```
-找到JC 050HD134 panel，按下空格，将其作为模块编译。然后保存配置并退出。
+找到 JC 050HD134 panel，按下空格，将其作为模块编译。然后保存配置并退出。
 
 执行`./mk_kernel.sh`编译内核，在`deploy/kernel/modules/lib/modules/6.1.83/kernel/drivers/gpu/drm/panel`目录下可以找到对应的驱动文件`panel-jc-050hd134.ko`
 
 执行`./mk_deb.sh hobot-dtb`,`./mk_deb.sh hobot-boot`,`./mk_deb.shhobot-kernel-headers`在`deploy/deb_pkgs/`目录下得到`hobot-dtb*.dtb`，`hobot-boot*.dtb`，`hobot-kernel-headers*.dtb`
 
-这三个deb包可以直接传给设备安装，更新设备上的设备树，内核及驱动文件，内核头文件，也可以执行`./pack_image.sh`编进文件系统中
+这三个 deb 包可以直接传给设备安装，更新设备上的设备树，内核及驱动文件，内核头文件，也可以执行`./pack_image.sh`编进文件系统中
 
 ## 4.测试
 
-RDK X5上电后会加载显示相关驱动，显示ubuntu桌面，需要打开`/etc/init.d/S70loadko`，把`modprobe panel-jc-050hd134`加到`modprobe vio_n2d`前
+RDK X5 上电后会加载显示相关驱动，显示 ubuntu 桌面，需要打开`/etc/init.d/S70loadko`，把`modprobe panel-jc-050hd134`加到`modprobe vio_n2d`前
 
-由于RDK X5 系统默认采用HDMI输出，需要通过命令切换到MIPI DSI显示方式。
+由于 RDK X5 系统默认采用 HDMI 输出，需要通过命令切换到 MIPI DSI 显示方式。
 ```bash
 mv /etc/X11/xorg.conf.d/xorg_dsi_ignore.conf /etc/X11/xorg.conf.d/xorg_dsi_ignore.conf.disable
 mv /etc/X11/xorg.conf.d/xorg_hdmi_ignore.conf.disable /etc/X11/xorg.conf.d/xorg_hdmi_ignore.conf
 ```
-也可以通过srpi-config来选择输出方式，可以参考 [Dsiplay Chose DSI or HDMI](../../../System_configuration/srpi-config#display-options) 章节
+也可以通过 srpi-config 来选择输出方式，可以参考 [Dsiplay Chose DSI or HDMI](../../../System_configuration/srpi-config#display-options) 章节
 
-重启设备，就可以在LCD屏上看到系统桌面桌面了
+重启设备，就可以在 LCD 屏上看到系统桌面桌面了
 
-如果LCD未显示，请逐步确认以下内容
+如果 LCD 未显示，请逐步确认以下内容
 
 1，该款屏幕是否有背光或者控制芯片，相关的驱动有没有加载成功；
 
-2，确认DRM，MIPI驱动是否加载成功，使用`dmesg | grep drm`；
+2，确认 DRM，MIPI 驱动是否加载成功，使用`dmesg | grep drm`；
 ```
 root@ubuntu:~# dmesg | grep drm
 [    6.717478] systemd[1]: Starting Load Kernel Module drm...
@@ -295,11 +295,11 @@ root@ubuntu:~# dmesg | grep drm
 [   13.678810] [drm] Initialized vs-drm 1.0.0 20191101 for 3e000000.disp_apb:display-subsystem on minor 0
 ```
 
-`vs-drm 3e000000.disp_apb:display-subsystem: bound 3e060000.mipi_dsi0 (ops dsi_component_ops [vs_drm])`表示mipi_dsi加载成功。
+`vs-drm 3e000000.disp_apb:display-subsystem: bound 3e060000.mipi_dsi0 (ops dsi_component_ops [vs_drm])`表示 mipi_dsi 加载成功。
 
 `[drm] Initialized vs-drm 1.0.0 20191101 for 3e000000.disp_apb:display-subsystem on minor 0`表示显示驱动加载成功。
 
-3，执行`modetest -M vs-drm -c`查看connectors的状态：
+3，执行`modetest -M vs-drm -c`查看 connectors 的状态：
 ```
 root@ubuntu:~# modetest -M vs-drm -c
 Connectors:
@@ -335,22 +335,22 @@ id      encoder status          name            size (mm)       modes   encoders
 
 4，使用`modetest`输出测试图镜像测试命令进行测试
 
-使用`sudo systemctl stop lightdm`关闭lightdm桌面
+使用`sudo systemctl stop lightdm`关闭 lightdm 桌面
 
 使用`modetest -M vs-drm -a -s 73@31:800x480 -P 33@31:800x480@NV12`命令进行测试
 
-如果一切顺利，连接的屏幕将会亮起并显示下图的pattern：
+如果一切顺利，连接的屏幕将会亮起并显示下图的 pattern：
 
 ![image-20220518111319607](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/screenshot-20241125-162524.png)
 
 ## 5.备注
-目前，RDK X5已经支持7款微雪 LCD屏幕，使用方法可以参考 [显示屏使用](../../hardware_development/rdk_x5/display) 章节
+目前，RDK X5 已经支持 7 款微雪 LCD 屏幕，使用方法可以参考 [显示屏使用](../../hardware_development/rdk_x5/display) 章节
 
 驱动已经集成到内核中
 ```
 kernel/drivers/gpu/drm/panel/panel-wh-cm480.c
 kernel/drivers/gpu/drm/panel/panel-waveshare-dsi.c
 ```
-设备树的修改通过dtoverlay来实现，详情前参考`source/hobot-display`
+设备树的修改通过 dtoverlay 来实现，详情前参考`source/hobot-display`
 
-您也可以参考这种方式支持更多LCD屏幕
+您也可以参考这种方式支持更多 LCD 屏幕

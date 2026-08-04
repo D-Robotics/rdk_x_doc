@@ -76,7 +76,7 @@ root@ubuntu:/app/pydev_demo/05_open_instance_seg_sample/01_yolo_world# python yo
 | `--label-file` | 词汇表嵌入文件路径（JSON 格式） | str | `offline_vocabulary_embeddings.json` |
 | `--prompts` | 文本提示词，逗号分隔（如 `dog,cat`） | str | `dog` |
 | `--img-save-path` | 检测结果图像保存路径 | str | `result.jpg` |
-| `--priority` | 推理优先级（0~255，255为最高） | int | `0` |
+| `--priority` | 推理优先级（0~255，255 为最高） | int | `0` |
 | `--bpu-cores` | BPU 核心索引列表（如 `0 1`） | int list | `[0]` |
 | `--nms-thres` | 非极大值抑制（NMS）阈值 | float | `0.45` |
 | `--score-thres` | 置信度阈值 | float | `0.05` |
@@ -140,7 +140,7 @@ root@ubuntu:/app/pydev_demo/05_open_instance_seg_sample/01_yolo_world# python yo
 
 9. `draw_boxes(img, boxes, cls_ids, scores, classes, rdk_colors)`
 
-    绘制检测结果，输入：图像、检测框、类别ID、置信度、类别列表、颜色映射
+    绘制检测结果，输入：图像、检测框、类别 ID、置信度、类别列表、颜色映射
    
 10. `cv2.imwrite(img_path,img)`
 

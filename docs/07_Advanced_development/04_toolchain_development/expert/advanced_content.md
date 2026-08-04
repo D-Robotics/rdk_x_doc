@@ -529,7 +529,7 @@ def register_fusion_patterns():
 
 ## Adaround（实验性功能）
 
-Adaround 是一种业界前沿的 PTQ 量化方法，通过逐层学习模型权重是向上取整还是向下取整，可以取得比传统的四舍五入策略更好的量化精度。在我们的实验中，Adaround 在不少任务中（分类、分割、BEV等）都可以以较小的性能代价有效地提升模型 calibration 精度，成为了现有 calibration 流程的有效补充。
+Adaround 是一种业界前沿的 PTQ 量化方法，通过逐层学习模型权重是向上取整还是向下取整，可以取得比传统的四舍五入策略更好的量化精度。在我们的实验中，Adaround 在不少任务中（分类、分割、BEV 等）都可以以较小的性能代价有效地提升模型 calibration 精度，成为了现有 calibration 流程的有效补充。
 
 ### 基本原理
 Adaround 旨在通过学习更好的取整范式降低权重的量化误差，因此其优化对象是带权重的算子。目前仅支持 Conv 和 Linear。Adaround 会以拓扑顺序逐层优化 Conv/Linear，基于单算子量化误差最小化学习向上/向下取整的 mask，最后 inplace 地修改 weight 完成优化。

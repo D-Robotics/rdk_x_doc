@@ -2,12 +2,12 @@
 sidebar_position: 7
 ---
 
-# CPU性能测试
+# CPU 性能测试
 
 ## 测试说明
 
 本测试使用`Coremark`工具进行测试，源码和编译好的软件放在`10-cpu_performace`目录下。
-CoreMark是一项基准测试程序，其主要目标是测试处理器核心性能，CoreMark标准的测试方法就是在某配置参数组合下单位时间内跑了多少次CoreMark程序，
+CoreMark 是一项基准测试程序，其主要目标是测试处理器核心性能，CoreMark 标准的测试方法就是在某配置参数组合下单位时间内跑了多少次 CoreMark 程序，
 业界的分数呈现为 `Coremark` / `CPU clock Mhz` / `Core num`，即 `coremark每秒跑的次数` / `cpu时钟频率` / `cpu的核数`，最终得到一个评分。
 
 ## 测试方法
@@ -37,7 +37,7 @@ CoreMark 1.0 : 5280.844935 / GCC6.5.0  -O3 -funroll-all-loops -static --param ma
 ```
 
 注意到`Iterations/Sec`这栏，表示每秒钟迭代多少次，也就是我们上面公式的`coremark`分数。  
-根据公式，这颗x3的单核分数为`5280.844935`/`1200`（默认频率）/`1` = `4.400`。属于正常范围。  
+根据公式，这颗 x3 的单核分数为`5280.844935`/`1200`（默认频率）/`1` = `4.400`。属于正常范围。  
 
 `./run2.log`里面保存着**多核心**的成绩，计算多核分数和单核分数类似，此处不再赘述。  
 
@@ -51,4 +51,4 @@ CoreMark 1.0 : 5280.844935 / GCC6.5.0  -O3 -funroll-all-loops -static --param ma
 交叉编译`coremark`流程如下：
 
 1. 进入`coremark-main`目录，将`aarch64/core_portme.mak`中的`CC`编译器路径换成自己的用于交叉编译的`gcc`路径。
-2. 执行`make PORT_DIR=aarch64 XCFLAGS="-O3 -funroll-all-loops -static --param max-inline-insns-auto=550 -DPERFORMANCE_RUN=1" REBUILD=1 run1.log`编译**单核**测试程序；执行`make PORT_DIR=aarch64 XCFLAGS="-O3 -funroll-all-loops -static --param max-inline-insns-auto=550 -DPERFORMANCE_RUN=1 -DMULTITHREAD=4  -DUSE_PTHREAD -pthread" REBUILD=1 run1.log`编译生成**4核**测试程序，其中`-DMULTITHREAD=`参数用于控制生成几核心的测试程序。
+2. 执行`make PORT_DIR=aarch64 XCFLAGS="-O3 -funroll-all-loops -static --param max-inline-insns-auto=550 -DPERFORMANCE_RUN=1" REBUILD=1 run1.log`编译**单核**测试程序；执行`make PORT_DIR=aarch64 XCFLAGS="-O3 -funroll-all-loops -static --param max-inline-insns-auto=550 -DPERFORMANCE_RUN=1 -DMULTITHREAD=4  -DUSE_PTHREAD -pthread" REBUILD=1 run1.log`编译生成**4 核**测试程序，其中`-DMULTITHREAD=`参数用于控制生成几核心的测试程序。

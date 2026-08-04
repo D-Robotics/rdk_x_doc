@@ -23,12 +23,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-## 连接Wi-Fi
+## 连接 Wi-Fi
 
 <Tabs groupId="rdk-type">
 <TabItem value="desktop" label="Desktop">
 
-使用菜单栏右上角的Wi-Fi管理工具连接Wi-Fi，如下图所示，点击需要连接的Wi-Fi名，然后在弹出的对话框中输入Wi-Fi密码。
+使用菜单栏右上角的 Wi-Fi 管理工具连接 Wi-Fi，如下图所示，点击需要连接的 Wi-Fi 名，然后在弹出的对话框中输入 Wi-Fi 密码。
 
 
 ![image-20231127111045649](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/configuration_wizard/20250507-160653.jpg)
@@ -40,16 +40,16 @@ import TabItem from '@theme/TabItem';
 
 <TabItem value="server" label="Server">
 
-使用srpi-config工具连接Wi-Fi。
+使用 srpi-config 工具连接 Wi-Fi。
 
-执行 `sudo srpi-config` 命令，选择 System Options -> Wireless LAN ，根据提示依次输入Wi-Fi名（`SSID`） 和 密码（`passwd`）。
+执行 `sudo srpi-config` 命令，选择 System Options -> Wireless LAN ，根据提示依次输入 Wi-Fi 名（`SSID`） 和 密码（`passwd`）。
 
 ![image-20231127112139204](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/configuration_wizard/image-20231127112139204.png)
 
 </TabItem>
 </Tabs>
 
-## 开启SSH服务
+## 开启 SSH 服务
 
 当前系统版本默认开启 SSH 登录服务，用户可以使用本方法开、关 SSH 服务。
 
@@ -76,9 +76,9 @@ import TabItem from '@theme/TabItem';
 
 </Tabs>
 
-SSH的使用请查看 [远程登录 - SSH登录](./remote_login#ssh)。
+SSH 的使用请查看 [远程登录 - SSH 登录](./remote_login#ssh)。
 
-## 开启VNC服务
+## 开启 VNC 服务
 
 <Tabs groupId="rdk-type">
 <TabItem value="desktop" label="Desktop">
@@ -87,14 +87,14 @@ SSH的使用请查看 [远程登录 - SSH登录](./remote_login#ssh)。
 
 ![image-20231127112029088](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/srpi-config/20250507-160737.jpg)
 
-选择 Interface Options -> VNC 项，根据提示选择使能或者关闭`VNC` 服务。选择使能 `VNC` 时需要设置登录密码，密码必须是一个8位长度的由字符组成的字符串。
+选择 Interface Options -> VNC 项，根据提示选择使能或者关闭`VNC` 服务。选择使能 `VNC` 时需要设置登录密码，密码必须是一个 8 位长度的由字符组成的字符串。
 
 ![image-20231127112202713](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/configuration_wizard/20250507-160744.jpg)
 
 </TabItem>
 </Tabs>
 
-VNC 的使用请查看 [远程登录 - VNC登录](./remote_login#vnc登录)。
+VNC 的使用请查看 [远程登录 - VNC 登录](./remote_login#vnc登录)。
 
 ## 设置登录模式
 
@@ -108,7 +108,7 @@ VNC 的使用请查看 [远程登录 - VNC登录](./remote_login#vnc登录)。
 3. 字符终端，自动登录
 4. 字符终端，用户手动登录
 
-X5系列板卡暂时不支持字符终端登录模式。
+X5 系列板卡暂时不支持字符终端登录模式。
 
 通过菜单栏找到`RDK Configuration` 项，点击打开。选择 System Options -> Boot / Auto Login 项进入如下配置项。根据需求选择对应项。
 
@@ -149,7 +149,7 @@ X5系列板卡暂时不支持字符终端登录模式。
 
 :::tip
 
-开机会提示：要不要更新home目录下的几个常用文件夹的名称。
+开机会提示：要不要更新 home 目录下的几个常用文件夹的名称。
 建议选择 `Don't ask me again` `Keep Old Name`， 这样可以保持用户工作目录下的 `Desktop  Documents  Downloads` 等目录名不随语言环境发生变化。
 
 :::
@@ -176,7 +176,7 @@ X5系列板卡暂时不支持字符终端登录模式。
 <Tabs groupId="rdk-type">
 <TabItem value="desktop" label="Desktop">
 
-第一步：在桌面端找到EN输入法标志，右键点击首选项
+第一步：在桌面端找到 EN 输入法标志，右键点击首选项
 
 ![QQ_1IGglEVRSO.png](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/configuration_wizard/20250507-160754.jpg)
 
@@ -184,7 +184,7 @@ X5系列板卡暂时不支持字符终端登录模式。
 
 ![QQ_MxWDZrZ7Wk.png](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/configuration_wizard/20250507-160757.jpg)
 
-第三步：选择智能拼音，最后右上角EN就可以右键选择智能拼音
+第三步：选择智能拼音，最后右上角 EN 就可以右键选择智能拼音
 
 ![QQ_rICn3iU1Vc.png](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/configuration_wizard/20250507-160805.jpg)
 
@@ -197,7 +197,7 @@ X5系列板卡暂时不支持字符终端登录模式。
 
 **修改用户名**
 
-以新用户名为usertest为例
+以新用户名为 usertest 为例
 
 ```shell
 #关闭sunrise用户所有进程
@@ -214,7 +214,7 @@ sudo passwd usertest
 
 **增加新用户**
 
-以新增用户为usertest为例
+以新增用户为 usertest 为例
 
 ```shell
 sudo useradd -U -m -d /home/usertest -k /etc/skel/ -s /bin/bash -G disk,kmem,dialout,sudo,audio,video,render,i2c,lightdm,vpu,gdm,weston-launch,graphics,jpu,ipu,vps,misc,gpio usertest

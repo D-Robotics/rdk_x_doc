@@ -4,21 +4,21 @@ sidebar_position: 9
 
 # PWM 驱动调试指南
 
-X5有两类控制器：一类是标准PWM，有4组，每组2路输出，共8个PWM输出，另一类是LPWM，共两组，每组4路PWM输出，主要用于支持Sensor的同步曝光。
+X5 有两类控制器：一类是标准 PWM，有 4 组，每组 2 路输出，共 8 个 PWM 输出，另一类是 LPWM，共两组，每组 4 路 PWM 输出，主要用于支持 Sensor 的同步曝光。
 
 - PWM 默认支持频率范围为 0.05Hz - 1MHz，占空比寄存器 RATIO 精度为 16bit，周期有效时间为 1us 到 20s，占空比有效时间为 10ns 到 20s；
-- LPWM 默认支持频率范围是1Hz到1MHz，输出脉冲宽度范围为 1us～ 4ms；
-- LPWM是为了Sensor 同步设计的，不是一个通用的PWM，**单纯PWM功能建议使用PWM。**
+- LPWM 默认支持频率范围是 1Hz 到 1MHz，输出脉冲宽度范围为 1us～ 4ms；
+- LPWM 是为了 Sensor 同步设计的，不是一个通用的 PWM，**单纯 PWM 功能建议使用 PWM。**
 ## 驱动代码
 
 ### 代码路径
 
-PWM代码路径
+PWM 代码路径
 ```c
 drivers/pwm/pwm-hobot.c
 ```
 
-LPWM代码路径
+LPWM 代码路径
 ```c
 kernel/drivers/media/platform/horizon/camsys/lpwm/
 ```
@@ -34,15 +34,15 @@ CONFIG_PWM_DROBOT=y
 ...
 ```
 
-### DTS节点配置
+### DTS 节点配置
 
-X5 PWM及LPWM控制器设备树定义位于SDK包的kernel文件夹下的arch/arm64/boot/dts/hobot/x5.dtsi文件内。
+X5 PWM 及 LPWM 控制器设备树定义位于 SDK 包的 kernel 文件夹下的 arch/arm64/boot/dts/hobot/x5.dtsi 文件内。
 
 :::note
-x5.dtsi中的节点主要声明SoC共有特性，和具体电路板无关，一般情况下不用修改。
+x5.dtsi 中的节点主要声明 SoC 共有特性，和具体电路板无关，一般情况下不用修改。
 :::
 
-当需要使能特定PWM端口输出的时候，可以到对应的板级文件修改，这里以x5-rdk-v1p0.dts为例，使能lpwm1_0, lpwm1_1, pwm0_0, pwm0_1, pwm1_0, pwm1_1, pwm2_0, pwm2_1, pwm3_0, pwm3_1。
+当需要使能特定 PWM 端口输出的时候，可以到对应的板级文件修改，这里以 x5-rdk-v1p0.dts 为例，使能 lpwm1_0, lpwm1_1, pwm0_0, pwm0_1, pwm1_0, pwm1_1, pwm2_0, pwm2_1, pwm3_0, pwm3_1。
 
 ```c
 &lpwm1 {
@@ -78,9 +78,9 @@ x5.dtsi中的节点主要声明SoC共有特性，和具体电路板无关，一�
 };
 ```
 
-### DTS中pwm和pwmchip对应关系查询方法
+### DTS 中 pwm 和 pwmchip 对应关系查询方法
 
-尽管pwm和lpwm都属于pwmchip，但PWM/LPWM下含的设备数量不一致，所以无法通过aliases固定序号，因此在板端操作pwm时，需要cat pwmchip下的device/uevent，查看pwm地址是否与目标pwm地址是否一致。以pwm0为例，在板端使用以下命令查看pwmchip的uevent
+尽管 pwm 和 lpwm 都属于 pwmchip，但 PWM/LPWM 下含的设备数量不一致，所以无法通过 aliases 固定序号，因此在板端操作 pwm 时，需要 cat pwmchip 下的 device/uevent，查看 pwm 地址是否与目标 pwm 地址是否一致。以 pwm0 为例，在板端使用以下命令查看 pwmchip 的 uevent
 
 ```
 root@ubuntu:~# cat /sys/class/pwm/pwmchip0/device/uevent
@@ -93,17 +93,17 @@ OF_ALIAS_0=pwm0
 MODALIAS=of:NpwmT(null)Cd-robotics,pwm
 ```
 
-### 40pin中pwm对应关系表
-| 40pin引脚序号 | pwm引脚序号 | pwmchip序号 | srpi-config 中 pwm 序号 | 该引脚在设备树中的配置标签 | 该引脚默认功能 |
+### 40pin 中 pwm 对应关系表
+| 40pin 引脚序号 | pwm 引脚序号 | pwmchip 序号 | srpi-config 中 pwm 序号 | 该引脚在设备树中的配置标签 | 该引脚默认功能 |
 | ------- | ---------- | ----------- | ----------------------- | ----------------------- | -------------- |
-| 29脚 | pwm0 | pwm0 | pwm0 | pinctrl_pwm0_0 | SPI2_SCLK |
-| 31脚 | pwm1 | pwm0 | pwm0 | pinctrl_pwm0_1 | SPI2_SSN |
-| 37脚 | pwm2 | pwm1 | pwm1 | pinctrl_pwm1_0 | SPI2_MISO |
-| 18脚 | pwm3 | pwm1 | pwm1 | pinctrl_pwm1_1 | SPI2_MOSI |
-| 28脚 | pwm4 | pwm2 | pwm2 | pinctrl_pwm2_0 | SCL0 |
-| 27脚 | pwm5 | pwm2 | pwm2 | pinctrl_pwm2_1 | SDA0 |
-| 32脚 | pwm6 | pwm3 | pwm3 | pinctrl_pwm3_0 | SCL1 |
-| 33脚 | pwm7 | pwm3 | pwm3 | pinctrl_pwm3_1 | SDA1 |
+| 29 脚 | pwm0 | pwm0 | pwm0 | pinctrl_pwm0_0 | SPI2_SCLK |
+| 31 脚 | pwm1 | pwm0 | pwm0 | pinctrl_pwm0_1 | SPI2_SSN |
+| 37 脚 | pwm2 | pwm1 | pwm1 | pinctrl_pwm1_0 | SPI2_MISO |
+| 18 脚 | pwm3 | pwm1 | pwm1 | pinctrl_pwm1_1 | SPI2_MOSI |
+| 28 脚 | pwm4 | pwm2 | pwm2 | pinctrl_pwm2_0 | SCL0 |
+| 27 脚 | pwm5 | pwm2 | pwm2 | pinctrl_pwm2_1 | SDA0 |
+| 32 脚 | pwm6 | pwm3 | pwm3 | pinctrl_pwm3_0 | SCL1 |
+| 33 脚 | pwm7 | pwm3 | pwm3 | pinctrl_pwm3_1 | SDA1 |
 
 
 
@@ -121,8 +121,8 @@ root@ubuntu:~#
 
 ## 测试
 
-用户可以参考以下命令进行pwm功能测试，并进行信号测量，验证pwm工作是否正常。具体测量的硬件引脚请用户参考使用的具体硬件提供的说明。
-以下命令以验证PWM0 ch0为例。
+用户可以参考以下命令进行 pwm 功能测试，并进行信号测量，验证 pwm 工作是否正常。具体测量的硬件引脚请用户参考使用的具体硬件提供的说明。
+以下命令以验证 PWM0 ch0 为例。
 
 ```shell
 cd /sys/class/pwm/pwmchip0/

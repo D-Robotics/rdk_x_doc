@@ -2,12 +2,12 @@
 sidebar_position: 2
 ---
 
-# GPIO应用
+# GPIO 应用
 
 
 ### 导入 GPIO Python 库
 
-开发板预置了 GPIO Python 库 `Hobot.GPIO`，用户可以通过如下命令导入GPIO库。
+开发板预置了 GPIO Python 库 `Hobot.GPIO`，用户可以通过如下命令导入 GPIO 库。
 
 ```shell
 sunrise@ubuntu:~$ sudo python3
@@ -25,8 +25,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 开发板的引脚编码有 4 种模式：
 
 - BOARD：物理引脚序号，与开发板的丝印序号一一对应。
-- BCM：根据博通SoC制定的GPIO命名规则。
-- CVM： 使用字符串代替数字，对应于CVM / CVB连接器的信号名称。
+- BCM：根据博通 SoC 制定的 GPIO 命名规则。
+- CVM： 使用字符串代替数字，对应于 CVM / CVB 连接器的信号名称。
 - SOC： 对应的编号是芯片内部的 GPIO 管脚序号。
 
 本文推荐用户使用`BOARD`编码模式，设置编码的方式如下：  
@@ -53,7 +53,7 @@ GPIO.getmode()
 
 以下几种情况下运行代码，会有警告日志输出，但并不会影响正常功能：
 
- - 用户尝试使用的GPIO，已在其他应用程序中使用；
+ - 用户尝试使用的 GPIO，已在其他应用程序中使用；
  - 在设置模式和通道之前，尝试调用 `GPIO.cleanup` 清理管脚；
 
 如要屏蔽警告信息，可通过如下命令实现：
@@ -64,7 +64,7 @@ GPIO.setwarnings(False)
 
 ### 管脚配置
 
-GPIO管脚在使用之前，需要进行相应的配置，具体如下：
+GPIO 管脚在使用之前，需要进行相应的配置，具体如下：
 
 设置为输入的方式如下：
 ```python
@@ -141,10 +141,10 @@ GPIO.gpio_function(channel)
 
 ### 边沿检测与中断
 
-边沿是电信号`从低到高`（上升沿）或`从高到低`（下降沿）的变化，这种改变可以看作是一种事件的发生，这种事件可以用来触发CPU中断信号。
+边沿是电信号`从低到高`（上升沿）或`从高到低`（下降沿）的变化，这种改变可以看作是一种事件的发生，这种事件可以用来触发 CPU 中断信号。
 
 
-GPIO库提供了三种方法来检测输入事件：
+GPIO 库提供了三种方法来检测输入事件：
 
 #### wait_for_edge() 函数
 
@@ -161,7 +161,7 @@ GPIO.wait_for_edge(channel, GPIO.RISING)
 GPIO.wait_for_edge(channel, GPIO.RISING, timeout=500)
 ```
 
-在超时时间内外部信号发生变化，函数返回检测的通道号；如果发生超时，函数返回None。
+在超时时间内外部信号发生变化，函数返回检测的通道号；如果发生超时，函数返回 None。
 
 #### event_detected() 函数
 
@@ -228,13 +228,13 @@ GPIO.remove_event_detect(channel)
 | ---------------------- | --------------------------------------------- |
 | simple_out.py          | 单个管脚`输出`测试                            |
 | simple_input.py        | 单个管脚`输入`测试                            |
-| button_led.py          | 一个管脚作为按键输入，一个管脚作为输出控制LED |
+| button_led.py          | 一个管脚作为按键输入，一个管脚作为输出控制 LED |
 | test_all_pins_input.py | 所有管脚的`输入测试`代码                      |
 | test_all_pins.py       | 所有管脚的`输出测试`代码                      |
 | button_event.py        | 捕获管脚的上升沿、下降沿事件                  |
 | button_interrupt.py    | 中断方式处理管脚的上升沿、下降沿事件          |
 
-- GPIO 设置为`输出模式`，1秒钟切换输出电平，可以用于控制LED灯的循环亮灭， 测试代码 `simple_out.py`：
+- GPIO 设置为`输出模式`，1 秒钟切换输出电平，可以用于控制 LED 灯的循环亮灭， 测试代码 `simple_out.py`：
 
 ```python
 #!/usr/bin/env python3
@@ -318,7 +318,7 @@ if __name__=='__main__':
 
 ```
 
-- GPIO 设置为输入模式，捕获管脚的上升沿、下降沿事件，测试代码 `button_event.py`, 实现检测37号管脚的下降沿，然后控制31号管脚的输出：
+- GPIO 设置为输入模式，捕获管脚的上升沿、下降沿事件，测试代码 `button_event.py`, 实现检测 37 号管脚的下降沿，然后控制 31 号管脚的输出：
 
 ```python
 #!/usr/bin/env python3
@@ -368,7 +368,7 @@ if __name__ == '__main__':
 
 ```
 
-- GPIO 设置为输入模式，启动gpio中断功能，响应管脚的上升沿、下降沿事件，测试代码 `button_interrupt.py`, 实现检测 37 号管脚的下降沿，然后控制16号管脚快速切换高低电平 5 次：
+- GPIO 设置为输入模式，启动 gpio 中断功能，响应管脚的上升沿、下降沿事件，测试代码 `button_interrupt.py`, 实现检测 37 号管脚的下降沿，然后控制 16 号管脚快速切换高低电平 5 次：
 
 ```python
 #!/usr/bin/env python3
@@ -431,19 +431,19 @@ if __name__ == '__main__':
 
 ```
 
-## hb_gpioinfo工具介绍
+## hb_gpioinfo 工具介绍
 
-  hb_gpioinfo 是适配X5的一个gpio帮助工具，可以查看当前开发板的的PinName和PinNum的对应关系
+  hb_gpioinfo 是适配 X5 的一个 gpio 帮助工具，可以查看当前开发板的的 PinName 和 PinNum 的对应关系
 
-### hb_gpioinfo组成
+### hb_gpioinfo 组成
 
-  hb_gpioinfo工具由驱动和应用两部分组成，驱动负责解析pinmux-gpio.dtsi并将pinnode和pinname信息导出到debugfs系统中，hb_gpioinfo应用进行解析打印到终端上
+  hb_gpioinfo 工具由驱动和应用两部分组成，驱动负责解析 pinmux-gpio.dtsi 并将 pinnode 和 pinname 信息导出到 debugfs 系统中，hb_gpioinfo 应用进行解析打印到终端上
 
 驱动代码路径：`kernel/drivers/gpio/hobot_gpio_debug.c`
-### hb_gpioinfo使用实例
-- PinName:指的是Soc上的管脚名字，原理图上X5 Soc管脚命名一致
-- PinNode：指的是设备树中的PinNode信息
-- PinNum：指的是X5实际的对应的管脚gpio编号
+### hb_gpioinfo 使用实例
+- PinName:指的是 Soc 上的管脚名字，原理图上 X5 Soc 管脚命名一致
+- PinNode：指的是设备树中的 PinNode 信息
+- PinNum：指的是 X5 实际的对应的管脚 gpio 编号
 
 ```bash
 root@ubuntu:~# hb_gpioinfo

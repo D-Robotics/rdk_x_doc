@@ -74,7 +74,7 @@ root@ubuntu:/app/pydev_demo/04_pose_sample/01_ultralytics_yolo11_pose# python ul
 | `--test-img` | 输入测试图像路径 | str | `bus.jpg` |
 | `--label-file` | 类别标签路径（每行一个类别） | str | `coco_classes.names` |
 | `--img-save-path` | 检测结果图像保存路径 | str | `result.jpg` |
-| `--priority` | 推理优先级（0~255，255为最高） | int | `0` |
+| `--priority` | 推理优先级（0~255，255 为最高） | int | `0` |
 | `--bpu-cores` | BPU 核心索引列表（如 `0 1`） | int list | `[0]` |
 | `--nms-thres` | 非极大值抑制（NMS）阈值 | float | `0.7` |
 | `--score-thres` | 置信度阈值 | float | `0.25` |
@@ -130,7 +130,7 @@ root@ubuntu:/app/pydev_demo/04_pose_sample/01_ultralytics_yolo11_pose# python ul
 
 7. `filter_classification(cls_output, conf_thres)`
 
-   过滤预测结果，输入：分类输出、置信度阈值, 返回：置信度、类别ID、有效索引
+   过滤预测结果，输入：分类输出、置信度阈值, 返回：置信度、类别 ID、有效索引
 
 8. `decode_boxes(box_output, valid_indices, anchor_size, stride, weights)`
 
@@ -154,7 +154,7 @@ root@ubuntu:/app/pydev_demo/04_pose_sample/01_ultralytics_yolo11_pose# python ul
 
 13. `draw_boxes(img, boxes, ids, scores, coco_names, rdk_colors)`
 
-    绘制检测结果，输入：图像、检测框、类别ID、置信度、类别列表、颜色映射
+    绘制检测结果，输入：图像、检测框、类别 ID、置信度、类别列表、颜色映射
 
 14. `draw_keypoints(image, kpts_xy, kpt_score, kpt_conf_thresh)`
 

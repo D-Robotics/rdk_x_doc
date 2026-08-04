@@ -251,7 +251,7 @@ for any corresponding short options.
 示例程序参数选项说明 \
 --width	 -w：是摄像头 sensor 的输出宽度 \
 --height -h：是摄像头 sensor 的输出高度 \
---bit	-b：是RAW 位深（通常 8/10/16 ）\
+--bit	-b：是 RAW 位深（通常 8/10/16 ）\
 --count	-c：是捕获帧数
 
 我们这里可以列举一些标配 sensor 的示例参数，方便参考使用。

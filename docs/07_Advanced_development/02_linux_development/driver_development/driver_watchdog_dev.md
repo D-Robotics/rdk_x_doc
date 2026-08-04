@@ -11,7 +11,7 @@ drivers/watchdog/hobot_wdt.c # watchdog 驱动代码源文件
 include/linux/watchdog.h # watchdog 驱动代码头文件
 ```
 
-## dts配置
+## dts 配置
 
 ```
 /* arch/arm64/boot/dts/hobot/hobot-xj3.dtsi */

@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # rdk-miniboot-update
 
-**rdk-miniboot-update命令** 用于更新RDK硬件的最小启动镜像（miniboot）。
+**rdk-miniboot-update 命令** 用于更新 RDK 硬件的最小启动镜像（miniboot）。
 
 ## 语法说明
 

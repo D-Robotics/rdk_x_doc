@@ -5,12 +5,12 @@ title: BPU 算法接口手册
 sidebar_label: BPU 算法推理
 ---
 ## 简介
-RDK X5 3.5.0 版本之后，使用 Python 进行算法推理、目标检测、语义分割等部分，全升级为 hbm_runtime 接口，该接口是基于pybind11的Python绑定接口，用于访问和操作 libdnn C++ 库，提供高性能的神经网络模型加载和推理功能。
+RDK X5 3.5.0 版本之后，使用 Python 进行算法推理、目标检测、语义分割等部分，全升级为 hbm_runtime 接口，该接口是基于 pybind11 的 Python 绑定接口，用于访问和操作 libdnn C++ 库，提供高性能的神经网络模型加载和推理功能。
 
 该接口封装了底层模型运行时细节，使 Python 用户能够方便地加载单个或多个神经网络模型，管理模型的输入输出信息，并灵活执行推理操作。接口支持多种输入数据格式，且通过智能转换保证输入数据连续存储，提升运行效率。
 
 ### 适用场景
-- 在 Python 环境中快速集成和调用 hbm_runtime运行时功能。
+- 在 Python 环境中快速集成和调用 hbm_runtime 运行时功能。
 - 机器人视觉、智能边缘计算等对推理效率和灵活性有较高要求的应用。
 - 需要同时加载和管理多个模型，动态配置推理优先级及硬件资源分配的场景。
 
@@ -26,13 +26,13 @@ RDK X5 3.5.0 版本之后，使用 Python 进行算法推理、目标检测、�
 - 指定推理 BPU 核心（bpu_cores）
   - 支持通过 bpu_cores: Dict[str, List[int]] 显式指定模型推理时使用的 BPU 计算核心，实现异构核资源绑定等策略。
 - 多模型并行推理
-  - 对于多模型输入场景，底层自动采用多线程机制并行执行每个模型的推理任务（multi-threaded launch），在多核 BPU 系统上可获得更高吞吐（单核BPU底层还是串行执行）。
+  - 对于多模型输入场景，底层自动采用多线程机制并行执行每个模型的推理任务（multi-threaded launch），在多核 BPU 系统上可获得更高吞吐（单核 BPU 底层还是串行执行）。
 - 元信息访问接口
   - 输入输出数量、名称、数据类型（hbDNNDataType 枚举）；
   - 输入输出张量形状、内存 stride、量化参数（包括 scale、zero point、量化类型）；
-  - 模型描述信息、HBM文件描述信息等。
+  - 模型描述信息、HBM 文件描述信息等。
 - 完整绑定的类型系统
-  - 支持量化参数结构 QuantParams，数据类型枚举 hbDNNDataType，模型调度参数对象SchedParam  和量化类型枚举 hbDNNQuantiType，提供类型安全的属性访问。
+  - 支持量化参数结构 QuantParams，数据类型枚举 hbDNNDataType，模型调度参数对象 SchedParam  和量化类型枚举 hbDNNQuantiType，提供类型安全的属性访问。
 
 ## 安装说明（Installation）
 本模块 hbm_runtime 是基于 C++ 实现的高性能推理运行时 Python 接口，依赖 pybind11 和地平线提供的底层推理库（如 libdnn）。支持通过系统 DEB 包（.deb） 的方式进行安装，适用于 Python 3.10 及以上版本。
@@ -45,9 +45,9 @@ RDK X5 3.5.0 版本之后，使用 Python 进行算法推理、目标检测、�
 | scikit-build-core | ≥ 0.7 | 构建 wheel 包时使用（仅源码构建）                    |
 | 地平线基础库 | 根据平台 | 如 libdnn.so，通常由 BSP 提供           |
 
-### 构建wheel包
-构建wheel包的方式有两种，下面分别介绍。(RDK X5 软件 3.5.0 版本之后默认已经安装)
-#### 安装deb时构建
+### 构建 wheel 包
+构建 wheel 包的方式有两种，下面分别介绍。(RDK X5 软件 3.5.0 版本之后默认已经安装)
+#### 安装 deb 时构建
 在 hobot-spdev 仓库 有 hbm-runtime 的相关文件，编译 hobot-spdev 之后直接安装即可。
   ```bash
 
@@ -74,22 +74,22 @@ RDK X5 3.5.0 版本之后，使用 Python 进行算法推理、目标检测、�
 ### 安装方式
 
 #### 使用 wheel 包
-使用wheel 安装的方式有两种，选其一即可
+使用 wheel 安装的方式有两种，选其一即可
 - 通过本地 wheel 包安装
-  - 找到通过“构建wheel包”小节中构建的whl文件。
+  - 找到通过“构建 wheel 包”小节中构建的 whl 文件。
 
   ```bash
   #示例：使用 pip 安装本地whl包(注意不同版本号whl包名称不同，xxx代表版本)
   pip install hbm_runtime-x.x.x-cp310-cp310-manylinux_2_34_aarch64.whl
   ```
 
-- 从pypi源安装
+- 从 pypi 源安装
   ```bash
   pip install hbm_runtime
   ```
 
 #### 使用 .deb 包安装
-  使用deb安装的方式有两种，选其一即可
+  使用 deb 安装的方式有两种，选其一即可
 - 通过本地 DEB 包安装
   ```bash
   # 示例：安装 DEB 包（注意不同时间编译的包名称，以实际情况为准）

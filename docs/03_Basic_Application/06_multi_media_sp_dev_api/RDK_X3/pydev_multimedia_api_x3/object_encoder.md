@@ -2,11 +2,11 @@
 sidebar_position: 3
 ---
 
-# Encoder对象
+# Encoder 对象
 
 ## 模块描述
 
-Encoder对象实现了对视频数据的编码压缩功能，包含了`encode`、`close`、`send_frame`、`encode_file`、`get_frame`、`get_img`等几种方法，详细说明如下：
+Encoder 对象实现了对视频数据的编码压缩功能，包含了`encode`、`close`、`send_frame`、`encode_file`、`get_frame`、`get_img`等几种方法，详细说明如下：
 
 ## 基础规格
 - RDK 支持 H.265/HEVC 编码器 、 H.264/AVC 编码器 、 H.265/HEVC 解码器 、 H.264/AVC 解码器 、 JPEG 与 MJPEG 编／解码器 。
@@ -31,7 +31,7 @@ Encoder对象实现了对视频数据的编码压缩功能，包含了`encode`�
 
 <font color='Blue'>【功能描述】</font>
 
-配置并使能encode编码模块
+配置并使能 encode 编码模块
 
 <font color='Blue'>【函数声明】</font>
 
@@ -43,11 +43,11 @@ Encoder.encode(video_chn, encode_type , width, height, bits)
 
 | 参数名称  | 描述           | 取值范围                    |
 | --------- | --------------- | ------------------- |
-| video_chn | 指定视频编码器的通道号   | 范围0~31 |
-| encode_type    | 视频编码类型  | 范围1~3，分别对应`H264`、`H265`、`MJPEG` |
-| width     | 输入编码模块的图像宽度      | 不超过4096              |
-| height    | 输入编码模块的图像高度      | 不超过4096              |
-| bits      | 编码模块的比特率         |    默认8000kbps         |
+| video_chn | 指定视频编码器的通道号   | 范围 0~31 |
+| encode_type    | 视频编码类型  | 范围 1~3，分别对应`H264`、`H265`、`MJPEG` |
+| width     | 输入编码模块的图像宽度      | 不超过 4096              |
+| height    | 输入编码模块的图像高度      | 不超过 4096              |
+| bits      | 编码模块的比特率         |    默认 8000kbps         |
 
 <font color='Blue'>【使用方法】</font>
 
@@ -155,7 +155,7 @@ Encoder.encode_file(img)
 
 | 参数名称 | 描述              | 取值范围                     |
 | -------- | ----------------- | --------------------- |
-| img      | 需要编码的图像数据，需要使用NV12格式 | 无 |
+| img      | 需要编码的图像数据，需要使用 NV12 格式 | 无 |
 
 <font color='Blue'>【使用方法】</font> 
 

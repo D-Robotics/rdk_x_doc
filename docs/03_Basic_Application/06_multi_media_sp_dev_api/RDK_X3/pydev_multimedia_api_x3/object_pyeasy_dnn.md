@@ -7,7 +7,7 @@ sidebar_position: 1
 
 ## 模块描述
 
-pyeasy_dnn 是底层 DNN 推理能力的 C++ 封装实现，对外暴露轻量的 Python 接口，核心包含模块级模型加载方法、Model 对象推理方法，以及TensorProperties 张量属性获取三类能力。该接口适配 RDK X3 以及 RDK X5 （软件版本3.5.0 之前）系列硬件平台的神经网络推理场景。
+pyeasy_dnn 是底层 DNN 推理能力的 C++ 封装实现，对外暴露轻量的 Python 接口，核心包含模块级模型加载方法、Model 对象推理方法，以及 TensorProperties 张量属性获取三类能力。该接口适配 RDK X3 以及 RDK X5 （软件版本 3.5.0 之前）系列硬件平台的神经网络推理场景。
 
 ## 基础规格
 - 硬件兼容：RDK 系列开发板（支持 NPU 硬件加速）

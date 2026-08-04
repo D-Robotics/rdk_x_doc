@@ -60,7 +60,7 @@ python mobilenetv2.py
 
 ### 执行效果
 
-#### resnet18执行效果
+#### resnet18 执行效果
 
 ```
 root@ubuntu:/app/pydev_demo/01_classification_sample/01_resnet18# python resnet18.py 
@@ -81,7 +81,7 @@ warthog: 0.0004
 root@ubuntu:/app/pydev_demo/01_classification_sample/01_resnet18# 
 ```
 
-#### mobilenetv2执行效果
+#### mobilenetv2 执行效果
 
 ```
 root@ubuntu:/app/pydev_demo/01_classification_sample/02_mobilenetv2# python mobilenetv2.py 
@@ -111,7 +111,7 @@ impala, Aepyceros melampus: 0.0003
 | `--model-path` | BPU 量化模型路径（`.bin`） | str | 各示例不同，见下表"各示例默认模型路径" |
 | `--test-img` | 输入测试图像路径 | str | `zebra_cls.jpg` |
 | `--label-file` | 类别标签映射文件路径（dict 格式） | str | `imagenet1000_clsidx_to_labels.txt` |
-| `--priority` | 推理优先级（0~255，255为最高） | int | `0` |
+| `--priority` | 推理优先级（0~255，255 为最高） | int | `0` |
 | `--bpu-cores` | BPU 核心索引列表（如 `0 1`） | int list | `[0]` |
 
 **各示例默认模型路径：**

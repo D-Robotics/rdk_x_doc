@@ -4,19 +4,19 @@ sidebar_position: 4
 
 # 7.3.4 视频输入
 ## 概述
-视频输入（VIN）实现的功能：通过 MIPI Rx接口接收视频数据。VIN将接收到的数据给下一个模块VPS，同时也可存入到指定的内存区域，在此过程中，VIN可以对接收到的原始视频图像数据进行处理，实现视频数据的采集。
+视频输入（VIN）实现的功能：通过 MIPI Rx 接口接收视频数据。VIN 将接收到的数据给下一个模块 VPS，同时也可存入到指定的内存区域，在此过程中，VIN 可以对接收到的原始视频图像数据进行处理，实现视频数据的采集。
 
 ### 概念
 
-视频输入设备 视频输入设备主要是指sif，图像数据接口，主要功能接收摄像头模组输出的图像数据，经过offline或者online直接输出到ISP模块进行图像处理。
+视频输入设备 视频输入设备主要是指 sif，图像数据接口，主要功能接收摄像头模组输出的图像数据，经过 offline 或者 online 直接输出到 ISP 模块进行图像处理。
 
 - 视频输入设备
 
-​		视频输入设备主要是指sif，图像数据接口，主要功能接收摄像头模组输出的图像数据，经过offline或者		 		online直接输出到ISP模块进行图像处理。
+​		视频输入设备主要是指 sif，图像数据接口，主要功能接收摄像头模组输出的图像数据，经过 offline 或者		 		online 直接输出到 ISP 模块进行图像处理。
 
 - 视频输入 PIPE
 
-​		视频输入 PIPE (ISP)绑定在设备后端，负责图像处理，硬核功能配置，支持Multi context。
+​		视频输入 PIPE (ISP)绑定在设备后端，负责图像处理，硬核功能配置，支持 Multi context。
 
 - 镜头畸变校正（LDC）
 
@@ -28,33 +28,33 @@ sidebar_position: 4
 
 - DWE
 
-​		DWE主要是将LDC和DIS集成在一起，包括LDC的畸变矫正和DIS的统计结果。
+​		DWE 主要是将 LDC 和 DIS 集成在一起，包括 LDC 的畸变矫正和 DIS 的统计结果。
 
 ## 功能描述
 
-VIN在软件上划分4个部分，如下图所示。
+VIN 在软件上划分 4 个部分，如下图所示。
 
 ![image-20220329195124946](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_input/image-20220329195124946.png)
 
 ### 视频输入设备
 
-sif主要功能接收摄像头模组输出的图像数据，经过offline或者online直接输出到ISP模块进行图像处理。Mipi:支持RAW8/RAW10/RAW12/RAW14/RAW16 or YUV422 8bit/10bit。DVP interface: RAW8/RAW10/RAW12/RAW14/RAW16 or YUV422 8bit/10bit。最多支持8路sensor接入。
+sif 主要功能接收摄像头模组输出的图像数据，经过 offline 或者 online 直接输出到 ISP 模块进行图像处理。Mipi:支持 RAW8/RAW10/RAW12/RAW14/RAW16 or YUV422 8bit/10bit。DVP interface: RAW8/RAW10/RAW12/RAW14/RAW16 or YUV422 8bit/10bit。最多支持 8 路 sensor 接入。
 
-### 视频输入PIPE
+### 视频输入 PIPE
 
-Isp主要负责图像处理，硬核功能配置，支持Multi context，最多支持8路接入。主要是对图像数据进行流水线处理，输出YUV 图像格式给通道。同时PIPE也包括DIS、LDC的功能。
+Isp 主要负责图像处理，硬核功能配置，支持 Multi context，最多支持 8 路接入。主要是对图像数据进行流水线处理，输出 YUV 图像格式给通道。同时 PIPE 也包括 DIS、LDC 的功能。
 
 ### 视频物理通道
 
-VIN的PIPE 包含 2 个物理通道，物理通道0是指isp处理后的数据到ddr，或者是通过ddr给到下一级模块VPS。物理通道1是指isp处理后的数据online到VPS，VIN和VPS的绑定关系请参考“系统控制”章节。
+VIN 的 PIPE 包含 2 个物理通道，物理通道 0 是指 isp 处理后的数据到 ddr，或者是通过 ddr 给到下一级模块 VPS。物理通道 1 是指 isp 处理后的数据 online 到 VPS，VIN 和 VPS 的绑定关系请参考“系统控制”章节。
 
 ### 绑定关系
 
-VIN和VPS之间的绑定关系请参考“系统控制”章节 HB_SYS_SetVINVPSMode
+VIN 和 VPS 之间的绑定关系请参考“系统控制”章节 HB_SYS_SetVINVPSMode
 
 
 
-## API参考
+## API 参考
 
 ```c
 int HB_MIPI_SetBus(MIPI_SENSOR_INFO_S *snsInfo, uint32_t busNum);
@@ -128,27 +128,27 @@ int HB_VIN_ReleaseDevFrame(uint32_t devId, uint32_t chnId, void *buf);
 int HB_MIPI_SetBus(MIPI_SENSOR_INFO_S *snsInfo, uint32_t busNum)
 ```
 【功能描述】
-> 设置sensor的总线号
+> 设置 sensor 的总线号
 
 【参数描述】
 
 | 参数名称 |       描述       | 输入/输出 |
 | :------: | :--------------: | :-------: |
-| snsInfo  | sensor的配置信息 |   输入    |
-|  busNum  |      bus号       |   输入    |
+| snsInfo  | sensor 的配置信息 |   输入    |
+|  busNum  |      bus 号       |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_MIPI_InitSensor/HB_MIPI_DeinitSensor举例
+> 请参见 HB_MIPI_InitSensor/HB_MIPI_DeinitSensor 举例
 
 ### HB_MIPI_SetPort
 【函数声明】
@@ -156,27 +156,27 @@ int HB_MIPI_SetBus(MIPI_SENSOR_INFO_S *snsInfo, uint32_t busNum)
 int HB_MIPI_SetPort(MIPI_SENSOR_INFO_S *snsInfo, uint32_t port)
 ```
 【功能描述】
-> 设置sensor的port，取值范围 0~7
+> 设置 sensor 的 port，取值范围 0~7
 
 【参数描述】
 
 | 参数名称 |          描述           | 输入/输出 |
 | :------: | :---------------------: | :-------: |
-| snsInfo  |    sensor的配置信息     |   输入    |
-|   port   | 当前sensor的port号，0~7 |   输入    |
+| snsInfo  |    sensor 的配置信息     |   输入    |
+|   port   | 当前 sensor 的 port 号，0~7 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_MIPI_InitSensor/HB_MIPI_DeinitSensor举例
+> 请参见 HB_MIPI_InitSensor/HB_MIPI_DeinitSensor 举例
 
 ### HB_MIPI_SensorBindSerdes
 【函数声明】
@@ -184,28 +184,28 @@ int HB_MIPI_SetPort(MIPI_SENSOR_INFO_S *snsInfo, uint32_t port)
 int HB_MIPI_SensorBindSerdes(MIPI_SENSOR_INFO_S *snsInfo, uint32_t serdesIdx, uint32_t serdesPort)
 ```
 【功能描述】
-> 设置sensor绑定到哪个serdes上
+> 设置 sensor 绑定到哪个 serdes 上
 
 【参数描述】
 
 |  参数名称  |              描述              | 输入/输出 |
 | :--------: | :----------------------------: | :-------: |
-|  snsInfo   |        sensor的配置信息        |   输入    |
-| serdesIdx  |        serdes的索引0~1         |   输入    |
-| serdesPort | serdes的port号954 0~1  960 0~3 |   输入    |
+|  snsInfo   |        sensor 的配置信息        |   输入    |
+| serdesIdx  |        serdes 的索引 0~1         |   输入    |
+| serdesPort | serdes 的 port 号 954 0~1  960 0~3 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_MIPI_InitSensor/HB_MIPI_DeinitSensor举例
+> 请参见 HB_MIPI_InitSensor/HB_MIPI_DeinitSensor 举例
 
 ### HB_MIPI_SensorBindMipi
 【函数声明】
@@ -213,27 +213,27 @@ int HB_MIPI_SensorBindSerdes(MIPI_SENSOR_INFO_S *snsInfo, uint32_t serdesIdx, ui
 int HB_MIPI_SensorBindMipi(MIPI_SENSOR_INFO_S *snsInfo, uint32_t mipiIdx)
 ```
 【功能描述】
-> 设置sensor绑定哪一个mipi上
+> 设置 sensor 绑定哪一个 mipi 上
 
 【参数描述】
 
 | 参数名称 |        描述         | 输入/输出 |
 | :------: | :-----------------: | :-------: |
-| snsInfo  |  sensor的配置信息   |   输入    |
-| mipiIdx  | mipi_host的索引 0~3 |   输入    |
+| snsInfo  |  sensor 的配置信息   |   输入    |
+| mipiIdx  | mipi_host 的索引 0~3 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_MIPI_InitSensor举例
+> 请参见 HB_MIPI_InitSensor 举例
 
 ### HB_MIPI_SetExtraMode
 【函数声明】
@@ -241,27 +241,27 @@ int HB_MIPI_SensorBindMipi(MIPI_SENSOR_INFO_S *snsInfo, uint32_t mipiIdx)
 int HB_MIPI_SetExtraMode(MIPI_SENSOR_INFO_S *snsInfo, uint32_t ExtraMode);
 ```
 【功能描述】
-> 设置sensor在DOL2或DOL3下的工作模式
+> 设置 sensor 在 DOL2 或 DOL3 下的工作模式
 
 【参数描述】
 
 | 参数名称  |        描述        | 输入/输出|
 | :-------: | :----------------: | :---------- |
-|  snsInfo  |  sensor的配置信息  | 输入 |
-| ExtraMode | 选择以何种工作模式 | 1. 单路DOL2,值为0<br /> 2. DOL2分为两路linear,一路值为1，另一路值为2<br /> 3. 单路DOl3,值为0<br /> 4. 一路DOl2(值为1)+一路linear(值为4)<br /> 5. DOL3分为三路linear,一路为2，一路为3，一路为4 |
+|  snsInfo  |  sensor 的配置信息  | 输入 |
+| ExtraMode | 选择以何种工作模式 | 1. 单路 DOL2,值为 0<br /> 2. DOL2 分为两路 linear,一路值为 1，另一路值为 2<br /> 3. 单路 DOl3,值为 0<br /> 4. 一路 DOl2(值为 1)+一路 linear(值为 4)<br /> 5. DOL3 分为三路 linear,一路为 2，一路为 3，一路为 4 |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_MIPI_InitSensor/HB_MIPI_DeinitSensor举例
+> 请参见 HB_MIPI_InitSensor/HB_MIPI_DeinitSensor 举例
 
 ### HB_MIPI_InitSensor/HB_MIPI_DeinitSensor
 【函数声明】
@@ -270,13 +270,13 @@ int HB_MIPI_InitSensor (uint32_t DevId, MIPI_SENSOR_INFO_S  *snsInfo);
 int HB_MIPI_DeinitSensor (uint32_t  DevId);
 ```
 【功能描述】
-> sensor的初始化和释放初始化产生的资源
+> sensor 的初始化和释放初始化产生的资源
 
 【参数描述】
 
 | 参数名称 |       描述        | 输入/输出 |
 | :------: | :---------------: | :-------: |
-|  devId   | 通路索引，范围0~7 |   输入    |
+|  devId   | 通路索引，范围 0~7 |   输入    |
 | snsInfo  |    Sensor 信息    |   输入    |
 
 【返回值】
@@ -284,7 +284,7 @@ int HB_MIPI_DeinitSensor (uint32_t  DevId);
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -363,26 +363,26 @@ int HB_MIPI_ResetSensor(uint32_t DevId);
 int HB_MIPI_UnresetSensor(uint32_t DevId);
 ```
 【功能描述】
-> sensor数据流的打开和关闭,sensor_start/sensor_stop
+> sensor 数据流的打开和关闭,sensor_start/sensor_stop
 
 【参数描述】
 
 | 参数名称 |       描述        | 输入/输出 |
 | :------: | :---------------: | :-------: |
-|  devId   | 通路索引，范围0~7 |   输入    |
+|  devId   | 通路索引，范围 0~7 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_MIPI_InitSensor/HB_MIPI_DeinitSensor举例
+> 请参见 HB_MIPI_InitSensor/HB_MIPI_DeinitSensor 举例
 
 ### HB_MIPI_EnableSensorClock/HB_MIPI_DisableSensorClock
 【函数声明】
@@ -397,14 +397,14 @@ int HB_MIPI_DisableSensorClock(uint32_t mipiIdx);
 
 | 参数名称 |           描述            | 输入/输出 |
 | :------: | :-----------------------: | :-------: |
-| mipiIdx  | Mipi host 索引号，范围0~3 |   输入    |
+| mipiIdx  | Mipi host 索引号，范围 0~3 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 使用此接口需去掉子板的晶振
@@ -418,30 +418,30 @@ int HB_MIPI_DisableSensorClock(uint32_t mipiIdx);
 int HB_MIPI_SetSensorClock(uint32_t mipiIdx, uint32_t snsMclk)
 ```
 【功能描述】
-> 设置sensor_mclk
-> 一共有4个sensor_mclk，目前用到得是sensor0_mclk和sensor1_mclk,
-> mipi0连接在sensor_mclk1, mipi1连接在sensor_mclk0,硬件连接关系在dts里面定义。
+> 设置 sensor_mclk
+> 一共有 4 个 sensor_mclk，目前用到得是 sensor0_mclk 和 sensor1_mclk,
+> mipi0 连接在 sensor_mclk1, mipi1 连接在 sensor_mclk0,硬件连接关系在 dts 里面定义。
 
 【参数描述】
 
 | 参数名称 |           描述            |             输入/输出              |
 | :------: | :-----------------------: | :--------------------------------: |
-| mipiIdx  | Mipi host 索引号，范围0~3 |                输入                |
-| snsMclk  |          单位HZ           | 输入，比如24MHZ，snsMclk为24000000 |
+| mipiIdx  | Mipi host 索引号，范围 0~3 |                输入                |
+| snsMclk  |          单位 HZ           | 输入，比如 24MHZ，snsMclk 为 24000000 |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 使用此接口需去掉子板的晶振
 
 【参考代码】
 > 初始化时:
->> 先设置sensor_mclk然后再去使能
+>> 先设置 sensor_mclk 然后再去使能
 >> HB_MIPI_SetSensorClock(mipiIdx, 24000000);
 >> HB_MIPI_EnableSensorClock(mipiIdx);
 
@@ -457,26 +457,26 @@ int HB_MIPI_ResetMipi(uint32_t  mipiIdx);
 int HB_MIPI_UnresetMipi(uint32_t  mipiIdx)
 ```
 【功能描述】
-> mipi的start和stop
+> mipi 的 start 和 stop
 
 【参数描述】
 
 | 参数名称 |           描述            | 输入/输出 |
 | :------: | :-----------------------: | :-------: |
-| mipiIdx  | Mipi host 索引号，范围0~3 |   输入    |
+| mipiIdx  | Mipi host 索引号，范围 0~3 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_MIPI_InitSensor/HB_MIPI_DeinitSensor举例
+> 请参见 HB_MIPI_InitSensor/HB_MIPI_DeinitSensor 举例
 
 ### HB_MIPI_SetMipiAttr
 【函数声明】
@@ -484,27 +484,27 @@ int HB_MIPI_UnresetMipi(uint32_t  mipiIdx)
 int HB_MIPI_SetMipiAttr(uint32_t  mipiIdx, MIPI_ATTR_S  mipiAttr)
 ```
 【功能描述】
-> 设置mipi的属性，host和dev的初始化。
+> 设置 mipi 的属性，host 和 dev 的初始化。
 
 【参数描述】
 
 | 参数名称 |       描述       | 输入/输出 |
 | :------: | :--------------: | :-------: |
 | mipiIdx  | Mipi host 索引号 |   输入    |
-| mipiAttr | Mipi总线属性信息 |   输入    |
+| mipiAttr | Mipi 总线属性信息 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_MIPI_InitSensor/HB_MIPI_DeinitSensor举例
+> 请参见 HB_MIPI_InitSensor/HB_MIPI_DeinitSensor 举例
 
 ### HB_MIPI_Clear
 【函数声明】
@@ -512,26 +512,26 @@ int HB_MIPI_SetMipiAttr(uint32_t  mipiIdx, MIPI_ATTR_S  mipiAttr)
 int HB_MIPI_Clear(uint32_t  mipiIdx);
 ```
 【功能描述】
-> 清除设备相关的配置，mipi host/dev 的deinit，和接口HB_MIPI_SetMipiAttr对应。
+> 清除设备相关的配置，mipi host/dev 的 deinit，和接口 HB_MIPI_SetMipiAttr 对应。
 
 【参数描述】
 
 | 参数名称 |           描述            | 输入/输出 |
 | :------: | :-----------------------: | :-------: |
-| mipiIdx  | Mipi host 索引号，范围0~3 |   输入    |
+| mipiIdx  | Mipi host 索引号，范围 0~3 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_MIPI_InitSensor/HB_MIPI_DeinitSensor举例
+> 请参见 HB_MIPI_InitSensor/HB_MIPI_DeinitSensor 举例
 
 ### HB_MIPI_ReadSensor
 【函数声明】
@@ -539,13 +539,13 @@ int HB_MIPI_Clear(uint32_t  mipiIdx);
 int HB_MIPI_ReadSensor(uint32_t devId, uint32_t regAddr, char *buffer, uint32_t size)
 ```
 【功能描述】
-> 通过i2c读取sensor。
+> 通过 i2c 读取 sensor。
 
 【参数描述】
 
 | 参数名称 |       描述        | 输入/输出 |
 | :------: | :---------------: | :-------: |
-|  devId   | 通路索引，范围0~7 |   输入    |
+|  devId   | 通路索引，范围 0~7 |   输入    |
 | regAddr  |    寄存器地址     |   输入    |
 | buffer,  |  存放数据的地址   |   输出    |
 |   size   |    读取的长度     |   输入    |
@@ -555,13 +555,13 @@ int HB_MIPI_ReadSensor(uint32_t devId, uint32_t regAddr, char *buffer, uint32_t 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 必须在HB_MIPI_InitSensor接口调用后才能使用
+> 必须在 HB_MIPI_InitSensor 接口调用后才能使用
 
 【参考代码】
-> 不同的sensor不一样，以imx327为例：
+> 不同的 sensor 不一样，以 imx327 为例：
 ```c
     int i;
     char buffer[] = {0x34, 0x56};
@@ -593,13 +593,13 @@ int HB_MIPI_ReadSensor(uint32_t devId, uint32_t regAddr, char *buffer, uint32_t 
 int HB_MIPI_WriteSensor (uint32_t devId, uint32_t regAddr, char *buffer, uint32_t size)
 ```
 【功能描述】
-> 通过i2c写sensor寄存器
+> 通过 i2c 写 sensor 寄存器
 
 【参数描述】
 
 | 参数名称 |       描述        | 输入/输出 |
 | :------: | :---------------: | :-------: |
-|  devId   | 通路索引，范围0~7 |   输入    |
+|  devId   | 通路索引，范围 0~7 |   输入    |
 | regAddr  |    寄存器地址     |   输入    |
 |  buffer  |  存放数据的地址   |   输入    |
 |   size   |     写的长度      |   输入    |
@@ -609,13 +609,13 @@ int HB_MIPI_WriteSensor (uint32_t devId, uint32_t regAddr, char *buffer, uint32_
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 必须在HB_MIPI_InitSensor接口调用后才能使用
+> 必须在 HB_MIPI_InitSensor 接口调用后才能使用
 
 【参考代码】
-> 请参见HB_MIPI_ReadSensor举例
+> 请参见 HB_MIPI_ReadSensor 举例
 
 ### HB_MIPI_GetSensorInfo
 【函数声明】
@@ -623,24 +623,24 @@ int HB_MIPI_WriteSensor (uint32_t devId, uint32_t regAddr, char *buffer, uint32_
 int HB_MIPI_GetSensorInfo(uint32_t devId, MIPI_SENSOR_INFO_S *snsInfo)
 ```
 【功能描述】
-> 获取sensor相关配置信息
+> 获取 sensor 相关配置信息
 
 【参数描述】
 
 | 参数名称 |       描述        | 输入/输出 |
 | :------: | :---------------: | :-------: |
-|  devId   | 通路索引，范围0~7 |   输入    |
-| snsInfo  |    sensor信息     |   输出    |
+|  devId   | 通路索引，范围 0~7 |   输入    |
+| snsInfo  |    sensor 信息     |   输出    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 必须在HB_MIPI_InitSensor接口调用后才能使用
+> 必须在 HB_MIPI_InitSensor 接口调用后才能使用
 
 【参考代码】
 ```c
@@ -664,24 +664,24 @@ int HB_MIPI_GetSensorInfo(uint32_t devId, MIPI_SENSOR_INFO_S *snsInfo)
 int HB_MIPI_SwSensorFps(uint32_t devId, uint32_t fps)
 ```
 【功能描述】
-> 切换sensor的帧率
+> 切换 sensor 的帧率
 
 【参数描述】
 
 | 参数名称 |       描述        | 输入/输出 |
 | :------: | :---------------: | :-------: |
-|  devId   | 通路索引，范围0~7 |   输入    |
-|   fps    |   sensor的帧率    |   输入    |
+|  devId   | 通路索引，范围 0~7 |   输入    |
+|   fps    |   sensor 的帧率    |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 必须在HB_MIPI_InitSensor接口调用后才能使用
+> 必须在 HB_MIPI_InitSensor 接口调用后才能使用
 
 【参考代码】
 > 暂无
@@ -693,27 +693,27 @@ int HB_VIN_SetMipiBindDev(uint32_t devId, uint32_t mipiIdx)
 int HB_VIN_GetMipiBindDev(uint32_t devId, uint32_t *mipiIdx)
 ```
 【功能描述】
-> 设置mipi和dev的绑定，dev使用哪一个mipi_host
+> 设置 mipi 和 dev 的绑定，dev 使用哪一个 mipi_host
 
 【参数描述】
 
 | 参数名称 |          描述           | 输入/输出 |
 | :------: | :---------------------: | :-------: |
-|  devId   | 对应通道索引号，范围0~7 |   输入    |
-|mipiIdx|mipi_host的索引| 输入|
+|  devId   | 对应通道索引号，范围 0~7 |   输入    |
+|mipiIdx|mipi_host 的索引| 输入|
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_SetDevAttr/HB_VIN_GetDevAttr
 【函数声明】
@@ -722,30 +722,30 @@ int HB_VIN_SetDevAttr(uint32_t devId,  const VIN_DEV_ATTR_S *stVinDevAttr)
 int HB_VIN_GetDevAttr(uint32_t devId, VIN_DEV_ATTR_S *stVinDevAttr)
 ```
 【功能描述】
-> 设置和获取dev的属性
+> 设置和获取 dev 的属性
 
 【参数描述】
 
 |   参数名称   |          描述           |             输入/输出             |
 | :----------: | :---------------------: | :-------------------------------: |
-|    devId     | 对应通道索引号，范围0~7 |               输入                |
-| stVinDevAttr |       dev通道属性       | 输入，调用HB_VIN_GetDevAttr为输出 |
+|    devId     | 对应通道索引号，范围 0~7 |               输入                |
+| stVinDevAttr |       dev 通道属性       | 输入，调用 HB_VIN_GetDevAttr 为输出 |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> DOL3拆分成多路时，多进程情况：第一个进程要先于第二个进程运行1秒即可。
-> 另外目前不支持HB_VIN_DestroyDev之后重新HB_VIN_SetDevAttr。
+> DOL3 拆分成多路时，多进程情况：第一个进程要先于第二个进程运行 1 秒即可。
+> 另外目前不支持 HB_VIN_DestroyDev 之后重新 HB_VIN_SetDevAttr。
 >
-> 出现SIF_IOC_BIND_GROUT ioctl failed报错，一般是前一次pipeid的调用没有退出，又重新调用。
+> 出现 SIF_IOC_BIND_GROUT ioctl failed 报错，一般是前一次 pipeid 的调用没有退出，又重新调用。
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_SetDevAttrEx/HB_VIN_GetDevAttrEx
 【函数声明】
@@ -754,21 +754,21 @@ int HB_VIN_SetDevAttrEx(uint32_t devId,  const VIN_DEV_ATTR_EX_S *stVinDevAttrEx
 int HB_VIN_GetDevAttrEx(uint32_t devId, VIN_DEV_ATTR_EX_S *stVinDevAttrEx)
 ```
 【功能描述】
-> 设置何获取dev的扩展属性
+> 设置何获取 dev 的扩展属性
 
 【参数描述】
 
 |    参数名称    |          描述           |             输入/输出             |
 | :------------: | :---------------------: | :-------------------------------: |
-|     devId      | 对应通道索引号，范围0~7 |               输入                |
-| stVinDevAttrEx |      dev的扩展属性      | 输入，调用HB_VIN_GetDevAttr为输出 |
+|     devId      | 对应通道索引号，范围 0~7 |               输入                |
+| stVinDevAttrEx |      dev 的扩展属性      | 输入，调用 HB_VIN_GetDevAttr 为输出 |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 该接口暂不支持
@@ -783,26 +783,26 @@ int HB_VIN_EnableDev(uint32_t devId);
 int HB_VIN_DisableDev (uint32_t devId);
 ```
 【功能描述】
-> dev模块的使能和关闭
+> dev 模块的使能和关闭
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  devId   | 对应每路输入，范围0~7 |   输入    |
+|  devId   | 对应每路输入，范围 0~7 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_DestroyDev
 【函数声明】
@@ -810,26 +810,26 @@ int HB_VIN_DisableDev (uint32_t devId);
 int HB_VIN_DestroyDev(uint32_t devId)
 ```
 【功能描述】
-> dev模块的销毁，资源释放
+> dev 模块的销毁，资源释放
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  devId   | 对应每路输入，范围0~7 |   输入    |
+|  devId   | 对应每路输入，范围 0~7 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_SetDevBindPipe/HB_VIN_GetDevBindPipe
 【函数声明】
@@ -839,14 +839,14 @@ int HB_VIN_GetDevBindPipe(uint32_t devId, uint32_t *pipeId)
 
 ```
 【功能描述】
-> 设置dev的chn输出和pipe的chn输入的绑定
-> 设置pipe的chn输入和pipe输出的chn绑定。
+> 设置 dev 的 chn 输出和 pipe 的 chn 输入的绑定
+> 设置 pipe 的 chn 输入和 pipe 输出的 chn 绑定。
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  devId   | 对应每路输入，范围0~7 |   输入    |
+|  devId   | 对应每路输入，范围 0~7 |   输入    |
 |  pipeId  |  对应每路输入，同上   |   输入    |
 
 【返回值】
@@ -854,13 +854,13 @@ int HB_VIN_GetDevBindPipe(uint32_t devId, uint32_t *pipeId)
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> HB_VIN_GetDevBindPipe接口暂未实现
+> HB_VIN_GetDevBindPipe 接口暂未实现
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_CreatePipe/HB_VIN_DestroyPipe
 【函数声明】
@@ -869,21 +869,21 @@ int HB_VIN_CreatePipe(uint32_t pipeId, const VIN_PIPE_ATTR_S * stVinPipeAttr);
 int HB_VIN_DestroyPipe(uint32_t pipeId);
 ```
 【功能描述】
-> 创建pipe、销毁pipe
+> 创建 pipe、销毁 pipe
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  pipeId  | 对应每路输入，范围0~7 |   输入    |
-|stVinPipeAttr|描述pipe属性的指针|输入|
+|  pipeId  | 对应每路输入，范围 0~7 |   输入    |
+|stVinPipeAttr|描述 pipe 属性的指针|输入|
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1134,26 +1134,26 @@ int HB_VIN_StartPipe(uint32_t pipeId);
 int HB_VIN_StopPipe(uint32_t pipeId);
 ```
 【功能描述】
-> 启动和停止pipe
+> 启动和停止 pipe
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  pipeId  | 对应每路输入，范围0~7 |   输入    |
+|  pipeId  | 对应每路输入，范围 0~7 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_EnableChn/HB_VIN_DisableChn
 【函数声明】
@@ -1162,27 +1162,27 @@ int HB_VIN_EnableChn(uint32_t pipeId, uint32_t chnId);
 int HB_VIN_DisableChn(uint32_t pipeId, uint32_t chnId);
 ```
 【功能描述】
-> 对pipe的chn使能和关闭
+> 对 pipe 的 chn 使能和关闭
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  pipeId  | 对应每路输入，范围0~7 |   输入    |
-|  chnId   |       输入1即可       |   输入    |
+|  pipeId  | 对应每路输入，范围 0~7 |   输入    |
+|  chnId   |       输入 1 即可       |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_SetChnLDCAttr/HB_VIN_GetChnLDCAttr
 【函数声明】
@@ -1191,28 +1191,28 @@ int HB_VIN_SetChnLDCAttr(uint32_t pipeId, uint32_t chnId,const VIN_LDC_ATTR_S *s
 int HB_VIN_GetChnLDCAttr(uint32_t pipeId, uint32_t chnId, VIN_LDC_ATTR_S*stVinLdcAttr);
 ```
 【功能描述】
-> 设置和获取LDC的属性
+> 设置和获取 LDC 的属性
 
 【参数描述】
 
 |   参数名称   |         描述          |         输入/输出          |
 | :----------: | :-------------------: | :------------------------: |
-|    pipeId    | 对应每路输入，范围0~7 |            输入            |
-|    chnId     |       输入1即可       |            输入            |
-| stVinLdcAttr |     ldc的属性信息     | 输入，获取属性的时候为输出 |
+|    pipeId    | 对应每路输入，范围 0~7 |            输入            |
+|    chnId     |       输入 1 即可       |            输入            |
+| stVinLdcAttr |     ldc 的属性信息     | 输入，获取属性的时候为输出 |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> LDC有调整送往IPU数据时序的功能，在VIN_ISP与VPS模块是在线模式的情况下，必须要通过该接口配置LDC参数，否则VPS会出异常。VIN_ISP与VPS模块是离线模式LDC参数配置与否都不影响。
+> LDC 有调整送往 IPU 数据时序的功能，在 VIN_ISP 与 VPS 模块是在线模式的情况下，必须要通过该接口配置 LDC 参数，否则 VPS 会出异常。VIN_ISP 与 VPS 模块是离线模式 LDC 参数配置与否都不影响。
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_SetChnDISAttr/HB_VIN_GetChnDISAttr
 【函数声明】
@@ -1221,28 +1221,28 @@ int HB_VIN_SetChnDISAttr(uint32_t pipeId, uint32_t chnId, const VIN_DIS_ATTR_S *
 int HB_VIN_GetChnDISAttr(uint32_t pipeId, uint32_t chnId, VIN_DIS_ATTR_S *stVinDisAttr);
 ```
 【功能描述】
-> 设置和获取DIS的属性
+> 设置和获取 DIS 的属性
 
 【参数描述】
 
 |   参数名称   |         描述          |         输入/输出          |
 | :----------: | :-------------------: | :------------------------: |
-|    pipeId    | 对应每路输入，范围0~7 |            输入            |
-|    chnId     |       输入1即可       |            输入            |
-| stVinDisAttr |     dis的属性信息     | 输入，获取属性的时候为输出 |
+|    pipeId    | 对应每路输入，范围 0~7 |            输入            |
+|    chnId     |       输入 1 即可       |            输入            |
+| stVinDisAttr |     dis 的属性信息     | 输入，获取属性的时候为输出 |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_SetChnAttr
 【函数声明】
@@ -1250,27 +1250,27 @@ int HB_VIN_GetChnDISAttr(uint32_t pipeId, uint32_t chnId, VIN_DIS_ATTR_S *stVinD
 int HB_VIN_SetChnAttr(uint32_t pipeId, uint32_t chnId);
 ```
 【功能描述】
-> 设置chn的属性
+> 设置 chn 的属性
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  pipeId  | 对应每路输入，范围0~7 |   输入    |
-|  chnId   |       输入1即可       |   输入    |
+|  pipeId  | 对应每路输入，范围 0~7 |   输入    |
+|  chnId   |       输入 1 即可       |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> LDC和DIS的属性真正设置是在这个接口里面，HB_VIN_SetChnLDCAttr和HB_VIN_SetChnDISAttr只是给属性赋值。这个chn是指isp的其中一个输出chn,值固定为1。
+> LDC 和 DIS 的属性真正设置是在这个接口里面，HB_VIN_SetChnLDCAttr 和 HB_VIN_SetChnDISAttr 只是给属性赋值。这个 chn 是指 isp 的其中一个输出 chn,值固定为 1。
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_DestroyChn
 【函数声明】
@@ -1278,27 +1278,27 @@ int HB_VIN_SetChnAttr(uint32_t pipeId, uint32_t chnId);
 int HB_VIN_DestroyChn(uint32_t pipeId, uint32_t chnId)
 ```
 【功能描述】
-> 销毁chn
+> 销毁 chn
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  pipeId  | 对应每路输入，范围0~7 |   输入    |
-|  chnId   |       输入1即可       |   输入    |
+|  pipeId  | 对应每路输入，范围 0~7 |   输入    |
+|  chnId   |       输入 1 即可       |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 目前不支持HB_VIN_DestroyChn之后重新HB_VIN_SetChnAttr
+> 目前不支持 HB_VIN_DestroyChn 之后重新 HB_VIN_SetChnAttr
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_GetChnFrame/HB_VIN_ReleaseChnFrame
 【函数声明】
@@ -1307,14 +1307,14 @@ int HB_VIN_GetChnFrame(uint32_t pipeId, uint32_t chnId, void *pstVideoFrame, int
 int HB_VIN_ReleaseChnFrame(uint32_t pipeId, uint32_t chnId, void *pstVideoFrame);
 ```
 【功能描述】
-> 获取pipe chn后的数据
+> 获取 pipe chn 后的数据
 
 【参数描述】
 
 |   参数名称    |                                                                描述                                                                | 输入/输出 |
 | :-----------: | :--------------------------------------------------------------------------------------------------------------------------------: | :-------: |
-|    pipeId     |                                                       对应每路输入，范围0~7                                                        |   输入    |
-|     chnId     |                                                             输入0即可                                                              |   输入    |
+|    pipeId     |                                                       对应每路输入，范围 0~7                                                        |   输入    |
+|     chnId     |                                                             输入 0 即可                                                              |   输入    |
 | pstVideoFrame |                                                              数据信息                                                              |   输出    |
 |    millSec    | 超时参数 millSec<br/>设为-1 时，为阻塞接口；<br/>0 时为 非阻塞接口；<br/>大于 0 时为超时等待时间，<br/>超时时间的 单位为毫秒（ms） |   输入    |
 
@@ -1323,13 +1323,13 @@ int HB_VIN_ReleaseChnFrame(uint32_t pipeId, uint32_t chnId, void *pstVideoFrame)
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 此接口是获取ISP处理之后的图像
+> 此接口是获取 ISP 处理之后的图像
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_GetDevFrame/HB_VIN_ReleaseDevFrame
 【函数声明】
@@ -1338,14 +1338,14 @@ int HB_VIN_GetDevFrame(uint32_t devId, uint32_t chnId, void *videoFrame, int32_t
 int HB_VIN_ReleaseDevFrame(uint32_t devId, uint32_t chnId, void *buf);
 ```
 【功能描述】
-> 获取sif chn处理后的数据，chn为0
+> 获取 sif chn 处理后的数据，chn 为 0
 
 【参数描述】
 
 | 参数名称  |                                                                描述                                                                | 输入/输出 |
 | :-------: | :--------------------------------------------------------------------------------------------------------------------------------: | :-------: |
-|   devId   |                                                       对应每路输入，范围0~7                                                        |   输入    |
-|   chnId   |                                                             输入0即可                                                              |   输入    |
+|   devId   |                                                       对应每路输入，范围 0~7                                                        |   输入    |
+|   chnId   |                                                             输入 0 即可                                                              |   输入    |
 | videoFram |                                                              数据信息                                                              |   输出    |
 |  millSec  | 超时参数 millSec<br/>设为-1 时，为阻塞接口；<br/>0 时为 非阻塞接口；<br/>大于 0 时为超时等待时间，<br/>超时时间的 单位为毫秒（ms） |   输入    |
 
@@ -1354,16 +1354,16 @@ int HB_VIN_ReleaseDevFrame(uint32_t devId, uint32_t chnId, void *buf);
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 此接口是获取SIF处理之后的图像，sif –offline-isp得时候可以dump raw图，
+> 此接口是获取 SIF 处理之后的图像，sif –offline-isp 得时候可以 dump raw 图，
 适用场景：
 >>VIN_OFFLINE_VPS_ONLINE
 >>VIN_OFFLINE_VPS_OFFINE
 >>VIN_SIF_OFFLINE_ISP_OFFLINE_VPS_ONLINE
 
-另外sif-online-isp 同时sif到ddr也可以dump raw图，适用场景：
+另外 sif-online-isp 同时 sif 到 ddr 也可以 dump raw 图，适用场景：
 >>VIN_SIF_ONLINE_DDR_ISP_DDR_VPS_ONLINE
 >>VIN_SIF_ONLINE_DDR_ISP_ONLINE_VPS_ONLINE
 
@@ -1526,14 +1526,14 @@ int HB_VIN_ReleaseDevFrame(uint32_t devId, uint32_t chnId, void *buf);
 int HB_VIN_SendPipeRaw(uint32_t pipeId, void *pstVideoFrame，int32_t millSec)
 ```
 【功能描述】
-> 回灌raw接口，数据给ISP处理
+> 回灌 raw 接口，数据给 ISP 处理
 
 【参数描述】
 
 |   参数名称    |                                                                描述                                                                | 输入/输出 |
 | :-----------: | :--------------------------------------------------------------------------------------------------------------------------------: | :-------: |
-|    pipeId     |                                                       对应每路输入，范围0~7                                                        |   输入    |
-| pstVideoFrame |                                                          回灌raw数据信息                                                           |   输入    |
+|    pipeId     |                                                       对应每路输入，范围 0~7                                                        |   输入    |
+| pstVideoFrame |                                                          回灌 raw 数据信息                                                           |   输入    |
 |    millSec    | 超时参数 millSec<br/>设为-1 时，为阻塞接口；<br/>0 时为 非阻塞接口；<br/>大于 0 时为超时等待时间，<br/>超时时间的 单位为毫秒（ms） |   输入    |
 
 【返回值】
@@ -1541,7 +1541,7 @@ int HB_VIN_SendPipeRaw(uint32_t pipeId, void *pstVideoFrame，int32_t millSec)
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1574,27 +1574,27 @@ int HB_VIN_SetPipeAttr(uint32_t pipeId,VIN_PIPE_ATTR_S *stVinPipeAttr);
 int HB_VIN_GetPipeAttr(uint32_t pipeId, VIN_PIPE_ATTR_S *stVinPipeAttr);
 ```
 【功能描述】
-> 设置pipe（ISP）属性、获取pipe属性
+> 设置 pipe（ISP）属性、获取 pipe 属性
 
 【参数描述】
 
 |   参数名称    |         描述          |       输入/输出       |
 | :-----------: | :-------------------: | :-------------------: |
-|    pipeId     | 对应每路输入，范围0~7 |         输入          |
-| stVinPipeAttr |  描述pipe属性的指针   | 输入，get的时候为输出 |
+|    pipeId     | 对应每路输入，范围 0~7 |         输入          |
+| stVinPipeAttr |  描述 pipe 属性的指针   | 输入，get 的时候为输出 |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> 请参见HB_VIN_CreatePipe/HB_VIN_DestroyPipe举例
+> 请参见 HB_VIN_CreatePipe/HB_VIN_DestroyPipe 举例
 
 ### HB_VIN_CtrlPipeMirror
 【函数声明】
@@ -1602,24 +1602,24 @@ int HB_VIN_GetPipeAttr(uint32_t pipeId, VIN_PIPE_ATTR_S *stVinPipeAttr);
 int HB_VIN_CtrlPipeMirror(uint32_t pipeId, uint8_t on);
 ```
 【功能描述】
-> pipe镜像控制。
+> pipe 镜像控制。
 
 【参数描述】
 
 | 参数名称 |               描述               | 输入/输出 |
 | :------: | :------------------------------: | :-------: |
-|  pipeId  |      对应每路输入，范围0~7       |   输入    |
-|    on    | 非0打开镜像功能，0关闭镜像功能。 |   输入    |
+|  pipeId  |      对应每路输入，范围 0~7       |   输入    |
+|    on    | 非 0 打开镜像功能，0 关闭镜像功能。 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> Flip功能需要借助GDC实现，如先把镜像打开然后再旋转180度。
+> Flip 功能需要借助 GDC 实现，如先把镜像打开然后再旋转 180 度。
 
 ### HB_VIN_MotionDetect
 【函数声明】
@@ -1627,13 +1627,13 @@ int HB_VIN_CtrlPipeMirror(uint32_t pipeId, uint8_t on);
 int HB_VIN_MotionDetect(uint32_t pipeId)
 ```
 【功能描述】
-> 检测MD是否有中断,有MD中断就返回
+> 检测 MD 是否有中断,有 MD 中断就返回
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  pipeId  | 对应每路输入，范围0~7 |   输入    |
+|  pipeId  | 对应每路输入，范围 0~7 |   输入    |
 
 【返回值】
 
@@ -1645,7 +1645,7 @@ int HB_VIN_MotionDetect(uint32_t pipeId)
 > 无
 
 【参考代码】
-> 请参见HB_VIN_EnableDevMd举例
+> 请参见 HB_VIN_EnableDevMd 举例
 
 ### HB_VIN_InitLens
 【函数声明】
@@ -1659,8 +1659,8 @@ int HB_VIN_InitLens(uint32_t pipeId, VIN_LENS_FUNC_TYPE_E lensType, const VIN_LE
 
 |  参数名称  |             描述             | 输入/输出 |
 | :--------: | :--------------------------: | :-------: |
-|   pipeId   |    对应每路输入，范围0~7     |   输入    |
-|  lensType  | 马达的功能类型，AF、Zoom功能 |   输入    |
+|   pipeId   |    对应每路输入，范围 0~7     |   输入    |
+|  lensType  | 马达的功能类型，AF、Zoom 功能 |   输入    |
 | lenCtlAttr |           控制属性           |   输入    |
 
 【返回值】
@@ -1668,10 +1668,10 @@ int HB_VIN_InitLens(uint32_t pipeId, VIN_LENS_FUNC_TYPE_E lensType, const VIN_LE
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 如果使用AF调用一次接口，如果同时使用AF和Zoom功能，调用两次初始化。使用就去调用，不使用建议不调用。
+> 如果使用 AF 调用一次接口，如果同时使用 AF 和 Zoom 功能，调用两次初始化。使用就去调用，不使用建议不调用。
 
 【参考代码】
 > 暂无
@@ -1688,14 +1688,14 @@ int HB_VIN_DeinitLens(uint32_t pipeId)
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  pipeId  | 对应每路输入，范围0~7 |   输入    |
+|  pipeId  | 对应每路输入，范围 0~7 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1709,13 +1709,13 @@ int HB_VIN_DeinitLens(uint32_t pipeId)
 int HB_VIN_RegisterDisCallback(uint32_t pipeId, VIN_DIS_CALLBACK_S *pstDISCallback)
 ```
 【功能描述】
-> 注册dis回调
+> 注册 dis 回调
 
 【参数描述】
 
 |    参数名称    |         描述          | 输入/输出 |
 | :------------: | :-------------------: | :-------: |
-|     pipeId     | 对应每路输入，范围0~7 |   输入    |
+|     pipeId     | 对应每路输入，范围 0~7 |   输入    |
 | pstDISCallback |       回调接口        |   输入    |
 
 【返回值】
@@ -1723,7 +1723,7 @@ int HB_VIN_RegisterDisCallback(uint32_t pipeId, VIN_DIS_CALLBACK_S *pstDISCallba
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1738,21 +1738,21 @@ int HB_VIN_SetDevVCNumber(uint32_t devId, uint32_t vcNumber);
 int HB_VIN_GetDevVCNumber(uint32_t devId, uint32_t *vcNumber);
 ```
 【功能描述】
-> 设置和获取dev的vc_index，使用MIPI的哪个vc.
+> 设置和获取 dev 的 vc_index，使用 MIPI 的哪个 vc.
 
 【参数描述】
 
 | 参数名称 |         描述          |       输入/输出        |
 | :------: | :-------------------: | :--------------------: |
-|  devId   | 对应每路输入，范围0~7 |          输入          |
-| vcNumber | 对应mipi的vc,范围0~3  | 输入，获取的时候为输出 |
+|  devId   | 对应每路输入，范围 0~7 |          输入          |
+| vcNumber | 对应 mipi 的 vc,范围 0~3  | 输入，获取的时候为输出 |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1766,35 +1766,35 @@ int HB_VIN_GetDevVCNumber(uint32_t devId, uint32_t *vcNumber);
 int HB_VIN_AddDevVCNumber(uint32_t devId, uint32_t vcNumber)
 ```
 【功能描述】
-> 设置dev的vc_index,使用MIPI的哪个vc.
+> 设置 dev 的 vc_index,使用 MIPI 的哪个 vc.
 
 【参数描述】
 
 | 参数名称 |          描述           | 输入/输出 |
 | :------: | :---------------------: | :-------: |
-|  devId   | 对应每路输vc入，范围0~7 |   输入    |
-| vcNumber |  对应mipi的vc,范围0~3   |   输入    |
+|  devId   | 对应每路输 vc 入，范围 0~7 |   输入    |
+| vcNumber |  对应 mipi 的 vc,范围 0~3   |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 当使用linear模式时，这个接口不用使用，当使用DOL2模式时，此接口vcNumber设置为1，当使用DOL3模式时，调用两次HB_VIN_AddDevVCNumber，vcNumber分别传0和1.
+> 当使用 linear 模式时，这个接口不用使用，当使用 DOL2 模式时，此接口 vcNumber 设置为 1，当使用 DOL3 模式时，调用两次 HB_VIN_AddDevVCNumber，vcNumber 分别传 0 和 1.
 
 【参考代码】
-> 一路DOL2
+> 一路 DOL2
 > 初始化顺序：
-> 1)  把dev0绑到mipi0
+> 1)  把 dev0 绑到 mipi0
 > HB_VIN_SetMipiBindDev(0, 0)
-> 2)  把mipi0的虚通道0绑到dev0
+> 2)  把 mipi0 的虚通道 0 绑到 dev0
 > HB_VIN_SetDevVCNumber(0, 0)
-> 3)  把mipi0的虚通道1绑到dev0
+> 3)  把 mipi0 的虚通道 1 绑到 dev0
 > HB_VIN_AddDevVCNumber(0, 1);
-> 4)  把dev0分别绑到ISP pipe0,
+> 4)  把 dev0 分别绑到 ISP pipe0,
 > HB_VIN_SetDevBindPipe(0, 0)
 ```c
     ret = HB_SYS_SetVINVPSMode(pipeId, vin_vps_mode);
@@ -1856,22 +1856,22 @@ int HB_VIN_AddDevVCNumber(uint32_t devId, uint32_t vcNumber)
 int HB_VIN_SetDevMclk(uint32_t devId, uint32_t devMclk, uint32_t vpuMclk);
 ```
 【功能描述】
-> 设置sif mclk和vpu clk.
+> 设置 sif mclk 和 vpu clk.
 
 【参数描述】
 
 | 参数名称 |             描述             |   输入/输出   |
 | :------: | :--------------------------: | :-----------: |
-|  devId   |    对应每路输入，范围0~7     |     输入      |
-| devMclk  | Sif mclk设置，请参见SIF MCLK | 输入，单位KHz |
-| vpuMclk  |  vpu clk设置, 请参见VPU CLK  | 输入，单位KHz |
+|  devId   |    对应每路输入，范围 0~7     |     输入      |
+| devMclk  | Sif mclk 设置，请参见 SIF MCLK | 输入，单位 KHz |
+| vpuMclk  |  vpu clk 设置, 请参见 VPU CLK  | 输入，单位 KHz |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1885,14 +1885,14 @@ int HB_VIN_SetDevMclk(uint32_t devId, uint32_t devMclk, uint32_t vpuMclk);
 int HB_VIN_GetChnFd(uint32_t pipeId, uint32_t chnId)
 ```
 【功能描述】
-> 获取通道的fd
+> 获取通道的 fd
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  pipeId  | 对应每路输入，范围0~7 |   输入    |
-|  chnId   |      通道号，为0      |   输入    |
+|  pipeId  | 对应每路输入，范围 0~7 |   输入    |
+|  chnId   |      通道号，为 0      |   输入    |
 
 【返回值】
 
@@ -1913,7 +1913,7 @@ int HB_VIN_GetChnFd(uint32_t pipeId, uint32_t chnId)
 int HB_VIN_CloseFd(void)
 ```
 【功能描述】
-> 关闭通道的fd
+> 关闭通道的 fd
 
 【参数描述】
 
@@ -1926,7 +1926,7 @@ int HB_VIN_CloseFd(void)
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
 > 无
@@ -1940,23 +1940,23 @@ int HB_VIN_CloseFd(void)
 int HB_VIN_EnableDevMd(uint32_t devId)
 ```
 【功能描述】
-> 打开motiondetect功能
+> 打开 motiondetect 功能
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  devId   | 对应每路输入，范围0~7 |   输入    |
+|  devId   | 对应每路输入，范围 0~7 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 调用得在HB_VIN_SetDevAttrEx之后，HB_VIN_SetDevAttrEx接口是设置MD的一些属性值
+> 调用得在 HB_VIN_SetDevAttrEx 之后，HB_VIN_SetDevAttrEx 接口是设置 MD 的一些属性值
 
 【参考代码】
 ```c
@@ -1982,7 +1982,7 @@ int HB_VIN_EnableDevMd(uint32_t devId)
         return ret;
     }
 ```
-下面起一个线程调用HB_VIN_MotionDetect检测收到MD中断后将MD功能关闭HB_VIN_DisableDevMd。
+下面起一个线程调用 HB_VIN_MotionDetect 检测收到 MD 中断后将 MD 功能关闭 HB_VIN_DisableDevMd。
 ```c
     int md_func(work_info_t * info)
     {
@@ -2005,26 +2005,26 @@ int HB_VIN_EnableDevMd(uint32_t devId)
 int HB_VIN_DisableDevMd(uint32_t devId)
 ```
 【功能描述】
-> 关闭motiondetect功能
+> 关闭 motiondetect 功能
 
 【参数描述】
 
 | 参数名称 |         描述          | 输入/输出 |
 | :------: | :-------------------: | :-------: |
-|  devId   | 对应每路输入，范围0~7 |   输入    |
+|  devId   | 对应每路输入，范围 0~7 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 |:------:|:----:|
 |    0   | 成功 |
-|   非0  | 失败 |
+|   非 0  | 失败 |
 
 【注意事项】
-> 用户收到md中断后关闭md功能
+> 用户收到 md 中断后关闭 md 功能
 
 【参考代码】
-> 请参见HB_VIN_EnableDevMd举例
+> 请参见 HB_VIN_EnableDevMd 举例
 
 ## 数据结构
 
@@ -2039,11 +2039,11 @@ typedef enum HB_MIPI_INPUT_MODE_E
 } MIPI_INPUT_MODE_E;
 ```
 【功能描述】
-> sensor接入方式
+> sensor 接入方式
 
 【成员说明】
-- MIPI接入
-- DVP接入
+- MIPI 接入
+- DVP 接入
 
 ### MIPI_SENSOR_MODE_E
 【结构定义】
@@ -2057,10 +2057,10 @@ typedef enum HB_MIPI_SENSOR_MODE_E
 } MIPI_SENSOR_MODE_E;
 ```
 【功能描述】
-> sensor工作模式
+> sensor 工作模式
 
 【成员说明】
-> linear模式、DOL2模式、DOL3模式、PWL模式
+> linear 模式、DOL2 模式、DOL3 模式、PWL 模式
 
 ### MIPI_DESERIAL_INFO_T
 【结构定义】
@@ -2074,17 +2074,17 @@ typedef struct HB_MIPI_DESERIAL_INFO_T {
 } MIPI_DESERIAL_INFO_T;
 ```
 【功能描述】
-> 定义serdes初始化的属性信息
+> 定义 serdes 初始化的属性信息
 
 【成员说明】
 
 |      成员      | 含义                                         |
 | :------------: | :------------------------------------------- |
-|    bus_type    | 总线类型，0是i2c,1是spi                      |
-|    bus_num     | 总线号,根据具体板子硬件原理图确定，目前用的5 |
-| deserial_addr  | serdes地址                                   |
+|    bus_type    | 总线类型，0 是 i2c,1 是 spi                      |
+|    bus_num     | 总线号,根据具体板子硬件原理图确定，目前用的 5 |
+| deserial_addr  | serdes 地址                                   |
 | physical_entry | 保留                                         |
-| deserial_name  | serdes名字                                   |
+| deserial_name  | serdes 名字                                   |
 
 ### MIPI_SNS_INFO_S
 【结构定义】
@@ -2112,31 +2112,31 @@ typedef struct HB_MIPI_SNS_INFO_S {
 } MIPI_SNS_INFO_S;
 ```
 【功能描述】
-> 定义sensor初始化的属性信息
+> 定义 sensor 初始化的属性信息
 
 【成员说明】
 
 |      成员      | 含义                                                                       |
 | :------------: | :------------------------------------------------------------------------- |
-|      port      | 当前sensor的一个逻辑编号，必须从0开始                                      |
-|    dev_port    | 每路sensor操作的驱动节点，一个驱动支持多个节点。                           |
-|    bus_type    | 总线类型，0是i2c,1是spi                                                    |
-|    bus_num     | 总线号，根据具体板子硬件原理图确定,现在默认i2c5                            |
+|      port      | 当前 sensor 的一个逻辑编号，必须从 0 开始                                      |
+|    dev_port    | 每路 sensor 操作的驱动节点，一个驱动支持多个节点。                           |
+|    bus_type    | 总线类型，0 是 i2c,1 是 spi                                                    |
+|    bus_num     | 总线号，根据具体板子硬件原理图确定,现在默认 i2c5                            |
 |      fps       | 帧率                                                                       |
-|   resolution   | Sensor的分辨率                                                             |
-|  sensor_addr   | sensor地址                                                                 |
-|  serial_addr   | sensor内部serdes地址                                                       |
-|  entry_index   | sensor使用的mipi索引                                                       |
-|  sensor_mode   | sensor工作模式，1是normal,2是dol2,3是dol3                                  |
+|   resolution   | Sensor 的分辨率                                                             |
+|  sensor_addr   | sensor 地址                                                                 |
+|  serial_addr   | sensor 内部 serdes 地址                                                       |
+|  entry_index   | sensor 使用的 mipi 索引                                                       |
+|  sensor_mode   | sensor 工作模式，1 是 normal,2 是 dol2,3 是 dol3                                  |
 |   reg_width    | 寄存器地址宽度                                                             |
-|  sensor_name   | sensor名字                                                                 |
-|   extra_mode   | 区分sensor的特性，具体sensor驱动实现                                       |
-| deserial_index | 当前属于哪一个serdes                                                       |
-| deserial_port  | 当前属于serdes哪一个port                                                   |
-|    gpio_num    | 有的sensor需要gpio上下电，此sensor用到的相关GPIO管脚                       |
-|    gpio_pin    | 操作的GPIO管脚，GPIO_NUM是用到的GPIO管脚的个数                             |
-|   gpio_level   | 初始有效值，比如该管脚需要先拉低再拉高，此值为0，如果先拉高在拉低，此值为1 |
-|    spi_info    | sensor spi信息，有的sensor通过spi总线访问                                  |
+|  sensor_name   | sensor 名字                                                                 |
+|   extra_mode   | 区分 sensor 的特性，具体 sensor 驱动实现                                       |
+| deserial_index | 当前属于哪一个 serdes                                                       |
+| deserial_port  | 当前属于 serdes 哪一个 port                                                   |
+|    gpio_num    | 有的 sensor 需要 gpio 上下电，此 sensor 用到的相关 GPIO 管脚                       |
+|    gpio_pin    | 操作的 GPIO 管脚，GPIO_NUM 是用到的 GPIO 管脚的个数                             |
+|   gpio_level   | 初始有效值，比如该管脚需要先拉低再拉高，此值为 0，如果先拉高在拉低，此值为 1 |
+|    spi_info    | sensor spi 信息，有的 sensor 通过 spi 总线访问                                  |
 
 ### MIPI_SENSOR_INFO_S
 【结构定义】
@@ -2149,16 +2149,16 @@ typedef struct HB_MIPI_SENSOR_INFO_S {
 } MIPI_SENSOR_INFO_S;
 ```
 【功能描述】
-> 定义dev初始化的属性信息
+> 定义 dev 初始化的属性信息
 
 【成员说明】
 
 |     成员     | 含义                 |
 | :----------: | :------------------- |
-|  deseEnable  | 该sensor是否有serdes |
-|  inputMode   | sensor接入方式       |
-| deserialInfo | serdes信息           |
-|  sensorInfo  | sensor信息           |
+|  deseEnable  | 该 sensor 是否有 serdes |
+|  inputMode   | sensor 接入方式       |
+| deserialInfo | serdes 信息           |
+|  sensorInfo  | sensor 信息           |
 
 ### MIPI_HOST_CFG_S
 【结构定义】
@@ -2179,22 +2179,22 @@ typedef struct HB_MIPI_HOST_CFG_S {
 } MIPI_HOST_CFG_S;
 ```
 【功能描述】
-> 定义mipi初始化参数信息
+> 定义 mipi 初始化参数信息
 
 【成员说明】
 
 |      成员      | 含义                                                   |
 | :------------: | :----------------------------------------------------- |
-|      lane      | lane个数，0~4                                          |
-|    datatype    | 数据格式,参见DATA TYPE                                 |
-|      mclk      | mipi模块主时钟，目前固定是24MHZ                        |
-|    mipiclk     | sensor 输出 总的mipi bit rate, 单位 Mbits/每秒         |
-|      fps       | sensor输出实际帧率                                     |
-|     width      | sensor输出实际宽度                                     |
-|     height     | sensor输出实际高度                                     |
-|   linelenth    | sensor输出带blanking的总行长                           |
-|   framelenth   | sensor输出带blanking的总行数                           |
-|     settle     | sensor输出实际 Ttx-zero + Ttx-prepare时间（clk为单位） |
+|      lane      | lane 个数，0~4                                          |
+|    datatype    | 数据格式,参见 DATA TYPE                                 |
+|      mclk      | mipi 模块主时钟，目前固定是 24MHZ                        |
+|    mipiclk     | sensor 输出 总的 mipi bit rate, 单位 Mbits/每秒         |
+|      fps       | sensor 输出实际帧率                                     |
+|     width      | sensor 输出实际宽度                                     |
+|     height     | sensor 输出实际高度                                     |
+|   linelenth    | sensor 输出带 blanking 的总行长                           |
+|   framelenth   | sensor 输出带 blanking 的总行数                           |
+|     settle     | sensor 输出实际 Ttx-zero + Ttx-prepare 时间（clk 为单位） |
 |  channel_num   | 使用虚通道的个数                                       |
 | channel_sel[4] | 保存每个虚通道的值                                     |
 
@@ -2207,14 +2207,14 @@ typedef struct HB_MIPI_ATTR_S {
 } MIPI_ATTR_S;
 ```
 【功能描述】
-> 定义mipi初始化参数信息
+> 定义 mipi 初始化参数信息
 
 【成员说明】
 
 |     成员      | 含义                               |
 | :-----------: | :--------------------------------- |
-| mipi_host_cfg | mipi host属性结构体                |
-|  dev_enable   | mipi dev是否使能，1是使能，0是关闭 |
+| mipi_host_cfg | mipi host 属性结构体                |
+|  dev_enable   | mipi dev 是否使能，1 是使能，0 是关闭 |
 
 ### MIPI_SPI_DATA_S
 【结构定义】
@@ -2226,15 +2226,15 @@ typedef struct HB_MIPI_SPI_DATA_S {
 } MIPI_SPI_DATA_S;
 ```
 【功能描述】
-> 定义sensor相关spi信息
+> 定义 sensor 相关 spi 信息
 
 【成员说明】
 
 |   成员    | 含义          |
 | :-------: | :------------ |
-| spi_mode  | spi的工作模式 |
-|  spi_cs   | spi的片选     |
-| spi_speed | spi的传输速率 |
+| spi_mode  | spi 的工作模式 |
+|  spi_cs   | spi 的片选     |
+| spi_speed | spi 的传输速率 |
 
 ### VIN_DEV_SIZE_S
 【结构定义】
@@ -2247,13 +2247,13 @@ typedef struct HB_VIN_DEV_SIZE_S {
 } VIN_DEV_SIZE_S;
 ```
 【功能描述】
-> 定义dev初始化的属性信息
+> 定义 dev 初始化的属性信息
 
 【成员说明】
 
 |    成员    | 含义                                                                            |
 | :--------: | :------------------------------------------------------------------------------ |
-|   format   | 像素格式，format为0代表是raw8~raw16,根据pixel_lenght来表示究竟是raw8还是raw16。 |
+|   format   | 像素格式，format 为 0 代表是 raw8~raw16,根据 pixel_lenght 来表示究竟是 raw8 还是 raw16。 |
 |   width    | 数据宽                                                                          |
 |   height   | 数据高                                                                          |
 | pix_length | 每个像素点长度                                                                  |
@@ -2277,24 +2277,24 @@ typedef struct HB_VIN_MIPI_ATTR_S {
 } VIN_MIPI_ATTR_S;
 ```
 【功能描述】
-> 定义dev mipi初始化的信息
+> 定义 dev mipi 初始化的信息
 
 【成员说明】
 
 |         成员         | 含义                                                                                        |
 | :------------------: | :------------------------------------------------------------------------------------------ |
-|        enable        | mipi使能,0是关闭，1是使能                                                                   |
-|     ipi_channels     | ipi_channels表示用了几个channel，默认是0开始，如果设置是2，是用了0，1                       |
-|       ipi_mode       | 当DOL2分成两路linear或者DOL3分成一路DOl2和一路linear或者三路linear的时候，此值就赋值为2或3. |
-|    enable_mux_out    | 使能mux选择输出                                                                             |
-|   enable_frame_id    | 是否使能frameid                                                                             |
-|    enable_bypass     | 是否使能bypass                                                                              |
+|        enable        | mipi 使能,0 是关闭，1 是使能                                                                   |
+|     ipi_channels     | ipi_channels 表示用了几个 channel，默认是 0 开始，如果设置是 2，是用了 0，1                       |
+|       ipi_mode       | 当 DOL2 分成两路 linear 或者 DOL3 分成一路 DOl2 和一路 linear 或者三路 linear 的时候，此值就赋值为 2 或 3. |
+|    enable_mux_out    | 使能 mux 选择输出                                                                             |
+|   enable_frame_id    | 是否使能 frameid                                                                             |
+|    enable_bypass     | 是否使能 bypass                                                                              |
 |  enable_line_shift   | 未用                                                                                        |
 |  enable_id_decoder   | 未用                                                                                        |
-|  set_init_frame_id   | 初始frame id值一般为1                                                                       |
+|  set_init_frame_id   | 初始 frame id 值一般为 1                                                                       |
 | set_line_shift_count | 未用                                                                                        |
 | set_bypass_channels  | 未用                                                                                        |
-|    enable_pattern    | 是否使能testpartern                                                                         |
+|    enable_pattern    | 是否使能 testpartern                                                                         |
 
 ### VIN_DEV_INPUT_DDR_ATTR_S
 【结构定义】
@@ -2307,15 +2307,15 @@ typedef struct HB_VIN_DEV_INPUT_DDR_ATTR_S {
 } VIN_DEV_INPUT_DDR_ATTR_S;
 ```
 【功能描述】
-> 定义dev输入信息，offline和回灌场景用
+> 定义 dev 输入信息，offline 和回灌场景用
 
 【成员说明】
 
 |      成员       | 含义                                                         |
 | :-------------: | :----------------------------------------------------------- |
-|     stride      | 硬件stride 跟格式匹配，如果是12bit那么stride = widthx1.5，如果是10bit，stride = widthx1.25,如此类推 |
+|     stride      | 硬件 stride 跟格式匹配，如果是 12bit 那么 stride = widthx1.5，如果是 10bit，stride = widthx1.25,如此类推 |
 |     buf_num     | 回灌的存储数据的 buf 数目                                    |
-| raw_feedback_en | 使能回灌模式，不能和offline 模式同时开启，独立使用           |
+| raw_feedback_en | 使能回灌模式，不能和 offline 模式同时开启，独立使用           |
 |      data       | 数据格式，见 VIN_DEV_SIZE_S                                  |
 
 ### VIN_DEV_OUTPUT_DDR_S
@@ -2328,15 +2328,15 @@ typedef struct HB_VIN_DEV_OUTPUT_DDR_S {
 } VIN_DEV_OUTPUT_DDR_S;
 ```
 【功能描述】
-> 定义dev 输出到ddr初始化的信息
+> 定义 dev 输出到 ddr 初始化的信息
 
 【成员说明】
 
 |    成员    | 含义                                                                            |
 | :--------: | :------------------------------------------------------------------------------ |
-|   stride   | 硬件stride 跟格式匹配，目前12bit  1952x1.5                                      |
-| buffer_num | dev 输出到ddr 的buf 个数                                                        |
-| frameDepth | 最多get的帧数, buffer_num是总buff数量，建议frameDepth值最大是ddrOutBufNum – 4。 |
+|   stride   | 硬件 stride 跟格式匹配，目前 12bit  1952x1.5                                      |
+| buffer_num | dev 输出到 ddr 的 buf 个数                                                        |
+| frameDepth | 最多 get 的帧数, buffer_num 是总 buff 数量，建议 frameDepth 值最大是 ddrOutBufNum – 4。 |
 
 ### VIN_DEV_OUTPUT_ISP_S
 【结构定义】
@@ -2355,22 +2355,22 @@ typedef struct HB_VIN_DEV_OUTPUT_ISP_S {
 } VIN_DEV_OUTPUT_ISP_S;
 ```
 【功能描述】
-> 定义dev 输出到pipe初始化的信息
+> 定义 dev 输出到 pipe 初始化的信息
 
 【成员说明】
 
 |        成员         | 含义                                                                                |
 | :-----------------: | :---------------------------------------------------------------------------------- |
 |     dol_exp_num     | 曝光模式，1 为普通模式，dol 2 或者 3 设置对应数目                                   |
-|    enable_dgain     | ISP内部调试参数，暂可忽略                                                           |
+|    enable_dgain     | ISP 内部调试参数，暂可忽略                                                           |
 |   set_dgain_short   | ISP 内部调试参数，暂可忽略                                                          |
 |  set_dgain_medium   | ISP 内部调试参数，暂可忽略                                                          |
 |   set_dgain_long    | ISP 内部调试参数，暂可忽略                                                          |
-| short_maxexp_lines  | 最短帧的最大曝光行数，一般是sensor mode寄存器表中找，DOL2/3需要填，用来分配IRAM大小 |
-| medium_maxexp_lines | 普通帧的最大曝光行数，一般是sensor mode寄存器表中找，DOL3需要填，用来分配IRAM大小   |
-|    vc_short_seq     | 用来描述DOL2/3模式下，短帧的顺序                                                    |
-|    vc_medium_seq    | 用来描述DOL2/3模式下，普通帧的顺序                                                  |
-|     vc_long_seq     | 用来描述DOL2/3模式下，长帧的顺序                                                    |
+| short_maxexp_lines  | 最短帧的最大曝光行数，一般是 sensor mode 寄存器表中找，DOL2/3 需要填，用来分配 IRAM 大小 |
+| medium_maxexp_lines | 普通帧的最大曝光行数，一般是 sensor mode 寄存器表中找，DOL3 需要填，用来分配 IRAM 大小   |
+|    vc_short_seq     | 用来描述 DOL2/3 模式下，短帧的顺序                                                    |
+|    vc_medium_seq    | 用来描述 DOL2/3 模式下，普通帧的顺序                                                  |
+|     vc_long_seq     | 用来描述 DOL2/3 模式下，长帧的顺序                                                    |
 
 ### VIN_DEV_ATTR_S
 【结构定义】
@@ -2388,17 +2388,17 @@ typedef struct HB_VIN_DEV_ATTR_S {
     }VIN_DEV_ATTR_S;
 ```
 【功能描述】
-> 定义dev初始化的属性信息
+> 定义 dev 初始化的属性信息
 
 【成员说明】
 
 |        成员         | 含义                                                        |
 | :-----------------: | :---------------------------------------------------------- |
 |   VIN_DEV_SIZE_S    | stSize 输入的数据                                           |
-| VIN_DEV_INTF_MODE_E | enIntfMode sif(dev)输入的接口模式，mipi or dvp,目前都是mipi |
-|     DdrIspAttr      | isp(pipe)的输入属性配置，offline或者是回灌                  |
-|     outDdrAttr      | sif(dev)的输出到ddr配置                                     |
-|     outIspAttr      | sif到isp一些属性设置                                        |
+| VIN_DEV_INTF_MODE_E | enIntfMode sif(dev)输入的接口模式，mipi or dvp,目前都是 mipi |
+|     DdrIspAttr      | isp(pipe)的输入属性配置，offline 或者是回灌                  |
+|     outDdrAttr      | sif(dev)的输出到 ddr 配置                                     |
+|     outIspAttr      | sif 到 isp 一些属性设置                                        |
 
 ### VIN_DEV_ATTR_EX_S
 【结构定义】
@@ -2417,22 +2417,22 @@ typedef struct HB_VIN_DEV_ATTR_EX_S {
 }VIN_DEV_ATTR_EX_S;
 ```
 【功能描述】
-> 定义md相关信息
+> 定义 md 相关信息
 
 【成员说明】
 
 |      成员      | 含义                                                                                                                                                   |
 | :------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-|    path_sel    | 0：sif-isp通路；1：sif-ipu通路                                                                                                                         |
-|    roi_top     | ROI的y坐标                                                                                                                                             |
-|    roi_left    | ROI的x坐标                                                                                                                                             |
-|   roi_width    | ROI的长，必须是step的整数s倍                                                                                                                           |
-|   roi_height   | ROI的宽， 必须是step的整数倍                                                                                                                           |
-|   grid_step    | 对应motion detect的区域中划分的每块的宽和高。为2的整数次幂，有效范围为4~128。                                                                          |
+|    path_sel    | 0：sif-isp 通路；1：sif-ipu 通路                                                                                                                         |
+|    roi_top     | ROI 的 y 坐标                                                                                                                                             |
+|    roi_left    | ROI 的 x 坐标                                                                                                                                             |
+|   roi_width    | ROI 的长，必须是 step 的整数 s 倍                                                                                                                           |
+|   roi_height   | ROI 的宽， 必须是 step 的整数倍                                                                                                                           |
+|   grid_step    | 对应 motion detect 的区域中划分的每块的宽和高。为 2 的整数次幂，有效范围为 4~128。                                                                          |
 | grid_tolerance | 每个块前后两帧进行比较的阈值。当前后两帧中相同块进行相减，插值超过这个阈值时，判断为不同。                                                             |
-|   threshold    | 动态检测选取的ROI区域中划分的块比较不同的个数超过这个阈值,发出mot_det中断。                                                                            |
-|  weight_decay  | 新的一帧更新ref buffer时不是完全替代上一帧的数据，而是前后两帧加权平均的结果。Mot_det_wgt_decay为当前帧的权重，前一帧的权重为(256-mot_det_wgt_decay)。 |
-|   precision    | 为进行每个块计算时保留的小数点后的精度的位数，有效范围为1~4.                                                                                           |
+|   threshold    | 动态检测选取的 ROI 区域中划分的块比较不同的个数超过这个阈值,发出 mot_det 中断。                                                                            |
+|  weight_decay  | 新的一帧更新 ref buffer 时不是完全替代上一帧的数据，而是前后两帧加权平均的结果。Mot_det_wgt_decay 为当前帧的权重，前一帧的权重为(256-mot_det_wgt_decay)。 |
+|   precision    | 为进行每个块计算时保留的小数点后的精度的位数，有效范围为 1~4.                                                                                           |
 
 ### VIN_PIPE_SENSOR_MODE_E
 【结构定义】
@@ -2447,10 +2447,10 @@ typedef enum HB_VIN_PIPE_SENSOR_MODE_E {
 } VIN_PIPE_SENSOR_MODE_E;
 ```
 【功能描述】
-> sensor工作模式
+> sensor 工作模式
 
 【成员说明】
-> normal模式、DOL2模式、DOL3模式、PWL模式（压缩模式）
+> normal 模式、DOL2 模式、DOL3 模式、PWL 模式（压缩模式）
 
 ### VIN_PIPE_CFA_PATTERN_E
 【结构定义】
@@ -2479,7 +2479,7 @@ typedef struct HB_VIN_PIPE_SIZE_S {
 } VIN_PIPE_SIZE_S;
 ```
 【功能描述】
-> 定义pipe size 数据信息
+> 定义 pipe size 数据信息
 
 【成员说明】
 
@@ -2498,13 +2498,13 @@ typedef struct HB_VIN_PIPE_CALIB_S {
 } VIN_PIPE_CALIB_S;
 ```
 【功能描述】
-> sensor矫正数据加载
+> sensor 矫正数据加载
 
 【成员说明】
 
 | 成员  | 含义                       |
 | :---: | :------------------------- |
-| mode  | 是否开启sensor矫正数据加载 |
+| mode  | 是否开启 sensor 矫正数据加载 |
 | lname | 对应使用的校准库           |
 
 ### VIN_PIPE_ATTR_S
@@ -2527,24 +2527,24 @@ typedef struct HB_VIN_PIPE_ATTR_S {
 } VIN_PIPE_ATTR_S;
 ```
 【功能描述】
-> 定义pipe属性信息
+> 定义 pipe 属性信息
 
 【成员说明】
 
 |     成员     | 含义                                                         |
 | :----------: | :----------------------------------------------------------- |
 | ddrOutBufNum | 数据的位宽，8 \10\12\14\16                                   |
-|  frameDepth  | 最多get的帧数, ddrOutBufNum是总buff数量，建议frameDepth值最大是ddrOutBufNum – 3。 |
-|   snsMode    | sensor工作模式                                               |
-|    stSize    | sensor的数据信息，见17                                       |
-|  cfaPattern  | 数据格式布局，和sensor保持一致                               |
-|  temperMode  | temper模式，0关闭，2打开                                     |
-| BypassEnable | 是否使能isp的bypass                                          |
-| ispAlgoState | 是否启动3a算法库,1是启动，0是关闭                            |
+|  frameDepth  | 最多 get 的帧数, ddrOutBufNum 是总 buff 数量，建议 frameDepth 值最大是 ddrOutBufNum – 3。 |
+|   snsMode    | sensor 工作模式                                               |
+|    stSize    | sensor 的数据信息，见 17                                       |
+|  cfaPattern  | 数据格式布局，和 sensor 保持一致                               |
+|  temperMode  | temper 模式，0 关闭，2 打开                                     |
+| BypassEnable | 是否使能 isp 的 bypass                                          |
+| ispAlgoState | 是否启动 3a 算法库,1 是启动，0 是关闭                            |
 |   bitwidth   | 位宽，有效值 8、10、12、14、16、20                           |
-|    startX    | 相对于原点的X偏移                                            |
-|    startY    | 相对于原点的Y偏移                                            |
-|    calib     | 是否开启sensor矫正数据加载，1是开启，0是关闭。               |
+|    startX    | 相对于原点的 X 偏移                                            |
+|    startY    | 相对于原点的 Y 偏移                                            |
+|    calib     | 是否开启 sensor 矫正数据加载，1 是开启，0 是关闭。               |
 
 ### VIN_LDC_PATH_SEL_S
 【结构定义】
@@ -2559,7 +2559,7 @@ typedef struct HB_VIN_LDC_PATH_SEL_S {
 } VIN_LDC_PATH_SEL_S;
 ```
 【功能描述】
-> 定义LDC属性信息
+> 定义 LDC 属性信息
 
 【成员说明】
 
@@ -2567,8 +2567,8 @@ typedef struct HB_VIN_LDC_PATH_SEL_S {
 | :------------: | :-------- |
 |   rg_y_only    | 输出类型  |
 |   rg_uv_mode   | 输出类型  |
-| rg_uv_interpo  | turning用 |
-| rg_h_blank_cyc | turning用 |
+| rg_uv_interpo  | turning 用 |
+| rg_h_blank_cyc | turning 用 |
 
 ### VIN_LDC_PICSIZE_S
 【结构定义】
@@ -2579,14 +2579,14 @@ typedef struct HB_VIN_LDC_PICSIZE_S {
 } VIN_LDC_PICSIZE_S;
 ```
 【功能描述】
-> 定义LDC宽高输入信息
+> 定义 LDC 宽高输入信息
 
 【成员说明】
 
 | 成员  | 含义                                                               |
 | :---: | :----------------------------------------------------------------- |
-| pic_w | 需要设置比接入尺寸  -1 的size, 如果ISP 输出 1920 , 则这里设置 1919 |
-| pic_h | 除了size, ldc以及dis 部分其他设置不要更改                          |
+| pic_w | 需要设置比接入尺寸  -1 的 size, 如果 ISP 输出 1920 , 则这里设置 1919 |
+| pic_h | 除了 size, ldc 以及 dis 部分其他设置不要更改                          |
 
 ### VIN_LDC_ALGOPARAM_S
 【结构定义】
@@ -2597,14 +2597,14 @@ typedef struct HB_VIN_LDC_ALGOPARAM_S {
 } VIN_LDC_ALGOPARAM_S;
 ```
 【功能描述】
-> 定义LDC属性信息
+> 定义 LDC 属性信息
 
 【成员说明】
 
 |      成员       | 含义           |
 | :-------------: | :------------- |
-| rg_algo_param_b | 参数需要tuning |
-| rg_algo_param_a | 参数需要tuning |
+| rg_algo_param_b | 参数需要 tuning |
+| rg_algo_param_a | 参数需要 tuning |
 
 ### VIN_LDC_OFF_SHIFT_S
 【结构定义】
@@ -2616,7 +2616,7 @@ typedef struct HB_VIN_LDC_OFF_SHIFT_S {
 } VIN_LDC_OFF_SHIFT_S;
 ```
 【功能描述】
-> 定义LDC属性信息
+> 定义 LDC 属性信息
 
 【成员说明】
 
@@ -2636,7 +2636,7 @@ typedef struct HB_VIN_LDC_WOI_S {
 }VIN_LDC_WOI_S;
 ```
 【功能描述】
-> 定义LDC属性信息
+> 定义 LDC 属性信息
 
 【成员说明】
 
@@ -2663,20 +2663,20 @@ typedef struct HB_VIN_LDC_ATTR_S {
 } VIN_LDC_ATTR_S;
 ```
 【功能描述】
-> 定义LDC属性信息
+> 定义 LDC 属性信息
 
 【成员说明】
 
 |    成员    | 含义           |
 | :--------: | :------------- |
-| ldcEnable  | LDC是否使能    |
+| ldcEnable  | LDC 是否使能    |
 |  ldcPath   | 输出类型       |
-| yStartAddr | Iram使用地址   |
-| cStartAddr | Iram使用地址   |
+| yStartAddr | Iram 使用地址   |
+| cStartAddr | Iram 使用地址   |
 |  picSize   | 接入的尺寸     |
-|  lineBuf   | 值设置99       |
-|   xParam   | 参数需要tuning |
-|   yParam   | 参数需要tuning |
+|  lineBuf   | 值设置 99       |
+|   xParam   | 参数需要 tuning |
+|   yParam   | 参数需要 tuning |
 |  offShift  | 处理区域修正   |
 |    xWoi    | 处理区域修正   |
 |    yWoi    | 处理区域修正   |
@@ -2690,14 +2690,14 @@ typedef struct HB_VIN_DIS_PICSIZE_S {
 } VIN_DIS_PICSIZE_S;
 ```
 【功能描述】
-> 定义DIS属性信息
+> 定义 DIS 属性信息
 
 【成员说明】
 
 | 成员  | 含义                                                              |
 | :---: | :---------------------------------------------------------------- |
-| pic_w | 需要设置比接入尺寸  -1 的size, 如果ISP输出 1920 , 则这里设置 1919 |
-| pic_h | 需要设置比接入尺寸  -1 的size                                     |
+| pic_w | 需要设置比接入尺寸  -1 的 size, 如果 ISP 输出 1920 , 则这里设置 1919 |
+| pic_h | 需要设置比接入尺寸  -1 的 size                                     |
 
 ### VIN_DIS_PATH_SEL_S
 【结构定义】
@@ -2709,7 +2709,7 @@ typedef struct HB_VIN_DIS_PATH_SEL_S {
 } VIN_DIS_PATH_SEL_S;
 ```
 【功能描述】
-> 定义DIS属性信息
+> 定义 DIS 属性信息
 
 【成员说明】
 
@@ -2727,7 +2727,7 @@ typedef struct HB_VIN_DIS_CROP_S {
 } VIN_DIS_CROP_S;
 ```
 【功能描述】
-> 定义DIS属性信息
+> 定义 DIS 属性信息
 
 【成员说明】
 
@@ -2745,7 +2745,7 @@ typedef struct HB_VIN_DIS_CALLBACK_S {
 } VIN_DIS_CALLBACK_S;
 ```
 【功能描述】
-> 定义dis回调接口
+> 定义 dis 回调接口
 
 【成员说明】
 
@@ -2771,10 +2771,10 @@ typedef struct HB_VIN_DIS_MV_INFO_S {
 
 |  成员   | 含义                                                                                                                                                         |
 | :-----: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  gmvX   | 绝对坐标,相对于相机中心的x移动量, 如果相机锁好固定住，gmv就是相对于固定锁好位置的移动。                                                                      |
-|  gmvY   | 绝对坐标,相对于相机中心的y移动量                                                                                                                             |
-| xUpdate | 相对量，相对于前一帧的x移动量, Update则是不管锁在那,只看前一帧相机晃动的位置的移动.(如果前一帧是锁好的位置,则update与gmv相同,但这只会在连续晃动的第一帧发生) |
-| yUpdate | 相对量，相对于前一帧的y移动量                                                                                                                                |
+|  gmvX   | 绝对坐标,相对于相机中心的 x 移动量, 如果相机锁好固定住，gmv 就是相对于固定锁好位置的移动。                                                                      |
+|  gmvY   | 绝对坐标,相对于相机中心的 y 移动量                                                                                                                             |
+| xUpdate | 相对量，相对于前一帧的 x 移动量, Update 则是不管锁在那,只看前一帧相机晃动的位置的移动.(如果前一帧是锁好的位置,则 update 与 gmv 相同,但这只会在连续晃动的第一帧发生) |
+| yUpdate | 相对量，相对于前一帧的 y 移动量                                                                                                                                |
 
 ### VIN_DIS_ATTR_S
 【结构定义】
@@ -2789,7 +2789,7 @@ typedef struct HB_VIN_DIS_ATTR_S {
 } VIN_DIS_ATTR_S;
 ```
 【功能描述】
-> 定义DIS属性信息
+> 定义 DIS 属性信息
 
 【成员说明】
 
@@ -2797,8 +2797,8 @@ typedef struct HB_VIN_DIS_ATTR_S {
 | :-------: | :----------- |
 |  picSize  | 输入数据宽高 |
 |  disPath  | 输出类型     |
-| disHratio | 设置为65536  |
-| disVrati  | 设置为65536  |
+| disHratio | 设置为 65536  |
+| disVrati  | 设置为 65536  |
 |   xCrop   | 处理区域修正 |
 |   yCrop   | 处理区域修正 |
 
@@ -2815,8 +2815,8 @@ typedef enum HB_VIN_LENS_FUNC_TYPE_E {
 > 马达功能
 
 【成员说明】
-- AF自动对焦，改变像距
-- ZOOM变焦，改变焦距
+- AF 自动对焦，改变像距
+- ZOOM 变焦，改变焦距
 
 ### VIN_LENS_CTRL_ATTR_S
 【结构定义】
@@ -2854,31 +2854,31 @@ typedef struct HB_VIN_LENS_CTRL_ATTR_S {
 } VIN_LENS_CTRL_ATTR_S;
 ```
 【功能描述】
-> 定义pipe属性信息
+> 定义 pipe 属性信息
 
 【成员说明】
 
 |      成员       | 含义                                    |
 | :-------------: | :-------------------------------------- |
-|      port       | 每一路输入，和pipeId对应                |
-|    motorType    | 电机驱动类型，详见VIN_LENS_MOTOR_TYPE_E |
+|      port       | 每一路输入，和 pipeId 对应                |
+|    motorType    | 电机驱动类型，详见 VIN_LENS_MOTOR_TYPE_E |
 |     maxStep     | 电机最大步数                            |
 |     initPos     | 电机初始位置                            |
 |     minPos      | 电机最小位置                            |
 |     maxPos      | 电机最大位置                            |
-|     pwmNum      | 马达控制pwm  设备号                     |
-|     pwmDuty     | 马达控制pwm 占空比                      |
-|    pwmPeriod    | 马达控制pwm 频率                        |
+|     pwmNum      | 马达控制 pwm  设备号                     |
+|     pwmDuty     | 马达控制 pwm 占空比                      |
+|    pwmPeriod    | 马达控制 pwm 频率                        |
 | pulseForwardNum | 马达控制 前向控制 pulse 设备号          |
 |  pulseBackNum   | 马达控制 后向控制 pulse 设备号          |
 |    pulseDuty    | 马达控制 脉冲占空比                     |
 |   pulsePeriod   | 马达控制 脉冲 频率                      |
-|     i2cNum      | 马达控制I2C 设备号                      |
-|     i2cAddr     | 马达控制I2C 地址                        |
-|     gpioA1      | 马达控制a+ gpio 号                      |
-|     gpioA2      | 马达控制a- gpio 号                      |
-|     gpioB1      | 马达控制b+ gpio 号                      |
-|     gpioB2      | 马达控制b- gpio 号                      |
+|     i2cNum      | 马达控制 I2C 设备号                      |
+|     i2cAddr     | 马达控制 I2C 地址                        |
+|     gpioA1      | 马达控制 a+ gpio 号                      |
+|     gpioA2      | 马达控制 a- gpio 号                      |
+|     gpioB1      | 马达控制 b+ gpio 号                      |
+|     gpioB2      | 马达控制 b- gpio 号                      |
 
 ### VIN_LENS_MOTOR_TYPE_E
 【结构定义】
@@ -2896,7 +2896,7 @@ typedef enum HB_VIN_LENS_MOTOR_TYPE_E {
 
 【成员说明】
 - PWM 驱动、脉冲个数驱动、I2C 通信方式控制、spi 通信方式控制、GPIP 引脚时序控制。
-由于硬件环境因素，只调试验证过GPIO方式。
+由于硬件环境因素，只调试验证过 GPIO 方式。
 
 ### DATA TYPE
 
@@ -2920,17 +2920,17 @@ typedef enum HB_VIN_LENS_MOTOR_TYPE_E {
 
 ### SIF MCLK
 
-| ISP应用场景          | SIF_MCLK(MHz) |
+| ISP 应用场景          | SIF_MCLK(MHz) |
 | :------------------- | :-----------: |
-| 8M 30fps输入         |     326.4     |
-| 2M 30fps 2路分时多工 |    148.36     |
-| 2M 30fps 1路输入     |    102.00     |
+| 8M 30fps 输入         |     326.4     |
+| 2M 30fps 2 路分时多工 |    148.36     |
+| 2M 30fps 1 路输入     |    102.00     |
 | 8M DOL2 30fps        |    544.00     |
-| 2M 15fps 4路分时多工 |    148.36     |
+| 2M 15fps 4 路分时多工 |    148.36     |
 
 ### VPU CLK
 
-| VPU应用场景 | 编码  | VPU_BCLK/VPU_CCLK(MHz) |
+| VPU 应用场景 | 编码  | VPU_BCLK/VPU_CCLK(MHz) |
 | :---------- | :---: | :--------------------: |
 | 8M@30fps    |  AVC  |         326.4          |
 |             | HEVC  |          408           |
@@ -2941,29 +2941,29 @@ typedef enum HB_VIN_LENS_MOTOR_TYPE_E {
 
 ## 错误码
 
-VIN错误码如下表：
+VIN 错误码如下表：
 
 |   错误码   | 宏定义                           | 描述                         |
 | :--------: | :------------------------------- | :--------------------------- |
-| -268565505 | HB_ERR_VIN_CREATE_PIPE_FAIL      | 创建PIPE失败                 |
+| -268565505 | HB_ERR_VIN_CREATE_PIPE_FAIL      | 创建 PIPE 失败                 |
 | -268565506 | HB_ERR_VIN_SIF_INIT_FAIL         | DEV(Sif)初始化失败           |
-| -268565507 | HB_ERR_VIN_DEV_START_FAIL        | DEV(Sif) start失败           |
-| -268565508 | HB_ERR_VIN_PIPE_START_FAIL       | ISP start失败                |
-| -268565509 | HB_ERR_VIN_CHN_UNEXIST           | Chn不存在                    |
+| -268565507 | HB_ERR_VIN_DEV_START_FAIL        | DEV(Sif) start 失败           |
+| -268565508 | HB_ERR_VIN_PIPE_START_FAIL       | ISP start 失败                |
+| -268565509 | HB_ERR_VIN_CHN_UNEXIST           | Chn 不存在                    |
 | -268565510 | HB_ERR_VIN_INVALID_PARAM         | 接口参数错误                 |
-| -268565511 | HB_ERR_VIN_ISP_INIT_FAIL         | ISP初始化错误                |
-| -268565512 | HB_ERR_VIN_ISP_FRAME_CORRUPTED   | ISP破帧，isp驱动应该会有drop |
-| -268565513 | HB_ERR_VIN_CHANNEL_INIT_FAIL     | ISP初始化两个chn通道时失败   |
-| -268565514 | HB_ERR_VIN_DWE_INIT_FAIL         | DWE初始化失败                |
-| -268565515 | HB_ERR_VIN_SET_DEV_ATTREX_FAIL   | SIF扩展属性初始化失败        |
+| -268565511 | HB_ERR_VIN_ISP_INIT_FAIL         | ISP 初始化错误                |
+| -268565512 | HB_ERR_VIN_ISP_FRAME_CORRUPTED   | ISP 破帧，isp 驱动应该会有 drop |
+| -268565513 | HB_ERR_VIN_CHANNEL_INIT_FAIL     | ISP 初始化两个 chn 通道时失败   |
+| -268565514 | HB_ERR_VIN_DWE_INIT_FAIL         | DWE 初始化失败                |
+| -268565515 | HB_ERR_VIN_SET_DEV_ATTREX_FAIL   | SIF 扩展属性初始化失败        |
 | -268565516 | HB_ERR_VIN_LENS_INIT_FAIL        | 马达初始化失败               |
-| -268565517 | HB_ERR_VIN_SEND_PIPERAW_FAIL     | SIF回灌raw失败               |
-| -268565518 | HB_ERR_VIN_NULL_POINT            | VIN模块有空指针              |
-| -268565519 | HB_ERR_VIN_GET_CHNFRAME_FAIL     | 获取ISP出来的数据失败        |
-| -268565520 | HB_ERR_VIN_GET_DEVFRAME_FAIL     | 获取SIF出来的数据失败        |
-| -268565521 | HB_ERR_VIN_MD_ENABLE_FAIL        | 使能MotionDetect失败         |
-| -268565522 | HB_ERR_VIN_MD_DISABLE_FAIL       | 关闭MotionDetect失败         |
-| -268565523 | HB_ERR_VIN_SWITCH_SNS_TABLE_FAIL | ISP模式linear\DOL切换失败    |
+| -268565517 | HB_ERR_VIN_SEND_PIPERAW_FAIL     | SIF 回灌 raw 失败               |
+| -268565518 | HB_ERR_VIN_NULL_POINT            | VIN 模块有空指针              |
+| -268565519 | HB_ERR_VIN_GET_CHNFRAME_FAIL     | 获取 ISP 出来的数据失败        |
+| -268565520 | HB_ERR_VIN_GET_DEVFRAME_FAIL     | 获取 SIF 出来的数据失败        |
+| -268565521 | HB_ERR_VIN_MD_ENABLE_FAIL        | 使能 MotionDetect 失败         |
+| -268565522 | HB_ERR_VIN_MD_DISABLE_FAIL       | 关闭 MotionDetect 失败         |
+| -268565523 | HB_ERR_VIN_SWITCH_SNS_TABLE_FAIL | ISP 模式 linear\DOL 切换失败    |
 
 ## 参考代码
-VIN部分示例代码可以参考，[get_sif_data](./multimedia_samples#get_sif_data)和[get_isp_data](./multimedia_samples#get_isp_data)。
+VIN 部分示例代码可以参考，[get_sif_data](./multimedia_samples#get_sif_data)和[get_isp_data](./multimedia_samples#get_isp_data)。
