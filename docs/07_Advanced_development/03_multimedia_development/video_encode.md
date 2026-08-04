@@ -4,70 +4,70 @@ sidebar_position: 9
 
 # 7.3.9 视频编码
 ## 概述
-视频编码模块实现H.264/H.265/JPEG/MJPEG协议硬件编码。该模块支持多通道实时编码，各通道相互独立，常见的使用场景，包括单路录像、多路录像、单路VIO视频流、多路VIO视频流、录像+VIO视频流等。
+视频编码模块实现 H.264/H.265/JPEG/MJPEG 协议硬件编码。该模块支持多通道实时编码，各通道相互独立，常见的使用场景，包括单路录像、多路录像、单路 VIO 视频流、多路 VIO 视频流、录像+VIO 视频流等。
 
 ## 功能描述
 
 ### 基础规格
 
-X3支持的编码规格如下：
+X3 支持的编码规格如下：
 
 ![image-20220329224946556](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/image-20220329224946556.png)
 
-H264/H265协议编码性能如下：
+H264/H265 协议编码性能如下：
 
-- H.264编解码支持最大分辨率为 8192 x 8192，最小为256 x 128，解码最小为32 x 32
-- H.265编解码支持最大分辨率为 8192 x 8192，最小为256 x 128，解码最小为8 x 8
-- H.264/H.265的stride是32字节对齐，width和height都是8字节对齐，如果不是对齐的建议使用VIDEO_CROP_INFO_S去对应裁剪
-- H.264/H.265均具备多码流实时编码能力
+- H.264 编解码支持最大分辨率为 8192 x 8192，最小为 256 x 128，解码最小为 32 x 32
+- H.265 编解码支持最大分辨率为 8192 x 8192，最小为 256 x 128，解码最小为 8 x 8
+- H.264/H.265 的 stride 是 32 字节对齐，width 和 height 都是 8 字节对齐，如果不是对齐的建议使用 VIDEO_CROP_INFO_S 去对应裁剪
+- H.264/H.265 均具备多码流实时编码能力
 - 最高能力支持 4K@60fps
-- 带QP map的ROI编码（让用户选择画面中感兴趣的区域，启用ROI功能后，重要的或者移动的区域将会进行高质量无损编码，而对那些不移动，不被选择的区域降低其码率和图像质量，进行标准清晰度视频压缩，甚至是不传输这部分区域视频）
+- 带 QP map 的 ROI 编码（让用户选择画面中感兴趣的区域，启用 ROI 功能后，重要的或者移动的区域将会进行高质量无损编码，而对那些不移动，不被选择的区域降低其码率和图像质量，进行标准清晰度视频压缩，甚至是不传输这部分区域视频）
 - 支持旋转和镜像
-- Multi-instance处理，最多32个
+- Multi-instance 处理，最多 32 个
 
-JPEG协议编码能力如下：
-- 编解码分辨率最大32768 x 32768，最小 16 x 16
-- MJPEG、JPEG的stride是32字节对齐，width是16字节对齐，height是8字节对齐
-- 对于YUV 4:2:0 格式（例如：NV12），最高能力达到 4K@30fps
+JPEG 协议编码能力如下：
+- 编解码分辨率最大 32768 x 32768，最小 16 x 16
+- MJPEG、JPEG 的 stride 是 32 字节对齐，width 是 16 字节对齐，height 是 8 字节对齐
+- 对于 YUV 4:2:0 格式（例如：NV12），最高能力达到 4K@30fps
 - JPEG Baseline and Extended sequential ISO/IEC 10918-1
-- 支持一个或三个颜色分量，每个分量可以8位或12位采样
-- 支持YUV 4:0:0，4:2:0，4:2:2，4:4:0 和 4:4:4 颜色格式
-- 支持编解码ROI
-- 支持slice encoding
+- 支持一个或三个颜色分量，每个分量可以 8 位或 12 位采样
+- 支持 YUV 4:0:0，4:2:0，4:2:2，4:4:0 和 4:4:4 颜色格式
+- 支持编解码 ROI
+- 支持 slice encoding
 - 支持旋转和镜像
-- Multi-instance，最高支持64个
+- Multi-instance，最高支持 64 个
 
 ### 编解码通道
 编解码通道即一个特定类型的编解码实例，不同编解码通道的用户参数配置和资源可以相互独立，这样就可以实现多路不同规格的视频编解码，覆盖多种业务场景。
 ### 码率控制
-码率控制主要指的是对编码码率的控制。码率控制针对连续的视频编码码流而言，对于一个变化的场景，如果要达到图像质量稳定，则编码码率会抖动；如果要达到编码码率稳定，则图像质量会波动。X3针对H264、H265和MJPEG协议支持以下码率控制方式：
+码率控制主要指的是对编码码率的控制。码率控制针对连续的视频编码码流而言，对于一个变化的场景，如果要达到图像质量稳定，则编码码率会抖动；如果要达到编码码率稳定，则图像质量会波动。X3 针对 H264、H265 和 MJPEG 协议支持以下码率控制方式：
 
-- H264/H265支持编码通道的CBR、VBR、AVBR、FixQp和QpMap五种码率控制方式
-- MJPGE编码通道的FixQp码率控制方式。
+- H264/H265 支持编码通道的 CBR、VBR、AVBR、FixQp 和 QpMap 五种码率控制方式
+- MJPGE 编码通道的 FixQp 码率控制方式。
 
-CBR能够保证整体的编码码率稳定；
+CBR 能够保证整体的编码码率稳定；
 
-VBR则是保证编码图像的质量稳定；
+VBR 则是保证编码图像的质量稳定；
 
-AVBR会兼顾码率和图像质量，产生码率和图像质量相对稳定的码流；
+AVBR 会兼顾码率和图像质量，产生码率和图像质量相对稳定的码流；
 
-FixQp是固定每一个I帧、P帧和B帧的QP值；
+FixQp 是固定每一个 I 帧、P 帧和 B 帧的 QP 值；
 
-QPMAP是为一帧图像中的每一个块指定QP值，其中H264块大小为16x16，H265块大小为32x32。
+QPMAP 是为一帧图像中的每一个块指定 QP 值，其中 H264 块大小为 16x16，H265 块大小为 32x32。
 
-对于CBR和AVBR来说，编码器内部会为每一帧图片找到合适的QP值，从而保证恒定码率。
+对于 CBR 和 AVBR 来说，编码器内部会为每一帧图片找到合适的 QP 值，从而保证恒定码率。
 
-编码器内部支持三种级别的码率控制，分别为帧级别、CTU/MB级别和subCTU/subMB级别。其中帧级别的控制主要会根据目标码率为每一帧图片产生一个QP值，从而保证码率恒定；CTU/MB级别的控制则根据每一个64x64的CTU或16x16的MB的目标码率为每个block产生一个QP值，能够得到更好的码率控制，但是频繁的QP值调整会造成图像质量不稳定的问题；subCTU/subMB级别的控制则为每一个32x32的subCTU或8x8的subMB产生一个QP值，其中复杂的块会得到较高的QP值，静态的块则会得到较低的QP值，因为相比于复杂的区域人眼对于静态的区域更敏感，复杂和静态区域的检测主要依赖于内部硬件模块，这个级别控制主要是为了提高主观图像质量同时保证码率恒定，该模式控制下SSIM得分较高，但是PSNR得分会降低。
+编码器内部支持三种级别的码率控制，分别为帧级别、CTU/MB 级别和 subCTU/subMB 级别。其中帧级别的控制主要会根据目标码率为每一帧图片产生一个 QP 值，从而保证码率恒定；CTU/MB 级别的控制则根据每一个 64x64 的 CTU 或 16x16 的 MB 的目标码率为每个 block 产生一个 QP 值，能够得到更好的码率控制，但是频繁的 QP 值调整会造成图像质量不稳定的问题；subCTU/subMB 级别的控制则为每一个 32x32 的 subCTU 或 8x8 的 subMB 产生一个 QP 值，其中复杂的块会得到较高的 QP 值，静态的块则会得到较低的 QP 值，因为相比于复杂的区域人眼对于静态的区域更敏感，复杂和静态区域的检测主要依赖于内部硬件模块，这个级别控制主要是为了提高主观图像质量同时保证码率恒定，该模式控制下 SSIM 得分较高，但是 PSNR 得分会降低。
 
-CBR、VBR、AVBR可以使能QPMAP，则每个块区域的实际值由以下公式得到：
+CBR、VBR、AVBR 可以使能 QPMAP，则每个块区域的实际值由以下公式得到：
 
 ![image-20220329234019920](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/image-20220329234019920.png)
 
-其中MQP为ROI map中的值，RQP为编码器内部码率控制得到的值，ROIAvaQP为ROI map中QP的平均值。
+其中 MQP 为 ROI map 中的值，RQP 为编码器内部码率控制得到的值，ROIAvaQP 为 ROI map 中 QP 的平均值。
 
-### GOP结构
+### GOP 结构
 
-GOP结构表可定义一组周期性的GOP结构，该GOP结构将用于整个编码过程。单个结构表中的元素如下表所示，其中可以指定该图像的参考帧，如果IDR帧后的其他帧指定的参考帧为IDR帧前的数据帧，编码器内部会自动处理这种情况使其不参考其他帧，用户无需关心这种情况。用户在自定义GOP结构时需要指明结构表的数量，最多可定义8个结构表，结构表的顺序需要按照解码顺序排列。
+GOP 结构表可定义一组周期性的 GOP 结构，该 GOP 结构将用于整个编码过程。单个结构表中的元素如下表所示，其中可以指定该图像的参考帧，如果 IDR 帧后的其他帧指定的参考帧为 IDR 帧前的数据帧，编码器内部会自动处理这种情况使其不参考其他帧，用户无需关心这种情况。用户在自定义 GOP 结构时需要指明结构表的数量，最多可定义 8 个结构表，结构表的顺序需要按照解码顺序排列。
 
 | Element        | Description                                                  |
 | :------------- | :----------------------------------------------------------- |
@@ -79,11 +79,11 @@ GOP结构表可定义一组周期性的GOP结构，该GOP结构将用于整个�
 | 1st_ref_POC    | The POC of the 1st reference picture of L0                   |
 | 2nd_ref_POC    | The POC of 1st reference picture of L1 in case that Type is equal to B<br/>The POC of 2nd reference picture of L0 in case that Type is equal to P<br/>Note that reference_L1can have the same POC as reference in B slice. But for compression efficiency it is recommended that reference_L1 have a different POC from reference_L0 |
 
-#### GOP预置结构
+#### GOP 预置结构
 
 ![VENC_GOP_structure](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_gop_structure.png)
 
-下表所示为预置的8种GOP结构
+下表所示为预置的 8 种 GOP 结构
 
 | Index | GOP <br />Structure | Low Delay<br />（encoding<br /> order and<br /> display<br />order<br /> are same） | GOP<br /> Size |      Encoding Order      | Minimum <br />Source <br />Frame <br />Buffer | Minimum<br />Decoded<br />Picture<br />Buffer | Intra Period<br />（I Frame <br />Interval）<br />Requirement |
 | :---: | :-----------------: | :----------------------------------------------------------: | :------------: | :----------------------: | :-------------------------------------------: | :-------------------------------------------: | :----------------------------------------------------------: |
@@ -99,91 +99,91 @@ GOP结构表可定义一组周期性的GOP结构，该GOP结构将用于整个�
 其中
 
 - GOP Preset1
-  - 只有I帧，没有相互参考帧
+  - 只有 I 帧，没有相互参考帧
   - 低延时
   ![VENC_GOP_preset1](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_gop_preset1.png)
   
 - GOP Preset2
-  - 只有I帧和P帧
-  - P帧参考两个前向参考帧
+  - 只有 I 帧和 P 帧
+  - P 帧参考两个前向参考帧
   - 低延时
   ![VENC_GOP_preset2](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_gop_preset2.png)
   
 - GOP Preset3
-  - 只有I帧和B帧
-  - B帧参考两个前向参考帧
+  - 只有 I 帧和 B 帧
+  - B 帧参考两个前向参考帧
   - 低延时
   ![VENC_GOP_preset3](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_gop_preset3.png)
   
 - GOP Preset4
-  - 有I帧、P帧和B帧
-  - P帧参考两个前向参考帧
-  - B帧参考一个前向参考帧和一个后向参考帧
+  - 有 I 帧、P 帧和 B 帧
+  - P 帧参考两个前向参考帧
+  - B 帧参考一个前向参考帧和一个后向参考帧
   ![VENC_GOP_preset4](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_gop_preset4.png)
   
 - GOP Preset5
-  - 有I帧、P帧和B帧
-  - P帧参考两个前向参考帧
-  - B帧参考一个前向参考帧和一个后向参考帧，后向参考帧可为P帧或B帧
+  - 有 I 帧、P 帧和 B 帧
+  - P 帧参考两个前向参考帧
+  - B 帧参考一个前向参考帧和一个后向参考帧，后向参考帧可为 P 帧或 B 帧
   ![VENC_GOP_preset5](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_gop_preset5.png)
   
 - GOP Preset 6
-  - 只有I帧和P帧；
-  - P帧参考两个前向参考帧；
+  - 只有 I 帧和 P 帧；
+  - P 帧参考两个前向参考帧；
   - 低延时；
   ![VENC_GOP_preset6](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_gop_preset6.png)
   
 - GOP Preset 7
-  - 只有I帧和B帧；
-  - B帧参考两个前向参考帧；
+  - 只有 I 帧和 B 帧；
+  - B 帧参考两个前向参考帧；
   - 低延时；
   ![VENC_GOP_preset7](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_gop_preset7.png)
   
 - GOP Preset 8
-  - 只有I帧和B帧；
-  - B帧参考一个前向参考帧和一个后向参考帧；
+  - 只有 I 帧和 B 帧；
+  - B 帧参考一个前向参考帧和一个后向参考帧；
   ![VENC_GOP_preset8](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_gop_preset8.png)
 
-#### GOP和I帧周期关系
-如下图所示为GOP结构和I帧周期的关系。
+#### GOP 和 I 帧周期关系
+如下图所示为 GOP 结构和 I 帧周期的关系。
 
 ![VENC_GOP_i-frame](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_gop_i-frame.png)
 
 ### ROI
 
-ROI编码的实现和QPMAP类似，需要用户按照光栅扫描的方向为每一个块设定QP值，如下图所示为H265的ROI map示例。对于H264编码来说，每一个块的大小为16x16，而H265中则为32x32。在ROI map表中，每一个QP值占用一个字节，大小为0~51。
+ROI 编码的实现和 QPMAP 类似，需要用户按照光栅扫描的方向为每一个块设定 QP 值，如下图所示为 H265 的 ROI map 示例。对于 H264 编码来说，每一个块的大小为 16x16，而 H265 中则为 32x32。在 ROI map 表中，每一个 QP 值占用一个字节，大小为 0~51。
 
-ROI编码可以和CBR和AVBR一起工作，当不使能CBR或AVBR时，每个块区域的实际QP值就为ROI map中指定的值，当使能CBR或AVBR时，则每个块区域的实际值由以下公式得到
+ROI 编码可以和 CBR 和 AVBR 一起工作，当不使能 CBR 或 AVBR 时，每个块区域的实际 QP 值就为 ROI map 中指定的值，当使能 CBR 或 AVBR 时，则每个块区域的实际值由以下公式得到
 
 ![image-20220405152959958](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/image-20220405152959958.png)
 
-其中MQP为ROI map中的值，RQP为编码器内部码率控制得到的值，ROIAvaQP为ROI map中QP的平均值。
+其中 MQP 为 ROI map 中的值，RQP 为编码器内部码率控制得到的值，ROIAvaQP 为 ROI map 中 QP 的平均值。
 ![VENC_H265_ROI_map](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_h265_roi_map.png)
 
 ### Intra Refresh
-Intra Refresh模式通过在非I帧内部周期性的插入帧内编码的MB/CTU来提高容错性。它能够为解码器提供更多的修复点来避免时域错误造成的图像损坏。用户可以指定MB/CTU的连续行数、列数或者步长来强制编码器插入帧内编码单元，用户还可指定帧内编码单元的大小由编码器内部决定哪一块需要帧内编码。
+Intra Refresh 模式通过在非 I 帧内部周期性的插入帧内编码的 MB/CTU 来提高容错性。它能够为解码器提供更多的修复点来避免时域错误造成的图像损坏。用户可以指定 MB/CTU 的连续行数、列数或者步长来强制编码器插入帧内编码单元，用户还可指定帧内编码单元的大小由编码器内部决定哪一块需要帧内编码。
 
 ### 长期参考帧
 用户可指定长期参考帧的周期和参考长期参考帧的周期，如下图所示。
 ![VENC_long_reference_frame](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_long_reference_frame.png)
 
 ### Smart background encoding
-在视频监控场景中，很多时候背景是固定的。因此希望编码器在检测到背景区域时采用忽略模式或使用更少的码流来编码该区域。实际场景中由于camera图像存在噪点导致背景区域检测不太容易，很多时候需要ISP检测到背景区域时再通知编码器，这种方案会消耗额外的带宽和系统计算资源。
+在视频监控场景中，很多时候背景是固定的。因此希望编码器在检测到背景区域时采用忽略模式或使用更少的码流来编码该区域。实际场景中由于 camera 图像存在噪点导致背景区域检测不太容易，很多时候需要 ISP 检测到背景区域时再通知编码器，这种方案会消耗额外的带宽和系统计算资源。
 
-H264和H265编码提供集成在codec内部的智能背景编码模式，该模式充分利用内部硬件模块和on-the-fly处理，不会消耗额外的带宽和系统资源。如下图所示为背景检测的工作模式，智能背景编码模式下内部硬件模块会将每一个块单元和参考帧的块单元对比决定该块是否为背景。
+H264 和 H265 编码提供集成在 codec 内部的智能背景编码模式，该模式充分利用内部硬件模块和 on-the-fly 处理，不会消耗额外的带宽和系统资源。如下图所示为背景检测的工作模式，智能背景编码模式下内部硬件模块会将每一个块单元和参考帧的块单元对比决定该块是否为背景。
 
-对于背景区域的判断，用户可以设置最大的像素差值（推荐值8）和平均像素差值（推荐值1）。用户还可调整Lambda参数来影响编码中的模式选择，当检测到背景区域时，编码器内部会为每个块增加对应的Lambda值，使能编码器内部偏向于采用忽略模式来编码该块单元。对于Lambda控制，用户可设置lambdaQP（推荐值32）和deltaQP（推荐值3），最终的Lambda值按以下公式计算得到。
+对于背景区域的判断，用户可以设置最大的像素差值（推荐值 8）和平均像素差值（推荐值 1）。用户还可调整 Lambda 参数来影响编码中的模式选择，当检测到背景区域时，编码器内部会为每个块增加对应的 Lambda 值，使能编码器内部偏向于采用忽略模式来编码该块单元。对于 Lambda 控制，用户可设置 lambdaQP（推荐值 32）和 deltaQP（推荐值 3），最终的 Lambda 值按以下公式计算得到。
 
 ![image-20220405153105331](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/image-20220405153105331.png)
 
-其中QP_TO_LAMBDA_TABLE为lambda转换表，该表也会被用于非背景区域的lambda转换。
+其中 QP_TO_LAMBDA_TABLE 为 lambda 转换表，该表也会被用于非背景区域的 lambda 转换。
 ![VENC_smart_bg_encoding](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_encode/ss_venc_smart_bg_encoding.png)
 
-需要注意的是当ROI编码使能时，Smart background encoding不会工作。该模式实际能节省的带宽与设定的码率和I帧间隔有很大关系，当码率和I帧间隔变大时，节省的码率越多。此外该模式下可以设置图像质量较好的帧作为长期参考帧来提高背景图像的质量和节省码率。
-### 帧skip设置
-用户可调用接口设置下一次操作输入的图像的编码模式为skip模式，该模式只对非I帧编码有效；skip模式下编码器内部会忽略输入帧，而是利用上一帧的重构帧生成该次输入的的重构帧，输入帧则被编码成P帧。
+需要注意的是当 ROI 编码使能时，Smart background encoding 不会工作。该模式实际能节省的带宽与设定的码率和 I 帧间隔有很大关系，当码率和 I 帧间隔变大时，节省的码率越多。此外该模式下可以设置图像质量较好的帧作为长期参考帧来提高背景图像的质量和节省码率。
+### 帧 skip 设置
+用户可调用接口设置下一次操作输入的图像的编码模式为 skip 模式，该模式只对非 I 帧编码有效；skip 模式下编码器内部会忽略输入帧，而是利用上一帧的重构帧生成该次输入的的重构帧，输入帧则被编码成 P 帧。
 
-## API参考
+## API 参考
 ```C
 HB_VENC_CreateChn：创建编码通道。
 HB_VENC_DestroyChn：销毁编码通道。
@@ -249,7 +249,7 @@ int32_t HB_VENC_CreateChn(VENC_CHN VeChn, const VENC_CHN_ATTR_S *pstAttr);
 
 | 参数名称 | 描述                                                                                                       | 输入/输出 |
 | :------: | :--------------------------------------------------------------------------------------------------------- | :-------: |
-|  VeChn   | 编码通道号。<br/>取值范围：[0, VENC_MAX_CHN_NUM)。<br/>H264/H265最大支持32通道，JPEG/MJPEG最大支持64通道。 |   输入    |
+|  VeChn   | 编码通道号。<br/>取值范围：[0, VENC_MAX_CHN_NUM)。<br/>H264/H265 最大支持 32 通道，JPEG/MJPEG 最大支持 64 通道。 |   输入    |
 | pstAttr  | 编码通道属性指针                                                                                           |   输入    |
 
 【返回值】
@@ -257,13 +257,13 @@ int32_t HB_VENC_CreateChn(VENC_CHN VeChn, const VENC_CHN_ATTR_S *pstAttr);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetStream参考代码
+> HB_VENC_GetStream 参考代码
 
 ### HB_VENC_DestroyChn
 【函数声明】
@@ -284,13 +284,13 @@ int32_t HB_VENC_DestroyChn(VENC_CHN VeChn);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetStream参考代码
+> HB_VENC_GetStream 参考代码
 
 ### HB_VENC_ResetChn
 【函数声明】
@@ -311,13 +311,13 @@ int32_t HB_VENC_ResetChn(VENC_CHN VeChn);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetStream参考代码
+> HB_VENC_GetStream 参考代码
 
 ### HB_VENC_StartRecvFrame
 【函数声明】
@@ -339,13 +339,13 @@ int32_t HB_VENC_StartRecvFrame(VENC_CHN VeChn, const VENC_RECV_PIC_PARAM_S *pstR
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
-> 需要在HB_VENC_SetChnAttr设置完通道属性后，才能调用。
+> 需要在 HB_VENC_SetChnAttr 设置完通道属性后，才能调用。
 
 【参考代码】
-> HB_VENC_GetStream参考代码
+> HB_VENC_GetStream 参考代码
 
 ### HB_VENC_StopRecvFrame
 【函数声明】
@@ -366,13 +366,13 @@ int32_t HB_VENC_StopRecvFrame(VENC_CHN VeChn);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetStream参考代码
+> HB_VENC_GetStream 参考代码
 
 ### HB_VENC_SetChnAttr
 【函数声明】
@@ -394,13 +394,13 @@ int32_t HB_VENC_SetChnAttr(VENC_CHN VeChn, const VENC_CHN_ATTR_S *pstChnAttr);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
-> 需要先HB_VENC_CreateChn创建通道。
+> 需要先 HB_VENC_CreateChn 创建通道。
 
 【参考代码】
-> HB_VENC_GetStream参考代码
+> HB_VENC_GetStream 参考代码
 
 ### HB_VENC_GetChnAttr
 【函数声明】
@@ -422,13 +422,13 @@ int32_t HB_VENC_GetChnAttr(VENC_CHN VeChn, VENC_CHN_ATTR_S *pstChnAttr);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetStream参考代码
+> HB_VENC_GetStream 参考代码
 
 ### HB_VENC_GetStream
 【函数声明】
@@ -451,7 +451,7 @@ int32_t HB_VENC_GetStream(VENC_CHN VeChn, VIDEO_STREAM_S *pstStream, int32_t s32
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -595,13 +595,13 @@ int32_t HB_VENC_ReleaseStream(VENC_CHN VeChn, VIDEO_STREAM_S *pstStream);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetStream参考代码
+> HB_VENC_GetStream 参考代码
 
 ### HB_VENC_SendFrame
 【函数声明】
@@ -624,13 +624,13 @@ int32_t HB_VENC_SendFrame(VENC_CHN VeChn, VIDEO_FRAME_S *pstFrame ,int32_t s32Mi
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetStream参考代码
+> HB_VENC_GetStream 参考代码
 
 ### HB_VENC_RequestIDR
 【函数声明】
@@ -651,7 +651,7 @@ int32_t HB_VENC_RequestIDR(VENC_CHN VeChn);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -700,20 +700,20 @@ int32_t HB_VENC_SetRoiAttr(VENC_CHN VeChn, const VENC_ROI_ATTR_S *pstRoiAttr);
 |  参数名称  | 描述                                             | 输入/输出 |
 | :--------: | :----------------------------------------------- | :-------: |
 |   VeChn    | 编码通道号。<br/>取值范围：[0, VENC_MAX_CHN_NUM) |   输入    |
-| pstRoiAttr | ROI区域参数                                      |   输入    |
+| pstRoiAttr | ROI 区域参数                                      |   输入    |
 
 【返回值】
 
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetRoiAttr参考代码
+> HB_VENC_GetRoiAttr 参考代码
 
 ### HB_VENC_GetRoiAttr
 【函数声明】
@@ -728,14 +728,14 @@ int32_t HB_VENC_GetRoiAttr(VENC_CHN VeChn, VENC_ROI_ATTR_S *pstRoiAttr);
 |  参数名称  | 描述                                             | 输入/输出 |
 | :--------: | :----------------------------------------------- | :-------: |
 |   VeChn    | 编码通道号。<br/>取值范围：[0, VENC_MAX_CHN_NUM) |   输入    |
-| pstRoiAttr | 对应ROI区域的配置                                |   输出    |
+| pstRoiAttr | 对应 ROI 区域的配置                                |   输出    |
 
 【返回值】
 
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -802,13 +802,13 @@ int32_t HB_VENC_SetH264SliceSplit(VENC_CHN VeChn, const VENC_H264_SLICE_SPLIT_S 
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetH264SliceSplit参考代码
+> HB_VENC_GetH264SliceSplit 参考代码
 
 ### HB_VENC_GetH264SliceSplit
 【函数声明】
@@ -830,7 +830,7 @@ int32_t HB_VENC_GetH264SliceSplit(VENC_CHN VeChn, VENC_H264_SLICE_SPLIT_S *pstSl
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -883,7 +883,7 @@ int32_t HB_VENC_GetH264SliceSplit(VENC_CHN VeChn, VENC_H264_SLICE_SPLIT_S *pstSl
 int32_t HB_VENC_SetH264IntraPred(VENC_CHN VeChn, const VENC_H264_INTRA_PRED_S *pstH264IntraPred);
 ```
 【功能描述】
-> 设置H.264 编码的帧内预测配置。
+> 设置 H.264 编码的帧内预测配置。
 
 【参数描述】
 
@@ -897,13 +897,13 @@ int32_t HB_VENC_SetH264IntraPred(VENC_CHN VeChn, const VENC_H264_INTRA_PRED_S *p
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetH264IntraPred参考代码
+> HB_VENC_GetH264IntraPred 参考代码
 
 ### HB_VENC_GetH264IntraPred
 【函数声明】
@@ -925,7 +925,7 @@ int32_t HB_VENC_GetH264IntraPred(VENC_CHN VeChn, VENC_H264_INTRA_PRED_S *pstH264
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -976,7 +976,7 @@ int32_t HB_VENC_GetH264IntraPred(VENC_CHN VeChn, VENC_H264_INTRA_PRED_S *pstH264
 int32_t HB_VENC_SetH264Trans(VENC_CHN VeChn, const VENC_H264_TRANS_S *pstH264Trans);
 ```
 【功能描述】
-> 设置H.264 编码的变换、量化配置。
+> 设置 H.264 编码的变换、量化配置。
 
 【参数描述】
 
@@ -990,7 +990,7 @@ int32_t HB_VENC_SetH264Trans(VENC_CHN VeChn, const VENC_H264_TRANS_S *pstH264Tra
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1057,13 +1057,13 @@ int32_t HB_VENC_GetH264Trans(VENC_CHN VeChn, VENC_H264_TRANS_S *pstH264Trans);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetH264Trans参考代码
+> HB_VENC_SetH264Trans 参考代码
 
 ### HB_VENC_SetH264Entropy
 【函数声明】
@@ -1085,7 +1085,7 @@ int32_t HB_VENC_SetH264Entropy(VENC_CHN VeChn, const VENC_H264_ENTROPY_S *pstH26
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1149,13 +1149,13 @@ int32_t HB_VENC_GetH264Entropy(VENC_CHN VeChn, VENC_H264_ENTROPY_S *pstH264Entro
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetH264Entropy参考代码
+> HB_VENC_SetH264Entropy 参考代码
 
 ### HB_VENC_SetH264Dblk
 【函数声明】
@@ -1163,7 +1163,7 @@ int32_t HB_VENC_GetH264Entropy(VENC_CHN VeChn, VENC_H264_ENTROPY_S *pstH264Entro
 int32_t HB_VENC_SetH264Dblk(VENC_CHN VeChn, const VENC_H264_DBLK_S *pstH264Dblk);
 ```
 【功能描述】
-> 设置获H.264 编码的 deblocking 配置。
+> 设置获 H.264 编码的 deblocking 配置。
 
 【参数描述】
 
@@ -1177,7 +1177,7 @@ int32_t HB_VENC_SetH264Dblk(VENC_CHN VeChn, const VENC_H264_DBLK_S *pstH264Dblk)
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1243,13 +1243,13 @@ int32_t HB_VENC_GetH264Dblk(VENC_CHN VeChn, VENC_H264_DBLK_S *pstH264Dblk);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetH264Dblk参考代码
+> HB_VENC_GetH264Dblk 参考代码
 
 ### HB_VENC_SetH264Vui
 【函数声明】
@@ -1271,10 +1271,10 @@ int32_t HB_VENC_SetH264Vui(VENC_CHN VeChn, const VENC_H264_VUI_S *pstH264Vui);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
-> Vui参数为静态参数，只能在HB_VENC_SetChnAttr之前调用。
+> Vui 参数为静态参数，只能在 HB_VENC_SetChnAttr 之前调用。
 
 【参考代码】
 ```C
@@ -1338,13 +1338,13 @@ int32_t HB_VENC_GetH264Vui(VENC_CHN VeChn, VENC_H264_VUI_S *pstH264Vui);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetH264Vui参考代码
+> HB_VENC_SetH264Vui 参考代码
 
 ### HB_VENC_SetH265Vui
 【函数声明】
@@ -1366,7 +1366,7 @@ int32_t HB_VENC_SetH265Vui(VENC_CHN VeChn, const VENC_H265_VUI_S *pstH265Vui);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1430,13 +1430,13 @@ int32_t HB_VENC_GetH265Vui(VENC_CHN VeChn, VENC_H265_VUI_S *pstH265Vui);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetH265Vui参考代码
+> HB_VENC_SetH265Vui 参考代码
 
 ### HB_VENC_SetRcParam
 【函数声明】
@@ -1458,7 +1458,7 @@ int32_t HB_VENC_SetRcParam(VENC_CHN VeChn, const VENC_RC_ATTR_S *pstRcParam);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1485,7 +1485,7 @@ int32_t HB_VENC_GetRcParam(VENC_CHN VeChn, VENC_RC_ATTR_S *pstRcParam);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1512,7 +1512,7 @@ int32_t HB_VENC_SetRefParam(VENC_CHN VeChn, const VENC_REF_PARAM_S *pstRefParam)
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1580,13 +1580,13 @@ int32_t HB_VENC_GetRefParam(VENC_CHN VeChn, VENC_REF_PARAM_S *pstRefParam);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetRefParam参考代码
+> HB_VENC_SetRefParam 参考代码
 
 ### HB_VENC_EnableIDR
 【函数声明】
@@ -1603,7 +1603,7 @@ int32_t HB_VENC_EnableIDR(VENC_CHN VeChn, HB_BOOL bEnableIDR);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1631,7 +1631,7 @@ int32_t HB_VENC_SetH265SliceSplit(VENC_CHN VeChn, const VENC_H265_SLICE_SPLIT_S 
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1697,13 +1697,13 @@ int32_t HB_VENC_GetH265SliceSplit(VENC_CHN VeChn, VENC_H265_SLICE_SPLIT_S *pstSl
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetH265SliceSplit参考代码
+> HB_VENC_SetH265SliceSplit 参考代码
 
 ### HB_VENC_SetH265PredUnit
 【函数声明】
@@ -1711,7 +1711,7 @@ int32_t HB_VENC_GetH265SliceSplit(VENC_CHN VeChn, VENC_H265_SLICE_SPLIT_S *pstSl
 int32_t HB_VENC_SetH265PredUnit(VENC_CHN VeChn, const VENC_H265_PU_S *pstPredUnit);
 ```
 【功能描述】
-> 设置H.265 编码的 PU 配置
+> 设置 H.265 编码的 PU 配置
 
 【参数描述】
 
@@ -1725,7 +1725,7 @@ int32_t HB_VENC_SetH265PredUnit(VENC_CHN VeChn, const VENC_H265_PU_S *pstPredUni
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1793,13 +1793,13 @@ int32_t HB_VENC_GetH265PredUnit(VENC_CHN VeChn, VENC_H265_PU_S *pstPredUnit);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetH265PredUnit参考代码
+> HB_VENC_SetH265PredUnit 参考代码
 
 ### HB_VENC_SetH265Trans
 【函数声明】
@@ -1807,7 +1807,7 @@ int32_t HB_VENC_GetH265PredUnit(VENC_CHN VeChn, VENC_H265_PU_S *pstPredUnit);
 int32_t HB_VENC_SetH265Trans(VENC_CHN VeChn, const VENC_H265_TRANS_S *pstH265Trans);
 ```
 【功能描述】
-> 设置H.265编码的变换、量化配置。
+> 设置 H.265 编码的变换、量化配置。
 
 【参数描述】
 
@@ -1821,7 +1821,7 @@ int32_t HB_VENC_SetH265Trans(VENC_CHN VeChn, const VENC_H265_TRANS_S *pstH265Tra
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1884,13 +1884,13 @@ int32_t HB_VENC_GetH265Trans(VENC_CHN VeChn, VENC_H265_TRANS_S *pstH265Trans);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetH265Trans参考代码
+> HB_VENC_SetH265Trans 参考代码
 
 ### HB_VENC_SetH265Dblk
 【函数声明】
@@ -1912,7 +1912,7 @@ int32_t HB_VENC_SetH265Dblk(VENC_CHN VeChn, const VENC_H265_DBLK_S *pstH265Dblk)
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -1977,13 +1977,13 @@ int32_t HB_VENC_GetH265Dblk(VENC_CHN VeChn, VENC_H265_DBLK_S *pstH265Dblk);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetH265Dblk参考代码
+> HB_VENC_SetH265Dblk 参考代码
 
 ### HB_VENC_SetH265Sao
 【函数声明】
@@ -2005,7 +2005,7 @@ int32_t HB_VENC_SetH265Sao(VENC_CHN VeChn, const VENC_H265_SAO_S *pstH265Sao);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2069,13 +2069,13 @@ int32_t HB_VENC_GetH265Sao(VENC_CHN VeChn, VENC_H265_SAO_S *pstH265Sao);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetH265Sao参考代码
+> HB_VENC_SetH265Sao 参考代码
 
 ### HB_VENC_SetIntraRefresh
 【函数声明】
@@ -2097,7 +2097,7 @@ int32_t HB_VENC_SetIntraRefresh(VENC_CHN VeChn, const HB_VENC_INTRA_REFRESH_S *p
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2162,13 +2162,13 @@ int32_t HB_VENC_GetIntraRefresh(VENC_CHN VeChn, VENC_INTRA_REFRESH_S *pstIntraRe
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetIntraRefresh参考代码
+> HB_VENC_SetIntraRefresh 参考代码
 
 ### HB_VENC_SetCuPrediction
 【函数声明】
@@ -2190,7 +2190,7 @@ int32_t HB_VENC_SetCuPrediction(VENC_CHN VeChn, const VENC_CU_PREDICTION_S * pst
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2255,13 +2255,13 @@ int32_t HB_VENC_GetCuPrediction(VENC_CHN VeChn, VENC_CU_PREDICTION_S * pstCuPred
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetCuPrediction参考代码
+> HB_VENC_SetCuPrediction 参考代码
 
 ### HB_VENC_SetJpegParam
 【函数声明】
@@ -2269,7 +2269,7 @@ int32_t HB_VENC_GetCuPrediction(VENC_CHN VeChn, VENC_CU_PREDICTION_S * pstCuPred
 int32_t HB_VENC_SetJpegParam(VENC_CHN VeChn, const VENC_JPEG_PARAM_S * pstJpegParam);
 ```
 【功能描述】
-> 设置JPEG协议编码通道的高级参数。
+> 设置 JPEG 协议编码通道的高级参数。
 
 【参数描述】
 
@@ -2283,13 +2283,13 @@ int32_t HB_VENC_SetJpegParam(VENC_CHN VeChn, const VENC_JPEG_PARAM_S * pstJpegPa
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetJpegParam参考代码
+> HB_VENC_SetJpegParam 参考代码
 
 ### HB_VENC_GetJpegParam
 【函数声明】
@@ -2297,7 +2297,7 @@ int32_t HB_VENC_SetJpegParam(VENC_CHN VeChn, const VENC_JPEG_PARAM_S * pstJpegPa
 int32_t HB_VENC_GetJpegParam(VENC_CHN VeChn, VENC_JPEG_PARAM_S * pstJpegParam);
 ```
 【功能描述】
-> 获取JPEG协议编码通道的高级参数设置。
+> 获取 JPEG 协议编码通道的高级参数设置。
 
 【参数描述】
 
@@ -2311,13 +2311,13 @@ int32_t HB_VENC_GetJpegParam(VENC_CHN VeChn, VENC_JPEG_PARAM_S * pstJpegParam);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetJpegParam参考代码
+> HB_VENC_SetJpegParam 参考代码
 
 ### HB_VENC_SetMjpegParam
 【函数声明】
@@ -2325,7 +2325,7 @@ int32_t HB_VENC_GetJpegParam(VENC_CHN VeChn, VENC_JPEG_PARAM_S * pstJpegParam);
 int32_t HB_VENC_SetJpegParam(VENC_CHN VeChn, const VENC_MJPEG_PARAM_S * pstMjpegParam);
 ```
 【功能描述】
-> 设置MJPEG协议编码通道的高级参数。
+> 设置 MJPEG 协议编码通道的高级参数。
 
 【参数描述】
 
@@ -2339,7 +2339,7 @@ int32_t HB_VENC_SetJpegParam(VENC_CHN VeChn, const VENC_MJPEG_PARAM_S * pstMjpeg
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2406,7 +2406,7 @@ int32_t HB_VENC_SetJpegParam(VENC_CHN VeChn, const VENC_MJPEG_PARAM_S * pstMjpeg
 int32_t HB_VENC_GetMjpegParam(VENC_CHN VeChn, VENC_MJPEG_PARAM_S * pstMjpegParam);
 ```
 【功能描述】
-> 获取MJPEG协议编码通道的高级参数设置。
+> 获取 MJPEG 协议编码通道的高级参数设置。
 
 【参数描述】
 
@@ -2420,13 +2420,13 @@ int32_t HB_VENC_GetMjpegParam(VENC_CHN VeChn, VENC_MJPEG_PARAM_S * pstMjpegParam
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_SetMjpegParam参考代码
+> HB_VENC_SetMjpegParam 参考代码
 
 ### HB_VENC_GetFd
 【函数声明】
@@ -2448,7 +2448,7 @@ int32_t HB_VENC_GetFd(VENC_CHN VeChn, int32_t *fd)
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2513,13 +2513,13 @@ int32_t HB_VENC_GetFd(VENC_CHN VeChn, int32_t fd)
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> HB_VENC_GetFd参考代码
+> HB_VENC_GetFd 参考代码
 
 ### HB_VENC_QueryStatus
 【函数声明】
@@ -2541,7 +2541,7 @@ int32_t HB_VENC_QueryStatus(VENC_CHN VeChn, , VENC_CHN_STATUS_S *pstStatus)
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2570,7 +2570,7 @@ int32_t HB_VENC_InserUserData(VENC_CHN VeChn, uint8_t *pu8Data,
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2597,7 +2597,7 @@ int32_t HB_VENC_SetChnParam(VENC_CHN VeChn, const VENC_CHN_PARAM_S *pstChnParam)
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2625,7 +2625,7 @@ int32_t HB_VENC_GetChnParam(VENC_CHN VeChn, VENC_CHN_PARAM_S *pstChnParam)
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2639,21 +2639,21 @@ int32_t HB_VENC_GetChnParam(VENC_CHN VeChn, VENC_CHN_PARAM_S *pstChnParam)
 int32_t HB_VENC_SetModParam(VENC_CHN VeChn, const VENC_PARAM_MOD_S *pstModParam)
 ```
 【功能描述】
-> 设置编码通道VPS、SPS、PPS、IDR是否一帧输出。
+> 设置编码通道 VPS、SPS、PPS、IDR 是否一帧输出。
 
 【参数描述】
 
 |  参数名称   | 描述                                             | 输入/输出 |
 | :---------: | :----------------------------------------------- | :-------: |
 |    VeChn    | 编码通道号。<br/>取值范围：[0, VENC_MAX_CHN_NUM) |   输入    |
-| pstModParam | ModParam指针                                     |   输入    |
+| pstModParam | ModParam 指针                                     |   输入    |
 
 【返回值】
 
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2666,21 +2666,21 @@ int32_t HB_VENC_SetModParam(VENC_CHN VeChn, const VENC_PARAM_MOD_S *pstModParam)
 int32_t HB_VENC_GetModParam(VENC_CHN VeChn, VENC_PARAM_MOD_S *pstModParam)
 ```
 【功能描述】
-> 获取编码通道VPS、SPS、PPS、IDR是否一帧输出。
+> 获取编码通道 VPS、SPS、PPS、IDR 是否一帧输出。
 
 【参数描述】
 
 |  参数名称   | 描述                                             | 输入/输出 |
 | :---------: | :----------------------------------------------- | :-------: |
 |    VeChn    | 编码通道号。<br/>取值范围：[0, VENC_MAX_CHN_NUM) |   输入    |
-| pstModParam | ModParam指针                                     |   输出    |
+| pstModParam | ModParam 指针                                     |   输出    |
 
 【返回值】
 
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2693,7 +2693,7 @@ int32_t HB_VENC_GetModParam(VENC_CHN VeChn, VENC_PARAM_MOD_S *pstModParam)
 int32_t HB_VENC_SendFrameEx(VENC_CHN VeChn, const USER_FRAME_INFO_S *pstFrame, int32_t s32MilliSec)
 ```
 【功能描述】
-> 用户发送原始图像及该图的QpMap表进行编码。
+> 用户发送原始图像及该图的 QpMap 表进行编码。
 
 【参数描述】
 
@@ -2708,7 +2708,7 @@ int32_t HB_VENC_SendFrameEx(VENC_CHN VeChn, const USER_FRAME_INFO_S *pstFrame, i
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2721,21 +2721,21 @@ int32_t HB_VENC_SendFrameEx(VENC_CHN VeChn, const USER_FRAME_INFO_S *pstFrame, i
 int32_t HB_VENC_SetAverageQp(VENC_CHN VeChn, int averageQp)
 ```
 【功能描述】
-> 设置相对Qpmap averageQp。
+> 设置相对 Qpmap averageQp。
 
 【参数描述】
 
 | 参数名称  | 描述                                             | 输入/输出 |
 | :-------: | :----------------------------------------------- | :-------: |
 |   VeChn   | 编码通道号。<br/>取值范围：[0, VENC_MAX_CHN_NUM) |   输入    |
-| averageQp | 相对QPMAP averageqp                              |   输入    |
+| averageQp | 相对 QPMAP averageqp                              |   输入    |
 
 【返回值】
 
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2748,21 +2748,21 @@ int32_t HB_VENC_SetAverageQp(VENC_CHN VeChn, int averageQp)
 int32_t HB_VENC_GetAverageQp(VENC_CHN VeChn, int *averageQp)
 ```
 【功能描述】
-> 获取相对Qpmap averageQp。
+> 获取相对 Qpmap averageQp。
 
 【参数描述】
 
 | 参数名称  | 描述                                             | 输入/输出 |
 | :-------: | :----------------------------------------------- | :-------: |
 |   VeChn   | 编码通道号。<br/>取值范围：[0, VENC_MAX_CHN_NUM) |   输入    |
-| averageQp | 相对QPMAP averageqp                              |   输出    |
+| averageQp | 相对 QPMAP averageqp                              |   输出    |
 
 【返回值】
 
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2775,7 +2775,7 @@ int32_t HB_VENC_GetAverageQp(VENC_CHN VeChn, int *averageQp)
 int32_t HB_VENC_Set3DNRParam(VENC_CHN VeChn, VENC_3DNR_PARAMS *param)
 ```
 【功能描述】
-> 设置H265 3DNR 参数。
+> 设置 H265 3DNR 参数。
 
 【参数描述】
 
@@ -2789,7 +2789,7 @@ int32_t HB_VENC_Set3DNRParam(VENC_CHN VeChn, VENC_3DNR_PARAMS *param)
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2802,7 +2802,7 @@ int32_t HB_VENC_Set3DNRParam(VENC_CHN VeChn, VENC_3DNR_PARAMS *param)
 int32_t HB_VENC_Get3DNRParam(VENC_CHN VeChn, VENC_3DNR_PARAMS *param)
 ```
 【功能描述】
-> 获取H265 3DNR 参数。
+> 获取 H265 3DNR 参数。
 
 【参数描述】
 
@@ -2816,7 +2816,7 @@ int32_t HB_VENC_Get3DNRParam(VENC_CHN VeChn, VENC_3DNR_PARAMS *param)
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 > 无
@@ -2824,7 +2824,7 @@ int32_t HB_VENC_Get3DNRParam(VENC_CHN VeChn, VENC_3DNR_PARAMS *param)
 【参考代码】
 
 ## 数据结构
-结构中不可动态调整变量，需要在HB_VENC_SetChnAttr前设置，可动态设置变量可以随时设置。
+结构中不可动态调整变量，需要在 HB_VENC_SetChnAttr 前设置，可动态设置变量可以随时设置。
 ### HB_PIXEL_FORMAT_E
 【描述】
 > 定义编码器输入图像类型枚举。
@@ -2959,9 +2959,9 @@ typedef enum HB_CODEC_ROTATION_S {
 |        成员        |        含义         |
 | :----------------: | :-----------------: |
 |  CODEC_ROTATION_0  | 不旋转，旋转 0 度。 |
-| CODEC_ROTATION_90  |     旋转90度。      |
-| CODEC_ROTATION_180 |     旋转180度。     |
-| CODEC_ROTATION_270 |     旋转270度。     |
+| CODEC_ROTATION_90  |     旋转 90 度。      |
+| CODEC_ROTATION_180 |     旋转 180 度。     |
+| CODEC_ROTATION_270 |     旋转 270 度。     |
 
 ### MIRROR_FLIP_E
 【描述】
@@ -2988,7 +2988,7 @@ typedef enum HB_MIRROR_FLIP_E {
 
 ### HB_VENC_H264_PROFILE_E
 【描述】
-> 定义H264 profile枚举。
+> 定义 H264 profile 枚举。
 
 【结构定义】
 ```C
@@ -3006,7 +3006,7 @@ typedef enum HB_VENC_H264_PROFILE_E {
 
 ### HB_VENC_H264_LEVEL
 【描述】
-> 定义H264级别枚举。
+> 定义 H264 级别枚举。
 
 【结构定义】
 ```C
@@ -3034,7 +3034,7 @@ typedef enum HB_VENC_H264_LEVEL {
 
 ### HB_VENC_H265_LEVEL
 【描述】
-> 定义H265 级别枚举。
+> 定义 H265 级别枚举。
 
 【结构定义】
 ```C
@@ -3112,12 +3112,12 @@ typedef struct HB_VENC_ATTR_H265_S {
 
 |               成员                |                         含义                          |
 | :-------------------------------: | :---------------------------------------------------: |
-| main_still_picture_profile_enable |  使能H265 main still picture profile，不可动态配置。  |
-|           s32h265_tier            |           设置H265 tier信息，不可动态配置。           |
+| main_still_picture_profile_enable |  使能 H265 main still picture profile，不可动态配置。  |
+|           s32h265_tier            |           设置 H265 tier 信息，不可动态配置。           |
 |    transform_skip_enabled_flag    | 是否使能 transform skip for intra CU，不可动态配置。  |
 |           lossless_mode           |           开启无损编码模式，不可动态配置。            |
-|            tmvp_Enable            | 使能temporal motion vector prediction，不可动态配置。 |
-|            wpp_Enable             |                使能wpp，不可动态配置。                |
+|            tmvp_Enable            | 使能 temporal motion vector prediction，不可动态配置。 |
+|            wpp_Enable             |                使能 wpp，不可动态配置。                |
 |            h265_level             |               H265 级别，不可动态配置。               |
 
 ### VENC_ATTR_MJPEG_S
@@ -3145,16 +3145,16 @@ typedef struct HB_VENC_ATTR_MJPEG_S {
 
 |        成员         |                           含义                            |
 | :-----------------: | :-------------------------------------------------------: |
-|  restart_interval   | 指定在一个独立的扫描序列中包含的MCU的个数，不可动态配置。 |
-|  huff_table_valid   |             是否使能huffman表，不可动态配置。             |
-|  huff_luma_dc_bits  |        uffman 亮度DC bit length 表，不可动态配置。        |
-|  huff_luma_dc_val   |        Huffman 亮度DC huffvalue表，不可动态配置。         |
-|  huff_luma_ac_bits  |       Huffman 亮度AC bit length 表，不可动态配置。        |
-|  huff_luma_ac_val   |        Huffman 亮度AC huffvalue表，不可动态配置。         |
-| huff_chroma_dc_bits |       Huffman 色度DC bit length 表，不可动态配置。        |
-| huff_chroma_ac_bits |        Huffman 色度AC bit length表，不可动态配置。        |
-| huff_chroma_dc_val  |        Huffman 亮度DC huffvalue表，不可动态配置。         |
-| huff_chroma_ac_val  |        Huffman 亮度AC huffvalue表，不可动态配置。         |
+|  restart_interval   | 指定在一个独立的扫描序列中包含的 MCU 的个数，不可动态配置。 |
+|  huff_table_valid   |             是否使能 huffman 表，不可动态配置。             |
+|  huff_luma_dc_bits  |        uffman 亮度 DC bit length 表，不可动态配置。        |
+|  huff_luma_dc_val   |        Huffman 亮度 DC huffvalue 表，不可动态配置。         |
+|  huff_luma_ac_bits  |       Huffman 亮度 AC bit length 表，不可动态配置。        |
+|  huff_luma_ac_val   |        Huffman 亮度 AC huffvalue 表，不可动态配置。         |
+| huff_chroma_dc_bits |       Huffman 色度 DC bit length 表，不可动态配置。        |
+| huff_chroma_ac_bits |        Huffman 色度 AC bit length 表，不可动态配置。        |
+| huff_chroma_dc_val  |        Huffman 亮度 DC huffvalue 表，不可动态配置。         |
+| huff_chroma_ac_val  |        Huffman 亮度 AC huffvalue 表，不可动态配置。         |
 | extended_sequential |                12 bit 模式，不可动态配置。                |
 
 ### VENC_ATTR_JPEG_S
@@ -3183,18 +3183,18 @@ typedef struct HB_VENC_ATTR_JPEG_S {
 
 |        成员         |                              含义                              |
 | :-----------------: | :------------------------------------------------------------: |
-|     dcf_enable      |                  是否使能dcf，不可动态配置。                   |
-|  restart_interval   |   指定在一个独立的扫描序列中包含的MCU的个数，不可动态配置。    |
+|     dcf_enable      |                  是否使能 dcf，不可动态配置。                   |
+|  restart_interval   |   指定在一个独立的扫描序列中包含的 MCU 的个数，不可动态配置。    |
 |   quality_factor    | 质量系数，该值越大，压缩率越低，编码质量损失越小，可动态配置。 |
-|  huff_table_valid   |               是否使能huffman表，不可动态配置。                |
-|  huff_luma_dc_bits  |          uffman 亮度DC bit length 表，不可动态配置。           |
-|  huff_luma_dc_val   |           Huffman 亮度DC huffvalue表，不可动态配置。           |
-|  huff_luma_ac_bits  |          Huffman 亮度AC bit length 表，不可动态配置。          |
-|  huff_luma_ac_val   |           Huffman 亮度AC huffvalue表，不可动态配置。           |
-| huff_chroma_dc_bits |          Huffman 色度DC bit length 表，不可动态配置。          |
-| huff_chroma_ac_bits |          Huffman 色度AC bit length表，不可动态配置。           |
-| huff_chroma_dc_val  |           Huffman 亮度DC huffvalue表，不可动态配置。           |
-| huff_chroma_ac_val  |           Huffman 亮度AC huffvalue表，不可动态配置。           |
+|  huff_table_valid   |               是否使能 huffman 表，不可动态配置。                |
+|  huff_luma_dc_bits  |          uffman 亮度 DC bit length 表，不可动态配置。           |
+|  huff_luma_dc_val   |           Huffman 亮度 DC huffvalue 表，不可动态配置。           |
+|  huff_luma_ac_bits  |          Huffman 亮度 AC bit length 表，不可动态配置。          |
+|  huff_luma_ac_val   |           Huffman 亮度 AC huffvalue 表，不可动态配置。           |
+| huff_chroma_dc_bits |          Huffman 色度 DC bit length 表，不可动态配置。          |
+| huff_chroma_ac_bits |          Huffman 色度 AC bit length 表，不可动态配置。           |
+| huff_chroma_dc_val  |           Huffman 亮度 DC huffvalue 表，不可动态配置。           |
+| huff_chroma_ac_val  |           Huffman 亮度 AC huffvalue 表，不可动态配置。           |
 | extended_sequential |                  12 bit 模式，不可动态配置。                   |
 
 ### VENC_ATTR_S
@@ -3235,17 +3235,17 @@ typedef struct HB_VENC_ATTR_S {
 |                    u32PicWidth                    |                  编码图像宽度，不可动态配置。                  |
 |                   u32PicHeight                    |                  编码图像高度，不可动态配置。                  |
 |                   enPixelFormat                   |                    像素格式，不可动态配置。                    |
-|                u32FrameBufferCount                |          输入的Framebuffer缓存的个数，不可动态配置。           |
-|             u32BitStreamBufferCount;              |           输出的bitstream缓存区个数，不可动态配置。            |
-|                      HB_BOOL                      | bExternalFreamBuffer;	使用用户分配的输入buffer，不可动态配置。 |
-|                u32BitStreamBufSize                |            输出的bitstream缓存大小，不可动态配置。             |
+|                u32FrameBufferCount                |          输入的 Framebuffer 缓存的个数，不可动态配置。           |
+|             u32BitStreamBufferCount;              |           输出的 bitstream 缓存区个数，不可动态配置。            |
+|                      HB_BOOL                      | bExternalFreamBuffer;	使用用户分配的输入 buffer，不可动态配置。 |
+|                u32BitStreamBufSize                |            输出的 bitstream 缓存大小，不可动态配置。             |
 |                    enRotation                     |                    旋转属性，不可动态配置。                    |
 |                   enMirrorFlip                    |                    镜像属性，不可动态配置。                    |
 |                     stCropCfg                     |                    裁剪配置，不可动态配置。                    |
-|                  bEnableUserPts                   |                是否使用用户pts，不可动态配置。                 |
-|                   vlc_buf_size                    |          设置编码task vlc buffer大小，不可动态配置。           |
+|                  bEnableUserPts                   |                是否使用用户 pts，不可动态配置。                 |
+|                   vlc_buf_size                    |          设置编码 task vlc buffer 大小，不可动态配置。           |
 |                    s32BufJoint                    |            是否使用连续内存缓存多帧，不可动态配置。            |
-|                  s32BufJointSize                  |                  使用连续内存大小，范围4M-50M                  |
+|                  s32BufJointSize                  |                  使用连续内存大小，范围 4M-50M                  |
 | stAttrH264/stAttrMjpeg/<br/>stAttrJpeg/stAttrH265 |              某种协议的编码器属性，不可动态配置。              |
 
 ### VENC_RC_MODE_E
@@ -3274,17 +3274,17 @@ typedef enum HB_VENC_RC_MODE_E {
 
 |          成员           |        含义        |
 | :---------------------: | :----------------: |
-|  VENC_RC_MODE_H264CBR   |   H264 CBR方式。   |
-|  VENC_RC_MODE_H264VBR   |   H264 VBR方式。   |
-|  VENC_RC_MODE_H264AVBR  |  H264 AVBR方式。   |
-| VENC_RC_MODE_H264FIXQP  |  H264 Fixqp方式。  |
+|  VENC_RC_MODE_H264CBR   |   H264 CBR 方式。   |
+|  VENC_RC_MODE_H264VBR   |   H264 VBR 方式。   |
+|  VENC_RC_MODE_H264AVBR  |  H264 AVBR 方式。   |
+| VENC_RC_MODE_H264FIXQP  |  H264 Fixqp 方式。  |
 | VENC_RC_MODE_H264QPMAP  | H.264 QPMAP 方式。 |
 | VENC_RC_MODE_MJPEGFIXQP | MJPEG Fixqp 方式。 |
-|  VENC_RC_MODE_H265CBR   |   H265 CBR方式。   |
-|  VENC_RC_MODE_H265VBR   |   H265 VBR方式。   |
-|  VENC_RC_MODE_H265AVBR  |   H265 VBR方式。   |
-| VENC_RC_MODE_H265FIXQP  |  H265 Fixqp方式。  |
-| VENC_RC_MODE_H265QPMAP  |  H265 QPMAP方式。  |
+|  VENC_RC_MODE_H265CBR   |   H265 CBR 方式。   |
+|  VENC_RC_MODE_H265VBR   |   H265 VBR 方式。   |
+|  VENC_RC_MODE_H265AVBR  |   H265 VBR 方式。   |
+| VENC_RC_MODE_H265FIXQP  |  H265 Fixqp 方式。  |
+| VENC_RC_MODE_H265QPMAP  |  H265 QPMAP 方式。  |
 
 ### VENC_H264_CBR_S
 【描述】
@@ -3317,25 +3317,25 @@ typedef struct HB_VENC_H264_CBR_S {
 
 |       成员       |含义|
 | :--------------: | :---------------------: |
-|  u32IntraPeriod  |I帧间隔，可动态配置。|
-|    u32IntraQp    |I帧的QP值，可动态配置，值越小反应的图像质量越好。|
-|    u32BitRate    |目标平均比特率，单位是kbps，可动态配置。|
-|   u32FrameRate   |目标帧率，单位是fps，可动态配置。|
-|  u32InitialRcQp  |指定码率控制时的初始QP值，当该值不在[0,51]范围内,编码器内部会决定初始值，不可动态配置。|
-| u32VbvBufferSize | 实际的VBV buffer的空间大小为bit_rate * vbv_buffer_size / 1000（kb），该buffer的大小会影响编码图像质量和码率控制精度。当该buffer比较小时，码率控制精确度高，但图像编码质量较差；当该buffer比较大时，图像编码质量高，但是码率波动大。可动态配置。 |
-| bMbLevelRcEnable |H264的码率控制可以工作在宏块级别的控制，该模式可以达到更高精度的码率控制，但是会损失编码图像质量，该模式不可以和ROI编码一起工作，当使能ROI编码时，该功能自动失效。不可动态配置。|
-|    u32MaxIQp     |I帧的最大QP值，可动态配置。|
-|    u32MinIQp     |I帧的最小QP值，可动态配置。|
-|    u32MaxPQp     |P帧的最大QP值，可动态配置。|
-|    u32MinPQp     |P帧的最小QP值，可动态配置。|
-|    u32MaxBQp     |B帧的最大QP值，可动态配置。|
-|    u32MinBQp     |B帧的最小QP值，可动态配置。|
-|   bHvsQpEnable   |H264的码率控制可以工作在子宏块级别的控制，该模式会调整子宏块的QP值，进而提高主观图像质量。可动态配置。|
-|  s32HvsQpScale   |当hvs_qp_enable使能后有效，该值表示QP缩放因子。可动态配置。|
-|  u32MaxDeltaQp   |当hvs_qp_enable使能后有效，指定HVS qp值的最大偏差范围。可动态配置。|
-|   bQpMapEnable   |是否使能Qp map，可动态配置。|
+|  u32IntraPeriod  |I 帧间隔，可动态配置。|
+|    u32IntraQp    |I 帧的 QP 值，可动态配置，值越小反应的图像质量越好。|
+|    u32BitRate    |目标平均比特率，单位是 kbps，可动态配置。|
+|   u32FrameRate   |目标帧率，单位是 fps，可动态配置。|
+|  u32InitialRcQp  |指定码率控制时的初始 QP 值，当该值不在[0,51]范围内,编码器内部会决定初始值，不可动态配置。|
+| u32VbvBufferSize | 实际的 VBV buffer 的空间大小为 bit_rate * vbv_buffer_size / 1000（kb），该 buffer 的大小会影响编码图像质量和码率控制精度。当该 buffer 比较小时，码率控制精确度高，但图像编码质量较差；当该 buffer 比较大时，图像编码质量高，但是码率波动大。可动态配置。 |
+| bMbLevelRcEnable |H264 的码率控制可以工作在宏块级别的控制，该模式可以达到更高精度的码率控制，但是会损失编码图像质量，该模式不可以和 ROI 编码一起工作，当使能 ROI 编码时，该功能自动失效。不可动态配置。|
+|    u32MaxIQp     |I 帧的最大 QP 值，可动态配置。|
+|    u32MinIQp     |I 帧的最小 QP 值，可动态配置。|
+|    u32MaxPQp     |P 帧的最大 QP 值，可动态配置。|
+|    u32MinPQp     |P 帧的最小 QP 值，可动态配置。|
+|    u32MaxBQp     |B 帧的最大 QP 值，可动态配置。|
+|    u32MinBQp     |B 帧的最小 QP 值，可动态配置。|
+|   bHvsQpEnable   |H264 的码率控制可以工作在子宏块级别的控制，该模式会调整子宏块的 QP 值，进而提高主观图像质量。可动态配置。|
+|  s32HvsQpScale   |当 hvs_qp_enable 使能后有效，该值表示 QP 缩放因子。可动态配置。|
+|  u32MaxDeltaQp   |当 hvs_qp_enable 使能后有效，指定 HVS qp 值的最大偏差范围。可动态配置。|
+|   bQpMapEnable   |是否使能 Qp map，可动态配置。|
 
-注意：rc模块会计算码率，小于设置的码率，会调小qp值，如果qp小于qpmin，就调整不了，导致图像达不到预期；大于设置的码率，会调大qp值，如果qp大于qpmax，调整不了，码率会一直大于设置的码率，达不到设置的码率。
+注意：rc 模块会计算码率，小于设置的码率，会调小 qp 值，如果 qp 小于 qpmin，就调整不了，导致图像达不到预期；大于设置的码率，会调大 qp 值，如果 qp 大于 qpmax，调整不了，码率会一直大于设置的码率，达不到设置的码率。
 
 ### VENC_H264_VBR_S
 
@@ -3355,10 +3355,10 @@ typedef struct HB_VENC_H264_VBR_S {
 
 |      成员      |             含义             |
 | :------------: | :--------------------------: |
-| u32IntraPeriod |    I帧间隔，可动态配置。     |
-|   u32IntraQp   |   I帧的QP值，可动态配置。    |
+| u32IntraPeriod |    I 帧间隔，可动态配置。     |
+|   u32IntraQp   |   I 帧的 QP 值，可动态配置。    |
 |  u32FrameRate  |      帧率，可动态配置。      |
-|  bQpMapEnable  | 是否使能Qp map，可动态配置。 |
+|  bQpMapEnable  | 是否使能 Qp map，可动态配置。 |
 
 ### VENC_H264_AVBR_S
 【描述】
@@ -3390,23 +3390,23 @@ typedef struct HB_VENC_H264_AVBR_S {
 
 |       成员       |含义|
 | :--------------: | :--------------: |
-|  u32IntraPeriod  |I帧间隔，可动态配置。|
-|    u32IntraQp    |I帧的QP值，可动态配置。|
-|    u32BitRate    |目标平均比特率，单位是kbps，可动态配置。|
-|   u32FrameRate   |目标帧率，单位是fps，可动态配置。|
-|  u32InitialRcQp  |指定码率控制时的初始QP值，当该值不在[0,51]范围内,编码器内部会决定初始值，不可动态配置。|
-| u32VbvBufferSize | 实际的VBV buffer的空间大小为bit_rate * vbv_buffer_size / 1000（kb），该buffer的大小会影响编码图像质量和码率控制精度。当该buffer比较小时，码率控制精确度高，但图像编码质量较差；当该buffer比较大时，图像编码质量高，但是码率波动大，可动态配置。 |
-| bMbLevelRcEnable |H264的码率控制可以工作在宏块级别的控制，该模式可以达到更高精度的码率控制，但是会损失编码图像质量，该模式不可以和ROI编码一起工作，当使能ROI编码时，该功能自动失效。不可动态配置。|
-|    u32MaxIQp     |I帧的最大QP值，可动态配置。|
-|    u32MinIQp     |I帧的最小QP值，可动态配置。|
-|    u32MaxPQp     |P帧的最大QP值，可动态配置。|
-|    u32MinPQp     |P帧的最小QP值，可动态配置。|
-|    u32MaxBQp     |B帧的最大QP值，可动态配置。|
-|    u32MinBQp     |B帧的最小QP值，可动态配置。|
-|   bHvsQpEnable   |H264的码率控制可以工作在子宏块级别的控制，该模式会调整子宏块的QP值，进而提高主观图像质量，可动态配置。|
-|  s32HvsQpScale   |当hvs_qp_enable使能后有效，该值表示QP缩放因子，可动态配置。|
-|  u32MaxDeltaQp   |当hvs_qp_enable使能后有效，指定HVS qp值的最大偏差范围，可动态配置。|
-|   bQpMapEnable   |是否使能Qp map，可动态配置。|
+|  u32IntraPeriod  |I 帧间隔，可动态配置。|
+|    u32IntraQp    |I 帧的 QP 值，可动态配置。|
+|    u32BitRate    |目标平均比特率，单位是 kbps，可动态配置。|
+|   u32FrameRate   |目标帧率，单位是 fps，可动态配置。|
+|  u32InitialRcQp  |指定码率控制时的初始 QP 值，当该值不在[0,51]范围内,编码器内部会决定初始值，不可动态配置。|
+| u32VbvBufferSize | 实际的 VBV buffer 的空间大小为 bit_rate * vbv_buffer_size / 1000（kb），该 buffer 的大小会影响编码图像质量和码率控制精度。当该 buffer 比较小时，码率控制精确度高，但图像编码质量较差；当该 buffer 比较大时，图像编码质量高，但是码率波动大，可动态配置。 |
+| bMbLevelRcEnable |H264 的码率控制可以工作在宏块级别的控制，该模式可以达到更高精度的码率控制，但是会损失编码图像质量，该模式不可以和 ROI 编码一起工作，当使能 ROI 编码时，该功能自动失效。不可动态配置。|
+|    u32MaxIQp     |I 帧的最大 QP 值，可动态配置。|
+|    u32MinIQp     |I 帧的最小 QP 值，可动态配置。|
+|    u32MaxPQp     |P 帧的最大 QP 值，可动态配置。|
+|    u32MinPQp     |P 帧的最小 QP 值，可动态配置。|
+|    u32MaxBQp     |B 帧的最大 QP 值，可动态配置。|
+|    u32MinBQp     |B 帧的最小 QP 值，可动态配置。|
+|   bHvsQpEnable   |H264 的码率控制可以工作在子宏块级别的控制，该模式会调整子宏块的 QP 值，进而提高主观图像质量，可动态配置。|
+|  s32HvsQpScale   |当 hvs_qp_enable 使能后有效，该值表示 QP 缩放因子，可动态配置。|
+|  u32MaxDeltaQp   |当 hvs_qp_enable 使能后有效，指定 HVS qp 值的最大偏差范围，可动态配置。|
+|   bQpMapEnable   |是否使能 Qp map，可动态配置。|
 
 ### VENC_H264_FIXQP_S
 【描述】
@@ -3427,11 +3427,11 @@ typedef struct HB_VENC_H264_FIXQP_S {
 
 |      成员      |               含义                |
 | :------------: | :-------------------------------: |
-| u32IntraPeriod |       I帧间隔，可动态配置。       |
-|  u32FrameRate  | 目标帧率，单位是fps，可动态配置。 |
-|     u32IQp     |    强制I帧的QP值，可动态配置。    |
-|     u32PQp     |    强制P帧的QP值，可动态配置。    |
-|     u32BQp     |    强制B帧的QP值，可动态配置。    |
+| u32IntraPeriod |       I 帧间隔，可动态配置。       |
+|  u32FrameRate  | 目标帧率，单位是 fps，可动态配置。 |
+|     u32IQp     |    强制 I 帧的 QP 值，可动态配置。    |
+|     u32PQp     |    强制 P 帧的 QP 值，可动态配置。    |
+|     u32BQp     |    强制 B 帧的 QP 值，可动态配置。    |
 
 ### VENC_H264_QPMAP_S
 【描述】
@@ -3450,10 +3450,10 @@ typedef struct HB_VENC_H264_QPMAP_S {
 
 |        成员        |                                                             含义                                                              |
 | :----------------: | :---------------------------------------------------------------------------------------------------------------------------: |
-|   u32IntraPeriod   |                                                     I帧间隔，可动态配置。                                                     |
-|    u32FrameRate    |                                               目标帧率，单位是fps，可动态配置。                                               |
-|   u32QpMapArray    | 指定QP map表，H264的宏块大小为16x16，需要为每一个宏块指定一个QP值，每个QP值占一个字节，并且按照光栅扫描方向排序，可动态配置。 |
-| u32QpMapArrayCount |                                               指定QP map表的大小，可动态配置。                                                |
+|   u32IntraPeriod   |                                                     I 帧间隔，可动态配置。                                                     |
+|    u32FrameRate    |                                               目标帧率，单位是 fps，可动态配置。                                               |
+|   u32QpMapArray    | 指定 QP map 表，H264 的宏块大小为 16x16，需要为每一个宏块指定一个 QP 值，每个 QP 值占一个字节，并且按照光栅扫描方向排序，可动态配置。 |
+| u32QpMapArrayCount |                                               指定 QP map 表的大小，可动态配置。                                                |
 
 ### VENC_H265_CBR_S
 【描述】
@@ -3485,23 +3485,23 @@ typedef struct HB_VENC_H265_CBR_S {
 
 |       成员       |含义|
 | :--------------: | :--------------: |
-|  u32IntraPeriod  |I帧间隔，可动态配置。|
-|    u32IntraQp    |I帧的QP值，可动态配置。|
-|    u32BitRate    |目标平均比特率，单位是kbps，可动态配置。|
-|   u32FrameRate   |目标帧率，单位是fps，可动态配置。|
-|  u32InitialRcQp  |指定码率控制时的初始QP值，当该值不在[0,51]范围内,编码器内部会决定初始值，不可动态配置。|
-| u32VbvBufferSize | 实际的VBV buffer的空间大小为bit_rate * vbv_buffer_size / 1000（kb），该buffer的大小会影响编码图像质量和码率控制精度。当该buffer比较小时，码率控制精确度高，但图像编码质量较差；当该buffer比较大时，图像编码质量高，但是码率波动大，可动态配置。 |
-|bMbLevelRcEnable|H264的码率控制可以工作在宏块级别的控制，该模式可以达到更高精度的码率控制，但是会损失编码图像质量，该模式不可以和ROI编码一起工作，当使能ROI编码时，该功能自动失效，可动态配置。|
-|u32MaxIQp|I帧的最大QP值，可动态配置。|
-|u32MinIQp|I帧的最小QP值，可动态配置。|
-|u32MaxPQp|P帧的最大QP值，可动态配置。|
-|u32MinPQp|P帧的最小QP值，可动态配置。|
-|u32MaxBQp|B帧的最大QP值，可动态配置。|
-|u32MinBQp|B帧的最小QP值，可动态配置。|
-|bHvsQpEnable|H264的码率控制可以工作在子宏块级别的控制，该模式会调整子宏块的QP值，进而提高主观图像质量，可动态配置。|
-|s32HvsQpScale|当hvs_qp_enable使能后有效，该值表示QP缩放因子，可动态配置。|
-|u32MaxDeltaQp|当hvs_qp_enable使能后有效，指定HVS qp值的最大偏差范围，可动态配置。|
-|bQpMapEnable|是否使能Qp map，可动态配置。|
+|  u32IntraPeriod  |I 帧间隔，可动态配置。|
+|    u32IntraQp    |I 帧的 QP 值，可动态配置。|
+|    u32BitRate    |目标平均比特率，单位是 kbps，可动态配置。|
+|   u32FrameRate   |目标帧率，单位是 fps，可动态配置。|
+|  u32InitialRcQp  |指定码率控制时的初始 QP 值，当该值不在[0,51]范围内,编码器内部会决定初始值，不可动态配置。|
+| u32VbvBufferSize | 实际的 VBV buffer 的空间大小为 bit_rate * vbv_buffer_size / 1000（kb），该 buffer 的大小会影响编码图像质量和码率控制精度。当该 buffer 比较小时，码率控制精确度高，但图像编码质量较差；当该 buffer 比较大时，图像编码质量高，但是码率波动大，可动态配置。 |
+|bMbLevelRcEnable|H264 的码率控制可以工作在宏块级别的控制，该模式可以达到更高精度的码率控制，但是会损失编码图像质量，该模式不可以和 ROI 编码一起工作，当使能 ROI 编码时，该功能自动失效，可动态配置。|
+|u32MaxIQp|I 帧的最大 QP 值，可动态配置。|
+|u32MinIQp|I 帧的最小 QP 值，可动态配置。|
+|u32MaxPQp|P 帧的最大 QP 值，可动态配置。|
+|u32MinPQp|P 帧的最小 QP 值，可动态配置。|
+|u32MaxBQp|B 帧的最大 QP 值，可动态配置。|
+|u32MinBQp|B 帧的最小 QP 值，可动态配置。|
+|bHvsQpEnable|H264 的码率控制可以工作在子宏块级别的控制，该模式会调整子宏块的 QP 值，进而提高主观图像质量，可动态配置。|
+|s32HvsQpScale|当 hvs_qp_enable 使能后有效，该值表示 QP 缩放因子，可动态配置。|
+|u32MaxDeltaQp|当 hvs_qp_enable 使能后有效，指定 HVS qp 值的最大偏差范围，可动态配置。|
+|bQpMapEnable|是否使能 Qp map，可动态配置。|
 
 ### VENC_H265_VBR_S
 【描述】
@@ -3520,10 +3520,10 @@ typedef struct HB_VENC_H265_VBR_S {
 
 |      成员      |             含义             |
 | :------------: | :--------------------------: |
-| u32IntraPeriod |    I帧间隔，可动态配置。     |
-|   u32IntraQp   |   I帧的QP值，可动态配置。    |
+| u32IntraPeriod |    I 帧间隔，可动态配置。     |
+|   u32IntraQp   |   I 帧的 QP 值，可动态配置。    |
 |  u32FrameRate  |      帧率，可动态配置。      |
-|  bQpMapEnable  | 是否使能Qp map，可动态配置。 |
+|  bQpMapEnable  | 是否使能 Qp map，可动态配置。 |
 
 ### VENC_H265_AVBR_S
 【描述】
@@ -3555,23 +3555,23 @@ typedef struct HB_VENC_H265_AVBR_S {
 
 |       成员       |含义|
 | :--------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|  u32IntraPeriod  |I帧间隔，可动态配置。|
-|    u32IntraQp    |I帧的QP值，可动态配置。|
-|    u32BitRate    |目标平均比特率，单位是kbps，可动态配置。|
-|   u32FrameRate   |目标帧率，单位是fps，可动态配置。|
-|  u32InitialRcQp  |指定码率控制时的初始QP值，当该值不在[0,51]范围内,编码器内部会决定初始值，可动态配置。|
-| u32VbvBufferSize | 实际的VBV buffer的空间大小为bit_rate * vbv_buffer_size / 1000（kb），该buffer的大小会影响编码图像质量和码率控制精度。当该buffer比较小时，码率控制精确度高，但图像编码质量较差；当该buffer比较大时，图像编码质量高，但是码率波动大，可动态配置。 |
-|bMbLevelRcEnable	|H264的码率控制可以工作在宏块级别的控制，该模式可以达到更高精度的码率控制，但是会损失编码图像质量，该模式不可以和ROI编码一起工作，当使能ROI编码时，该功能自动失效，可动态配置。|
-|u32MaxIQp|I帧的最大QP值，可动态配置。|
-|u32MinIQp|I帧的最小QP值，可动态配置。|
-|u32MaxPQp|P帧的最大QP值，可动态配置。|
-|u32MinPQp|P帧的最小QP值，可动态配置。|
-|u32MaxBQp|B帧的最大QP值，可动态配置。|
-|u32MinBQp|B帧的最小QP值，可动态配置。|
-|bHvsQpEnable|H264的码率控制可以工作在子宏块级别的控制，该模式会调整子宏块的QP值，进而提高主观图像质量，可动态配置。|
-|s32HvsQpScale|当hvs_qp_enable使能后有效，该值表示QP缩放因子，可动态配置。|
-|u32MaxDeltaQp|当hvs_qp_enable使能后有效，指定HVS qp值的最大偏差范围，可动态配置。|
-|bQpMapEnable|是否使能Qp map，可动态配置。|
+|  u32IntraPeriod  |I 帧间隔，可动态配置。|
+|    u32IntraQp    |I 帧的 QP 值，可动态配置。|
+|    u32BitRate    |目标平均比特率，单位是 kbps，可动态配置。|
+|   u32FrameRate   |目标帧率，单位是 fps，可动态配置。|
+|  u32InitialRcQp  |指定码率控制时的初始 QP 值，当该值不在[0,51]范围内,编码器内部会决定初始值，可动态配置。|
+| u32VbvBufferSize | 实际的 VBV buffer 的空间大小为 bit_rate * vbv_buffer_size / 1000（kb），该 buffer 的大小会影响编码图像质量和码率控制精度。当该 buffer 比较小时，码率控制精确度高，但图像编码质量较差；当该 buffer 比较大时，图像编码质量高，但是码率波动大，可动态配置。 |
+|bMbLevelRcEnable	|H264 的码率控制可以工作在宏块级别的控制，该模式可以达到更高精度的码率控制，但是会损失编码图像质量，该模式不可以和 ROI 编码一起工作，当使能 ROI 编码时，该功能自动失效，可动态配置。|
+|u32MaxIQp|I 帧的最大 QP 值，可动态配置。|
+|u32MinIQp|I 帧的最小 QP 值，可动态配置。|
+|u32MaxPQp|P 帧的最大 QP 值，可动态配置。|
+|u32MinPQp|P 帧的最小 QP 值，可动态配置。|
+|u32MaxBQp|B 帧的最大 QP 值，可动态配置。|
+|u32MinBQp|B 帧的最小 QP 值，可动态配置。|
+|bHvsQpEnable|H264 的码率控制可以工作在子宏块级别的控制，该模式会调整子宏块的 QP 值，进而提高主观图像质量，可动态配置。|
+|s32HvsQpScale|当 hvs_qp_enable 使能后有效，该值表示 QP 缩放因子，可动态配置。|
+|u32MaxDeltaQp|当 hvs_qp_enable 使能后有效，指定 HVS qp 值的最大偏差范围，可动态配置。|
+|bQpMapEnable|是否使能 Qp map，可动态配置。|
 
 ### VENC_H265_FIXQP_S
 【描述】
@@ -3591,11 +3591,11 @@ typedef struct HB_VENC_H265_FIXQP_S {
 
 |      成员      |               含义                |
 | :------------: | :-------------------------------: |
-| u32IntraPeriod |       I帧间隔，可动态配置。       |
-|  u32FrameRate  | 目标帧率，单位是fps，可动态配置。 |
-|     u32IQp     |    强制I帧的QP值，可动态配置。    |
-|     u32PQp     |    强制P帧的QP值，可动态配置。    |
-|     u32BQp     |    强制B帧的QP值，可动态配置。    |
+| u32IntraPeriod |       I 帧间隔，可动态配置。       |
+|  u32FrameRate  | 目标帧率，单位是 fps，可动态配置。 |
+|     u32IQp     |    强制 I 帧的 QP 值，可动态配置。    |
+|     u32PQp     |    强制 P 帧的 QP 值，可动态配置。    |
+|     u32BQp     |    强制 B 帧的 QP 值，可动态配置。    |
 
 ### VENC_H265_QPMAP_S
 【描述】
@@ -3614,10 +3614,10 @@ typedef struct HB_VENC_H265_QPMAP_S {
 
 |        成员        |                                                             含义                                                              |
 | :----------------: | :---------------------------------------------------------------------------------------------------------------------------: |
-|   u32IntraPeriod   |                                                     I帧间隔，可动态配置。                                                     |
-|    u32FrameRate    |                                               目标帧率，单位是fps，可动态配置。                                               |
-|   u32QpMapArray    | 指定QP map表，H264的宏块大小为16x16，需要为每一个宏块指定一个QP值，每个QP值占一个字节，并且按照光栅扫描方向排序，可动态配置。 |
-| u32QpMapArrayCount |                                               指定QP map表的大小，可动态配置。                                                |
+|   u32IntraPeriod   |                                                     I 帧间隔，可动态配置。                                                     |
+|    u32FrameRate    |                                               目标帧率，单位是 fps，可动态配置。                                               |
+|   u32QpMapArray    | 指定 QP map 表，H264 的宏块大小为 16x16，需要为每一个宏块指定一个 QP 值，每个 QP 值占一个字节，并且按照光栅扫描方向排序，可动态配置。 |
+| u32QpMapArrayCount |                                               指定 QP map 表的大小，可动态配置。                                                |
 
 ### VENC_MJPEG_FIXQP_S
 【描述】
@@ -3634,8 +3634,8 @@ typedef struct HB_VENC_MJPEG_FIXQP_S {
 
 |       成员        |                                                             含义                                                             |
 | :---------------: | :--------------------------------------------------------------------------------------------------------------------------: |
-|   u32FrameRate    |                                              目标帧率，单位是fps，可动态配置。                                               |
-| u32QualityFactort | 量化因子，当该值为100时，编码的图像质量损失最小但是压缩率很低；当该值为1时，编码的图像质量损失较大，但压缩率高，可动态配置。 |
+|   u32FrameRate    |                                              目标帧率，单位是 fps，可动态配置。                                               |
+| u32QualityFactort | 量化因子，当该值为 100 时，编码的图像质量损失最小但是压缩率很低；当该值为 1 时，编码的图像质量损失较大，但压缩率高，可动态配置。 |
 
 ### VENC_RC_ATTR_S
 【描述】
@@ -3679,7 +3679,7 @@ typedef struct HB_VENC_RC_ATTR_S {
 
 ### VENC_GOP_PICTURE_CUSTOM_S
 【描述】
-> 定义自定义的GOP结构表的数据结构。
+> 定义自定义的 GOP 结构表的数据结构。
 
 【结构定义】
 ```C
@@ -3698,16 +3698,16 @@ typedef struct HB_VENC_GOP_PICTURE_CUSTOM_S {
 |        成员        |                                                   含义                                                   |
 | :----------------: | :------------------------------------------------------------------------------------------------------: |
 |   u32PictureType   |                                       图像的帧类型，不可动态配置。                                       |
-|    s32PocOffset    |                                       图像的POC值，不可动态配置。                                        |
-|    u32PictureQp    |                                        图像的QP值，不可动态配置。                                        |
-| s32NumRefPictureL0 |                  当前图像参考的L0的帧数量，只有当pic_type=1时，该值有效，不可动态配置。                  |
-|    s32RefPocL0     |                                当前图像的L0参考帧的POC值，不可动态配置。                                 |
-|    s32RefPocL1     | 当pic_type=2，表示当前图像的L1参考帧的POC值；当pic_type=1，表示当前图像的L0参考帧的POC值，不可动态配置。 |
-|   u32TemporalId    |                                    图像的temporal id，不可动态配置。                                     |
+|    s32PocOffset    |                                       图像的 POC 值，不可动态配置。                                        |
+|    u32PictureQp    |                                        图像的 QP 值，不可动态配置。                                        |
+| s32NumRefPictureL0 |                  当前图像参考的 L0 的帧数量，只有当 pic_type=1 时，该值有效，不可动态配置。                  |
+|    s32RefPocL0     |                                当前图像的 L0 参考帧的 POC 值，不可动态配置。                                 |
+|    s32RefPocL1     | 当 pic_type=2，表示当前图像的 L1 参考帧的 POC 值；当 pic_type=1，表示当前图像的 L0 参考帧的 POC 值，不可动态配置。 |
+|   u32TemporalId    |                                    图像的 temporal id，不可动态配置。                                     |
 
 ### VENC_GOP_CUSTOM_S
 【描述】
-> 定义自定义的GOP结构的参数集。
+> 定义自定义的 GOP 结构的参数集。
 
 【结构定义】
 ```C
@@ -3720,12 +3720,12 @@ typedef struct HB_VENC_GOP_CUSTOM_S {
 
 |        成员        |                   含义                    |
 | :----------------: | :---------------------------------------: |
-|  u32CustomGopSize  | 自定义的GOP的大小【0，8】，不可动态配置。 |
-| stCustomGopPicture |   自定义的GOP结构表数组，不可动态配置。   |
+|  u32CustomGopSize  | 自定义的 GOP 的大小【0，8】，不可动态配置。 |
+| stCustomGopPicture |   自定义的 GOP 结构表数组，不可动态配置。   |
 
 ### VENC_GOP_ATTR_S
 【描述】
-> 定义GOP参数，用户可选择预置的GOP结构和自定义GOP结构。
+> 定义 GOP 参数，用户可选择预置的 GOP 结构和自定义 GOP 结构。
 【结构定义】
 ```C
 typedef struct HB_VENC_GOP_ATTR_S {
@@ -3738,9 +3738,9 @@ typedef struct HB_VENC_GOP_ATTR_S {
 
 |          成员          |                                 含义                                  |
 | :--------------------: | :-------------------------------------------------------------------: |
-| s32DecodingRefreshType |      设置IDR帧的具体类型，该项只对H265 codec有效，不可动态配置。      |
-|    u32GopPresetIdx     | 选择预置的GOP结构，当该值为0时，表示需要自定义GOP结构，不可动态配置。 |
-|    stCustomGopParam    |    自定义的GOP结构，只有当u32GopPresetIdx=0才有效，不可动态配置。     |
+| s32DecodingRefreshType |      设置 IDR 帧的具体类型，该项只对 H265 codec 有效，不可动态配置。      |
+|    u32GopPresetIdx     | 选择预置的 GOP 结构，当该值为 0 时，表示需要自定义 GOP 结构，不可动态配置。 |
+|    stCustomGopParam    |    自定义的 GOP 结构，只有当 u32GopPresetIdx=0 才有效，不可动态配置。     |
 
 ### VENC_CHN_ATTR_S
 【描述】
@@ -3764,7 +3764,7 @@ typedef struct HB_VENC_CHN_ATTR_S {
 
 ### VENC_JPEG_PARAM_S
 【描述】
-> 定义JPEG协议编码通道高级参数结构体。
+> 定义 JPEG 协议编码通道高级参数结构体。
 
 【结构定义】
 ```C
@@ -3782,17 +3782,17 @@ typedef struct HB_VENC_JPEG_PARAM_S {
 
 |         成员          |                               含义                               |
 | :-------------------: | :--------------------------------------------------------------: |
-|      u32Qfactor       |   具体含义请参考RFC2435协议, 系统默认为90。取值范围: [1, 99]。   |
-|   u8LumaQuantTable    |              8bit Y量化表<br/>取值范围: [0, 255]。               |
-|  u8ChromaQuantTable   |             8bit CbCr量化表<br/>取值范围: [0, 255]。             |
-|  u16LumaQuantEsTable  |              12bit Y量化表<br/>取值范围: [0, 255]。              |
-| u16ChromaQuantEsTable |            12bit CbCr量化表<br/>取值范围: [0, 255]。             |
+|      u32Qfactor       |   具体含义请参考 RFC2435 协议, 系统默认为 90。取值范围: [1, 99]。   |
+|   u8LumaQuantTable    |              8bit Y 量化表<br/>取值范围: [0, 255]。               |
+|  u8ChromaQuantTable   |             8bit CbCr 量化表<br/>取值范围: [0, 255]。             |
+|  u16LumaQuantEsTable  |              12bit Y 量化表<br/>取值范围: [0, 255]。              |
+| u16ChromaQuantEsTable |            12bit CbCr 量化表<br/>取值范围: [0, 255]。             |
 |  u32RestartInterval   | u32RestartInterval: [0, (picwidth+15)>>4 x(picheight+15)>>4 x 2] |
-|       stCropCfg       |                           crop配置参数                           |
+|       stCropCfg       |                           crop 配置参数                           |
 
 ### VENC_MJPEG_PARAM_S
 【描述】
-> 定义MJPEG协议编码通道高级参数结构体。
+> 定义 MJPEG 协议编码通道高级参数结构体。
 
 【结构定义】
 ```C
@@ -3808,10 +3808,10 @@ typedef struct HB_VENC_MJPEG_PARAM_S {
 
 |         成员          |                               含义                               |
 | :-------------------: | :--------------------------------------------------------------: |
-|   u8LumaQuantTable    |              8bit Y量化表<br/>取值范围: [0, 255]。               |
-|  u8ChromaQuantTable   |             8bit CbCr量化表<br/>取值范围: [0, 255]。             |
-|  u16LumaQuantEsTable  |              12bit Y量化表<br/>取值范围: [0, 255]。              |
-| u16ChromaQuantEsTable |            12bit CbCr量化表<br/>取值范围: [0, 255]。             |
+|   u8LumaQuantTable    |              8bit Y 量化表<br/>取值范围: [0, 255]。               |
+|  u8ChromaQuantTable   |             8bit CbCr 量化表<br/>取值范围: [0, 255]。             |
+|  u16LumaQuantEsTable  |              12bit Y 量化表<br/>取值范围: [0, 255]。              |
+| u16ChromaQuantEsTable |            12bit CbCr 量化表<br/>取值范围: [0, 255]。             |
 |  u32RestartInterval   | u32RestartInterval: [0, (picwidth+15)>>4 x(picheight+15)>>4 x 2] |
 
 ### VENC_INTRA_REFRESH_MODE_E
@@ -3835,8 +3835,8 @@ typedef enum HB_VENC_INTRA_REFRESH_MODE_E
 | :---------------------: | :----------------------: |
 |    INTRA_REFRESH_ROW    |         按行刷新         |
 |  INTRA_REFRESH_COLUMN   |         按列刷新         |
-| INTRA_REFRESH_STEP_SIZE |        MB/CTU步长        |
-| INTRA_REFRESH_ADAPTIVE  | 一帧编码多少个帧内MB/CTU |
+| INTRA_REFRESH_STEP_SIZE |        MB/CTU 步长        |
+| INTRA_REFRESH_ADAPTIVE  | 一帧编码多少个帧内 MB/CTU |
 
 ### VENC_INTRA_REFRESH_S
 【描述】
@@ -3861,7 +3861,7 @@ typedef struct HB_VENC_INTRA_REFRESH_S
 
 ### VENC_H264_ENTROPY_S
 【描述】
-> 定义H264熵编码参数。
+> 定义 H264 熵编码参数。
 
 【结构定义】
 ```C
@@ -3878,7 +3878,7 @@ typedef struct HB_VENC_H264_ENTROPY_S
 
 ### VENC_H264_DBLK_S
 【描述】
-> 定义H264去块滤波参数。
+> 定义 H264 去块滤波参数。
 
 【结构定义】
 ```C
@@ -3894,12 +3894,12 @@ typedef struct HB_VENC_H264_DBLK_S
 |             成员              |                                含义                                 |
 | :---------------------------: | :-----------------------------------------------------------------: |
 | disable_deblocking_filter_idc | 取值范围：[0, 2], 默认值 0，具体含义请参见 H.264 协议，可动态配置。 |
-|  slice_alpha_c0_offset_div2   | 取值范围：[-6, 6], 默认值 0，具体含义请参见 H.264协议，可动态配置。 |
-|    slice_beta_offset_div2     | 取值范围：[-6, 6], 默认值 0，具体含义请参见 H.264协议，可动态配置。 |
+|  slice_alpha_c0_offset_div2   | 取值范围：[-6, 6], 默认值 0，具体含义请参见 H.264 协议，可动态配置。 |
+|    slice_beta_offset_div2     | 取值范围：[-6, 6], 默认值 0，具体含义请参见 H.264 协议，可动态配置。 |
 
 ### VENC_H265_DBLK_S
 【描述】
-> 定义H265去块滤波参数。
+> 定义 H265 去块滤波参数。
 
 【结构定义】
 ```C
@@ -3918,11 +3918,11 @@ typedef struct HB_VENC_H265_DBLK_S
 |    slice_deblocking_filter_disabled_flag     |    默认为 0。<br/>取值范围：0 或 1。可动态配置。    |
 |             slice_tc_offset_div2             | 默认为 0。<br/>取值范围：[-6，6]。<br/>可动态配置。 |
 |            slice_beta_offset_div2            | 默认为 0。<br/>取值范围：[-6，6]。<br/>可动态配置。 |
-| slice_loop_filter_across_slices_enabled_flag |           使能slice边界滤波，可动态配置。           |  |
+| slice_loop_filter_across_slices_enabled_flag |           使能 slice 边界滤波，可动态配置。           |  |
 
 ### VENC_VUI_H264_TIME_INFO_S
 【描述】
-> 定义H264 Timing参数。
+> 定义 H264 Timing 参数。
 
 【结构定义】
 ```C
@@ -3938,8 +3938,8 @@ typedef struct HB_VENC_H264_VUI_TIME_INFO_S
 |         成员          |                            含义                             |
 | :-------------------: | :---------------------------------------------------------: |
 | fixed_frame_rate_flag | 具体含义请参见 H.264 协议，系统默认为 0。取值范围：0 或 1。 | 不可动态设置参数。 |
-|   num_units_in_tick   |              参考H264规范，不可动态设置参数。               |
-|      time_scale       |              参考H264规范，不可动态设置参数。               |
+|   num_units_in_tick   |              参考 H264 规范，不可动态设置参数。               |
+|      time_scale       |              参考 H264 规范，不可动态设置参数。               |
 
 ### VENC_H264_VUI_S
 【描述】
@@ -3956,11 +3956,11 @@ typedef struct HB_VENC_H264_VUI_S
 
 |     成员      | 含义  |
 | :-----------: | :---: |
-| stVuiTimeInfo | H264  | Timing参数 |
+| stVuiTimeInfo | H264  | Timing 参数 |
 
 ### VENC_VUI_H265_TIME_INFO_S
 【描述】
-> 定义H265 Timing参数。
+> 定义 H265 Timing 参数。
 
 【结构定义】
 ```C
@@ -3975,9 +3975,9 @@ typedef struct HB_VENC_VUI_H265_TIME_INFO_S
 
 |             成员              |               含义               |
 | :---------------------------: | :------------------------------: |
-|       num_units_in_tick       | 参考H265规范，不可动态设置参数。 |
-|          time_scale           | 参考H265规范，不可动态设置参数。 |
-| num_ticks_poc_diff_one_minus1 | 参考H265规范，不可动态设置参数。 |
+|       num_units_in_tick       | 参考 H265 规范，不可动态设置参数。 |
+|          time_scale           | 参考 H265 规范，不可动态设置参数。 |
+| num_ticks_poc_diff_one_minus1 | 参考 H265 规范，不可动态设置参数。 |
 
 ### VENC_H265_VUI_S
 【描述】
@@ -3994,7 +3994,7 @@ typedef struct HB_VENC_H265_VUI_S
 
 |     成员      |      含义       |
 | :-----------: | :-------------: |
-| stVuiTimeInfo | H265 Timing参数 |
+| stVuiTimeInfo | H265 Timing 参数 |
 
 ### VENC_H265_SAO_S
 【描述】
@@ -4011,7 +4011,7 @@ typedef struct HB_VENC_H265_SAO_S
 
 |                成员                 |  含义   |
 | :---------------------------------: | :-----: |
-| sample_adaptive_offset_enabled_flag | SAO参数 |
+| sample_adaptive_offset_enabled_flag | SAO 参数 |
 
 ### VENC_H264_SLICE_SPLIT_S
 【描述】
@@ -4030,7 +4030,7 @@ typedef struct HB_VENC_H264_SLICE_SPLIT_S
 |      成员       |                             含义                             |
 | :-------------: | :----------------------------------------------------------: |
 | h264_slice_mode |                  Slice 分割模式，可动态配置                  |
-| h264_slice_arg  | slice参数，可动态配置，代表一个slice 宏块个数，从左上开始，16x16的像素，定义一个宏块，图像被划分成一个个宏块，进行编码，宏块最大值(h+15)/16 *（w+15）/16，同理h265得时候宏块得最大值是(h+63)/64*（w+63）/64 |
+| h264_slice_arg  | slice 参数，可动态配置，代表一个 slice 宏块个数，从左上开始，16x16 的像素，定义一个宏块，图像被划分成一个个宏块，进行编码，宏块最大值(h+15)/16 *（w+15）/16，同理 h265 得时候宏块得最大值是(h+63)/64*（w+63）/64 |
 
 ### VENC_H265_SLICE_SPLIT_S
 【描述】
@@ -4050,10 +4050,10 @@ typedef struct HB_VENC_H265_SLICE_SPLIT_S
 
 |            成员             |                                             含义                                              |
 | :-------------------------: | :-------------------------------------------------------------------------------------------: |
-| h265_independent_slice_mode |                     独立slice编码模<br/>0：不使能   1：使能, 可动态配置。                     |
-| h265_independent_slice_arg  |                     独立slice的大小，单位是编码CTU，取值范围[0, 2^16-1]，                     | 可动态配置 |
-|  h265_dependent_slice_mode  | 非独立slice编码模式<br/>0: 不使能  1：slice单位是编码CTU<br/>2: slice单位是byte, 可动态配置。 |
-|  h265_dependent_slice_arg   |                       独立slice大小，范围是[0, 2^16-1]，, 可动态配置。                        |
+| h265_independent_slice_mode |                     独立 slice 编码模<br/>0：不使能   1：使能, 可动态配置。                     |
+| h265_independent_slice_arg  |                     独立 slice 的大小，单位是编码 CTU，取值范围[0, 2^16-1]，                     | 可动态配置 |
+|  h265_dependent_slice_mode  | 非独立 slice 编码模式<br/>0: 不使能  1：slice 单位是编码 CTU<br/>2: slice 单位是 byte, 可动态配置。 |
+|  h265_dependent_slice_arg   |                       独立 slice 大小，范围是[0, 2^16-1]，, 可动态配置。                        |
 
 ### VENC_H264_INTRA_PRED_S
 【描述】
@@ -4090,14 +4090,14 @@ typedef struct HB_VENC_H265_PU_S
 
 |                                            成员                                             |                      含义                      |
 | :-----------------------------------------------------------------------------------------: | :--------------------------------------------: |
-|                                      intra_nxn_enable                                       | 是否使能intra NxN PUs in intra Cus，可动态配置 |
-|                                        max_num_merge                                        | 指定num of merge candidates in RDO，可动态配置 |
+|                                      intra_nxn_enable                                       | 是否使能 intra NxN PUs in intra Cus，可动态配置 |
+|                                        max_num_merge                                        | 指定 num of merge candidates in RDO，可动态配置 |
 |                                 constrained_intra_pred_flag                                 | 默认为 0<br/>取值范围：0 或 1。<br/>可动态配置 |
 | strong_intra_smoothing_enabled_flag<br/>默认为 0。<br/>取值范围：0 或 1。<br/>可动态配置	。 |
 
 ### VENC_H264_TRANS_S
 【描述】
-> 定义H264 Transform参数。
+> 定义 H264 Transform 参数。
 
 【结构定义】
 ```C
@@ -4114,16 +4114,16 @@ typedef struct HB_VENC_H264_TRANS_S {
 
 |           成员           |                          含义                           |
 | :----------------------: | :-----------------------------------------------------: |
-|   transform_8x8_enable   |             使能8x8 transform，可动态配置。             |
-|   chroma_cb_qp_offset    |            指定cb分量的QP偏差，可动态配置。             |
-|   chroma_cr_qp_offset    |            指定cr分量的QP偏差，可动态配置。             |
-| user_scaling_list_enable |       使能用户指定的scaling list，不可动态配置。        |
-|     scaling_list_4x4     | 指定4x4块的相关系数，每个元素有16个系数，不可动态配置。 |
-|     scaling_list_8x8     | 指定8x8块的相关系数，每个元素有64个系数，不可动态配置。 |
+|   transform_8x8_enable   |             使能 8x8 transform，可动态配置。             |
+|   chroma_cb_qp_offset    |            指定 cb 分量的 QP 偏差，可动态配置。             |
+|   chroma_cr_qp_offset    |            指定 cr 分量的 QP 偏差，可动态配置。             |
+| user_scaling_list_enable |       使能用户指定的 scaling list，不可动态配置。        |
+|     scaling_list_4x4     | 指定 4x4 块的相关系数，每个元素有 16 个系数，不可动态配置。 |
+|     scaling_list_8x8     | 指定 8x8 块的相关系数，每个元素有 64 个系数，不可动态配置。 |
 
 ### VENC_H265_TRANS_S
 【描述】
-> 定义H265 Transform参数。
+> 定义 H265 Transform 参数。
 
 【结构定义】
 ```C
@@ -4143,19 +4143,19 @@ typedef struct HB_VENC_H265_TRANSFORM_PARAMS {
 
 |           成员           |                           含义                            |
 | :----------------------: | :-------------------------------------------------------: |
-|   chroma_cb_qp_offset    |             指定cb分量的QP偏差，可动态配置。              |
-|   chroma_cr_qp_offset    |             指定cr分量的QP偏差，可动态配置。              |
-| user_scaling_list_enable |        使能用户指定的scaling list，不可动态配置。         |
-|     scaling_list_4x4     |  指定4x4块的相关系数，每个元素有16个系数，不可动态配置。  |
-|     scaling_list_8x8     |  指定8x8块的相关系数，每个元素有64个系数，不可动态配置。  |
-|    scaling_list_16x16    | 指定16x16块的相关系数，每个元素有64个系数，不可动态配置。 |
-|    scaling_list_32x32    | 指定32x32块的相关系数，每个元素有64个系数，不可动态配置。 |
-|  scaling_list_dc_16x16   |             指定16x16的DC系数，不可动态配置。             |
-|  scaling_list_dc_32x32   |             指定32x32的DC系数，不可动态配置。             |
+|   chroma_cb_qp_offset    |             指定 cb 分量的 QP 偏差，可动态配置。              |
+|   chroma_cr_qp_offset    |             指定 cr 分量的 QP 偏差，可动态配置。              |
+| user_scaling_list_enable |        使能用户指定的 scaling list，不可动态配置。         |
+|     scaling_list_4x4     |  指定 4x4 块的相关系数，每个元素有 16 个系数，不可动态配置。  |
+|     scaling_list_8x8     |  指定 8x8 块的相关系数，每个元素有 64 个系数，不可动态配置。  |
+|    scaling_list_16x16    | 指定 16x16 块的相关系数，每个元素有 64 个系数，不可动态配置。 |
+|    scaling_list_32x32    | 指定 32x32 块的相关系数，每个元素有 64 个系数，不可动态配置。 |
+|  scaling_list_dc_16x16   |             指定 16x16 的 DC 系数，不可动态配置。             |
+|  scaling_list_dc_32x32   |             指定 32x32 的 DC 系数，不可动态配置。             |
 
 ### VENC_CU_PREDICTION_S
 【描述】
-> 定义H264/H265内部编码模式决策参数。
+> 定义 H264/H265 内部编码模式决策参数。
 
 【结构定义】
 ```C
@@ -4194,31 +4194,31 @@ int32_t mode_decision_enable;
 |             成员              |                           含义                            |
 | :---------------------------: | :-------------------------------------------------------: |
 |     mode_decision_enable;     |                使能模式选择，可动态配置。                 |
-|       pu04_delta_rate;        |               4x4块cost delta，可动态配置。               |
-|       pu08_delta_rate;        |               8x8块cost delta，可动态配置。               |
-|       pu16_delta_rate;        |              16x16块cost delta，可动态配置。              |
-|       pu32_delta_rate;        |              32x32块cost delta，可动态配置。              |
-| pu04_intra_planar_delta_rate; |  帧内预测模式下4x4 intra planar rate delta，可动态配置。  |
-|   pu04_intra_dc_delta_rate;   |    帧内预测模式下4x4 intra dc rate delta，可动态配置。    |
-| pu04_intra_angle_delta_rate;  |  帧内预测模式下4x4 intra angle rate delta，可动态配置。   |
-| pu08_intra_planar_delta_rate; |  帧内预测模式下8x8 intra planar rate delta，可动态配置。  |
-|   pu08_intra_dc_delta_rate;   |    帧内预测模式下8x8 intra dc rate delta，可动态配置。    |
-| pu08_intra_angle_delta_rate;  |  帧内预测模式下8x8 intra angle rate delta，可动态配置。   |
-| pu16_intra_planar_delta_rate; | 帧内预测模式下16x16 intra planar rate delta，可动态配置。 |
-|   pu16_intra_dc_delta_rate;   |   帧内预测模式下16x16 intra dc rate delta，可动态配置。   |
-| pu16_intra_angle_delta_rate;  | 帧内预测模式下16x16 intra angle rate delta，可动态配置。  |
-| pu32_intra_planar_delta_rate; | 帧内预测模式下32x32 intra planar rate delta，可动态配置。 |
-|   pu32_intra_dc_delta_rate;   |   帧内预测模式下32x32 intra dc rate delta，可动态配置。   |
-| pu32_intra_angle_delta_rate;  | 帧内预测模式下32x32 intra angle rate delta，可动态配置。  |
-|    cu08_intra_delta_rate;     |         帧间CU8x8 intra rate delta，可动态配置。          |
-|    cu08_inter_delta_rate;     |         帧间CU8x8 inter rate delta，可动态配置。          |
-|    cu08_merge_delta_rate;     |         帧间CU8x8 merge rate delta，可动态配置。          |
-|    cu16_intra_delta_rate;     |        帧间CU16x16 intra rate delta，可动态配置。         |
-|    cu16_inter_delta_rate;     |        帧间CU16x16 inter rate delta，可动态配置。         |
-|    cu16_merge_delta_rate;     |        帧间CU16x16 merge rate delta，可动态配置。         |
-|    cu32_intra_delta_rate;     |        帧间CU32x32 intra rate delta，可动态配置。         |
-|    cu32_inter_delta_rate;     |        帧间CU32x32 inter rate delta，可动态配置。         |
-|    cu32_merge_delta_rate;     |        帧间CU32x32 merge rate delta，可动态配置。         |
+|       pu04_delta_rate;        |               4x4 块 cost delta，可动态配置。               |
+|       pu08_delta_rate;        |               8x8 块 cost delta，可动态配置。               |
+|       pu16_delta_rate;        |              16x16 块 cost delta，可动态配置。              |
+|       pu32_delta_rate;        |              32x32 块 cost delta，可动态配置。              |
+| pu04_intra_planar_delta_rate; |  帧内预测模式下 4x4 intra planar rate delta，可动态配置。  |
+|   pu04_intra_dc_delta_rate;   |    帧内预测模式下 4x4 intra dc rate delta，可动态配置。    |
+| pu04_intra_angle_delta_rate;  |  帧内预测模式下 4x4 intra angle rate delta，可动态配置。   |
+| pu08_intra_planar_delta_rate; |  帧内预测模式下 8x8 intra planar rate delta，可动态配置。  |
+|   pu08_intra_dc_delta_rate;   |    帧内预测模式下 8x8 intra dc rate delta，可动态配置。    |
+| pu08_intra_angle_delta_rate;  |  帧内预测模式下 8x8 intra angle rate delta，可动态配置。   |
+| pu16_intra_planar_delta_rate; | 帧内预测模式下 16x16 intra planar rate delta，可动态配置。 |
+|   pu16_intra_dc_delta_rate;   |   帧内预测模式下 16x16 intra dc rate delta，可动态配置。   |
+| pu16_intra_angle_delta_rate;  | 帧内预测模式下 16x16 intra angle rate delta，可动态配置。  |
+| pu32_intra_planar_delta_rate; | 帧内预测模式下 32x32 intra planar rate delta，可动态配置。 |
+|   pu32_intra_dc_delta_rate;   |   帧内预测模式下 32x32 intra dc rate delta，可动态配置。   |
+| pu32_intra_angle_delta_rate;  | 帧内预测模式下 32x32 intra angle rate delta，可动态配置。  |
+|    cu08_intra_delta_rate;     |         帧间 CU8x8 intra rate delta，可动态配置。          |
+|    cu08_inter_delta_rate;     |         帧间 CU8x8 inter rate delta，可动态配置。          |
+|    cu08_merge_delta_rate;     |         帧间 CU8x8 merge rate delta，可动态配置。          |
+|    cu16_intra_delta_rate;     |        帧间 CU16x16 intra rate delta，可动态配置。         |
+|    cu16_inter_delta_rate;     |        帧间 CU16x16 inter rate delta，可动态配置。         |
+|    cu16_merge_delta_rate;     |        帧间 CU16x16 merge rate delta，可动态配置。         |
+|    cu32_intra_delta_rate;     |        帧间 CU32x32 intra rate delta，可动态配置。         |
+|    cu32_inter_delta_rate;     |        帧间 CU32x32 inter rate delta，可动态配置。         |
+|    cu32_merge_delta_rate;     |        帧间 CU32x32 merge rate delta，可动态配置。         |
 
 ### VIDEO_CROP_INFO_S
 【描述】
@@ -4237,7 +4237,7 @@ typedef struct HB_VIDEO_CROP_INFO_S
 |  成员   |                             含义                             |
 | :-----: | :----------------------------------------------------------: |
 | bEnable |       是否进行裁剪。<br/>取值范围：[HB_FALSE, HB_TRUE]       |
-| stRect  | 裁剪的区域，其中s32X，s32Y是8字节对齐，H.264/H.265对应的u32Width，u32Height是2字节对齐，mjpeg、jpeg对应的u32Width，u32Height是1字节对齐 |
+| stRect  | 裁剪的区域，其中 s32X，s32Y 是 8 字节对齐，H.264/H.265 对应的 u32Width，u32Height 是 2 字节对齐，mjpeg、jpeg 对应的 u32Width，u32Height 是 1 字节对齐 |
 
 ### VIDEO_FRAME_PACK_S
 【描述】
@@ -4273,11 +4273,11 @@ typedef struct HB_VIDEO_FRAME_PACK_S {
 | pix_format |    图像像素格式    |
 |   stride   |    图像横向跨度    |
 |  vstride   |    图像垂直跨度    |
-|   fd[3]    |  图像ion内存句柄   |
-|    pts     |      图像pts       |
+|   fd[3]    |  图像 ion 内存句柄   |
+|    pts     |      图像 pts       |
 | frame_end  |  图像是否最后一帧  |
 |   flags    |      图像标志      |
-|  src_idx   |   内部buffer序号   |
+|  src_idx   |   内部 buffer 序号   |
 
 ### VIDEO_FRAME_S
 【描述】
@@ -4299,7 +4299,7 @@ typedef struct HB_VIDEO_FRAME_S {
 | :---------: | :--------: |
 |  stVFrame   |   视频帧   |
 | stFrameInfo | 视频帧信息 |
-| stJpegInfo  | Jpeg帧信息 |
+| stJpegInfo  | Jpeg 帧信息 |
 
 ### VIDEO_FRAME_INFO_S
 【描述】
@@ -4345,10 +4345,10 @@ typedef struct HB_VIDEO_FRAME_INFO_S {
 |    stream_start_addr;     |        码流起始地址        |
 |       stream_size;        |          码流大小          |
 |         nalu_type         |         码流帧类型         |
-|  err_mb_in_frame_decoded  |     解码帧错误MB块数量     |
-| total_mb_in_frame_decoded |      解码帧总MB块数量      |
-|  err_mb_in_frame_display  |     显示帧错误MB块数量     |
-| total_mb_in_frame_display |      显示帧总MB块数量      |
+|  err_mb_in_frame_decoded  |     解码帧错误 MB 块数量     |
+| total_mb_in_frame_decoded |      解码帧总 MB 块数量      |
+|  err_mb_in_frame_display  |     显示帧错误 MB 块数量     |
+| total_mb_in_frame_display |      显示帧总 MB 块数量      |
 |       display_rect        |          显示区域          |
 |       display_width       |          显示宽度          |
 |      display_height       |          显示高度          |
@@ -4360,8 +4360,8 @@ typedef struct HB_VIDEO_FRAME_INFO_S {
 |        decoded_poc        |        图像解码序号        |
 |       error_reason        |        解码错误信息        |
 |         warn_info         |        解码告警信息        |
-|        sequence_no        |     图像序号，每帧加1      |
-|        temporal_id        | custom gop中的tempeoral id |
+|        sequence_no        |     图像序号，每帧加 1      |
+|        temporal_id        | custom gop 中的 tempeoral id |
 |        output_flag        |        是否输出标志        |
 |         ctu_size          |          ctu size          |
 
@@ -4399,7 +4399,7 @@ typedef struct HB_VIDEO_FRAME_INFO_JPEG_S {
 
 ### VIDEO_STREAM_PACK_S
 【描述】
-> 定义视频流的stream buffer信息。
+> 定义视频流的 stream buffer 信息。
 
 【结构定义】
 ```C
@@ -4417,17 +4417,17 @@ typedef struct HB_VIDEO_PACK_S {
 
 |    成员    |         含义         |
 | :--------: | :------------------: |
-|  vir_ptr   | 帧buffer虚拟地址指针 |
-|  phy_ptr   |   帧buffer物理地址   |
-|    size    |   帧buffer总的大小   |
+|  vir_ptr   | 帧 buffer 虚拟地址指针 |
+|  phy_ptr   |   帧 buffer 物理地址   |
+|    size    |   帧 buffer 总的大小   |
 |    pts     |       帧时间戳       |
-|     fd     |    buffer文件句柄    |
+|     fd     |    buffer 文件句柄    |
 |  src_idx   |        索引号        |
 | stream_end |  最后一段数据数据流  |
 
 ### VIDEO_STREAM_INFO_S
 【描述】
-> 定义H264/H265输出码流的额外信息。
+> 定义 H264/H265 输出码流的额外信息。
 
 【结构定义】
 ```C
@@ -4463,29 +4463,29 @@ typedef struct HB_VIDEO_STREAM_INFO_S {
 |   frame_start_addr    |                                         码流起始地址                                          |
 |      frame_size       |                                           码流大小                                            |
 |      frame_index      |                                         重构帧的序号                                          |
-|       nalu_type       |                                           nalu类型                                            |
+|       nalu_type       |                                           nalu 类型                                            |
 |       slice_idx       |                                          slice 序号                                           |
-|       slice_num       |                                      slice数量，H264有效                                      |
-|  dependent_slice_num  |                                   非独立slice数量，H265有效                                   |
-| independent_slice_num |                                    独立slice数量，H265有效                                    |
+|       slice_num       |                                      slice 数量，H264 有效                                      |
+|  dependent_slice_num  |                                   非独立 slice 数量，H265 有效                                   |
+| independent_slice_num |                                    独立 slice 数量，H265 有效                                    |
 |      pic_skipped      |                                      标记该帧是否被忽略                                       |
 |    intra_block_num    |                                          帧内块数量                                           |
 |    skip_block_num     |                                          忽略块数量                                           |
-|       avg_mb_qp       |                                          平均宏块QP                                           |
-|     enc_pic_byte      |                                  编码图像的大小，单位是byte                                   |
-|    enc_gop_pic_idx    |                                       编码图像的gop索引                                       |
-|      enc_pic_poc      |                                        编码图像的POC值                                        |
-|      enc_src_idx      |                                     编码图像的buffer索引                                      |
+|       avg_mb_qp       |                                          平均宏块 QP                                           |
+|     enc_pic_byte      |                                  编码图像的大小，单位是 byte                                   |
+|    enc_gop_pic_idx    |                                       编码图像的 gop 索引                                       |
+|      enc_pic_poc      |                                        编码图像的 POC 值                                        |
+|      enc_src_idx      |                                     编码图像的 buffer 索引                                      |
 |      enc_pic_cnt      |                                        编码图像的数量                                         |
 |   enc_error_reason    |                                         编码错误信息                                          |
 |     enc_warn_info     |                                         编码警告信息                                          |
 |      frame_cycle      |                                        编码一帧的周期                                         |
 |      temporal_id      |                                       输出码流时域层号                                        |
-|   longterm_ref_type   | 输出码流帧类型，bit1 bit0有效<br/>bit1 为1 表示为长期参考帧<br/>bit0位1表示为参考长期参考帧。 |
+|   longterm_ref_type   | 输出码流帧类型，bit1 bit0 有效<br/>bit1 为 1 表示为长期参考帧<br/>bit0 位 1 表示为参考长期参考帧。 |
 
 ### VIDEO_STREAM_INFO_JPEG_S
 【描述】
-> 定义MJPEG/JPEG输出码流的额外信息。
+> 定义 MJPEG/JPEG 输出码流的额外信息。
 
 【结构定义】
 ```C
@@ -4585,8 +4585,8 @@ typedef struct HB_VENC_USER_RC_ATTR_S {
 
 |        成员        |       含义       |
 | :----------------: | :--------------: |
-|    qp_map_valid    | 是否使能qp map。 |
-|  qp_map_array	qp   |   map表指针。    |
+|    qp_map_valid    | 是否使能 qp map。 |
+|  qp_map_array	qp   |   map 表指针。    |
 | qp_map_array_count | qp map 表长度。  |
 
 ### USER_FRAME_INFO_S
@@ -4605,7 +4605,7 @@ typedef struct HB_USER_FRAME_INFO_S {
 |     成员     |     含义     |
 | :----------: | :----------: |
 | stUserFrame  |    图像帧    |
-| stUserRcInfo | 用户RC信息。 |
+| stUserRcInfo | 用户 RC 信息。 |
 
 ### VENC_PARAM_MOD_S
 【描述】
@@ -4621,7 +4621,7 @@ typedef struct HB_VENC_PARAM_MOD_S {
 
 |        成员        |                       含义                        |
 | :----------------: | :-----------------------------------------------: |
-| u32OneStreamBuffer | VPS、SPS、PPS、IDR是否一帧输出<br/>默认一帧输出。 |
+| u32OneStreamBuffer | VPS、SPS、PPS、IDR 是否一帧输出<br/>默认一帧输出。 |
 
 ### VENC_FRAME_RATE_S
 【描述】
@@ -4674,9 +4674,9 @@ typedef struct HB_VENC_ROI_ATTR_S
 
 |        成员         |               含义                |
 | :-----------------: | :-------------------------------: |
-|     roi_enable      |    使能roi区域，不可动态配置。    |
-|    roi_map_array    |    roi区域Qp数组，可动态配置。    |
-| roi_map_array_count | roi区域Qp数组个数，不可动态配置。 |
+|     roi_enable      |    使能 roi 区域，不可动态配置。    |
+|    roi_map_array    |    roi 区域 Qp 数组，可动态配置。    |
+| roi_map_array_count | roi 区域 Qp 数组个数，不可动态配置。 |
 
 ### VENC_CHN_STATUS_S
 【描述】
@@ -4704,9 +4704,9 @@ typedef struct HB_VENC_CHN_STATUS_S {
 |         成员         |           含义           |
 | :------------------: | :----------------------: |
 |  cur_input_buf_cnt   | 当前输入未编码图像帧个数 |
-|  cur_input_buf_size  |  当前输入帧buffer size   |
+|  cur_input_buf_size  |  当前输入帧 buffer size   |
 |  cur_output_buf_cnt  | 当前已完成编码图像帧个数 |
-| cur_output_buf_size  |  当前已编码buffer size   |
+| cur_output_buf_size  |  当前已编码 buffer size   |
 |   left_recv_frame    |   剩余需要接收图像帧数   |
 |    left_enc_frame    |   剩余需要编码图像帧数   |
 | total_input_buf_cnt  |    总计输入图像帧个数    |
@@ -4757,21 +4757,21 @@ typedef struct HB_VENC_3DNR_PARAMS {
 ```
 
 ## 错误码
-VENC错误码如下表：
+VENC 错误码如下表：
 
 |   错误码   |                             宏定义 |               描述 |
 | :--------: | ---------------------------------: | -----------------: |
 | -268958720 |                HB_ERR_VENC_UNKNOWN |           未知错误 |
-| -268958721 |              HB_ERR_VENC_NOT_FOUND |     VENC通道未找到 |
-| -268958722 |              HB_ERR_VENC_OPEN_FAIL |   打开VENC通道失败 |
-| -268958723 |       HB_ERR_VENC_RESPONSE_TIMEOUT | 操作VENC通道无响应 |
-| -268958724 |              HB_ERR_VENC_INIT_FAIL | 初始化VENC模块失败 |
+| -268958721 |              HB_ERR_VENC_NOT_FOUND |     VENC 通道未找到 |
+| -268958722 |              HB_ERR_VENC_OPEN_FAIL |   打开 VENC 通道失败 |
+| -268958723 |       HB_ERR_VENC_RESPONSE_TIMEOUT | 操作 VENC 通道无响应 |
+| -268958724 |              HB_ERR_VENC_INIT_FAIL | 初始化 VENC 模块失败 |
 | -268958725 | HB_ERR_VENC_OPERATION_NOT_ALLOWDED |         操作不允许 |
-| -268958726 |                  HB_ERR_VENC_NOMEM |       VENC内存不够 |
-| -268958727 |        HB_ERR_VENC_NO_FREE_CHANNEL |   没有空的VENC通道 |
+| -268958726 |                  HB_ERR_VENC_NOMEM |       VENC 内存不够 |
+| -268958727 |        HB_ERR_VENC_NO_FREE_CHANNEL |   没有空的 VENC 通道 |
 | -268958728 |          HB_ERR_VENC_ILLEGAL_PARAM |           参数错误 |
 | -268958729 |          HB_ERR_VENC_INVALID_CHNID |       错误的通道号 |
-| -268958730 |            HB_ERR_VENC_INVALID_BUF |     错误的buffer块 |
+| -268958730 |            HB_ERR_VENC_INVALID_BUF |     错误的 buffer 块 |
 | -268958731 |            HB_ERR_VENC_INVALID_CMD |         错误的命令 |
 | -268958732 |           HB_ERR_VENC_WAIT_TIMEOUT |           等待超时 |
 | -268958733 |    HB_ERR_VENC_FILE_OPERATION_FAIL |           操作失败 |
@@ -4783,4 +4783,4 @@ VENC错误码如下表：
 | -268958739 |              HB_ERR_VENC_UNSUPPORT |             不支持 |
 
 ## 参考代码
-VENC部分示例代码可以参考，[sample_video_codec](./multimedia_samples.md#sample_video_codec)。
+VENC 部分示例代码可以参考，[sample_video_codec](./multimedia_samples.md#sample_video_codec)。

@@ -2,7 +2,7 @@
 sidebar_position: 7
 ---
 
-# SPI调试指南
+# SPI 调试指南
 
 ## 驱动代码
 
@@ -16,19 +16,19 @@ drivers/spi/spi-hobot.c # spi驱动层代码
 
 ### 内核配置
 
-CONFIG_SPI_SPIDEV=y # spidev.c配置选项
+CONFIG_SPI_SPIDEV=y # spidev.c 配置选项
 
 ![image-20220322212001661](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development/image-20220322212001661.png)
 
-CONFIG_SPI_SLAVE=y # CONFIG_SPI_SPIDEV依赖的配置选项
+CONFIG_SPI_SLAVE=y # CONFIG_SPI_SPIDEV 依赖的配置选项
 
 ![image-20220322212021521](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development/image-20220322212021521.png)
 
-CONFIG_SPI_HOBOT=y # spi-hobot.c驱动层配置选项
+CONFIG_SPI_HOBOT=y # spi-hobot.c 驱动层配置选项
 
 ![image-20220322212038265](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development/image-20220322212038265.png)
 
-### DTS设备节点配置
+### DTS 设备节点配置
 
 在下述文件中添加相应的设备节点，并对内核进行编译。
 文件路径为：arch/arm64/boot/dts/hobot/hobot-xj3.dtsi
@@ -75,18 +75,18 @@ spi0: spi@0xA5004000 {
 };
 ```
 
-以spi0和spi2配置为例
+以 spi0 和 spi2 配置为例
 
--   hobot-xj3.dtsi中的节点为公用的节点基本不用修改，针对不同的硬件，会在对应的dts中进行修改
--   spi0配置为spi master，spi2配置为spi slave，其中spi2中 isslave = \<1\>
-    属性表示该spi配置为slave
--   两个节点中的spidev@0x00、slave@0x00节点会在spidev.c中被识别成为/dev/spidev0.0和/dev/spidev2.0设备节点，供用户空间操作
+-   hobot-xj3.dtsi 中的节点为公用的节点基本不用修改，针对不同的硬件，会在对应的 dts 中进行修改
+-   spi0 配置为 spi master，spi2 配置为 spi slave，其中 spi2 中 isslave = \<1\>
+    属性表示该 spi 配置为 slave
+-   两个节点中的 spidev@0x00、slave@0x00 节点会在 spidev.c 中被识别成为/dev/spidev0.0 和/dev/spidev2.0 设备节点，供用户空间操作
 
-## SPI驱动
+## SPI 驱动
 
 驱动位于：drivers/spi/spi-hobot.c
 
-### SPI master/slave配置
+### SPI master/slave 配置
 
 ```c
 static int hb_spi_probe(struct platform_device *pdev)
@@ -111,9 +111,9 @@ static int hb_spi_probe(struct platform_device *pdev)
 }
 ```
 
-### SPI注册
+### SPI 注册
 
-向内核注册SPI控制器
+向内核注册 SPI 控制器
 
 ```c
 static int hb_spi_probe(struct platform_device *pdev)
@@ -154,7 +154,7 @@ static int hb_spi_probe(struct platform_device *pdev)
 
 ### 硬件初始化
 
-硬件初始化函数如下，寄存器含义可通过与D-Robotics 相关确认
+硬件初始化函数如下，寄存器含义可通过与 D-Robotics 相关确认
 
 ```c
 /* spi hw init */
@@ -192,7 +192,7 @@ static void hb_spi_init_hw(struct hb_spi *hbspi)
 
 ### 调试参数
 
-下列为spi驱动中输出的调试参数：
+下列为 spi 驱动中输出的调试参数：
 
 ```c
 static int debug;
@@ -206,12 +206,12 @@ module_param(master_tout, int, 0644);
 MODULE_PARM_DESC(master_tout, "spi: master timeout(sec), default 2 s");
 ```
 
--   debug等级可以设置为0，1，2，默认值为0
--   slave超时时间默认是2s，有效最大值是100s
--   master超时时间默认是1s，有效最大值是10s
+-   debug 等级可以设置为 0，1，2，默认值为 0
+-   slave 超时时间默认是 2s，有效最大值是 100s
+-   master 超时时间默认是 1s，有效最大值是 10s
 
-在内核命令行内使用sysfs的修改方法如下，sysfs内单位均为毫秒。
-找到可用参数：如下，包含3个参数
+在内核命令行内使用 sysfs 的修改方法如下，sysfs 内单位均为毫秒。
+找到可用参数：如下，包含 3 个参数
 
 ```bash
 ls /sys/module/spi_hobot/parameters/
@@ -224,7 +224,7 @@ root@x3dvbj3-hynix2G-2666:~# ls /sys/module/spi_hobot/parameters/
 debug master_tout slave_tout
 ```
 
-获取当前debug参数的值：默认值为0，即不开启debug
+获取当前 debug 参数的值：默认值为 0，即不开启 debug
 
 ```bash
 cat /sys/module/spi_hobot/parameters/debug
@@ -237,7 +237,7 @@ root@x3dvbj3-hynix2G-2666:~# cat /sys/module/spi_hobot/parameters/debug
 0
 ```
 
-设置debug参数值为1，并再次确认设置成功：
+设置 debug 参数值为 1，并再次确认设置成功：
 
 ```bash
 echo 1 > /sys/module/spi_hobot/parameters/debug
@@ -252,7 +252,7 @@ root@x3dvbj3-hynix2G-2666:~# cat /sys/module/spi_hobot/parameters/debug
 1
 ```
 
-获取当前master\_tout参数，即作为master超时时间的值：默认值为2s
+获取当前 master\_tout 参数，即作为 master 超时时间的值：默认值为 2s
 
 ```bash
 cat /sys/module/spi_hobot/parameters/master_tout
@@ -265,7 +265,7 @@ root@x3dvbj3-hynix2G-2666:~# cat /sys/module/spi_hobot/parameters/master_tout
 1000
 ```
 
-获取当前slave\_tout参数，即作为slave超时时间的值：默认值为1s
+获取当前 slave\_tout 参数，即作为 slave 超时时间的值：默认值为 1s
 
 ```bash
 cat /sys/module/spi_hobot/parameters/slave_tout
@@ -278,11 +278,11 @@ root@x3dvbj3-hynix2G-2666:~# cat /sys/module/spi_hobot/parameters/slave_tout
 2000
 ```
 
-## SPI测试
+## SPI 测试
 
 ### 硬件回环测试
 
-内核dts使能spi0为master模式：
+内核 dts 使能 spi0 为 master 模式：
 
 ```
 /* 配置为master */
@@ -296,26 +296,26 @@ root@x3dvbj3-hynix2G-2666:~# cat /sys/module/spi_hobot/parameters/slave_tout
 };
 ```
 
-可以观察到spidev0.0设备节点
+可以观察到 spidev0.0 设备节点
 
 ```
 # ls /dev/spidev0.0 
 /dev/spidev0.0
 ```
 
-使用连接器把spi的MOSI 和 MISO 两个管脚连接起来
+使用连接器把 spi 的 MOSI 和 MISO 两个管脚连接起来
 
 ![image-20220322222747547](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development/image-20220322222747547.png)
 
 ### 测试代码
 
-编译spidev_tc.c 代码，具体代码如附录A
+编译 spidev_tc.c 代码，具体代码如附录 A
 
 ```
 /opt/gcc-ubuntu-9.3.0-2020.03-x86_64-aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc -o spidev_tc spidev_tc.c -lpthread
 ```
 
-回环测试命令：打开/dev/spidev0.0，设置12MHz速率，读写同时进行，每次读写1000个字节，测试50轮
+回环测试命令：打开/dev/spidev0.0，设置 12MHz 速率，读写同时进行，每次读写 1000 个字节，测试 50 轮
 
 ```
 # ./spidev_tc -D /dev/spidev0.0 -s 12000000 -m 3 -e 1000 -t 50
@@ -329,11 +329,11 @@ test: OK, times=1
 test: OK, times=49
 ```
 
-spidev_tc 命令是测试spi的工具集命令，可以阅读它的帮助信息获取更多使用方法。
+spidev_tc 命令是测试 spi 的工具集命令，可以阅读它的帮助信息获取更多使用方法。
 
 ## 附录
 
-### spidev_tc.c测试代码
+### spidev_tc.c 测试代码
 
 ```c
 /*
@@ -968,7 +968,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-### SPI时序
+### SPI 时序
 
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development/a91efe6c59515b2b9d38b106a7e066a5.png)
 

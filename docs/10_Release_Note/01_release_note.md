@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# RDK X系列历史发布
+# RDK X 系列历史发布
 
 ```mdx-code-block
 import DocScope from '@site/src/components/DocScope';
@@ -45,7 +45,7 @@ import DocScope from '@site/src/components/DocScope';
 
 **5. GPU 桌面体验优化**
 
-  - 修复相关BUG，解决GPU鼠标残留，VLC工具无法使用等问题。
+  - 修复相关 BUG，解决 GPU 鼠标残留，VLC 工具无法使用等问题。
 
 **6. 同步 SDK 最新版本**
 
@@ -167,7 +167,7 @@ RDK X5 V3.3.3 版本已同步至：
 
 ---
 
-### TROS算法升级 & 版本号：3.2.3
+### TROS 算法升级 & 版本号：3.2.3
 
 #### 镜像更新
 
@@ -183,7 +183,7 @@ RDK X5 V3.3.3 版本已同步至：
 - **桌面显示优化**：Ubuntu 桌面支持 3D GPU 加速渲染，视觉体验更流畅
 - **音频子板适配新增**：支持 微雪 WM8960 Audio HAT 与 幻尔载板，加快语音方案集成效率
 - **WIFI 驱动升级**：增强弱信号环境下连接稳定性，优化休眠/唤醒过程中的自动重连机制
-- **Sensor采集框架支持扩展**：集成 V4L2 框架，已适配 imx477、ov5647、imx219，更多 Sensor 支持持续更新中
+- **Sensor 采集框架支持扩展**：集成 V4L2 框架，已适配 imx477、ov5647、imx219，更多 Sensor 支持持续更新中
 - **网络与远程优化**：默认切换至 iptables legacy 模式，VNC 显示流畅性提升，远程桌面不卡顿
 - **接口增强**：CAN 接口稳定性优化，解决高速数据丢包问题。`srpi-config` 工具新增 Uart7 支持，提升串口扩展能力
 - **存储兼容性优化**：提升对 SD 卡的兼容性，适配更多存储卡型号
@@ -200,7 +200,7 @@ RDK X5 V3.3.3 版本已同步至：
 
 #### 核心功能亮点
 
-- **系统备份**：全新 `rdk-backup` 工具，一键备份当前系统，轻松生成可烧录镜像。详见 [rdk-backup介绍](../Appendix/rdk-command-manual/cmd_rdk-backup)
+- **系统备份**：全新 `rdk-backup` 工具，一键备份当前系统，轻松生成可烧录镜像。详见 [rdk-backup 介绍](../Appendix/rdk-command-manual/cmd_rdk-backup)
 - **配置管理**：支持使用 `config.txt` 配置 40pin 引脚在 U-Boot 阶段的初始化状态，提升系统启动稳定性
 - **触摸屏增强**：新增双击和长按操作，长按模拟右键，屏幕控制更加灵活
 - **设备树覆盖支持**：增加 1_wire 设备树覆盖（dtoverlay）示例，为定制硬件连接提供更多选择
@@ -346,7 +346,7 @@ RDK X5 V3.3.3 版本已同步至：
 
 ### TogetheROS-V2.x
 
-详见TogetheROS.Bot[版本发布记录](/docs/05_Robot_development/01_quick_start/changelog.md)。
+详见 TogetheROS.Bot[版本发布记录](/docs/05_Robot_development/01_quick_start/changelog.md)。
 
 ---
 

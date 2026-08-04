@@ -2,11 +2,11 @@
 sidebar_position: 2
 ---
 
-# USB摄像头使用
+# USB 摄像头使用
 
 Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=18
 
-开发板上安装了 `usb_camera_fcos.py` 程序用于测试USB摄像头的数据通路，该示例会实时采集USB摄像头的图像数据，然后运行目标检测算法，最后把图像数据和检测结果融合后通过HDMI接口输出。
+开发板上安装了 `usb_camera_fcos.py` 程序用于测试 USB 摄像头的数据通路，该示例会实时采集 USB 摄像头的图像数据，然后运行目标检测算法，最后把图像数据和检测结果融合后通过 HDMI 接口输出。
 
 ## 环境准备
 
@@ -27,21 +27,21 @@ Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=18
 
 :::tip
 
-详细代码实现说明请查阅[基于USB摄像头推理](../../03_pydev_demo_sample/RDK_X3/02_usb_camera_sample.md)章节。
-对接两个USB摄像头前，需要通过 rmmod uvcvideo;modprobe uvcvideo quirks=128 限制 uvcvideo 带宽占用
+详细代码实现说明请查阅[基于 USB 摄像头推理](../../03_pydev_demo_sample/RDK_X3/02_usb_camera_sample.md)章节。
+对接两个 USB 摄像头前，需要通过 rmmod uvcvideo;modprobe uvcvideo quirks=128 限制 uvcvideo 带宽占用
 
 :::
 
 ## 多摄像头支持
 
-RDK系列板卡都只有 一路 USB 控制器，多路 USB 设备都是通过 USB HUB 扩展出来的。但本质上，所有外设共享的依然是这一路 USB 的总带宽。
+RDK 系列板卡都只有 一路 USB 控制器，多路 USB 设备都是通过 USB HUB 扩展出来的。但本质上，所有外设共享的依然是这一路 USB 的总带宽。
 
 - 对于 USB 2.0，所有设备加起来只能共享 480 Mbps（约 500Mbit/s） 的总带宽；
 - 并不存在 “USB 2.0 外设共享 USB 3.0 总带宽” 这种情况。
 
 因此，在默认情况下，如果接入一台 USB 2.0 Camera，它通常会“贪心”地申请几乎全部的带宽，导致无法再接第二台相机。
 
-RDK 特殊的UVC 驱动（uvcvideo）可以通过`limitsize`参数在一定范围内限制相机的带宽占用，从而让两个相机同时取流。
+RDK 特殊的 UVC 驱动（uvcvideo）可以通过`limitsize`参数在一定范围内限制相机的带宽占用，从而让两个相机同时取流。
 
   ```shell
 rmmod uvcvideo.ko
@@ -129,7 +129,7 @@ modprobe uvcvideo limitsize=2
         bInterval  
   ```
 
-  查询wMaxPacketSize方法
+  查询 wMaxPacketSize 方法
 
   ```shell
   lsusb -v -d <vid>:<pid>

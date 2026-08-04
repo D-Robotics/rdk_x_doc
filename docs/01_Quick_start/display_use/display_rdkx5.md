@@ -4,21 +4,21 @@ sidebar_position: 1
 
 # 1.5.1 显示屏使用
 
-RDK X5支持HDMI和MIPI DSI两种显示输出方式，不能同时使用，系统默认采用HDMI输出。
+RDK X5 支持 HDMI 和 MIPI DSI 两种显示输出方式，不能同时使用，系统默认采用 HDMI 输出。
 
 ## HDMI
 
-RDK X5提供一路HDMI接口，支持的最大分辨率为1080P60。
+RDK X5 提供一路 HDMI 接口，支持的最大分辨率为 1080P60。
 
 ### HDMI 切换
 
-系统默认采用HDMI输出，不需要额外配置。如果您已经切换到MIPI DSI输出，可以使用`srpi-config`工具来切换回HDMI输出,重启设备生效。
+系统默认采用 HDMI 输出，不需要额外配置。如果您已经切换到 MIPI DSI 输出，可以使用`srpi-config`工具来切换回 HDMI 输出,重启设备生效。
 
 `2 Display Options` > `D1 Dsiplay Choice` > `2 HDMI`
 
 ![image-hdmi-choice.png](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/01_hardware_development/rdk_x5/display/image-hdmi-choice.png)
 
-如果您不想使用srpi-config工具，可以按照以下命令行方法进行配置。
+如果您不想使用 srpi-config 工具，可以按照以下命令行方法进行配置。
 
 ```bash
 mv /etc/X11/xorg.conf.d/xorg_hdmi_ignore.conf /etc/X11/xorg.conf.d/xorg_hdmi_ignore.conf.disable
@@ -48,7 +48,7 @@ EndSection
 
 #### 硬件连接
 
-使用`DSI-Cable-12cm`排线，将显示屏DSI接口连接到X5 rdk主板的22PIN DSI接口，用接口的卡扣把没有触点的背面压紧。
+使用`DSI-Cable-12cm`排线，将显示屏 DSI 接口连接到 X5 rdk 主板的 22PIN DSI 接口，用接口的卡扣把没有触点的背面压紧。
 
 安装效果如下：
 
@@ -70,9 +70,9 @@ EndSection
 
 #### 硬件连接
 
-使用`DSI-Cable-12cm`排线，将显示屏DSI接口连接到X5 rdk主板的22PIN DSI接口，用接口的卡扣把没有触点的背面压紧。
+使用`DSI-Cable-12cm`排线，将显示屏 DSI 接口连接到 X5 rdk 主板的 22PIN DSI 接口，用接口的卡扣把没有触点的背面压紧。
 
-通过4PIN顶针连通5V供电，包括5V和GND。在 RDK X5 主板的 40 PIN 接口上，第 4 脚为 5 V，第 6 脚为 GND。
+通过 4PIN 顶针连通 5V 供电，包括 5V 和 GND。在 RDK X5 主板的 40 PIN 接口上，第 4 脚为 5 V，第 6 脚为 GND。
 
 安装效果如下：
 
@@ -96,7 +96,7 @@ EndSection
 
 #### 硬件连接
 
-使用`DSI-Cable-12cm`排线，将显示屏DSI接口连接到X5 rdk主板的22PIN DSI接口，用接口的卡扣把没有触点的背面压紧。
+使用`DSI-Cable-12cm`排线，将显示屏 DSI 接口连接到 X5 rdk 主板的 22PIN DSI 接口，用接口的卡扣把没有触点的背面压紧。
 
 安装效果如下：
 
@@ -118,11 +118,11 @@ EndSection
 
 #### 硬件连接
 
-使用`DSI-Cable-12cm`排线，将显示屏DSI接口连接到X5 rdk主板的22PIN DSI接口，用接口的卡扣把没有触点的背面压紧。
+使用`DSI-Cable-12cm`排线，将显示屏 DSI 接口连接到 X5 rdk 主板的 22PIN DSI 接口，用接口的卡扣把没有触点的背面压紧。
 
-通过4PIN顶针连通5V供电，包括5V和GND。在 RDK X5 主板的 40 PIN 接口上，第 4 脚为 5 V，第 6 脚为 GND。
+通过 4PIN 顶针连通 5V 供电，包括 5V 和 GND。在 RDK X5 主板的 40 PIN 接口上，第 4 脚为 5 V，第 6 脚为 GND。
 
-通过4PIN顶针连通I2C通信，接到X5 rdk主板 40PIN I2C5接口上。在 RDK X5 主板的 40 PIN 接口上，第 3 脚为 SDA5，第 5 脚为 SCL5。
+通过 4PIN 顶针连通 I2C 通信，接到 X5 rdk 主板 40PIN I2C5 接口上。在 RDK X5 主板的 40 PIN 接口上，第 3 脚为 SDA5，第 5 脚为 SCL5。
 
 安装效果如下：
 
@@ -145,9 +145,9 @@ EndSection
 
 #### 硬件连接
 
-使用`DSI-Cable-12cm`排线，将显示屏DSI接口连接到X5 rdk主板的22PIN DSI接口，用接口的卡扣把没有触点的背面压紧。
+使用`DSI-Cable-12cm`排线，将显示屏 DSI 接口连接到 X5 rdk 主板的 22PIN DSI 接口，用接口的卡扣把没有触点的背面压紧。
 
-使用5V/3A的 type-C 接口电源为屏幕供电。
+使用 5V/3A 的 type-C 接口电源为屏幕供电。
 
 安装效果如下：
 
@@ -169,9 +169,9 @@ EndSection
 
 #### 硬件连接
 
-使用`DSI-Cable-12cm`排线，将显示屏DSI接口连接到X5 rdk主板的22PIN DSI接口，用接口的卡扣把没有触点的背面压紧。
+使用`DSI-Cable-12cm`排线，将显示屏 DSI 接口连接到 X5 rdk 主板的 22PIN DSI 接口，用接口的卡扣把没有触点的背面压紧。
 
-使用5V/3A的 type-C 接口电源为屏幕供电。
+使用 5V/3A 的 type-C 接口电源为屏幕供电。
 
 安装效果如下：
 
@@ -193,9 +193,9 @@ EndSection
 
 #### 硬件连接
 
-使用`DSI-Cable-12cm`排线，将显示屏DSI接口连接到X5 rdk主板的22PIN DSI接口，用接口的卡扣把没有触点的背面压紧。
+使用`DSI-Cable-12cm`排线，将显示屏 DSI 接口连接到 X5 rdk 主板的 22PIN DSI 接口，用接口的卡扣把没有触点的背面压紧。
 
-使用5V/3A的 type-C 接口电源为屏幕供电。
+使用 5V/3A 的 type-C 接口电源为屏幕供电。
 
 安装效果如下：
 
@@ -217,9 +217,9 @@ EndSection
 
 #### 硬件连接
 
-使用`DSI-Cable-12cm`排线，将显示屏DSI接口连接到X5 rdk主板的22PIN DSI接口，用接口的卡扣把没有触点的背面压紧。
+使用`DSI-Cable-12cm`排线，将显示屏 DSI 接口连接到 X5 rdk 主板的 22PIN DSI 接口，用接口的卡扣把没有触点的背面压紧。
 
-使用5V/3A的 type-C 接口电源为屏幕供电。
+使用 5V/3A 的 type-C 接口电源为屏幕供电。
 
 安装效果如下：
 
@@ -239,19 +239,19 @@ EndSection
 
 ### 旧版本方法
 
-如果您系统中srpi-config工具版本较低，没有`D3 MIPI LCD Choice`选项，可以使用以下方法升级工具。
+如果您系统中 srpi-config 工具版本较低，没有`D3 MIPI LCD Choice`选项，可以使用以下方法升级工具。
 
 ![screenshot-20250916-162038](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/01_hardware_development/rdk_x5/display/screenshot-20250916-162038.png)
 
-或者您不想使用srpi-config工具，可以按照以下命令行方法进行配置。
+或者您不想使用 srpi-config 工具，可以按照以下命令行方法进行配置。
 
-1，通过命令切换到MIPI DSI显示方式。
+1，通过命令切换到 MIPI DSI 显示方式。
 ```bash
 mv /etc/X11/xorg.conf.d/xorg_dsi_ignore.conf /etc/X11/xorg.conf.d/xorg_dsi_ignore.conf.disable
 mv /etc/X11/xorg.conf.d/xorg_hdmi_ignore.conf.disable /etc/X11/xorg.conf.d/xorg_hdmi_ignore.conf
 ```
 
-2，打开`/boot/config.txt`文件，以`2.8inch DSI LCD`为例，在config.txt最后加入以下代码，保存，退出，重启系统。
+2，打开`/boot/config.txt`文件，以`2.8inch DSI LCD`为例，在 config.txt 最后加入以下代码，保存，退出，重启系统。
 
 ```bash
 dtoverlay=dsi-waveshare-panel-overlay-2_8_inch
@@ -259,7 +259,7 @@ dtoverlay=dsi-waveshare-panel-overlay-2_8_inch
 
 所有版本的显示屏配置方法相同，只需修改`dtoverlay`参数即可。可以参考下表
 
-| 屏幕类型 | dtoverlay参数 |
+| 屏幕类型 | dtoverlay 参数 |
 | --- | --------- | 
 | 2.8inch DSI LCD | dsi-waveshare-panel-overlay-2_8_inch |
 | 3.4inch DSI LCD (C) | dsi-waveshare-panel-overlay-3_4_inch |

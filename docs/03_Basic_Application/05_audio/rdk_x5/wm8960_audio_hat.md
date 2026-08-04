@@ -5,16 +5,16 @@ sidebar_position: 4
 # 微雪 WM8960 Audio HAT
 
 ## 产品简介
-WM8960 Audio HAT是由微雪电子生产的一款音频转接板，采用WM8960 Codec方案，可实现双通道麦克风录音、音频播放功能，转接板外观如下图：
+WM8960 Audio HAT 是由微雪电子生产的一款音频转接板，采用 WM8960 Codec 方案，可实现双通道麦克风录音、音频播放功能，转接板外观如下图：
 
 ![image-audio-wm8960](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/02_audio/image/image-audio-wm8960.jpg)
 
-关于音频转接板的详细介绍，请参考[WM8960音频转接板](https://www.waveshare.net/wiki/WM8960_Audio_HAT)。
+关于音频转接板的详细介绍，请参考[WM8960 音频转接板](https://www.waveshare.net/wiki/WM8960_Audio_HAT)。
 ## 安装方法
 
 - ### 硬件部署
 
-按照下图方式，将转接板接入RDK X5的40pin header  
+按照下图方式，将转接板接入 RDK X5 的 40pin header  
 ![image-wm8960-audio-hat-rkd-x5-setup-2](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/02_audio/image/image-wm8960-audio-hat-rkd-x5-setup-2.png)
 
 - ### 软件配置
@@ -71,9 +71,9 @@ root@ubuntu:~# cat /proc/asound/devices
 root@ubuntu:~# ls /dev/snd/
 by-path  controlC0  controlC1  pcmC0D0p  pcmC0D1c  pcmC1D0c  pcmC1D0p  timer
 ```
-通过上述查询，结合[板载 Earphone 音频口](in_board_es8326.md#运行)的介绍，可以确认，声卡0对应的是 `WM8960 Audio Driver HAT` 节点；设备也是存在的, 且设备号为 `0-0` 和 `0-1` , 实际我们操作的设备应该是`pcmC0D0p 和 pcmC0D1c`。
+通过上述查询，结合[板载 Earphone 音频口](in_board_es8326.md#运行)的介绍，可以确认，声卡 0 对应的是 `WM8960 Audio Driver HAT` 节点；设备也是存在的, 且设备号为 `0-0` 和 `0-1` , 实际我们操作的设备应该是`pcmC0D0p 和 pcmC0D1c`。
 
-板载声卡对应的是1，设备号为`1-0`，这里我们不会用到它。
+板载声卡对应的是 1，设备号为`1-0`，这里我们不会用到它。
 
 **该音频板需要配置 Audio 路由才可以执行对应的功能，所以在以下每个场景功能执行之前都有加载特定路由的命令。**
 

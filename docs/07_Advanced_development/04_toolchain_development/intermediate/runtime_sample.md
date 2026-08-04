@@ -12,7 +12,7 @@ import DocScope from '@site/src/components/DocScope';
 
 ## RDK X3
 
-### 模型推理DNN API使用示例说明
+### 模型推理 DNN API 使用示例说明
 
 #### 概述
 
@@ -20,9 +20,9 @@ import DocScope from '@site/src/components/DocScope';
 
 示例包提供三个方面的示例：
 
-- 模型推理 dnn API使用示例。
+- 模型推理 dnn API 使用示例。
 - 自定义算子（custom OP）等特殊功能示例。
-- 非NV12输入模型的杂项示例。
+- 非 NV12 输入模型的杂项示例。
 
 详细内容请阅读下文。
 
@@ -101,14 +101,14 @@ import DocScope from '@site/src/components/DocScope';
           └── README.md
 ```
 
-- **00_quick_start**：快速入门示例，基于 ``dnn`` API，用mobilenetv1进行单张图片模型推理和结果解析。
-- **01_api_tutorial**： ``dnn`` API使用教学代码， 包括 **mem**， **model**， **resize**， **roi_infer** 和 **tensor** 五部分。
+- **00_quick_start**：快速入门示例，基于 ``dnn`` API，用 mobilenetv1 进行单张图片模型推理和结果解析。
+- **01_api_tutorial**： ``dnn`` API 使用教学代码， 包括 **mem**， **model**， **resize**， **roi_infer** 和 **tensor** 五部分。
 - **02_advanced_samples**：特殊功能示例，包括 **custom_identity**， **multi_input**， **multi_model_batch** 和 **nv12_batch** 功能。。
-- **03_misc**：非NV12输入模型的杂项示例。
-- **xj3**：RDK X3开发板示例运行脚本，预置了数据和相关模型。
-- **ultra**: RDK Ultra开发板示例运行脚本，预置了数据和相关模型。
-- **build_xj3.sh**：RDK X3程序一键编译脚本。
-- **build_ultra.sh**：RDK Ultra程序一键编译脚本。
+- **03_misc**：非 NV12 输入模型的杂项示例。
+- **xj3**：RDK X3 开发板示例运行脚本，预置了数据和相关模型。
+- **ultra**: RDK Ultra 开发板示例运行脚本，预置了数据和相关模型。
+- **build_xj3.sh**：RDK X3 程序一键编译脚本。
+- **build_ultra.sh**：RDK Ultra 程序一键编译脚本。
 - **deps/deps_gcc9.3**：示例代码所需要的三方依赖, 用户在开发自己代码程序的时候可以根据实际情况替换或者裁剪。
 
 
@@ -127,8 +127,8 @@ import DocScope from '@site/src/components/DocScope';
 
 ##### 编译
 
-编译需要当前环境安装好交叉编译工具： ``aarch64-linux-gnu-g++`` ， ``aarch64-linux-gnu-gcc``。 请使用D-Robotics 提供的开发机Docker镜像，直接进行编译使用。开发机Docker环境的获取及使用方法，请阅读[**环境安装**](../intermediate/environment_config.md) 章节内容；
-根据自身使用的开发板情况，请使用horizon_runtime_sample/code目录下的 ``build_xj3.sh`` 或 ``build_ultra.sh`` 脚本，即可一键编译开发板环境下的可执行程序，可执行程序和对应依赖会自动复制到 ``xj3/script`` 目录下的 ``aarch64`` 目录下 或 ``ultra/script`` 目录下的 ``aarch64`` 目录下。
+编译需要当前环境安装好交叉编译工具： ``aarch64-linux-gnu-g++`` ， ``aarch64-linux-gnu-gcc``。 请使用 D-Robotics 提供的开发机 Docker 镜像，直接进行编译使用。开发机 Docker 环境的获取及使用方法，请阅读[**环境安装**](../intermediate/environment_config.md) 章节内容；
+根据自身使用的开发板情况，请使用 horizon_runtime_sample/code 目录下的 ``build_xj3.sh`` 或 ``build_ultra.sh`` 脚本，即可一键编译开发板环境下的可执行程序，可执行程序和对应依赖会自动复制到 ``xj3/script`` 目录下的 ``aarch64`` 目录下 或 ``ultra/script`` 目录下的 ``aarch64`` 目录下。
 
 :::info 备注
   工程通过获取环境变量 ``LINARO_GCC_ROOT`` 来指定交叉编译工具的路径，用户使用之前可以检查本地的环境变量是否为目标交叉编译工具。
@@ -232,7 +232,7 @@ import DocScope from '@site/src/components/DocScope';
 ```
 
 :::info 备注
-- model文件夹下包含模型的路径，其中 ``runtime`` 文件夹为软链接，链接路径为 ``../../../model_zoo/runtime/horizon_runtime_sample`` ，可直接找到交付包中的模型路径
+- model 文件夹下包含模型的路径，其中 ``runtime`` 文件夹为软链接，链接路径为 ``../../../model_zoo/runtime/horizon_runtime_sample`` ，可直接找到交付包中的模型路径
 - 板端运行环境需要将模型放至 ``model`` 文件夹下
 :::
 
@@ -245,12 +245,12 @@ import DocScope from '@site/src/components/DocScope';
   ├── README.md
   └── run_mobilenetV1.sh
 ```
-- ``run_mobilenetV1.sh`` ：该脚本实现使用mobilenetv1模型读取单张图片进行推理的示例功能。
+- ``run_mobilenetV1.sh`` ：该脚本实现使用 mobilenetv1 模型读取单张图片进行推理的示例功能。
 
 
 ##### api_tutorial
 
-01_api_tutorial 目录下的示例，用于介绍如何使用嵌入式API。其目录包含以下脚本：
+01_api_tutorial 目录下的示例，用于介绍如何使用嵌入式 API。其目录包含以下脚本：
 
 ``` shell
   ├── model.sh
@@ -281,8 +281,8 @@ import DocScope from '@site/src/components/DocScope';
     I0108 04:19:27.246064 24638 model_example.cc:112] hbDNNGetModelHandle [mobilenetv1_nv12] success!
     I0108 04:19:27.246139 24638 model_example.cc:189] [mobilenetv1_nv12] Model Info:  input num: 1, input[0] validShape: ( 1, 3, 224, 224 ), alignedShape: ( 1, 4, 224, 224 ), tensorLayout: 2, tensorType: 1, output num: 1, output[0] validShape: ( 1, 1000, 1, 1 ), alignedShape: ( 1, 1000, 1, 1 ), tensorLayout: 2, tensorType: 13
 ```
--  ``resize_bgr.sh`` ：该脚本主要引导如何使用 ``hbDNNResize`` 这个API，
-   示例实现的代码功能是将一张1352x900大小的图片，截取图片中坐标为[5，19，340，343]的部分，然后resize到402x416并保存下来。
+-  ``resize_bgr.sh`` ：该脚本主要引导如何使用 ``hbDNNResize`` 这个 API，
+   示例实现的代码功能是将一张 1352x900 大小的图片，截取图片中坐标为[5，19，340，343]的部分，然后 resize 到 402x416 并保存下来。
    使用的时候，直接进入 01_api_tutorial 目录，然后直接执行 ``sh resize_bgr.sh`` 即可，如下所示：
 
 :::caution 注意
@@ -302,9 +302,9 @@ import DocScope from '@site/src/components/DocScope';
     I0108 06:58:03.328739 24975 resize_bgr_example.cc:139] resize success!
     I0108 06:58:03.335835 24975 resize_bgr_example.cc:143] wait task done finished!
 ```
-  执行成功后，当前目录会成功保存名称为resize_bgr.jpg的图片。
+  执行成功后，当前目录会成功保存名称为 resize_bgr.jpg 的图片。
 
--  ``resize_y.sh`` ：该脚本主要引导如何使用 ``hbDNNResize`` 这个API，示例代码实现的功能是将一张图片resize到416x402。
+-  ``resize_y.sh`` ：该脚本主要引导如何使用 ``hbDNNResize`` 这个 API，示例代码实现的功能是将一张图片 resize 到 416x402。
    使用的时候，直接进入 01_api_tutorial 目录，然后直接执行 ``sh resize_y.sh`` 即可，如下所示：
 
 :::caution 注意
@@ -325,14 +325,14 @@ import DocScope from '@site/src/components/DocScope';
     I0108 06:59:36.891711 24992 resize_y_example.cc:123] wait resize success
     I0108 06:59:36.891798 24992 resize_y_example.cc:129] spent time: 0.003463
 ```
-  ​执行成功后，当前目录会成功保存名称为resize_y.jpg的图片。
+  ​执行成功后，当前目录会成功保存名称为 resize_y.jpg 的图片。
 
-- ``roi_infer.sh`` ： 该脚本主要引导如何使用 ``hbDNNRoiInfer`` 这个API，示例代码实现的功能是将一张图片resize到模型输入大小，转为nv12数据，并给定roi框进行模型推理（infer）。
+- ``roi_infer.sh`` ： 该脚本主要引导如何使用 ``hbDNNRoiInfer`` 这个 API，示例代码实现的功能是将一张图片 resize 到模型输入大小，转为 nv12 数据，并给定 roi 框进行模型推理（infer）。
   使用的时候，直接进入 01_api_tutorial 目录，然后直接执行 ``sh roi_infer.sh`` 即可。
 
 - ``sys_mem.sh`` ：该脚本主要引导如何使用 ``hbSysAllocMem``、 ``hbSysFlushMem`` 和 ``hbSysFreeMem`` 这几个API。使用的时候，直接进入 01_api_tutorial 目录，执行 ``sh sys_mem.sh`` 即可。
 
-- ``tensor.sh`` ：该脚本主要引导如何准备模型输入和输出的tensor。
+- ``tensor.sh`` ：该脚本主要引导如何准备模型输入和输出的 tensor。
   使用的时候，直接进入 01_api_tutorial 目录，执行 ``sh tensor.sh`` 即可，如下所示：
 
 :::caution 注意
@@ -423,13 +423,13 @@ import DocScope from '@site/src/components/DocScope';
 ```
 ##### misc
 
-03_misc 目录下的示例，用于介绍非nv12输入模型的使用。其目录包含以下脚本：
+03_misc 目录下的示例，用于介绍非 nv12 输入模型的使用。其目录包含以下脚本：
 
 ```shell
   ├── run_lenet.sh
   └── run_resnet50_feature.sh
 ```
-- ``run_lenet.sh`` ：该脚本主要实现Y数据输入的lenet模型推理功能，
+- ``run_lenet.sh`` ：该脚本主要实现 Y 数据输入的 lenet 模型推理功能，
   使用的时候，进入 03_misc 目录, 然后直接执行 ``sh run_lenet.sh`` 即可，如下所示：
 
 :::caution 注意
@@ -458,7 +458,7 @@ import DocScope from '@site/src/components/DocScope';
     I0108 07:23:35.510903 25139 run_lenet_gray.cc:217] TOP 3 result id: 4
     I0108 07:23:35.510927 25139 run_lenet_gray.cc:217] TOP 4 result id: 2
 ```
-- ``run_resnet50_feature.sh`` ：该脚本主要实现feature数据输入的resnet50模型推理功能，示例代码对feature数据做了quantize和padding以满足模型的输入条件，然后输入到模型进行infer。
+- ``run_resnet50_feature.sh`` ：该脚本主要实现 feature 数据输入的 resnet50 模型推理功能，示例代码对 feature 数据做了 quantize 和 padding 以满足模型的输入条件，然后输入到模型进行 infer。
   使用的时候，进入 03_misc 目录, 然后直接执行 ``sh run_resnet50_feature.sh`` 即可，如下所示：
 
 :::caution 注意
@@ -492,33 +492,33 @@ import DocScope from '@site/src/components/DocScope';
 ##### 日志
 
 本章节主要包括 ``示例日志`` 和 ``模型推理 DNN API日志`` 两部分。
-其中示例日志是指交付包示例代码中的应用日志；模型推理 dnn API日志是指嵌入式dnn库中的日志。用户根据不同的需求可以获取不同的日志信息。
+其中示例日志是指交付包示例代码中的应用日志；模型推理 dnn API 日志是指嵌入式 dnn 库中的日志。用户根据不同的需求可以获取不同的日志信息。
 
 ##### 示例日志
 
-示例日志主要采用glog中的vlog，basic_samples参考示例中，日志内容会全部输出。
+示例日志主要采用 glog 中的 vlog，basic_samples 参考示例中，日志内容会全部输出。
 
-##### 模型推理 DNN API日志
+##### 模型推理 DNN API 日志
 
-关于模型推理 DNN API日志的配置，请阅读[《算法工具链产品手册》](https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html#bpu-sdk-config)。
+关于模型推理 DNN API 日志的配置，请阅读[《算法工具链产品手册》](https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html#bpu-sdk-config)。
 
 ### 公版模型性能精度测评说明
 
 #### 公版模型性能精度指标
 
-下表提供了典型深度神经网络模型在X3处理器上的性能、精度指标。
+下表提供了典型深度神经网络模型在 X3 处理器上的性能、精度指标。
 
 ![model_accuracy](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/model_accuracy.png)
 
 :::caution 注意
 
-  1. 表格中的数据均为在D-Robotics RDK X3开发板的实测结果，测试模型均来自于[horizon_model_convert_sample](../intermediate/environment_config.md) 模型示例包；
+  1. 表格中的数据均为在 D-Robotics RDK X3 开发板的实测结果，测试模型均来自于[horizon_model_convert_sample](../intermediate/environment_config.md) 模型示例包；
 
-  2. 对于模型示例包中的 BPU/CPU 混合异构模型，单帧的耗时主要由输入量化CPU节点、模型BPU算子、模型CPU算子、输出反量化CPU节点、CPU后处理等模块构成，具体说明如下：
+  2. 对于模型示例包中的 BPU/CPU 混合异构模型，单帧的耗时主要由输入量化 CPU 节点、模型 BPU 算子、模型 CPU 算子、输出反量化 CPU 节点、CPU 后处理等模块构成，具体说明如下：
 
-      a. 输入量化CPU节点：完成float32到int8的输入量化操作，该节点只在使用 featuremap 输入的模型中包含。量化耗时与输入 shape 大小成正比
+      a. 输入量化 CPU 节点：完成 float32 到 int8 的输入量化操作，该节点只在使用 featuremap 输入的模型中包含。量化耗时与输入 shape 大小成正比
 
-      b. 模型CPU算子：
+      b. 模型 CPU 算子：
 
           ⅰ. 检测模型中未包含 CPU 算子
 
@@ -526,28 +526,28 @@ import DocScope from '@site/src/components/DocScope';
 
           ⅲ. 分割模型 DeepLabV3+ 尾部的 Argmax 为 CPU 算子
 
-      c. 输出反量化CPU节点：完成int8到float32的输出反量化操作。量化耗时与输出 shape 大小成正比
+      c. 输出反量化 CPU 节点：完成 int8 到 float32 的输出反量化操作。量化耗时与输出 shape 大小成正比
 
-      d. D-Robotics 目前支持将模型的 量化/反量化节点手动摘除，由用户自行融入前后处理代码中实现，以减少数据重复遍历的损耗。以 EfficientDet 模型为例，摘除了反量化节点合入后处理，推理性能从 66FPS提高到100FPS
+      d. D-Robotics 目前支持将模型的 量化/反量化节点手动摘除，由用户自行融入前后处理代码中实现，以减少数据重复遍历的损耗。以 EfficientDet 模型为例，摘除了反量化节点合入后处理，推理性能从 66FPS 提高到 100FPS
 
-      e. 目前D-Robotics 示例模型的后处理均未做针对性的性能优化，您可以根据实际需求采用如近似高效实现等优化手段进行代码级加速
+      e. 目前 D-Robotics 示例模型的后处理均未做针对性的性能优化，您可以根据实际需求采用如近似高效实现等优化手段进行代码级加速
 
   3. 在实际应用中，BPU 和 CPU 可以并发运行，提高整体推理速度。
 
   4. 若实测性能与上述表格的测试结果不一致，有几个方面可能导致此种情况：
 
-      a. DDR带宽的影响，开发板只能运行ai_benchmark程序。
+      a. DDR 带宽的影响，开发板只能运行 ai_benchmark 程序。
 
       b. 算法工具链版本与系统镜像版本不完全匹配，最理想的情况是配套使用发布包的算法工具链和系统镜像。
 
-      c. CPU降频影响，目前开发板重启后默认启用自动降频，为了获得最好的性能，您需要在开发板上执行关闭降频命令： ``echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor``。
+      c. CPU 降频影响，目前开发板重启后默认启用自动降频，为了获得最好的性能，您需要在开发板上执行关闭降频命令： ``echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor``。
 :::
 
 #### 评测方法说明
 
 ##### 简介
 
-本章节介绍公版模型精度性能评测 ai_benchmark 示例包的具体用法， 示例包中预置了源码、可执行程序和评测脚本，开发者可以直接在D-Robotics 开发板上体验并基于这些示例进行嵌入式应用开发，降低开发门槛。
+本章节介绍公版模型精度性能评测 ai_benchmark 示例包的具体用法， 示例包中预置了源码、可执行程序和评测脚本，开发者可以直接在 D-Robotics 开发板上体验并基于这些示例进行嵌入式应用开发，降低开发门槛。
 
 示例包提供常见的分类、检测和分割模型的性能评测和精度评测示例，详细内容请阅读下文。
 
@@ -695,8 +695,8 @@ import DocScope from '@site/src/components/DocScope';
 ```
 
 - **code**：该目录内是评测程序的源码，用来进行模型性能和精度评测。
-- **xj3**： 提供了已经编译好的应用程序，以及各种评测脚本，用来测试多种模型在D-Robotics BPU上运行的性能，精度等(**RDK X3** 使用)。
-- **ultra**： 提供了已经编译好的应用程序，以及各种评测脚本，用来测试多种模型在D-Robotics BPU上运行的性能，精度等(**RDK Ultra** 使用)。
+- **xj3**： 提供了已经编译好的应用程序，以及各种评测脚本，用来测试多种模型在 D-Robotics BPU 上运行的性能，精度等(**RDK X3** 使用)。
+- **ultra**： 提供了已经编译好的应用程序，以及各种评测脚本，用来测试多种模型在 D-Robotics BPU 上运行的性能，精度等(**RDK Ultra** 使用)。
 - **build_ptq_xj3.sh**：开发板程序一键编译脚本(**RDK X3** 使用)。
 - **build_ptq_ultra.sh**：开发板程序一键编译脚本(**RDK Ultra** 使用)。
 - **deps/deps_gcc9.3**：示例代码所需要的依赖，主要如下所示:
@@ -711,7 +711,7 @@ import DocScope from '@site/src/components/DocScope';
 我们提供了开源的模型库，里面包含常用的分类、检测和分割模型，模型的命名规则为：`{model_name}_{backbone}_{input_size}_{input_type}`，开发者可以直接使用。
 
 :::tip 小技巧
-  以下表格中的bin模型都是通过 horizon_model_convert_sample 模型转换示例包转换编译出来的，请阅读[《交付物说明》](../intermediate/environment_config#deliverables_instructions) 章节内容进行获取。
+  以下表格中的 bin 模型都是通过 horizon_model_convert_sample 模型转换示例包转换编译出来的，请阅读[《交付物说明》](../intermediate/environment_config#deliverables_instructions) 章节内容进行获取。
 :::
 
   | MODEL              | MODEL NAME                                   |
@@ -737,9 +737,9 @@ import DocScope from '@site/src/components/DocScope';
 
 ##### 公共数据集
 
-测评示例中用到的数据集主要有VOC数据集、COCO数据集、ImageNet、Cityscapes数据集、FlyingChairs数据集、KITTI数据集、Culane数据集、Nuscenes数据集和Mot17数据集。
+测评示例中用到的数据集主要有 VOC 数据集、COCO 数据集、ImageNet、Cityscapes 数据集、FlyingChairs 数据集、KITTI 数据集、Culane 数据集、Nuscenes 数据集和 Mot17 数据集。
 
-请在linux环境下进行下载，获取方式如下：
+请在 linux 环境下进行下载，获取方式如下：
 
 ```shell
   VOC：http://host.robots.ox.ac.uk/pascal/VOC/  （使用VOC2012版本）
@@ -771,8 +771,8 @@ import DocScope from '@site/src/components/DocScope';
 
 ##### 编译环境准备
 
-编译需要当前环境安装好交叉编译工具 ``gcc-ubuntu-9.3.0-2020.03-x86_64-aarch64-linux-gnu``。请使用D-Robotics 提供的开发机Docker镜像，直接进行编译使用。开发机Docker环境的获取及使用方法，请阅读[**环境安装**](../intermediate/environment_config.md) 章节内容；
-请使用code目录下的 ``build_ptq_xj3.sh`` 或 ``build_ptq_ultra.sh`` 脚本，即可一键编译开发板环境下的可执行程序，可执行程序和对应依赖会自动复制到 ``xj3/ptq/script`` 目录下的 ``aarch64`` 目录下 或 ``ultra/ptq/script`` 目录下的 ``aarch64`` 目录下。
+编译需要当前环境安装好交叉编译工具 ``gcc-ubuntu-9.3.0-2020.03-x86_64-aarch64-linux-gnu``。请使用 D-Robotics 提供的开发机 Docker 镜像，直接进行编译使用。开发机 Docker 环境的获取及使用方法，请阅读[**环境安装**](../intermediate/environment_config.md) 章节内容；
+请使用 code 目录下的 ``build_ptq_xj3.sh`` 或 ``build_ptq_ultra.sh`` 脚本，即可一键编译开发板环境下的可执行程序，可执行程序和对应依赖会自动复制到 ``xj3/ptq/script`` 目录下的 ``aarch64`` 目录下 或 ``ultra/ptq/script`` 目录下的 ``aarch64`` 目录下。
 
 :::info 备注
   需要注意 ``build_ptq_xj3.sh`` 和 ``build_ptq_ultra.sh`` 脚本里指定的交叉编译工具链的位置是 ``/opt`` 目录下，用户如果安装在其他位置，可以手动修改下脚本。
@@ -784,9 +784,9 @@ import DocScope from '@site/src/components/DocScope';
 
 ##### 测评示例使用说明
 
-评测示例脚本主要在 ``script`` 和 ``tools`` 目录下。 script是开发板上运行的评测脚本，包括常见分类，检测和分割模型。每个模型下面有三个脚本，分别表示：
+评测示例脚本主要在 ``script`` 和 ``tools`` 目录下。 script 是开发板上运行的评测脚本，包括常见分类，检测和分割模型。每个模型下面有三个脚本，分别表示：
 
-- fps.sh：利用多线程调度实现fps统计，用户可以根据需求自由设置线程数。
+- fps.sh：利用多线程调度实现 fps 统计，用户可以根据需求自由设置线程数。
 - latency.sh：实现单帧延迟统计（一个线程，单帧）。
 - accuracy.sh：用于精度评测。
 
@@ -842,7 +842,7 @@ import DocScope from '@site/src/components/DocScope';
       └── unet_mobilenet
 
 ```
-tools目录下是精度评测需要的脚本。主要包括 ``python_tools`` 下的精度计算脚本。
+tools 目录下是精度评测需要的脚本。主要包括 ``python_tools`` 下的精度计算脚本。
 
 ```shell
   tools:
@@ -879,7 +879,7 @@ tools目录下是精度评测需要的脚本。主要包括 ``python_tools`` 下
 ##### 性能评测
 
 
-性能评测分为latency和fps两方面。
+性能评测分为 latency 和 fps 两方面。
 
 - 测评脚本使用说明
 
@@ -912,7 +912,7 @@ tools目录下是精度评测需要的脚本。主要包括 ``python_tools`` 下
 ```
 :::info 备注
 
-  该功能采用多线程并发方式，旨在让模型可以在BPU上达到极致的性能。由于多线程并发及数据采样的原因，在程序启动阶段帧率值会较低，之后帧率会上升并逐渐趋于稳定，帧率的浮动范围控制在0.5%之内。
+  该功能采用多线程并发方式，旨在让模型可以在 BPU 上达到极致的性能。由于多线程并发及数据采样的原因，在程序启动阶段帧率值会较低，之后帧率会上升并逐渐趋于稳定，帧率的浮动范围控制在 0.5%之内。
 :::
 
 - 命令行参数说明
@@ -954,9 +954,9 @@ tools目录下是精度评测需要的脚本。主要包括 ``python_tools`` 下
 
 :::info 备注
 
-  注意：max_cache参数生效时会预处理图片并读取到内存中，为保障您的程序稳定运行，请不要设置过大的值，建议您的数值设置不超过30。
+  注意：max_cache 参数生效时会预处理图片并读取到内存中，为保障您的程序稳定运行，请不要设置过大的值，建议您的数值设置不超过 30。
 :::
-以fcos_efficientnetb0模型为例，workflow_fps.json 配置文件内容如下：
+以 fcos_efficientnetb0 模型为例，workflow_fps.json 配置文件内容如下：
 
 ```
  {
@@ -1069,20 +1069,20 @@ workflow_latency.json 如下：
 
 - ##### 数据预处理
 
-对于PTQ模型：数据预处理需要在x86开发机环境下运行 ``hb_eval_preprocess`` 工具，对数据集进行预处理。
-所谓预处理是指图片数据在送入模型之前的特定处理操作，例如：图片resize、crop和padding等。
-该工具集成于开发机模型转换编译的环境中，原始数据集经过工具预处理之后，会生成模型对应的前处理二进制文件.bin文件集.
+对于 PTQ 模型：数据预处理需要在 x86 开发机环境下运行 ``hb_eval_preprocess`` 工具，对数据集进行预处理。
+所谓预处理是指图片数据在送入模型之前的特定处理操作，例如：图片 resize、crop 和 padding 等。
+该工具集成于开发机模型转换编译的环境中，原始数据集经过工具预处理之后，会生成模型对应的前处理二进制文件.bin 文件集.
 直接运行 ``hb_eval_preprocess --help`` 可查看工具使用规则。
 
 :::tip 小技巧
 
-  1. 关于 ``hb_eval_preprocess`` 工具命令行参数，可键入 ``hb_eval_preprocess -h``， 或查看 PTQ量化原理及步骤说明的
-     [**hb_eval_preprocess工具**](../intermediate/ptq_process#hb_eval_preprocess) 一节内容。
+  1. 关于 ``hb_eval_preprocess`` 工具命令行参数，可键入 ``hb_eval_preprocess -h``， 或查看 PTQ 量化原理及步骤说明的
+     [**hb_eval_preprocess 工具**](../intermediate/ptq_process#hb_eval_preprocess) 一节内容。
      :::
 
 下面将详细介绍示例包中每一个模型对应的数据集，以及对应数据集的预处理操作：
 
-- ``VOC数据集`` ：该数据集主要用于ssd_mobilenetv1模型的评测，
+- ``VOC数据集`` ：该数据集主要用于 ssd_mobilenetv1 模型的评测，
   其目录结构如下，示例中主要用到 ``Main`` 文件下的val.txt文件， ``JPEGImages`` 中的源图片和 ``Annotations`` 中的标注数据：
 
 ```shell
@@ -1105,7 +1105,7 @@ workflow_latency.json 如下：
 ```bash
   hb_eval_preprocess -m ssd_mobilenetv1 -i VOCdevkit/VOC2012/JPEGImages -v VOCdevkit/VOC2012/ImageSets/Main/val.txt -o ./pre_ssd_mobilenetv1
 ```
-- ``COCO数据集`` ：该数据集主要用于yolov2_darknet19、yolov3_darknet53、yolov5s、efficientdetd0、fcos_efficientnetb0和centernet_resnet50等检测模型的评测，
+- ``COCO数据集`` ：该数据集主要用于 yolov2_darknet19、yolov3_darknet53、yolov5s、efficientdetd0、fcos_efficientnetb0 和 centernet_resnet50 等检测模型的评测，
   其目录如下，示例中主要用到 ``annotations`` 文件夹下的instances_val2017.json标注文件和 ``images`` 中的图片：
 
 ```shell
@@ -1119,8 +1119,8 @@ workflow_latency.json 如下：
 ```bash
   hb_eval_preprocess -m model_name -i coco/coco_val2017/images -o ./pre_model_name
 ```
-- ``ImageNet数据集`` ：该数据集主要用于EfficientNet_lite0、EfficientNet_Lite1、EfficientNet_Lite2、EfficientNet_Lite3、EfficientNet_Lite4、MobileNet、GoogleNet、ResNet等分类模型的评测，
-  示例中主要用到了标注文件val.txt 和 ``val`` 目录中的源图片:
+- ``ImageNet数据集`` ：该数据集主要用于 EfficientNet_lite0、EfficientNet_Lite1、EfficientNet_Lite2、EfficientNet_Lite3、EfficientNet_Lite4、MobileNet、GoogleNet、ResNet 等分类模型的评测，
+  示例中主要用到了标注文件 val.txt 和 ``val`` 目录中的源图片:
 
 ```shell
   .
@@ -1132,7 +1132,7 @@ workflow_latency.json 如下：
 ```bash
   hb_eval_preprocess -m model_name -i imagenet/val -o ./pre_model_name
 ```
-- ``Cityscapes数据集`` ：该数据集用于deeplabv3plus_efficientnetb0、deeplabv3plus_efficientnetm1、deeplabv3plus_efficientnetm2和fastscnn_efficientnetb0等分割模型的评测。
+- ``Cityscapes数据集`` ：该数据集用于 deeplabv3plus_efficientnetb0、deeplabv3plus_efficientnetm1、deeplabv3plus_efficientnetm2 和 fastscnn_efficientnetb0 等分割模型的评测。
   示例中主要用到了 ``./gtFine/val`` 中的标注文件和 ``./leftImg8bit/val`` 中的源图片。
 
 ```shell
@@ -1160,7 +1160,7 @@ workflow_latency.json 如下：
 
 2、根据 ``lst`` 文件存储的前处理文件路径信息，去加载每一个前处理文件，然后进行推理
 
-所以，生成预处理文件之后，需要生成对应的lst文件，将每一张前处理文件的路径写入到lst文件中，而这个路径与数据集在开发板端的存放位置有关。
+所以，生成预处理文件之后，需要生成对应的 lst 文件，将每一张前处理文件的路径写入到 lst 文件中，而这个路径与数据集在开发板端的存放位置有关。
 这里我们推荐其存放位置与 ``script`` 文件夹同级目录，如下：
 
 ```bash
@@ -1250,7 +1250,7 @@ workflow_latency.json 如下：
   |   |   |-- ...
 
 ```
-与之对应的lst文件，参考生成方式如下：
+与之对应的 lst 文件，参考生成方式如下：
 
 ```shell
 
@@ -1261,14 +1261,14 @@ workflow_latency.json 如下：
 
 ```
 
-这样生成的lst文件中存储的路径为一个相对路径： ``../../../data/`` 或 ``../../../data/coco/pre_centernet_resnet101/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。
+这样生成的 lst 文件中存储的路径为一个相对路径： ``../../../data/`` 或 ``../../../data/coco/pre_centernet_resnet101/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。
 如果需要更改前处理数据集的存放位置，则需要确保对应的 ``lst`` 文件可以被 ``workflow_accuracy.json`` 读取到；其次需要确保程序根据 ``lst`` 中的路径信息，能读取到对应的前处理文件。
 
 - ##### 数据挂载
 
-由于数据集相对较大，不适合直接放在开发板上，可以采用nfs挂载的方式供开发板读取。
+由于数据集相对较大，不适合直接放在开发板上，可以采用 nfs 挂载的方式供开发板读取。
 
-开发机PC端（需要root权限）：
+开发机 PC 端（需要 root 权限）：
 
 1. 编辑 /etc/exports, 增加一行：
    ``/nfs *(insecure,rw,sync,all_squash,anonuid=1000,anongid=1000,no_subtree_check)``。
@@ -1280,7 +1280,7 @@ workflow_latency.json 如下：
 1. 创建需要挂载的目录：``mkdir -p /mnt``。
 2. ``mount -t nfs {PC端IP}:/nfs /mnt -o nolock``。
 
-完成将PC端的/nfs文件夹挂载至板端/mnt文件夹。按照此方式，将包含预处理数据的文件夹挂载至板端，并将/data目录软链接至板端/ptq目录下，与/script同级目录。
+完成将 PC 端的/nfs 文件夹挂载至板端/mnt 文件夹。按照此方式，将包含预处理数据的文件夹挂载至板端，并将/data 目录软链接至板端/ptq 目录下，与/script 同级目录。
 
 
 - ##### 模型推理
@@ -1290,7 +1290,7 @@ workflow_latency.json 如下：
   以下示例是使用 **RDK X3** 开发板的实测结果，若使用 **RDK Ultra** 开发板信息会有所差异，以具体实测为准！
 :::
 
-挂载完数据后，请登录开发板，开发板登录方法，请阅读[**开发板登录**](../../../01_Quick_start/remote_login.md) 章节内容，登录成功后，执行 ``fcos_efficientnetb0/`` 目录下的accuracy.sh脚本，如下所示：
+挂载完数据后，请登录开发板，开发板登录方法，请阅读[**开发板登录**](../../../01_Quick_start/remote_login.md) 章节内容，登录成功后，执行 ``fcos_efficientnetb0/`` 目录下的 accuracy.sh 脚本，如下所示：
 
 ```bash
   /userdata/ptq/script/detection/fcos# sh accuracy.sh
@@ -1312,14 +1312,14 @@ workflow_latency.json 如下：
 :::
 
 精度计算的脚本在 ``python_tools`` 目录下，其中 ``accuracy_tools`` 中的：
-cls_eval.py是用来计算分类模型的精度；
-coco_det_eval.py是用来计算使用COCO数据集评测的检测模型的精度；
-parsing_eval.py是用来计算使用Cityscapes数据集评测的分割模型的精度。
-voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度。
+cls_eval.py 是用来计算分类模型的精度；
+coco_det_eval.py 是用来计算使用 COCO 数据集评测的检测模型的精度；
+parsing_eval.py 是用来计算使用 Cityscapes 数据集评测的分割模型的精度。
+voc_det_eval.py 是用来计算使用 VOC 数据集评测的检测模型的精度。
 
 - 分类模型
 
-使用CIFAR-10数据集和ImageNet数据集的分类模型计算方式如下：
+使用 CIFAR-10 数据集和 ImageNet 数据集的分类模型计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -1329,12 +1329,12 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
 :::info 备注
 
   - ``log_file``：分类模型的预测结果文件。
-  - ``gt_file``：CIFAR-10和ImageNet数据集的标注文件。
+  - ``gt_file``：CIFAR-10 和 ImageNet 数据集的标注文件。
 :::
 
 - 检测模型
 
-使用COCO数据集的检测模型精度计算方式如下：
+使用 COCO 数据集的检测模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -1344,9 +1344,9 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
 :::info 备注
 
   -  ``eval_result_path``：检测模型的预测结果文件。
-  -  ``annotation_path``：COCO数据集的标注文件。
+  -  ``annotation_path``：COCO 数据集的标注文件。
 :::
-使用VOC数据集的检测模型精度计算方式如下：
+使用 VOC 数据集的检测模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -1356,12 +1356,12 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
 :::info 备注
 
   - ``eval_result_path``：检测模型的预测结果文件。
-  - ``annotation_path``：VOC数据集的标注文件。
-  - ``val_txt_path``：VOC数据集中ImageSets/Main文件夹下的val.txt文件。
+  - ``annotation_path``：VOC 数据集的标注文件。
+  - ``val_txt_path``：VOC 数据集中 ImageSets/Main 文件夹下的 val.txt 文件。
 :::
 - 分割模型
 
-使用Cityscapes数据集的分割模型精度计算方式如下：
+使用 Cityscapes 数据集的分割模型精度计算方式如下：
 
 ```shell
   :linenos:
@@ -1374,12 +1374,12 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
   - ``width``: 分割模型的输出宽度
   - ``height``: 分割模型的输出高度
   - ``log_file``：分割模型的预测结果文件。
-  - ``gt_path``：Cityscapes数据集的标注文件。
+  - ``gt_path``：Cityscapes 数据集的标注文件。
 :::
 
 ##### 模型集成
 
-模型后处理集成主要有2个步骤，以centernet_resnet50模型集成为例：
+模型后处理集成主要有 2 个步骤，以 centernet_resnet50 模型集成为例：
 
 1. 增加后处理文件 ``ptq_centernet_post_process_method.cc``，以及头文件 ``ptq_centernet_post_process_method.h``。
 2. 增加模型运行脚本及配置文件。
@@ -1391,13 +1391,13 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
   以下示例是使用 **RDK X3** 开发板举例，若使用 **RDK Ultra** 开发板信息会有所差异，以具体为准！
 :::
 
-后处理代码文件可直接复用src/method目录下任意后处理文件，主要修改 ``InitFromJsonString`` 函数，以及 ``PostProcess`` 函数即可。
+后处理代码文件可直接复用 src/method 目录下任意后处理文件，主要修改 ``InitFromJsonString`` 函数，以及 ``PostProcess`` 函数即可。
 
-``InitFromJsonString`` 函数主要是读取workflow.json中的后处理相关的参数配置，用户可自定义设置相应的输入参数。
+``InitFromJsonString`` 函数主要是读取 workflow.json 中的后处理相关的参数配置，用户可自定义设置相应的输入参数。
 ``PostProcess`` 函数主要完成后处理的逻辑。
 
-后处理.cc文件放置于 ``ai_benchmark/code/src/method/`` 路径下，
-.h头文件放置于 ``ai_benchmark/code/include/method/`` 路径下：
+后处理.cc 文件放置于 ``ai_benchmark/code/src/method/`` 路径下，
+.h 头文件放置于 ``ai_benchmark/code/include/method/`` 路径下：
 
 ```bash
   |--ai_benchmark
@@ -1435,27 +1435,27 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
 ##### 日志系统使用说明
 
 日志系统主要包括 ``示例日志`` 和 ``模型推理API DNN日志`` 两部分。
-其中示例日志是指交付包示例代码中的应用日志；DNN日志是指lib dnn库中的日志。
+其中示例日志是指交付包示例代码中的应用日志；DNN 日志是指 lib dnn 库中的日志。
 用户根据不同的需求可以获取不同的日志。
 
 - 示例日志
 
-1. 日志等级。示例日志主要采用glog中的vlog，主要分为四个自定义等级：
+1. 日志等级。示例日志主要采用 glog 中的 vlog，主要分为四个自定义等级：
 
   - ``0`` (SYSTEM)，该等级主要用来输出报错信息；
   - ``1`` (REPORT)，该等级在示例代码中主要用来输出性能数据；
   - ``2`` (DETAIL)，该等级在示例代码中主要用来输出系统当前状态信息；
   - ``3`` (DEBUG)，该等级在示例代码中主要用来输出调试信息。
     日志等级设置规则：假设设置了级别为 ``P``，如果发生了一个级别 ``Q`` 比 ``P`` 低，
-    则可以启动，否则屏蔽掉；默认DEBUG>DETAIL>REPORT>SYSTEM。
+    则可以启动，否则屏蔽掉；默认 DEBUG>DETAIL>REPORT>SYSTEM。
 
 2. 日志等级设置。通过 ``log_level`` 参数来设置日志等级，在运行示例的时候，指定 ``log_level`` 参数来设置等级，
    比如指定 ``log_level=0``，即输出SYSTEM日志；如果指定 ``log_level=3``，
-   则输出DEBUG、DETAIL、REPORT和SYSTEM日志。
+   则输出 DEBUG、DETAIL、REPORT 和 SYSTEM 日志。
 
-- 模型推理API DNN日志
+- 模型推理 API DNN 日志
 
-关于模型推理 DNN API日志的配置，请阅读[《算法工具链产品手册》](https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html#bpu-sdk-config)。
+关于模型推理 DNN API 日志的配置，请阅读[《算法工具链产品手册》](https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html#bpu-sdk-config)。
 
 
 ##### 算子耗时说明
@@ -1466,7 +1466,7 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
 
 :::info 备注
 
-  ``export HB_DNN_PROFILER_LOG_PATH=${path}``：表示OP节点dump的输出路径，程序正常运行完退出后，产生profiler.log文件。
+  ``export HB_DNN_PROFILER_LOG_PATH=${path}``：表示 OP 节点 dump 的输出路径，程序正常运行完退出后，产生 profiler.log 文件。
 :::
 - 示例说明
 
@@ -1475,7 +1475,7 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
   以下示例是使用 **RDK X3** 开发板举例，若使用 **RDK Ultra** 开发板信息会有所差异，以具体为准！
 :::
 
-以下代码块以mobilenetv1模型为例，开启单个线程同时RunModel，设置 ``export HB_DNN_PROFILER_LOG_PATH=./``，则统计输出的信息如下：
+以下代码块以 mobilenetv1 模型为例，开启单个线程同时 RunModel，设置 ``export HB_DNN_PROFILER_LOG_PATH=./``，则统计输出的信息如下：
 
 ```c
   {
@@ -1546,23 +1546,23 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
     }
   }
 ```
-以上输出了 ``model_latency`` 和 ``task_latency``。其中model_latency中输出了模型每个OP运行所需要的耗时情况，task_latency中输出了模型运行中各个task模块的耗时情况。
+以上输出了 ``model_latency`` 和 ``task_latency``。其中 model_latency 中输出了模型每个 OP 运行所需要的耗时情况，task_latency 中输出了模型运行中各个 task 模块的耗时情况。
 
 :::info 备注
 
-  程序只有正常退出才会输出profiler.log文件。
+  程序只有正常退出才会输出 profiler.log 文件。
 :::
-##### dump工具
+##### dump 工具
 
-本节主要介绍dump工具的开启方法，一般不需要关注，只有在模型精度异常情况时开启使用。
-​通过设置 ``export HB_DNN_DUMP_PATH=${path}`` 这个环境变量，可以dump出模型推理过程中每个节点的输入和输出, 根据dump的输出结果，可以排查模型推理在开发机模拟器和开发板是否存在一致性问题：即相同模型，相同输入，开发板和开发机模拟器的输出结果是否完全相同。
+本节主要介绍 dump 工具的开启方法，一般不需要关注，只有在模型精度异常情况时开启使用。
+​通过设置 ``export HB_DNN_DUMP_PATH=${path}`` 这个环境变量，可以 dump 出模型推理过程中每个节点的输入和输出, 根据 dump 的输出结果，可以排查模型推理在开发机模拟器和开发板是否存在一致性问题：即相同模型，相同输入，开发板和开发机模拟器的输出结果是否完全相同。
 
 
 ### 模型上板分析工具说明
 
 #### 概述
 
-本章节介绍D-Robotics 算法工具链中模型上板推理的快速验证工具，方便开发者可以快速获取到 ``***.bin`` 模型的信息、模型推理的性能、模型debug等内容。
+本章节介绍 D-Robotics 算法工具链中模型上板推理的快速验证工具，方便开发者可以快速获取到 ``***.bin`` 模型的信息、模型推理的性能、模型 debug 等内容。
 
 #### hrt_model_exec 工具使用说明
 
@@ -1597,15 +1597,15 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
   | 2        | ``model_name``                   | string   | 指定模型中某个模型的名称。                           |
   | 3        | ``core_id``                      | int      | 指定运行核。                                         |
   | 4        | ``input_file``                   | string   | 模型输入信息，多个可通过逗号分隔。                   |
-  | 5        | ``roi_infer``                    | bool     | 使能resizer模型推理。                                |
-  | 6        | ``roi``                          | string   | 指定推理resizer模型时所需的roi区域。                 |
+  | 5        | ``roi_infer``                    | bool     | 使能 resizer 模型推理。                                |
+  | 6        | ``roi``                          | string   | 指定推理 resizer 模型时所需的 roi 区域。                 |
   | 7        | ``frame_count``                  | int      | 执行模型运行帧数。                                   |
-  | 8        | ``dump_intermediate``            | string   | dump模型每一层输入和输出。                           |
-  | 9        | ``enable_dump``                  | bool     | 使能dump模型输入和输出。                             |
-  | 10       | ``dump_precision``               | int      | 控制txt格式输出float型数据的小数点位数。             |
-  | 11       | ``hybrid_dequantize_process``    | bool     | 控制txt格式输出float类型数据。                       |
-  | 12       | ``dump_format``                  | string   | dump模型输入和输出的格式。                           |
-  | 13       | ``dump_txt_axis``                | int      | 控制txt格式输入输出的换行规则。                      |
+  | 8        | ``dump_intermediate``            | string   | dump 模型每一层输入和输出。                           |
+  | 9        | ``enable_dump``                  | bool     | 使能 dump 模型输入和输出。                             |
+  | 10       | ``dump_precision``               | int      | 控制 txt 格式输出 float 型数据的小数点位数。             |
+  | 11       | ``hybrid_dequantize_process``    | bool     | 控制 txt 格式输出 float 类型数据。                       |
+  | 12       | ``dump_format``                  | string   | dump 模型输入和输出的格式。                           |
+  | 13       | ``dump_txt_axis``                | int      | 控制 txt 格式输入输出的换行规则。                      |
   | 14       | ``enable_cls_post_process``      | bool     | 使能分类后处理。                                     |
   | 15       | ``perf_time``                    | int      | 执行模型运行时间。                                   |
   | 16       | ``thread_num``                   | int      | 指定程序运行线程数。                                 |
@@ -1620,9 +1620,9 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
 
 - 概述
 
-该参数用于获取模型信息，模型支持范围：QAT模型，PTQ模型。
+该参数用于获取模型信息，模型支持范围：QAT 模型，PTQ 模型。
 该参数与 ``model_file`` 一起使用，用于获取模型的详细信息；
-模型的信息包括：模型输入输出信息 ``hbDNNTensorProperties`` 和模型的分段信息 ``stage`` ；模型的分段信息是：一张图片可以分多个阶段进行推理，stage信息为[x1, y1, x2, y2]，分别为图片推理的左上角和右下角坐标，目前D-Robotics RDK Ultra的bayes架构支持这类分段模型的推理，RDK X3上模型均为1个stage。
+模型的信息包括：模型输入输出信息 ``hbDNNTensorProperties`` 和模型的分段信息 ``stage`` ；模型的分段信息是：一张图片可以分多个阶段进行推理，stage 信息为[x1, y1, x2, y2]，分别为图片推理的左上角和右下角坐标，目前 D-Robotics RDK Ultra 的 bayes 架构支持这类分段模型的推理，RDK X3 上模型均为 1 个 stage。
 
 :::tip 小技巧
 
@@ -1638,7 +1638,7 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
 ```
   hrt_model_exec model_info --model_file=xxx.bin,xxx.bin
 ```
-3. 多模型--pack模型（输出指定模型信息）
+3. 多模型--pack 模型（输出指定模型信息）
 ```
   hrt_model_exec model_info --model_file=xxx.bin --model_name=xx
 ```
@@ -1664,7 +1664,7 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
 - 概述
 
 该参数用于输入自定义图片后，模型推理一帧，并给出模型推理结果。
-该参数需要与 ``input_file`` 一起使用，指定输入图片路径，工具根据模型信息resize图片，整理模型输入信息。
+该参数需要与 ``input_file`` 一起使用，指定输入图片路径，工具根据模型信息 resize 图片，整理模型输入信息。
 
 :::tip 小技巧
 
@@ -1691,10 +1691,10 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
   | ``roi_infer``                   | 使能resizer模型推理；若模型输入包含resizer源，设置为 ``true``，默认为 ``false``。                                                      |
   | ``roi``                         | ``roi_infer`` 为 ``true`` 时生效，设置推理resizer模型时所需的 ``roi`` 区域以分号间隔。                                                 |
   | ``frame_count``                 | 设置 ``infer`` 运行帧数，单帧重复推理，可与 ``enable_dump`` 并用，验证输出一致性，默认为 ``1``。                                       |
-  | ``dump_intermediate``           | dump模型每一层输入数据和输出数据，默认值 ``0``，不dump数据。 ``1``：输出文件类型为 ``bin``；``2``：输出类型为 ``bin`` 和 ``txt``，其中BPU节点输出为aligned数据； ``3``：输出类型为 ``bin`` 和 ``txt``，其中BPU节点输出为valid数据。|
+  | ``dump_intermediate``           | dump模型每一层输入数据和输出数据，默认值 ``0``，不dump数据。 ``1``：输出文件类型为 ``bin``；``2``：输出类型为 ``bin`` 和 ``txt``，其中BPU节点输出为aligned数据； ``3``：输出类型为 ``bin`` 和 ``txt``，其中 BPU 节点输出为 valid 数据。|
   | ``enable_dump``                 | dump模型输出数据，默认为 ``false``。                                                                                                   |
   | ``dump_precision``              | 控制txt格式输出float型数据的小数点位数，默认为 ``9``。                                                                                 |
-  | ``hybrid_dequantize_process``   | 控制txt格式输出float类型数据，若输出为定点数据将其进行反量化处理，目前只支持四维模型。                                                 |
+  | ``hybrid_dequantize_process``   | 控制 txt 格式输出 float 类型数据，若输出为定点数据将其进行反量化处理，目前只支持四维模型。                                                 |
   | ``dump_format``                 | dump模型输出文件的类型，可选参数为 ``bin`` 或 ``txt``，默认为 ``bin``。                                                                |
   | ``dump_txt_axis``               | dump模型txt格式输出的换行规则；若输出维度为n，则参数范围为[0, n], 默认为 ``4``。                                                       |
   | ``enable_cls_post_process``     | 使能分类后处理，目前只支持ptq分类模型，默认 ``false``。                                                                                |
@@ -1726,7 +1726,7 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
 
 - ``roi_infer``
 
-若模型包含resizer输入源， ``infer`` 和 ``perf`` 功能都需要设置 ``roi_infer`` 为true，并且配置与输入源一一对应的 ``input_file`` 和 ``roi`` 参数。
+若模型包含 resizer 输入源， ``infer`` 和 ``perf`` 功能都需要设置 ``roi_infer`` 为true，并且配置与输入源一一对应的 ``input_file`` 和 ``roi`` 参数。
 如：模型有三个输入，输入源顺序分别为[``ddr``, ``resizer``, ``resizer``]，则推理两组输入数据的命令行如下：
 
 ```
@@ -1739,7 +1739,7 @@ voc_det_eval.py是用来计算使用VOC数据集评测的检测模型的精度�
 
 - ``dump_intermediate``
 
-dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0`` 时，默认dump功能关闭；
+dump 模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0`` 时，默认 dump 功能关闭；
 ``dump_intermediate=1`` 时，模型中每一层节点输入数据和输出数据以 ``bin`` 方式保存，其中 ``BPU`` 节点输出为 ``aligned`` 数据；
 ``dump_intermediate=2`` 时，模型中每一层节点输入数据和输出数据以 ``bin`` 和 ``txt`` 两种方式保存，其中 ``BPU`` 节点输出为 ``aligned`` 数据；
 ``dump_intermediate=3`` 时，模型中每一层节点输入数据和输出数据以 ``bin`` 和 ``txt`` 两种方式保存，其中 ``BPU`` 节点输出为 ``valid`` 数据。
@@ -1752,10 +1752,10 @@ dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0
 
 - ``hybrid_dequantize_process``
 
-控制txt格式输出float类型数据。 ``hybrid_dequantize_process`` 参数在 ``enable_dump=true`` 时生效。
+控制 txt 格式输出 float 类型数据。 ``hybrid_dequantize_process`` 参数在 ``enable_dump=true`` 时生效。
 当 ``enable_dump=true`` 时，若设置 ``hybrid_dequantize_process=true`` ，反量化整型输出数据，将所有输出按float类型保存为 ``txt`` 文件，其中模型输出为 ``valid`` 数据，支持配置 ``dump_txt_axis`` 和 ``dump_precision``；
 若设置 ``hybrid_dequantize_process=false`` ，直接保存模型输出的 ``aligned`` 数据，不做任何处理。
-如： 模型有3个输出，输出Tensor数据类型顺序分别为[float，int32，int16]， 输出txt格式float类型的 ``valid`` 数据， 则推理命令行如下：
+如： 模型有 3 个输出，输出 Tensor 数据类型顺序分别为[float，int32，int16]， 输出 txt 格式 float 类型的 ``valid`` 数据， 则推理命令行如下：
 ```
   // 输出float类型数据
   hrt_model_exec infer --model_file=xxx.bin --input_file="xx.bin"  --enable_dump=true --hybrid_dequantize_process=true
@@ -1766,13 +1766,13 @@ dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0
 - 概述
 
 该参数用于测试模型的推理性能。
-使用此工具命令，用户无需输入数据，程序会根据模型信息自动构造模型的输入tensor，tensor数据为随机数。
-程序默认单线程运行200帧数据，当指定perf_time参数时，frame_count参数失效，程序会执行指定时间后退出。
-程序运行完成后，会输出模型运行的程序线程数、帧数、模型推理总时间，模型推理平均latency，帧率信息等。
+使用此工具命令，用户无需输入数据，程序会根据模型信息自动构造模型的输入 tensor，tensor 数据为随机数。
+程序默认单线程运行 200 帧数据，当指定 perf_time 参数时，frame_count 参数失效，程序会执行指定时间后退出。
+程序运行完成后，会输出模型运行的程序线程数、帧数、模型推理总时间，模型推理平均 latency，帧率信息等。
 
 :::tip 小技巧
 
-  程序每200帧打印一次性能信息：latnecy的最大、最小、平均值，不足200帧程序运行结束打印一次。
+  程序每 200 帧打印一次性能信息：latnecy 的最大、最小、平均值，不足 200 帧程序运行结束打印一次。
 :::
 
 - 示例说明
@@ -1797,16 +1797,16 @@ dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0
   | ``roi``                         | ``roi_infer`` 为 ``true`` 时生效，设置推理resizer模型时所需的 ``roi`` 区域以分号间隔。                                                  |
   | ``frame_count``                 | 设置 ``perf`` 运行帧数，当perf_time为0时生效，默认为 ``200``。                                                                          |
   | ``dump_intermediate``           | dump模型每一层输入数据和输出数据，默认值 ``0``，不dump数据。 ``1``：输出文件类型为 ``bin``；                                            |
-  |                                 | ``2``：输出类型为 ``bin`` 和 ``txt``，其中BPU节点输出为aligned数据； ``3``：输出类型为 ``bin`` 和 ``txt``，其中BPU节点输出为valid数据。 |
+  |                                 | ``2``：输出类型为 ``bin`` 和 ``txt``，其中BPU节点输出为aligned数据； ``3``：输出类型为 ``bin`` 和 ``txt``，其中 BPU 节点输出为 valid 数据。 |
   | ``perf_time``                   | 设置 ``perf`` 运行时间，单位：分钟，默认为 ``0``。                                                                                      |
-  | ``thread_num``                  | 设置程序运行线程数，范围[1, 8], 默认为 ``1``, 设置大于8时按照8个线程处理。                                                              |
-  | ``profile_path``                | 统计工具日志产生路径，运行产生profiler.log和profiler.csv，分析op耗时和调度耗时。时。                                                                      |
+  | ``thread_num``                  | 设置程序运行线程数，范围[1, 8], 默认为 ``1``, 设置大于 8 时按照 8 个线程处理。                                                              |
+  | ``profile_path``                | 统计工具日志产生路径，运行产生 profiler.log 和 profiler.csv，分析 op 耗时和调度耗时。时。                                                                      |
 
 
 ##### ``多线程Latency数据说明``
 
-多线程的目的是为了充分利用BPU资源，多线程共同处理 ``frame_count`` 帧数据或执行perf_time时间，直至数据处理完成/执行时间结束程序结束。
-在多线程 ``perf`` 过程中可以执行以下命令，实时获取BPU资源占用率情况。
+多线程的目的是为了充分利用 BPU 资源，多线程共同处理 ``frame_count`` 帧数据或执行 perf_time 时间，直至数据处理完成/执行时间结束程序结束。
+在多线程 ``perf`` 过程中可以执行以下命令，实时获取 BPU 资源占用率情况。
 
 ```bash
   hrut_somstatus -n 10000 –d 1
@@ -1831,23 +1831,23 @@ dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0
 :::info 备注
 
   以上示例展示的为 **RDK X3** 开发板的输出日志， 若使用 **RDK Ultra** 开发板，直接使用上述命令获取即可。
-  在 ``perf`` 模式下，单线程的latency时间表示模型的实测上板性能，
-  而多线程的latency数据表示的是每个线程的模型单帧处理时间，其相对于单线程的时间要长，但是多线程的总体处理时间减少，其帧率是提升的。
+  在 ``perf`` 模式下，单线程的 latency 时间表示模型的实测上板性能，
+  而多线程的 latency 数据表示的是每个线程的模型单帧处理时间，其相对于单线程的时间要长，但是多线程的总体处理时间减少，其帧率是提升的。
 :::
 
 ##### ``输入参数补充说明``
 
 - ``profile_path``
 
-profile日志文件产生目录。
-该参数通过设置环境变量 ``export HB_DNN_PROFILER_LOG_PATH=${path}`` 查看模型运行过程中OP以及任务调度耗时。
-一般设置 ``--profile_path="."`` 即可，代表在当前目录下生成日志文件，日志文件为profiler.log。
+profile 日志文件产生目录。
+该参数通过设置环境变量 ``export HB_DNN_PROFILER_LOG_PATH=${path}`` 查看模型运行过程中 OP 以及任务调度耗时。
+一般设置 ``--profile_path="."`` 即可，代表在当前目录下生成日志文件，日志文件为 profiler.log。
 
 - ``thread_num``
 
 线程数(并行度)，数值表示最多有多少个任务在并行处理。
-测试延时时，数值需要设置为1，没有资源抢占发生，延时测试更准确。
-测试吞吐时，建议设置>2 (BPU核心个数)，调整线程数使BPU利用率尽量高，吞吐测试更准确。
+测试延时时，数值需要设置为 1，没有资源抢占发生，延时测试更准确。
+测试吞吐时，建议设置>2 (BPU 核心个数)，调整线程数使 BPU 利用率尽量高，吞吐测试更准确。
 
 ```
   // 双核FPS
@@ -1858,7 +1858,7 @@ profile日志文件产生目录。
 
 #### hrt_bin_dump 工具使用说明
 
-``hrt_bin_dump`` 是 PTQ debug模型的layer dump工具，工具的输出文件为二进制文件。
+``hrt_bin_dump`` 是 PTQ debug 模型的 layer dump 工具，工具的输出文件为二进制文件。
 
 ##### 输入参数描述
 
@@ -1872,7 +1872,7 @@ profile日志文件产生目录。
 
 ##### 使用说明
 
-工具提供dump卷积层输出功能，输出文件为二进制文件。
+工具提供 dump 卷积层输出功能，输出文件为二进制文件。
 直接运行 ``hrt_bin_dump`` 获取工具使用详情。
 参见下图：
 
@@ -1886,7 +1886,7 @@ profile日志文件产生目录。
 
 ##### 示例说明
 
-以mobilenetv1的debug模型为例，创建outputs文件夹，执行以下命令：
+以 mobilenetv1 的 debug 模型为例，创建 outputs 文件夹，执行以下命令：
 
 ```
   ./hrt_bin_dump --model_file=./mobilenetv1_hybrid_horizonrt.bin --conv_mapping_file=./mobilenetv1_quantized_model_conv_output_map.json --conv_dump_path=./outputs --input_file=./zebra_cls.bin
@@ -1905,7 +1905,7 @@ profile日志文件产生目录。
 
 ## RDK X5
 
-### <span id="dnn_runtime_sample"/>模型推理DNN API使用示例说明
+### <span id="dnn_runtime_sample"/>模型推理 DNN API 使用示例说明
 
 #### 概述
 
@@ -1913,9 +1913,9 @@ profile日志文件产生目录。
 
 示例包提供三个方面的示例：
 
-- 模型推理 dnn API使用示例。
+- 模型推理 dnn API 使用示例。
 - 自定义算子（custom OP）等特殊功能示例。
-- 非NV12输入模型的杂项示例。
+- 非 NV12 输入模型的杂项示例。
 
 详细内容请阅读下文。
 
@@ -1979,12 +1979,12 @@ profile日志文件产生目录。
 ```
 
 - **code**：该目录内是示例的源码。
-- **code/00_quick_start**：快速入门示例，基于 **dnn API**，用mobilenetv1进行单张图片模型推理和结果解析。
-- **code/01_api_tutorial**：dnn API使用教学代码，包括 **mem**， **model** ， **roi_infer** 和 **tensor** 四部分。
+- **code/00_quick_start**：快速入门示例，基于 **dnn API**，用 mobilenetv1 进行单张图片模型推理和结果解析。
+- **code/01_api_tutorial**：dnn API 使用教学代码，包括 **mem**， **model** ， **roi_infer** 和 **tensor** 四部分。
 - **code/02_advanced_samples**：特殊功能示例，包括 **custom_identity**， **multi_input**， **multi_model_batch** 和 **nv12_batch** 功能。
-- **ode/03_misc**：非NV12输入模型的杂项示例。
+- **ode/03_misc**：非 NV12 输入模型的杂项示例。
 - **code/build_x5.sh**：程序一键编译脚本。
-- **code/build_x86.sh**：x86仿真环境一键编译脚本。
+- **code/build_x86.sh**：x86 仿真环境一键编译脚本。
 - **code/deps_gcc11.3**：示例代码所需要的三方依赖, 用户在开发自己代码程序的时候可以根据实际情况替换或者裁剪。
 - **x5**：示例运行脚本，预置了数据和相关模型
 
@@ -2031,8 +2031,8 @@ profile日志文件产生目录。
 
 ##### 编译
 
-编译需要当前环境安装好交叉编译工具： ``arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-linux-gnu``。 请使用X5算法工具链提供的开发机Docker镜像，直接进行编译使用。开发机Docker环境的获取及使用方法，请阅读[**环境安装**](../intermediate/environment_config.md) 章节内容；
-根据自身使用的开发板情况，请使用horizon_runtime_sample/code目录下的 ``build_x5.sh`` 脚本，即可一键编译开发板环境下的可执行程序，可执行程序和对应依赖会自动复制到 ``x5/script`` 目录下的 ``aarch64`` 目录下。
+编译需要当前环境安装好交叉编译工具： ``arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-linux-gnu``。 请使用 X5 算法工具链提供的开发机 Docker 镜像，直接进行编译使用。开发机 Docker 环境的获取及使用方法，请阅读[**环境安装**](../intermediate/environment_config.md) 章节内容；
+根据自身使用的开发板情况，请使用 horizon_runtime_sample/code 目录下的 ``build_x5.sh`` 脚本，即可一键编译开发板环境下的可执行程序，可执行程序和对应依赖会自动复制到 ``x5/script`` 目录下的 ``aarch64`` 目录下。
 
 **备注：**
   工程通过获取环境变量 ``LINARO_GCC_ROOT`` 来指定交叉编译工具的路径，用户使用之前可以检查本地的环境变量是否为目标交叉编译工具。
@@ -2115,7 +2115,7 @@ profile日志文件产生目录。
 ```
 
 **备注：**
-- model文件夹下包含模型的路径，其中 ``runtime`` 文件夹为软链接，链接路径为 ``../../../model_zoo/runtime/horizon_runtime_sample`` ，可直接找到交付包中的模型路径
+- model 文件夹下包含模型的路径，其中 ``runtime`` 文件夹为软链接，链接路径为 ``../../../model_zoo/runtime/horizon_runtime_sample`` ，可直接找到交付包中的模型路径
 - 板端运行环境需要将模型放至 ``model`` 文件夹下
 
 
@@ -2128,7 +2128,7 @@ profile日志文件产生目录。
   ├── README.md
   └── run_mobilenetV1.sh
 ```
-- ``run_mobilenetV1.sh`` ：该脚本实现使用mobilenetv1模型读取单张图片进行推理的示例功能。使用的时候，进入 00_quick_start 目录, 然后直接执行 sh run_mobilenetV1.sh 即可，如下代码块所示：
+- ``run_mobilenetV1.sh`` ：该脚本实现使用 mobilenetv1 模型读取单张图片进行推理的示例功能。使用的时候，进入 00_quick_start 目录, 然后直接执行 sh run_mobilenetV1.sh 即可，如下代码块所示：
 
 ```shell
   #!/bin/sh
@@ -2152,7 +2152,7 @@ profile日志文件产生目录。
 
 ##### api_tutorial
 
-01_api_tutorial 目录下的示例，用于介绍如何使用嵌入式API。其目录包含以下脚本：
+01_api_tutorial 目录下的示例，用于介绍如何使用嵌入式 API。其目录包含以下脚本：
 
 ``` shell
   ├── model.sh
@@ -2179,12 +2179,12 @@ profile日志文件产生目录。
   I0411 17:53:29.008011 10810 model_example.cc:186] [mobilenetv1_224x224_nv12] Model Info:  input num: 1, input[0] validShape: ( 1, 3, 224, 224 ), alignedShape: ( 1, 3, 224, 224 ), tensorType: 1, output num: 1, output[0] validShape: ( 1, 1000, 1, 1 ), alignedShape: ( 1, 1000, 1, 1 ), tensorType: 13
 ```
 
-- ``roi_infer.sh`` ： 该脚本主要引导如何使用 ``hbDNNRoiInfer`` 这个API，示例代码实现的功能是将一张图片resize到模型输入大小，转为nv12数据，并给定roi框进行模型推理（infer）。
+- ``roi_infer.sh`` ： 该脚本主要引导如何使用 ``hbDNNRoiInfer`` 这个 API，示例代码实现的功能是将一张图片 resize 到模型输入大小，转为 nv12 数据，并给定 roi 框进行模型推理（infer）。
   使用的时候，直接进入 01_api_tutorial 目录，然后直接执行 ``sh roi_infer.sh`` 即可。
 
 - ``sys_mem.sh`` ：该脚本主要引导如何使用 ``hbSysAllocMem``、 ``hbSysFlushMem`` 和 ``hbSysFreeMem`` 这几个API。使用的时候，直接进入 01_api_tutorial 目录，执行 ``sh sys_mem.sh`` 即可。
 
-- ``tensor.sh`` ：该脚本主要引导如何准备模型输入和输出的tensor。
+- ``tensor.sh`` ：该脚本主要引导如何准备模型输入和输出的 tensor。
   使用的时候，直接进入 01_api_tutorial 目录，执行 ``sh tensor.sh`` 即可，如下所示：
 
 ```shell
@@ -2370,13 +2370,13 @@ profile日志文件产生目录。
 
 ##### misc
 
-03_misc 目录下的示例，用于介绍非nv12输入模型的使用。其目录包含以下脚本：
+03_misc 目录下的示例，用于介绍非 nv12 输入模型的使用。其目录包含以下脚本：
 
 ```shell
   ├── run_lenet.sh
   └── run_resnet50_feature.sh
 ```
-- ``run_lenet.sh`` ：该脚本主要实现Y数据输入的lenet模型推理功能，
+- ``run_lenet.sh`` ：该脚本主要实现 Y 数据输入的 lenet 模型推理功能，
   使用的时候，进入 03_misc 目录, 然后直接执行 ``sh run_lenet.sh`` 即可，如下所示：
 
 ```shell
@@ -2402,7 +2402,7 @@ profile日志文件产生目录。
     I0411 18:02:12.615754 10979 run_lenet_gray.cc:198] TOP 3 result id: 4
     I0411 18:02:12.615782 10979 run_lenet_gray.cc:198] TOP 4 result id: 2
 ```
-- ``run_resnet50_feature.sh`` ：该脚本主要实现feature数据输入的resnet50模型推理功能，示例代码对feature数据做了quantize和padding以满足模型的输入条件，然后输入到模型进行infer。
+- ``run_resnet50_feature.sh`` ：该脚本主要实现 feature 数据输入的 resnet50 模型推理功能，示例代码对 feature 数据做了 quantize 和 padding 以满足模型的输入条件，然后输入到模型进行 infer。
   使用的时候，进入 03_misc 目录, 然后直接执行 ``sh run_resnet50_feature.sh`` 即可，如下所示：
 
 
@@ -2437,21 +2437,21 @@ profile日志文件产生目录。
 ##### 日志
 
 本章节主要包括 ``示例日志`` 和 ``模型推理 DNN API日志`` 两部分。
-其中示例日志是指交付包示例代码中的应用日志；模型推理 dnn API日志是指嵌入式dnn库中的日志。用户根据不同的需求可以获取不同的日志信息。
+其中示例日志是指交付包示例代码中的应用日志；模型推理 dnn API 日志是指嵌入式 dnn 库中的日志。用户根据不同的需求可以获取不同的日志信息。
 
 ##### 示例日志
 
-示例日志主要采用glog中的vlog，basic_samples参考示例中，日志内容会全部输出。
+示例日志主要采用 glog 中的 vlog，basic_samples 参考示例中，日志内容会全部输出。
 
-##### 模型推理 DNN API日志
+##### 模型推理 DNN API 日志
 
-关于模型推理 DNN API日志的配置，请阅读[《算法工具链产品手册》](https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/runtime/source/bpu_sdk_api/bpu_sdk_api.html#bpu-sdk-config) 。
+关于模型推理 DNN API 日志的配置，请阅读[《算法工具链产品手册》](https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/runtime/source/bpu_sdk_api/bpu_sdk_api.html#bpu-sdk-config) 。
 
 ### 公版模型性能精度测评说明
 
-本章节介绍公版模型精度性能评测 ai_benchmark 示例包的具体用法， 示例包中预置了源码、可执行程序和评测脚本，开发者可以直接在X5开发板上体验并基于这些示例进行嵌入式应用开发，降低开发门槛。
+本章节介绍公版模型精度性能评测 ai_benchmark 示例包的具体用法， 示例包中预置了源码、可执行程序和评测脚本，开发者可以直接在 X5 开发板上体验并基于这些示例进行嵌入式应用开发，降低开发门槛。
 
-示例包提供常见的分类、检测、分割、光流、追踪估计，雷达多任务，bev和深度估计模型的性能和精度评测示例，详细内容请阅读下文。
+示例包提供常见的分类、检测、分割、光流、追踪估计，雷达多任务，bev 和深度估计模型的性能和精度评测示例，详细内容请阅读下文。
 
 **小技巧：**
 
@@ -2514,9 +2514,9 @@ profile日志文件产生目录。
 ```
 
 - **code**：该目录内是评测程序的源码，用来进行模型性能和精度评测。
-- **x5**：该目录内提供了已经编译好的应用程序，以及各种评测脚本，用来测试多种模型在X5 BPU上运行的性能和精度等。
-- **build_ptq_x5.sh**：PTQ真机程序一键编译脚本。
-- **build_qat_x5.sh**：QAT真机程序一键编译脚本。
+- **x5**：该目录内提供了已经编译好的应用程序，以及各种评测脚本，用来测试多种模型在 X5 BPU 上运行的性能和精度等。
+- **build_ptq_x5.sh**：PTQ 真机程序一键编译脚本。
+- **build_qat_x5.sh**：QAT 真机程序一键编译脚本。
 - **deps_gcc11.3**：示例代码所需要的依赖，主要如下所示:
 
 ```bash
@@ -2525,11 +2525,11 @@ profile日志文件产生目录。
 
 ##### 示例模型
 
-示例包的模型发布物包括PTQ模型和QAT模型发布物：
+示例包的模型发布物包括 PTQ 模型和 QAT 模型发布物：
 
-- PTQ模型model_zoo请在 ``horizon_model_convert_sample/01_common/model_zoo/runtime/ai_benchmark/ptq`` 路径下进行获取。
+- PTQ 模型 model_zoo 请在 ``horizon_model_convert_sample/01_common/model_zoo/runtime/ai_benchmark/ptq`` 路径下进行获取。
 
-- QAT模型model_zoo请在 ``horizon_model_convert_sample/01_common/model_zoo/runtime/ai_benchmark/qat`` 路径下进行获取。
+- QAT 模型 model_zoo 请在 ``horizon_model_convert_sample/01_common/model_zoo/runtime/ai_benchmark/qat`` 路径下进行获取。
 
 其中包含常用的分类、检测、分割和光流预测等模型，模型命名规则为 **`{model_name}_{backbone}_{input_size}_{input_type}`**。
 
@@ -2538,15 +2538,15 @@ profile日志文件产生目录。
 
 ##### 公共数据集
 
-测评示例中用到的数据集主要有VOC数据集、COCO数据集、ImageNet、Cityscapes数据集、FlyingChairs数据集、KITTI数据集、Culane数据集、Nuscenes数据集、Mot17数据集、Carfusion数据集、Argoverse 1数据集和SceneFlow数据集。
+测评示例中用到的数据集主要有 VOC 数据集、COCO 数据集、ImageNet、Cityscapes 数据集、FlyingChairs 数据集、KITTI 数据集、Culane 数据集、Nuscenes 数据集、Mot17 数据集、Carfusion 数据集、Argoverse 1 数据集和 SceneFlow 数据集。
 
-请在Linux环境下进行下载，获取方式如下：
+请在 Linux 环境下进行下载，获取方式如下：
 
 | **数据集**    | **下载地址**          | **下载结构**       |
 | ------------------- | --------------- | --------------- |
 | ImageNet      | https://www.image-net.org/download.php                                              | 下载结构请您参考[数据预处理](../intermediate/ptq_process#hb_eval_preprocess.md) 中的相关描述  |
 | COCO          | https://cocodataset.org/                                                            | 下载结构请您参考[数据预处理](../intermediate/ptq_process#hb_eval_preprocess.md) 中的相关描述       |
-| VOC           | http://host.robots.ox.ac.uk/pascal/VOC/                                             | 需要下载2007和2012两个版本，下载结构请您参考[数据预处理](../intermediate/ptq_process#hb_eval_preprocess.md) 中的相关描述 |
+| VOC           | http://host.robots.ox.ac.uk/pascal/VOC/                                             | 需要下载 2007 和 2012 两个版本，下载结构请您参考[数据预处理](../intermediate/ptq_process#hb_eval_preprocess.md) 中的相关描述 |
 | Cityscapes    | https://github.com/mcordts/cityscapesScripts                                        | 下载结构请您参考[数据预处理](../intermediate/ptq_process#hb_eval_preprocess.md) 中的相关描述               |
 | CIFAR-10      | http://www.cs.toronto.edu/~kriz/cifar.html                                          | 下载结构请您参考[数据预处理](../intermediate/ptq_process#hb_eval_preprocess.md) 中的相关描述                     |
 | FlyingChairs  | https://lmb.informatik.uni-freiburg.de/resources/datasets/FlyingChairs.en.html      | 下载结构请您参考[数据预处理](../intermediate/ptq_process#hb_eval_preprocess.md) 中的相关描述                   |
@@ -2570,8 +2570,8 @@ profile日志文件产生目录。
 
 ##### 编译环境准备
 
-编译需要当前环境安装好交叉编译工具 ``arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc``。请使用X5算法工具链提供的开发机Docker镜像，直接进行编译使用。开发机Docker环境的获取及使用方法，请阅读[**环境安装**](../intermediate/environment_config.md) 章节内容；
-请使用code目录下的 ``build_ptq_x5.sh`` 脚本，即可一键编译开发板环境下的可执行程序，可执行程序和对应依赖会自动复制到 ``x5/ptq/script`` 目录下的 ``aarch64`` 目录下。
+编译需要当前环境安装好交叉编译工具 ``arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc``。请使用 X5 算法工具链提供的开发机 Docker 镜像，直接进行编译使用。开发机 Docker 环境的获取及使用方法，请阅读[**环境安装**](../intermediate/environment_config.md) 章节内容；
+请使用 code 目录下的 ``build_ptq_x5.sh`` 脚本，即可一键编译开发板环境下的可执行程序，可执行程序和对应依赖会自动复制到 ``x5/ptq/script`` 目录下的 ``aarch64`` 目录下。
 
 **备注：**
   需要注意 ``build_ptq_x5.sh`` 脚本里指定的交叉编译工具链的位置是 ``/opt`` 目录下，用户如果安装在其他位置，可以手动修改下脚本。
@@ -2583,9 +2583,9 @@ profile日志文件产生目录。
 
 #### 测评示例使用说明
 
-评测示例脚本主要在 ``script`` 和 ``tools`` 目录下。 script是开发板上运行的评测脚本，包括常见分类，检测和分割模型。每个模型下面有三个脚本，分别表示：
+评测示例脚本主要在 ``script`` 和 ``tools`` 目录下。 script 是开发板上运行的评测脚本，包括常见分类，检测和分割模型。每个模型下面有三个脚本，分别表示：
 
-- fps.sh：利用多线程调度实现fps统计，用户可以根据需求自由设置线程数。
+- fps.sh：利用多线程调度实现 fps 统计，用户可以根据需求自由设置线程数。
 - latency.sh：实现单帧延迟统计（一个线程，单帧）。
 - accuracy.sh：用于精度评测。
 
@@ -2619,7 +2619,7 @@ profile日志文件产生目录。
 
 ```
 
-- **ptq/tools** 目录下主要包括 python_tools 下的精度计算脚本，用于PTQ模型的精度评测。
+- **ptq/tools** 目录下主要包括 python_tools 下的精度计算脚本，用于 PTQ 模型的精度评测。
 
 ```shell
   python_tools
@@ -2635,7 +2635,7 @@ profile日志文件产生目录。
 
 ```
 
-- **qat/tools** 目录下主要包括前处理脚本及精度计算脚本，用于QAT模型的精度评测。
+- **qat/tools** 目录下主要包括前处理脚本及精度计算脚本，用于 QAT 模型的精度评测。
 
 ```shell
   tools/
@@ -2671,55 +2671,55 @@ profile日志文件产生目录。
 ```
 
 
-##### json配置文件参数信息
-本小节按照输入配置项（input_config）、输出配置项（output_config）及workflow配置项的维度， 分别对workflow_fps.json、workflow_latency.json及workflow_accuracy.json中的配置项进行简单说明。
+##### json 配置文件参数信息
+本小节按照输入配置项（input_config）、输出配置项（output_config）及 workflow 配置项的维度， 分别对 workflow_fps.json、workflow_latency.json 及 workflow_accuracy.json 中的配置项进行简单说明。
 
-**注意：** 下方给出的配置项参数信息为通用配置项信息，一些示例模型由于模型特殊性，还会有额外的配置项，具体请您参考示例模型json文件。
+**注意：** 下方给出的配置项参数信息为通用配置项信息，一些示例模型由于模型特殊性，还会有额外的配置项，具体请您参考示例模型 json 文件。
 
 
 ###### 输入配置项（input_config）
 
-| **参数名称**            | **参数说明**                                              | **涉及json文件**                                       |
+| **参数名称**            | **参数说明**                                              | **涉及 json 文件**                                       |
 | --------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
-| input_type          | 设置输入数据格式，支持图像或者bin文件。                   | fps.json、latency.json、accuracy.json              |
+| input_type          | 设置输入数据格式，支持图像或者 bin 文件。                   | fps.json、latency.json、accuracy.json              |
 | height              | 设置输入数据高度。                                        | fps.json、latency.json、accuracy.json              |
 | width               | 设置输入数据宽度。                                        | fps.json、latency.json、accuracy.json              |
-| data_type           | 设置输入数据类型，支持类型可参考 hbDNNDataType 小节。 <br/>对应数据类型由上到下排序，分别对应数字0,1,2...  <br/> 如HB_DNN_IMG_TYPE_Y对应数字0， <br/>HB_DNN_IMG_TYPE_NV12对应数字1，<br/>HB_DNN_IMG_TYPE_NV12_SEPARATE对应数字2...                        | fps.json、latency.json、accuracy.json              |
-| image_list_file     | 设置预处理数据集lst文件所在路径。                         | fps.json、latency.json、accuracy.json              |
+| data_type           | 设置输入数据类型，支持类型可参考 hbDNNDataType 小节。 <br/>对应数据类型由上到下排序，分别对应数字 0,1,2...  <br/> 如 HB_DNN_IMG_TYPE_Y 对应数字 0， <br/>HB_DNN_IMG_TYPE_NV12 对应数字 1，<br/>HB_DNN_IMG_TYPE_NV12_SEPARATE 对应数字 2...                        | fps.json、latency.json、accuracy.json              |
+| image_list_file     | 设置预处理数据集 lst 文件所在路径。                         | fps.json、latency.json、accuracy.json              |
 | need_pre_load       | 设置是否使用预加载方式对数据集读取。                      | fps.json、latency.json、accuracy.json              |
 | limit               | 设置处理中和处理完的输入数据量间差值的阈值，用于控制输入数据的处理线程。              | fps.json、latency.json、accuracy.json              |
 | need_loop           | 设置是否循环读取数据进行评测。                            | fps.json、latency.json、accuracy.json              |
-| max_cache           | 设置预加载的数据个数。 **请注意:** 此参数生效时会预处理图片并读取到内存中，为保障您的程序稳定运行，请不要设置过大的值，建议您的数值设置不超过30。 | fps.json、latency.json、accuracy.json              |
+| max_cache           | 设置预加载的数据个数。 **请注意:** 此参数生效时会预处理图片并读取到内存中，为保障您的程序稳定运行，请不要设置过大的值，建议您的数值设置不超过 30。 | fps.json、latency.json、accuracy.json              |
 
 
 ###### 输出配置项（output_config）
 
-| **参数名称**            | **参数说明**                                              | **涉及json文件**                                       |
+| **参数名称**            | **参数说明**                                              | **涉及 json 文件**                                       |
 | --------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
 | output_type         | 设置输出数据类型。                                        | fps.json、latency.json、accuracy.json              |
 | in_order            | 设置是否按顺序进行输出。                                  | fps.json、latency.json、accuracy.json              |
 | enable_view_output  | 设置是否将输出结果可视化。                                | fps.json、latency.json                             |
-| image_list_enable   | 可视化时，设置为true，则可将输出结果保存为图像类型。      | fps.json、latency.json                             |
+| image_list_enable   | 可视化时，设置为 true，则可将输出结果保存为图像类型。      | fps.json、latency.json                             |
 | view_output_dir     | 设置可视化结果输出文件路径。                              | fps.json、latency.json                             |
 | eval_enable         | 设置是否对精度进行评估。                                  | accuracy.json                                      |
 | output_file         | 设置模型输出结果文件。                                    | accuracy.json                                      |
 
 
-- **workflow配置项**
+- **workflow 配置项**
 
 **模型推理配置项**：
 
-| **参数名称**            | **参数说明**                                              | **涉及json文件**                                       |
+| **参数名称**            | **参数说明**                                              | **涉及 json 文件**                                       |
 | --------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
 | method_type         | 设置模型推理方法，此处需配置为 ``InferMethod``。          | fps.json、latency.json、accuracy.json              |
 | method_config       | 设置模型推理参数。                                        | fps.json、latency.json、accuracy.json              |
-|                     | - core：设置推理core id。 **请注意：** x5只有一个bpu核，这里只能设置为0（core any）或者1（core 0）。           |     |
+|                     | - core：设置推理 core id。 **请注意：** x5 只有一个 bpu 核，这里只能设置为 0（core any）或者 1（core 0）。           |     |
 |                     | - model_file：指定模型文件。                              |                                                    |
 
 
 - **后处理配置项**：
 
-| **参数名称**            | **参数说明**                                              | **涉及json文件**                                       |
+| **参数名称**            | **参数说明**                                              | **涉及 json 文件**                                       |
 | --------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
 | thread_count        | 设置后处理线程数，取值范围为 ``1-8``。                    | fps.json、latency.json、accuracy.json              |
 | method_type         | 设置后处理方法。                                          | fps.json、latency.json、accuracy.json              |
@@ -2729,7 +2729,7 @@ profile日志文件产生目录。
 
 ##### 性能评测
 
-性能评测分为latency和fps两方面。
+性能评测分为 latency 和 fps 两方面。
 
 ###### 测评脚本使用说明
 
@@ -2749,7 +2749,7 @@ profile日志文件产生目录。
 ```shell
   I0419 02:35:00.044417 39094 output_plugin.cc:109]  Throughput: 1129.39fps      # 模型帧率
 ```
-**备注：** 该功能采用多线程并发方式，旨在让模型可以在BPU上达到极致的性能。由于多线程并发及数据采样的原因，在程序启动阶段帧率值会较低，之后帧率会上升并逐渐趋于稳定，帧率的浮动范围控制在0.5%之内。
+**备注：** 该功能采用多线程并发方式，旨在让模型可以在 BPU 上达到极致的性能。由于多线程并发及数据采样的原因，在程序启动阶段帧率值会较低，之后帧率会上升并逐渐趋于稳定，帧率的浮动范围控制在 0.5%之内。
 
 
 ###### 命令行参数说明
@@ -2784,13 +2784,13 @@ profile日志文件产生目录。
 
 ###### 结果可视化
 
-如果您希望可以看到模型单次推理出来效果，可以修改workflow_latency.json，重新运行latency.sh脚本，即可在output_dir目录下生成展示效果。
+如果您希望可以看到模型单次推理出来效果，可以修改 workflow_latency.json，重新运行 latency.sh 脚本，即可在 output_dir 目录下生成展示效果。
 
-**注意：** 生成展示效果时，由于dump效果的原因，脚本运行会变慢。 **仅支持运行latency.sh脚本dump**。
+**注意：** 生成展示效果时，由于 dump 效果的原因，脚本运行会变慢。 **仅支持运行 latency.sh 脚本 dump**。
 
 **可视化操作步骤** 参考如下：
 
-1. 修改workflow_latency.json配置文件
+1. 修改 workflow_latency.json 配置文件
 
 ```shell
 
@@ -2803,16 +2803,16 @@ profile日志文件产生目录。
      }
 ```
 
-2. 执行latency.sh脚本
+2. 执行 latency.sh 脚本
 
 ```shell
 
      sh latency.sh
 ```
 
-**注意：** bev模型可视化需要指定场景信息和homography矩阵路径，homography矩阵用于相机视角和鸟瞰图的转换，不同场景有各自的homography矩阵。
+**注意：** bev 模型可视化需要指定场景信息和 homography 矩阵路径，homography 矩阵用于相机视角和鸟瞰图的转换，不同场景有各自的 homography 矩阵。
 
-bev模型的workflow_latency.json配置文件建议修改成如下形式：
+bev 模型的 workflow_latency.json 配置文件建议修改成如下形式：
 
 ```shell
 
@@ -2837,11 +2837,11 @@ bev模型的workflow_latency.json配置文件建议修改成如下形式：
 
 ![classification](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/classification.JPEG)
 
-- **2d检测**
+- **2d 检测**
 
 ![detection2d](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/detection2d.jpg)
 
-- **3d检测**
+- **3d 检测**
 
 ![detection3d](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/detection3d.png)
 
@@ -2901,7 +2901,7 @@ bev模型的workflow_latency.json配置文件建议修改成如下形式：
 ![stereonet_depth](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/stereonet_depth.png)
 
 
-**注意：** 轨迹预测可视化时如果需要可视化minidata以外的图片，需要额外配置道路信息、轨迹信息文件到 **minidata/argoverse1/visualization** 中，生成配置文件可使用 **densetnt_process.py** 预处理脚本，将 **--is-gen-visual-config** 参数设为 **true**。
+**注意：** 轨迹预测可视化时如果需要可视化 minidata 以外的图片，需要额外配置道路信息、轨迹信息文件到 **minidata/argoverse1/visualization** 中，生成配置文件可使用 **densetnt_process.py** 预处理脚本，将 **--is-gen-visual-config** 参数设为 **true**。
 
 
 ##### 精度评测
@@ -2910,31 +2910,31 @@ bev模型的workflow_latency.json配置文件建议修改成如下形式：
 模型精度评测分为四步：
 
 1. 数据预处理。
-2. 生成lst文件。
+2. 生成 lst 文件。
 3. 数据挂载。
 4. 模型推理。
 5. 精度计算。
 
 ###### <span id="data_preprocess"/>数据预处理
 
-对于PTQ模型：数据预处理需要在x86开发机环境下运行 ``hb_eval_preprocess`` 工具，对数据集进行预处理。
-所谓预处理是指图片数据在送入模型之前的特定处理操作，例如：图片resize、crop和padding等。
-该工具集成于开发机模型转换编译的环境中，原始数据集经过工具预处理之后，会生成模型对应的前处理二进制文件.bin文件集.
+对于 PTQ 模型：数据预处理需要在 x86 开发机环境下运行 ``hb_eval_preprocess`` 工具，对数据集进行预处理。
+所谓预处理是指图片数据在送入模型之前的特定处理操作，例如：图片 resize、crop 和 padding 等。
+该工具集成于开发机模型转换编译的环境中，原始数据集经过工具预处理之后，会生成模型对应的前处理二进制文件.bin 文件集.
 直接运行 ``hb_eval_preprocess --help`` 可查看工具使用规则。
 
 **小技巧：**
 
-  1. 关于 ``hb_eval_preprocess`` 工具命令行参数，可键入 ``hb_eval_preprocess -h``， 或查看 PTQ量化原理及步骤说明的
-     [**hb_eval_preprocess工具**](./ptq_process.md#hb_eval_preprocess) 一节内容。
+  1. 关于 ``hb_eval_preprocess`` 工具命令行参数，可键入 ``hb_eval_preprocess -h``， 或查看 PTQ 量化原理及步骤说明的
+     [**hb_eval_preprocess 工具**](./ptq_process.md#hb_eval_preprocess) 一节内容。
 
 
-**PTQ模型数据预处理**：
+**PTQ 模型数据预处理**：
 
 下面将详细介绍示例包中每一个模型对应的数据集，以及对应数据集的预处理操作：
 
-PTQ模型使用到的数据集包括以下几种：
+PTQ 模型使用到的数据集包括以下几种：
 
-- ``VOC数据集`` ：该数据集主要用于ssd_mobilenetv1模型的评测，
+- ``VOC数据集`` ：该数据集主要用于 ssd_mobilenetv1 模型的评测，
   其目录结构如下，示例中主要用到 ``Main`` 文件下的val.txt文件， ``JPEGImages`` 中的源图片和 ``Annotations`` 中的标注数据：
 
 ```shell
@@ -2957,7 +2957,7 @@ PTQ模型使用到的数据集包括以下几种：
 ```bash
   hb_eval_preprocess -m ssd_mobilenetv1 -i VOCdevkit/VOC2012/JPEGImages -v VOCdevkit/VOC2012/ImageSets/Main/val.txt -o ./pre_ssd_mobilenetv1
 ```
-- ``COCO数据集`` ：该数据集主要用于centernet_resnet101、detr_efficientnetb3_mscoco、detr_resnet50_mscoco、yolov2_darknet19、yolov3_darknet53、yolov3_vargdarknet、yolov5x、preq_qat_fcos_efficientnetb0、preq_qat_fcos_efficientnetb2和preq_qat_fcos_efficientnetb3等检测模型的评测，
+- ``COCO数据集`` ：该数据集主要用于 centernet_resnet101、detr_efficientnetb3_mscoco、detr_resnet50_mscoco、yolov2_darknet19、yolov3_darknet53、yolov3_vargdarknet、yolov5x、preq_qat_fcos_efficientnetb0、preq_qat_fcos_efficientnetb2 和 preq_qat_fcos_efficientnetb3 等检测模型的评测，
   其目录如下，示例中主要用到 ``annotations`` 文件夹下的instances_val2017.json标注文件和 ``images`` 中的图片：
 
 ```shell
@@ -2972,8 +2972,8 @@ PTQ模型使用到的数据集包括以下几种：
   hb_eval_preprocess -m model_name -i coco/coco_val2017/images -o ./pre_model_name
 ```
 
-- ``ImageNet数据集`` ：该数据集主要用于efficientnasnet_m、efficientnasnet_s、efficientnet_lite0、efficientnet_lite1、efficientnet_lite2、efficientnet_lite3、efficientnet_lite4、googlenet、mobilenetv1、mobilenetv2、resnet18和vargconvnet等分类模型的评测，
-  示例中主要用到了标注文件val.txt 和 ``val`` 目录中的源图片:
+- ``ImageNet数据集`` ：该数据集主要用于 efficientnasnet_m、efficientnasnet_s、efficientnet_lite0、efficientnet_lite1、efficientnet_lite2、efficientnet_lite3、efficientnet_lite4、googlenet、mobilenetv1、mobilenetv2、resnet18 和 vargconvnet 等分类模型的评测，
+  示例中主要用到了标注文件 val.txt 和 ``val`` 目录中的源图片:
 
 ```shell
   .
@@ -2986,7 +2986,7 @@ PTQ模型使用到的数据集包括以下几种：
   hb_eval_preprocess -m model_name -i imagenet/val -o ./pre_model_name
 ```
 
-- ``Cityscapes数据集`` ：该数据集用于deeplabv3plus_efficientnetb0、deeplabv3plus_efficientnetm1、deeplabv3plus_efficientnetm2和fastscnn_efficientnetb0等分割模型的评测。
+- ``Cityscapes数据集`` ：该数据集用于 deeplabv3plus_efficientnetb0、deeplabv3plus_efficientnetm1、deeplabv3plus_efficientnetm2 和 fastscnn_efficientnetb0 等分割模型的评测。
   示例中主要用到了 ``./gtFine/val`` 中的标注文件和 ``./leftImg8bit/val`` 中的源图片。
 
 ```shell
@@ -3010,14 +3010,14 @@ PTQ模型使用到的数据集包括以下几种：
 ```
 
 
-**QAT模型数据预处理**：
+**QAT 模型数据预处理**：
 
-QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/tools/eval_preprocess`` 中对应模型的前处理脚本。
+QAT 模型数据预处理需要在 x86 仿真环境下执行 ``ai_benchmark/x5/qat/tools/eval_preprocess`` 中对应模型的前处理脚本。
 下面将详细介绍示例包中模型对应的数据集，以及其预处理操作。
 
 **请注意：** 使用前请修改脚本中的数据集路径及保存路径使脚本正常运行。
 
-- ``ImageNet数据集`` ：该数据集主要用于QAT分类模型mixvargenet_imagenet、mobilenetv1_imagenet、mobilenetv2_imagenet、resnet50_imagenet、horizon_swin_transformer_imagenet和vargnetv2_imagenet的评测.
+- ``ImageNet数据集`` ：该数据集主要用于 QAT 分类模型 mixvargenet_imagenet、mobilenetv1_imagenet、mobilenetv2_imagenet、resnet50_imagenet、horizon_swin_transformer_imagenet 和 vargnetv2_imagenet 的评测.
 
 对数据集进行预处理：
 
@@ -3025,7 +3025,7 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
   python3 imagenet.py --image-path=./standard_imagenet/val/ --save-path=./pre_model_name
 ```
 
-- ``VOC数据集`` ：该数据集主要用于检测模型yolo_mobilenetv1_voc的评测。
+- ``VOC数据集`` ：该数据集主要用于检测模型 yolo_mobilenetv1_voc 的评测。
 
 对数据集进行预处理：
 
@@ -3033,7 +3033,7 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
   python3 voc.py --image-path=./VOCdevkit/VOC2012/JPEGImages/ --save-path=./pre_yolov3_mobilenetv1
 ```
 
-- ``COCO数据集`` ：该数据集主要用于QAT检测模型fcos_efficientnetb0_mscoco和retinanet_vargnetv2_fpn_mscoco的评测。
+- ``COCO数据集`` ：该数据集主要用于 QAT 检测模型 fcos_efficientnetb0_mscoco 和 retinanet_vargnetv2_fpn_mscoco 的评测。
 
 对数据集进行预处理：
 
@@ -3045,9 +3045,9 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
   python3 retinanet_process.py --image-path=./mscoco/images/val2017/  --label-path=./mscoco/images/annotations/instances_val2017.json --save-path=./pre_retinanet
 ```
 
-- ``Cityscapes`` ：该数据集主要用于QAT分割模型unet_mobilenetv1_cityscapes的评测，不需要前处理直接使用验证集数据即可。
+- ``Cityscapes`` ：该数据集主要用于 QAT 分割模型 unet_mobilenetv1_cityscapes 的评测，不需要前处理直接使用验证集数据即可。
 
-- ``FlyingChairs`` ：该数据集主要用于QAT光流模型pwcnet_pwcnetneck_flyingchairs的评测。本数据集您可以于 `FlyingChairs数据集官网下载地址 <https://lmb.informatik.uni-freiburg.de/resources/datasets/FlyingChairs.en.html>`_ 下载，示例中主要用到了 **FlyingChairs_release/data** 中的数据和 **./FlyingChairs_train_val.txt** 标注文件。
+- ``FlyingChairs`` ：该数据集主要用于QAT光流模型pwcnet_pwcnetneck_flyingchairs的评测。本数据集您可以于 `FlyingChairs 数据集官网下载地址 <https://lmb.informatik.uni-freiburg.de/resources/datasets/FlyingChairs.en.html>`_ 下载，示例中主要用到了 **FlyingChairs_release/data** 中的数据和 **./FlyingChairs_train_val.txt** 标注文件。
 
 ```shell
   .
@@ -3060,8 +3060,8 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
 ```
 
 **注意：**
-  - `{id}_img1.ppm和{id}_img2.ppm`是一个图像对，图像宽度大小是512，高度大小是38，id是从00001至22872的序号，每一图像对的标签是`{id}_flow.flo`。
-  - **FlyingChairs_train_val** 文件是用于划分训练集和验证集，标签值为2表示验证集。
+  - `{id}_img1.ppm和{id}_img2.ppm`是一个图像对，图像宽度大小是 512，高度大小是 38，id 是从 00001 至 22872 的序号，每一图像对的标签是`{id}_flow.flo`。
+  - **FlyingChairs_train_val** 文件是用于划分训练集和验证集，标签值为 2 表示验证集。
 
 
 对数据集进行预处理：
@@ -3070,7 +3070,7 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
   python3 pwcnet_process.py --input-path=./flyingchairs/FlyingChairs_release/data/ --val-file=./flyingchairs/FlyingChairs_train_val.txt --output-path=./pre_pwcnet_opticalflow
 ```
 
-- ``Kitti3D`` ：该数据集主要用于QAT检测模型pointpillars_kitti_car的评测。本数据集您可以于 `Kitti3D数据集官网下载地址 <https://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d>`_ 下载。
+- ``Kitti3D`` ：该数据集主要用于QAT检测模型pointpillars_kitti_car的评测。本数据集您可以于 `Kitti3D 数据集官网下载地址 <https://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d>`_ 下载。
 
 ```shell
   .
@@ -3106,7 +3106,7 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
   python3 pointpillars_process.py --data-path=./kitti3d_origin  --save-path=./pre_kitti3d  --height=1 --width=150000
 ```
 
-- ``Culane`` ：该数据集主要用于QAT检测模型ganet_mixvargenet_culane的评测。本数据集您可以于 `Culane数据集官网下载地址 <https://xingangpan.github.io/projects/CULane.html>`_ 下载。
+- ``Culane`` ：该数据集主要用于QAT检测模型ganet_mixvargenet_culane的评测。本数据集您可以于 `Culane 数据集官网下载地址 <https://xingangpan.github.io/projects/CULane.html>`_ 下载。
 
 ```shell
   .
@@ -3148,7 +3148,7 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
 ```
 
 
-- ``Nuscenes`` ：该数据集主要用于QAT检测模型fcos3d_efficientnetb0_nuscenes，centerpoint_pointpillar_nuscenes，lidar多任务模型centerpoint_mixvargnet_multitask_nuscenes和bev模型bev_gkt_mixvargenet_multitask_nuscenes，bev_lss_efficientnetb0_multitask_nuscenes，bev_ipm_efficientnetb0_multitask_nuscenes，bev_ipm_4d_efficientnetb0_multitask_nuscenes，detr3d_efficientnetb3_nuscenes的评测。本数据集您可以于 `Nuscenes数据集官网下载地址 <https://www.nuscenes.org/nuscenes#download>`_ 下载。
+- ``Nuscenes`` ：该数据集主要用于QAT检测模型fcos3d_efficientnetb0_nuscenes，centerpoint_pointpillar_nuscenes，lidar多任务模型centerpoint_mixvargnet_multitask_nuscenes和bev模型bev_gkt_mixvargenet_multitask_nuscenes，bev_lss_efficientnetb0_multitask_nuscenes，bev_ipm_efficientnetb0_multitask_nuscenes，bev_ipm_4d_efficientnetb0_multitask_nuscenes，detr3d_efficientnetb3_nuscenes的评测。本数据集您可以于 `Nuscenes 数据集官网下载地址 <https://www.nuscenes.org/nuscenes#download>`_ 下载。
 
 ```shell
   .
@@ -3173,7 +3173,7 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
       └── v1.0-trainval_meta.tar
 ```
 
-对于lidar多任务模型，还需从官网下载lidar分割标签lidarseg，并按照nuscenes官网教程更新v1.0-trainval，建议您将下载的数据集解压成如下结构：
+对于 lidar 多任务模型，还需从官网下载 lidar 分割标签 lidarseg，并按照 nuscenes 官网教程更新 v1.0-trainval，建议您将下载的数据集解压成如下结构：
 
 ```shell
   .
@@ -3193,9 +3193,9 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
 ```
 
 **请注意：**
-  - fcos3d_process.py除了生成预处理图片外，还会对待使用的相机内参进行处理，生成相应的相机内参配置文件。
-  - centerpoint_preprocess.py，bev_preprocess.py和lidar_preprocess.py除了生成预处理数据外，还会在预处理数据路径下生成一个 ``val_gt_infos.pkl`` 文件用于精度计算。
-  - bev_preprocess.py需要通过 ``--model`` 指定模型的名称，可选项有bev_gkt_mixvargenet_multitask_nuscenes，bev_ipm_4d_efficientnetb0_multitask_nuscenes，bev_ipm_efficientnetb0_multitask_nuscenes，bev_lss_efficientnetb0_multitask_nuscenes，detr3d_efficientnetb3_nuscenes。
+  - fcos3d_process.py 除了生成预处理图片外，还会对待使用的相机内参进行处理，生成相应的相机内参配置文件。
+  - centerpoint_preprocess.py，bev_preprocess.py 和 lidar_preprocess.py 除了生成预处理数据外，还会在预处理数据路径下生成一个 ``val_gt_infos.pkl`` 文件用于精度计算。
+  - bev_preprocess.py 需要通过 ``--model`` 指定模型的名称，可选项有 bev_gkt_mixvargenet_multitask_nuscenes，bev_ipm_4d_efficientnetb0_multitask_nuscenes，bev_ipm_efficientnetb0_multitask_nuscenes，bev_lss_efficientnetb0_multitask_nuscenes，detr3d_efficientnetb3_nuscenes。
 
 
 对数据集进行预处理：
@@ -3215,7 +3215,7 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
 ```
 
 
-- ``Mot17`` ：该数据集用于QAT追踪模型motr_efficientnetb3_mot17的评测。本数据集您可以于 `Mot17数据集官网下载地址 <https://opendatalab.com/MOT17>`_ 下载。
+- ``Mot17`` ：该数据集用于QAT追踪模型motr_efficientnetb3_mot17的评测。本数据集您可以于 `Mot17 数据集官网下载地址 <https://opendatalab.com/MOT17>`_ 下载。
 
 ```shell
   .
@@ -3245,7 +3245,7 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
   python3 motr_process.py --image-path=./valdata/images/train --save-path=./processed_motr
 ```
 
-- ``Carfusion`` ：该数据集用于QAT检测模型keypoint_efficientnetb0_carfusion的评测。本数据集您可以于 `Carfusion数据集官网下载地址 <http://www.cs.cmu.edu/~ILIM/projects/IM/CarFusion/cvpr2018/index.html>`_ 下载。
+- ``Carfusion`` ：该数据集用于QAT检测模型keypoint_efficientnetb0_carfusion的评测。本数据集您可以于 `Carfusion 数据集官网下载地址 <http://www.cs.cmu.edu/~ILIM/projects/IM/CarFusion/cvpr2018/index.html>`_ 下载。
 
 ```shell
   .
@@ -3270,14 +3270,14 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
       └── simple_anno
 ```
 
-保证data-root指定的地址与cropped_data同一级，然后运行下方指令：
+保证 data-root 指定的地址与 cropped_data 同一级，然后运行下方指令：
 
 ```bash
   python3 keypoints_preprocess.py --data-root=./ --label-path=cropped_data/simple_anno/keypoints_test.json --save-path=./processed_carfusion
 ```
 
 
-- ``Argoverse1`` ：该数据集用于QAT检测模型densetnt_vectornet_argoverse1的评测。本数据集您可以于 `Argoverse1数据集官网下载地址 <https://www.argoverse.org/av1.html>`_ 下载。
+- ``Argoverse1`` ：该数据集用于QAT检测模型densetnt_vectornet_argoverse1的评测。本数据集您可以于 `Argoverse1 数据集官网下载地址 <https://www.argoverse.org/av1.html>`_ 下载。
 
 ```shell
   .
@@ -3302,14 +3302,14 @@ QAT模型数据预处理需要在x86仿真环境下执行 ``ai_benchmark/x5/qat/
       └── val
 ```
 
-densetnt_process.py除了生成预处理输入外，还会在src-path下生成相应的评测meta文件。评测仅需使用 ``--src-path`` 和 ``--dst-path`` 两个参数即可，无需关注其他参数。
+densetnt_process.py 除了生成预处理输入外，还会在 src-path 下生成相应的评测 meta 文件。评测仅需使用 ``--src-path`` 和 ``--dst-path`` 两个参数即可，无需关注其他参数。
 
 ```bash
   python3 densetnt_process.py --src-path=arogverse-1 --dst-path=processed_arogverse1
 ```
 
 
-- ``SceneFlow`` ：该数据集用于QAT深度估计模型stereonetplus_mixvargenet_sceneflow的评测。本数据集您可以于 `SceneFlow数据集官网下载地址 <https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html>`_ 下载。
+- ``SceneFlow`` ：该数据集用于QAT深度估计模型stereonetplus_mixvargenet_sceneflow的评测。本数据集您可以于 `SceneFlow 数据集官网下载地址 <https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html>`_ 下载。
 
 ```shell
   .
@@ -3328,7 +3328,7 @@ densetnt_process.py除了生成预处理输入外，还会在src-path下生成�
 ```
 
 
-###### 生成lst文件
+###### 生成 lst 文件
 
 示例中精度计算脚本的运行流程是：
 
@@ -3336,10 +3336,10 @@ densetnt_process.py除了生成预处理输入外，还会在src-path下生成�
 
 2、根据 ``lst`` 文件存储的前处理文件路径信息，去加载每一个前处理文件，然后进行推理
 
-所以，生成预处理文件之后，需要生成对应的lst文件，将每一张前处理文件的路径写入到lst文件中，而这个路径与数据集在板端的存放位置有关。
+所以，生成预处理文件之后，需要生成对应的 lst 文件，将每一张前处理文件的路径写入到 lst 文件中，而这个路径与数据集在板端的存放位置有关。
 这里我们推荐其存放位置与 ``./data/dataset_name/pre_model_name`` 预处理数据文件夹同级目录。
 
-PTQ预处理数据集结构如下：
+PTQ 预处理数据集结构如下：
 
 ```bash
    |── ptq
@@ -3358,7 +3358,7 @@ PTQ预处理数据集结构如下：
 
 ```
 
-QAT预处理数据集结构如下：
+QAT 预处理数据集结构如下：
 
 ```bash
 
@@ -3378,9 +3378,9 @@ QAT预处理数据集结构如下：
 ```
 
 
-与之对应的lst文件，参考生成方式如下：
+与之对应的 lst 文件，参考生成方式如下：
 
-**注意：** ``除Densetnt_vectornet_argoverse1、Bev、Motr_efficientnetb3_mot17和Stereonetplus_mixvargenet_sceneflow模型外``，其余模型的lst文件参考生成方式：
+**注意：** ``除Densetnt_vectornet_argoverse1、Bev、Motr_efficientnetb3_mot17和Stereonetplus_mixvargenet_sceneflow模型外``，其余模型的 lst 文件参考生成方式：
 
 
 ```shell
@@ -3388,9 +3388,9 @@ QAT预处理数据集结构如下：
 
 ```
 
-**注意：**  ``-name`` 后的参数需要根据预处理后的数据集格式进行对应调整，如bin、png。
+**注意：**  ``-name`` 后的参数需要根据预处理后的数据集格式进行对应调整，如 bin、png。
 
-这样生成的lst文件中存储的路径为一个相对路径： ``../../../data/`` 或 ``../../../data/coco/pre_centernet_resnet101/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。
+这样生成的 lst 文件中存储的路径为一个相对路径： ``../../../data/`` 或 ``../../../data/coco/pre_centernet_resnet101/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。
 如果需要更改前处理数据集的存放位置，则需要确保对应的 ``lst`` 文件可以被 ``workflow_accuracy.json`` 读取到；其次需要确保程序根据 ``lst`` 中的路径信息，能读取到对应的前处理文件。
 
 
@@ -3400,10 +3400,10 @@ QAT预处理数据集结构如下：
   sh generate_acc_lst.sh
 ```
 
-这样生成的lst文件中存储的路径为一个相对路径： ``../../../data/argoverse1/densetnt/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。
+这样生成的 lst 文件中存储的路径为一个相对路径： ``../../../data/argoverse1/densetnt/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。
 
 
-对于Densetnt_vectornet_argoverse1、Bev、Motr_efficientnetb3_mot17和Stereonetplus_mixvargenet_sceneflow模型，lst文件参考生成方式：
+对于 Densetnt_vectornet_argoverse1、Bev、Motr_efficientnetb3_mot17 和 Stereonetplus_mixvargenet_sceneflow 模型，lst 文件参考生成方式：
 
 - ``Densetnt``：
 
@@ -3411,11 +3411,11 @@ QAT预处理数据集结构如下：
   sh generate_acc_lst.sh
 ```
 
-这样生成的lst文件中存储的路径为一个相对路径： ``../../../data/argoverse1/densetnt/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。
+这样生成的 lst 文件中存储的路径为一个相对路径： ``../../../data/argoverse1/densetnt/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。
 
 - ``Bev``：
 
-以bev_ipm_efficientnetb0_multitask模型为例，该模型有图像和参考点两种输入，同一帧输入的图片和参考点名称相同。为了保证输入相对应，在执行 ``find`` 命令时需要添加 ``sort`` 按名称进行排序。参考生成方式：
+以 bev_ipm_efficientnetb0_multitask 模型为例，该模型有图像和参考点两种输入，同一帧输入的图片和参考点名称相同。为了保证输入相对应，在执行 ``find`` 命令时需要添加 ``sort`` 按名称进行排序。参考生成方式：
 
 ```shell
   find ../../../data/nuscenes_bev/images -name "*bin*" | sort > ../../../data/nuscenes_bev/images.lst
@@ -3424,7 +3424,7 @@ QAT预处理数据集结构如下：
 
 ```
 
-detr3d_efficientnetb3_nuscenes，除了图像和参考点还有coords，masks和position embedding输入，生成lst方式如下：
+detr3d_efficientnetb3_nuscenes，除了图像和参考点还有 coords，masks 和 position embedding 输入，生成 lst 方式如下：
 
 ```shell
 
@@ -3441,13 +3441,13 @@ detr3d_efficientnetb3_nuscenes，除了图像和参考点还有coords，masks和
 
 ```
 
-**请注意：** bev模型中，detr3d_efficientnetb3_nuscenes的 ``reference_points`` 用于模型后处理，需要在 ``workflow_accuracy.json`` 配置正确的路径，确保程序能够读到对应的参考点文件。此外，bev_ipm_4d_efficientnetb0_multitask是时序模型，该模型对输入顺序有要求。因此，我们提供了专门的脚本 ``gen_file_list.sh`` 用于生成lst文件，使用方式如下：
+**请注意：** bev 模型中，detr3d_efficientnetb3_nuscenes 的 ``reference_points`` 用于模型后处理，需要在 ``workflow_accuracy.json`` 配置正确的路径，确保程序能够读到对应的参考点文件。此外，bev_ipm_4d_efficientnetb0_multitask是时序模型，该模型对输入顺序有要求。因此，我们提供了专门的脚本 ``gen_file_list.sh`` 用于生成 lst 文件，使用方式如下：
 
 ```shell
   sh gen_file_list.sh
 ```
 
-这样生成的lst文件中存储的路径为一个相对路径： ``../../../data/nuscenes_bev/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。如果需要更改前处理数据集的存放位置，则需要确保对应的 ``lst`` 文件可以被 ``workflow_accuracy.json`` 读取到。其次需要确保程序根据 ``lst`` 中的路径信息，能读取到对应的前处理文件。
+这样生成的 lst 文件中存储的路径为一个相对路径： ``../../../data/nuscenes_bev/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。如果需要更改前处理数据集的存放位置，则需要确保对应的 ``lst`` 文件可以被 ``workflow_accuracy.json`` 读取到。其次需要确保程序根据 ``lst`` 中的路径信息，能读取到对应的前处理文件。
 
 
 - ``Motr``：
@@ -3456,12 +3456,12 @@ detr3d_efficientnetb3_nuscenes，除了图像和参考点还有coords，masks和
   sh generate_acc_lst.sh
 ```
 
-这样生成的lst文件中存储的路径为一个相对路径： ``../../../data/mot17/motr/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。如果需要更改前处理数据集的存放位置，则需要确保对应的 ``lst`` 文件可以被 ``workflow_accuracy.json`` 读取到。其次需要确保程序根据 ``lst`` 中的路径信息，能读取到对应的前处理文件。
+这样生成的 lst 文件中存储的路径为一个相对路径： ``../../../data/mot17/motr/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。如果需要更改前处理数据集的存放位置，则需要确保对应的 ``lst`` 文件可以被 ``workflow_accuracy.json`` 读取到。其次需要确保程序根据 ``lst`` 中的路径信息，能读取到对应的前处理文件。
 
 
 - ``Stereonetplus``：
 
-以stereonetplus_mixvargenet_sceneflow模型为例，为了保证同一帧输入的左右视图相对应，在执行 ``find`` 命令时需要添加 ``sort`` 按名称进行排序，参考生成方式如下：
+以 stereonetplus_mixvargenet_sceneflow 模型为例，为了保证同一帧输入的左右视图相对应，在执行 ``find`` 命令时需要添加 ``sort`` 按名称进行排序，参考生成方式如下：
 
 ```shell
   find ../../../data/sceneflow/left -name "*png*" | sort > ../../../data/sceneflow/left.lst
@@ -3469,14 +3469,14 @@ detr3d_efficientnetb3_nuscenes，除了图像和参考点还有coords，masks和
   find ../../../data/sceneflow/right -name "*png*" | sort > ../../../data/sceneflow/right.lst
 ```
 
-这样生成的lst文件中存储的路径为一个相对路径： ``../../../data/mot17/motr/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。如果需要更改前处理数据集的存放位置，则需要确保对应的 ``lst`` 文件可以被 ``workflow_accuracy.json`` 读取到。其次需要确保程序根据 ``lst`` 中的路径信息，能读取到对应的前处理文件。
+这样生成的 lst 文件中存储的路径为一个相对路径： ``../../../data/mot17/motr/`` ，可以与 ``workflow_accuracy.json`` 默认的配置路径吻合。如果需要更改前处理数据集的存放位置，则需要确保对应的 ``lst`` 文件可以被 ``workflow_accuracy.json`` 读取到。其次需要确保程序根据 ``lst`` 中的路径信息，能读取到对应的前处理文件。
 
 
 ###### 数据挂载
 
-由于数据集相对较大，不适合直接放在开发板上，可以采用nfs挂载的方式供开发板读取。
+由于数据集相对较大，不适合直接放在开发板上，可以采用 nfs 挂载的方式供开发板读取。
 
-开发机PC端（需要root权限）：
+开发机 PC 端（需要 root 权限）：
 
 1. 编辑 /etc/exports, 增加一行：
    ``/nfs *(insecure,rw,sync,all_squash,anonuid=1000,anongid=1000,no_subtree_check)``。
@@ -3488,12 +3488,12 @@ detr3d_efficientnetb3_nuscenes，除了图像和参考点还有coords，masks和
 1. 创建需要挂载的目录：``mkdir -p /mnt``。
 2. ``mount -t nfs {PC端IP}:/nfs /mnt -o nolock``。
 
-完成将PC端的/nfs文件夹挂载至板端/mnt文件夹。按照此方式，将包含预处理数据的文件夹挂载至板端，并将/data目录软链接至板端/ptq目录下，与/script同级目录。
+完成将 PC 端的/nfs 文件夹挂载至板端/mnt 文件夹。按照此方式，将包含预处理数据的文件夹挂载至板端，并将/data 目录软链接至板端/ptq 目录下，与/script 同级目录。
 
 
 ###### 模型推理
 
-挂载完数据后，请登录开发板，开发板登录方法，请阅读[**开发板登录**](../../../01_Quick_start/remote_login.md) 章节内容，登录成功后，执行 ``centernet_resnet101/`` 目录下的accuracy.sh脚本，如下所示：
+挂载完数据后，请登录开发板，开发板登录方法，请阅读[**开发板登录**](../../../01_Quick_start/remote_login.md) 章节内容，登录成功后，执行 ``centernet_resnet101/`` 目录下的 accuracy.sh 脚本，如下所示：
 
 ```bash
   /userdata/ptq/script/detection/centernet_resnet101# sh accuracy.sh
@@ -3513,24 +3513,24 @@ detr3d_efficientnetb3_nuscenes，除了图像和参考点还有coords，masks和
 
   精度计算部分请在 ``开发机`` 模型转换的环境下操作
 
-**PTQ模型精度计算**：
+**PTQ 模型精度计算**：
 
-PTQ模型精度计算的脚本在 **ptq/tools/python_tools/accuracy_tools** 目录下，其中：
+PTQ 模型精度计算的脚本在 **ptq/tools/python_tools/accuracy_tools** 目录下，其中：
 
-- cls_eval.py用于计算分类模型的精度。
+- cls_eval.py 用于计算分类模型的精度。
 
-- coco_det_eval.py用于计算使用COCO数据集评测的检测模型的精度。
+- coco_det_eval.py 用于计算使用 COCO 数据集评测的检测模型的精度。
 
-- parsing_eval.py用于计算使用Cityscapes数据集评测的分割模型的精度。
+- parsing_eval.py 用于计算使用 Cityscapes 数据集评测的分割模型的精度。
 
-- voc_det_eval.py用于计算使用VOC数据集评测的检测模型的精度。
+- voc_det_eval.py 用于计算使用 VOC 数据集评测的检测模型的精度。
 
 
-以下为您说明不同类型的PTQ模型精度计算方式：
+以下为您说明不同类型的 PTQ 模型精度计算方式：
 
 - **分类模型**
 
-使用CIFAR-10数据集和ImageNet数据集的分类模型计算方式如下：
+使用 CIFAR-10 数据集和 ImageNet 数据集的分类模型计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3540,12 +3540,12 @@ PTQ模型精度计算的脚本在 **ptq/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``log_file``：分类模型的预测结果文件。
-  - ``gt_file``：CIFAR-10和ImageNet数据集的标注文件。
+  - ``gt_file``：CIFAR-10 和 ImageNet 数据集的标注文件。
 
 
 - **检测模型**
 
-使用COCO数据集的检测模型精度计算方式如下：
+使用 COCO 数据集的检测模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3555,9 +3555,9 @@ PTQ模型精度计算的脚本在 **ptq/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   -  ``eval_result_path``：检测模型的预测结果文件。
-  -  ``annotation_path``：COCO数据集的标注文件。
+  -  ``annotation_path``：COCO 数据集的标注文件。
 
-使用VOC数据集的检测模型精度计算方式如下：
+使用 VOC 数据集的检测模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3567,12 +3567,12 @@ PTQ模型精度计算的脚本在 **ptq/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``eval_result_path``：检测模型的预测结果文件。
-  - ``annotation_path``：VOC数据集的标注文件。
-  - ``val_txt_path``：VOC数据集中ImageSets/Main文件夹下的val.txt文件。
+  - ``annotation_path``：VOC 数据集的标注文件。
+  - ``val_txt_path``：VOC 数据集中 ImageSets/Main 文件夹下的 val.txt 文件。
 
 - **分割模型**
 
-使用Cityscapes数据集的分割模型精度计算方式如下：
+使用 Cityscapes 数据集的分割模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3581,52 +3581,52 @@ PTQ模型精度计算的脚本在 **ptq/tools/python_tools/accuracy_tools** 目�
 ```
 **备注：**
   - ``log_file``：分割模型的预测结果文件。
-  - ``gt_path``：Cityscapes数据集的标注文件。
+  - ``gt_path``：Cityscapes 数据集的标注文件。
 
 
-**QAT模型精度计算**：
+**QAT 模型精度计算**：
 
-QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目录下，其中：
+QAT 模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目录下，其中：
 
-- bev_eval.py用于计算bev模型的精度。
+- bev_eval.py 用于计算 bev 模型的精度。
 
-- centerpoint_eval.py用于计算雷达3D模型centerpoint_pointpillar_nuscenes的精度。
+- centerpoint_eval.py 用于计算雷达 3D 模型 centerpoint_pointpillar_nuscenes 的精度。
 
-- cls_eval.py用于计算分类模型的精度。
+- cls_eval.py 用于计算分类模型的精度。
 
-- densetnt_eval.py用于计算densetnt轨迹预测模型densetnt_vectornet_argoverse1的精度。
+- densetnt_eval.py 用于计算 densetnt 轨迹预测模型 densetnt_vectornet_argoverse1 的精度。
 
-- detr_eval.py用于计算detr检测模型的精度。
+- detr_eval.py 用于计算 detr 检测模型的精度。
 
-- fcos3d_eval.py用于计算检测模型fcos3d_efficientnetb0_nuscenes的精度。
+- fcos3d_eval.py 用于计算检测模型 fcos3d_efficientnetb0_nuscenes 的精度。
 
-- fcos_eval.py用于计算fcos检测模型的精度。
+- fcos_eval.py 用于计算 fcos 检测模型的精度。
 
-- ganet_eval.py用于计算检测模型ganet_mixvargenet_culane的精度。
+- ganet_eval.py 用于计算检测模型 ganet_mixvargenet_culane 的精度。
 
-- keypoints_eval.py用于计算检测模型keypoint_efficientnetb0_carfusion的精度。
+- keypoints_eval.py 用于计算检测模型 keypoint_efficientnetb0_carfusion 的精度。
 
-- lidar_multitask_eval.py用于计算lidar多任务模型centerpoint_mixvargnet_multitask_nuscenes的精度。
+- lidar_multitask_eval.py 用于计算 lidar 多任务模型 centerpoint_mixvargnet_multitask_nuscenes 的精度。
 
-- motr_eval.py用于计算motr检测模型motr_efficientnetb3_mot17的精度。
+- motr_eval.py 用于计算 motr 检测模型 motr_efficientnetb3_mot17 的精度。
 
-- parsing_eval.py用于计算使用Cityscapes数据集评测的分割模型的精度。
+- parsing_eval.py 用于计算使用 Cityscapes 数据集评测的分割模型的精度。
 
-- pointpillars_eval.py用于计算检测模型pointpillars_kitti_car的精度。
+- pointpillars_eval.py 用于计算检测模型 pointpillars_kitti_car 的精度。
 
-- pwcnet_eval.py用于计算使用FlyingChairs数据集评测的光流模型pwcnet_pwcnetneck_flyingchairs的精度。
+- pwcnet_eval.py 用于计算使用 FlyingChairs 数据集评测的光流模型 pwcnet_pwcnetneck_flyingchairs 的精度。
 
-- retinanet_eval.py用于计算检测模型retinanet_vargnetv2_fpn_mscoco的精度。
+- retinanet_eval.py 用于计算检测模型 retinanet_vargnetv2_fpn_mscoco 的精度。
 
-- yolov3_eval.py用于计算yolov3检测模型的精度。
+- yolov3_eval.py 用于计算 yolov3 检测模型的精度。
 
-- stereonet_eval.py用于计算深度估计模型stereonetplus_mixvargenet_sceneflow的精度。
+- stereonet_eval.py 用于计算深度估计模型 stereonetplus_mixvargenet_sceneflow 的精度。
 
-以下为您说明不同类型的QAT模型精度计算方式：
+以下为您说明不同类型的 QAT 模型精度计算方式：
 
-- **Bev模型**
+- **Bev 模型**
 
-使用nuscenes数据集的bev模型精度计算方式如下：
+使用 nuscenes 数据集的 bev 模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3639,15 +3639,15 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 
 **备注：**
 
-  - ``det_eval_path``：bev模型检测任务的预测结果文件。
-  - ``seg_eval_path``：bev模型分割任务的预测结果文件。
-  - ``gt_files_path``：对nuscenes数据集进行预处理生成的gt文件。
-  - ``meta_dir``：nuscenes数据集的meta信息路径。
+  - ``det_eval_path``：bev 模型检测任务的预测结果文件。
+  - ``seg_eval_path``：bev 模型分割任务的预测结果文件。
+  - ``gt_files_path``：对 nuscenes 数据集进行预处理生成的 gt 文件。
+  - ``meta_dir``：nuscenes 数据集的 meta 信息路径。
 
 
 - **分类模型**
 
-使用CIFAR-10数据集和ImageNet数据集的分类模型计算方式如下：
+使用 CIFAR-10 数据集和 ImageNet 数据集的分类模型计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3657,12 +3657,12 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``log_file``：分类模型的预测结果文件。
-  - ``gt_file``：CIFAR-10和ImageNet数据集的标注文件。
+  - ``gt_file``：CIFAR-10 和 ImageNet 数据集的标注文件。
 
 
 - **检测模型**
 
-- 1.使用COCO数据集的检测模型精度计算方式示例如下：
+- 1.使用 COCO 数据集的检测模型精度计算方式示例如下：
 
 ```shell
   #!/bin/sh
@@ -3675,10 +3675,10 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 ```
 **备注：**
 
-  - ``eval_result_path``：fcos检测模型的预测结果文件。
-  - ``annotation_path``：COCO数据集的标注文件。
-  - ``image_path``：COCO原始数据集。
-  - ``is_qat``：是否是qat fcos模型结果评测。
+  - ``eval_result_path``：fcos 检测模型的预测结果文件。
+  - ``annotation_path``：COCO 数据集的标注文件。
+  - ``image_path``：COCO 原始数据集。
+  - ``is_qat``：是否是 qat fcos 模型结果评测。
 
 
 ```shell
@@ -3689,9 +3689,9 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 ```
 **备注：**
 
-  - ``eval_result_path``：retinanet检测模型的预测结果文件。
-  - ``annotation_path``：COCO数据集的标注文件。
-  - ``image_path``：COCO原始数据集。
+  - ``eval_result_path``：retinanet 检测模型的预测结果文件。
+  - ``annotation_path``：COCO 数据集的标注文件。
+  - ``image_path``：COCO 原始数据集。
 
 
 ```shell
@@ -3702,12 +3702,12 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 ```
 **备注：**
 
-  - ``eval_result_path``：retinanet检测模型的预测结果文件。
-  - ``annotation_path``：COCO数据集的标注文件。
-  - ``image_path``：COCO原始数据集。
+  - ``eval_result_path``：retinanet 检测模型的预测结果文件。
+  - ``annotation_path``：COCO 数据集的标注文件。
+  - ``image_path``：COCO 原始数据集。
 
 
-- 2.使用VOC数据集的检测模型精度计算方式示例如下：
+- 2.使用 VOC 数据集的检测模型精度计算方式示例如下：
 
 ```shell
   #!/bin/sh
@@ -3718,13 +3718,13 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``eval_result_path``：检测模型的预测结果文件。
-  - ``annotation_path``：VOC数据集的标注文件。
-  - ``val_txt_path``：VOC数据集中ImageSets/Main文件夹下的val.txt文件。
+  - ``annotation_path``：VOC 数据集的标注文件。
+  - ``val_txt_path``：VOC 数据集中 ImageSets/Main 文件夹下的 val.txt 文件。
   - ``image_height``: 图像的高度。
   - ``image_width``: 图像的宽度。
 
 
-- 3.使用Kitti数据集的检测模型精度计算方式如下：
+- 3.使用 Kitti 数据集的检测模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3735,9 +3735,9 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``eval_result_path``：检测模型的预测结果文件。
-  - ``annotation_path``：预处理过程中生成的kitti3d数据集的标注文件val_gt_infos.pkl。
+  - ``annotation_path``：预处理过程中生成的 kitti3d 数据集的标注文件 val_gt_infos.pkl。
 
-- 4.使用Culane数据集的检测模型精度计算方式如下：
+- 4.使用 Culane 数据集的检测模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3748,9 +3748,9 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``eval_result_path``：检测模型的预测结果文件。
-  - ``image_path``：culane数据集。
+  - ``image_path``：culane 数据集。
 
-- 5.使用Nuscenes数据集的检测模型精度计算方式如下：
+- 5.使用 Nuscenes 数据集的检测模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3761,7 +3761,7 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``eval_result_path``：检测模型的预测结果文件。
-  - ``image_path``：nuscenes数据集。
+  - ``image_path``：nuscenes 数据集。
 
 
 ```shell
@@ -3773,10 +3773,10 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``predict_result_path``：检测模型的预测结果文件。
-  - ``gt_files_path``： 对nuscenes数据集进行预处理生成的gt文件。
-  - ``meta_dir``： nuscenes数据集的meta信息路径。
+  - ``gt_files_path``： 对 nuscenes 数据集进行预处理生成的 gt 文件。
+  - ``meta_dir``： nuscenes 数据集的 meta 信息路径。
 
-- 6.使用Carfusion数据集的检测模型精度计算方式如下：
+- 6.使用 Carfusion 数据集的检测模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3786,13 +3786,13 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 ```
 **备注：**
 
-  - ``anno_path``：预处理生成的processed_anno.json文件。
+  - ``anno_path``：预处理生成的 processed_anno.json 文件。
   - ``eval_result_path``：检测模型的预测结果文件。
 
 
 - **分割模型**
 
-使用Cityscapes数据集的分割模型精度计算方式如下：
+使用 Cityscapes 数据集的分割模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3802,12 +3802,12 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``log_file``：分割模型的预测结果文件。
-  - ``gt_path``：Cityscapes数据集的标注文件。
+  - ``gt_path``：Cityscapes 数据集的标注文件。
 
 
 - **光流模型**
 
-使用FlyingChairs数据集的光流模型精度计算方式如下：
+使用 FlyingChairs 数据集的光流模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3817,13 +3817,13 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``log_file``：光流模型的预测结果文件。
-  - ``val_file``：FlyingChairs数据集标签文件。
-  - ``gt_path``：FlyingChairs数据集原始文件。
+  - ``val_file``：FlyingChairs 数据集标签文件。
+  - ``gt_path``：FlyingChairs 数据集原始文件。
 
 
 - **追踪模型**
 
-使用mot17数据集的追踪模型计算方式如下：
+使用 mot17 数据集的追踪模型计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3833,11 +3833,11 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``eval_result_path``：追踪模型的预测结果文件夹。
-  - ``gt_val_path``：mot17数据集的标注文件。
+  - ``gt_val_path``：mot17 数据集的标注文件。
 
 - **多任务模型**
 
-使用nuscenes数据集的lidar多任务模型精度计算方式如下：
+使用 nuscenes 数据集的 lidar 多任务模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3848,13 +3848,13 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 
   - ``det_eval_path``: 检测任务的预测结果文件。
   - ``seg_eval_path``: 分割任务的预测结果文件。
-  - ``gt_files_path``: 对nuscenes数据集进行预处理生成的gt文件。
-  - ``data_dir``: nuscenes数据集路径。
+  - ``gt_files_path``: 对 nuscenes 数据集进行预处理生成的 gt 文件。
+  - ``data_dir``: nuscenes 数据集路径。
 
 
 - **轨迹预测模型**
 
-使用argoverse1数据集的追踪模型计算方式如下：
+使用 argoverse1 数据集的追踪模型计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3864,12 +3864,12 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``eval_result_path``：轨迹预测的预测结果文件。
-  - ``meta_path``：argoverse1数据集生成的的标注文件，使用预处理脚本后，生成在原数据集目录meta中。
+  - ``meta_path``：argoverse1 数据集生成的的标注文件，使用预处理脚本后，生成在原数据集目录 meta 中。
 
 
 - **深度估计模型**
 
-使用Sceneflow数据集的深度估计模型精度计算方式如下：
+使用 Sceneflow 数据集的深度估计模型精度计算方式如下：
 
 ```shell
   #!/bin/sh
@@ -3879,7 +3879,7 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 **备注：**
 
   - ``log_file``：深度估计模型的预测结果文件。
-  - ``gt_files``：对Sceneflow数据集进行预处理生成的gt文件。
+  - ``gt_files``：对 Sceneflow 数据集进行预处理生成的 gt 文件。
 
 
 
@@ -3887,9 +3887,9 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 
 ##### 前处理
 
-您可根据需要自行添加模型前处理，将其部署到 ``CPU`` 上，以centerpoint_pointpillar_nuscenes为例：
+您可根据需要自行添加模型前处理，将其部署到 ``CPU`` 上，以 centerpoint_pointpillar_nuscenes 为例：
 
-1.增加前处理文件qat_centerpoint_preprocess_method.cc，以及头文件qat_centerpoint_preprocess_method.h。
+1.增加前处理文件 qat_centerpoint_preprocess_method.cc，以及头文件 qat_centerpoint_preprocess_method.h。
 
 2.增加模型前处理配置文件。
 
@@ -3943,20 +3943,20 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 
 ##### 后处理
 
-后处理集成主要有2个步骤，以CenterNet模型集成为例：
+后处理集成主要有 2 个步骤，以 CenterNet 模型集成为例：
 
 1. 增加后处理文件 ``ptq_centernet_post_process_method.cc``，以及头文件 ``ptq_centernet_post_process_method.h``。
 2. 增加模型运行脚本及配置文件。
 
 ###### 后处理文件及头文件添加
 
-后处理代码文件可直接复用src/method目录下任意后处理文件，主要修改 ``InitFromJsonString`` 函数，以及 ``PostProcess`` 函数即可。
+后处理代码文件可直接复用 src/method 目录下任意后处理文件，主要修改 ``InitFromJsonString`` 函数，以及 ``PostProcess`` 函数即可。
 
-``InitFromJsonString`` 函数主要是读取workflow.json中的后处理相关的参数配置，用户可自定义设置相应的输入参数。
+``InitFromJsonString`` 函数主要是读取 workflow.json 中的后处理相关的参数配置，用户可自定义设置相应的输入参数。
 ``PostProcess`` 函数主要完成后处理的逻辑。
 
-后处理.cc文件放置于 ``ai_benchmark/code/src/method/`` 路径下，
-.h头文件放置于 ``ai_benchmark/code/include/method/`` 路径下：
+后处理.cc 文件放置于 ``ai_benchmark/code/src/method/`` 路径下，
+.h 头文件放置于 ``ai_benchmark/code/include/method/`` 路径下：
 
 ```bash
   |── ai_benchmark
@@ -3974,7 +3974,7 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 
 模型运行脚本及配置文件完成添加后的目录结构参考如下：
 
-- centerpoint_pointpillar_nuscenes模型：
+- centerpoint_pointpillar_nuscenes 模型：
 
 ```bash
     |── ai_benchmark
@@ -3989,7 +3989,7 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
     |  |  |  |  |── workflow_latency.json                      # 单帧延时配置文件
 ```
 
-- motr_efficientnetb3_mot17模型：
+- motr_efficientnetb3_mot17 模型：
 
 ```bash
     |── ai_benchmark
@@ -4005,7 +4005,7 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
     |  |  |  |  |── workflow_latency.json                      # 单帧延时配置文件
 ```
 
-- 除centerpoint_pointpillar_nuscenes模型及motr_efficientnetb3_mot17外其他模型：
+- 除 centerpoint_pointpillar_nuscenes 模型及 motr_efficientnetb3_mot17 外其他模型：
 
 ```bash
     |── ai_benchmark
@@ -4026,27 +4026,27 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 ##### 日志系统使用说明
 
 日志系统主要包括 ``示例日志`` 和 ``模型推理API DNN日志`` 两部分。
-其中示例日志是指交付包示例代码中的应用日志；DNN日志是指lib dnn库中的日志。
+其中示例日志是指交付包示例代码中的应用日志；DNN 日志是指 lib dnn 库中的日志。
 用户根据不同的需求可以获取不同的日志。
 
 ###### 示例日志
 
-1. 日志等级。示例日志主要采用glog中的vlog，主要分为四个自定义等级：
+1. 日志等级。示例日志主要采用 glog 中的 vlog，主要分为四个自定义等级：
 
   - ``0`` (SYSTEM)，该等级主要用来输出报错信息；
   - ``1`` (REPORT)，该等级在示例代码中主要用来输出性能数据；
   - ``2`` (DETAIL)，该等级在示例代码中主要用来输出系统当前状态信息；
   - ``3`` (DEBUG)，该等级在示例代码中主要用来输出调试信息。
     日志等级设置规则：假设设置了级别为 ``P``，如果发生了一个级别 ``Q`` 比 ``P`` 低，
-    则可以启动，否则屏蔽掉；默认DEBUG>DETAIL>REPORT>SYSTEM。
+    则可以启动，否则屏蔽掉；默认 DEBUG>DETAIL>REPORT>SYSTEM。
 
 2. 日志等级设置。通过 ``log_level`` 参数来设置日志等级，在运行示例的时候，指定 ``log_level`` 参数来设置等级，
    比如指定 ``log_level=0``，即输出SYSTEM日志；如果指定 ``log_level=3``，
-   则输出DEBUG、DETAIL、REPORT和SYSTEM日志。
+   则输出 DEBUG、DETAIL、REPORT 和 SYSTEM 日志。
 
-###### 模型推理API DNN日志
+###### 模型推理 API DNN 日志
 
-关于模型推理 DNN API日志的配置，请阅读[《算法工具链产品手册》](https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/runtime/source/bpu_sdk_api/bpu_sdk_api.html#bpu-sdk-config)。
+关于模型推理 DNN API 日志的配置，请阅读[《算法工具链产品手册》](https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/runtime/source/bpu_sdk_api/bpu_sdk_api.html#bpu-sdk-config)。
 
 
 ##### 算子耗时说明
@@ -4057,12 +4057,12 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 
 **备注：**
 
-  ``export HB_DNN_PROFILER_LOG_PATH=${path}``：表示OP节点dump的输出路径，程序正常运行完退出后，产生profiler.log文件。
+  ``export HB_DNN_PROFILER_LOG_PATH=${path}``：表示 OP 节点 dump 的输出路径，程序正常运行完退出后，产生 profiler.log 文件。
 
 - 示例说明
 
 
-以下代码块以mobilenetv1模型为例，开启单个线程同时RunModel，设置 ``export HB_DNN_PROFILER_LOG_PATH=./``，则统计输出的信息如下：
+以下代码块以 mobilenetv1 模型为例，开启单个线程同时 RunModel，设置 ``export HB_DNN_PROFILER_LOG_PATH=./``，则统计输出的信息如下：
 
 ```c
   {
@@ -4133,22 +4133,22 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
     }
   }
 ```
-以上输出了 ``model_latency`` 和 ``task_latency``。其中model_latency中输出了模型每个OP运行所需要的耗时情况，task_latency中输出了模型运行中各个task模块的耗时情况。
+以上输出了 ``model_latency`` 和 ``task_latency``。其中 model_latency 中输出了模型每个 OP 运行所需要的耗时情况，task_latency 中输出了模型运行中各个 task 模块的耗时情况。
 
 **备注：**
 
-  程序只有正常退出才会输出profiler.log文件。
+  程序只有正常退出才会输出 profiler.log 文件。
 
-##### dump工具
+##### dump 工具
 
-本节主要介绍dump工具的开启方法，一般不需要关注，只有在模型精度异常情况时开启使用。
-​通过设置 ``export HB_DNN_DUMP_PATH=${path}`` 这个环境变量，可以dump出模型推理过程中每个节点的输入和输出, 根据dump的输出结果，可以排查模型推理在开发机模拟器和开发板是否存在一致性问题：即相同模型，相同输入，开发板和开发机模拟器的输出结果是否完全相同。
+本节主要介绍 dump 工具的开启方法，一般不需要关注，只有在模型精度异常情况时开启使用。
+​通过设置 ``export HB_DNN_DUMP_PATH=${path}`` 这个环境变量，可以 dump 出模型推理过程中每个节点的输入和输出, 根据 dump 的输出结果，可以排查模型推理在开发机模拟器和开发板是否存在一致性问题：即相同模型，相同输入，开发板和开发机模拟器的输出结果是否完全相同。
 
 ### 模型上板分析工具说明
 
 #### 概述
 
-本章节介绍X5算法工具链中模型上板推理的快速验证工具，方便开发者可以快速获取到 ``***.bin`` 模型的信息、模型推理的性能、模型debug等内容。
+本章节介绍 X5 算法工具链中模型上板推理的快速验证工具，方便开发者可以快速获取到 ``***.bin`` 模型的信息、模型推理的性能、模型 debug 等内容。
 
 #### hrt_model_exec 工具使用说明
 
@@ -4182,21 +4182,21 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
   | 1        | ``model_file``                   | string   | 模型文件路径，多个路径可通过逗号分隔。               |
   | 2        | ``model_name``                   | string   | 指定模型中某个模型的名称。                         |
   | 3        | ``core_id``                      | int      | 指定运行核。0：任意核，1：core0，2：core1；默认为 ``0``。                                         |
-  | 4        | ``input_file``                   | string   | 模型输入信息。图片输入后缀必须为 ``bin`` / ``JPG`` / ``JPEG`` / ``jpg`` / ``jpeg`` / ``png`` / ``PNG``中的一种。feature输入后缀名必须为 ``bin`` / ``txt`` 中的一种。 每个输入之间需要用英文字符的逗号隔开 ``,``，如： ``xxx.jpg,input.txt``。当模型中含有对输入数据有要求的算子时，推荐使用指定数据进行perf，如：Gather算子的index输入需要满足一定范围。  |
+  | 4        | ``input_file``                   | string   | 模型输入信息。图片输入后缀必须为 ``bin`` / ``JPG`` / ``JPEG`` / ``jpg`` / ``jpeg`` / ``png`` / ``PNG``中的一种。feature输入后缀名必须为 ``bin`` / ``txt`` 中的一种。 每个输入之间需要用英文字符的逗号隔开 ``,``，如： ``xxx.jpg,input.txt``。当模型中含有对输入数据有要求的算子时，推荐使用指定数据进行 perf，如：Gather 算子的 index 输入需要满足一定范围。  |
   | 5        | ``roi_infer``                    | bool     | 使能resizer模型推理。 若模型存在resizer输入源的输入，需设置为 ``true``， 并且配置与输入源一一对应的 ``input_file`` 和 ``roi`` 参数。                                |
-  | 6        | ``roi``                          | string   | 指定推理resizer模型时所需的roi区域。 多个roi之间通过英文分号间隔。如：--roi="2,4,123,125;6,8,111,113"                  |
+  | 6        | ``roi``                          | string   | 指定推理 resizer 模型时所需的 roi 区域。 多个 roi 之间通过英文分号间隔。如：--roi="2,4,123,125;6,8,111,113"                  |
   | 7        | ``frame_count``                  | int      | 执行模型运行帧数。                                   |
   | 8        | ``dump_intermediate``            | string   | dump模型每一层输入和输出。<br/>- ``dump_intermediate=0`` 时，默认dump功能关闭。  <br/>- ``dump_intermediate=1`` 时，模型中每一层节点输入数据输出数据以 ``bin`` 方式保存，其中 ``BPU`` 节点输出为 ``aligned`` 数据。<br/>- ``dump_intermediate=2`` 时，模型中每一层节点输入数据和输出数据以 ``bin``和 ``txt`` 两种方式保存，其中 ``BPU`` 节点输出为 ``aligned`` 数据。 <br/>- ``dump_intermediate=3`` 时，模型中每一层节点输入数据和输出数据以 ``bin`` 和 ``txt`` 两种方式保存，其中 ``BPU`` 节点输出为 ``valid`` 数据。                          |
   | 9        | ``enable_dump``                  | bool     | 使能dump模型输入和输出，默认为 ``false``。                             |
   | 10       | ``dump_precision``               | int      | 控制txt格式输出float型数据的小数点位数，默认为 ``9``。              |
   | 11       | ``hybrid_dequantize_process``    | bool     | 对原始输出进行后处理后保存。在 ``enable_dump=true`` 时生效，且只支持四维模型。后处理包括对定点输出进行反量化操作、去除 ``padding`` 操作。                         |
-  | 12       | ``dump_format``                  | string   | dump模型输入和输出的格式。                           |
-  | 13       | ``dump_txt_axis``                | int      | 控制txt格式输入输出的换行规则。                      |
-  | 14       | ``enable_cls_post_process``      | bool     | 使能分类后处理，默认为 ``false``。子命令为 ``infer`` 时配合使用，目前只支持ptq分类模型的后处理，打印分类结果。                                      |
+  | 12       | ``dump_format``                  | string   | dump 模型输入和输出的格式。                           |
+  | 13       | ``dump_txt_axis``                | int      | 控制 txt 格式输入输出的换行规则。                      |
+  | 14       | ``enable_cls_post_process``      | bool     | 使能分类后处理，默认为 ``false``。子命令为 ``infer`` 时配合使用，目前只支持 ptq 分类模型的后处理，打印分类结果。                                      |
   | 15       | ``perf_time``                    | int      | 执行模型运行时间。                                   |
-  | 16       | ``thread_num``                   | int      | 线程数(并行度)，数值可以表示最多有多少个任务在并行处理。测试延时，数值需要设置为1，没有资源抢占发生，延时测试更准确。测试吞吐，建议设置>2 (BPU核心个数)，调整线程数使BPU利用率尽量高，吞吐测试更准确。       |
+  | 16       | ``thread_num``                   | int      | 线程数(并行度)，数值可以表示最多有多少个任务在并行处理。测试延时，数值需要设置为 1，没有资源抢占发生，延时测试更准确。测试吞吐，建议设置>2 (BPU 核心个数)，调整线程数使 BPU 利用率尽量高，吞吐测试更准确。       |
   | 17       | ``profile_path``                 | string   | 统计工具日志产生路径，运行产生profiler.log和profiler.csv，分析op耗时和调度耗时。一般设置 ``--profile_path="."`` 即可，代表在当前目录下生成日志文件。                |
-  | 18       | ``dump_path``                    | string   | 工具dump输出文件路径，enable_dump或dump_intermediate都会产生输出文件，指定路径后,文件将输出在指定路径下，若路径不存在，则工具会自动创建。                  |
+  | 18       | ``dump_path``                    | string   | 工具 dump 输出文件路径，enable_dump 或 dump_intermediate 都会产生输出文件，指定路径后,文件将输出在指定路径下，若路径不存在，则工具会自动创建。                  |
 
 ##### 使用说明
 
@@ -4206,9 +4206,9 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 
 - 概述
 
-该参数用于获取模型信息，模型支持范围：QAT模型，PTQ模型。
+该参数用于获取模型信息，模型支持范围：QAT 模型，PTQ 模型。
 该参数与 ``model_file`` 一起使用，用于获取模型的详细信息；
-模型的信息包括：模型输入输出信息 ``hbDNNTensorProperties`` 和模型的分段信息 ``stage`` ；模型的分段信息是：一张图片可以分多个阶段进行推理，stage信息为[x1, y1, x2, y2]，分别为图片推理的左上角和右下角坐标，目前X5的bayes架构支持这类分段模型的推理，X3上模型均为1个stage。
+模型的信息包括：模型输入输出信息 ``hbDNNTensorProperties`` 和模型的分段信息 ``stage`` ；模型的分段信息是：一张图片可以分多个阶段进行推理，stage 信息为[x1, y1, x2, y2]，分别为图片推理的左上角和右下角坐标，目前 X5 的 bayes 架构支持这类分段模型的推理，X3 上模型均为 1 个 stage。
 
 **小技巧：**
 
@@ -4224,7 +4224,7 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 ```
   hrt_model_exec model_info --model_file=xxx.bin,xxx.bin
 ```
-3. 多模型--pack模型（输出指定模型信息）
+3. 多模型--pack 模型（输出指定模型信息）
 ```
   hrt_model_exec model_info --model_file=xxx.bin --model_name=xx
 ```
@@ -4250,7 +4250,7 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 - 概述
 
 该参数用于输入自定义图片后，模型推理一帧，并给出模型推理结果。
-该参数需要与 ``input_file`` 一起使用，指定输入图片路径，工具根据模型信息resize图片，整理模型输入信息。
+该参数需要与 ``input_file`` 一起使用，指定输入图片路径，工具根据模型信息 resize 图片，整理模型输入信息。
 
 **小技巧：**
 
@@ -4266,17 +4266,17 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 ```bash
   hrt_model_exec infer --model_file=xxx.bin,xxx.bin --model_name=xx --input_file=xxx.jpg
 ```
-3. resizer模型
+3. resizer 模型
 
 模型有三个输入，输入源顺序分别为[``ddr``, ``resizer``, ``resizer``]。
 
-推理两帧数据，假设第一帧输入为[xx0.bin,xx1.jpg,xx2.jpg]，roi为[2,4,123,125;6,8,111,113]，第二帧输入为[xx3.bin,xx4.jpg,xx5.jpg]，roi为[27,46,143,195;16,28,131,183]，则推理命令如下：
+推理两帧数据，假设第一帧输入为[xx0.bin,xx1.jpg,xx2.jpg]，roi 为[2,4,123,125;6,8,111,113]，第二帧输入为[xx3.bin,xx4.jpg,xx5.jpg]，roi 为[27,46,143,195;16,28,131,183]，则推理命令如下：
 
 ```bash
 
   hrt_model_exec infer --roi_infer=true --model_file=xxx.bin --input_file="xx0.bin,xx1.jpg,xx2.jpg,xx3.bin,xx4.jpg,xx5.jpg"  --roi="2,4,123,125;6,8,111,113;27,46,143,195;16,28,131,183"
 ```
-**注意：** 多帧输入之间用英文逗号隔离，roi之间使用分号隔离。
+**注意：** 多帧输入之间用英文逗号隔离，roi 之间使用分号隔离。
 
 
 ![infer](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/perf_x5.png)
@@ -4290,14 +4290,14 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
   | ``roi_infer``                   | 使能resizer模型推理；若模型输入包含resizer源，设置为 ``true``，默认为 ``false``。                                                      |
   | ``roi``                         | ``roi_infer`` 为 ``true`` 时生效，设置推理resizer模型时所需的 ``roi`` 区域以分号间隔。                                                 |
   | ``frame_count``                 | 设置 ``infer`` 运行帧数，单帧重复推理，可与 ``enable_dump`` 并用，验证输出一致性，默认为 ``1``。                                       |
-  | ``dump_intermediate``           | dump模型每一层输入数据和输出数据，默认值 ``0``，不dump数据。 ``1``：输出文件类型为 ``bin``；``2``：输出类型为 ``bin`` 和 ``txt``，其中BPU节点输出为aligned数据； ``3``：输出类型为 ``bin`` 和 ``txt``，其中BPU节点输出为valid数据。|
+  | ``dump_intermediate``           | dump模型每一层输入数据和输出数据，默认值 ``0``，不dump数据。 ``1``：输出文件类型为 ``bin``；``2``：输出类型为 ``bin`` 和 ``txt``，其中BPU节点输出为aligned数据； ``3``：输出类型为 ``bin`` 和 ``txt``，其中 BPU 节点输出为 valid 数据。|
   | ``enable_dump``                 | dump模型输出数据，默认为 ``false``。                                                                                                   |
   | ``dump_precision``              | 控制txt格式输出float型数据的小数点位数，默认为 ``9``。                                                                                 |
-  | ``hybrid_dequantize_process``   | 控制txt格式输出float类型数据，若输出为定点数据将其进行反量化处理，目前只支持四维模型。                                                 |
+  | ``hybrid_dequantize_process``   | 控制 txt 格式输出 float 类型数据，若输出为定点数据将其进行反量化处理，目前只支持四维模型。                                                 |
   | ``dump_format``                 | dump模型输出文件的类型，可选参数为 ``bin`` 或 ``txt``，默认为 ``bin``。                                                                |
   | ``dump_txt_axis``               | dump模型txt格式输出的换行规则；若输出维度为n，则参数范围为[0, n], 默认为 ``-1``，一行一个数据。                                                      |
   | ``enable_cls_post_process``     | 使能分类后处理，目前只支持ptq分类模型，默认 ``false``。                                                                                |
-  | ``dump_path``                   | 指定dump输出路径，默认当前路径。                                                                                                       |
+  | ``dump_path``                   | 指定 dump 输出路径，默认当前路径。                                                                                                       |
 
 
 ##### ``多输入模型说明``
@@ -4326,7 +4326,7 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 
 - ``roi_infer``
 
-若模型包含resizer输入源， ``infer`` 和 ``perf`` 功能都需要设置 ``roi_infer`` 为true，并且配置与输入源一一对应的 ``input_file`` 和 ``roi`` 参数。
+若模型包含 resizer 输入源， ``infer`` 和 ``perf`` 功能都需要设置 ``roi_infer`` 为true，并且配置与输入源一一对应的 ``input_file`` 和 ``roi`` 参数。
 如：模型有三个输入，输入源顺序分别为[``ddr``, ``resizer``, ``resizer``]，则推理两组输入数据的命令行如下：
 
 ```
@@ -4339,7 +4339,7 @@ QAT模型的精度计算脚本在 **qat/tools/python_tools/accuracy_tools** 目�
 
 - ``dump_intermediate``
 
-dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0`` 时，默认dump功能关闭；
+dump 模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0`` 时，默认 dump 功能关闭；
 ``dump_intermediate=1`` 时，模型中每一层节点输入数据和输出数据以 ``bin`` 方式保存，其中 ``BPU`` 节点输出为 ``aligned`` 数据；
 ``dump_intermediate=2`` 时，模型中每一层节点输入数据和输出数据以 ``bin`` 和 ``txt`` 两种方式保存，其中 ``BPU`` 节点输出为 ``aligned`` 数据；
 ``dump_intermediate=3`` 时，模型中每一层节点输入数据和输出数据以 ``bin`` 和 ``txt`` 两种方式保存，其中 ``BPU`` 节点输出为 ``valid`` 数据。
@@ -4352,10 +4352,10 @@ dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0
 
 - ``hybrid_dequantize_process``
 
-控制txt格式输出float类型数据。 ``hybrid_dequantize_process`` 参数在 ``enable_dump=true`` 时生效。
+控制 txt 格式输出 float 类型数据。 ``hybrid_dequantize_process`` 参数在 ``enable_dump=true`` 时生效。
 当 ``enable_dump=true`` 时，若设置 ``hybrid_dequantize_process=true`` ，反量化整型输出数据，将所有输出按float类型保存为 ``txt`` 文件，其中模型输出为 ``valid`` 数据，支持配置 ``dump_txt_axis`` 和 ``dump_precision``；
 若设置 ``hybrid_dequantize_process=false`` ，直接保存模型输出的 ``aligned`` 数据，不做任何处理。
-如： 模型有3个输出，输出Tensor数据类型顺序分别为[float，int32，int16]， 输出txt格式float类型的 ``valid`` 数据， 则推理命令行如下：
+如： 模型有 3 个输出，输出 Tensor 数据类型顺序分别为[float，int32，int16]， 输出 txt 格式 float 类型的 ``valid`` 数据， 则推理命令行如下：
 ```
   // 输出float类型数据
   hrt_model_exec infer --model_file=xxx.bin --input_file="xx.bin"  --enable_dump=true --hybrid_dequantize_process=true
@@ -4367,13 +4367,13 @@ dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0
 - 概述
 
 该参数用于测试模型的推理性能。
-使用此工具命令，用户无需输入数据，程序会根据模型信息自动构造模型的输入tensor，tensor数据为随机数。
-程序默认单线程运行200帧数据，当指定perf_time参数时，frame_count参数失效，程序会执行指定时间后退出。
-程序运行完成后，会输出模型运行的程序线程数、帧数、模型推理总时间，模型推理平均latency，帧率信息等。
+使用此工具命令，用户无需输入数据，程序会根据模型信息自动构造模型的输入 tensor，tensor 数据为随机数。
+程序默认单线程运行 200 帧数据，当指定 perf_time 参数时，frame_count 参数失效，程序会执行指定时间后退出。
+程序运行完成后，会输出模型运行的程序线程数、帧数、模型推理总时间，模型推理平均 latency，帧率信息等。
 
 **小技巧：**
 
-  程序每200帧打印一次性能信息：latnecy的最大、最小、平均值，不足200帧程序运行结束打印一次。
+  程序每 200 帧打印一次性能信息：latnecy 的最大、最小、平均值，不足 200 帧程序运行结束打印一次。
 
 
 - 示例说明
@@ -4386,17 +4386,17 @@ dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0
 ```
   hrt_model_exec perf --model_file=xxx.bin,xxx.bin --model_name=xx
 ```
-3. resizer模型
+3. resizer 模型
 
 模型有三个输入，输入源顺序分别为[``ddr``, ``resizer``, ``resizer``]。
 
-推理两帧数据，假设第一帧输入为[xx0.bin,xx1.jpg,xx2.jpg]，roi为[2,4,123,125;6,8,111,113]，第二帧输入为[xx3.bin,xx4.jpg,xx5.jpg]，roi为[27,46,143,195;16,28,131,183]，则推理命令如下：
+推理两帧数据，假设第一帧输入为[xx0.bin,xx1.jpg,xx2.jpg]，roi 为[2,4,123,125;6,8,111,113]，第二帧输入为[xx3.bin,xx4.jpg,xx5.jpg]，roi 为[27,46,143,195;16,28,131,183]，则推理命令如下：
 
 ```bash
 
   hrt_model_exec perf --roi_infer=true --model_file=xxx.bin --input_file="xx0.bin,xx1.jpg,xx2.jpg,xx3.bin,xx4.jpg,xx5.jpg"   --roi="2,4,123,125;6,8,111,113;27,46,143,195;16,28,131,183"
 ```
-**注意：** 多帧输入之间用英文逗号隔离，roi之间使用分号隔离。
+**注意：** 多帧输入之间用英文逗号隔离，roi 之间使用分号隔离。
 
 ![perf](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/perf_x5.png)
 
@@ -4410,14 +4410,14 @@ dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0
   | ``roi``                         | ``roi_infer`` 为 ``true`` 时生效，设置推理resizer模型时所需的 ``roi`` 区域以英文分号间隔。                                               |
   | ``frame_count``                 | 设置 ``perf`` 运行帧数，当perf_time为0时生效，默认为 ``200``。                                                                          |
   | ``perf_time``                   | 设置 ``perf`` 运行时间，单位：分钟，默认为 ``0``。                                                                                      |
-  | ``thread_num``                  | 设置程序运行线程数，范围[1, 8], 默认为 ``1``, 设置大于8时按照8个线程处理。                                                              |
-  | ``profile_path``                | 统计工具日志产生路径，运行产生profiler.log和profiler.csv，分析op耗时和调度耗时。                                                                      |
+  | ``thread_num``                  | 设置程序运行线程数，范围[1, 8], 默认为 ``1``, 设置大于 8 时按照 8 个线程处理。                                                              |
+  | ``profile_path``                | 统计工具日志产生路径，运行产生 profiler.log 和 profiler.csv，分析 op 耗时和调度耗时。                                                                      |
 
 
 ##### ``多线程Latency数据说明``
 
-多线程的目的是为了充分利用BPU资源，多线程共同处理 ``frame_count`` 帧数据或执行perf_time时间，直至数据处理完成/执行时间结束程序结束。
-在多线程 ``perf`` 过程中可以执行以下命令，实时获取BPU资源占用率情况。
+多线程的目的是为了充分利用 BPU 资源，多线程共同处理 ``frame_count`` 帧数据或执行 perf_time 时间，直至数据处理完成/执行时间结束程序结束。
+在多线程 ``perf`` 过程中可以执行以下命令，实时获取 BPU 资源占用率情况。
 
 ```bash
   hrut_somstatus -n 10000 –d 1
@@ -4469,23 +4469,23 @@ dump模型每一层节点的输入数据和输出数据。 ``dump_intermediate=0
 
 **备注：**
 
-  在 ``perf`` 模式下，单线程的latency时间表示模型的实测上板性能，
-  而多线程的latency数据表示的是每个线程的模型单帧处理时间，其相对于单线程的时间要长，但是多线程的总体处理时间减少，其帧率是提升的。
+  在 ``perf`` 模式下，单线程的 latency 时间表示模型的实测上板性能，
+  而多线程的 latency 数据表示的是每个线程的模型单帧处理时间，其相对于单线程的时间要长，但是多线程的总体处理时间减少，其帧率是提升的。
 
 
 ##### ``输入参数补充说明``
 
 - ``profile_path``
 
-profile日志文件产生目录。
-该参数通过设置环境变量 ``export HB_DNN_PROFILER_LOG_PATH=${path}`` 查看模型运行过程中OP以及任务调度耗时。
-一般设置 ``--profile_path="."`` 即可，代表在当前目录下生成日志文件，日志文件为profiler.log。
+profile 日志文件产生目录。
+该参数通过设置环境变量 ``export HB_DNN_PROFILER_LOG_PATH=${path}`` 查看模型运行过程中 OP 以及任务调度耗时。
+一般设置 ``--profile_path="."`` 即可，代表在当前目录下生成日志文件，日志文件为 profiler.log。
 
 - ``thread_num``
 
 线程数(并行度)，数值表示最多有多少个任务在并行处理。
-测试延时时，数值需要设置为1，没有资源抢占发生，延时测试更准确。
-测试吞吐时，建议设置>2 (BPU核心个数)，调整线程数使BPU利用率尽量高，吞吐测试更准确。
+测试延时时，数值需要设置为 1，没有资源抢占发生，延时测试更准确。
+测试吞吐时，建议设置>2 (BPU 核心个数)，调整线程数使 BPU 利用率尽量高，吞吐测试更准确。
 **注意： ``X5只有一个BPU核，core_id 只能设置为 0 或 1``**
 
 ```bash
@@ -4497,9 +4497,9 @@ profile日志文件产生目录。
 
 ##### 常见问题
 
-###### Latency、FPS数据是如何统计的？
+###### Latency、FPS 数据是如何统计的？
 
-Latency是指单流程推理模型所耗费的平均时间，重在表示在资源充足的情况下推理一帧的平均耗时，体现在上板运行是单核单线程统计；统计方法伪代码如下：
+Latency 是指单流程推理模型所耗费的平均时间，重在表示在资源充足的情况下推理一帧的平均耗时，体现在上板运行是单核单线程统计；统计方法伪代码如下：
 
 ```cpp
 
@@ -4531,16 +4531,16 @@ Latency是指单流程推理模型所耗费的平均时间，重在表示在资�
   // release tensor and model
   ```
 
-FPS是指多流程同时进行模型推理平均一秒推理的帧数，重在表示充分使用资源情况下模型的吞吐，体现在上板运行为单核多线程；统计方法是同时起多个线程进行模型推理，计算平均1s推理的总帧数。
+FPS 是指多流程同时进行模型推理平均一秒推理的帧数，重在表示充分使用资源情况下模型的吞吐，体现在上板运行为单核多线程；统计方法是同时起多个线程进行模型推理，计算平均 1s 推理的总帧数。
 
-###### 通过Latency推算FPS与工具测出的FPS为什么不一致？
+###### 通过 Latency 推算 FPS 与工具测出的 FPS 为什么不一致？
 
-Latency与FPS的统计情景不同，Latency为单流程（单核单线程）推理，FPS为多流程（单核多线程）推理，因此推算不一致；若统计FPS时将流程（线程）数量设置为 ``1`` ，则通过Latency推算FPS和测出的一致。
+Latency 与 FPS 的统计情景不同，Latency 为单流程（单核单线程）推理，FPS 为多流程（单核多线程）推理，因此推算不一致；若统计 FPS 时将流程（线程）数量设置为 ``1`` ，则通过 Latency 推算 FPS 和测出的一致。
 
 
 ###### 工具如何评测自定义算子模型？
 
-参考horizon_runtime_sample/code/02_advanced_samples/custom_identity示例开发自定义算子，将自定义算子编译成动态库，在工具使用之前指定该动态库路径即可。
+参考 horizon_runtime_sample/code/02_advanced_samples/custom_identity 示例开发自定义算子，将自定义算子编译成动态库，在工具使用之前指定该动态库路径即可。
 例如动态库路径为：/userdata/plugins/libplugin.so，工具运行含该自定义算子的模型，仅需指定该动态库所在路径即可。
 
 ```shell
@@ -4551,20 +4551,20 @@ Latency与FPS的统计情景不同，Latency为单流程（单核单线程）推
 
 #### hrt_bin_dump 工具使用说明
 
-``hrt_bin_dump`` 是模型的layer dump工具，工具的输出文件为二进制文件。
+``hrt_bin_dump`` 是模型的 layer dump 工具，工具的输出文件为二进制文件。
 
 ##### 输入参数描述
 
   | 编号 |          参数         |  类型  |         描述         |      说明    |
   |------|-----|--------|----|--------|
-  | 1    | ``model_file``        | string | 模型文件路径。       | 指定模型文件路径，可dump模型所有节点的输入和输出文件  |
+  | 1    | ``model_file``        | string | 模型文件路径。       | 指定模型文件路径，可 dump 模型所有节点的输入和输出文件  |
   | 2    | ``input_file``        | string | 输入文件路径。       | 模型的输入文件，支持 ``hbDNNDataType`` 所有类型的输入； IMG类型文件需为二进制文件（后缀必须为.bin），二进制文件的大小应与模型的输入信息相匹配，如：YUV444文件大小为 :math:`height * width * 3`； TENSOR类型文件需为二进制文件或文本文件（后缀必须为.bin/.txt），二进制文件的大小应与模型的输入信息相匹配，文本文件的读入数据个数必须大于等于模型要求的输入数据个数，多余的数据会被丢弃；每个输入之间通过逗号分隔，如：模型有两个输入，则： ``--input_file=kite.bin,input.txt``。                           |
   | 3    | ``dump_path``    | string | 工具输出路径。       | 工具的输出路径，该路径应为合法路径。                                                                               |
 
 
 ##### 使用说明
 
-工具提供模型节点输入输出dump卷积层输出功能，输出文件为二进制文件。
+工具提供模型节点输入输出 dump 卷积层输出功能，输出文件为二进制文件。
 直接运行 ``hrt_bin_dump`` 获取工具使用详情。
 参见下图：
 
@@ -4578,7 +4578,7 @@ Latency与FPS的统计情景不同，Latency为单流程（单核单线程）推
 
 ##### 示例说明
 
-以mobilenetv1的模型为例，创建outputs文件夹，执行以下命令：
+以 mobilenetv1 的模型为例，创建 outputs 文件夹，执行以下命令：
 
 ```
   ./hrt_bin_dump --model_file=./mobilenetv1.bin --dump_path=./outputs --input_file=./input.bin

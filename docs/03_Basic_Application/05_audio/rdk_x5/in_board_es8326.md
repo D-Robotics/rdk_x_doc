@@ -9,7 +9,7 @@ sidebar_position: 2
 
 ## 安装方法
 
-接 上3.5mm 耳机孔，这里要注意，耳机也需要是 4 段式的，3 段是的接口一般没有 MIC(microphone)。
+接 上 3.5mm 耳机孔，这里要注意，耳机也需要是 4 段式的，3 段是的接口一般没有 MIC(microphone)。
 
 ![image-audio-earphone](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/02_audio/image/image-audio-earphone.png)
 
@@ -52,7 +52,7 @@ root@ubuntu:~# ls /dev/snd/
 by-path/   controlC0  pcmC0D0c   pcmC0D0p   timer    
 ```
 
-通过上述查询，可以确认，声卡0对应的是板载声卡；设备也是存在的, 且设备号为 `0-0` , 实际我们操作的设备应该是 `pcmC0D0p` 和 `pcmC0D0c`。
+通过上述查询，可以确认，声卡 0 对应的是板载声卡；设备也是存在的, 且设备号为 `0-0` , 实际我们操作的设备应该是 `pcmC0D0p` 和 `pcmC0D0c`。
 
 - ### 录音
 
@@ -68,7 +68,7 @@ arecord -Dhw:0,0 -c 2 -r 48000 -f S24_LE -t wav -d 10 /userdata/record1.wav
 Recording WAVE '/userdata/record1.wav' : Signed 24 bit Little Endian, Rate 48000 Hz, Stereo
 ```
 
-观察到屏幕输出正常的录制log，等待大概10s（-d 10 中的10代表10秒），录制结束，就可以通过如下命令来播放刚刚的录音了。
+观察到屏幕输出正常的录制 log，等待大概 10s（-d 10 中的 10 代表 10 秒），录制结束，就可以通过如下命令来播放刚刚的录音了。
 
 - ### 播放
 

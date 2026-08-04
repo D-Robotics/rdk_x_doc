@@ -2,12 +2,12 @@
 sidebar_position: 7
 ---
 
-# IO-DOMAIN调试指南
+# IO-DOMAIN 调试指南
 
-IO-Domain用来配置X5部分模块的电压域，以RGMII接口为例，如果电路设计时外接电压域为3.3V，则需要配置RGMII模块的IO-DOMAIN为3.3V，如果电路设计时外接电压域为1.8V，则需要配置为1.8v，需要注意的是：
+IO-Domain 用来配置 X5 部分模块的电压域，以 RGMII 接口为例，如果电路设计时外接电压域为 3.3V，则需要配置 RGMII 模块的 IO-DOMAIN 为 3.3V，如果电路设计时外接电压域为 1.8V，则需要配置为 1.8v，需要注意的是：
 
--   外接电压域为3.3V而对应的IO-DOMAIN配置为1.8V时，可能会对芯片有损伤；
--   外接电压域为1.8V而对应的IO-DOMAIN配置为3.3V时，相应的模块可能无法正常工作；
+-   外接电压域为 3.3V 而对应的 IO-DOMAIN 配置为 1.8V 时，可能会对芯片有损伤；
+-   外接电压域为 1.8V 而对应的 IO-DOMAIN 配置为 3.3V 时，相应的模块可能无法正常工作；
 
 ## 驱动代码
 
@@ -18,13 +18,13 @@ drivers/pinctrl/hobot/ # pinctrl 驱动代码源文件所在文件夹
 include/linux/platform_data/pinctrl-single.h # pinctrl 驱动代码头文件
 ```
 
-### IO-DOMAIN的DTS
+### IO-DOMAIN 的 DTS
 
-X5的Pinctrl功能相关定义位于SDK包kernel文件夹下的arch/arm64/boot/dts/hobot/pinmux-func.dtsi文件内。
+X5 的 Pinctrl 功能相关定义位于 SDK 包 kernel 文件夹下的 arch/arm64/boot/dts/hobot/pinmux-func.dtsi 文件内。
 
-由于IO-Domain在pinctrl-single的框架下实现，因此其DTS和pinctrl的类似，在IO-Domain的DTS里已经列出了所有模块1.8V和3.3V的配置组，客户一般不需要修改，在具体开发时根据实际情况选择使用即可。
+由于 IO-Domain 在 pinctrl-single 的框架下实现，因此其 DTS 和 pinctrl 的类似，在 IO-Domain 的 DTS 里已经列出了所有模块 1.8V 和 3.3V 的配置组，客户一般不需要修改，在具体开发时根据实际情况选择使用即可。
 
-比较特殊的是SD和SDIO两组IO-Domain的配置。由于在芯片PAD上SD与SDIO的电压域会被同时配置，我们默认使用SD及SDIO的MMC控制器来独立控制SD/SDIO的PIN的电压域，配置选项为自定义的“power-source”宏，如下所示：
+比较特殊的是 SD 和 SDIO 两组 IO-Domain 的配置。由于在芯片 PAD 上 SD 与 SDIO 的电压域会被同时配置，我们默认使用 SD 及 SDIO 的 MMC 控制器来独立控制 SD/SDIO 的 PIN 的电压域，配置选项为自定义的“power-source”宏，如下所示：
 
 ```c
 ...
@@ -68,9 +68,9 @@ X5的Pinctrl功能相关定义位于SDK包kernel文件夹下的arch/arm64/boot/d
 ...
 ```
 
-### 驱动调用时DTS配置
+### 驱动调用时 DTS 配置
 
-首先，在DTS内定义当前硬件特殊的电压域配置，以配置pwm0 ch1为1.8V为例：
+首先，在 DTS 内定义当前硬件特殊的电压域配置，以配置 pwm0 ch1 为 1.8V 为例：
 
 ```c
 &lsio_iomuxc {
@@ -82,7 +82,7 @@ X5的Pinctrl功能相关定义位于SDK包kernel文件夹下的arch/arm64/boot/d
 }
 ```
 
-和pinctrl的使用方法类似，驱动在自己的DTS中引用需要配置的IO-Domain，以pwm驱动为例，配置如下：
+和 pinctrl 的使用方法类似，驱动在自己的 DTS 中引用需要配置的 IO-Domain，以 pwm 驱动为例，配置如下：
 
 ```c
 &pwm0 {
@@ -95,7 +95,7 @@ X5的Pinctrl功能相关定义位于SDK包kernel文件夹下的arch/arm64/boot/d
 
 ### 驱动调用示例代码
 
-和Pinctrl调用方法一致，驱动先通过Pinctrl-names查找对应的pinctrl state，然后再切换到对应的state。
+和 Pinctrl 调用方法一致，驱动先通过 Pinctrl-names 查找对应的 pinctrl state，然后再切换到对应的 state。
 
 ```c
 static int hobot_xxx_probe(struct platform_device *pdev)
@@ -127,6 +127,6 @@ static int hobot_xxx_probe(struct platform_device *pdev)
 }
 ```
 
-## uboot下修改电压域
+## uboot 下修改电压域
 
-X5的Uboot内已实现了Pinctrl驱动，使用方法与内核一致，均通过DTS来定义具体的Pin的属性。
+X5 的 Uboot 内已实现了 Pinctrl 驱动，使用方法与内核一致，均通过 DTS 来定义具体的 Pin 的属性。

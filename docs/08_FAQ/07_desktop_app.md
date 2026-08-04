@@ -31,6 +31,6 @@ import TabItem from '@theme/TabItem';
 
 问题描述：在"Settings"中切换系统语言并重启后，出现输入正确密码也无法登录桌面的情况。
 
-步骤：打开 Settings 应用，导航至 Region & Language，选择目标语言，出现restart按钮（此restart只重启桌面会话，不会重启设备），在锁屏界面输入密码。
+步骤：打开 Settings 应用，导航至 Region & Language，选择目标语言，出现 restart 按钮（此 restart 只重启桌面会话，不会重启设备），在锁屏界面输入密码。
 
-解决方案：若在步骤中遇到输入密码正确无法登录的问题，设备重新上电或reboot重启设备即可完成切换。
+解决方案：若在步骤中遇到输入密码正确无法登录的问题，设备重新上电或 reboot 重启设备即可完成切换。

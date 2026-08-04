@@ -2,30 +2,30 @@
 sidebar_position: 5
 ---
 
-# 7.3.5 ISP图像系统
+# 7.3.5 ISP 图像系统
 
 ## 概述
 
 ### AE
 
-AE算法通过分析直方图进行操作，以计算相对于校准中设置的AE target的新EV值。AE
-target由算法动态控制，以确保正确曝光低动态范围场景和高动态范围场景。例如，在低动态范围场景中，AE
-target将基于AE_LDR_Target（18％灰度目标）。对于高动态范围场景，该算法将动态修改AE
-target，保证亮区不会过曝。本地色调映射引擎（Iridix）将确保阴影被显示并正确曝光。HDR目标值需要根据 Sensor的动态范围校准，Iridix引擎来还原低亮区域的内容 。
+AE 算法通过分析直方图进行操作，以计算相对于校准中设置的 AE target 的新 EV 值。AE
+target 由算法动态控制，以确保正确曝光低动态范围场景和高动态范围场景。例如，在低动态范围场景中，AE
+target 将基于 AE_LDR_Target（18％灰度目标）。对于高动态范围场景，该算法将动态修改 AE
+target，保证亮区不会过曝。本地色调映射引擎（Iridix）将确保阴影被显示并正确曝光。HDR 目标值需要根据 Sensor 的动态范围校准，Iridix 引擎来还原低亮区域的内容 。
 
 #### 重要概念
 
-曝光时间：图像传感器内部积累电荷的时间，是pixel从开始曝光到电量被读出的这段时间，决定了sensor受光时间的长短，曝光时间可以以行长为单位。
+曝光时间：图像传感器内部积累电荷的时间，是 pixel 从开始曝光到电量被读出的这段时间，决定了 sensor 受光时间的长短，曝光时间可以以行长为单位。
 
-曝光增益：对sensor 的输出电荷的总的放大系数，一般有数字增益和模拟增益，模拟增益引入的噪声会稍小，所以一般优先用模拟增益。
+曝光增益：对 sensor 的输出电荷的总的放大系数，一般有数字增益和模拟增益，模拟增益引入的噪声会稍小，所以一般优先用模拟增益。
 
 #### 基本原理
 
-AE算法通过分析直方图统计并结合校准的AE目标值来得到新的EV（exposure value）值。为了兼顾低动态场景和高动态场景都能准确曝光，算法会动态的调整AE目标值。
+AE 算法通过分析直方图统计并结合校准的 AE 目标值来得到新的 EV（exposure value）值。为了兼顾低动态场景和高动态场景都能准确曝光，算法会动态的调整 AE 目标值。
 
 ### AWB
 
-AWB模块负责实现色彩稳定，因为图像传感器对中性色调的响应取决于场景光照情况，不具有人眼的不同光照色温下的色彩恒定性，使得这些在白色和灰色等中性色调中最为明显。因此白平衡模块就需要将人眼看来白色的物体进行色彩的还原,使其在照片上也呈现为白色。AWB算法处理范围广泛的照明条件和光谱，以避免不良的偏色。
+AWB 模块负责实现色彩稳定，因为图像传感器对中性色调的响应取决于场景光照情况，不具有人眼的不同光照色温下的色彩恒定性，使得这些在白色和灰色等中性色调中最为明显。因此白平衡模块就需要将人眼看来白色的物体进行色彩的还原,使其在照片上也呈现为白色。AWB 算法处理范围广泛的照明条件和光谱，以避免不良的偏色。
 
 #### 重要概念
 
@@ -35,99 +35,99 @@ AWB模块负责实现色彩稳定，因为图像传感器对中性色调的响�
 
 #### 基本原理
 
-白平衡各通道校正由AWB统计信息和算法基于静态校正结果完成的。该校正结果不会在帧数据
+白平衡各通道校正由 AWB 统计信息和算法基于静态校正结果完成的。该校正结果不会在帧数据
 中更新，而是作为配置的一部分在下一帧更新。
 
 ### Demosaic
 
-Demosaic单元负责从覆盖有颜色过滤器阵列（CFA）的图像传感器输出的（空间欠采样）颜色样本中重建出全彩色图像。此外，该模块提供了对图像的高级控制锐化。
+Demosaic 单元负责从覆盖有颜色过滤器阵列（CFA）的图像传感器输出的（空间欠采样）颜色样本中重建出全彩色图像。此外，该模块提供了对图像的高级控制锐化。
 
-数码相机传感器元件本身只能记录落在它们上面光线的强度，无法区分不同的颜色，因此仅产生灰度图像。要捕获颜色信息，必须在每个像素传感器上放置滤镜，它仅允许特定颜色的光通过。使用的滤镜必须能够重建——每个像素具有红色，绿色和蓝色（RGB）值的全彩色图像。这种彩色滤光片阵列最常见的类型称为“拜耳阵列”，之所以这么称呼，是因为滤镜安排每2x2像素组以RGGB方式排列。
+数码相机传感器元件本身只能记录落在它们上面光线的强度，无法区分不同的颜色，因此仅产生灰度图像。要捕获颜色信息，必须在每个像素传感器上放置滤镜，它仅允许特定颜色的光通过。使用的滤镜必须能够重建——每个像素具有红色，绿色和蓝色（RGB）值的全彩色图像。这种彩色滤光片阵列最常见的类型称为“拜耳阵列”，之所以这么称呼，是因为滤镜安排每 2x2 像素组以 RGGB 方式排列。
 
-所有像素的一半是绿色（G），四分之一是红色（R）和蓝色（B）。与蓝色同一行中的绿色单元格标记为Gb，与红色同一行中的绿色单元格标记为Gr。模式可以以R，Gr，Gb或B中的任何一个开头。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/5bfd1de8f3d9be1c11337c90cfb3ed96.png)
+所有像素的一半是绿色（G），四分之一是红色（R）和蓝色（B）。与蓝色同一行中的绿色单元格标记为 Gb，与红色同一行中的绿色单元格标记为 Gr。模式可以以 R，Gr，Gb 或 B 中的任何一个开头。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/5bfd1de8f3d9be1c11337c90cfb3ed96.png)
 
-彩色滤光片的这种布置实质上导致了色彩信息空间欠采样，去马赛克单元负责从这种不完整色彩信息中重建全彩色图像（每个像素含R、G、B三色信息）。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/fc1ece44a956c1be254dc257e400c9f2.png)
+彩色滤光片的这种布置实质上导致了色彩信息空间欠采样，去马赛克单元负责从这种不完整色彩信息中重建全彩色图像（每个像素含 R、G、B 三色信息）。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/fc1ece44a956c1be254dc257e400c9f2.png)
 
 该模块由许多滤波器组成，这些滤波器根据内插的亮度通道重建色度通道。它还考虑了信号相关的传感器噪声（基于较早确定的噪声轮廓），以保持边缘的清晰度和区域均匀的平滑度，同时插补缺失的像素分量。也因此，缺失像素分量的插值包含了传感器的噪声。内置的锐化最大程度地减少了高频噪声的放大。
 
 ### Sharpen
 
-通常称之为后端锐化，此模块旨在与Demosaic模块的Sharpen协同作用。Demosaic模块的锐化是在RGB域控制锐化，用于达到要求分辨率，但过度锐化会导致伪像和看起来不自然的纹理。
+通常称之为后端锐化，此模块旨在与 Demosaic 模块的 Sharpen 协同作用。Demosaic 模块的锐化是在 RGB 域控制锐化，用于达到要求分辨率，但过度锐化会导致伪像和看起来不自然的纹理。
 
 暗区使用配置寄存器：luma thresh low 以及 luma slope low；
 
 亮区使用配置寄存器：luma thresh high 以及 luma slope high。
-下图显示了这四个参数对于sharpen效果的影响：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/9eaa1e65ba21c013ed572f20193fe614.png)
+下图显示了这四个参数对于 sharpen 效果的影响：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/9eaa1e65ba21c013ed572f20193fe614.png)
 
 ### Gamma
 
-该模块对输出Gamma进行编码，通常设置为匹配BT.709或sRGB Gamma曲线。
+该模块对输出 Gamma 进行编码，通常设置为匹配 BT.709 或 sRGB Gamma 曲线。
 
-此模块分别为三个（R，G，B）颜色通道中的每一个应用Gamma LUT。
+此模块分别为三个（R，G，B）颜色通道中的每一个应用 Gamma LUT。
 
-在典型配置中，LUT具有129个均匀间隔的节点，标记为0…128，硬件在这些节点之间应用线性插值。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/2c8942a6ea8766837bedf807ec126d28.png)
+在典型配置中，LUT 具有 129 个均匀间隔的节点，标记为 0…128，硬件在这些节点之间应用线性插值。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/2c8942a6ea8766837bedf807ec126d28.png)
 
-每个数据值都是16位无符号数，因此可以预计Gamma [0] = 0和Gamma [128] =
-0xFFFF，其他127个值定义Gamma校正曲线。
+每个数据值都是 16 位无符号数，因此可以预计 Gamma [0] = 0 和 Gamma [128] =
+0xFFFF，其他 127 个值定义 Gamma 校正曲线。
 
 注意：
 
-自适应对比度增强由Iridix模块动态执行。应根据所需输出的Gamma特性对LUT进行静态修改。同时Gamma会影响 AE、 CCM、 Iridix模块，因此Gamma变动时需要重新验证这几个模块。
+自适应对比度增强由 Iridix 模块动态执行。应根据所需输出的 Gamma 特性对 LUT 进行静态修改。同时 Gamma 会影响 AE、 CCM、 Iridix 模块，因此 Gamma 变动时需要重新验证这几个模块。
 
 ### Iridix
 
-Iridix®使用本地色调映射进行动态范围压缩（DRC），尝试从HDR场景中可见性低的区域恢复细节，而又不影响全局图像。总体而言，通过增加相对于场景内容的增益，增加了可用于本地区域的色调范围。
+Iridix®使用本地色调映射进行动态范围压缩（DRC），尝试从 HDR 场景中可见性低的区域恢复细节，而又不影响全局图像。总体而言，通过增加相对于场景内容的增益，增加了可用于本地区域的色调范围。
 
 ### CNR
 
-CNR模块通过对周边色度均值智能估计的方式进行α-混合来矫正YUV空间中每个pixel的颜色，从而降低图像中的色度噪声。在此过程中，该模块会保持图像的强度信息完整，仅处理其色度部分。
+CNR 模块通过对周边色度均值智能估计的方式进行α-混合来矫正 YUV 空间中每个 pixel 的颜色，从而降低图像中的色度噪声。在此过程中，该模块会保持图像的强度信息完整，仅处理其色度部分。
 
-该模块内部按YUV域处理，会先将RGB图像转换为YUV域，并根据颜色部分进一步细分，分别处理U和V通道，然后再将YUV转换回RGB域。
+该模块内部按 YUV 域处理，会先将 RGB 图像转换为 YUV 域，并根据颜色部分进一步细分，分别处理 U 和 V 通道，然后再将 YUV 转换回 RGB 域。
 
-> 注意：此YUV不会直接输出, CNR后面模块会把RGB转换成YUV输出到IPU或DDR
+> 注意：此 YUV 不会直接输出, CNR 后面模块会把 RGB 转换成 YUV 输出到 IPU 或 DDR
 
-对U和V的处理是将高斯核应用于相应段的每个U和V通道，并通过相应的偏移或斜率参数进行配置。为了最大程度地减少硬件实现或减少大内核的行数，垂直高斯滤波被新兴的递归滤波器代替。
+对 U 和 V 的处理是将高斯核应用于相应段的每个 U 和 V 通道，并通过相应的偏移或斜率参数进行配置。为了最大程度地减少硬件实现或减少大内核的行数，垂直高斯滤波被新兴的递归滤波器代替。
 
-另外，为了进一步减小面积，在处理之前先对色彩通道进行下采样，然后在输出阶段进行上采样。输出的U通道和V通道分别是经过处理的U通道和V通道与原始U通道和V通道的混合，这些通道由增量偏移或斜率参数配置。然后将已处理的U和V以及未处理的Y转换回RGB域。
+另外，为了进一步减小面积，在处理之前先对色彩通道进行下采样，然后在输出阶段进行上采样。输出的 U 通道和 V 通道分别是经过处理的 U 通道和 V 通道与原始 U 通道和 V 通道的混合，这些通道由增量偏移或斜率参数配置。然后将已处理的 U 和 V 以及未处理的 Y 转换回 RGB 域。
 
 ### CCM
 
-大多数情况下，标准颜色无法提供最佳图像质量。根据应用程序或客户喜好，CCM模块可以对颜色进行校正和调整。该模块更改图像的色度值以匹配标准色彩空间的色度值。
+大多数情况下，标准颜色无法提供最佳图像质量。根据应用程序或客户喜好，CCM 模块可以对颜色进行校正和调整。该模块更改图像的色度值以匹配标准色彩空间的色度值。
 
 通过捕获该模块对输入的 `{R，G，B}` 或 `{R，G，B，Ir}` 像素值应用线性颜色校正。计算系数矩阵如图所示：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/8d9c2a42362a495faa03dc054781802a.png)
 
-In1、In2、In3和In4是输入（分别是R、G、B和Ir），A11到A34是可配置的矩阵系数。系数为s4.8数字格式的13位值，其中Msbit(12bits)为符号位。负值的MSbit(12bits)设置为1。
+In1、In2、In3 和 In4 是输入（分别是 R、G、B 和 Ir），A11 到 A34 是可配置的矩阵系数。系数为 s4.8 数字格式的 13 位值，其中 Msbit(12bits)为符号位。负值的 MSbit(12bits)设置为 1。
 
-> 注意：如果CFA模式是RGGB，则Ir系数和Ir信道偏移必须设置为零。
+> 注意：如果 CFA 模式是 RGGB，则 Ir 系数和 Ir 信道偏移必须设置为零。
 
 ### Sinter
 
-Sinter®是一种先进的空间降噪模块，结合了一组算法来抑制传感器噪声，该滤波器作用于RAW数据域空间，在保持纹理和细节的同时，可有效降低图像中的人眼感知到的噪声，使得处理得到的图像更自然。
+Sinter®是一种先进的空间降噪模块，结合了一组算法来抑制传感器噪声，该滤波器作用于 RAW 数据域空间，在保持纹理和细节的同时，可有效降低图像中的人眼感知到的噪声，使得处理得到的图像更自然。
 
-通过使用外部生成的sensor Noise Profile LUT可以简化该模块的使用。正确配置了LUT表之后，可通过较少的一组寄存器来控制模块。大多数情况下，仅需要修改Sinter的阈值以调整噪声滤波器的强度。
+通过使用外部生成的 sensor Noise Profile LUT 可以简化该模块的使用。正确配置了 LUT 表之后，可通过较少的一组寄存器来控制模块。大多数情况下，仅需要修改 Sinter 的阈值以调整噪声滤波器的强度。
 
-Sinter:Thresh Long和Sinter:Thresh Short寄存器分别对应于长曝光和短曝光，用于WDR模式。当曝光比例为1或WDR模式禁止时，Sinter:Thresh Long和Sinter:Thresh Short应该被设置为相同的值。阈值是在标准校正过程中使用以各种ISO值捕获的图像确定的，并通过系统增益进行调制。如果图像是使用frame-switching创建的，则应根据曝光比相应地设置这些值。
+Sinter:Thresh Long 和 Sinter:Thresh Short 寄存器分别对应于长曝光和短曝光，用于 WDR 模式。当曝光比例为 1 或 WDR 模式禁止时，Sinter:Thresh Long 和 Sinter:Thresh Short 应该被设置为相同的值。阈值是在标准校正过程中使用以各种 ISO 值捕获的图像确定的，并通过系统增益进行调制。如果图像是使用 frame-switching 创建的，则应根据曝光比相应地设置这些值。
 
 ### Temper
 
-该模块是运动自适应时间降噪滤波器。通过在当前帧中检测到的局部运动程度设置的递归级别来将当前帧与先前历史帧进行递归平均。滤波器工作在RAW域，并且需要两帧外部存储，数据位宽是视频位宽+4位。
+该模块是运动自适应时间降噪滤波器。通过在当前帧中检测到的局部运动程度设置的递归级别来将当前帧与先前历史帧进行递归平均。滤波器工作在 RAW 域，并且需要两帧外部存储，数据位宽是视频位宽+4 位。
 
->  注意：在WDR模式下，视频位宽会更大。
+>  注意：在 WDR 模式下，视频位宽会更大。
 
-可以增加或减少Recursion_Limit来调整递归的深度，反过来会影响进行递归平均操作的有效帧数。增大此参数将导致较小的递归深度、较小的降噪效果以及最小的运动伪影。
+可以增加或减少 Recursion_Limit 来调整递归的深度，反过来会影响进行递归平均操作的有效帧数。增大此参数将导致较小的递归深度、较小的降噪效果以及最小的运动伪影。
 
-当Recursion_Limit设置为 0 时，最多16帧可以被平均。
+当 Recursion_Limit 设置为 0 时，最多 16 帧可以被平均。
 
-当Recursion_Limit设置为 0xf 时，不对帧进行平均，这等同于禁止Temper。
+当 Recursion_Limit 设置为 0xf 时，不对帧进行平均，这等同于禁止 Temper。
 
-Temper的阈值用于调节Temper噪声滤波器的强度。该模块的性能由外部生成的sensor Noise
-Profile LUT来保证。参考数据通过DMA存储在DDR中，有2个读DMA和2个写DMA管理参考数据的存储。
+Temper 的阈值用于调节 Temper 噪声滤波器的强度。该模块的性能由外部生成的 sensor Noise
+Profile LUT 来保证。参考数据通过 DMA 存储在 DDR 中，有 2 个读 DMA 和 2 个写 DMA 管理参考数据的存储。
 
 ### Mesh Shading
 
 由于镜头光学折射不均匀，导致画面出现中心亮四周暗的现象。网格着色校正为非线性着色失真提供了进一步的校正，并微调径向着色校正所产生的效果。
 
-该模块使用最大64x 64区域的网格对图像应用网格着色校正。网格校正有3页（R/G/B）的校正表，4种不同模式：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/faa3129f78eedd29839392c093e6e330.png)
+该模块使用最大 64x 64 区域的网格对图像应用网格着色校正。网格校正有 3 页（R/G/B）的校正表，4 种不同模式：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/faa3129f78eedd29839392c093e6e330.png)
 
 设置 Mesh Alpha Mode = 0<br/>
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/a021fb719e5465ec10e9153e421d1100.png)
@@ -143,143 +143,143 @@ Profile LUT来保证。参考数据通过DMA存储在DDR中，有2个读DMA和2�
 
 ### Radial Shading
 
-与mesh shading相对应，径向阴影也是一种校正 Lens Shading 校正方法。利用透镜阴影的径向性质，可以校正偏心和椭圆形阴影效果。
+与 mesh shading 相对应，径向阴影也是一种校正 Lens Shading 校正方法。利用透镜阴影的径向性质，可以校正偏心和椭圆形阴影效果。
 
-径向着色系数存储在类型为32位的4x129条目LUT中，系数采用x.12格式，其中低12位为小数。对于每个颜色平面，从中心到外边缘存储系数。
+径向着色系数存储在类型为 32 位的 4x129 条目 LUT 中，系数采用 x.12 格式，其中低 12 位为小数。对于每个颜色平面，从中心到外边缘存储系数。
 
 ### Color Space Conversion
 
-此模块将输入的 `{R，G，B}` 像素值转换为 `{Y，U，V}`值，并使用标准3x3矩阵乘法和向量偏移。如果转换未激活，则ISP输出RGB格式的像素。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/349a1fb120a6478e02d6ae647f8b43b5.png)
+此模块将输入的 `{R，G，B}` 像素值转换为 `{Y，U，V}`值，并使用标准 3x3 矩阵乘法和向量偏移。如果转换未激活，则 ISP 输出 RGB 格式的像素。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/349a1fb120a6478e02d6ae647f8b43b5.png)
 
-如果需要，可以对参数进行修改，以提供不同的转换。以BT.709为例进行说明，公式如下所示：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/31ead51a2003c093e39a8660d535adde.png)
+如果需要，可以对参数进行修改，以提供不同的转换。以 BT.709 为例进行说明，公式如下所示：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/31ead51a2003c093e39a8660d535adde.png)
 
-则calibration中RGB2YUV_CONVERSION中对应的参数如公式所示：
+则 calibration 中 RGB2YUV_CONVERSION 中对应的参数如公式所示：
 
-其中，若Coefft11 (Coefft12, Coefft13, Coefft21, Coefft22, Coefft23, Coefft31,
+其中，若 Coefft11 (Coefft12, Coefft13, Coefft21, Coefft22, Coefft23, Coefft31,
 Coefft32, Coefft33)
-参数为正，clibration中参数为Coefft11\*256取整；若该参数为负，则calibraiton中参数为(\|Coefft11\*256\|+1\<\<15)取整。calibration
-中参数为Coefft01(Coefft02, Coefft01)\*1024取整。
+参数为正，clibration 中参数为 Coefft11\*256 取整；若该参数为负，则 calibraiton 中参数为(\|Coefft11\*256\|+1\<\<15)取整。calibration
+中参数为 Coefft01(Coefft02, Coefft01)\*1024 取整。
 
 ### 统计信息
 
-3A统计信息包含AWB，AE和AF。
+3A 统计信息包含 AWB，AE 和 AF。
 
-AWB模块收集的统计信息用来给软件做白平衡，它累积区域级R/G和B/G统计信息，也收集全帧统计信息。
+AWB 模块收集的统计信息用来给软件做白平衡，它累积区域级 R/G 和 B/G 统计信息，也收集全帧统计信息。
 
-AE自动曝光统计信息用于调整传感器曝光，这是通过收集5-bin、1024-bin直方图完成的。
+AE 自动曝光统计信息用于调整传感器曝光，这是通过收集 5-bin、1024-bin 直方图完成的。
 
-AF模块计算图像中的统计清晰度值。软件使用此值/统计信息来调整镜头，使其在感兴趣区域（ROI）上具有最佳聚焦。该模块计算区域和整个图像的边缘值。
+AF 模块计算图像中的统计清晰度值。软件使用此值/统计信息来调整镜头，使其在感兴趣区域（ROI）上具有最佳聚焦。该模块计算区域和整个图像的边缘值。
 
-ISP为各统计模块提供可编程的标记点。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/265bc3c2561f462db3e18c6e76c6dd62.png)
+ISP 为各统计模块提供可编程的标记点。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/265bc3c2561f462db3e18c6e76c6dd62.png)
 
-#### AWB统计信息
+#### AWB 统计信息
 
-AWB有全局和区域统计信息。
+AWB 有全局和区域统计信息。
 
-全局统计信息：整幅图像的R/G和B/G均值及有效统计点个数。
+全局统计信息：整幅图像的 R/G 和 B/G 均值及有效统计点个数。
 
-区域统计信息：最大支持图像的33x33分块，每个分块输出R/G，B/G的均值以及有效统计点个数。
+区域统计信息：最大支持图像的 33x33 分块，每个分块输出 R/G，B/G 的均值以及有效统计点个数。
 
-AWB_stats_mode寄存器可用来配置均值的类别：R/G，B/G还是G/R，G/B。
+AWB_stats_mode 寄存器可用来配置均值的类别：R/G，B/G 还是 G/R，G/B。
 
 通过寄存器配置，可限定有效像素：
 
-Cb_Ref_Min/Max，Cr_Ref_Min/Max这4个值限定了R/G，B/G的最大值和最小值。
+Cb_Ref_Min/Max，Cr_Ref_Min/Max 这 4 个值限定了 R/G，B/G 的最大值和最小值。
 
-另外，可通过Cb_Ref_Low/High，Cr_Ref_Low/High来限定更小的R/G，B/G范围。
+另外，可通过 Cb_Ref_Low/High，Cr_Ref_Low/High 来限定更小的 R/G，B/G 范围。
 
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/82efe11737fca5681b2df8a3af582612.png)
 
-全局统计信息：由三个寄存器AWB RG，AWB BG，SUM来存储；
+全局统计信息：由三个寄存器 AWB RG，AWB BG，SUM 来存储；
 
 区域统计信息：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/b7004c4bfc0cfea42dfd9c922ad3e52e.png)
 
-#### AE统计信息
+#### AE 统计信息
 
-在应用黑电平、白平衡和ISP增益之后收集自动曝光（AE）统计信息。包含两种直方图类型：
+在应用黑电平、白平衡和 ISP 增益之后收集自动曝光（AE）统计信息。包含两种直方图类型：
 
-5-bin局部和全局直方图；
+5-bin 局部和全局直方图；
 
-1024-bin全局直方图；
+1024-bin 全局直方图；
 
-#### 5-bin直方图
+#### 5-bin 直方图
 
-使用可调整的直方图bin边界，为每个区域和整个图像生成5-bin标准化直方图。Statistics_Hist_Thresh[i][j]用来定义i
-bin，j bin间的强度阈值。
+使用可调整的直方图 bin 边界，为每个区域和整个图像生成 5-bin 标准化直方图。Statistics_Hist_Thresh[i][j]用来定义 i
+bin，j bin 间的强度阈值。
 
-Statistics_Hist[i] 提供i bin的全局归一化像素数，总和归一化为0xFFFF。
+Statistics_Hist[i] 提供 i bin 的全局归一化像素数，总和归一化为 0xFFFF。
 
-不提供中间bin的直方图，但可通过软件来计算得到：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/ebea37c8cf8b3d7e3bcc6049715ff0a5.png)
+不提供中间 bin 的直方图，但可通过软件来计算得到：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/ebea37c8cf8b3d7e3bcc6049715ff0a5.png)
 
-包含Histx数据的内部表提供了每个区域的直方图的归一化值，如下表中mxn区域所示。区域的顺序是从图像的左上角开始的栅格顺序。对于每个区域，直方图数据的总和被标准化为0xFFFF。
+包含 Histx 数据的内部表提供了每个区域的直方图的归一化值，如下表中 mxn 区域所示。区域的顺序是从图像的左上角开始的栅格顺序。对于每个区域，直方图数据的总和被标准化为 0xFFFF。
 
 最多支持
 
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/9a978ee0b05af72629b9ab769ccd65ec.png)
 
-33x33分块。
+33x33 分块。
 
-#### 1024-bin直方图
+#### 1024-bin 直方图
 
-为整个图像构建全局1024-bin直方图。全局直方图可设置区域权重，但未标准化，ISP
-Firmware会执行统计数据的标准化。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/7715fc9e61a93745eb21ea33691af15e.png)
+为整个图像构建全局 1024-bin 直方图。全局直方图可设置区域权重，但未标准化，ISP
+Firmware 会执行统计数据的标准化。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/7715fc9e61a93745eb21ea33691af15e.png)
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/44de7677ae0485a0be2b89fc6ca62eef.png)
 
-#### AF统计信息
+#### AF 统计信息
 
-自动对焦统计信息由感兴趣区域（ROI）或区域的、标准化的全图像多方向对比度指标组成。CPU使用此对比度度量来确定镜头的位置，以实现最佳聚焦。
+自动对焦统计信息由感兴趣区域（ROI）或区域的、标准化的全图像多方向对比度指标组成。CPU 使用此对比度度量来确定镜头的位置，以实现最佳聚焦。
 
 AF 统计模块的清晰度评价函数计算像素点四个方向的对比度，计算示意如下图所示，![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/af7452605a6fd44cf2f233c04dd50efa.png)
 
-需要注意的是，AF统计模块不支持修改清晰度评价函数的系数。用户可修改kernel改变清晰度计算的像素点位置来适配不同的场景。AF统计模块不同kernel下清晰度计算方式如下图所示。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/320db90e9c15074cef59f9abf2a95e7c.png)
+需要注意的是，AF 统计模块不支持修改清晰度评价函数的系数。用户可修改 kernel 改变清晰度计算的像素点位置来适配不同的场景。AF 统计模块不同 kernel 下清晰度计算方式如下图所示。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/320db90e9c15074cef59f9abf2a95e7c.png)
 
-对于AF模块，可以通过软件配置区域。模块为每个像素计算区域对比度度量，并在整个区域内进行累积。对于每个像素，沿4个方向计算对比度。除此之外，还可以使用内核选择配置参数来控制对角线的角度方向，如上表所示。为了改善在弱光和低通成像情况下的响应，所计算的对比度为四级（四次对比度总和）。
+对于 AF 模块，可以通过软件配置区域。模块为每个像素计算区域对比度度量，并在整个区域内进行累积。对于每个像素，沿 4 个方向计算对比度。除此之外，还可以使用内核选择配置参数来控制对角线的角度方向，如上表所示。为了改善在弱光和低通成像情况下的响应，所计算的对比度为四级（四次对比度总和）。
 
 这些区域度量标准不会在硬件中加权，但是软件可以在计算后应用基于区域的权重。
 
-下图表明当AF对比度指标达到最高点时可以实现最佳对焦：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/eb46356fc26d3b00fc5c41a191b77a69.png)
+下图表明当 AF 对比度指标达到最高点时可以实现最佳对焦：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/eb46356fc26d3b00fc5c41a191b77a69.png)
 
-#### AF度量数据计算
+#### AF 度量数据计算
 
-区域累积对比度度量标准以16b尾数和5b指数的浮点格式存储。除了对比度指标外，我们还在该区域上累积平方图像和四次图像数据，如下图所示I2值是指图1所示四个方向像素的差值的平方和，I4是图1四个方向像素差的四次方和，E4是4个kernel下像素差四次方和累加，如图2，16b Mantissa存的是底数，5b Exponent存的是指数，Register1和Register2合起来64bit使用，用户不需要自己直接去计算，可以直接使用HB_ISP_GetMeteringData拿到cv值。
+区域累积对比度度量标准以 16b 尾数和 5b 指数的浮点格式存储。除了对比度指标外，我们还在该区域上累积平方图像和四次图像数据，如下图所示 I2 值是指图 1 所示四个方向像素的差值的平方和，I4 是图 1 四个方向像素差的四次方和，E4 是 4 个 kernel 下像素差四次方和累加，如图 2，16b Mantissa 存的是底数，5b Exponent 存的是指数，Register1 和 Register2 合起来 64bit 使用，用户不需要自己直接去计算，可以直接使用 HB_ISP_GetMeteringData 拿到 cv 值。
 
 每个区域累积的统计信息如下表所示：![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/92ed8281119113cec44cca19621de865.png)
 
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/63be20d81aeffdf2e29f10eac189f2e8.png)
 
-AF区域数据以如下形式存储：
+AF 区域数据以如下形式存储：
 
-除了区域统计，AF还累积归一化的四次边沿和，它存储在一个32位寄存器中。
+除了区域统计，AF 还累积归一化的四次边沿和，它存储在一个 32 位寄存器中。
 
-#### Auto Level统计信息
+#### Auto Level 统计信息
 
-iridix模块提供的1024bin统计数据。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/51b1c86929ebf73752bf1803d437a06c.png)
+iridix 模块提供的 1024bin 统计数据。![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/51b1c86929ebf73752bf1803d437a06c.png)
 
 
 #### 平均亮度和平均亮度方差统计信息
 
-ISP提供YUV域的区域亮度平均值的统计信息和区域亮度平均值的方差。该模块始终使用32x16的固定区域大小（水平x垂直），此统计模块提供可用结果所需的最小帧分辨率为512x256。这些统计信息存储在512个位置的SRAM中，每个位置包含每个区域的10位（LSB）平均值信息和12位（MSB）亮度平均值信息的方差。其存储方法为10bits
-reserved + 12bits亮度方差 + 10bits 亮度平均值。
+ISP 提供 YUV 域的区域亮度平均值的统计信息和区域亮度平均值的方差。该模块始终使用 32x16 的固定区域大小（水平 x 垂直），此统计模块提供可用结果所需的最小帧分辨率为 512x256。这些统计信息存储在 512 个位置的 SRAM 中，每个位置包含每个区域的 10 位（LSB）平均值信息和 12 位（MSB）亮度平均值信息的方差。其存储方法为 10bits
+reserved + 12bits 亮度方差 + 10bits 亮度平均值。
 
 ## 功能描述
 
 ### 交互数据
 
-#### 算法库与ISP Firmware交互框图
+#### 算法库与 ISP Firmware 交互框图
 
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/3f6586aeb35102bf50fc3a8c45f90c82.png)
 
-MEM中的内容有两部分，一是提供给算法库的数据，二是算法库给ISP Driver传入的值，ISP
-Driver中如AWB收到算法配置的值会更新到ISP寄存器空间；
+MEM 中的内容有两部分，一是提供给算法库的数据，二是算法库给 ISP Driver 传入的值，ISP
+Driver 中如 AWB 收到算法配置的值会更新到 ISP 寄存器空间；
 
--   这是一个上下文（对应一路sensor）的情况，多个sensor多套数据结构；
+-   这是一个上下文（对应一路 sensor）的情况，多个 sensor 多套数据结构；
 
 -   黄颜色块是可替换部分，Algo
-    Lib需要几个回调接口，见“API参考”一节；另外需要一些输入输出的数据，见“数据结构”一节；
+    Lib 需要几个回调接口，见“API 参考”一节；另外需要一些输入输出的数据，见“数据结构”一节；
 
--   Sensor Driver包含了常用的sensor增益、曝光配置方法，一般情况不需要修改；
+-   Sensor Driver 包含了常用的 sensor 增益、曝光配置方法，一般情况不需要修改；
 
-#### 算法库与ISP Firmware交互数据
+#### 算法库与 ISP Firmware 交互数据
 
 | **Module** | **ISP Fw -\> 算法库**                             | **算法库 -\> ISP Fw**  |
 |------------|---------------------------------------------------|------------------------|
@@ -314,13 +314,13 @@ Driver中如AWB收到算法配置的值会更新到ISP寄存器空间；
 ### 开发说明
 
 ISP
-Firmware有两部分，分用户空间和内核空间。内核空间Firmware随系统启动而初始化，用户空间Firmware（内含默认3A算法）由HB_VIN_StartPipe接口启动，Firmware启动过程中会优先选择外部3A算法，如果未注册外部3A算法，那么启动默认3A算法。每一类算法都会有对应的两个输入参数——统计数据（stats）、输入参数（input），和一个输出参数——输出参数（output）。在每帧统计数据Ready后ISP
-Firmware会调用proc_func回调，并传入两个输入参数，proc_func是实际的算法实现，算法计算后要填充好输出参数，ISP
-Firmware会把输出参数应用到Sensor或ISP硬件。
+Firmware 有两部分，分用户空间和内核空间。内核空间 Firmware 随系统启动而初始化，用户空间 Firmware（内含默认 3A 算法）由 HB_VIN_StartPipe 接口启动，Firmware 启动过程中会优先选择外部 3A 算法，如果未注册外部 3A 算法，那么启动默认 3A 算法。每一类算法都会有对应的两个输入参数——统计数据（stats）、输入参数（input），和一个输出参数——输出参数（output）。在每帧统计数据 Ready 后 ISP
+Firmware 会调用 proc_func 回调，并传入两个输入参数，proc_func 是实际的算法实现，算法计算后要填充好输出参数，ISP
+Firmware 会把输出参数应用到 Sensor 或 ISP 硬件。
 
-#### AE算法注册
+#### AE 算法注册
 
-AE向ISP Firmware注册回调函数：
+AE 向 ISP Firmware 注册回调函数：
 
 | From  | 用户需要实现 | To           |
 |-------|--------------|--------------|
@@ -333,12 +333,12 @@ AE向ISP Firmware注册回调函数：
 | 回调函数    | 说明                                                                                                                                                         |
 |-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | init_func   | 算法初始化函数                                                                                                                                               |
-| proc_func   | 实际算法实现，如target、exposure计算。ISP Firmware在每帧AE统计数据Ready时会调用该函数。proc_func传入参数和需要传出的参数见[结构体描述](#hb_isp_ae_func_s) |
+| proc_func   | 实际算法实现，如 target、exposure 计算。ISP Firmware 在每帧 AE 统计数据 Ready 时会调用该函数。proc_func 传入参数和需要传出的参数见[结构体描述](#hb_isp_ae_func_s) |
 | deinit_func | 算法去初始化函数                                                                                                                                             |
 
-#### AWB算法注册
+#### AWB 算法注册
 
-AWB向ISP Firmware注册回调函数：
+AWB 向 ISP Firmware 注册回调函数：
 
 | From   | 用户需要实现 | To           |
 |--------|--------------|--------------|
@@ -351,12 +351,12 @@ AWB向ISP Firmware注册回调函数：
 | 回调函数    | 说明                                                                                                                                    |
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | init_func   | 算法初始化函数                                                                                                                          |
-| proc_func   | 实际算法实现， ISP Firmware在每帧AWB统计数据Ready时会调用该函数。proc_func传入参数和需要传出的参数见[结构体描述](#hb_isp_ae_func_s) |
+| proc_func   | 实际算法实现， ISP Firmware 在每帧 AWB 统计数据 Ready 时会调用该函数。proc_func 传入参数和需要传出的参数见[结构体描述](#hb_isp_ae_func_s) |
 | deinit_func | 算法去初始化函数                                                                                                                        |
 
-#### AF算法注册
+#### AF 算法注册
 
-AF向ISP Firmware注册回调函数：
+AF 向 ISP Firmware 注册回调函数：
 
 | From  | 用户需要实现 | To           |
 |-------|--------------|--------------|
@@ -369,12 +369,12 @@ AF向ISP Firmware注册回调函数：
 | 回调函数    | 说明                                                                                                                                  |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------|
 | init_func   | 算法初始化函数                                                                                                                        |
-| proc_func   | 实际算法实现， ISP Firmware在每帧AF统计数据Ready时会调用该函数。proc_func传入参数和需要传出的参数见[结构体描述](#hb_isp_ae_func_s) |
+| proc_func   | 实际算法实现， ISP Firmware 在每帧 AF 统计数据 Ready 时会调用该函数。proc_func 传入参数和需要传出的参数见[结构体描述](#hb_isp_ae_func_s) |
 | deinit_func | 算法去初始化函数                                                                                                                      |
 
 #### 算法注册举例
 
-以AWB算法为例：
+以 AWB 算法为例：
 
 ```c
 ISP_AWB_FUNC_S stAwbFunc = {
@@ -449,7 +449,7 @@ int32_t awb_deinit_func(void *awb_ctx)
 }
 ```
 
-## API参考
+## API 参考
 
 ### HB_ISP_SetFWState/HB_ISP_GetFWState
 
@@ -461,21 +461,21 @@ int HB_ISP_GetFWState(uint8_t pipeId, ISP_FW_STATE_E *penState);
 ```
 【功能描述】
 
-设置/获取ISP Firmware的状态。
+设置/获取 ISP Firmware 的状态。
 
 【参数描述】
 
 | 参数名称 | 描述             | 输入/输出 |
 |----------|------------------|-----------|
-| pipeId   | Pipeline索引号   | 输入      |
-| penState | ISP Firmware状态 | 输入      |
+| pipeId   | Pipeline 索引号   | 输入      |
+| penState | ISP Firmware 状态 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -491,14 +491,14 @@ int HB_ISP_GetRegister(uint8_t pipeId, uint32_t u32Addr, uint32_t *pu32Value);
 ```
 【功能描述】
 
-设置/获取ISP寄存器。
+设置/获取 ISP 寄存器。
 
 【参数描述】
 
 | 参数名称 | 描述           | 输入/输出 |
 |----------|----------------|-----------|
-| pipeId   | Pipeline索引号 | 输入      |
-| u32Addr  | ISP寄存器地址  | 输入      |
+| pipeId   | Pipeline 索引号 | 输入      |
+| u32Addr  | ISP 寄存器地址  | 输入      |
 | u32Value | 要设置的值     | 输入      |
 
 【返回值】
@@ -506,7 +506,7 @@ int HB_ISP_GetRegister(uint8_t pipeId, uint32_t u32Addr, uint32_t *pu32Value);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -522,21 +522,21 @@ int HB_ISP_GetModuleControl(uint8_t pipeId, ISP_MODULE_CTRL_U *punModCtrl);
 ```
 【功能描述】
 
-设置/获取ISP内部各模块的bypass情况。
+设置/获取 ISP 内部各模块的 bypass 情况。
 
 【参数描述】
 
 | 参数名称   | 描述                     | 输入/输出 |
 |------------|--------------------------|-----------|
-| pipeId     | Pipeline索引号           | 输入      |
-| punModCtrl | ISP 内部各模块bypass控制 | 输入      |
+| pipeId     | Pipeline 索引号           | 输入      |
+| punModCtrl | ISP 内部各模块 bypass 控制 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -550,21 +550,21 @@ int HB_ISP_SwitchScence(uint8_t pipeId, const char *cname);
 ```
 【功能描述】
 
-设置calibration库。
+设置 calibration 库。
 
 【参数描述】
 
 | 参数名称 | 描述                | 输入/输出 |
 |----------|---------------------|-----------|
-| pipeId   | Pipeline索引号      | 输入      |
-| cname    | Calibration库的路径 | 输入      |
+| pipeId   | Pipeline 索引号      | 输入      |
+| cname    | Calibration 库的路径 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -580,22 +580,22 @@ void HB_ISP_StopI2CBus(uint8_t pipeId);
 ```
 【功能描述】
 
-启动、停止写I2C线程。
+启动、停止写 I2C 线程。
 
 【参数描述】
 
 | 参数名称 | 描述           | 输入/输出 |
 |----------|----------------|-----------|
-| pipeId   | Pipeline索引号 | 输入      |
+| pipeId   | Pipeline 索引号 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
-【注意事项】StartI2Cbus前需要HB_ISP_GetSetInit初始化和sensor初始化。
+【注意事项】StartI2Cbus 前需要 HB_ISP_GetSetInit 初始化和 sensor 初始化。
 
 【参考代码】
 
@@ -607,24 +607,24 @@ int HB_ISP_SendI2CData(ISP_I2C_DATA_S data);
 ```
 【功能描述】
 
-写I2C数据。
+写 I2C 数据。
 
 【参数描述】
 
 | 参数名称 | 描述             | 输入/输出 |
 |----------|------------------|-----------|
-| data     | 要发送的data信息 | 输入      |
+| data     | 要发送的 data 信息 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-在使用前要调用HB_ISP_StartI2CBus接口启动写I2C线程。
+在使用前要调用 HB_ISP_StartI2CBus 接口启动写 I2C 线程。
 
 【参考代码】
 
@@ -637,26 +637,26 @@ ISP_AE_FUNC_S *pstAeFunc);
 ```
 【功能描述】
 
-注册AE算法库。
+注册 AE 算法库。
 
 【参数描述】
 
 | 参数名称  | 描述                       | 输入/输出           |
 |-----------|----------------------------|---------------------|
-| pipeId    | Pipeline索引号             | 输入                |
-| name      | 库名字，固定拷贝20字符长度 | 输入 预留项，可缺省 |
-| pstAeFunc | AE算法回调函数指针         | 输入                |
+| pipeId    | Pipeline 索引号             | 输入                |
+| name      | 库名字，固定拷贝 20 字符长度 | 输入 预留项，可缺省 |
+| pstAeFunc | AE 算法回调函数指针         | 输入                |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-HB_VIN_StartPipe会启动ISP算法，需要在调用HB_VIN_StartPipe函数前进行算法注册。
+HB_VIN_StartPipe 会启动 ISP 算法，需要在调用 HB_VIN_StartPipe 函数前进行算法注册。
 
 【参考代码】见[算法注册举例](#算法注册举例)
 
@@ -669,26 +669,26 @@ ISP_AWB_FUNC_S *pstAWBFunc);
 ```
 【功能描述】
 
-注册AWB算法库。
+注册 AWB 算法库。
 
 【参数描述】
 
 | 参数名称   | 描述                       | 输入/输出           |
 |------------|----------------------------|---------------------|
-| pipeId     | Pipeline索引号             | 输入                |
-| name       | 库名字，固定拷贝20字符长度 | 输入 预留项，可缺省 |
-| pstAWBFunc | AWB算法回调函数指针        | 输入                |
+| pipeId     | Pipeline 索引号             | 输入                |
+| name       | 库名字，固定拷贝 20 字符长度 | 输入 预留项，可缺省 |
+| pstAWBFunc | AWB 算法回调函数指针        | 输入                |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-HB_VIN_StartPipe会启动ISP算法，需要在调用HB_VIN_StartPipe函数前进行算法注册。
+HB_VIN_StartPipe 会启动 ISP 算法，需要在调用 HB_VIN_StartPipe 函数前进行算法注册。
 
 【参考代码】见[算法注册举例](#算法注册举例)
 
@@ -701,26 +701,26 @@ ISP_AF_FUNC_S *pstAFFunc);
 ```
 【功能描述】
 
-注册AF算法库。
+注册 AF 算法库。
 
 【参数描述】
 
 | 参数名称  | 描述                       | 输入/输出           |
 |-----------|----------------------------|---------------------|
-| pipeId    | Pipeline索引号             | 输入                |
-| name      | 库名字，固定拷贝20字符长度 | 输入 预留项，可缺省 |
-| pstAFFunc | AF算法回调函数指针         | 输入                |
+| pipeId    | Pipeline 索引号             | 输入                |
+| name      | 库名字，固定拷贝 20 字符长度 | 输入 预留项，可缺省 |
+| pstAFFunc | AF 算法回调函数指针         | 输入                |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-HB_VIN_StartPipe会启动ISP算法，需要在调用HB_VIN_StartPipe函数前进行算法注册。
+HB_VIN_StartPipe 会启动 ISP 算法，需要在调用 HB_VIN_StartPipe 函数前进行算法注册。
 
 【参考代码】见[算法注册举例](#算法注册举例)
 
@@ -732,20 +732,20 @@ int HB_ISP_AELibUnRegCallback(uint8_t pipeId);
 ```
 【功能描述】
 
-去注册AE算法库。
+去注册 AE 算法库。
 
 【参数描述】
 
 | 参数名称 | 描述           | 输入/输出 |
 |----------|----------------|-----------|
-| pipeId   | Pipeline索引号 | 输入      |
+| pipeId   | Pipeline 索引号 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -759,20 +759,20 @@ int HB_ISP_AWBLibUnRegCallback(uint8_t pipeId);
 ```
 【功能描述】
 
-去注册AWB算法库。
+去注册 AWB 算法库。
 
 【参数描述】
 
 | 参数名称 | 描述           | 输入/输出 |
 |----------|----------------|-----------|
-| pipeId   | Pipeline索引号 | 输入      |
+| pipeId   | Pipeline 索引号 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -786,20 +786,20 @@ int HB_ISP_AFLibUnRegCallback(uint8_t pipeId);
 ```
 【功能描述】
 
-去注册AF算法库。
+去注册 AF 算法库。
 
 【参数描述】
 
 | 参数名称 | 描述           | 输入/输出 |
 |----------|----------------|-----------|
-| pipeId   | Pipeline索引号 | 输入      |
+| pipeId   | Pipeline 索引号 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -807,10 +807,10 @@ int HB_ISP_AFLibUnRegCallback(uint8_t pipeId);
 
 注意：
 
-1.  如果使用默认3A算法，不需要关注该章节的接口。
+1.  如果使用默认 3A 算法，不需要关注该章节的接口。
 
-2.  不含Zoom和光圈控制算法，用户可自己实现，给出输出参数，以修改ISP
-    Firmware做适配。
+2.  不含 Zoom 和光圈控制算法，用户可自己实现，给出输出参数，以修改 ISP
+    Firmware 做适配。
 
 ### HB_ISP_GetSetInit/HB_ISP_GetSetExit
 
@@ -831,11 +831,11 @@ int HB_ISP_GetSetExit(void);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-同一个进程里调用一次即可，在调用所有Get/Set类接口前，首先要调用HB_ISP_GetSetInit进行初始化。
+同一个进程里调用一次即可，在调用所有 Get/Set 类接口前，首先要调用 HB_ISP_GetSetInit 进行初始化。
 
 【参考代码】
 
@@ -849,25 +849,25 @@ int HB_ISP_GetAeAttr(uint8_t pipeId, ISP_AE_ATTR_S *pstAeAttr);
 ```
 【功能描述】
 
-设置AE算法属性。
+设置 AE 算法属性。
 
 【参数描述】
 
 | 参数名称  | 描述             | 输入/输出 |
 |-----------|------------------|-----------|
-| pipeId    | Pipeline索引号   | 输入      |
-| pstAeAttr | 指向AE参数的指针 | 输入      |
+| pipeId    | Pipeline 索引号   | 输入      |
+| pstAeAttr | 指向 AE 参数的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-set只针对manual模式，get时传不同模式获取对应模式的值。
+set 只针对 manual 模式，get 时传不同模式获取对应模式的值。
 
 【参考代码】
 
@@ -881,21 +881,21 @@ int HB_ISP_GetAfAttr(uint8_t pipeId, ISP_AF_ATTR_S *pstAfAttr);
 ```
 【功能描述】
 
-设置AF-ZOOM属性。
+设置 AF-ZOOM 属性。
 
 【参数描述】
 
 | 参数名称  | 描述             | 输入/输出 |
 |-----------|------------------|-----------|
-| pipeId    | Pipeline索引号   | 输入      |
-| pstAfAttr | 指向AF参数的指针 | 输入      |
+| pipeId    | Pipeline 索引号   | 输入      |
+| pstAfAttr | 指向 AF 参数的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -912,25 +912,25 @@ int HB_ISP_GetAwbAttr(uint8_t pipeId, ISP_AWB_ATTR_S *pstAwbAttr);
 ```
 【功能描述】
 
-设置AWB算法属性。
+设置 AWB 算法属性。
 
 【参数描述】
 
 | 参数名称   | 描述              | 输入/输出 |
 |------------|-------------------|-----------|
-| pipeId     | Pipeline索引号    | 输入      |
-| pstAwbAttr | 指向AWB参数的指针 | 输入      |
+| pipeId     | Pipeline 索引号    | 输入      |
+| pstAwbAttr | 指向 AWB 参数的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-set只针对manual模式，get时传不同模式获取对应模式的值。
+set 只针对 manual 模式，get 时传不同模式获取对应模式的值。
 
 【参考代码】
 
@@ -952,7 +952,7 @@ ISP_BLACK_LEVEL_ATTR_S *pstBlackLevelAttr);
 
 | 参数名称          | 描述                 | 输入/输出 |
 |-------------------|----------------------|-----------|
-| pipeId            | Pipeline索引号       | 输入      |
+| pipeId            | Pipeline 索引号       | 输入      |
 | pstBlackLevelAttr | 指向黑电平参数的指针 | 输入      |
 
 【返回值】
@@ -960,16 +960,16 @@ ISP_BLACK_LEVEL_ATTR_S *pstBlackLevelAttr);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-set只针对manual模式，get时传不同模式获取对应模式的值。
+set 只针对 manual 模式，get 时传不同模式获取对应模式的值。
 
-auto模式下，black_level
-值为calibraiton参数BLACK_LEVEL_B/BLACK_LEVEL_GB/BLACK_LEVEL_GR/BLACK_LEVEL_R根据当前曝光gain插值得到。
+auto 模式下，black_level
+值为 calibraiton 参数 BLACK_LEVEL_B/BLACK_LEVEL_GB/BLACK_LEVEL_GR/BLACK_LEVEL_R 根据当前曝光 gain 插值得到。
 
-manual模式下，用户可设置black_level 值。
+manual 模式下，用户可设置 black_level 值。
 
 【参考代码】
 
@@ -991,7 +991,7 @@ ISP_DEMOSAIC_ATTR_S *pstDemosaicAttr);
 
 | 参数名称        | 描述                   | 输入/输出 |
 |-----------------|------------------------|-----------|
-| pipeId          | Pipeline索引号         | 输入      |
+| pipeId          | Pipeline 索引号         | 输入      |
 | pstDemosaicAttr | 指向解马赛克参数的指针 | 输入      |
 
 【返回值】
@@ -999,7 +999,7 @@ ISP_DEMOSAIC_ATTR_S *pstDemosaicAttr);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1023,7 +1023,7 @@ ISP_SHARPEN_ATTR_S *pstSharpenAttr);
 
 | 参数名称       | 描述               | 输入/输出 |
 |----------------|--------------------|-----------|
-| pipeId         | Pipeline索引号     | 输入      |
+| pipeId         | Pipeline 索引号     | 输入      |
 | pstSharpenAttr | 指向锐化参数的指针 | 输入      |
 
 【返回值】
@@ -1031,7 +1031,7 @@ ISP_SHARPEN_ATTR_S *pstSharpenAttr);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1049,21 +1049,21 @@ ISP_GAMMA_ATTR_S *pstGammaAttr);
 ```
 【功能描述】
 
-设置Gamma属性。
+设置 Gamma 属性。
 
 【参数描述】
 
 | 参数名称     | 描述                | 输入/输出 |
 |--------------|---------------------|-----------|
-| pipeId       | Pipeline索引号      | 输入      |
-| pstGammaAttr | 指向Gamma参数的指针 | 输入      |
+| pipeId       | Pipeline 索引号      | 输入      |
+| pstGammaAttr | 指向 Gamma 参数的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1080,21 +1080,21 @@ ISP_IRIDIX_ATTR_S *pstIridixAttr);
 ```
 【功能描述】
 
-设置Iridix模块属性。
+设置 Iridix 模块属性。
 
 【参数描述】
 
 | 参数名称      | 描述                 | 输入/输出 |
 |---------------|----------------------|-----------|
-| pipeId        | Pipeline索引号       | 输入      |
-| pstIridixAttr | 指向Iridix参数的指针 | 输入      |
+| pipeId        | Pipeline 索引号       | 输入      |
+| pstIridixAttr | 指向 Iridix 参数的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1110,13 +1110,13 @@ int HB_ISP_GetIridixStrengthLevel(uint8_t pipeId, uint16_t *level);
 ```
 【功能描述】
 
-设置Iridix强度等级。
+设置 Iridix 强度等级。
 
 【参数描述】
 
 | 参数名称 | 描述                    | 输入/输出 |
 |----------|-------------------------|-----------|
-| pipeId   | Pipeline索引号          | 输入      |
+| pipeId   | Pipeline 索引号          | 输入      |
 | level    | 强度等级，范围 [0, 255] | 输入      |
 
 【返回值】
@@ -1124,7 +1124,7 @@ int HB_ISP_GetIridixStrengthLevel(uint8_t pipeId, uint16_t *level);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1146,7 +1146,7 @@ int HB_ISP_GetCnrAttr(uint8_t pipeId, ISP_CNR_ATTR_S *pstCnrAttr);
 
 | 参数名称   | 描述                   | 输入/输出 |
 |------------|------------------------|-----------|
-| pipeId     | Pipeline索引号         | 输入      |
+| pipeId     | Pipeline 索引号         | 输入      |
 | pstCnrAttr | 指向色度降噪参数的指针 | 输入      |
 
 【返回值】
@@ -1154,7 +1154,7 @@ int HB_ISP_GetCnrAttr(uint8_t pipeId, ISP_CNR_ATTR_S *pstCnrAttr);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1177,7 +1177,7 @@ ISP_SINTER_ATTR_S *pstSinterAttr);
 
 | 参数名称      | 描述                   | 输入/输出 |
 |---------------|------------------------|-----------|
-| pipeId        | Pipeline索引号         | 输入      |
+| pipeId        | Pipeline 索引号         | 输入      |
 | pstSinterAttr | 指向空域降噪参数的指针 | 输入      |
 
 【返回值】
@@ -1185,7 +1185,7 @@ ISP_SINTER_ATTR_S *pstSinterAttr);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1209,7 +1209,7 @@ ISP_TEMPER_ATTR_S *pstTemperAttr);
 
 | 参数名称      | 描述                   | 输入/输出 |
 |---------------|------------------------|-----------|
-| pipeId        | Pipeline索引号         | 输入      |
+| pipeId        | Pipeline 索引号         | 输入      |
 | pstTemperAttr | 指向时域降噪参数的指针 | 输入      |
 
 【返回值】
@@ -1217,7 +1217,7 @@ ISP_TEMPER_ATTR_S *pstTemperAttr);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1235,21 +1235,21 @@ MESH_SHADING_ATTR_S *pstMeshShadingAttr);
 ```
 【功能描述】
 
-设置Mesh Shading模块属性。
+设置 Mesh Shading 模块属性。
 
 【参数描述】
 
 | 参数名称           | 描述                      | 输入/输出 |
 |--------------------|---------------------------|-----------|
-| pipeId             | Pipeline索引号            | 输入      |
-| pstMeshShadingAttr | 指向MeshShading参数的指针 | 输入      |
+| pipeId             | Pipeline 索引号            | 输入      |
+| pstMeshShadingAttr | 指向 MeshShading 参数的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1266,21 +1266,21 @@ int HB_ISP_GetMeshShadingLUT(uint8_t pipeId, MESH_SHADING_LUT_S *pstMeshShadingL
 ```
 【功能描述】
 
-设置Mesh Shading模块LUT表。
+设置 Mesh Shading 模块 LUT 表。
 
 【参数描述】
 
 | 参数名称          | 描述                        | 输入/输出 |
 |-------------------|-----------------------------|-----------|
-| pipeId            | Pipeline索引号              | 输入      |
-| pstMeshShadingLUT | 指向MeshShading LUT表的指针 | 输入      |
+| pipeId            | Pipeline 索引号              | 输入      |
+| pstMeshShadingLUT | 指向 MeshShading LUT 表的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1298,21 +1298,21 @@ RADIAL_SHADING_ATTR_S *pstRadialShadingAttr);
 ```
 【功能描述】
 
-设置Radial Shading模块属性。
+设置 Radial Shading 模块属性。
 
 【参数描述】
 
 | 参数名称             | 描述                         | 输入/输出 |
 |----------------------|------------------------------|-----------|
-| pipeId               | Pipeline索引号               | 输入      |
-| pstRadialShadingAttr | 指向Radial Shading参数的指针 | 输入      |
+| pipeId               | Pipeline 索引号               | 输入      |
+| pstRadialShadingAttr | 指向 Radial Shading 参数的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1330,21 +1330,21 @@ RADIAL_SHADING_LUT_S *pstRadialShadingLUT);
 ```
 【功能描述】
 
-设置Radial Shading模块LUT表。
+设置 Radial Shading 模块 LUT 表。
 
 【参数描述】
 
 | 参数名称            | 描述                           | 输入/输出 |
 |---------------------|--------------------------------|-----------|
-| pipeId              | Pipeline索引号                 | 输入      |
-| pstRadialShadingLUT | 指向Radial Shading LUT表的指针 | 输入      |
+| pipeId              | Pipeline 索引号                 | 输入      |
+| pstRadialShadingLUT | 指向 Radial Shading LUT 表的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1367,15 +1367,15 @@ int HB_ISP_GetCSCAttr(uint8_t pipeId, ISP_CSC_ATTR_S *pstCSCAttr);
 
 | 参数名称   | 描述              | 输入/输出 |
 |------------|-------------------|-----------|
-| pipeId     | Pipeline索引号    | 输入      |
-| pstCSCAttr | 指向CSC属性的指针 | 输入      |
+| pipeId     | Pipeline 索引号    | 输入      |
+| pstCSCAttr | 指向 CSC 属性的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1399,7 +1399,7 @@ ISP_SCENE_MODES_ATTR_S *pstSceneModesAttr);
 
 | 参数名称          | 描述                   | 输入/输出 |
 |-------------------|------------------------|-----------|
-| pipeId            | Pipeline索引号         | 输入      |
+| pipeId            | Pipeline 索引号         | 输入      |
 | pstSceneModesAttr | 指向场景模式参数的指针 | 输入      |
 
 【返回值】
@@ -1407,7 +1407,7 @@ ISP_SCENE_MODES_ATTR_S *pstSceneModesAttr);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1423,21 +1423,21 @@ int HB_ISP_SetAwbZoneInfo(uint8_t pipeId, ISP_ZONE_ATTR_S awbZoneInfo);
 ```
 【功能描述】
 
-获取/设置AWB zones信息。
+获取/设置 AWB zones 信息。
 
 【参数描述】
 
 | 参数名称    | 描述                                                                    | 输入/输出 |
 |-------------|-------------------------------------------------------------------------|-----------|
-| pipeId      | Pipeline索引号                                                          | 输入      |
-| awbZoneInfo | 指向AWB zones 信息的指针（获取时）； AWB zones 信息数据结构（设置时）； | 输入      |
+| pipeId      | Pipeline 索引号                                                          | 输入      |
+| awbZoneInfo | 指向 AWB zones 信息的指针（获取时）； AWB zones 信息数据结构（设置时）； | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】无
 
@@ -1453,21 +1453,21 @@ int HB_ISP_SetAfZoneInfo(uint8_t pipeId, ISP_ZONE_ATTR_S *afZoneInfo);
 ```
 【功能描述】
 
-获取/设置AF zones信息。
+获取/设置 AF zones 信息。
 
 【参数描述】
 
 | 参数名称   | 描述                                                                  | 输入/输出 |
 |------------|-----------------------------------------------------------------------|-----------|
-| pipeId     | Pipeline索引号                                                        | 输入      |
-| afZoneInfo | 指向AF zones 信息的指针（获取时）； AF zones 信息数据结构（设置时）； | 输入      |
+| pipeId     | Pipeline 索引号                                                        | 输入      |
+| afZoneInfo | 指向 AF zones 信息的指针（获取时）； AF zones 信息数据结构（设置时）； | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】无
 
@@ -1485,21 +1485,21 @@ ISP_ZONE_ATTR_S ae5binZoneInfo);
 ```
 【功能描述】
 
-获取/设置AE 5bin zones信息。
+获取/设置 AE 5bin zones 信息。
 
 【参数描述】
 
 | 参数名称       | 描述                                                                            | 输入/输出 |
 |----------------|---------------------------------------------------------------------------------|-----------|
-| pipeId         | Pipeline索引号                                                                  | 输入      |
-| ae5binZoneInfo | 指向AE 5bin zones 信息的指针（获取时）； AE 5BIN zones 信息数据结构（设置时）； | 输入      |
+| pipeId         | Pipeline 索引号                                                                  | 输入      |
+| ae5binZoneInfo | 指向 AE 5bin zones 信息的指针（获取时）； AE 5BIN zones 信息数据结构（设置时）； | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1515,25 +1515,25 @@ int HB_ISP_SetAfKernelInfo(uint8_t pipeId, uint32_t af_kernel);
 ```
 【功能描述】
 
-获取/设置AF KERNEL信息。
+获取/设置 AF KERNEL 信息。
 
 【参数描述】
 
 | 参数名称  | 描述                                                        | 输入/输出 |
 |-----------|-------------------------------------------------------------|-----------|
-| pipeId    | Pipeline索引号                                              | 输入      |
-| af_kernel | 指向af_kernel指针（获取时）； af_kernel数据信息（设置时）； | 输入      |
+| pipeId    | Pipeline 索引号                                              | 输入      |
+| af_kernel | 指向 af_kernel 指针（获取时）； af_kernel 数据信息（设置时）； | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-该接口主要为应用使用，如获取或改变当前af统计数据kernel。
+该接口主要为应用使用，如获取或改变当前 af 统计数据 kernel。
 
 【参考代码】
 
@@ -1547,21 +1547,21 @@ int HB_ISP_GetAeParam(uint8_t pipeId, ISP_AE_PARAM_S *pstAeParam);
 ```
 【功能描述】
 
-设置/获取AE 参数信息，line和total_gain。
+设置/获取 AE 参数信息，line 和 total_gain。
 
 【参数描述】
 
 | 参数名称   | 描述              | 输入/输出 |
 |------------|-------------------|-----------|
-| pipeId     | Pipeline索引号    | 输入      |
-| pstAeParam | 指向ae 参数的指针 | 输入      |
+| pipeId     | Pipeline 索引号    | 输入      |
+| pstAeParam | 指向 ae 参数的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1579,13 +1579,13 @@ int HB_ISP_GetAeRoiInfo(uint8_t pipeId, ISP_AE_ROI_ATTR_S *aeRoiInfo);
 ```
 【功能描述】
 
-设置ae的ROI权重区域，可以动态调用。
+设置 ae 的 ROI 权重区域，可以动态调用。
 
 【参数描述】
 
 | 参数名称  | 描述           | 输入/输出 |
 |-----------|----------------|-----------|
-| pipeId    | Pipeline索引号 | 输入      |
+| pipeId    | Pipeline 索引号 | 输入      |
 | aeRoiInfo | ROI 信息参数   | 输出      |
 
 【返回值】
@@ -1593,11 +1593,11 @@ int HB_ISP_GetAeRoiInfo(uint8_t pipeId, ISP_AE_ROI_ATTR_S *aeRoiInfo);
 | 返回值 | 描述  |
 |--------|-------|
 | 0      | 成功  |
-| 非0    | 失败  |
+| 非 0    | 失败  |
 
 【注意事项】
 
-该roi区域设置与3A-AE中roi 权重设置是独立进行，同一时刻只能使用其中一种功能。
+该 roi 区域设置与 3A-AE 中 roi 权重设置是独立进行，同一时刻只能使用其中一种功能。
 
 【参考代码】无
 
@@ -1613,13 +1613,13 @@ int HB_ISP_SetAwbStatAreaAttr(uint8_t pipeId, ISP_AWB_STAT_AREA_ATTR_S
 ```
 【功能描述】
 
-设置awb统计数据区域范围。
+设置 awb 统计数据区域范围。
 
 【参数描述】
 
 | 参数名称           | 描述                 | 输入/输出 |
 |--------------------|----------------------|-----------|
-| pipeId             | Pipeline索引号       | 输入      |
+| pipeId             | Pipeline 索引号       | 输入      |
 | pstAwbStatAreaAttr | 统计数据区域范围参数 | 输出      |
 
 【返回值】
@@ -1627,7 +1627,7 @@ int HB_ISP_SetAwbStatAreaAttr(uint8_t pipeId, ISP_AWB_STAT_AREA_ATTR_S
 | 返回值 | 描述  |
 |--------|-------|
 | 0      | 成功  |
-| 非0    | 失败  |
+| 非 0    | 失败  |
 
 【注意事项】
 
@@ -1641,25 +1641,25 @@ int HB_ISP_GetAeFullHist(uint8_t pipeId, uint32_t *pu32AeFullHist);
 ```
 【功能描述】
 
-获取AE统计数据。
+获取 AE 统计数据。
 
 【参数描述】
 
 | 参数名称       | 描述                 | 输入/输出 |
 |----------------|----------------------|-----------|
-| pipeId         | Pipeline索引号       | 输入      |
-| pu32AeFullHist | 指向AE统计数据的指针 | 输出      |
+| pipeId         | Pipeline 索引号       | 输入      |
+| pu32AeFullHist | 指向 AE 统计数据的指针 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-该接口主要为应用使用，如依统计信息做某些策略判断，3A算法库不需要用此接口。
+该接口主要为应用使用，如依统计信息做某些策略判断，3A 算法库不需要用此接口。
 
 【参考代码】
 ```c
@@ -1696,25 +1696,25 @@ ISP_STATISTICS_AWB_ZONE_ATTR_S
 ```
 【功能描述】
 
-获取AWB统计数据。
+获取 AWB 统计数据。
 
 【参数描述】
 
 | 参数名称        | 描述                  | 输入/输出 |
 |-----------------|-----------------------|-----------|
-| pipeId          | Pipeline索引号        | 输入      |
-| pstAwbZonesAttr | 指向AWB统计数据的指针 | 输出      |
+| pipeId          | Pipeline 索引号        | 输入      |
+| pstAwbZonesAttr | 指向 AWB 统计数据的指针 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-该接口主要为应用使用，如依统计信息做某些策略判断，3A算法库不需要用此接口。
+该接口主要为应用使用，如依统计信息做某些策略判断，3A 算法库不需要用此接口。
 
 【参考代码】
 
@@ -1728,25 +1728,25 @@ pipeId, ISP_STATISTICS_AE_5BIN_ZONE_ATTR_S
 ```
 【功能描述】
 
-获取AE 5bin统计数据。
+获取 AE 5bin 统计数据。
 
 【参数描述】
 
 | 参数名称    | 描述                      | 输入/输出 |
 |-------------|---------------------------|-----------|
-| pipeId      | Pipeline索引号            | 输入      |
-| pst32Ae5bin | 指向AE 5bin统计数据的指针 | 输出      |
+| pipeId      | Pipeline 索引号            | 输入      |
+| pst32Ae5bin | 指向 AE 5bin 统计数据的指针 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-该接口主要为应用使用，如依统计信息做某些策略判断，3A算法库不需要用此接口。
+该接口主要为应用使用，如依统计信息做某些策略判断，3A 算法库不需要用此接口。
 
 【参考代码】
 ```c
@@ -1769,27 +1769,27 @@ int HB_ISP_GetAfZoneHist(uint8_t pipeId, af_stats_data_t
 ```
 【功能描述】
 
-获取AF统计数据。
+获取 AF 统计数据。
 
 【参数描述】
 
 | 参数名称       | 描述                 | 输入/输出 |
 |----------------|----------------------|-----------|
-| pipeId         | Pipeline索引号       | 输入      |
-| pstAfZonesAttr | 指向AF统计数据的指针 | 输出      |
+| pipeId         | Pipeline 索引号       | 输入      |
+| pstAfZonesAttr | 指向 AF 统计数据的指针 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-1.该接口主要为应用使用，如依统计信息做某些策略判断，3A算法库不需要用此接口。
+1.该接口主要为应用使用，如依统计信息做某些策略判断，3A 算法库不需要用此接口。
 
-2.此接口有好几种数据的缓存，如果要获取实时的数据，请使用HB_ISP_GetMeteringData接口去获取，HB_ISP_GetMeteringData是获取的实时数据。
+2.此接口有好几种数据的缓存，如果要获取实时的数据，请使用 HB_ISP_GetMeteringData 接口去获取，HB_ISP_GetMeteringData 是获取的实时数据。
 
 【参考代码】
 ```c
@@ -1816,14 +1816,14 @@ int HB_ISP_GetMeteringData(uint8_t pipeId, void *data, ISP_METERING_DATA_TYPE_E 
 
 【功能描述】
 
-获取AF/LUMVAR统计数据。
+获取 AF/LUMVAR 统计数据。
 
 【参数描述】
 
 | 参数名称    | 描述                          | 输入/输出 |
 | ----------- | ----------------------------- | --------- |
-| pipeId      | Pipeline索引号                | 输入      |
-| data        | 指向AF/LUMVAR统计数据的指针   | 输出      |
+| pipeId      | Pipeline 索引号                | 输入      |
+| data        | 指向 AF/LUMVAR 统计数据的指针   | 输出      |
 | type        | 获取统计数据类型（AF/LUMVAR） | 输入      |
 | latest_flag | 是否获取最新数据              | 输入      |
 
@@ -1832,13 +1832,13 @@ int HB_ISP_GetMeteringData(uint8_t pipeId, void *data, ISP_METERING_DATA_TYPE_E 
 | 返回值 | 描述 |
 | ------ | ---- |
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-1.此接口获取得值fv即是可以直接用来聚焦计算。
+1.此接口获取得值 fv 即是可以直接用来聚焦计算。
 
-2.可以不需要调用HB_ISP_GetVDTTimeOut帧中断接口再去获取，直接调用此接口获取就是最新的值。
+2.可以不需要调用 HB_ISP_GetVDTTimeOut 帧中断接口再去获取，直接调用此接口获取就是最新的值。
 
 ### HB_ISP_GetVDTTimeOut
 
@@ -1848,14 +1848,14 @@ int HB_ISP_GetVDTTimeOut(uint8_t pipeId, uint8_t vdt_type, uint64_t timeout);
 ```
 【功能描述】
 
-获取ISP FRAME_START 或FRAME_END信息。
+获取 ISP FRAME_START 或 FRAME_END 信息。
 
 【参数描述】
 
 | 参数名称 | 描述                                 | 输入/输出 |
 |----------|--------------------------------------|-----------|
-| pipeId   | Pipeline索引号                       | 输入      |
-| vdt_type | 选择获取ISP frame_start or frame_end | 输入      |
+| pipeId   | Pipeline 索引号                       | 输入      |
+| vdt_type | 选择获取 ISP frame_start or frame_end | 输入      |
 | timeout  | 超时返回时间                         | 输入      |
 
 【返回值】
@@ -1863,7 +1863,7 @@ int HB_ISP_GetVDTTimeOut(uint8_t pipeId, uint8_t vdt_type, uint64_t timeout);
 | 返回值 | 描述       |
 |--------|------------|
 | 0      | FS/FE 同步 |
-| 非0    | 超时返回   |
+| 非 0    | 超时返回   |
 
 【注意事项】
 
@@ -1880,21 +1880,21 @@ int HB_ISP_GetLumaZoneHist(uint8_t pipeId, ISP_STATISTICS_LUMVAR_ZONE_ATTR_S
 ```
 【功能描述】
 
-获取LUMVAR 统计信息均值及方差。
+获取 LUMVAR 统计信息均值及方差。
 
 【参数描述】
 
 | 参数名称  | 描述                      | 输入/输出 |
 |-----------|---------------------------|-----------|
-| pipeId    | Pipeline索引号            | 输入      |
-| pst32Luma | 执行lumvar 统计信息的指针 | 输出      |
+| pipeId    | Pipeline 索引号            | 输入      |
+| pst32Luma | 执行 lumvar 统计信息的指针 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1910,21 +1910,21 @@ int HB_ISP_GetAEControl(uint8_t pipeId, ISP_AE_CONTROL *pstAeControl);
 ```
 【功能描述】
 
-设置/获取AE控制信息
+设置/获取 AE 控制信息
 
 【参数描述】
 
 | 参数名称     | 描述                 | 输入/输出 |
 |--------------|----------------------|-----------|
-| pipeId       | Pipeline索引号       | 输入      |
-| pstAeControl | 指向AE控制信息的指针 | 输入      |
+| pipeId       | Pipeline 索引号       | 输入      |
+| pstAeControl | 指向 AE 控制信息的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1941,21 +1941,21 @@ int HB_ISP_GetAECorrection(uint8_t pipeId, ISP_AE_CORRECTION *pstAeCorrection);
 ```
 【功能描述】
 
-设置/获取AE校正信息
+设置/获取 AE 校正信息
 
 【参数描述】
 
 | 参数名称        | 描述                 | 输入/输出 |
 |-----------------|----------------------|-----------|
-| pipeId          | Pipeline索引号       | 输入      |
-| pstAeCorrection | 指向AE校正信息的指针 | 输入      |
+| pipeId          | Pipeline 索引号       | 输入      |
+| pstAeCorrection | 指向 AE 校正信息的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -1973,21 +1973,21 @@ int HB_ISP_Get_AE_5bin_Hist(uint8_t pipeId, ISP_5BIN_HIST * pAe5binHist);
 
 【功能描述】
 
-设置/获取AE的5bin统计信息
+设置/获取 AE 的 5bin 统计信息
 
 【参数描述】
 
 | 参数名称    | 描述                       | 输入/输出 |
 | ----------- | -------------------------- | --------- |
-| pipeId      | Pipeline索引号             | 输入      |
-| pAe5binHist | 指向AE的5bin统计信息的指针 | 输入      |
+| pipeId      | Pipeline 索引号             | 输入      |
+| pAe5binHist | 指向 AE 的 5bin 统计信息的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 | ------ | ---- |
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2011,7 +2011,7 @@ int HB_ISP_GetExposureRatioAdjustment(uint8_t pipeId, ISP_EXP_RATIO_ADJ
 
 | 参数名称       | 描述               | 输入/输出 |
 |----------------|--------------------|-----------|
-| pipeId         | Pipeline索引号     | 输入      |
+| pipeId         | Pipeline 索引号     | 输入      |
 | pstExpRatioAdj | 指向曝光比例的指针 | 输入      |
 
 【返回值】
@@ -2019,7 +2019,7 @@ int HB_ISP_GetExposureRatioAdjustment(uint8_t pipeId, ISP_EXP_RATIO_ADJ
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2037,21 +2037,21 @@ int HB_ISP_SetExposurePartitionLuts(uint8_t pipeId, ISP_EXP_PAT_LUTS
 ```
 【功能描述】
 
-设置/获取曝光分区Lut表信息
+设置/获取曝光分区 Lut 表信息
 
 【参数描述】
 
 | 参数名称      | 描述                    | 输入/输出 |
 |---------------|-------------------------|-----------|
-| pipeId        | Pipeline索引号          | 输入      |
-| pstExpPatLuts | 指向曝光分区lut表的指针 | 输入      |
+| pipeId        | Pipeline 索引号          | 输入      |
+| pstExpPatLuts | 指向曝光分区 lut 表的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2069,21 +2069,21 @@ int HB_ISP_GetAwbBgMaxGain(uint8_t pipeId, ISP_AWB_BG_MAX_GAIN
 ```
 【功能描述】
 
-设置/获取 AWB BG最大增益
+设置/获取 AWB BG 最大增益
 
 【参数描述】
 
 | 参数名称        | 描述                     | 输入/输出 |
 |-----------------|--------------------------|-----------|
-| pipeId          | Pipeline索引号           | 输入      |
-| pstAwbBgMaxGain | 指向AWB BG最大增益的指针 | 输入      |
+| pipeId          | Pipeline 索引号           | 输入      |
+| pstAwbBgMaxGain | 指向 AWB BG 最大增益的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2101,21 +2101,21 @@ int HB_ISP_GetCcmSaturationStrength(uint8_t pipeId, ISP_CCM_SATURA_STRENG
 ```
 【功能描述】
 
-设置/获取CCM饱和强度信息
+设置/获取 CCM 饱和强度信息
 
 【参数描述】
 
 | 参数名称      | 描述                  | 输入/输出 |
 |---------------|-----------------------|-----------|
-| pipeId        | Pipeline索引号        | 输入      |
-| pstCcmSatStre | 指向CCM曝光强度的指针 | 输入      |
+| pipeId        | Pipeline 索引号        | 输入      |
+| pstCcmSatStre | 指向 CCM 曝光强度的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2132,21 +2132,21 @@ int HB_ISP_GetCcmMtLs(uint8_t pipeId, ISP_MT_ABSOLUTE_LS *pstMtAbsoluteLs);
 ```
 【功能描述】
 
-设置/获取CCM Mt Ls
+设置/获取 CCM Mt Ls
 
 【参数描述】
 
 | 参数名称        | 描述                | 输入/输出 |
 |-----------------|---------------------|-----------|
-| pipeId          | Pipeline索引号      | 输入      |
-| pstMtAbsoluteLs | 指向CCM Mt Ls的指针 | 输入      |
+| pipeId          | Pipeline 索引号      | 输入      |
+| pstMtAbsoluteLs | 指向 CCM Mt Ls 的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2164,21 +2164,21 @@ int HB_ISP_GetCcmAttr(uint8_t pipeId, ISP_CCM_ONE_GAIN_THRESHOLD
 ```
 【功能描述】
 
-设置/获取CCM属性
+设置/获取 CCM 属性
 
 【参数描述】
 
 | 参数名称            | 描述              | 输入/输出 |
 |---------------------|-------------------|-----------|
-| pipeId              | Pipeline索引号    | 输入      |
-| pstOneGainThreshold | 指向CCM属性的指针 | 输入      |
+| pipeId              | Pipeline 索引号    | 输入      |
+| pstOneGainThreshold | 指向 CCM 属性的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2194,21 +2194,21 @@ int HB_ISP_GetGammaEv1(uint8_t pipeId, ISP_GAMMA_EV1 *pstGammaEv1);
 ```
 【功能描述】
 
-设置/获取Gamma Ev1属性
+设置/获取 Gamma Ev1 属性
 
 【参数描述】
 
 | 参数名称    | 描述                | 输入/输出 |
 |-------------|---------------------|-----------|
-| pipeId      | Pipeline索引号      | 输入      |
-| pstGammaEv1 | 指向Gamma Ev1的指针 | 输入      |
+| pipeId      | Pipeline 索引号      | 输入      |
+| pstGammaEv1 | 指向 Gamma Ev1 的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2224,21 +2224,21 @@ int HB_ISP_GetGammaEv2(uint8_t pipeId, ISP_GAMMA_EV2 *pstGammaEv2);
 ```
 【功能描述】
 
-设置/获取Gamma Ev2属性
+设置/获取 Gamma Ev2 属性
 
 【参数描述】
 
 | 参数名称    | 描述                | 输入/输出 |
 |-------------|---------------------|-----------|
-| pipeId      | Pipeline索引号      | 输入      |
-| pstGammaEv2 | 指向Gamma Ev2的指针 | 输入      |
+| pipeId      | Pipeline 索引号      | 输入      |
+| pstGammaEv2 | 指向 Gamma Ev2 的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2255,21 +2255,21 @@ int HB_ISP_GetGammaThreshold(uint8_t pipeId, ISP_GAMMA_THRESHOLD *pstGammaThd);
 ```
 【功能描述】
 
-设置/获取Gamma临界值
+设置/获取 Gamma 临界值
 
 【参数描述】
 
 | 参数名称    | 描述                  | 输入/输出 |
 |-------------|-----------------------|-----------|
-| pipeId      | Pipeline索引号        | 输入      |
-| pstGammaThd | 指向Gamma临界值的指针 | 输入      |
+| pipeId      | Pipeline 索引号        | 输入      |
+| pstGammaThd | 指向 Gamma 临界值的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2287,21 +2287,21 @@ int HB_ISP_SetEvToLuxStatustAttr(uint8_t pipeId, const uint8_t
 ```
 【功能描述】
 
-获取evtolux属性
+获取 evtolux 属性
 
 【参数描述】
 
 | 参数名称              | 描述                  | 输入/输出 |
 |-----------------------|-----------------------|-----------|
-| pipeId                | Pipeline索引号        | 输入      |
-| pstEvtoluxStatustAttr | 指向evtolux属性的指针 | 输出      |
+| pipeId                | Pipeline 索引号        | 输入      |
+| pstEvtoluxStatustAttr | 指向 evtolux 属性的指针 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2318,21 +2318,21 @@ int HB_ISP_GetCctCtrlAttr(uint8_t pipeId, ISP_AWB_CCT_CTRL_S *pstCctAttr);
 ```
 【功能描述】
 
-设置/获取CCT属性
+设置/获取 CCT 属性
 
 【参数描述】
 
 | 参数名称   | 描述              | 输入/输出 |
 |------------|-------------------|-----------|
-| pipeId     | Pipeline索引号    | 输入      |
-| pstCctAttr | 指向CCT属性的指针 | 输入      |
+| pipeId     | Pipeline 索引号    | 输入      |
+| pstCctAttr | 指向 CCT 属性的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2348,21 +2348,21 @@ int HB_ISP_GetAwbAvgCoeff(uint8_t pipeId, uint8_t *Coeff);
 ```
 【功能描述】
 
-设置AWB平均参数
+设置 AWB 平均参数
 
 【参数描述】
 
 | 参数名称 | 描述                                                         | 输入/输出 |
 | -------- | ------------------------------------------------------------ | --------- |
-| pipeId   | Pipeline索引号                                               | 输入      |
-| Coeff    | 指向AWB平均参数的指针，值越小收敛step越少，值越小收敛越快，值越大收敛step越大 | 输入      |
+| pipeId   | Pipeline 索引号                                               | 输入      |
+| Coeff    | 指向 AWB 平均参数的指针，值越小收敛 step 越少，值越小收敛越快，值越大收敛 step 越大 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2380,21 +2380,21 @@ int HB_ISP_GetMixLightAttr(uint8_t pipeId, ISP_MIX_LIGHT_PARAM_S
 ```
 【功能描述】
 
-设置MIX LIGHT属性
+设置 MIX LIGHT 属性
 
 【参数描述】
 
 | 参数名称        | 描述                    | 输入/输出 |
 |-----------------|-------------------------|-----------|
-| pipeId          | Pipeline索引号          | 输入      |
-| pstMixLightAttr | 指向MIX LIGHT属性的指针 | 输入      |
+| pipeId          | Pipeline 索引号          | 输入      |
+| pstMixLightAttr | 指向 MIX LIGHT 属性的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2410,21 +2410,21 @@ int HB_ISP_GetSkyCtrlAttr(uint8_t pipeId, ISP_SKY_PARAM_S *pstSkyCtrlAttr);
 ```
 【功能描述】
 
-设置outdoor daylight属性
+设置 outdoor daylight 属性
 
 【参数描述】
 
 | 参数名称       | 描述                           | 输入/输出 |
 |----------------|--------------------------------|-----------|
-| pipeId         | Pipeline索引号                 | 输入      |
-| pstSkyCtrlAttr | 指向outdoor daylight属性的指针 | 输入      |
+| pipeId         | Pipeline 索引号                 | 输入      |
+| pstSkyCtrlAttr | 指向 outdoor daylight 属性的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2445,7 +2445,7 @@ Api 控制
 
 | 参数名称  | 描述           | 输入/输出 |
 |-----------|----------------|-----------|
-| pipeId    | Pipeline索引号 | 输入      |
+| pipeId    | Pipeline 索引号 | 输入      |
 | direction | 设置/获取      | 输入      |
 | type      | 大类型         | 输入      |
 | cmd       | 小类型         | 输入      |
@@ -2456,7 +2456,7 @@ Api 控制
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2472,21 +2472,21 @@ int HB_ISP_SetTempLut(uint8_t pipeId, TEMPER_NP_LUT_S *pstTemperLUT);
 ```
 【功能描述】
 
-设置/获取temper lut表
+设置/获取 temper lut 表
 
 【参数描述】
 
 | 参数名称     | 描述                           | 输入/输出 |
 |--------------|--------------------------------|-----------|
-| pipeId       | Pipeline索引号                 | 输入      |
-| pstTemperLUT | 指向temper 模块的lut表的指针。 | 输入      |
+| pipeId       | Pipeline 索引号                 | 输入      |
+| pstTemperLUT | 指向 temper 模块的 lut 表的指针。 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2504,21 +2504,21 @@ int HB_ISP_GetAwbRgBgWeightAttr(uint8_t pipeId, ISP_MESH_RGBG_WEIGHT_S
 ```
 【功能描述】
 
-设置/获取awb rg bg 权重表
+设置/获取 awb rg bg 权重表
 
 【参数描述】
 
 | 参数名称      | 描述                               | 输入/输出 |
 |---------------|------------------------------------|-----------|
-| pipeId        | Pipeline索引号                     | 输入      |
-| pstWeightAttr | 指向普朗克曲线weight权重表的指针。 | 输入      |
+| pipeId        | Pipeline 索引号                     | 输入      |
+| pstWeightAttr | 指向普朗克曲线 weight 权重表的指针。 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2536,21 +2536,21 @@ int HB_ISP_SetAwbLsWeightAttr(uint8_t pipeId, const ISP_MESH_LS_WEIGHT_S
 ```
 【功能描述】
 
-设置/获取awb ls weight属性
+设置/获取 awb ls weight 属性
 
 【参数描述】
 
 | 参数名称      | 描述                           | 输入/输出 |
 |---------------|--------------------------------|-----------|
-| pipeId        | Pipeline索引号                 | 输入      |
-| pstWeightAttr | 指向孤立光源点weight权重的指针 | 输入      |
+| pipeId        | Pipeline 索引号                 | 输入      |
+| pstWeightAttr | 指向孤立光源点 weight 权重的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2568,21 +2568,21 @@ int HB_ISP_SetAwbDefultParmAttr(uint8_t pipeId, const ISP_AWB_DEFAULT_PARAM_S
 ```
 【功能描述】
 
-设置/获取CALIBRATION_CT30POS 参数
+设置/获取 CALIBRATION_CT30POS 参数
 
 【参数描述】
 
 | 参数名称   | 描述                      | 输入/输出 |
 |------------|---------------------------|-----------|
-| pipeId     | Pipeline索引号            | 输入      |
-| pstAwbAttr | 指向awb U30数组标号的指针 | 输入      |
+| pipeId     | Pipeline 索引号            | 输入      |
+| pstAwbAttr | 指向 awb U30 数组标号的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2600,13 +2600,13 @@ ISP_MESH_COLOR_TEMP_WEIGHT_S *pstWeightAttr);
 ```
 【功能描述】
 
-设置/获取CALIBRATION_MESH_COLOR_TEMPERATURE属性
+设置/获取 CALIBRATION_MESH_COLOR_TEMPERATURE 属性
 
 【参数描述】
 
 | 参数名称      | 描述                 | 输入/输出 |
 |---------------|----------------------|-----------|
-| pipeId        | Pipeline索引号       | 输入      |
+| pipeId        | Pipeline 索引号       | 输入      |
 | pstWeightAttr | 指向色温权重表的指针 | 输入      |
 
 【返回值】
@@ -2614,7 +2614,7 @@ ISP_MESH_COLOR_TEMP_WEIGHT_S *pstWeightAttr);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2632,7 +2632,7 @@ int HB_ISP_GetAwbPosStatusAttr(uint8_t pipeId, ISP_AWB_POS_STATUS_S
 ```
 【功能描述】
 
-设置/获取awb位置状态
+设置/获取 awb 位置状态
 
 CALIBRATION_RG_POS
 
@@ -2642,15 +2642,15 @@ CALIBRATION_BG_POS
 
 | 参数名称   | 描述                      | 输入/输出 |
 |------------|---------------------------|-----------|
-| pipeId     | Pipeline索引号            | 输入      |
-| pstPosAttr | 指向rgain/bgain数组的指针 | 输入      |
+| pipeId     | Pipeline 索引号            | 输入      |
+| pstPosAttr | 指向 rgain/bgain 数组的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2668,7 +2668,7 @@ int HB_ISP_GetAwbLightSourceAttr(uint8_t pipeId, ISP_AWB_LIGHT_SOURCE_S
 ```
 【功能描述】
 
-设置/获取awb光源属性
+设置/获取 awb 光源属性
 
 COLOR_TEMP
 
@@ -2680,7 +2680,7 @@ CT_BG_POS_CALC
 
 | 参数名称     | 描述               | 输入/输出 |
 |--------------|--------------------|-----------|
-| pipeId       | Pipeline索引号     | 输入      |
+| pipeId       | Pipeline 索引号     | 输入      |
 | pstLightAttr | 指向光源属性的指针 | 输入      |
 
 【返回值】
@@ -2688,7 +2688,7 @@ CT_BG_POS_CALC
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2706,21 +2706,21 @@ int HB_ISP_SetWdrOffsetAttr(uint8_t pipeId, ISP_WDR_OFFSET_S
 ```
 【功能描述】
 
-设置/获取wdr偏移属性
+设置/获取 wdr 偏移属性
 
 【参数描述】
 
 | 参数名称         | 描述                  | 输入/输出 |
 |------------------|-----------------------|-----------|
-| pipeId           | Pipeline索引号        | 输入      |
-| pstWdrOffsetAttr | 指向wdr偏移属性的指针 | 输入      |
+| pipeId           | Pipeline 索引号        | 输入      |
+| pstWdrOffsetAttr | 指向 wdr 偏移属性的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2735,23 +2735,23 @@ uint32_t scale_bottom, uint32_t scale_top);
 ```
 【功能描述】
 
-设置hdr ae1024bin权重属性
+设置 hdr ae1024bin 权重属性
 
 【参数描述】
 
 | 参数名称        | 描述           | 输入/输出 |
 |-----------------|----------------|-----------|
-| pipeId          | Pipeline索引号 | 输入      |
+| pipeId          | Pipeline 索引号 | 输入      |
 | pstAexpTypeAttr | 选择长短帧     | 输入      |
-| scale_bottom    | 低bin处缩放    | 输入      |
-| scale_top       | 高bin处停止    | 输入      |
+| scale_bottom    | 低 bin 处缩放    | 输入      |
+| scale_top       | 高 bin 处停止    | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2765,21 +2765,21 @@ int HB_ISP_GetAfStatus(uint8_t pipeId, ISP_AF_STATUS_E *pstAfStatusAttr);
 ```
 【功能描述】
 
-获取af状态
+获取 af 状态
 
 【参数描述】
 
 | 参数名称        | 描述             | 输入/输出 |
 |-----------------|------------------|-----------|
-| pipeId          | Pipeline索引号   | 输入      |
-| pstAfStatusAttr | 指向af状态的指针 | 输出      |
+| pipeId          | Pipeline 索引号   | 输入      |
+| pstAfStatusAttr | 指向 af 状态的指针 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2793,7 +2793,7 @@ int HB_ISP_GetAfInfo(uint8_t pipeId, ISP_AF_LENS_INFO_S *ptrLenInfo);
 ```
 【功能描述】
 
-获取af信息
+获取 af 信息
 
 AF_MANUAL_CONTROL
 
@@ -2805,15 +2805,15 @@ AF_RANGE_HIGH
 
 | 参数名称   | 描述             | 输入/输出 |
 |------------|------------------|-----------|
-| pipeId     | Pipeline索引号   | 输入      |
-| ptrLenInfo | 指向af信息的指针 | 输出      |
+| pipeId     | Pipeline 索引号   | 输入      |
+| ptrLenInfo | 指向 af 信息的指针 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2828,22 +2828,22 @@ pos);
 ```
 【功能描述】
 
-设置af 模式
+设置 af 模式
 
 【参数描述】
 
 | 参数名称     | 描述                    | 输入/输出 |
 |--------------|-------------------------|-----------|
-| pipeId       | Pipeline索引号          | 输入      |
-| stAfModeAttr | 指向af模式类型的指针    | 输入      |
-| pos          | 只在manual 模式下有作用 | 输入      |
+| pipeId       | Pipeline 索引号          | 输入      |
+| stAfModeAttr | 指向 af 模式类型的指针    | 输入      |
+| pos          | 只在 manual 模式下有作用 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2861,14 +2861,14 @@ int HB_ISP_GetFlickerStatus(uint8_t pipeId, uint32_t *flicker_enable, uint32_t
 ```
 【功能描述】
 
-设置/获取flicker状态
+设置/获取 flicker 状态
 
 【参数描述】
 
 | 参数名称          | 描述           | 输入/输出 |
 |-------------------|----------------|-----------|
-| pipeId            | Pipeline索引号 | 输入      |
-| flicker_enable    | 使能flincker   | 输入      |
+| pipeId            | Pipeline 索引号 | 输入      |
+| flicker_enable    | 使能 flincker   | 输入      |
 | flicker_frequency | filcker 频率   | 输入      |
 
 【返回值】
@@ -2876,11 +2876,11 @@ int HB_ISP_GetFlickerStatus(uint8_t pipeId, uint32_t *flicker_enable, uint32_t
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
-flicker_frequency 为频率值，eg. 50hz输入50；60hz 输入60，50hz下flicker限制的曝光时间10ms,如果对着灯光亮度太亮，曝光时间少于10ms，那flicker不会重新拉到10ms，可以使用HB_ISP_SetAeMinIntertime(uint8_t pipeId, uint32_t stAeMinTime)把最小时间固定在10ms
+flicker_frequency 为频率值，eg. 50hz 输入 50；60hz 输入 60，50hz 下 flicker 限制的曝光时间 10ms,如果对着灯光亮度太亮，曝光时间少于 10ms，那 flicker 不会重新拉到 10ms，可以使用 HB_ISP_SetAeMinIntertime(uint8_t pipeId, uint32_t stAeMinTime)把最小时间固定在 10ms
 
 【参考代码】无
 
@@ -2894,21 +2894,21 @@ int HB_ISP_GetAeAttrEx(uint8_t pipeId, ISP_AE_ATTR_EX_S *pstAeAttrEx);
 ```
 【功能描述】
 
-设置ae 属性
+设置 ae 属性
 
 【参数描述】
 
 | 参数名称    | 描述             | 输入/输出 |
 |-------------|------------------|-----------|
-| pipeId      | Pipeline索引号   | 输入      |
-| pstAeAttrEx | 指向ae参数的指针 | 输出      |
+| pipeId      | Pipeline 索引号   | 输入      |
+| pstAeAttrEx | 指向 ae 参数的指针 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2924,21 +2924,21 @@ int HB_ISP_SetAeWeight(uint8_t pipeId, AE_ZONES_WEIGHT_S *pstAeWeightLUT);
 ```
 【功能描述】
 
-设置/获取ae weight
+设置/获取 ae weight
 
 【参数描述】
 
 | 参数名称       | 描述                  | 输入/输出 |
 |----------------|-----------------------|-----------|
-| pipeId         | Pipeline索引号        | 输入      |
-| pstAeWeightLUT | 指向ae weight表的指针 | 输出      |
+| pipeId         | Pipeline 索引号        | 输入      |
+| pstAeWeightLUT | 指向 ae weight 表的指针 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2954,21 +2954,21 @@ int HB_ISP_SetAeMinIntertime(uint8_t pipeId, uint32_t stAeMinTime);
 ```
 【功能描述】
 
-设置/获取ae最小intertime
+设置/获取 ae 最小 intertime
 
 【参数描述】
 
 | 参数名称     | 描述                              | 输入/输出 |
 | ------------ | --------------------------------- | --------- |
-| pipeId       | Pipeline索引号                    | 输入      |
-| pstAeMinTime | 指向最小intertime的指针，单位为行 | 输出      |
+| pipeId       | Pipeline 索引号                    | 输入      |
+| pstAeMinTime | 指向最小 intertime 的指针，单位为行 | 输出      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -2984,13 +2984,13 @@ int HB_GetAwbTemperatureInfo(uint8_t pipeId, uint32_t *temper);
 ```
 【功能描述】
 
-获取awb色温信息
+获取 awb 色温信息
 
 【参数描述】
 
 | 参数名称 | 描述           | 输入/输出 |
 |----------|----------------|-----------|
-| pipeId   | Pipeline索引号 | 输入      |
+| pipeId   | Pipeline 索引号 | 输入      |
 | temper   | 指向色温的指针 | 输出      |
 
 【返回值】
@@ -2998,7 +2998,7 @@ int HB_GetAwbTemperatureInfo(uint8_t pipeId, uint32_t *temper);
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -3014,21 +3014,21 @@ int HB_ISP_SetAwbTolerance(uint8_t pipeId, uint8_t Tolerance);
 
 【功能描述】
 
-设置awb容忍度信息
+设置 awb 容忍度信息
 
 【参数描述】
 
 | 参数名称  | 描述                       | 输入/输出 |
 | --------- | -------------------------- | --------- |
-| pipeId    | Pipeline索引号             | 输入      |
-| Tolerance | awb容忍度值，范围是[1, 50] | 输入      |
+| pipeId    | Pipeline 索引号             | 输入      |
+| Tolerance | awb 容忍度值，范围是[1, 50] | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 | ------ | ---- |
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -3044,21 +3044,21 @@ int HB_SetAwbModeInfo(uint8_t pipeId, ISP_AWB_MODE_E AwbMode);
 ```
 【功能描述】
 
-设置/获取awb模式信息
+设置/获取 awb 模式信息
 
 【参数描述】
 
 | 参数名称   | 描述              | 输入/输出 |
 |------------|-------------------|-----------|
-| pipeId     | Pipeline索引号    | 输入      |
-| ptrAwbMode | 指向awb模式的指针 | 输入      |
+| pipeId     | Pipeline 索引号    | 输入      |
+| ptrAwbMode | 指向 awb 模式的指针 | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -3074,23 +3074,23 @@ int HB_GetAwbGainByTemp(uint8_t pipeId, uint16_t ColorTemp, int16_t Shift, ISP_A
 
 【功能描述】
 
-获取awb色温的plank曲线公式计算出来rgain和bgain
+获取 awb 色温的 plank 曲线公式计算出来 rgain 和 bgain
 
 【参数描述】
 
 | 参数名称   | 描述                                           | 输入/输出 |
 | ---------- | ---------------------------------------------- | --------- |
-| pipeId     | Pipeline索引号                                 | 输入      |
-| ColorTemp  | 色温值，单位Kelvin，范围[1500~10000]           | 输入      |
-| Shift      | 白点与Planckian 曲线的位置和距离，范围[-64~64] | 输入      |
-| pstAwbAttr | 指向AwbAttr指针                                | 输入      |
+| pipeId     | Pipeline 索引号                                 | 输入      |
+| ColorTemp  | 色温值，单位 Kelvin，范围[1500~10000]           | 输入      |
+| Shift      | 白点与 Planckian 曲线的位置和距离，范围[-64~64] | 输入      |
+| pstAwbAttr | 指向 AwbAttr 指针                                | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 | ------ | ---- |
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -3104,21 +3104,21 @@ int HB_ISP_SetAfSpeed(uint8_t pipeId, uint32_t speed);
 ```
 【功能描述】
 
-设置AF对焦步数
+设置 AF 对焦步数
 
 【参数描述】
 
 | 参数名称   | 描述              | 输入/输出 |
 |------------|-------------------|-----------|
-| pipeId     | Pipeline索引号    | 输入      |
-| speed      | AF对焦步数        | 输入      |
+| pipeId     | Pipeline 索引号    | 输入      |
+| speed      | AF 对焦步数        | 输入      |
 
 【返回值】
 
 | 返回值 | 描述 |
 |--------|------|
 | 0      | 成功 |
-| 非0    | 失败 |
+| 非 0    | 失败 |
 
 【注意事项】
 
@@ -3144,8 +3144,8 @@ typedef enum HB_ISP_FW_STATE_E {
 
 | 成员                | 含义             |
 |---------------------|------------------|
-| ISP_FW_STATE_RUN    | Firmware正常运行 |
-| ISP_FW_STATE_FREEZE | Firmware冻结     |
+| ISP_FW_STATE_RUN    | Firmware 正常运行 |
+| ISP_FW_STATE_FREEZE | Firmware 冻结     |
 
 ### HB\_ ISP_MODULE_CTRL_U
 
@@ -3228,7 +3228,7 @@ typedef union HB_ISP_MODULE_CTRL_U {
 
 } ISP_MODULE_CTRL_U;
 ```
-【功能描述】各模块bypass控制bit位定义。
+【功能描述】各模块 bypass 控制 bit 位定义。
 
 ### HB_ISP_I2C_DATA_S
 
@@ -3285,15 +3285,15 @@ typedef struct HB_ISP_AE_FUNC_S {
 ```
 【功能描述】
 
-定义AE算法库回调函数结构体。
+定义 AE 算法库回调函数结构体。
 
 【成员说明】
 
 | 成员        | 含义                                                                                                                                                                                                                  |
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| init_func   | 描述： AE算法的初始化 参数： ctx_id 入参，对应不同实例 返回： 指向实例指针                                                                                                                                            |
-| proc_func   | 描述： 做AE算法处理 参数： ae_ctx 入参，是init_func的返回值，对应一个实例 stats 入参，对应AE统计数据 input 入参，ISP Firmware传给算法的参数 output 出参，AE算法的输出结果，会配置给ISP Firmware 返回： 0成功，非0失败 |
-| deinit_func | 描述： AE去初始化 参数： ae_ctx 入参，是init_func的返回值，对应一个实例 返回： 0成功，非0失败                                                                                                                         |
+| init_func   | 描述： AE 算法的初始化 参数： ctx_id 入参，对应不同实例 返回： 指向实例指针                                                                                                                                            |
+| proc_func   | 描述： 做 AE 算法处理 参数： ae_ctx 入参，是 init_func 的返回值，对应一个实例 stats 入参，对应 AE 统计数据 input 入参，ISP Firmware 传给算法的参数 output 出参，AE 算法的输出结果，会配置给 ISP Firmware 返回： 0 成功，非 0 失败 |
+| deinit_func | 描述： AE 去初始化 参数： ae_ctx 入参，是 init_func 的返回值，对应一个实例 返回： 0 成功，非 0 失败                                                                                                                         |
 
 ### ae_stats_data_t
 
@@ -3315,7 +3315,7 @@ typedef struct _ae_stats_data_ {
 ```
 【功能描述】
 
-定义AE统计数据结构体。有关AE统计数据详细描述可见[统计信息](#ae统计信息)章节。
+定义 AE 统计数据结构体。有关 AE 统计数据详细描述可见[统计信息](#ae统计信息)章节。
 
 【成员说明】
 
@@ -3341,14 +3341,14 @@ typedef struct _ae_input_data_ {
 ```
 【功能描述】
 
-定义AE算法输入参数结构体。
+定义 AE 算法输入参数结构体。
 
 【成员说明】
 
 | 成员          | 含义                                               |
 |---------------|----------------------------------------------------|
 | custom_input  | 无含义                                             |
-| acamera_input | AE算法需要用到的参数，实际为ae_acamera_input_t类型 |
+| acamera_input | AE 算法需要用到的参数，实际为 ae_acamera_input_t 类型 |
 
 ### ae_acamera_input_t
 
@@ -3370,7 +3370,7 @@ typedef struct _ae_acamera_input_ {
 ```
 【功能描述】
 
-传给AE算法的参数。
+传给 AE 算法的参数。
 
 包含以下结构体：
 ```c
@@ -3466,7 +3466,7 @@ typedef struct _ae_5bin_info_ {
 
 } ae_5bin_info_t;
 ```
-modulation_entry_t定义：
+modulation_entry_t 定义：
 ```c
 typedef struct _modulation_entry_t {  
     uint16_t x, y;  
@@ -3486,14 +3486,14 @@ typedef struct _ae_output_data_ {
 ```
 【功能描述】
 
-定义AE算法输出参数结构体。
+定义 AE 算法输出参数结构体。
 
 【成员说明】
 
 | 成员           | 含义                                                    |
 |----------------|---------------------------------------------------------|
 | custom_output  | 无含义                                                  |
-| acamera_output | AE算法的输出结果，代码中被强转为ae_acamera_output_t类型 |
+| acamera_output | AE 算法的输出结果，代码中被强转为 ae_acamera_output_t 类型 |
 
 ### ae_acamera_output_t
 
@@ -3517,7 +3517,7 @@ typedef struct _ae_acamera_output_ {
 ```
 【功能描述】
 
-定义AE算法输出结果的结构体。
+定义 AE 算法输出结果的结构体。
 
 【成员说明】
 
@@ -3525,8 +3525,8 @@ typedef struct _ae_acamera_output_ {
 |--------------------|----------------------------------------------------|
 | exposure_log2      | exposure target 范围[0, uint32_t]                  |
 | exposure_ratio     | 曝光比例 范围[0, 64]                               |
-| ae_converged       | AE算法的状态，是已收敛、还是进行中 1 收敛，0进行中 |
-| sensor_ctrl_enable | sensor 控制使能 1使能，0禁止                       |
+| ae_converged       | AE 算法的状态，是已收敛、还是进行中 1 收敛，0 进行中 |
+| sensor_ctrl_enable | sensor 控制使能 1 使能，0 禁止                       |
 | ae_out_info        | ae 相关控制信息                                    |
 | ae_1024bin_weight  | global 统计信息权重                                |
 
@@ -3554,7 +3554,7 @@ typedef struct _ae_out_info_ {
 ```
 【功能描述】
 
-定义AE控制参数结构体。
+定义 AE 控制参数结构体。
 
 【成员说明】
 
@@ -3582,7 +3582,7 @@ typedef struct _ae_1024bin_weight_ {
 ```
 【功能描述】
 
-定义AE统计权重参数结构体。
+定义 AE 统计权重参数结构体。
 
 【成员说明】
 
@@ -3607,15 +3607,15 @@ typedef struct HB_ISP_AWB_FUNC_S {
 ```
 【功能描述】
 
-定义AWB算法库回调函数结构体。
+定义 AWB 算法库回调函数结构体。
 
 【成员说明】
 
 | 成员        | 含义                                                                                                                                                                                                                      |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| init_func   | 描述： AWB算法的初始化  参数： ctx_id 入参，对应不同实例 返回： 指向实例指针                                                                                                                                              |
-| proc_func   | 描述： 做AWB算法处理 参数： awb_ctx 入参，是init_func的返回值，对应一个实例 stats 入参，对应AWB统计数据 input 入参，ISP Firmware传给算法的参数 output 出参，AWB算法的输出结果，会配置给isp firmware 返回： 0成功，非0失败 |
-| deinit_func | 描述： AWB去初始化 参数： awb_ctx 入参，是init_func的返回值，对应一个实例 返回： 0成功，非0失败                                                                                                                           |
+| init_func   | 描述： AWB 算法的初始化  参数： ctx_id 入参，对应不同实例 返回： 指向实例指针                                                                                                                                              |
+| proc_func   | 描述： 做 AWB 算法处理 参数： awb_ctx 入参，是 init_func 的返回值，对应一个实例 stats 入参，对应 AWB 统计数据 input 入参，ISP Firmware 传给算法的参数 output 出参，AWB 算法的输出结果，会配置给 isp firmware 返回： 0 成功，非 0 失败 |
+| deinit_func | 描述： AWB 去初始化 参数： awb_ctx 入参，是 init_func 的返回值，对应一个实例 返回： 0 成功，非 0 失败                                                                                                                           |
 
 ### awb_stats_data_t
 
@@ -3631,7 +3631,7 @@ typedef struct _awb_stats_data_ {
 ```
 【功能描述】
 
-定义AWB统计数据结构体。有关AWB统计数据详细描述可见[统计信息](#awb统计信息)章节。
+定义 AWB 统计数据结构体。有关 AWB 统计数据详细描述可见[统计信息](#awb统计信息)章节。
 
 【成员说明】
 
@@ -3656,14 +3656,14 @@ typedef struct _awb_zone_t {
 ```
 【功能描述】
 
-定义AWB区块统计信息结构体。
+定义 AWB 区块统计信息结构体。
 
 【成员说明】
 
 | 成员 | 含义                   |
 |------|------------------------|
-| rg   | 区域加权的R/G或G/R均值 |
-| bg   | 区域加权的B/G或G/B均值 |
+| rg   | 区域加权的 R/G 或 G/R 均值 |
+| bg   | 区域加权的 B/G 或 G/B 均值 |
 | sum  | 参与统计的像素总数     |
 
 ### awb_input_data_t
@@ -3680,14 +3680,14 @@ typedef struct _awb_input_data_ {
 ```
 【功能描述】
 
-定义AWB算法输入参数结构体。
+定义 AWB 算法输入参数结构体。
 
 【成员说明】
 
 | 成员          | 含义                                                 |
 |---------------|------------------------------------------------------|
 | custom_input  | 无含义                                               |
-| acamera_input | AWB算法需要用到的参数，实际为awb_acamera_input_t类型 |
+| acamera_input | AWB 算法需要用到的参数，实际为 awb_acamera_input_t 类型 |
 
 ### awb_acamera_input_t
 
@@ -3703,7 +3703,7 @@ typedef struct _awb_acamera_input_ {
 ```
 【功能描述】
 
-传给AWB算法的参数。
+传给 AWB 算法的参数。
 
 包含以下结构体：
 ```c
@@ -3811,14 +3811,14 @@ typedef struct _awb_output_data_ {
 ```
 【功能描述】
 
-定义AWB算法输出参数结构体。
+定义 AWB 算法输出参数结构体。
 
 【成员说明】
 
 | 成员           | 含义                                                          |
 |----------------|---------------------------------------------------------------|
 | custom_output  | 无含义                                                        |
-| acamera_output | AWB算法的输出结果，代码中被强制转化为awb_acamera_output_t类型 |
+| acamera_output | AWB 算法的输出结果，代码中被强制转化为 awb_acamera_output_t 类型 |
 
 ### awb_acamera_output_t
 
@@ -3844,7 +3844,7 @@ typedef struct _awb_acamera_output_ {
 ```
 【功能描述】
 
-定义AWB算法输出结果的结构体。
+定义 AWB 算法输出结果的结构体。
 
 【成员说明】
 
@@ -3853,10 +3853,10 @@ typedef struct _awb_acamera_output_ {
 | rg_coef                | R Gain                                        |
 | bg_coef                | B Gain                                        |
 | temperature_detected   | 色温值                                        |
-| p_high                 | 用于CCM控制的高色温阈值                       |
-| light_source_candidate | 光源，用于CCM切换                             |
-| awb_warming[3]         | 分别对应CCM R/G/B系数                         |
-| awb_converged          | AWB算法的状态，是已收敛、进行中还是未活动状态 |
+| p_high                 | 用于 CCM 控制的高色温阈值                       |
+| light_source_candidate | 光源，用于 CCM 切换                             |
+| awb_warming[3]         | 分别对应 CCM R/G/B 系数                         |
+| awb_converged          | AWB 算法的状态，是已收敛、进行中还是未活动状态 |
 
 ### HB_ISP_AF_FUNC_S
 
@@ -3874,15 +3874,15 @@ typedef struct HB_ISP_AF_FUNC_S {
 ```
 【功能描述】
 
-定义AF算法库回调函数结构体。
+定义 AF 算法库回调函数结构体。
 
 【成员说明】
 
 | 成员        | 含义                                                                                                                                                                                                                  |
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| init_func   | 描述： AF算法的初始化  参数： ctx_id 入参，对应不同实例 返回： 指向实例指针                                                                                                                                           |
-| proc_func   | 描述： 做AF算法处理 参数： af_ctx 入参，是init_func的返回值，对应一个实例 stats 入参，对应AF统计数据 input 入参，ISP Firmware传给算法的参数 output 出参，AF算法的输出结果，会配置给ISP Firmware 返回： 0成功，非0失败 |
-| deinit_func | 描述： AF去初始化 参数： af_ctx 入参，是init_func的返回值，对应一个实例 返回： 0成功，非0失败                                                                                                                         |
+| init_func   | 描述： AF 算法的初始化  参数： ctx_id 入参，对应不同实例 返回： 指向实例指针                                                                                                                                           |
+| proc_func   | 描述： 做 AF 算法处理 参数： af_ctx 入参，是 init_func 的返回值，对应一个实例 stats 入参，对应 AF 统计数据 input 入参，ISP Firmware 传给算法的参数 output 出参，AF 算法的输出结果，会配置给 ISP Firmware 返回： 0 成功，非 0 失败 |
+| deinit_func | 描述： AF 去初始化 参数： af_ctx 入参，是 init_func 的返回值，对应一个实例 返回： 0 成功，非 0 失败                                                                                                                         |
 
 ### af_stats_data_t
 
@@ -3898,13 +3898,13 @@ typedef struct _af_stats_data_ {
 ```
 【功能描述】
 
-定义AF统计数据结构体。有关AF统计数据详细描述可见[统计信息](#af统计信息)章节。
+定义 AF 统计数据结构体。有关 AF 统计数据详细描述可见[统计信息](#af统计信息)章节。
 
 【成员说明】
 
 | 成员        | 含义           |
 |-------------|----------------|
-| zones_stats | AF统计信息指针 |
+| zones_stats | AF 统计信息指针 |
 | zones_size  | 区域大小       |
 
 ### af_input_data_t
@@ -3921,14 +3921,14 @@ typedef struct _af_input_data_ {
 ```
 【功能描述】
 
-定义AF算法输入参数结构体。
+定义 AF 算法输入参数结构体。
 
 【成员说明】
 
 | 成员          | 含义                                               |
 |---------------|----------------------------------------------------|
-| custom_input  | AF算法需要用到的参数                               |
-| acamera_input | AF算法需要用到的参数，实际为af_acamera_input_t类型 |
+| custom_input  | AF 算法需要用到的参数                               |
+| acamera_input | AF 算法需要用到的参数，实际为 af_acamera_input_t 类型 |
 
 ### af_acamera_input_t
 
@@ -3946,7 +3946,7 @@ typedef struct _af_acamera_input_ {
 ```
 【功能描述】
 
-传给AF算法的参数。
+传给 AF 算法的参数。
 
 包含以下结构体：
 ```c
@@ -4050,14 +4050,14 @@ typedef struct _af_output_data_ {
 ```
 【功能描述】
 
-定义AF算法输出参数结构体。
+定义 AF 算法输出参数结构体。
 
 【成员说明】
 
 | 成员           | 含义                                                        |
 |----------------|-------------------------------------------------------------|
 | custom_output  | 无含义                                                      |
-| acamera_output | AF算法的输出结果，代码中被强制转化为af_acamera_output_t类型 |
+| acamera_output | AF 算法的输出结果，代码中被强制转化为 af_acamera_output_t 类型 |
 
 ### af_acamera_output_t
 
@@ -4075,13 +4075,13 @@ typedef struct _af_acamera_output_ {
 ```
 【功能描述】
 
-定义AF算法输出结果的结构体。
+定义 AF 算法输出结果的结构体。
 
 【成员说明】
 
 | 成员         | 含义                                                                                                                 |
 |--------------|----------------------------------------------------------------------------------------------------------------------|
-| af_lens_pos  | Lens位置                                                                                                             |
+| af_lens_pos  | Lens 位置                                                                                                             |
 | af_sharp_val | 锐化值                                                                                                               |
 | state        | typedef enum af_state `{   AF_STATE_INACTIVE,   AF_STATE_SCAN,   AF_STATE_FOCUSED,   AF_STATE_UNFOCUSED } `af_state_t; |
 
@@ -4140,7 +4140,7 @@ typedef struct HB_ISP_AE_ATTR_S {
 
 【功能描述】
 
-index 与实际倍数换算关系：y=2\^(x/32)；例如设置gain值为96，则实际应用的倍率为 2\^(96/32)=8x。
+index 与实际倍数换算关系：y=2\^(x/32)；例如设置 gain 值为 96，则实际应用的倍率为 2\^(96/32)=8x。
 
 【成员说明】
 
@@ -4157,7 +4157,7 @@ index 与实际倍数换算关系：y=2\^(x/32)；例如设置gain值为96，则
 | u32MaxSensorAnalogGain  | Control the max sensor analog gain parameter Values: [0-255]                                                                                                                                                      |
 | u32MaxSensorDigitalGain | Control the max sensor digital gain parameter Values: [0-255]                                                                                                                                                     |
 | u32MaxIspDigitalGain    | Control the max isp digital gain parameter Values: [0-255]                                                                                                                                                        |
-| enOpType                | 值见[ISP_OP_TYPE_E](#hb_isp_op_type_e)结构体定义。 因为无Auto参数，对于Set接口，设置Auto会把模式改为Auto，设置Manual会把模式改为Manual并设置Manual参数； 对于Get接口，设置Auto or Manual获取不同模式下的参数值； |
+| enOpType                | 值见[ISP_OP_TYPE_E](#hb_isp_op_type_e)结构体定义。 因为无 Auto 参数，对于 Set 接口，设置 Auto 会把模式改为 Auto，设置 Manual 会把模式改为 Manual 并设置 Manual 参数； 对于 Get 接口，设置 Auto or Manual 获取不同模式下的参数值； |
 
 ### HB_ISP_AF_ATTR_S
 
@@ -4205,7 +4205,7 @@ typedef struct HB_ISP_AWB_ATTR_S {
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | u32RGain | Control the awb_red_gain parameter Values: [0-4096] format: unsigned 4.8 bit fixed-point                                                                                                                          |
 | u32BGain | Control the awb_blue_gain parameter Values: [0-4096] format: unsigned 4.8 bit fixed-point                                                                                                                         |
-| enOpType | 值见[ISP_OP_TYPE_E](#hb_isp_op_type_e)结构体定义。 因为无Auto参数，对于Set接口，设置Auto会把模式改为Auto，设置Manual会把模式改为Manual并设置Manual参数； 对于Get接口，设置Auto or Manual获取不同模式下的参数值； |
+| enOpType | 值见[ISP_OP_TYPE_E](#hb_isp_op_type_e)结构体定义。 因为无 Auto 参数，对于 Set 接口，设置 Auto 会把模式改为 Auto，设置 Manual 会把模式改为 Manual 并设置 Manual 参数； 对于 Get 接口，设置 Auto or Manual 获取不同模式下的参数值； |
 
 ### HB_ISP_BLACK_LEVEL_ATTR_S
 
@@ -4237,7 +4237,7 @@ black_level 参数。
 | u32OffsetGr | Black offset subtraction for each channel in linear domain: Channel 01 (Gr). Values: [0-1048575]                                                                                                                  |
 | u32OffsetGb | Black offset subtraction for each channel in linear domain: Channel 10 (Gb). Values: [0-1048575]                                                                                                                  |
 | u32OffsetB  | Black offset subtraction for each channel in linear domain: Channel 11 (B). Values: [0-1048575]                                                                                                                   |
-| enOpType    | 值见[ISP_OP_TYPE_E](#hb_isp_op_type_e)结构体定义。 因为无Auto参数，对于Set接口，设置Auto会把模式改为Auto，设置Manual会把模式改为Manual并设置Manual参数； 对于Get接口，设置Auto or Manual获取不同模式下的参数值； |
+| enOpType    | 值见[ISP_OP_TYPE_E](#hb_isp_op_type_e)结构体定义。 因为无 Auto 参数，对于 Set 接口，设置 Auto 会把模式改为 Auto，设置 Manual 会把模式改为 Manual 并设置 Manual 参数； 对于 Get 接口，设置 Auto or Manual 获取不同模式下的参数值； |
 
 ### HB_ISP_DEMOSAIC_ATTR_S
 
@@ -4407,12 +4407,12 @@ typedef struct HB_ISP_SHARPEN_ATTR_S {
 | u32SharpAltLdu;     | Sharpen strength for L_Ldu in unsigned 4.4 format Values: [0- 255]                         |
 | u32SharpAltLu;      | Sharpen strength for L_Lu in unsigned 4.4 format Values: [0- 255]                          |
 | 成员                | 含义                                                                                       |
-| LumaLow;            | 低亮处控制参数，包括offset/thresh/slope                                                    |
-| LumaHigh;           | 高亮处控制参数，包括offset/thresh/slope                                                    |
-| u32ClipStrMax;      | 最大值阈值，超过该将会被clip, 影响overshoot. Values: [0- 16383]                            |
-| u32ClipStrMin;      | 最小值阈值，超过该将会被clip, 影响undershoot. Values: [0- 16383]                           |
-| u32AlphaUndershoot; | undershoot/overshoot 参数 当取0时，仅取undershoot 当取255时，仅取overshoot Values: [0-255] |
-| u32SadAmp;          | demosaic 中sharpen 中高频融合参数                                                          |
+| LumaLow;            | 低亮处控制参数，包括 offset/thresh/slope                                                    |
+| LumaHigh;           | 高亮处控制参数，包括 offset/thresh/slope                                                    |
+| u32ClipStrMax;      | 最大值阈值，超过该将会被 clip, 影响 overshoot. Values: [0- 16383]                            |
+| u32ClipStrMin;      | 最小值阈值，超过该将会被 clip, 影响 undershoot. Values: [0- 16383]                           |
+| u32AlphaUndershoot; | undershoot/overshoot 参数 当取 0 时，仅取 undershoot 当取 255 时，仅取 overshoot Values: [0-255] |
+| u32SadAmp;          | demosaic 中 sharpen 中高频融合参数                                                          |
 | stManual;           | manual 模式参数                                                                            |
 | stAuto;             | auto 模式参数                                                                              |
 | enOpType;           | auto/manual 模式选择                                                                       |
@@ -4526,7 +4526,7 @@ typedef struct HB_ISP_IRIDIX_MANUAL_ATTR_S {
 | u32RoiHorEnd                        | Horizontal ending point of ROI Values: [0-65535]             |
 | u32RoiVerStart                      | Vertical starting point of ROI Values: [0-65535]             |
 | u32RoiVerEnd                        | Vertical ending point of ROI Values: [0-65535]               |
-| u32StrengthInRoi                    | Manual Strength value for inside of ROI Values: [0-65535]，比如8.8的定点，256是1倍的强度，512是2倍的强度，u32StrengthInRoi是有控制的策略的，u32StrengthOutRoi 没有，建议设置u32StrengthInRoi为整个区域，u32StrengthOutRoi设置defalut 值就可以，最大强度是1023，调到1024会翻转 |
+| u32StrengthInRoi                    | Manual Strength value for inside of ROI Values: [0-65535]，比如 8.8 的定点，256 是 1 倍的强度，512 是 2 倍的强度，u32StrengthInRoi 是有控制的策略的，u32StrengthOutRoi 没有，建议设置 u32StrengthInRoi 为整个区域，u32StrengthOutRoi 设置 defalut 值就可以，最大强度是 1023，调到 1024 会翻转 |
 | u32StrengthOutRoi                   | Manual Strength value for outside of ROI Values: [0-65535]   |
 | u32DarkEnh                          | Manual Dark Enhance value to control Iridix core Values: [0-65535] |
 | u32BlackLevel                       | Iridix black level. Values below this will not be affected by Iridix. |
@@ -4738,15 +4738,15 @@ typedef struct HB_MESH_SHADING_LUT_S {
 
 | 成员       | 含义                            |
 |------------|---------------------------------|
-| au8LsAR    | a光下，mesh_shading R校正表     |
-| au8LsAG    | a光下，mesh_shading G校正表     |
-| au8LsAB    | a光下，mesh_shading B校正表     |
-| au8LsTl84R | TL84光下，mesh_shading R校正表  |
-| au8LsTl84G | TL 84光下，mesh_shading G校正表 |
-| au8LsTl84B | TL 84光下，mesh_shading B校正表 |
-| au8LsD65R  | D65光下，mesh_shading R校正表   |
-| au8LsD65G  | D65光下，mesh_shading G校正表   |
-| au8LsD65B  | D65光下，mesh_shading B校正表   |
+| au8LsAR    | a 光下，mesh_shading R 校正表     |
+| au8LsAG    | a 光下，mesh_shading G 校正表     |
+| au8LsAB    | a 光下，mesh_shading B 校正表     |
+| au8LsTl84R | TL84 光下，mesh_shading R 校正表  |
+| au8LsTl84G | TL 84 光下，mesh_shading G 校正表 |
+| au8LsTl84B | TL 84 光下，mesh_shading B 校正表 |
+| au8LsD65R  | D65 光下，mesh_shading R 校正表   |
+| au8LsD65G  | D65 光下，mesh_shading G 校正表   |
+| au8LsD65B  | D65 光下，mesh_shading B 校正表   |
 
 ### HB_RADIAL_SHADING_ATTR_S
 
@@ -4863,7 +4863,7 @@ typedef struct HB_ISP_CSC_ATTR_S {
 | u32MaskRY       | Data mask for channel 1 (R or Y). Bit-wise and of this value and video data. Values: [0-1023]                                     |
 | u32MaskGU       | Data mask for channel 2 (G or U). Bit-wise and of this value and video data. Values: [0-1023]                                     |
 | u32MaskBV       | Data mask for channel 3 (B or V). Bit-wise and of this value and video data. Values: [0-1023]                                     |
-| aau16Coefft[12] | Coefficients in the 3x3 conversion matrix. And Offset coefficients.  Values: [0-65535] 系数填写详见1.13节Color Space Conversion。 |
+| aau16Coefft[12] | Coefficients in the 3x3 conversion matrix. And Offset coefficients.  Values: [0-65535] 系数填写详见 1.13 节 Color Space Conversion。 |
 
 ### HB_ISP_SCENE_MODES_ATTR_S
 
@@ -4911,7 +4911,7 @@ typedef struct HB_ISP_STATISTICS_AWB_ZONE_ATTR_S {
 ```
 【功能描述】
 
-AWB统计信息参数。
+AWB 统计信息参数。
 
 【成员说明】
 
@@ -4974,10 +4974,10 @@ typedef struct HB_ISP_AE_PARAM_S {
 
 | 成员               | 含义                                                                              |
 |--------------------|-----------------------------------------------------------------------------------|
-| u32TotalGain       | ae总曝光时间，total_gain = sensor_again + sensor_dgain + isp_dgain 取值：[0, 765] |
+| u32TotalGain       | ae 总曝光时间，total_gain = sensor_again + sensor_dgain + isp_dgain 取值：[0, 765] |
 | GainOpType         | gain 手动/自动选择                                                                |
-| u32IntegrationTime | line 控制（单位us）                                                               |
-| u32ExposureRatio   | 曝光ratio 值，HDR模式下有效                                                       |
+| u32IntegrationTime | line 控制（单位 us）                                                               |
+| u32ExposureRatio   | 曝光 ratio 值，HDR 模式下有效                                                       |
 | IntegrationOpType  | line 手动/自动选择                                                                |
 
 ### HB_ISP_AE_ROI_ATTR_S
@@ -5002,10 +5002,10 @@ typedef struct HB_ISP_AE_ROI_ATTR_S {
 
 | 成员     | 含义                         |
 |----------|------------------------------|
-| u8XStart | ROI区域x_start 取值：[0,255] |
-| u8YStart | ROI区域y_start 取值：[0,255] |
-| u8XEnd   | ROI区域x_end 取值：[0,255]   |
-| u8YEnd   | ROI区域y_end 取值：[0,255]   |
+| u8XStart | ROI 区域 x_start 取值：[0,255] |
+| u8YStart | ROI 区域 y_start 取值：[0,255] |
+| u8XEnd   | ROI 区域 x_end 取值：[0,255]   |
+| u8YEnd   | ROI 区域 y_end 取值：[0,255]   |
 
 ### ISP_ZONE_ATTR_S
 
@@ -5021,14 +5021,14 @@ typedef struct HB_ISP_ZONE_ATTR_S {
 ```
 【功能描述】
 
-用于改变AF/AWB的统计zones.
+用于改变 AF/AWB 的统计 zones.
 
 【成员说明】
 
 | 成员    | 含义              |
 |---------|-------------------|
-| u8Horiz | 水平方向zones数量 |
-| u8Vert  | 垂直方向zones数量 |
+| u8Horiz | 水平方向 zones 数量 |
+| u8Vert  | 垂直方向 zones 数量 |
 
 ### HB_ISP_STATISTICS_LUMVAR_ZONE_ATTR_S
 
@@ -5048,8 +5048,8 @@ typedef struct HB_ISP_STATISTICS_LUMVAR_ZONE_ATTR_S {
 
 | 成员    | 含义               |
 |---------|--------------------|
-| u16Var  | lumvar统计信息方差 |
-| u16Mean | lumvar统计信息均值 |
+| u16Var  | lumvar 统计信息方差 |
+| u16Mean | lumvar 统计信息均值 |
 
 ### ISP_AWB_STAT_AREA_ATTR_S
 
@@ -5107,7 +5107,7 @@ typedef struct HB_ISP_AE_CONTROL {
 
 | 成员                  | 含义                                                           |
 |-----------------------|----------------------------------------------------------------|
-| u32AeControl          | AE控制模块                                                     |
+| u32AeControl          | AE 控制模块                                                     |
 | u16AeControlHdrTarget | AE HDR target control. This target is modulated by totoal gain |
 
 ### HB_ISP_AE_CORRECTION
@@ -5155,14 +5155,14 @@ typedef struct HB_ISP_5BIN_HIST {
 
 | 成员            | 含义                          |
 | --------------- | ----------------------------- |
-| u16HistThresh01 | AE的5bin统计信息第一个bin的值 |
-| u16HistThresh12 | AE的5bin统计信息第二个bin的值 |
-| u16HistThresh23 | AE的5bin统计信息第三个bin的值 |
-| u16HistThresh34 | AE的5bin统计信息第四个bin的值 |
+| u16HistThresh01 | AE 的 5bin 统计信息第一个 bin 的值 |
+| u16HistThresh12 | AE 的 5bin 统计信息第二个 bin 的值 |
+| u16HistThresh23 | AE 的 5bin 统计信息第三个 bin 的值 |
+| u16HistThresh34 | AE 的 5bin 统计信息第四个 bin 的值 |
 
 【注意事项】
 
-注意因为硬件节省资源，AE的5bin统计信息可以从前面四个值当中计算出来。
+注意因为硬件节省资源，AE 的 5bin 统计信息可以从前面四个值当中计算出来。
 
 ### HB_ISP_EXP_RATIO_ADJ
 
@@ -5425,7 +5425,7 @@ NOISE_PROFILE--LUT
 
 | 成员  | 含义                                                         |
 | ----- | ------------------------------------------------------------ |
-| au8Np | The lookup table for noise profile calibrations，对应Control Tool工具Dynamic calibrations下的AE_ZONE_WGHT_HOR，AE_ZONE_WGHT_VER，这个区域的权重值 = (int(ae_zone_wght_ver * ae_zone_wght_hor) / 16) - (int(ae_zone_wght_ver * ae_zone_wght_hor/16 > 1 ? 1 : 0)) （int(ae_zone_wght_ver * ae_zone_wght_hor/16 > 1 大于1 取1，否则取0） |
+| au8Np | The lookup table for noise profile calibrations，对应Control Tool工具Dynamic calibrations下的AE_ZONE_WGHT_HOR，AE_ZONE_WGHT_VER，这个区域的权重值 = (int(ae_zone_wght_ver * ae_zone_wght_hor) / 16) - (int(ae_zone_wght_ver * ae_zone_wght_hor/16 > 1 ? 1 : 0)) （int(ae_zone_wght_ver * ae_zone_wght_hor/16 > 1 大于 1 取 1，否则取 0） |
 
 ### HB_ISP_MESH_RGBG_WEIGHT_S
 
@@ -5590,22 +5590,22 @@ typedef struct HB_ISP_WDR_OFFSET_S {
 
 | 成员       | 含义                       |
 |------------|----------------------------|
-| u32WdrLR   | wdr 模式下长帧的R偏移量    |
-| u32WdrLGr  | wdr 模式下长帧的Gr偏移量   |
-| u32WdrLGb  | wdr 模式下长帧的Gb偏移量   |
-| u32WdrLB   | wdr 模式下长帧的B偏移量    |
-| u32WdrMR   | wdr 模式下中帧的R偏移量    |
-| u32WdrMGr  | wdr 模式下中帧的Gr偏移量   |
-| u32WdrMGb  | wdr 模式下中帧的Gb偏移量   |
-| u32WdrMB   | wdr 模式下中帧的B偏移量    |
-| u32WdrSR   | wdr 模式下短帧的R偏移量    |
-| u32WdrSGr  | wdr 模式下短帧的Gr偏移量   |
-| u32WdrSGb  | wdr 模式下短帧的Gb偏移量   |
-| u32WdrSB   | wdr 模式下短帧的B偏移量    |
-| u32WdrVsR  | wdr 模式下更短帧的R偏移量  |
-| u32WdrVsGr | wdr 模式下更短帧的Gr偏移量 |
-| u32WdrVsGb | wdr 模式下更短帧的Gb偏移量 |
-| u32WdrVsB  | wdr 模式下更短帧的B偏移量  |
+| u32WdrLR   | wdr 模式下长帧的 R 偏移量    |
+| u32WdrLGr  | wdr 模式下长帧的 Gr 偏移量   |
+| u32WdrLGb  | wdr 模式下长帧的 Gb 偏移量   |
+| u32WdrLB   | wdr 模式下长帧的 B 偏移量    |
+| u32WdrMR   | wdr 模式下中帧的 R 偏移量    |
+| u32WdrMGr  | wdr 模式下中帧的 Gr 偏移量   |
+| u32WdrMGb  | wdr 模式下中帧的 Gb 偏移量   |
+| u32WdrMB   | wdr 模式下中帧的 B 偏移量    |
+| u32WdrSR   | wdr 模式下短帧的 R 偏移量    |
+| u32WdrSGr  | wdr 模式下短帧的 Gr 偏移量   |
+| u32WdrSGb  | wdr 模式下短帧的 Gb 偏移量   |
+| u32WdrSB   | wdr 模式下短帧的 B 偏移量    |
+| u32WdrVsR  | wdr 模式下更短帧的 R 偏移量  |
+| u32WdrVsGr | wdr 模式下更短帧的 Gr 偏移量 |
+| u32WdrVsGb | wdr 模式下更短帧的 Gb 偏移量 |
+| u32WdrVsB  | wdr 模式下更短帧的 B 偏移量  |
 
 ### HB_ISP_AF_LENS_INFO_S
 
@@ -5653,10 +5653,10 @@ typedef struct HB_ISP_AE_ATTR_EX_S {
 
 | 成员            | 含义                                                         |
 | --------------- | ------------------------------------------------------------ |
-| u32Compensation | AE_COMPENSATION_ID default: 128 取整范围: [0,255] u32Compensation 取128表示无调整，调整单位为1，表示2\^(1/32)倍。 |
-| u32Speed        | 收敛速度，收敛到target 需要的帧数，speed越大，曝光变化越慢，speed是一个滤波参数，改变以后滤波器就改变了，会影响画面亮度，画面可能会有一个闪烁的过程，不建议动态调整 |
+| u32Compensation | AE_COMPENSATION_ID default: 128 取整范围: [0,255] u32Compensation 取 128 表示无调整，调整单位为 1，表示 2\^(1/32)倍。 |
+| u32Speed        | 收敛速度，收敛到 target 需要的帧数，speed 越大，曝光变化越慢，speed 是一个滤波参数，改变以后滤波器就改变了，会影响画面亮度，画面可能会有一个闪烁的过程，不建议动态调整 |
 | u32Tolerance    | 容忍度                                                       |
-| u32AeTarget     | AE target，HB_ISP_SetAeAttrEx传值范围[0,255)，HB_ISP_GetAeAttrEx获取到值范围是[0,256] |
+| u32AeTarget     | AE target，HB_ISP_SetAeAttrEx 传值范围[0,255)，HB_ISP_GetAeAttrEx 获取到值范围是[0,256] |
 
 ### HB_AE_ZONES_WEIGHT_S
 
@@ -5674,40 +5674,40 @@ typedef struct HB_AE_ZONES_WEIGHT_S {
 
 | 成员  | 含义         |
 | ----- | ------------ |
-| au8Np | AE区域权重表 |
+| au8Np | AE 区域权重表 |
 
 #### 补充说明：
 
-AE区域权重表通过AE_ZONE_WGHT_VER和AE_ZONE_WGHT_HOR 共同确定
+AE 区域权重表通过 AE_ZONE_WGHT_VER 和 AE_ZONE_WGHT_HOR 共同确定
 
-其中AE_ZONE_WGHT_HOR和AE_ZONE_WGHT_VER的lut表如control tool工具截图，总共32个值，每个值16bit，0表示该块不统计，1表示统计1次，2表示统计2次，依次类推，其中15比较特殊，表示统计16次。
+其中 AE_ZONE_WGHT_HOR 和 AE_ZONE_WGHT_VER 的 lut 表如 control tool 工具截图，总共 32 个值，每个值 16bit，0 表示该块不统计，1 表示统计 1 次，2 表示统计 2 次，依次类推，其中 15 比较特殊，表示统计 16 次。
 
 ![image-20221118175019755](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/image-20221118175019755.png)
 
-AE_ZONES_WEIGHT如control tool截图，统计模块将整幅画面默认分为horz_zones（33） *vore_zones（33） 块，总共1089个值，其中horz_zones，vore_zones可以通过接口设置，AE_ZONES_WEIGHT的权重值 = (int(ae_zone_wght_ver * ae_zone_wght_hor) / 16) - (int(ae_zone_wght_ver * ae_zone_wght_hor/16 > 1 ? 1 : 0)) （int(ae_zone_wght_ver * ae_zone_wght_hor/16 > 1 大于1 取1，否则取0）
+AE_ZONES_WEIGHT 如 control tool 截图，统计模块将整幅画面默认分为 horz_zones（33） *vore_zones（33） 块，总共 1089 个值，其中 horz_zones，vore_zones 可以通过接口设置，AE_ZONES_WEIGHT 的权重值 = (int(ae_zone_wght_ver * ae_zone_wght_hor) / 16) - (int(ae_zone_wght_ver * ae_zone_wght_hor/16 > 1 ? 1 : 0)) （int(ae_zone_wght_ver * ae_zone_wght_hor/16 > 1 大于 1 取 1，否则取 0）
 
 ![image-20221118180830337](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/image-20221118180830337.png)
 
-AE_ZONE_WGHT_HOR表示纵轴的行的权重系数，一个数据控制几列与horz_zones相关，数据控制列数 =1 + int((horz_zones - 1)/(AE_ZONE_WGHT_HOR的lut表长度)) ，比如horz_zones\*vore_zones为33\*33,则AE_ZONE_WGHT_HOR一个下标数据控制就是（1+int((33 - 1)/(32)）= 2列，AE_ZONE_WGHT_HOR的lut表的长度/2的下标（中心）位置控制horz_zones/2的列数，比如lut表的16下标是中心点，lut表下标改成0的话就是控制的AE_ZONES_WEIGHT的第16和17列，如下control tool图1，图2，AE_ZONE_WGHT_HOR的lut表中心点往中心点两边计算，比如下标15控制AE_ZONES_WEIGHT的第14和15列，下标17控制AE_ZONES_WEIGHT的第18和19列，如图3，图4，其他下标控制如此类推，由于horz_zones会修改，修改后通过数据控制列数公式计算出一个下标控制几列，然后根据与中心距离，得出对应关系。
+AE_ZONE_WGHT_HOR 表示纵轴的行的权重系数，一个数据控制几列与 horz_zones 相关，数据控制列数 =1 + int((horz_zones - 1)/(AE_ZONE_WGHT_HOR 的 lut 表长度)) ，比如 horz_zones\*vore_zones 为 33\*33,则 AE_ZONE_WGHT_HOR 一个下标数据控制就是（1+int((33 - 1)/(32)）= 2 列，AE_ZONE_WGHT_HOR 的 lut 表的长度/2 的下标（中心）位置控制 horz_zones/2 的列数，比如 lut 表的 16 下标是中心点，lut 表下标改成 0 的话就是控制的 AE_ZONES_WEIGHT 的第 16 和 17 列，如下 control tool 图 1，图 2，AE_ZONE_WGHT_HOR 的 lut 表中心点往中心点两边计算，比如下标 15 控制 AE_ZONES_WEIGHT 的第 14 和 15 列，下标 17 控制 AE_ZONES_WEIGHT 的第 18 和 19 列，如图 3，图 4，其他下标控制如此类推，由于 horz_zones 会修改，修改后通过数据控制列数公式计算出一个下标控制几列，然后根据与中心距离，得出对应关系。
 
 ![image-20221118184855810](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/image-20221118184855810.png)
 
-图1
+图 1
 
 ![image-20221118183608168](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/image-20221118183608168.png)
 
-图2
+图 2
 
 ![image-20221118185143974](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/image-20221118185143974.png)
 
-图3
+图 3
 
 ![image-20221118185333583](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/isp_system/image-20221118185333583.png)
 
-图4
+图 4
 
-AE_ZONE_WGHT_VER表示横轴的列的权重系数，lut表下标控制行数计算公式如AE_ZONE_WGHT_HOR。
+AE_ZONE_WGHT_VER 表示横轴的列的权重系数，lut 表下标控制行数计算公式如 AE_ZONE_WGHT_HOR。
 
 ## 参考代码
 
-ISP图像系统部分示例代码可以参考，[sample_isp](./multimedia_samples#sample_isp)。
+ISP 图像系统部分示例代码可以参考，[sample_isp](./multimedia_samples#sample_isp)。

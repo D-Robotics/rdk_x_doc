@@ -461,7 +461,7 @@ cd /app/pydev_demo/08_decode_rtsp_stream/
 root@ubuntu:/app/pydev_demo/08_decode_rtsp_stream# sudo ./live555MediaServer &
 ```
 
-服务正常启动后的log如下， 注意最后一行的 `We use port 80`, 说明rtsp服务运行在80端口，它有可能存在8000和8080的情况，在后面设置rtsp url的时候需要根据实际使用的端口号做修改：
+服务正常启动后的 log 如下， 注意最后一行的 `We use port 80`, 说明 rtsp 服务运行在 80 端口，它有可能存在 8000 和 8080 的情况，在后面设置 rtsp url 的时候需要根据实际使用的端口号做修改：
 ```bash
 root@ubuntu:/app/pydev_demo/08_decode_rtsp_stream#
 LIVE555 Media Server version 1.01 (LIVE555 Streaming Media library version 2020.07.09).
@@ -493,27 +493,27 @@ RTSP stream frame_width:1920, frame_height:1080
 
 ### 选项参数说明
 
-示例程序`decode_rtsp_stream.py`可通过修改启动参数，设置rtsp地址、开关HDMI输出、开关推理等功能。参数说明如下：
+示例程序`decode_rtsp_stream.py`可通过修改启动参数，设置 rtsp 地址、开关 HDMI 输出、开关推理等功能。参数说明如下：
 
-- **-u**  ： 设置rtsp网络地址，支持输入多个地址，如：`-u "rtsp://127.0.0.1/1080P_test.h264;rtsp://192.168.1.10:8000/1080P_test.h264"`
-- **-d**  ： 开启、关闭HDMI的显示输出，不设置时默认开启显示，`-d 0 ` 关闭显示，多路解码时只显示第一路的视频
+- **-u**  ： 设置 rtsp 网络地址，支持输入多个地址，如：`-u "rtsp://127.0.0.1/1080P_test.h264;rtsp://192.168.1.10:8000/1080P_test.h264"`
+- **-d**  ： 开启、关闭 HDMI 的显示输出，不设置时默认开启显示，`-d 0 ` 关闭显示，多路解码时只显示第一路的视频
 - **-a**  ： 开启、关闭算法推理功能，不设置时默认关闭算法，`-a`开启算法推理，运行目标检测算法
 
 **几种常用的启动方式**
 
-解码默认流并开启HDMI显示
+解码默认流并开启 HDMI 显示
 ```
 sudo ./decode_rtsp_stream.py
 ```
-解码默认流并关闭HDMI显示
+解码默认流并关闭 HDMI 显示
 ```
 sudo ./decode_rtsp_stream.py -d 0
 ```
-解码单路rtsp流
+解码单路 rtsp 流
 ```
 sudo ./decode_rtsp_stream.py -u "rtsp://x.x.x.x/xxx"
 ```
-解码多路rtsp流
+解码多路 rtsp 流
 ```
 sudo ./decode_rtsp_stream.py -u "rtsp://x.x.x.x/xxx;rtsp://x.x.x.x/xxx"
 ```
@@ -524,7 +524,7 @@ sudo ./decode_rtsp_stream.py -a
 
 ### 注意事项
 
-- 推流服务器推送的rtsp码流里面需要包含`PPS`和`SPS`参数信息，否则会导致开发板解码异常，错误信息如下：
+- 推流服务器推送的 rtsp 码流里面需要包含`PPS`和`SPS`参数信息，否则会导致开发板解码异常，错误信息如下：
 ![image-20220728110439753](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/08_FAQ/image/multimedia/image-20220728110439753.png)
 
 - 使用`ffmpeg`打开`.mp4 .avi`等格式的视频文件推流时，需要添加`-vbsf h264_mp4toannexb`选项，以添加码流的`PPS` 和`SPS`信息，例如：
@@ -533,6 +533,6 @@ sudo ./decode_rtsp_stream.py -a
     ffmpeg -re -stream_loop -1 -i xxx.mp4 -vcodec copy -vbsf h264_mp4toannexb -f rtsp rtsp://192.168.1.195:8554/h264_stream
     ```
 
-- rtsp视频流目前仅支持 1080P 分辨率
+- rtsp 视频流目前仅支持 1080P 分辨率
 
 - 不支持使用 vlc 软件进行 rtsp 推流，原因是 vlc 软件不支持添加`PPS`和`SPS`信息

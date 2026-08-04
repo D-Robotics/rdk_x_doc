@@ -2,13 +2,13 @@
 sidebar_position: 0
 ---
 
-# D-Robotics RDK套件
+# D-Robotics RDK 套件
 
 ```mdx-code-block
 import DocScope from '@site/src/components/DocScope';
 ```
 
-本文档为 D-Robotics RDK 套件 X 系列的用户手册，为开发者提供关于RDK X3（旭日X3派）、RDK X3 Module（旭日X3模组）、RDK X5 、RDK X5 Module（旭日X5模组）
+本文档为 D-Robotics RDK 套件 X 系列的用户手册，为开发者提供关于 RDK X3（旭日 X3 派）、RDK X3 Module（旭日 X3 模组）、RDK X5 、RDK X5 Module（旭日 X5 模组）
 
 :::tip 💾 下载资源汇总
 
@@ -22,10 +22,10 @@ import DocScope from '@site/src/components/DocScope';
 
 :::info 注意
 
-- 本文档中**RDK X3**均使用3.0 & 2.0版本Ubuntu操作系统，对于仍需使用**旭日X3派1.0版本系统**的用户，可从下述链接中获取资料：<br/>
-     [旭日X3派用户手册](https://developer.d-robotics.cc/api/v1/fileData/documents_pi/index.html)<br/>
-     [旭日X3派Ubuntu镜像](https://archive.d-robotics.cc/downloads/os_images/)，选择1.x.x 版本目录下的镜像<br/>
-     [旭日X3派资料包](https://developer.d-robotics.cc/api/v1/static/fileData/X3%E6%B4%BE%E8%B5%84%E6%96%99%E5%8C%85_20220711175326.zip)<br/>
+- 本文档中**RDK X3**均使用 3.0 & 2.0 版本 Ubuntu 操作系统，对于仍需使用**旭日 X3 派 1.0 版本系统**的用户，可从下述链接中获取资料：<br/>
+     [旭日 X3 派用户手册](https://developer.d-robotics.cc/api/v1/fileData/documents_pi/index.html)<br/>
+     [旭日 X3 派 Ubuntu 镜像](https://archive.d-robotics.cc/downloads/os_images/)，选择 1.x.x 版本目录下的镜像<br/>
+     [旭日 X3 派资料包](https://developer.d-robotics.cc/api/v1/static/fileData/X3%E6%B4%BE%E8%B5%84%E6%96%99%E5%8C%85_20220711175326.zip)<br/>
 
 -  **RDK X3 Module**出厂已经烧写测试版本系统镜像，为确保使用最新版本的系统，建议参考本文档完成[系统烧录](./01_Quick_start/install_os/rdk_x3_module/01_system_burn.md)章节。
 
@@ -45,13 +45,13 @@ import DocScope from '@site/src/components/DocScope';
 
 搭配 TogetheROS.Bot 机器人中间件，RDK 套件可以帮助开发者快速搭建机器人原型，开展评测和验证工作。
 
-本文将详细说明 RDK X系列套件的使用方法，包括开发环境搭建、示例教程的运行、应用程序的开发、系统镜像的定制等方面内容。无论您选择使用哪种硬件，本文所介绍的内容都将为您提供一致的使用体验。
+本文将详细说明 RDK X 系列套件的使用方法，包括开发环境搭建、示例教程的运行、应用程序的开发、系统镜像的定制等方面内容。无论您选择使用哪种硬件，本文所介绍的内容都将为您提供一致的使用体验。
 
 ## 产品介绍
 
-**RDK X3（旭日X3派）** 是一款全功能开发板，具有 5Tops 端侧推理算力。通过搭配丰富的传感器和扩展组件，为开发者提供了灵活的硬件扩展和连接选项。
+**RDK X3（旭日 X3 派）** 是一款全功能开发板，具有 5Tops 端侧推理算力。通过搭配丰富的传感器和扩展组件，为开发者提供了灵活的硬件扩展和连接选项。
 
-**RDK X3 Module（旭日X3模组）** 是一款紧凑型核心模组，与 RDK X3 保持了同等规格，尺寸和接口兼容树莓派 CM4 模组。通过搭配扩展板，可以为各种应用场景提供高效的计算和通信能力。
+**RDK X3 Module（旭日 X3 模组）** 是一款紧凑型核心模组，与 RDK X3 保持了同等规格，尺寸和接口兼容树莓派 CM4 模组。通过搭配扩展板，可以为各种应用场景提供高效的计算和通信能力。
 
 **RDK X5** 是一款全功能开发板，具有 10Tops 端侧推理算力与 8 核 ARM A55 处理能力，支持 2 路 MIPI Camera 接入，4 路 USB3.0 接口。通过搭配丰富的传感器和扩展组件，为开发者提供了灵活的硬件扩展和连接选项。
 
@@ -89,13 +89,13 @@ import DocScope from '@site/src/components/DocScope';
 介绍系统中预装的功能示例，如 IO 管脚控制、音视频采集，多媒体初步使用等。  
 
 **四、算法应用开发**  
-介绍Python和C++两种语言版本的算法简易接口的使用方法，此接口简单易用，方便用户快速上手，基于更底层的推理接口进行了封装，并提供基础的使用示例。  
+介绍 Python 和 C++两种语言版本的算法简易接口的使用方法，此接口简单易用，方便用户快速上手，基于更底层的推理接口进行了封装，并提供基础的使用示例。  
 
 **五、机器人应用开发**  
 向机器人厂商和生态开发者推出的机器人操作系统，旨在释放机器人场景的智能潜能，助力生态开发者和商业客户能够高效、便捷的进行机器人开发，打造具有竞争力的智能机器人产品。
 
 **六、应用开发指南**  
-包含了深度学习寻线小车、AMR开发指南，大模型应用等多方面的应用开发指南。
+包含了深度学习寻线小车、AMR 开发指南，大模型应用等多方面的应用开发指南。
 
 **七、进阶开发**  
 完整的介绍了硬件开发、系统开发、多媒体应用开发以及算法开发指南，涵盖了硬件设计，系统配置编译，多媒体使用与调试，算法训练与量化上板的开发流程，接口功能丰富，可以实现复杂、灵活的功能需求。
@@ -181,7 +181,7 @@ import DocScope from '@site/src/components/DocScope';
 - ROS 组件修复： 修复了 MIPI Cam 和算法模块 ros component so 安装路径错误导致运行时加载失败的问题。
 - hobot_codec 优化： 优化了图像编解码模块配置，删除了无效参数，并新增用于 Debug 的配置项。
 
-####  TROS算法升级 2.4.3 & 版本号：3.3.3
+####  TROS 算法升级 2.4.3 & 版本号：3.3.3
 
 - 新增 御光-SC132GS 双目摄像头模组驱动
 - srpi-config 功能增强：支持接口自动管脚复用，新增 MIPI 屏幕选择
@@ -195,37 +195,37 @@ import DocScope from '@site/src/components/DocScope';
 
 TROS V2.4.3
 
-- 单目MIPI图像采集支持启动多路图像采集。
-- 双目MIPI图像采集支持sc132gs双目相机。
+- 单目 MIPI 图像采集支持启动多路图像采集。
+- 双目 MIPI 图像采集支持 sc132gs 双目相机。
 
 ####  版本号：3.3.1
 
 新功能
 
 - 支持普通内核，实时内核切换；
-- 支持CPU,GPU桌面切换,默认CPU桌面;
+- 支持 CPU,GPU 桌面切换,默认 CPU 桌面;
 - 上电后一段时间内，根据所在地自动切换成官方源和清华源；
-- 支持通过桌面来配置wifi热点；
+- 支持通过桌面来配置 wifi 热点；
 - 支持通过桌面来配置有线网络；
-- 适配新硬件X5_MD_V1P1，X5_MD_V1P0；
-- rdk-miniboot-update限制烧录旧版本miniboot；
+- 适配新硬件 X5_MD_V1P1，X5_MD_V1P0；
+- rdk-miniboot-update 限制烧录旧版本 miniboot；
 - 支持配置降频温度和关机温度；
-- deb包 包含 github 提交信息；
+- deb 包 包含 github 提交信息；
 
 修复
 
-- 修复8G板卡，内存减少2G的问题，需要更新miniboot；
-- 优化can通信，支持高速双向通信；
+- 修复 8G 板卡，内存减少 2G 的问题，需要更新 miniboot；
+- 优化 can 通信，支持高速双向通信；
 - 更正引脚电压域和驱动强度配置；
-- 修复X5 MD emmc 系统无法使用rdk-backup进行备份的问题；
+- 修复 X5 MD emmc 系统无法使用 rdk-backup 进行备份的问题；
 - 修复休眠唤醒异常；
-- 修补其他系统和示例BUG；
+- 修补其他系统和示例 BUG；
 
-####  TROS算法升级 & 版本号：3.2.3
+####  TROS 算法升级 & 版本号：3.2.3
 
 镜像更新
 
-- **20250610** 更新ROS仓库GPG签名密钥；支持[实时内核切换](./Advanced_development/linux_development/realtime_kernel#x5系列板卡)；集成了最新版的iniboot固件，使用rdk-miniboot-update命令烧录nand后，会释放更多内存给系统。
+- **20250610** 更新 ROS 仓库 GPG 签名密钥；支持[实时内核切换](./Advanced_development/linux_development/realtime_kernel#x5系列板卡)；集成了最新版的 iniboot 固件，使用 rdk-miniboot-update 命令烧录 nand 后，会释放更多内存给系统。
 - **20250604** 修复了配置幻尔载板系统启动失败的问题。
 
 系统层更新
@@ -233,7 +233,7 @@ TROS V2.4.3
 - **桌面显示优化** Ubuntu 桌面支持 3D GPU 加速渲染，视觉体验更流畅。
 - **音频子板适配新增** 支持 微雪 WM8960 Audio HAT 与 幻尔载板，加快语音方案集成效率。
 - **WIFI 驱动升级** 增强弱信号环境下连接稳定性，优化休眠/唤醒过程中的自动重连机制。
-- **Sensor采集框架支持扩展** 集成 V4L2 框架，已适配：imx477，ov5647，imx219，更多 Sensor 支持持续更新中。
+- **Sensor 采集框架支持扩展** 集成 V4L2 框架，已适配：imx477，ov5647，imx219，更多 Sensor 支持持续更新中。
 - **网络与远程优化** 默认切换至 iptables legacy 模式，VNC 显示流畅性提升，远程桌面不卡顿。
 - **接口增强** CAN 接口稳定性优化，解决高速数据丢包问题。srpi-config 工具新增 Uart7 支持，提升串口扩展能力。
 - **存储兼容性优化** 提升对 SD 卡的兼容性，适配更多存储卡型号。
@@ -248,7 +248,7 @@ TROS V2.4.3
 
 **核心功能亮点：**
 
-- **系统备份** 全新 rdk-backup 工具，一键备份当前系统，轻松生成可烧录镜像。[rdk-backup介绍](./Appendix/rdk-command-manual/cmd_rdk-backup)。
+- **系统备份** 全新 rdk-backup 工具，一键备份当前系统，轻松生成可烧录镜像。[rdk-backup 介绍](./Appendix/rdk-command-manual/cmd_rdk-backup)。
 - **配置管理** 支持使用 config.txt 配置 40pin 引脚在 U-Boot 阶段的初始化状态，提升系统启动稳定性。
 - **触摸屏增强** 新增双击和长按操作，长按模拟右键，屏幕控制更加灵活。
 - **设备树覆盖支持** 增加 1_wire 设备树覆盖（dtoverlay）示例，为定制硬件连接提供更多选择。
@@ -273,9 +273,9 @@ TROS V2.4.3
 - 开放 40Pin 第二功能；
 
 优化改进：
-- 修复BUG；
-- 修正can 频率 异常；
-- 支持更多sensor和分辨率；
+- 修复 BUG；
+- 修正 can 频率 异常；
+- 支持更多 sensor 和分辨率；
 
 <font color="red">注意事项：</font>
 
@@ -290,19 +290,19 @@ sudo apt install -y tros-humble-hobot-stereonet
 #### 版本号：3.0.1
 
 新增功能：
-- 提供Server版本固件；
-- 支持7款 微雪 MIPI DSI LCD 屏幕的桌面显示和触控;
-- 支持非root用户执行示例程序；
+- 提供 Server 版本固件；
+- 支持 7 款 微雪 MIPI DSI LCD 屏幕的桌面显示和触控;
+- 支持非 root 用户执行示例程序；
 
 优化改进：
 
-- 修复BUG；
-- 支持更多sensor和分辨率；
+- 修复 BUG；
+- 支持更多 sensor 和分辨率；
 - 优化高分辨率显示稳定性；
 
 #### 版本号：3.0.0
 
-首次发布的RDK X5固件，基于Ubuntu 22.04，提供丰富的多媒体示例，算法示例，支持多种应用场景的机器人应用开发。
+首次发布的 RDK X5 固件，基于 Ubuntu 22.04，提供丰富的多媒体示例，算法示例，支持多种应用场景的机器人应用开发。
 
 </DocScope>
 
@@ -322,27 +322,27 @@ sudo apt install -y tros-humble-hobot-stereonet
 
 新增功能：
 
-- 完善srpi-config系统配置工具，支持Wi-Fi连接，开/关SSH、VNC，使能/禁用40pin上的外设总线，本地化语言配置，设置CPU超频，设置ION内存大小等系统配置。
-- 支持了/boot/config.txt系统配置文件，支持设置dtoverlay、cpu超频、io启动状态配置等选项。
-- 添加yolov5s v6/v7 模型示例。
+- 完善 srpi-config 系统配置工具，支持 Wi-Fi 连接，开/关 SSH、VNC，使能/禁用 40pin 上的外设总线，本地化语言配置，设置 CPU 超频，设置 ION 内存大小等系统配置。
+- 支持了/boot/config.txt 系统配置文件，支持设置 dtoverlay、cpu 超频、io 启动状态配置等选项。
+- 添加 yolov5s v6/v7 模型示例。
 
 优化改进：
 
-- 支持在hdmi显示器上输出启动日志和进入用户命令行，方便用户使用。
-- 支持更多的hdmi显示分辨率，极大的增强了兼容性。
-- 优化了Desktop和server版本的预装软件清单，删除冗余项，补充必要软件，如添加vlc。
-- 优化了Desktop菜单栏的布局，精简选项。
+- 支持在 hdmi 显示器上输出启动日志和进入用户命令行，方便用户使用。
+- 支持更多的 hdmi 显示分辨率，极大的增强了兼容性。
+- 优化了 Desktop 和 server 版本的预装软件清单，删除冗余项，补充必要软件，如添加 vlc。
+- 优化了 Desktop 菜单栏的布局，精简选项。
 - 默认开启蓝牙功能。
-- 增加后处理的C++接口，提高后处理效率。
-- 使用udisk2自动挂载U盘，解决NTFS文件系统自动挂载后不能访问的问题。
-- 支持用户保留vnc密码文件。
-- VNC服务默认不自动开启，可以减少系统的资源消耗。用户可以通过srpi-config工具打开。
-- RDK X3 v2.1和RDK Module开发板CPU正常模式下最高运行在1.5GHz频率，超频后最高运行频率1.8GHz
+- 增加后处理的 C++接口，提高后处理效率。
+- 使用 udisk2 自动挂载 U 盘，解决 NTFS 文件系统自动挂载后不能访问的问题。
+- 支持用户保留 vnc 密码文件。
+- VNC 服务默认不自动开启，可以减少系统的资源消耗。用户可以通过 srpi-config 工具打开。
+- RDK X3 v2.1 和 RDK Module 开发板 CPU 正常模式下最高运行在 1.5GHz 频率，超频后最高运行频率 1.8GHz
 
 问题修复：
 
-- 删除Wi-Fi驱动的冗余内核日志。
-- 修改apt源域名为archive.d-robotics.cc
+- 删除 Wi-Fi 驱动的冗余内核日志。
+- 修改 apt 源域名为 archive.d-robotics.cc
 
 其他更新：
 
@@ -358,16 +358,16 @@ sudo apt install -y tros-humble-hobot-stereonet
 - 详细的代码文档和注释将提供给开发者，以帮助他们更好地理解和使用源代码。
 - 我们欢迎开发者通过开源社区参与代码贡献和讨论，共同推动操作系统的改进和优化，源码在 [D-Robotics](https://github.com/D-Robotics) 上维护。
 
-支持RDK X3 Module：
+支持 RDK X3 Module：
 
 - 我们引入了全新的核心板开发者套件，RDK X3 Module。
-- RDK X3 Module拥有更小的尺寸，并兼容树莓派CM4接口。
+- RDK X3 Module 拥有更小的尺寸，并兼容树莓派 CM4 接口。
 - 开发者可以根据需求选择适配的第三方载板，从而扩展核心板的功能和应用场景。
 
 其他更新：
 
 - 我们对已有功能进行了优化，修复了已知问题和漏洞，提升了操作系统的稳定性和性能。
 - 修订了文档和帮助文档，提供更全面、准确的技术资料和指南。
-- 我们提供了更低层的API，方便开发者进行二次开发和集成，使其能够更加灵活地定制软件。
+- 我们提供了更低层的 API，方便开发者进行二次开发和集成，使其能够更加灵活地定制软件。
 
 </DocScope>

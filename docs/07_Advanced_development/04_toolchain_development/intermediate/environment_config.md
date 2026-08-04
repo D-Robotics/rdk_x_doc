@@ -8,7 +8,7 @@ sidebar_position: 1
 import DocScope from '@site/src/components/DocScope';
 ```
 
-本章节主要介绍D-Robotics 算法工具链完整开发环境部署方法。
+本章节主要介绍 D-Robotics 算法工具链完整开发环境部署方法。
 
 <DocScope versions=">= 3.0.0" products="RDK-X3">
 
@@ -16,9 +16,9 @@ import DocScope from '@site/src/components/DocScope';
 
 ### 交付物使用说明{#deliverables_instructions}
 
-在进行算法工具链使用环境部署前，请下载D-Robotics 提供的 **嵌入式应用开发Sample交付包** 到Linux开发机环境中。
+在进行算法工具链使用环境部署前，请下载 D-Robotics 提供的 **嵌入式应用开发 Sample 交付包** 到 Linux 开发机环境中。
 
-下载嵌入式应用开发Sample交付包：
+下载嵌入式应用开发 Sample 交付包：
 
 ```bash
   // 示例版本为 V2.6.6
@@ -31,7 +31,7 @@ import DocScope from '@site/src/components/DocScope';
 
 #### 示例包源码目录结构说明
 
-解压算法工具链SDK源码包：
+解压算法工具链 SDK 源码包：
 
 ```bash
   // 示例版本为 V2.6.6
@@ -69,7 +69,7 @@ import DocScope from '@site/src/components/DocScope';
 
 ### 开发机部署{#machine_deploy}
 
-对于开发机的环境部署，D-Robotics 支持使用Docker部署方式。
+对于开发机的环境部署，D-Robotics 支持使用 Docker 部署方式。
 
 #### 开发机准备
 
@@ -78,24 +78,24 @@ import DocScope from '@site/src/components/DocScope';
 
   | 硬件/操作系统 | 要求                                 |
   |---------------|------|
-  | CPU           | CPU I3以上或者同级别E3/E5的处理器    |
-  | 内存          | 16G或以上级别                        |
-  | GPU(可选)     | CUDA11.6、驱动版本Linux:>= 510.39.01*推荐驱动版本Linux:515.76）<br/>适配显卡包括但不限于：<br/>1)GeForce RTX 3090<br/>2)GeForce RTX 2080 Ti<br/>3)NVIDIA TITAN V<br/>4)Tesla V100S-PCIE-32GB<br/>5)A100
+  | CPU           | CPU I3 以上或者同级别 E3/E5 的处理器    |
+  | 内存          | 16G 或以上级别                        |
+  | GPU(可选)     | CUDA11.6、驱动版本 Linux:>= 510.39.01*推荐驱动版本 Linux:515.76）<br/>适配显卡包括但不限于：<br/>1)GeForce RTX 3090<br/>2)GeForce RTX 2080 Ti<br/>3)NVIDIA TITAN V<br/>4)Tesla V100S-PCIE-32GB<br/>5)A100
   | 系统          | Ubuntu 20.04         |
 
-更多关于CUDA与显卡的兼容性问题请参考[**NVIDIA官网信息**](https://docs.nvidia.com/deploy/cuda-compatibility/) 。
+更多关于 CUDA 与显卡的兼容性问题请参考[**NVIDIA 官网信息**](https://docs.nvidia.com/deploy/cuda-compatibility/) 。
 
-#### 使用Docker环境
+#### 使用 Docker 环境
 
-为了帮助您快速使用算法工具链，D-Robotics 提供了包含完整开发环境的Docker镜像，大大简化了环境的部署过程。
+为了帮助您快速使用算法工具链，D-Robotics 提供了包含完整开发环境的 Docker 镜像，大大简化了环境的部署过程。
 
-在阅读此部分内容前，我们希望您的开发机中已经预装好了Docker的基础环境。
-D-Robotics 要求的Docker基础环境信息如下：
+在阅读此部分内容前，我们希望您的开发机中已经预装好了 Docker 的基础环境。
+D-Robotics 要求的 Docker 基础环境信息如下：
 
-- Docker（19.03或更高版本，建议安装19.03版本），详见 [**Docker安装手册**](https://docs.docker.com/install/)。
-- NVIDIA Container Toolkit（1.13.1-1.13.5，建议安装1.13.5），详见[**NVIDIA Container Toolkit 安装手册**](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)。
+- Docker（19.03 或更高版本，建议安装 19.03 版本），详见 [**Docker 安装手册**](https://docs.docker.com/install/)。
+- NVIDIA Container Toolkit（1.13.1-1.13.5，建议安装 1.13.5），详见[**NVIDIA Container Toolkit 安装手册**](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)。
 
-完成Docker环境安装后，需要将无root权限的用户添加到Docker用户组中。参考如下命令：
+完成 Docker 环境安装后，需要将无 root 权限的用户添加到 Docker 用户组中。参考如下命令：
 
 ```bash
   sudo groupadd docker
@@ -103,22 +103,22 @@ D-Robotics 要求的Docker基础环境信息如下：
   sudo service docker restart
 ```
 
-获取本节需要使用的Docker镜像的地址如下：
+获取本节需要使用的 Docker 镜像的地址如下：
 
 - [**D-Robotics  Docker Hub GPU Docker**](https://hub.docker.com/r/openexplorer/ai_toolchain_ubuntu_20_x3j5_gpu)
 
 镜像文件命名形式为：
 
-- GPU版本docker： ``openexplorer/ai_toolchain_ubuntu_20_x3j5_gpu:{version}``
+- GPU 版本 docker： ``openexplorer/ai_toolchain_ubuntu_20_x3j5_gpu:{version}``
 
 
 :::tip 小技巧
 
   执行命令时将 ``{version}`` 替换为您获取到的 **最新版本的Docker镜像** ，例如： [**D-Robotics  docker hub GPU Docker**](https://hub.docker.com/r/openexplorer/ai_toolchain_ubuntu_20_x3j5_gpu) 中目前的最新版本为 ``openexplorer/ai_toolchain_ubuntu_20_x3j5_gpu:v1.0.0``。
 
-  本地Docker镜像包版本，可以联系D-Robotics 技术支持团队获取。
+  本地 Docker 镜像包版本，可以联系 D-Robotics 技术支持团队获取。
 
-  开发机并不是必须含有GPU卡，一般使用CPU开发机加载Docker镜像即可做模型转换！
+  开发机并不是必须含有 GPU 卡，一般使用 CPU 开发机加载 Docker 镜像即可做模型转换！
 :::
 
 每个镜像文件在第一次使用前，需要拉取镜像。
@@ -128,9 +128,9 @@ D-Robotics 要求的Docker基础环境信息如下：
   ```bash
     docker pull openexplorer/ai_toolchain_ubuntu_20_x3j5_gpu:v1.0.0
   ```
-然后执行以下命令运行Docker容器。
+然后执行以下命令运行 Docker 容器。
 
-- CPU开发机Docker容器执行以下命令：
+- CPU 开发机 Docker 容器执行以下命令：
 
   ```bash
     // 运行 docker 镜像的命令
@@ -146,7 +146,7 @@ D-Robotics 要求的Docker基础环境信息如下：
       -v "$dataset_path":/data \
       openexplorer/ai_toolchain_ubuntu_20_x3j5_gpu:"${version}"
   ```
-- GPU开发机 Docker容器执行以下命令：
+- GPU 开发机 Docker 容器执行以下命令：
 
   ```bash
     // 运行 docker 镜像的命令
@@ -172,7 +172,7 @@ D-Robotics 要求的Docker基础环境信息如下：
 
   - 公共数据集可参考以下链接下载：
 
-      VOC：http://host.robots.ox.ac.uk/pascal/VOC/  （使用VOC2012版本）
+      VOC：http://host.robots.ox.ac.uk/pascal/VOC/  （使用 VOC2012 版本）
 
       COCO：https://cocodataset.org/#download
 
@@ -190,7 +190,7 @@ D-Robotics 要求的Docker基础环境信息如下：
 
       nuScenes: https://www.nuscenes.org/nuscenes
 :::
-至此，您已经成功通过Docker镜像进入完整的算法工具链开发环境。
+至此，您已经成功通过 Docker 镜像进入完整的算法工具链开发环境。
 您可以键入 ``hb_mapper --help`` 命令验证是否可以正常得到帮助信息：
 
 ```bash
@@ -208,7 +208,7 @@ D-Robotics 要求的Docker基础环境信息如下：
     infer      inference and dump output feature as float vector.
     makertbin  transform caffe model to quantization model, generate runtime...
 ```
-若hb_mapper工具已正常输出日志， 说明环境已安装部署完成，请到 **开发板部署** 章节，进行开发板的环境安装。
+若 hb_mapper 工具已正常输出日志， 说明环境已安装部署完成，请到 **开发板部署** 章节，进行开发板的环境安装。
 
 
 ### 开发板部署
@@ -220,7 +220,7 @@ D-Robotics 要求的Docker基础环境信息如下：
 #### 补充文件准备
 
 算法工具链的部分补充工具未包含在系统镜像中，这些工具已经放置在 ``horizon_xj3_open_explorer_vX.X.X-XXXXX/ddk/package/`` 安装包中，
-进入到 ``horizon_xj3_open_explorer_vX.X.X-XXXXX/ddk/package/board/`` 执行install脚本。
+进入到 ``horizon_xj3_open_explorer_vX.X.X-XXXXX/ddk/package/board/`` 执行 install 脚本。
 执行命令如下：
 
 ```bash
@@ -229,7 +229,7 @@ D-Robotics 要求的Docker基础环境信息如下：
 ```
 :::info 备注
 
-  其中，``${board_ip}`` 是您为开发板设置的IP地址，请确保在开发机上可以访问该IP。
+  其中，``${board_ip}`` 是您为开发板设置的 IP 地址，请确保在开发机上可以访问该 IP。
   成功安装后，重新启动开发板，在开发板上执行 ``hrt_model_exec`` 可以验证安装是否成功。
 :::
 
@@ -242,13 +242,13 @@ D-Robotics 要求的Docker基础环境信息如下：
 
 :::tip
 
-本章节仅演示算法工具链使用方法。最新版本的工具链安装包及离线文档，可通过访问[**《地瓜X5算法工具链版本发布》**](https://developer.d-robotics.cc/forumDetail/251934919646096384)获取。
+本章节仅演示算法工具链使用方法。最新版本的工具链安装包及离线文档，可通过访问[**《地瓜 X5 算法工具链版本发布》**](https://developer.d-robotics.cc/forumDetail/251934919646096384)获取。
 
 :::
 
-在进行算法工具链使用环境部署前，请下载D-Robotics 提供的 **嵌入式应用开发Sample交付包** 到Linux开发机环境中。
+在进行算法工具链使用环境部署前，请下载 D-Robotics 提供的 **嵌入式应用开发 Sample 交付包** 到 Linux 开发机环境中。
 
-下载嵌入式应用开发Sample交付包：
+下载嵌入式应用开发 Sample 交付包：
 
 ```bash
   // 示例版本为 V1.2.8
@@ -262,7 +262,7 @@ D-Robotics 要求的Docker基础环境信息如下：
 
 #### 示例包源码目录结构说明
 
-解压算法工具链SDK源码包：
+解压算法工具链 SDK 源码包：
 
 ```bash
   // 示例版本为 V1.2.8
@@ -299,33 +299,33 @@ D-Robotics 要求的Docker基础环境信息如下：
 
 ### 开发机部署
 
-对于开发机的环境部署，X5算法工具链支持使用Docker部署方式。
+对于开发机的环境部署，X5 算法工具链支持使用 Docker 部署方式。
 
 #### 开发机准备
 
 
-为了顺利地使用算法工具链，X5算法工具链建议您选择的开发机应满足以下要求：
+为了顺利地使用算法工具链，X5 算法工具链建议您选择的开发机应满足以下要求：
 
   | 硬件/操作系统 | 要求                                 |
   |---------------|------|
-  | CPU           | CPU I3以上或者同级别E3/E5的处理器    |
-  | 内存          | 16G或以上级别                        |
-  | GPU(可选)     | CUDA11.6、驱动版本Linux:>= 510.39.01*<br/>适配显卡包括但不限于：<br/>1)GeForce RTX 3090<br/>2)GeForce RTX 2080 Ti<br/>3)NVIDIA TITAN V<br/>4)Tesla V100S-PCIE-32GB <br/>5)A100
+  | CPU           | CPU I3 以上或者同级别 E3/E5 的处理器    |
+  | 内存          | 16G 或以上级别                        |
+  | GPU(可选)     | CUDA11.6、驱动版本 Linux:>= 510.39.01*<br/>适配显卡包括但不限于：<br/>1)GeForce RTX 3090<br/>2)GeForce RTX 2080 Ti<br/>3)NVIDIA TITAN V<br/>4)Tesla V100S-PCIE-32GB <br/>5)A100
   | 系统          | Ubuntu 20.04         |
 
-更多关于CUDA与显卡的兼容性问题请参考[**NVIDIA官网信息**](https://docs.nvidia.com/deploy/cuda-compatibility/) 。
+更多关于 CUDA 与显卡的兼容性问题请参考[**NVIDIA 官网信息**](https://docs.nvidia.com/deploy/cuda-compatibility/) 。
 
-#### 使用Docker环境
+#### 使用 Docker 环境
 
-为了帮助您快速使用算法工具链，X5算法工具链提供了包含完整开发环境的Docker镜像，大大简化了环境的部署过程。
+为了帮助您快速使用算法工具链，X5 算法工具链提供了包含完整开发环境的 Docker 镜像，大大简化了环境的部署过程。
 
-在阅读此部分内容前，我们希望您的开发机中已经预装好了Docker的基础环境。
-X5算法工具链要求的Docker基础环境信息如下：
+在阅读此部分内容前，我们希望您的开发机中已经预装好了 Docker 的基础环境。
+X5 算法工具链要求的 Docker 基础环境信息如下：
 
-- Docker（19.03或更高版本，建议安装19.03版本），详见 [**Docker安装手册**](https://docs.docker.com/install/)。
-- NVIDIA Container Toolkit（1.13.1-1.13.5，建议安装1.13.5），详见[**NVIDIA Container Toolkit 安装手册**](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)。
+- Docker（19.03 或更高版本，建议安装 19.03 版本），详见 [**Docker 安装手册**](https://docs.docker.com/install/)。
+- NVIDIA Container Toolkit（1.13.1-1.13.5，建议安装 1.13.5），详见[**NVIDIA Container Toolkit 安装手册**](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)。
 
-完成Docker环境安装后，需要将无root权限的用户添加到Docker用户组中。参考如下命令：
+完成 Docker 环境安装后，需要将无 root 权限的用户添加到 Docker 用户组中。参考如下命令：
 
 ```bash
   sudo groupadd docker
@@ -333,21 +333,21 @@ X5算法工具链要求的Docker基础环境信息如下：
   sudo service docker restart
 ```
 
-获取本节需要使用的Docker镜像的地址如下：
+获取本节需要使用的 Docker 镜像的地址如下：
 
-- [**X5算法工具链 Docker Hub CPU Docker**](https://hub.docker.com/r/openexplorer/ai_toolchain_ubuntu_20_x5_cpu)
-- [**X5算法工具链 Docker Hub GPU Docker**](https://hub.docker.com/r/openexplorer/ai_toolchain_ubuntu_20_x5_gpu)
+- [**X5 算法工具链 Docker Hub CPU Docker**](https://hub.docker.com/r/openexplorer/ai_toolchain_ubuntu_20_x5_cpu)
+- [**X5 算法工具链 Docker Hub GPU Docker**](https://hub.docker.com/r/openexplorer/ai_toolchain_ubuntu_20_x5_gpu)
 
 镜像文件命名形式为：
 
-- CPU版本docker： ``openexplorer/ai_toolchain_ubuntu_20_x5_cpu:{version}``
-- GPU版本docker： ``openexplorer/ai_toolchain_ubuntu_20_x5_gpu:{version}``
+- CPU 版本 docker： ``openexplorer/ai_toolchain_ubuntu_20_x5_cpu:{version}``
+- GPU 版本 docker： ``openexplorer/ai_toolchain_ubuntu_20_x5_gpu:{version}``
 
 
 **小技巧：**
 >1. 执行命令时将 ``{version}`` 替换为您根据 **``X5 SDK交付包中的 ai_toolchain_package``** 目录下获取到的 **版本信息**
->2. 本地Docker镜像包版本，可以联系技术支持团队获取。
->3. 开发机并不是必须含有GPU卡，一般使用CPU开发机加载Docker镜像即可做模型转换！
+>2. 本地 Docker 镜像包版本，可以联系技术支持团队获取。
+>3. 开发机并不是必须含有 GPU 卡，一般使用 CPU 开发机加载 Docker 镜像即可做模型转换！
 
 每个镜像文件在第一次使用前，需要拉取镜像。
 
@@ -356,9 +356,9 @@ X5算法工具链要求的Docker基础环境信息如下：
   ```bash
     docker pull openexplorer/ai_toolchain_ubuntu_20_x5_cpu:v1.2.8
   ```
-然后执行以下命令运行Docker容器。
+然后执行以下命令运行 Docker 容器。
 
-- CPU开发机Docker容器执行以下命令：
+- CPU 开发机 Docker 容器执行以下命令：
 
   ```bash
     // 运行 docker 镜像的命令
@@ -374,7 +374,7 @@ X5算法工具链要求的Docker基础环境信息如下：
       -v "$dataset_path":/data \
       openexplorer/ai_toolchain_ubuntu_20_x5_cpu:"${version}"
   ```
-- GPU开发机 Docker容器执行以下命令：
+- GPU 开发机 Docker 容器执行以下命令：
 
   ```bash
     // 运行 docker 镜像的命令
@@ -399,7 +399,7 @@ X5算法工具链要求的Docker基础环境信息如下：
 
 - 公共数据集可参考以下链接下载：
 
-  [**VOC（使用VOC2012版本）：**](http://host.robots.ox.ac.uk/pascal/VOC/)
+  [**VOC（使用 VOC2012 版本）：**](http://host.robots.ox.ac.uk/pascal/VOC/)
 
   [**COCO：**](https://cocodataset.org/#download)
 
@@ -418,7 +418,7 @@ X5算法工具链要求的Docker基础环境信息如下：
   [**nuScenes:**](https://www.nuscenes.org/nuscenes)
 
 
-至此，您已经成功通过Docker镜像进入完整的算法工具链开发环境。
+至此，您已经成功通过 Docker 镜像进入完整的算法工具链开发环境。
 您可以键入 ``hb_mapper --help`` 命令验证是否可以正常得到帮助信息：
 
 ```bash
@@ -436,7 +436,7 @@ X5算法工具链要求的Docker基础环境信息如下：
     infer      inference and dump output feature as float vector.
     makertbin  transform caffe model to quantization model, generate runtime...
 ```
-若hb_mapper工具已正常输出日志， 说明环境已安装部署完成，请到**开发板部署**章节，进行开发板的环境安装。
+若 hb_mapper 工具已正常输出日志， 说明环境已安装部署完成，请到**开发板部署**章节，进行开发板的环境安装。
 
 
 ### <span id="board_env_install"/>开发板部署
@@ -444,24 +444,24 @@ X5算法工具链要求的Docker基础环境信息如下：
 开发板部署需要您按照刷机说明，将开发版镜像更新到最新版本，升级方法请参考[**安装系统**](../../../01_Quick_start/install_os/rdk_x5/01_system_burn.md) 章节内容， 升级完成后，再将相关补充文件拷贝到开发板中即可。
 
 算法工具链的部分补充工具未包含在系统镜像中，这些工具已经放置在 ``horizon_x5_open_explorer_vX.X.X-XXXXXXX/package/`` 安装包中，
-进入到 ``horizon_x5_open_explorer_vX.X.X-XXXXXXX/package/package/board`` 执行install脚本。
+进入到 ``horizon_x5_open_explorer_vX.X.X-XXXXXXX/package/package/board`` 执行 install 脚本。
 执行命令如下：
 
 ```bash
   bash install.sh ${board_ip}
 ```
 **注意：**
--  ``${board_ip}`` 是您为开发板设置的IP地址，请确保在开发机上可以访问该IP。
+-  ``${board_ip}`` 是您为开发板设置的 IP 地址，请确保在开发机上可以访问该 IP。
 -  成功安装后，重新启动开发板，在开发板上执行 ``hrt_model_exec`` 可以验证安装是否成功。
 
 </DocScope>
 
 ## 版本管理工具使用说明
 
-本章节主要介绍ddk_vcs版本管理工具的使用说明，便于开发者了解当前开发机环境中算法工具链依赖包的版本情况。
+本章节主要介绍 ddk_vcs 版本管理工具的使用说明，便于开发者了解当前开发机环境中算法工具链依赖包的版本情况。
 
 :::tip 小技巧
-  版本管理工具主要用于在使用Docker环境进行模型PTQ转换出现错误时做DEBUG使用，若模型转换功能正常，可跳过此章节阅读。
+  版本管理工具主要用于在使用 Docker 环境进行模型 PTQ 转换出现错误时做 DEBUG 使用，若模型转换功能正常，可跳过此章节阅读。
 :::
 
 版本管理工具包括以下功能：
@@ -495,8 +495,8 @@ ddk_vcs list 用于列出已安装的软件包。
   x86             hbdk            3.28.3  origin:3.28.3
 ```
 :::info 备注
-  最后几行的origin信息会在每次使用工具链SDK包内的install脚本进行安装后更新为当前环境下的版本，
-  后续在使用ddk_vcs进行安装时则不会改变，只会改变Version的值。
+  最后几行的 origin 信息会在每次使用工具链 SDK 包内的 install 脚本进行安装后更新为当前环境下的版本，
+  后续在使用 ddk_vcs 进行安装时则不会改变，只会改变 Version 的值。
 :::
 
 使用 ``-p`` 参数以后会显示当前可以安装的模块版本情况，可以通过 ``ddk_vcs install`` 进行安装，使用示例如下：
@@ -518,7 +518,7 @@ ddk_vcs list 用于列出已安装的软件包。
 ### ddk_vcs install
 
 ddk_vcs install 用于对安装包进行安装。
-用户可以直接通过 ``ddk_vcs install`` 将对应的模块tar包进行安装。安装时需要指定对应的platform。使用示例如下：
+用户可以直接通过 ``ddk_vcs install`` 将对应的模块 tar 包进行安装。安装时需要指定对应的 platform。使用示例如下：
 
 ```bash
 
@@ -528,7 +528,7 @@ ddk_vcs install 用于对安装包进行安装。
   hbdk-3.28.3-py3-none-linux_x86_64.whl installed successfully
   horizon_nn-0.13.3-py3-none-any.whl installed successfully
 ```
-在使用 ``ddk_vcs list -p`` 后用户可以得到自己当前host package中各个模块包的版本信息，
+在使用 ``ddk_vcs list -p`` 后用户可以得到自己当前 host package 中各个模块包的版本信息，
 然后使用 ``ddk_vcs install`` 可以很方便地切换各个版本，使用示例如下：
 
 ```bash
@@ -551,7 +551,7 @@ ddk_vcs uninstall 用于卸载指定模块。使用示例如下：
 ### ddk_vcs patch
 
 
-使用 ``ddk_vcs patch ddk_patch.tar.gz`` 可以安装预先制作好的patch包。使用示例如下：
+使用 ``ddk_vcs patch ddk_patch.tar.gz`` 可以安装预先制作好的 patch 包。使用示例如下：
 
 ```bash
 
@@ -573,7 +573,7 @@ ddk_vcs show 用于显示有关已安装软件包的信息。使用 ``ddk_vcs sh
   aarch_64        bpu_predict 1.10.2        5b6e5dd6c5
   x86_64_gcc5.4.0 bpu_predict 1.10.2_patch1 d4f8e37921
 ```
-如果2个架构内有同名依赖，可以使用 ``-p/--platform`` 指定架构名进行过滤。使用示例如下：
+如果 2 个架构内有同名依赖，可以使用 ``-p/--platform`` 指定架构名进行过滤。使用示例如下：
 
 ```bash
 

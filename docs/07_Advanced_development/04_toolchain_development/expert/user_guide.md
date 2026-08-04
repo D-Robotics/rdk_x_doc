@@ -24,7 +24,7 @@ sidebar_position: 3
 
 3. add , cat 等多输入算子的不同输入差异过大，可能造成较大误差。
 
-4. 数据分布不合理。plugin 采用的是均匀对称量化，所以 0 均值的均匀分布最好，应尽量避免长尾和离群点。同时，数值范围需要与量化 bit 相匹配，如果使用int8量化分布为 [-1000, 1000] 均匀分布的数据，那么精度显然也是不够的。例如，下面三个分布图，从左到右对量化的友好性依次递减，模型中大部分数值的分布应当为中间这种分布。在实际使用中，可以用 debug 工具查看模型 weight 和 feature map 的分布是否量化友好。因为模型冗余性的存在，有些看起来分布非常量化不友好的 op 并不会显著降低模型的最终精度，需要结合实际的 qat 训练难度和最后达到的量化精度综合考虑。
+4. 数据分布不合理。plugin 采用的是均匀对称量化，所以 0 均值的均匀分布最好，应尽量避免长尾和离群点。同时，数值范围需要与量化 bit 相匹配，如果使用 int8 量化分布为 [-1000, 1000] 均匀分布的数据，那么精度显然也是不够的。例如，下面三个分布图，从左到右对量化的友好性依次递减，模型中大部分数值的分布应当为中间这种分布。在实际使用中，可以用 debug 工具查看模型 weight 和 feature map 的分布是否量化友好。因为模型冗余性的存在，有些看起来分布非常量化不友好的 op 并不会显著降低模型的最终精度，需要结合实际的 qat 训练难度和最后达到的量化精度综合考虑。
 
 ![data_distribution](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/expert/data_distribution.png)
 
@@ -42,7 +42,7 @@ sidebar_position: 3
 
 6. 使用 BN 。
 
-7. 对模型输入做关于0对称的归一化。
+7. 对模型输入做关于 0 对称的归一化。
 
 需要注意的是， qat 自身具有一定的调整能力，量化不友好并不代表不能量化，很多情况下，即使出现上面的不适合量化的现象，仍然可以量化得很好。因为上述建议也可能会导致浮点模型精度下降，所以应当在 qat 精度无法达标时再尝试上述建议，尤其是 1 - 5 条建议，最后应当是在浮点模型精度和量化模型精度中找一个平衡点。
 
@@ -51,7 +51,7 @@ sidebar_position: 3
 
 ### 什么是 qconfig
 
-模型的量化方式由 qconfig 决定，在准备 qat / calibration 模型之前，需要先给模型设置 qconfig。我们不推荐您自定义 qconfig，尽量只使用预定义好的qconfig变量，因为自定义 qconfig 需要对具体的处理器限制认知清晰，详细了解训练工具的工作原理，定义出错可能导致模型无法正常收敛、模型无法编译等问题，浪费大量时间和人力。
+模型的量化方式由 qconfig 决定，在准备 qat / calibration 模型之前，需要先给模型设置 qconfig。我们不推荐您自定义 qconfig，尽量只使用预定义好的 qconfig 变量，因为自定义 qconfig 需要对具体的处理器限制认知清晰，详细了解训练工具的工作原理，定义出错可能导致模型无法正常收敛、模型无法编译等问题，浪费大量时间和人力。
 
 ```{attention}
 目前，Plugin 中维护了两个版本的qconfig，早期版本的 qconfig 将在不久的将来被废弃，我们只推荐您使用此文档中介绍的 qconfig 用法。
@@ -147,7 +147,7 @@ qat_model = prepare_qat_fx(
 
 模板可分为三类：
 
-1. 固定模板。固定模板中 calibration / qat / qat_fixed_act_scale 区别在于使用的 observer 类型和 scale 更新逻辑，分别用于校准，qat 训练，固定 activation scale qat 训练。default 模板( default_calibration_qconfig_setter / default_qat_qconfig_setter / default_qat_fixed_act_qconfig_setter )会做三件事：首先，将可以设置的高精度输出都设置上，对于不支持高精度的输出将给出提示；然后，从 grid sample 算子的 grid 输入向前搜索，直到出现第一个 gemm 类算子或者QuantStub，将中间的所有算子都设置为 int16。根据经验这里的 grid 一般表达范围较宽，int8 有较大可能不满足精度需求；最后，将其余算子设置为 int8。int16 模板( qat_8bit_weight_16bit_act_qconfig_setter / qat_8bit_weight_16bit_fixed_act_qconfig_setter / calibration_8bit_weight_16bit_act_qconfig_setter )会做两件事：首先，将可以设置的高精度输出都设置上，对于不支持高精度的输出将给出提示；其次，将其余算子设置为 int16。
+1. 固定模板。固定模板中 calibration / qat / qat_fixed_act_scale 区别在于使用的 observer 类型和 scale 更新逻辑，分别用于校准，qat 训练，固定 activation scale qat 训练。default 模板( default_calibration_qconfig_setter / default_qat_qconfig_setter / default_qat_fixed_act_qconfig_setter )会做三件事：首先，将可以设置的高精度输出都设置上，对于不支持高精度的输出将给出提示；然后，从 grid sample 算子的 grid 输入向前搜索，直到出现第一个 gemm 类算子或者 QuantStub，将中间的所有算子都设置为 int16。根据经验这里的 grid 一般表达范围较宽，int8 有较大可能不满足精度需求；最后，将其余算子设置为 int8。int16 模板( qat_8bit_weight_16bit_act_qconfig_setter / qat_8bit_weight_16bit_fixed_act_qconfig_setter / calibration_8bit_weight_16bit_act_qconfig_setter )会做两件事：首先，将可以设置的高精度输出都设置上，对于不支持高精度的输出将给出提示；其次，将其余算子设置为 int16。
 
 ```python
 from horizon_plugin_pytorch.quantization.qconfig_template import (
@@ -971,7 +971,7 @@ def convert_fx(
 
    - 对于非 `module` 的运算，如果需要单独设置 `qconfig` 或指定其运行在 CPU 上，需要将其封装成 `module` ，参考示例中的 `_SeluModule` 。
 
-2. 设置 `march` 。 **RDK X3** 设置bernoulli2， **RDK X5** 设置为bayes-e。
+2. 设置 `march` 。 **RDK X3** 设置 bernoulli2， **RDK X5** 设置为 bayes-e。
 
 3. 设置 `qconfig` 。保留非异构模式下在 `module` 内设置 `qconfig` 的配置方式，除此以外，还可以通过 `prepare_qat_fx` 接口的 `qconfig_dict` 参数传入 `qconfig`，具体用法见接口参数说明。
 
@@ -983,7 +983,7 @@ def convert_fx(
 
 :::caution 注意
 
-目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
+目前只有 BPU 架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 :::
 
 4. 设置 `hybrid_dict` 。可选，具体用法见接口参数说明，如果没有主动指定的 CPU 算子，可以不设置 `hybrid_dict` 。
@@ -2130,9 +2130,9 @@ export_quantized_onnx(quantized_net, (data, data), "quantized_test.onnx")
 
 :::caution 注意
 
-- 若**某一层的输出全为0，使用余弦相似度计算时相似度结果也是0**。此时可以检查一下该层输出是否为全0，或者根据打印的 `atol` 等指标确认一下输出是否相同。若**某一层的输出完全相同，使用信噪比计算相似度时结果为inf**；
+- 若**某一层的输出全为 0，使用余弦相似度计算时相似度结果也是 0**。此时可以检查一下该层输出是否为全 0，或者根据打印的 `atol` 等指标确认一下输出是否相同。若**某一层的输出完全相同，使用信噪比计算相似度时结果为 inf**；
 
-- 若`device=None`，工具不会做模型和输入数据的搬运，**需要您手动保证模型和模型输入均在同一个device上**；
+- 若`device=None`，工具不会做模型和输入数据的搬运，**需要您手动保证模型和模型输入均在同一个 device 上**；
 
 - 支持任意两阶段的模型以任意输入顺序，在任意两个 `device` 上比较相似度。推荐按照 `float/qat/quantized` 的顺序输入，比如（float，qat）（qat，quantized）这样。如果是（qat，float）的顺序，对相似度和单算子误差没有影响，但是结果中`相同输入下的单算子误差`项可能会有偏差，因为无法生成和 float 模型完全对应的输入给 QAT 模型。此外，因为 QAT 训练之后，模型参数会改变，所以直接比较 float 和训练之后的 QAT 模型的相似度参考意义不大，建议比较 float 和经过 calibration 之后且未训练的 QAT 模型的相似度；
 
@@ -2368,7 +2368,7 @@ featuremap_similarity(qat_net, bpu_net, (data, data))
 
 :::caution 注意
 
-目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
+目前只有 BPU 架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 :::
 
 ```python
@@ -2555,7 +2555,7 @@ profile_featuremap(get_raw_features(qat_net, (data, data)), True)
 
 :::caution 注意
 
-目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
+目前只有 BPU 架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 :::
 
     - Mean：数据的均值；
@@ -2568,7 +2568,7 @@ profile_featuremap(get_raw_features(qat_net, (data, data)), True)
 
 :::caution 注意
 
-目前只有BPU架构为  ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
+目前只有 BPU 架构为  ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 :::
 
     正常情况下，statistic.txt 中会包含两个上述格式的表格，一个是按照模型 forward 顺序打印的每一层的统计量；另一个是按照量化数据的范围从大到小打印的每一层的统计量信息，方便您快速定位到某些数值范围很大的层。若模型中某些层存在 NaN 或者 inf，那 statistic.txt 中也会额外包含一个哪些层 NaN 或者 inf 的表格，该表格也会在屏幕打印，提示您检查这些异常层。
@@ -3703,7 +3703,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
         :::caution 注意
 
-            目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+            目前只有 BPU 架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
         :::
 
          以图像输入为例，由于原始图像（不管是 RGB 还是 YUV）输入范围是 [0, 255]，不适合对称量化，而做关于 0 对称的归一化之后，输入范围变为 [-1, 1]，可以直接使用固定 scale=1/128.0 进行量化。
@@ -3723,7 +3723,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
         :::caution 注意
 
-            目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+            目前只有 BPU 架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
         :::
 
         :::caution 注意
@@ -3745,7 +3745,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
             :::caution 注意
 
-                目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+                目前只有 BPU 架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
             :::
 
             3. 如果遇到 conv-[bn]-[add]-relu 这样的 pattern，可以尝试在 QAT 阶段指定使用 relu6（不一定有效）。
@@ -3778,7 +3778,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
                 :::caution 注意
 
-                    目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+                    目前只有 BPU 架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
                 :::
 
             2. 非线性激活算子，如果算子本身在某些区间值域波动较大，比如 reciprocal；这类算子一般内部采用查表实现，由于查表项有限，当输出处于陡峭的区间时，可能导致分辨率不足。尝试以下方式改进：
@@ -3791,7 +3791,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
                 :::caution 注意
 
-                    目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+                    目前只有 BPU 架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
                 :::
 
                4. 如果 QAT 精度正常但 quantized 精度不足，可尝试手动调整查表参数。
@@ -3804,7 +3804,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
             :::caution 注意
 
-                目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+                目前只有 BPU 架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
 
                 Debug 成本：这三种情况中如果需要调整输入范围或算子，则需要重训浮点；如果需要采用 int16 量化，需要重训 QAT；如果只是手动调整查表参数，仅需要重新转换 QAT 模型到 quantized 模型。
             :::
@@ -3824,14 +3824,14 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
   :::caution 注意
 
-    目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+    目前只有 BPU 架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
 
     Debug 成本：使用 int16 量化后需要重训 QAT。
   :::
 
 :::info 备注
 
-目前只有BPU架构 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
+目前只有 BPU 架构 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 
 1. 采用 int16 会带来部署性能的降低，请根据具体情况选择使用；
 2. 部分算子不支持 int16 量化，详见算子支持列表；

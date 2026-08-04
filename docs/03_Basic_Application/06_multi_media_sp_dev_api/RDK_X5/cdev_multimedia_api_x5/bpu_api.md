@@ -4,15 +4,15 @@ sidebar_position: 5
 
 # BPU（算法推理模块）API
 
-`BPU` API提供了以下的接口：
+`BPU` API 提供了以下的接口：
 
 | 函数 | 功能 |
 | ---- | ----- |
 | sp_init_bpu_module | **初始化算法推理模块对象，创建算法推理任务** |
 | sp_bpu_start_predict | **使用 BPU 进行算法推理，获得推理结果** |
 | sp_release_bpu_module | **关闭算法推理任务** |
-| sp_init_bpu_tensors | **分配tensor内存** |
-| sp_deinit_bpu_tensor | **销毁tensor内存** |
+| sp_init_bpu_tensors | **分配 tensor 内存** |
+| sp_deinit_bpu_tensor | **销毁 tensor 内存** |
 
 
 ## sp_init_bpu_module  

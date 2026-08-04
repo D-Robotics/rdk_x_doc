@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# USB驱动性能测试
+# USB 驱动性能测试
 
 ## 测试方法
 
@@ -20,11 +20,11 @@ losetup -a
 modprobe g_mass_storage file=/dev/loop0 removable=1
 ```
 
-### PC侧
+### PC 侧
 
-1. PC端会出现新磁盘设备的提醒，将其格式化为FAT32格式。
-2. PC打开`CrystalDiskMark`，选择刚挂载的X3设备，点击`All`开始测试，若出现空间不足的提示，则调整测试文件大小。
-3. 测试完成之后，前两项`SEQ1M*`表示顺序读写速度，后面两项`RND4K*`表示4k小文件随机读写速度。
+1. PC 端会出现新磁盘设备的提醒，将其格式化为 FAT32 格式。
+2. PC 打开`CrystalDiskMark`，选择刚挂载的 X3 设备，点击`All`开始测试，若出现空间不足的提示，则调整测试文件大小。
+3. 测试完成之后，前两项`SEQ1M*`表示顺序读写速度，后面两项`RND4K*`表示 4k 小文件随机读写速度。
    ![10_usb_benchmark](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/hardware_unit_test/10_usb_benchmark.png)  
 
 
@@ -32,6 +32,6 @@ modprobe g_mass_storage file=/dev/loop0 removable=1
 
 ## 测试标准
 
-测试结果取CrystalDiskMark SEQ1MQ8T1读写数据  
+测试结果取 CrystalDiskMark SEQ1MQ8T1 读写数据  
 USB 2.0 : 读写超过**40**MB/s  
 USB 3.0 : 读写超过**370**MB/s  

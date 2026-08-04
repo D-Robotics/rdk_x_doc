@@ -22,7 +22,7 @@ root@ubuntu:/app/pydev_demo/08_mipi_camera_sample$ tree
 
 ## 效果展示
 
-### 01实时目标检测效果
+### 01 实时目标检测效果
 
 :::info 可视化检测效果
 
@@ -40,25 +40,25 @@ root@ubuntu:/app/pydev_demo/08_mipi_camera_sample$ tree
 
 ![output-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_08_mipi_camera_yolov5s_runing.jpg)
 
-### 02图像采集保存效果
+### 02 图像采集保存效果
 
 运行后会在脚本同级目录下保存多个 YUV 格式的图像文件，默认是 1920x1080 的分辨率。
 
 ![output-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_08_mipi_camera_dump.png)
 
-### 03图像缩放处理效果
+### 03 图像缩放处理效果
 
 运行后会在脚本同级目录下保存缩放后的 YUV 图像文件，默认是 640x360 的分辨率。
 
 ![output-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_08_mipi_camera_scale.png)
 
-### 04图像裁剪缩放效果
+### 04 图像裁剪缩放效果
 
 运行后会在脚本同级目录下保存裁剪并缩放后的 YUV 图像文件（NV12 格式），默认是裁剪缩放画面中心，我们调整一下裁剪位置，可以得到如下 YUV 图像。
 
 ![output-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_08_mipi_camera_crop_scale.png)
 
-### 05实时推流显示效果
+### 05 实时推流显示效果
 
 运行后通过 HDMI 屏幕实时显示摄像头画面（推流测试）, 注意 Desktop 版本需要先执行 `sudo systemctl stop lightdm` 关闭桌面服务。
 

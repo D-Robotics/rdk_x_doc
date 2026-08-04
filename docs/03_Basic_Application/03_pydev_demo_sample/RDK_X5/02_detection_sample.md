@@ -77,7 +77,7 @@ python ultralytics_yolo10.py
 ### 执行效果
 <!-- 运行后，程序会加载预训练的 YOLOv3 模型，对 kite.jpg 图像进行目标检测，并生成带有检测框的结果图像 output_image.jpg。 -->
 
-#### YOLOv5X执行效果
+#### YOLOv5X 执行效果
 
 ```
 root@ubuntu:/app/pydev_demo/02_detection_sample/01_ultralytics_yolov5x# python ultralytics_yolov5x.py 
@@ -93,7 +93,7 @@ root@ubuntu:/app/pydev_demo/02_detection_sample/01_ultralytics_yolov5x# python u
 [Saved] Result saved to: result.jpg
 ```
 
-#### YOLOv11执行效果
+#### YOLOv11 执行效果
 
 ```
 root@ubuntu:/app/pydev_demo/02_detection_sample/02_ultralytics_yolo11# python ultralytics_yolo11.py 
@@ -107,7 +107,7 @@ root@ubuntu:/app/pydev_demo/02_detection_sample/02_ultralytics_yolo11# python ul
 [Saved] Result saved to: result.jpg
 ```
 
-#### YOLOv8执行效果
+#### YOLOv8 执行效果
 ```
 root@ubuntu:/app/pydev_demo/02_detection_sample/03_ultralytics_yolov8# python ultralytics_yolov8.py 
 [BPU_PLAT]BPU Platform Version(1.3.6)!
@@ -122,7 +122,7 @@ root@ubuntu:/app/pydev_demo/02_detection_sample/03_ultralytics_yolov8# python ul
 ```
 
 
-#### YOLOv10执行效果
+#### YOLOv10 执行效果
 ```
 root@ubuntu:~/app/pydev_demo/02_detection_sample/04_ultralytics_yolo10# python ultralytics_yolo10.py 
 [BPU_PLAT]BPU Platform Version(1.3.6)!
@@ -147,7 +147,7 @@ root@ubuntu:~/app/pydev_demo/02_detection_sample/04_ultralytics_yolo10# python u
 | `--test-img` | 输入测试图像路径 | str | `kite.jpg` |
 | `--label-file` | 类别标签路径（每行一个类别） | str | `coco_classes.names` |
 | `--img-save-path` | 检测结果图像保存路径 | str | `result.jpg` |
-| `--priority` | 推理优先级（0~255，255为最高） | int | `0` |
+| `--priority` | 推理优先级（0~255，255 为最高） | int | `0` |
 | `--bpu-cores` | BPU 核心索引列表（如 `0 1`） | int list | `[0]` |
 | `--nms-thres` | 非极大值抑制（NMS）阈值 | float | `0.45` |
 | `--score-thres` | 置信度阈值 | float | `0.25` |
@@ -228,7 +228,7 @@ root@ubuntu:~/app/pydev_demo/02_detection_sample/04_ultralytics_yolo10# python u
 
 11. `draw_boxes(image, detections, class_names)`
 
-    绘制检测结果，输入：图像、检测框、类别ID、置信度、类别列表、颜色映射
+    绘制检测结果，输入：图像、检测框、类别 ID、置信度、类别列表、颜色映射
 
 
 ### FAQ

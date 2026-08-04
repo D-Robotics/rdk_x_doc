@@ -29,7 +29,7 @@ sudo srpi-config
 
 ## System Options
 
-系统选项菜单，允许对 Wi-F i网络、用户密码、主机名、系统登录模式、浏览器选择等各个部分进行配置更改，以及一些系统级别的更改。
+系统选项菜单，允许对 Wi-F i 网络、用户密码、主机名、系统登录模式、浏览器选择等各个部分进行配置更改，以及一些系统级别的更改。
 
 ![image-20231123102447793](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/srpi-config/image-20231123102447793.png)
 
@@ -85,7 +85,7 @@ sudo srpi-config
 
 - **SSH**
   
-  使用 SSH 启用/禁用对`RDK`的远程登录。默认情况下系统是启用SSH选项的。
+  使用 SSH 启用/禁用对`RDK`的远程登录。默认情况下系统是启用 SSH 选项的。
 
 - **VNC**
   
@@ -95,12 +95,12 @@ sudo srpi-config
 
 - **Peripheral bus config**
   
-  启用/禁用40pin接口上的 SPI、I2C、Serial Port、I2S等接口。本配置方式会直接修改使用的设备树文件的对应总线的`status`，重启后生效。
+  启用/禁用 40pin 接口上的 SPI、I2C、Serial Port、I2S 等接口。本配置方式会直接修改使用的设备树文件的对应总线的`status`，重启后生效。
   [RDK X5] 
-  X5增加了PWM接口；
-  下表中，每行的接口使用相同的引脚，同时只能生效一种功能，当一行的所有接口都为dsiable时，引脚为gpio功能脚
+  X5 增加了 PWM 接口；
+  下表中，每行的接口使用相同的引脚，同时只能生效一种功能，当一行的所有接口都为 dsiable 时，引脚为 gpio 功能脚
 
-  | 功能1 | 功能2 | 
+  | 功能 1 | 功能 2 | 
   | ---- | ---- |
   | serial3 | i2c5 |
   | i2c0 | pwm2 |
@@ -110,9 +110,9 @@ sudo srpi-config
   ![image-20231123103758686](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/srpi-config/image-20231123103758686.png)
 
 - **Configure Wi-Fi antenna**
-  切换Wi-Fi天线模式，支持设置使用板载还是外置天线。Onboard 板载天线 External 外置天线。
+  切换 Wi-Fi 天线模式，支持设置使用板载还是外置天线。Onboard 板载天线 External 外置天线。
 
-> RDK X3（V2.1） RDK X5（V0.1 V1.0） RDK X5 MD（小于V1.1）支持。
+> RDK X3（V2.1） RDK X5（V0.1 V1.0） RDK X5 MD（小于 V1.1）支持。
 
   ![img-20250903-163740](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/srpi-config/img-20250903-163740.png)
 
@@ -126,11 +126,11 @@ sudo srpi-config
 
 - **Audio**
  安装和卸载音频转接板
- 可能支持的音频转接板包括Audio Driver HAT V1 Audio Driver HAT V2 、WM8960 Audio HAT，不同的硬件能支持的音频转接板也有差别 ![image-20231123103758686](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/srpi-config/image-20240819164716000.png)
+ 可能支持的音频转接板包括 Audio Driver HAT V1 Audio Driver HAT V2 、WM8960 Audio HAT，不同的硬件能支持的音频转接板也有差别 ![image-20231123103758686](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/srpi-config/image-20240819164716000.png)
 
 ## Performance Options
 
-性能选项，包括超频、CPU运行模式和定频设置、调整ION内存大小等功能。
+性能选项，包括超频、CPU 运行模式和定频设置、调整 ION 内存大小等功能。
 
 ![image-20231123104234000](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/srpi-config/image-20231123104234000.png)
 
@@ -140,7 +140,7 @@ sudo srpi-config
 
   <DocScope products="RDK-X5">
 
-  `X5系列`有关`CPU`调度方式的说明请查阅 [X5 CPU频率管理](./04_frequency_management.md#cpu频率管理-1)，若计划进行超频，请务必先阅读文档中`CPU 超频`一节，全面了解风险与注意事项。
+  `X5系列`有关`CPU`调度方式的说明请查阅 [X5 CPU 频率管理](./04_frequency_management.md#cpu频率管理-1)，若计划进行超频，请务必先阅读文档中`CPU 超频`一节，全面了解风险与注意事项。
   
   ![image-20231123104553727](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/srpi-config/image-20231123104553727.png)
 
@@ -148,9 +148,9 @@ sudo srpi-config
 
 - **ION memory**
   
-  可以通过此选项配置ION内存的常用大小。
+  可以通过此选项配置 ION 内存的常用大小。
 
-> ION 内存是预留出来给BPU和图像、视频多媒体功能的物理内存空间。默认配置大小为672MB，如果需要运行比较大的算法模型、同时编解码多路视频时，请根据具体需要调整该内存大小。
+> ION 内存是预留出来给 BPU 和图像、视频多媒体功能的物理内存空间。默认配置大小为 672MB，如果需要运行比较大的算法模型、同时编解码多路视频时，请根据具体需要调整该内存大小。
 
 ## Localisation Options
 
@@ -180,7 +180,7 @@ sudo srpi-config
   
   此选项将扩展安装以填满整个 TF 卡，提供更多空间用于文件系统。
 
-> 如果系统是通过从另一张已经完成初始化配置的系统中复制而来的，那么系统的`TF`卡容量可能不会被自动调整为当前TF卡的容量。使用此功能可以方便地完成扩展。
+> 如果系统是通过从另一张已经完成初始化配置的系统中复制而来的，那么系统的`TF`卡容量可能不会被自动调整为当前 TF 卡的容量。使用此功能可以方便地完成扩展。
 
 - **Network Proxy Settings**
   
@@ -188,7 +188,7 @@ sudo srpi-config
 
 - **Boot Order**
   
-  RDK X3 Module 和 RDK X5 Module 支持从eMMC和SD卡两种模式启动系统，本选项用于切换启动模式。
+  RDK X3 Module 和 RDK X5 Module 支持从 eMMC 和 SD 卡两种模式启动系统，本选项用于切换启动模式。
 
 ## Sensor Profiles
 

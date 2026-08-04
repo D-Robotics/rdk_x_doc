@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # rdk-backup
 
-**rdk-backup命令** 用于将当前系统备份成镜像。
+**rdk-backup 命令** 用于将当前系统备份成镜像。
 
 ## 语法说明
 
@@ -18,7 +18,7 @@ sudo rdk-backup [dir]
 
 ## 常用命令
 
-使用前需要先联网，rdk-backup执行过程中会下载安装所需的工具
+使用前需要先联网，rdk-backup 执行过程中会下载安装所需的工具
 
 ```
 sudo rdk-backup

@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # 显示屏使用
 
-RDK X3 Module载板提供一路MIPI DSI接口，支持多种LCD屏幕的接入。下文以4.3英寸MIPI LCD为例，介绍显示屏接入和使用方法。
+RDK X3 Module 载板提供一路 MIPI DSI 接口，支持多种 LCD 屏幕的接入。下文以 4.3 英寸 MIPI LCD 为例，介绍显示屏接入和使用方法。
 
 屏幕连接方式如下图所示：
 
@@ -14,7 +14,7 @@ RDK X3 Module载板提供一路MIPI DSI接口，支持多种LCD屏幕的接入�
 严禁在开发板未断电的情况下插拔屏幕，否则容易引起短路并烧坏屏幕模组。
 :::
 
-由于RDK X3 Module 系统默认采用HDMI输出，需要通过命令切换到LCD显示方式，首先执行下面命令备份`DTB`
+由于 RDK X3 Module 系统默认采用 HDMI 输出，需要通过命令切换到 LCD 显示方式，首先执行下面命令备份`DTB`
 
 ```shell
 sudo cp /boot/hobot/hobot-x3-cm.dtb /boot/hobot/hobot-x3-cm_backup.dtb

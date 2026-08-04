@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-# UART驱动调试指南
+# UART 驱动调试指南
 
-X5 芯片共有8路串口：UART0、UART1，UART2，UART3，UART4，UART5，UART6，UART7
+X5 芯片共有 8 路串口：UART0、UART1，UART2，UART3，UART4，UART5，UART6，UART7
 
 - UART0 用作调试串口，只有 UART1, UART7 支持硬件自动流控
 - 支持比特率 115.2Kbps，230.4Kbps，460.8Kbps，921.6Kbps，1.5Mbps，2Mbps，4Mbps。
@@ -28,13 +28,13 @@ SERIAL_8250_DWLIB
 
 ![image-20220324112539182](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/image-20220324112539182.png)
 
-### DTS设备节点配置
+### DTS 设备节点配置
 
-X5 UART控制器的设备树定义位于SDK包的kernel文件夹下的<font color="red">arch/arm64/boot/dts/hobot/x5.dtsi</font>文件内。
+X5 UART 控制器的设备树定义位于 SDK 包的 kernel 文件夹下的<font color="red">arch/arm64/boot/dts/hobot/x5.dtsi</font>文件内。
 
-<font color="red">备注：</font> x5.dtsi中的节点主要声明SoC共有特性，和具体电路板无关，一般情况下不用修改。
+<font color="red">备注：</font> x5.dtsi 中的节点主要声明 SoC 共有特性，和具体电路板无关，一般情况下不用修改。
 
-X5 的UART控制器默认关闭，当需要使能对应的串口时，可以到具体的板子配置设备树中修改、添加自定义配置。
+X5 的 UART 控制器默认关闭，当需要使能对应的串口时，可以到具体的板子配置设备树中修改、添加自定义配置。
 例如在 x5-rdk-v1p0.dts 文件内使能 uart0、2、5：
 
 ```c
@@ -59,17 +59,17 @@ X5 的UART控制器默认关闭，当需要使能对应的串口时，可以到�
 ...
 ```
 
-### DTS配置DMA绑定
+### DTS 配置 DMA 绑定
 
-X5所有UART均支持使用DMA搬运。
+X5 所有 UART 均支持使用 DMA 搬运。
 
 <font color="red">注意：</font>
 
-UART0(dsp_uart)作为内核的默认UART输出，Linux禁止使用DMA搬运;
+UART0(dsp_uart)作为内核的默认 UART 输出，Linux 禁止使用 DMA 搬运;
 
-<font color="red">配置UART使用DMA传输后，传输必须16字节对齐。</font>
+<font color="red">配置 UART 使用 DMA 传输后，传输必须 16 字节对齐。</font>
 
-以UART7为例：
+以 UART7 为例：
 
 ```c
 /* arch/arm64/boot/dts/hobotx5-rdk-v1p0.dts */
@@ -83,9 +83,9 @@ UART0(dsp_uart)作为内核的默认UART输出，Linux禁止使用DMA搬运;
 }
 ```
 
-<font color="red">注意：</font>UART7在EVB上默认功能为GPIO，如果需要UART7的话，需要首先从“ls_gpio0_porta”内将UART7对应的PIN（lsio_gpio0_0~lsio_gpio0_3）删掉；
+<font color="red">注意：</font>UART7 在 EVB 上默认功能为 GPIO，如果需要 UART7 的话，需要首先从“ls_gpio0_porta”内将 UART7 对应的 PIN（lsio_gpio0_0~lsio_gpio0_3）删掉；
 
-UART DMA握手列表如下：
+UART DMA 握手列表如下：
 
   |  UART | RX | TX |  
   | ---- | ---- | ---- |
@@ -97,18 +97,18 @@ UART DMA握手列表如下：
   | UART6 | 37 | 38 | 
   | UART7 | 0 | 1 | 
 
-## UART测试{#uart_test}
+## UART 测试{#uart_test}
 
-硬件上把uart1的TX和RX进行连接。对应40pin 8，10 管脚
+硬件上把 uart1 的 TX 和 RX 进行连接。对应 40pin 8，10 管脚
 
-编译uart_duplex.c 代码，具体代码如附录A
+编译 uart_duplex.c 代码，具体代码如附录 A
 请注意修改下列命令中的交叉编译工具链路径。
 
 ```
 /opt/arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-linux-gnu -o uart_duplex uart_duplex.c  -lpthread
 ```
 
-回环测试命令：打开/dev/ttyS1，默认波特率4Mbps，默认每轮测试1MB数据，测试100轮，读写同时进行，每发、收512字节做一轮数据校验，完整一轮测试结束后，如果没有出错则打印校验正确。
+回环测试命令：打开/dev/ttyS1，默认波特率 4Mbps，默认每轮测试 1MB 数据，测试 100 轮，读写同时进行，每发、收 512 字节做一轮数据校验，完整一轮测试结束后，如果没有出错则打印校验正确。
 
 ```
 # ./uart_duplex -c 100 -d /dev/ttyS1
@@ -128,7 +128,7 @@ This is receive test 2 times
 ### Check the received data is correct ###
 ```
 
-uart_duplex命令是测试uart的，可以阅读它的帮助信息获取更多使用方法。
+uart_duplex 命令是测试 uart 的，可以阅读它的帮助信息获取更多使用方法。
 
 ## 附录（测试代码）
 

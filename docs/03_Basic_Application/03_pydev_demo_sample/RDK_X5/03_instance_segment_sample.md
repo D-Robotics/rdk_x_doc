@@ -65,7 +65,7 @@ python ultralytics_yolo11_seg.py
 
 ### 执行效果
 
-#### UNetMobileNet执行效果
+#### UNetMobileNet 执行效果
 
 ```
 root@ubuntu:/app/pydev_demo/03_instance_segmentation_sample/01_unetmobilenet# python unet_mobilenet.py 
@@ -89,7 +89,7 @@ unet_mobilenet_1024x2048_nv12:
 [Saved] Result saved to: result.jpg
 ```
 
-#### YOLOv11实例分割执行效果
+#### YOLOv11 实例分割执行效果
 
 ```
 root@ubuntu:/app/pydev_demo/03_instance_segmentation_sample/02_ultralytics_yolo11_seg# python ultralytics_yolo11_seg.py
@@ -130,7 +130,7 @@ yolo11n_seg_bayese_640x640_nv12:
 | `--model-path` | BPU 量化模型路径（`.bin`） | str | `/app/model/basic/mobilenet_unet_1024x2048_nv12.bin` |
 | `--test-img` | 输入测试图像路径 | str | `segmentation.png` |
 | `--img-save-path` | 分割结果图像保存路径 | str | `result.jpg` |
-| `--priority` | 推理优先级（0~255，255为最高） | int | `0` |
+| `--priority` | 推理优先级（0~255，255 为最高） | int | `0` |
 | `--bpu-cores` | BPU 核心索引列表（如 `0 1`） | int list | `[0]` |
 | `--alpha-f` | 分割掩码与原图混合的透明度因子（0.0=仅掩码，1.0=仅原图） | float | `0.75` |
 
@@ -142,7 +142,7 @@ yolo11n_seg_bayese_640x640_nv12:
 | `--test-img` | 输入测试图像路径 | str | `bus.jpg` |
 | `--label-file` | 类别标签路径（每行一个类别） | str | `coco_classes.names` |
 | `--img-save-path` | 分割结果图像保存路径 | str | `result.jpg` |
-| `--priority` | 推理优先级（0~255，255为最高） | int | `0` |
+| `--priority` | 推理优先级（0~255，255 为最高） | int | `0` |
 | `--bpu-cores` | BPU 核心索引列表（如 `0 1`） | int list | `[0]` |
 | `--nms-thres` | 非极大值抑制（NMS）阈值 | float | `0.7` |
 | `--score-thres` | 置信度阈值 | float | `0.25` |
@@ -213,7 +213,7 @@ yolo11n_seg_bayese_640x640_nv12:
 
    混合原图与分割掩码，输入：原图、原图权重 、分割掩码彩色图、分割掩码权重、亮度偏移量
 
-#### YOLOv11实例分割 API 流程
+#### YOLOv11 实例分割 API 流程
 
 <center>
 ![API_Flow](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_03_instance_seg_yolo11_sample_api_flow.png)
@@ -245,7 +245,7 @@ yolo11n_seg_bayese_640x640_nv12:
 
 7. `filter_classification(cls_output, conf_thres)`
 
-   过滤分类结果，输入：分类输出、置信度阈值, 返回：置信度、类别ID、有效索引
+   过滤分类结果，输入：分类输出、置信度阈值, 返回：置信度、类别 ID、有效索引
 
 8. `decode_boxes(box_output, valid_indices, anchor_size, stride, weights)`
 
@@ -273,15 +273,15 @@ yolo11n_seg_bayese_640x640_nv12:
 
 14. `draw_boxes(image, boxes, cls_ids, scores, class_names, rdk_colors)`
 
-    绘制检测框，输入：图像、检测框、类别ID、置信度、类别列表、颜色映射
+    绘制检测框，输入：图像、检测框、类别 ID、置信度、类别列表、颜色映射
 
 15. `draw_masks(image, boxes, masks, cls_ids, rdk_colors, alpha)`
 
-    绘制分割掩码，输入：图像、检测框、掩码、类别ID、颜色映射、透明度
+    绘制分割掩码，输入：图像、检测框、掩码、类别 ID、颜色映射、透明度
 
 16. `draw_contours(image, boxes, masks, cls_ids, rdk_colors, thickness)`
 
-    绘制掩码边缘轮廓，输入：图像、检测框、掩码、类别ID、颜色映射、线宽
+    绘制掩码边缘轮廓，输入：图像、检测框、掩码、类别 ID、颜色映射、线宽
 17. `cv2.imwrite(image_path, image)`
 
     保存结果图像，输入：保存路径、图像
