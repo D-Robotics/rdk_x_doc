@@ -102,27 +102,27 @@ sidebar_position: 7
   <tbody>
     <tr>
       <td>📦 **SDK源码包**</td>
-      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/board_support_package/platform_source_code.tar.gz">RDK X5 Module SDK源码包</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/board_support_package/platform_source_code.tar.gz">RDK X5 Module SDK源码包</a></td>
       <td>完整的Buildroot源码包，支持内核定制、驱动开发、系统构建（约3.1GB）</td>
     </tr>
     <tr>
       <td>💾 **eMMC预编译镜像**</td>
-      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/board_support_package/firmwares/product_ddr_auto_detect_non-secure_release.zip">非安全版本固件</a> / <a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/board_support_package/firmwares/product_ddr_auto_detect_secure_release.zip">安全版本固件</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/board_support_package/firmwares/product_ddr_auto_detect_non-secure_release.zip">非安全版本固件</a> / <a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/board_support_package/firmwares/product_ddr_auto_detect_secure_release.zip">安全版本固件</a></td>
       <td>基于Buildroot构建的eMMC版本预编译系统镜像，支持DDR自动检测</td>
     </tr>
     <tr>
       <td>📚 **用户手册**</td>
-      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/user_manual/user_manual_v1.1.0.zip">SDK用户手册</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/user_manual/user_manual_v1.1.2.zip">SDK用户手册</a></td>
       <td>包含buildroot编译指南、开发环境配置、API参考等完整文档（约163MB）</td>
     </tr>
     <tr>
       <td>📋 **发布说明**</td>
-      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/release_note_and_change_log/LNX6.1.83_PL5.1_V1.1.0%20ReleaseNotes.pdf">ReleaseNotes</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/release_note_and_change_log/LNX6.1.83_PL5.1_V1.1.2%20ReleaseNotes.pdf">ReleaseNotes</a></td>
       <td>SDK版本更新说明、功能特性、已知问题和解决方案</td>
     </tr>
     <tr>
       <td>🛠️ **烧录工具**</td>
-      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/software_tools/download_tools/">xburn下载工具</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/software_tools/download_tools/">xburn下载工具</a></td>
       <td>支持Linux、macOS、Windows的专业烧录工具，用于固件刷写</td>
     </tr>
   </tbody>
