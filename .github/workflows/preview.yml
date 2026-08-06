@@ -1,0 +1,57 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+
+jobs:
+  preview:
+    if: github.event.action != 'closed'
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Clean install dependencies
+      run: |
+        rm -rf node_modules
+        npm ci
+
+    - name: Build with PR-specific config
+      run: |
+        cat > docusaurus.preview-pr.config.js << EOF
+        import mainConfig from './docusaurus.config.js';
+        export default {
+          ...mainConfig,
+          url: 'http://10.64.66.11:3335',
+          baseUrl: '/rdk_x_doc/pr-${{ github.event.number }}/',
+        };
+        EOF
+        npx docusaurus build --config docusaurus.preview-pr.config.js
+
+    - name: Deploy to test server
+      run: |
+        ssh paka@10.64.66.11 "mkdir -p /home/paka/rdkx/rdk_x_doc/pr-${{ github.event.number }}"
+        scp -r build/* paka@10.64.66.11:/home/paka/rdkx/rdk_x_doc/pr-${{ github.event.number }}/
+
+    - name: Post preview link
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const prNumber = context.issue.number;
+          github.rest.issues.createComment({
+            issue_number: prNumber,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `🔍 预览链接：http://10.64.66.11:3335/rdk_x_doc/pr-${prNumber}/`
+          });
+
+  cleanup:
+    if: github.event.action == 'closed'
+    runs-on: self-hosted
+
+    steps:
+    - name: Remove PR preview
+      run: |
+        ssh paka@10.64.66.11 "rm -rf /home/paka/rdkx/rdk_x_doc/pr-${{ github.event.number }}"
