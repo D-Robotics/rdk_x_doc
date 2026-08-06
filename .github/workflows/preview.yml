@@ -4,6 +4,9 @@ on:
   pull_request:
     types: [opened, synchronize, closed]
 
+permissions:
+  pull-requests: write
+
 jobs:
   preview:
     if: github.event.action != 'closed'
