@@ -21,23 +21,13 @@ miniboot 是 RDK 硬件的最小启动镜像，包含 miniboot、U-Boot 等底�
 
 **前提**：系统正常运行且已连接网络。
 
-- 更新 miniboot 为最新版本：
+常用命令：
 
-    ```bash
-    sudo rdk-miniboot-update
-    ```
+- 更新为最新版本：`sudo rdk-miniboot-update`
+- 使用指定镜像文件：`sudo rdk-miniboot-update -f /userdata/miniboot.img`
+- 查看当前使用的镜像文件：`rdk-miniboot-update -l`
 
-- 使用指定的 miniboot 镜像文件：
-
-    ```bash
-    sudo rdk-miniboot-update -f /userdata/miniboot.img
-    ```
-
-- 查看当前会使用什么镜像文件进行更新：
-
-    ```bash
-    rdk-miniboot-update -l
-    ```
+更多信息见 [rdk-miniboot-update 命令参考](../../09_Appendix/rdk-command-manual/cmd_rdk-miniboot-update.md)。
 
 ## 使用 XBurn 烧录
 
@@ -89,22 +79,10 @@ XBurn 是 PC 端烧录工具，通过 USB 和串口连接开发板，将 miniboo
 
 | 连接类型 | 可用下载模式 | 串口/波特率 | 适用场景 |
 |:---|:---|:---|:---|
-| `Serial+USB` | `xmodem_fastboot` / `fastboot` | 在 XBurn 界面 **板卡** 处填写 **串口** 和 **波特率** | 串口经 Xmodem 引导、USB 经 Fastboot 下发。空板或非空板均可，设备无法正常启动时使用 |
+| `Serial+USB` | `xmodem_fastboot` / `fastboot` | 在 XBurn 界面 **板卡** 处填写 **串口** 和 **波特率**（RDK X5: `115200`，RDK X5 Module: `921600`） | 串口经 Xmodem 引导、USB 经 Fastboot 下发。空板或非空板均可，设备无法正常启动时使用 |
 | `USB` | `fastboot` | 选项不出现，需在 MobaXterm/minicom 看日志 | 要求设备 U-Boot 正常，手动进入 Fastboot（上电后长按空格进 U-Boot，输入 `fastboot 0`） |
 
 <img src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/xburn/x5-flash.png" alt="XBurn 烧录参数配置界面" style={{ width: '100%', height: 'auto', align:'center'}} />
-
-<DocScope versions=">=3.5.0" products="RDK X5">
-
-串口和波特率选项仅在连接类型为 `Serial+USB` 时出现。RDK X5 波特率为 `115200`。
-
-</DocScope>
-
-<DocScope versions=">=3.5.0" products="RDK X5 Module">
-
-串口和波特率选项仅在连接类型为 `Serial+USB` 时出现。RDK X5 Module 波特率为 `921600`。
-
-</DocScope>
 
 ### 烧录 Bootloader
 
@@ -129,19 +107,7 @@ XBurn 是 PC 端烧录工具，通过 USB 和串口连接开发板，将 miniboo
 系统首次启动时会进行默认环境配置，整个过程持续 45 秒左右。
 
 - **Desktop 版本**：通过 HDMI 连接显示器，出现 Ubuntu 系统桌面即启动成功。
-- **Server 版本**：通过调试串口连接开发板，用 MobaXterm 等串口工具查看输出，出现用户名登录界面即启动成功。
-
-<DocScope versions=">=3.5.0" products="RDK X5">
-
-MobaXterm 串口配置：**Serial port** 选 PC 识别到的串口号，**Speed (bps)** 选 `115200`。
-
-</DocScope>
-
-<DocScope versions=">=3.5.0" products="RDK X5 Module">
-
-MobaXterm 串口配置：**Serial port** 选 PC 识别到的串口号，**Speed (bps)** 选 `921600`。
-
-</DocScope>
+- **Server 版本**：通过调试串口连接开发板，打开 MobaXterm，单击 **Session** > **Serial**，选择 PC 识别到的串口号，单击 **OK**，出现用户名登录界面即启动成功。
 
 <img src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/xburn/x5-boot.png" alt="RDK X5 串口启动日志出现登录界面" style={{ width: '100%', height: 'auto', align:'center'}} />
 

@@ -8,7 +8,17 @@ import DocScope from '@site/src/components/DocScope';
 
 # 烧录系统镜像
 
+<DocScope versions=">=3.5.0" products="RDK X5">
+
+烧录系统镜像是指将 Ubuntu 系统镜像写入 Micro SD 卡，为开发板提供运行环境。
+
+</DocScope>
+
+<DocScope versions=">=3.5.0" products="RDK X5 Module">
+
 烧录系统镜像是指将 Ubuntu 系统镜像写入 Micro SD 卡或 eMMC，为开发板提供运行环境。
+
+</DocScope>
 
 :::warning 注意事项
 
@@ -18,7 +28,9 @@ import DocScope from '@site/src/components/DocScope';
 - 开发板通过 USB Type-C 接口供电，需要使用支持 **5V/5A** 的电源适配器为开发板供电，不要使用电脑 USB 接口为开发板供电，否则会因供电不足造成开发板异常断电、反复重启等异常情况。
 
 <DocScope versions=">=3.5.0" products="RDK X5">
+
 - 更多供电方式参见 [PoE 供电使用](../../07_Advanced_development/01_hardware_development/rdk_x5/POE.md)。
+
 </DocScope>
 
 :::
@@ -27,28 +39,28 @@ import DocScope from '@site/src/components/DocScope';
 
 <DocScope versions=">=3.5.0" products="RDK X5">
 
-RDK X5 采用 Micro SD 存储卡作为系统启动介质，烧录时将系统烧录进 SD 卡。
+RDK X5 采用 Micro SD 卡作为系统启动介质，烧录时将系统烧录进 SD 卡。
 
-- 准备至少 16GB 容量的 Micro SD 存储卡，以便满足 Ubuntu 系统、应用功能软件对存储空间的需求。
+- 准备至少 16GB 容量的 Micro SD 卡，以便满足 Ubuntu 系统、应用功能软件对存储空间的需求。
 - SD 读卡器。
 
 </DocScope>
 
 <DocScope versions=">=3.5.0" products="RDK X5 Module">
 
-RDK X5 Module 板载 eMMC，支持 Micro SD 存储卡和 eMMC 作为系统启动介质，烧录时可选择将系统烧录进 Micro SD 存储卡或 eMMC。
+RDK X5 Module 板载 eMMC，支持 Micro SD 卡和 eMMC 作为系统启动介质，烧录时可选择将系统烧录进 Micro SD 卡或 eMMC。
 
-- 准备至少 16GB 容量的 Micro SD 存储卡，以便满足 Ubuntu 系统、应用功能软件对存储空间的需求。
+- 准备至少 16GB 容量的 Micro SD 卡，以便满足 Ubuntu 系统、应用功能软件对存储空间的需求。
 - SD 读卡器。
 
 </DocScope>
 
-## 镜像下载
+## 下载镜像
 
 1. [单击此处](https://archive.d-robotics.cc/downloads/os_images/rdk_x5/) 进入 RDK X5 镜像下载目录，选择镜像版本。
 
     <img
-          src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/install_os/install_os_260408/zh/x5/x5_os_download.png"
+          src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_s/system-os.png"
           style={{ width: '100%', height: 'auto', align:'center'}}
     />
 
@@ -74,11 +86,21 @@ RDK X5 Module 板载 eMMC，支持 Micro SD 存储卡和 eMMC 作为系统启动
           style={{ width: '100%', height: 'auto', align:'center'}}
     />
 
-3. 下载完成后，解压出 Ubuntu 系统镜像文件夹，如 `rdk-x5-ubuntu22-preinstalled-desktop-3.3.3-arm64.img`。
+3. 下载完成后，解压出 Ubuntu 系统镜像文件夹，如 `rdk-x5-ubuntu22-preinstalled-desktop-3.3.3-arm64.img`。使用 XBurn 烧录时需解压为 `.img` 文件，使用 RDK Studio 或 Rufus 烧录可直接选择压缩包。
+
+## 烧录步骤
 
 以下三种工具任选其一即可完成烧录。
 
-## 使用 Rufus 烧录
+### 使用 RDK Studio 烧录
+
+RDK Studio 支持 Windows 和 Mac 系统，可在线选择镜像后下载，也可自行下载镜像后本地导入。SD 卡通过读卡器连接 PC 进行烧录。
+
+1. [点此下载](https://developer.d-robotics.cc/rdkstudio) RDK Studio。
+
+2. 安装后，打开 RDK Studio，选择对应设备型号，按向导完成烧录，详细步骤参见 [登录 RDK Studio 并烧录系统](https://developer.d-robotics.cc/rdk_studio_doc/category/2-quick-start)。
+
+### 使用 Rufus 烧录
 
 Rufus 是 Windows 平台的免费开源工具，支持 SD 卡单独烧录和 SD 卡在板烧录。
 
@@ -89,15 +111,15 @@ Rufus 是 Windows 平台的免费开源工具，支持 SD 卡单独烧录和 SD 
       style={{ width: '100%', height: 'auto', align:'center'}}
 />
 
-双击下载的 `.exe` 安装包文件即可自动安装完成并打开应用。
+双击下载的 `.exe` 文件即可打开 Rufus。
 
-### SD 卡单独烧录
+#### SD 卡单独烧录 {#solo}
 
 SD 卡单独烧录是指将 SD 卡从开发板取出，通过读卡器连接 PC 进行烧录。
 
 1. 将 SD 卡插入读卡器，将读卡器插入 PC。
 
-2. 打开 Rufus 工具，**设备** 下拉框中会自动识别到 Micro SD 存储卡。
+2. 打开 Rufus 工具，**设备** 下拉框中会自动识别到 Micro SD 卡。
 
     <img
           src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/install_os/install_os_260408/zh/x5/rufus_select_device.png"
@@ -120,13 +142,13 @@ SD 卡单独烧录是指将 SD 卡从开发板取出，通过读卡器连接 PC 
 
 5. 烧录完成后，关闭 Rufus 并取出存储卡。
 
-### SD 卡在板烧录 {#rufus-sd-card-flash}
+#### SD 卡在板烧录
 
 SD 卡在板烧录是指 SD 卡插在开发板卡槽内，开发板通过 USB 连接 PC，将 SD 卡映射为 U 盘后由 Rufus 写入。
 
 1. 打开 Rufus 工具。
 
-2. SD 卡插入开发板，USB Type-C 接到 PC 端，按住 Sleep 按键不放，给开发板上电，观察 Rufus **设备** 下拉框，直到出现 Micro SD 存储卡后松开按键。
+2. SD 卡插入开发板，USB Type-C 接到 PC 端，按住 Sleep 按键不放，给开发板上电，观察 Rufus **设备** 下拉框，直到出现 Micro SD 卡后松开按键。
 
     <DocScope versions=">=3.5.0" products="RDK X5">
     <img
@@ -142,11 +164,11 @@ SD 卡在板烧录是指 SD 卡插在开发板卡槽内，开发板通过 USB �
     />
     </DocScope>
 
-3. 其余步骤与 [SD 卡单独烧录](#rufus-sd-card-flash) 一致，完成镜像烧录。
+3. 其余步骤与 [SD 卡单独烧录](#solo) 一致，完成镜像烧录。
 
 <DocScope versions=">=3.5.0" products="RDK X5 Module">
 
-### eMMC 烧录
+#### eMMC 烧录
 
 SD 卡不在板时，开发板通过 USB 连接 PC，eMMC 会被映射为 U 盘，可使用 Rufus 写入。
 
@@ -159,21 +181,13 @@ SD 卡不在板时，开发板通过 USB 连接 PC，eMMC 会被映射为 U 盘�
           style={{ width: '100%', height: 'auto', align:'center'}}
     />
 
-3. 其余步骤与 [SD 卡单独烧录](#rufus-sd-card-flash) 一致，完成镜像烧录。
+3. 其余步骤与 [SD 卡单独烧录](#solo) 一致，完成镜像烧录。
 
 </DocScope>
 
-## 使用 RDK Studio 烧录
+### 使用 XBurn 烧录
 
-RDK Studio 支持 Windows 和 Mac 系统，提供在线选择镜像功能，免去手动下载镜像的步骤。SD 卡通过读卡器连接 PC 进行烧录。
-
-1. [点此下载](https://developer.d-robotics.cc/rdkstudio) RDK Studio。
-
-2. 安装后，打开 RDK Studio，选择对应设备型号，按向导完成烧录，详细步骤参见 [登录 RDK Studio 并烧录系统](https://developer.d-robotics.cc/rdk_studio_doc/category/2-quick-start)。
-
-## 使用 XBurn 烧录系统镜像
-
-XBurn 也可以烧录系统镜像。硬件连接、环境准备和烧录参数与烧录 miniboot 一致，只需将镜像所在目录选为本文档[镜像下载](#镜像下载)中解压出的文件夹即可。详细步骤见 [升级 miniboot](upgrade-miniboot#使用-xburn-烧录)。
+XBurn 也可以烧录系统镜像。硬件连接、环境准备和烧录参数与烧录 miniboot 一致，只需将镜像所在目录选为本文档 [下载镜像](#下载镜像) 中解压出的文件夹即可。详细步骤见 [升级 miniboot](upgrade-miniboot#使用-xburn-烧录)。
 
 <DocScope versions=">=3.5.0" products="RDK X5 Module">
 
@@ -186,19 +200,7 @@ XBurn 还可以烧录 eMMC。SD 卡不在板时，产品类型选 `X5`，存储�
 系统首次启动时会进行默认环境配置，整个过程持续 45 秒左右。
 
 - **Desktop 版本**：通过 HDMI 连接显示器，出现 Ubuntu 系统桌面即启动成功。
-- **Server 版本**：通过调试串口连接开发板，用 MobaXterm 等串口工具查看输出，出现用户名登录界面即启动成功。
-
-<DocScope versions=">=3.5.0" products="RDK X5">
-
-MobaXterm 串口配置：**Serial port** 选 PC 识别到的串口号，**Speed (bps)** 选 `115200`。
-
-</DocScope>
-
-<DocScope versions=">=3.5.0" products="RDK X5 Module">
-
-MobaXterm 串口配置：**Serial port** 选 PC 识别到的串口号，**Speed (bps)** 选 `921600`。
-
-</DocScope>
+- **Server 版本**：通过调试串口连接开发板，打开 MobaXterm，单击 **Session** > **Serial**，选择 PC 识别到的串口号，**Speed (bps)** 选 `115200`（RDK X5）或 `921600`（RDK X5 Module），单击 **OK**，出现用户名登录界面即启动成功。
 
 <img
     src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/install_os/install_os_260408/zh/x5/boot_system.png"
@@ -207,7 +209,7 @@ MobaXterm 串口配置：**Serial port** 选 PC 识别到的串口号，**Speed 
 
 :::tip 指示灯说明
 
-<font color='Green'>绿灯</font> 点亮代表启动中；熄灭或闪烁代表启动完成。
+<font color='Green'>绿色灯</font> 点亮表示供电正常，<font color='Orange'>橙色灯</font> 闪烁表示系统启动完成。
 
 :::
 
