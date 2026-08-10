@@ -86,7 +86,10 @@ RDK X5 Module 板载 eMMC，支持 Micro SD 卡和 eMMC 作为系统启动介质
           style={{ width: '100%', height: 'auto', align:'center'}}
     />
 
-3. 下载完成后，解压出 Ubuntu 系统镜像文件夹，如 `rdk-x5-ubuntu22-preinstalled-desktop-3.3.3-arm64.img`。使用 XBurn 烧录时需解压为 `.img` 文件，使用 RDK Studio 或 Rufus 烧录可直接选择压缩包。
+3. 下载完成后，解压出 Ubuntu 系统镜像文件夹，如 `rdk-x5-ubuntu22-preinstalled-desktop-3.3.3-arm64.img`。
+   
+   - 使用 XBurn 烧录时需解压为 `.img` 文件。
+   - 使用 RDK Studio 或 Rufus 烧录可直接选择压缩包。
 
 ## 烧录步骤
 

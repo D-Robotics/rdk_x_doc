@@ -22,7 +22,7 @@ import DocScope from '@site/src/components/DocScope';
 | 工具 | 烧录系统镜像 | 升级 miniboot | 说明 |
 |:---|:---|:---|:---|
 | Rufus | ✅ | ❌ | Windows 工具，支持 SD 卡单独烧录和 SD 卡在板烧录 |
-| RDK Studio | ✅ | ❌ | 支持 Windows / Mac，可在线选择镜像免下载 |
+| RDK Studio | ✅ | ❌ | 支持 Windows / Mac，可在线下载或本地导入镜像 |
 | XBurn | ✅ | ✅ | 支持 Windows / Linux / macOS，可烧录系统镜像和 miniboot |
 | rdk-miniboot-update | ❌ | ✅ | 命令行工具，系统正常运行 + 联网时可用 |
 
@@ -33,7 +33,7 @@ import DocScope from '@site/src/components/DocScope';
 | 工具 | 烧录系统镜像 | 升级 miniboot | 说明 |
 |:---|:---|:---|:---|
 | Rufus | ✅ | ❌ | Windows 工具，支持 SD 卡单独烧录、SD 卡在板烧录和 eMMC 烧录 |
-| RDK Studio | ✅ | ❌ | 支持 Windows / Mac，可在线选择镜像免下载 |
+| RDK Studio | ✅ | ❌ | 支持 Windows / Mac，可在线下载或本地导入镜像 |
 | XBurn | ✅ | ✅ | 支持 Windows / Linux / macOS，可烧录系统镜像和 miniboot |
 | rdk-miniboot-update | ❌ | ✅ | 命令行工具，系统正常运行 + 联网时可用 |
 

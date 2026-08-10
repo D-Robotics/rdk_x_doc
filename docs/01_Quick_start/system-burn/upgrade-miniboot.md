@@ -113,7 +113,7 @@ XBurn 是 PC 端烧录工具，通过 USB 和串口连接开发板，将 miniboo
 
 :::tip 指示灯说明
 
-<font color='Green'>绿灯</font> 点亮代表启动中；熄灭或闪烁代表启动完成。
+<font color='Green'>绿色灯</font> 点亮表示供电正常，<font color='Orange'>橙色灯</font> 闪烁表示系统启动完成。
 
 :::
 
