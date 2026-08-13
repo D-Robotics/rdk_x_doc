@@ -112,6 +112,7 @@ export default function DocItemWrapper(props) {
   const homeUrl = useBaseUrl("/");
 
   const docId = props?.content?.metadata?.id || "";
+  const docPermalink = props?.content?.metadata?.permalink || "";
 
   const skipSidebarScope = isMultiInstanceDocsRoute(
     location.pathname,
@@ -129,8 +130,12 @@ export default function DocItemWrapper(props) {
   }, [sidebar, skipSidebarScope, version, product]);
   const currentDocDisplayNumber = useMemo(() => {
     if (!filteredRenumberedSidebar) return null;
-    return findDocDisplayNumber(filteredRenumberedSidebar, docId);
-  }, [filteredRenumberedSidebar, docId]);
+    return findDocDisplayNumber(
+      filteredRenumberedSidebar,
+      docId,
+      docPermalink,
+    );
+  }, [filteredRenumberedSidebar, docId, docPermalink]);
   const renumberedDocTitle = useMemo(() => {
     const rawMetaTitle = props?.content?.metadata?.title || "";
     const plain = stripNumberPrefix(rawMetaTitle).trim();
