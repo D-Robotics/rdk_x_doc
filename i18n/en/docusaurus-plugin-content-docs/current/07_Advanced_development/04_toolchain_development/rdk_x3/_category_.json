@@ -1,0 +1,9 @@
+{
+  "label": "7.4.1 Development Guide",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "slug": "/04_toolchain_development/rdk_x3",
+    "description": "RDK X3 Algorithm Toolchain Development Guide"
+  }
+}

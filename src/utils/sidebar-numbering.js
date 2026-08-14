@@ -48,19 +48,62 @@ export function renumberVisibleItems(items, parentPrefix = '') {
   });
 }
 
+function normalizePermalink(path) {
+  if (!path) return '';
+  return String(path)
+    .split('#')[0]
+    .split('?')[0]
+    .replace(/^https?:\/\/[^/]+/i, '')
+    .replace(/\/+$/, '')
+    .toLowerCase();
+}
+
+function normalizePermalinkTail(path) {
+  const normalized = normalizePermalink(path);
+  if (!normalized) return '';
+  return normalized.replace(/^\/rdk_x_doc\//, '/').replace(/^\/en\//, '/');
+}
+
+function permalinkEquals(a, b) {
+  if (!a || !b) return false;
+  return (
+    normalizePermalink(a) === normalizePermalink(b) ||
+    normalizePermalinkTail(a) === normalizePermalinkTail(b)
+  );
+}
+
 /**
  * 从（已重排编号的）侧边栏中获取当前文档显示编号。
+ * 同时支持普通 link 文档，以及 category 通过 link.type=doc 挂载的入口文档。
  */
-export function findDocDisplayNumber(items, targetDocId) {
-  if (!Array.isArray(items) || !targetDocId) return null;
+export function findDocDisplayNumber(items, targetDocId, targetPermalink) {
+  if (!Array.isArray(items) || (!targetDocId && !targetPermalink)) return null;
+
   for (const item of items) {
-    if (item.type === 'link' && item.docId === targetDocId) {
+    if (item.type === 'link' && targetDocId && item.docId === targetDocId) {
       const parsed = parseNumberedLabel(item.label);
       return parsed?.prefix ?? null;
     }
-    if (item.type === 'category' && Array.isArray(item.items)) {
-      const found = findDocDisplayNumber(item.items, targetDocId);
-      if (found) return found;
+
+    if (item.type === 'category') {
+      const categoryMatchesDoc =
+        (targetDocId && item.docId === targetDocId) ||
+        permalinkEquals(item.href, targetPermalink);
+
+      // 当前页就是该 category 的入口文档时，直接使用 category 标签上的编号
+      if (categoryMatchesDoc) {
+        const parsed = parseNumberedLabel(item.label);
+        return parsed?.prefix ?? null;
+      }
+
+      if (Array.isArray(item.items)) {
+        const found = findDocDisplayNumber(
+          item.items,
+          targetDocId,
+          targetPermalink,
+        );
+        if (found) return found;
+      }
     }
   }
   return null;

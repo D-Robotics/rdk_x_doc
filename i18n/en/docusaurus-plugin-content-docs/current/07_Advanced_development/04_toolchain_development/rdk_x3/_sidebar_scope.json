@@ -1,0 +1,4 @@
+{
+  "versions": [">=3.0.0"],
+  "products": ["RDK-X3"]
+}
