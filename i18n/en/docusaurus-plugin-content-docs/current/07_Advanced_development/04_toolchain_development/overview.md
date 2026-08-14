@@ -32,4 +32,4 @@ This section is intended for developers using D-Robotics processors and provides
 
 ### Model Operator List Description
 
-- Currently, the list of all Caffe and ONNX operators supported by D-Robotics processors is provided. Operators not listed are <font color='Red'>currently unsupported</font> due to <font color='Red'>limitations of the D-Robotics processor's BPU hardware</font>. For the specific supported operator list, please refer to the chapter [**Supported Operator List**](./intermediate/supported_op_list).
+Currently, the list of all Caffe and ONNX operators supported by D-Robotics processors is provided. Operators not listed are <font color='Red'>currently unsupported</font> due to <font color='Red'>limitations of the D-Robotics processor's BPU hardware</font>. For the specific supported operator list, please refer to the user manual of the algorithm toolchain.

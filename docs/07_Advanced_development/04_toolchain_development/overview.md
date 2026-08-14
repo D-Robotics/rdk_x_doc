@@ -12,7 +12,7 @@ sidebar_position: 1
 
 D-Robotics 算法工具链是基于 D-Robotics 处理器研发的算法解决方案，可以帮助您把浮点模型量化为定点模型， 并在 D-Robotics 处理器上快速部署自研算法模型。
 
-目前在 GPU 上训练的模型大部分都是浮点模型，即参数使用的是 float 类型存储；D-Robotics BPU 架构的处理器使用的是  INT8   的计算精度（业内处理器的通用精度），只能运行定点量化模型。从训练出的浮点模型转为定点模型的过程，我们叫做量化，依据是否要对量化后的参数进行调整，我们可以将量化方法分为 QAT（Quantification Aware Training）量化感知训练和 PTQ（Post-Training Quantization）训练后量化。
+目前在 GPU 上训练的模型大部分都是浮点模型，即参数使用的是 float 类型存储；D-Robotics BPU 架构的处理器使用的是 INT8 的计算精度（业内处理器的通用精度），只能运行定点量化模型。从训练出的浮点模型转为定点模型的过程，我们叫做量化，依据是否要对量化后的参数进行调整，我们可以将量化方法分为 QAT（Quantification Aware Training）量化感知训练和 PTQ（Post-Training Quantization）训练后量化。
 
 D-Robotics 算法工具链主要使用的是<font color='Red'>训练后量化 PTQ</font>方法，只需使用一批校准数据对训练好的浮点模型进行校准, 将训练过的 FP32 网络直接转换为定点计算的网络，此过程中无需对原始浮点模型进行任何训练，只对几个超参数调整就可完成量化过程, 整个过程简单快速, 目前在端侧和云侧场景已得到广泛应用。 
 
@@ -33,4 +33,4 @@ D-Robotics 算法工具链主要使用的是<font color='Red'>训练后量化 PT
 
 ### 模型算子列表说明
 
--   目前提供了 D-Robotics 处理器可支持的所有 Caffe 和 ONNX 算子情况，其他未列出的算子因<font color='Red'>D-Robotics 处理器 bpu 硬件限制</font> ，<font color='Red'>暂不支持</font> 。具体算子支持列表，请参考 [**模型算子支持列表**](./intermediate/supported_op_list) 章节内容。
+-   目前提供了 D-Robotics 处理器可支持的所有 Caffe 和 ONNX 算子情况，其他未列出的算子因<font color='Red'>D-Robotics 处理器 bpu 硬件限制</font> ，<font color='Red'>暂不支持</font> 。具体算子支持列表，请参考算法工具链手册。
