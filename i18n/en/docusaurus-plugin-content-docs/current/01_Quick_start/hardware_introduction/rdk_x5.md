@@ -429,6 +429,33 @@ All IO pins on the 40-pin header support switching between 3.3V and 1.8V voltage
 </TabItem>
 </Tabs>
 
+## Function Control IO Header
+
+<Tabs groupId="rdk-type">
+<TabItem value="x5" label="RDK X5">
+
+This interface is not available.
+
+</TabItem>
+<TabItem value="x5md" label="RDK X5 Module">
+
+The RDK X5 Module carrier board provides a function control IO header (interface No. 16, silkscreen J4). By shorting the corresponding pins with a jumper, you can control and verify the module power, reset, sleep, and Wi-Fi/Bluetooth enable signals.
+
+Pins are arranged **from outside to inside** on the carrier board, as follows:
+
+| Order (outside → inside) | Pin Name | Description | Usage |
+| --- | --- | --- | --- |
+| 1 | GLOBAL_EN | Cuts off all power supplies of the MD module | Install a jumper to power off the module; the **5V LED stays on** |
+| 2 | RUN_PG | Resets the main SoC | Install a jumper to reset the main chip; the **PWR LED stays on** (5V-related indication) |
+| 3 | AON_FLASH_SLEEP | Sleep control, equivalent to the Sleep button on the carrier board (interface No. 23) | Can be tested with an external button or a jumper. With a jumper installed, the level toggles frequently and can achieve a similar sleep behavior; **success rate is not required** |
+| 4 | WL_nDisable | Wi-Fi enable control (reserved, not implemented yet) | Jumper installed: Wi-Fi down; jumper removed: Wi-Fi up |
+| 5 | BT_nDisable | Bluetooth enable control (reserved, not implemented yet) | Jumper installed: BT down; jumper removed: BT up |
+
+Note: The software-side Wi-Fi / Bluetooth power control for `WL_nDisable` and `BT_nDisable` is currently reserved and **not implemented**.
+
+</TabItem>
+</Tabs>
+
 ## Connector Models
 
 <Tabs groupId="rdk-type">

@@ -434,6 +434,31 @@ RDK X5 Module 开发板提供 1 路 40PIN 接口，方便用户扩展外围接�
 
 </DocScope>
 
+## 功能控制 IO header
+
+<DocScope versions=">=3.5.0" products="RDK X5">
+
+无该接口。
+
+</DocScope>
+<DocScope versions=">=3.5.0" products="RDK X5 Module">
+
+RDK X5 Module 载板提供一组功能控制 IO header（对应接口 16，丝印 J4），用户使用跳线帽短接相应管脚，可对核心模组电源、复位、休眠以及 Wi-Fi/蓝牙使能进行控制与验证。
+
+管脚按载板**从外到内**排列，功能说明如下：
+
+| 顺序（由外到内） | 管脚名称 | 功能描述 | 使用方式 |
+| --- | --- | --- | --- |
+| 1 | GLOBAL_EN | 关断 MD 模组所有供电 | 接跳线帽后关断模组供电；此时 **5V 灯亮** |
+| 2 | RUN_PG | 主芯片复位 | 接跳线帽后主芯片复位；此时 **PWR 灯亮**（5V 相关指示） |
+| 3 | AON_FLASH_SLEEP | 休眠 / Sleep，等同于载板上的 Sleep 按键（接口 23） | 可外接按键测试，或接跳线帽测试。接跳线帽时电平会频繁变化，能实现类似休眠功能即可，**不要求成功率** |
+| 4 | WL_nDisable | Wi-Fi 使能控制（功能保留，尚未实现） | 接跳线帽：Wi-Fi down；拔跳线帽：Wi-Fi up |
+| 5 | BT_nDisable | 蓝牙使能控制（功能保留，尚未实现） | 接跳线帽：BT down；拔跳线帽：BT up |
+
+说明：`WL_nDisable`、`BT_nDisable` 的软件侧 Wi-Fi / 蓝牙上下电控制功能目前为保留能力，**尚未实现**。
+
+</DocScope>
+
 ## 连接器型号
 
 <DocScope versions=">=3.5.0" products="RDK X5">
