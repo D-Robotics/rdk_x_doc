@@ -2,12 +2,12 @@
 sidebar_position: 2
 ---
 
-# UART驱动调试指南
+# UART 驱动调试指南
 
-X3 芯片共有4路串口：UART0、UART1，UART2，UART3
+X3 芯片共有 4 路串口：UART0、UART1，UART2，UART3
 
 - UART0 用作调试串口，只有 UART1 支持硬件流控
-- 支持比特率 115.2Kbps，230.4Kbps，460.8Kbps，921.6Kbps，1.5Mbps，2Mbps，4Mbps。2M以上速录需要使能TOI
+- 支持比特率 115.2Kbps，230.4Kbps，460.8Kbps，921.6Kbps，1.5Mbps，2Mbps，4Mbps。2M 以上速录需要使能 TOI
 - 支持基于中断或基于 DMA 的模式
 
 ## 驱动代码
@@ -27,9 +27,9 @@ SERIAL_HOBOT_UART_CONSOLE
 
 ![image-20220324112539182](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/image-20220324112539182.png)
 
-### DTS设备节点配置
+### DTS 设备节点配置
 
-在 hobot-xj3.dtsi 文件中有uart0-3的通用配置，此文件内配置一般不做修改，当需要使能对应的串口时，可以到具体的板子配置设备树中修改、添加自定义配置，例如在 hobot-x3-sdb.dts 文件内使能 uart0、1、3
+在 hobot-xj3.dtsi 文件中有 uart0-3 的通用配置，此文件内配置一般不做修改，当需要使能对应的串口时，可以到具体的板子配置设备树中修改、添加自定义配置，例如在 hobot-x3-sdb.dts 文件内使能 uart0、1、3
 
 ```c
 /* arch/arm64/boot/dts/hobot/hobot-xj3.dtsi */
@@ -63,19 +63,19 @@ uart0: serial@0xA5000000 {
 
 
 
-## UART测试{#uart_test}
+## UART 测试{#uart_test}
 
-硬件上把uart3的TX和RX进行连接。
+硬件上把 uart3 的 TX 和 RX 进行连接。
 
 ![image-20220324122032808](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development/image-20220324122032808.png)
 
-编译uart_duplex.c 代码，具体代码如附录A
+编译 uart_duplex.c 代码，具体代码如附录 A
 
 ```
 /opt/gcc-ubuntu-9.3.0-2020.03-x86_64-aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc -o uart_duplex uart_duplex.c  -lpthread
 ```
 
-回环测试命令：打开/dev/ttyS3，默认波特率4Mbps，默认每轮测试1MB数据，测试100轮，读写同时进行，每发、收512字节做一轮数据校验，完整一轮测试结束后，如果没有出错则打印校验正确。
+回环测试命令：打开/dev/ttyS3，默认波特率 4Mbps，默认每轮测试 1MB 数据，测试 100 轮，读写同时进行，每发、收 512 字节做一轮数据校验，完整一轮测试结束后，如果没有出错则打印校验正确。
 
 ```
 # ./uart_duplex -c 100 -d /dev/ttyS3
@@ -95,7 +95,7 @@ This is receive test 2 times
 ## Check the received data is correct ##
 ```
 
-uart_duplex命令是测试uart的，可以阅读它的帮助信息获取更多使用方法。
+uart_duplex 命令是测试 uart 的，可以阅读它的帮助信息获取更多使用方法。
 
 ## 附录（测试代码）
 

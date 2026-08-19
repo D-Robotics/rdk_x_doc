@@ -1,4 +1,4 @@
-# 音频Codec适配说明
+# 音频 Codec 适配说明
 
 ## 概述
 
@@ -15,9 +15,9 @@
 
 一个完整的声卡信息由`CPU DAI`，`CODEC DAI`，`PLATFORM`，`DAI LINK`组成。分别对应`i2s`驱动，`codec`的驱动，`dma`驱动，以及声卡驱动，如`source/kernel/sound/soc/hobot/hobot-snd-wm8960.c`。本章节以新增`WM8960`这款**双声道全双工**`Codec`为例说明如何添加声卡。
 
-### I2S参数
+### I2S 参数
 
-X3芯片的I2S有以下特性：
+X3 芯片的 I2S 有以下特性：
 -   通道支持：音频输入支持`1/2/4/8/16`通道输入；音频输出支持`1/2`通道输出
 
 -   采样率支持：`8k/16k/32k/48k/44.1k/64k`
@@ -26,9 +26,9 @@ X3芯片的I2S有以下特性：
 
 -   传输协议支持：`i2s/dsp(TDM)A`
 
--   I2S做master模式下的默认时钟：mclk为12.288M bclk为2.048M。mclk不发生变化的情况下，bclk支持6.144M、4.096M、3.072M、2.048M、1.536M,根据应用层传输的参数动态调整，调频策略在sound/soc/hobot/hobot-cpudai.c的hobot_i2s_sample_rate_set函数中.对于44.1k采样率的支持，在不调整PLL的情况下，可以调整出的最接近频率44.11764khz
+-   I2S 做 master 模式下的默认时钟：mclk 为 12.288M bclk 为 2.048M。mclk 不发生变化的情况下，bclk 支持 6.144M、4.096M、3.072M、2.048M、1.536M,根据应用层传输的参数动态调整，调频策略在 sound/soc/hobot/hobot-cpudai.c 的 hobot_i2s_sample_rate_set 函数中.对于 44.1k 采样率的支持，在不调整 PLL 的情况下，可以调整出的最接近频率 44.11764khz
 
--   **I2S做slave，在需要读写i2s寄存器操作前，需要有bclk时钟灌入，否则会访问i2s模块寄存器异常，导致系统不能正常工作**
+-   **I2S 做 slave，在需要读写 i2s 寄存器操作前，需要有 bclk 时钟灌入，否则会访问 i2s 模块寄存器异常，导致系统不能正常工作**
 
 针对板级`RDM X3 Module`，还有以下限制：
 
@@ -40,16 +40,16 @@ X3芯片的I2S有以下特性：
 
 :::
 
-### 新增Codec说明
+### 新增 Codec 说明
 
-#### 添加codec driver
+#### 添加 codec driver
 您获取`Codec`驱动代码后，将其复制到`source/kernel/sound/soc/codecs/`目录下。
 #### 添加编译选项
 
 
 修改`source/kernel/sound/soc/codecs/`目录下的`Kconfig`以及`Makefile`，将`WM8960`的驱动加入驱动编译。
 
-其中，Kconfig添加
+其中，Kconfig 添加
 
 ```
 config SND_SOC_WM8960
@@ -62,7 +62,7 @@ config SND_SOC_WM8960
 ```
 snd-soc-wm8960-objs := wm8960.o
 ```
-#### Kernel启用驱动
+#### Kernel 启用驱动
 
 ```bash
 Device Drivers --->
@@ -74,7 +74,7 @@ Device Drivers --->
 ```
 
 保存`kernel`配置
-### 修改dts文件
+### 修改 dts 文件
 
 在对应的`i2c`添加`codec`信息，例如`WM8960`挂在`i2c0`总线上，则在`i2c0`中增加信息如下配置：
 
@@ -157,7 +157,7 @@ Device Drivers --->
     };
 };
 ```
-### 编写DAI LINK驱动
+### 编写 DAI LINK 驱动
 
 这部分驱动比较通用，可以参考`source/kernel/sound/soc/hobot/hobot-snd-wm8960.c`编写，注意要和设备树对应上
 

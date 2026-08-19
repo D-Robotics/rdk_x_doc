@@ -6,7 +6,7 @@ sidebar_position: 7
 ## 概述
 用户一般都需要在视频中叠加 `OSD` 用于显示一些特定的信息（如：通道号、时间戳等），必要时还会填充色块。这些叠加在视频上的 `OSD` 和遮挡在视频上的色块统称为区域。`REGION` 模块，用于统一管理这些区域资源。
 
-区域管理可以实现区域的创建，并叠加到视频中或对视频进行遮挡。例如，实际应用中，用户通过`HB_RGN_AttachToChn`创建一个区域，将该区域叠加到某个通道（如US通道）中。在通道进行调度时，则会将 `OSD` 叠加在视频中。一个区域支持通过调用设置通道显示属性接口指定到多个通道中（如：`US通道`和`DS通道`），且支持在每个通道的显示属性（如位置、是否显示等）都不同。
+区域管理可以实现区域的创建，并叠加到视频中或对视频进行遮挡。例如，实际应用中，用户通过`HB_RGN_AttachToChn`创建一个区域，将该区域叠加到某个通道（如 US 通道）中。在通道进行调度时，则会将 `OSD` 叠加在视频中。一个区域支持通过调用设置通道显示属性接口指定到多个通道中（如：`US通道`和`DS通道`），且支持在每个通道的显示属性（如位置、是否显示等）都不同。
 
 ## 功能描述
 ### 基本概念
@@ -25,7 +25,7 @@ sidebar_position: 7
 - 将区域叠加到通道上时需要设定通道的显示属性，例如叠加的位置、是否显示等，如果设置`bShow`为`false`，将叠加到通道但是不显示区域。
 
 绘制文字：
-- 可以使用`HB_RGN_DrawWord`绘制文字，支持四种字体大小以及15种字体颜色；
+- 可以使用`HB_RGN_DrawWord`绘制文字，支持四种字体大小以及 15 种字体颜色；
 
 绘制线条：
 - 可以使用`HB_RGN_DrawLine`/`HB_RGN_DrawLineArray`绘制线条或同时多个线条，支持调整线条粗细以及线条颜色。
@@ -45,7 +45,7 @@ sidebar_position: 7
 - 通过`HB_RGN_SetDisplayAttr`/`HB_RGN_GetDisplayAttr`获取或设置通道显示属性；
 - 最后用户再将区域从通道中撤出，销毁区域；
 
-## API参考
+## API 参考
 ```c
 int32_t HB_RGN_Create(RGN_HANDLE Handle, const RGN_ATTR_S *pstRegion);
 int32_t HB_RGN_Destory(RGN_HANDLE Handle);
@@ -91,20 +91,20 @@ int32_t HB_RGN_Destory(RGN_HANDLE Handle);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 HB_RGN_Create：
-1. 句柄由用户指定，意义等同于ID号，句柄号需在指定范围内；
+1. 句柄由用户指定，意义等同于 ID 号，句柄号需在指定范围内；
 2. 不支持重复创建；
 3. 区域属性不能为空且属性需合法；
-4. 创建Cover类型区域的时候只需指定区域类型，区域属性在调用HB_RGN_AttachToChn时指定；
-5. 创建区域时，会进行最大最小宽高等检查，具体支持像素格式请参考RGN_PIXEL_FORMAT_E；
+4. 创建 Cover 类型区域的时候只需指定区域类型，区域属性在调用 HB_RGN_AttachToChn 时指定；
+5. 创建区域时，会进行最大最小宽高等检查，具体支持像素格式请参考 RGN_PIXEL_FORMAT_E；
 
 HB_RGN_Destory：
 1. 区域必须已创建；
-2. 调用此接口之前区域需先调用HB_RGN_DetachFromChn接口；
-3. 调用该接口的过程中，不允许同时调用HB_RGN_SetAttr及HB_RGN_SetBitMap接口；
+2. 调用此接口之前区域需先调用 HB_RGN_DetachFromChn 接口；
+3. 调用该接口的过程中，不允许同时调用 HB_RGN_SetAttr 及 HB_RGN_SetBitMap 接口；
 
 【参考代码】
 ```c
@@ -159,22 +159,22 @@ int32_t HB_RGN_SetAttr(RGN_HANDLE Handle, const RGN_ATTR_S *pstRegion);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 HB_RGN_GetAttr：
 1. 区域必须已创建；
 2. 区域属性指针不能为空；
-3. 区域类型必须为Overlay，Cover属性在HB_RGN_AttachToChn时指定、HB_RGN_SetDisplayAttr时修改；
+3. 区域类型必须为 Overlay，Cover 属性在 HB_RGN_AttachToChn 时指定、HB_RGN_SetDisplayAttr 时修改；
 
 HB_RGN_SetAttr：
 1. 区域必须已创建；
 2. 区域属性指针不能为空；
-3. 区域类型必须为Overlay，Cover属性在HB_RGN_AttachToChn时指定、HB_RGN_SetDisplayAttr时修改；
-4. 在调用HB_RGN_AttachToChn之后不可修改区域大小；
+3. 区域类型必须为 Overlay，Cover 属性在 HB_RGN_AttachToChn 时指定、HB_RGN_SetDisplayAttr 时修改；
+4. 在调用 HB_RGN_AttachToChn 之后不可修改区域大小；
 
 【参考代码】
-> 请参见HB_RGN_Create/HB_RGN_Destory举例
+> 请参见 HB_RGN_Create/HB_RGN_Destory 举例
 
 ### HB_RGN_SetBitMap
 【函数声明】
@@ -196,7 +196,7 @@ int32_t HB_RGN_SetBitMap(RGN_HANDLE Handle, const RGN_BITMAP_S *pstBitmapAttr);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 1. 区域必须已创建；
@@ -205,8 +205,8 @@ int32_t HB_RGN_SetBitMap(RGN_HANDLE Handle, const RGN_BITMAP_S *pstBitmapAttr);
 4. 像素格式必须和区域像素格式一致；
 5. 位图属性指针不能为空；
 6. 支持多次调用；
-7. 此接口只对Overlay类型区域有效；
-8. 调用了HB_RGN_GetCanvasInfo之后，调用本接口无效，除非调用HB_RGN_UpdateCanvas更新画布生效；
+7. 此接口只对 Overlay 类型区域有效；
+8. 调用了 HB_RGN_GetCanvasInfo 之后，调用本接口无效，除非调用 HB_RGN_UpdateCanvas 更新画布生效；
 
 【参考代码】
 ```c
@@ -292,13 +292,13 @@ int32_t HB_RGN_DetachFromChn(RGN_HANDLE Handle, const RGN_CHN_S *pstChn);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 HB_RGN_AttachToChn：
 1. 区域必须已创建；
 2. 通道结构体指针及显示属性结构体指针不能为空；
-3. 每个通道最多叠加32个区域；
+3. 每个通道最多叠加 32 个区域；
 4. 叠加到通道上的区域大小范围不能超过通道分辨率；
 
 HB_RGN_DetachFromChn：
@@ -366,7 +366,7 @@ int32_t HB_RGN_GetDisplayAttr(RGN_HANDLE Handle, const RGN_CHN_S *pstChn, RGN_CH
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 HB_RGN_SetDisplayAttr：
@@ -374,14 +374,14 @@ HB_RGN_SetDisplayAttr：
 2. 建议先获取属性再设置；
 3. 通道结构体指针及显示属性结构体指针不能为空；
 4. 区域需先叠加到通道上；
-5. Cover类型的区域大小不可修改；
+5. Cover 类型的区域大小不可修改；
 
 HB_RGN_GetDisplayAttr:
 1. 区域必须已创建；
 2. 通道结构体指针及显示属性结构体指针不能为空；
 
 【参考代码】
-> 请参见HB_RGN_AttachToChn/HB_RGN_DetachFromChn举例
+> 请参见 HB_RGN_AttachToChn/HB_RGN_DetachFromChn 举例
 
 ### HB_RGN_GetCanvasInfo/HB_RGN_UpdateCanvas
 【函数声明】
@@ -404,18 +404,18 @@ int32_t HB_RGN_UpdateCanvas(RGN_HANDLE Handle);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 HB_RGN_GetCanvasInfo：
 1. 区域必须已创建；
-2. 与HB_RGN_SetBitMap类似，用于更新Overlay类型区域位图数据；此接口可以直接操作内部buffer节省一次内存拷贝；
-3. 此接口与HB_RGN_SetBitMap接口互斥。如果已经使用了本接口，那么在调用HB_RGN_UpdateCanvas前，调用HB_RGN_SetBitMap不生效；
+2. 与 HB_RGN_SetBitMap 类似，用于更新 Overlay 类型区域位图数据；此接口可以直接操作内部 buffer 节省一次内存拷贝；
+3. 此接口与 HB_RGN_SetBitMap 接口互斥。如果已经使用了本接口，那么在调用 HB_RGN_UpdateCanvas 前，调用 HB_RGN_SetBitMap 不生效；
 
 HB_RGN_UpdateCanvas：
 1. 区域必须已创建；
-2. 此接口配合HB_RGN_GetCanvasInfo使用，用于更新数据之后切换buffer显示；
-3. 每次使用此接口之前，都需要调用HB_RGN_GetCanvasInfo获取信息；
+2. 此接口配合 HB_RGN_GetCanvasInfo 使用，用于更新数据之后切换 buffer 显示；
+3. 每次使用此接口之前，都需要调用 HB_RGN_GetCanvasInfo 获取信息；
 【参考代码】
 ```c
     RGN_HANDLE handle = 0;
@@ -461,16 +461,16 @@ int32_t HB_RGN_DrawWord(RGN_HANDLE Handle, const RGN_DRAW_WORD_S *pstRgnDrawWord
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 1. 区域必须已创建；
 2. 属性信息结构体指针及地址指针不能为空；
 3. 属性信息值需要合法；
-4. 写入格式为PIXEL_FORMAT_VGA_4格式；
+4. 写入格式为 PIXEL_FORMAT_VGA_4 格式；
 
 【参考代码】
-> 请参见HB_RGN_SetBitMap举例
+> 请参见 HB_RGN_SetBitMap 举例
 
 ### HB_RGN_DrawLine/HB_RGN_DrawLineArray
 【函数声明】
@@ -494,16 +494,16 @@ int32_t HB_RGN_DrawLineArray(RGN_HANDLE Handle,const RGN_DRAW_LINE_S astRgnDrawL
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 1. 区域必须已创建；
 2. 属性信息结构体指针及地址指针不能为空；
-3. HB_RGN_DrawLineArray接口中数组元素个数必须与数组匹配；
-4. 写入格式为PIXEL_FORMAT_VGA_4格式；
+3. HB_RGN_DrawLineArray 接口中数组元素个数必须与数组匹配；
+4. 写入格式为 PIXEL_FORMAT_VGA_4 格式；
 
 【参考代码】
-> 请参见HB_RGN_SetBitMap举例
+> 请参见 HB_RGN_SetBitMap 举例
 
 ### HB_RGN_BatchBegin/HB_RGN_BatchEnd
 【函数声明】
@@ -527,13 +527,13 @@ int32_t HB_RGN_BatchEnd(RGN_HANDLEGROUP u32Group);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 1. 区域必须已创建；
-2. HB_RGN_BatchBegin设置的句柄个数一定要等于数组的长度，且不超过最大值；
-3. 区域类型一定要是Overlay类型；
-4. HB_RGN_BatchBegin必须与 HB_RGN_BatchEnd成对出现；
+2. HB_RGN_BatchBegin 设置的句柄个数一定要等于数组的长度，且不超过最大值；
+3. 区域类型一定要是 Overlay 类型；
+4. HB_RGN_BatchBegin 必须与 HB_RGN_BatchEnd 成对出现；
 
 【参考代码】
 ```c
@@ -571,28 +571,28 @@ int32_t HB_RGN_BatchEnd(RGN_HANDLEGROUP u32Group);
 int32_t HB_RGN_SetColorMap(const RGN_CHN_S *pstChn, uint32_t aColorMap[15]);
 ```
 【功能描述】
-> 设置使用颜色的调色板，使用后RGN_FONT_COLOR_E枚举失效，需要区域attach到通道后使用；
+> 设置使用颜色的调色板，使用后 RGN_FONT_COLOR_E 枚举失效，需要区域 attach 到通道后使用；
 
 【参数描述】
 
 | 参数名称  |                 描述                  |
 | :-------: | :-----------------------------------: |
 |  pstChn   |           通道结构体指针。            |
-| aColorMap | 设置的调色板，设定的颜色值为RGB格式。 |
+| aColorMap | 设置的调色板，设定的颜色值为 RGB 格式。 |
 
 【返回值】
 
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 1. 通道结构体指针不能为空；
-2. 通道在vps模块中对用通道需要使能；
+2. 通道在 vps 模块中对用通道需要使能；
 3. 设置一次即可所有通道共享；
-4. 输入颜色值为RGB颜色空间；
-5. 参数不能传CHN_GRP；
+4. 输入颜色值为 RGB 颜色空间；
+5. 参数不能传 CHN_GRP；
 
 【参考代码】
 ```c
@@ -617,7 +617,7 @@ int32_t HB_RGN_SetSta(const RGN_CHN_S *pstChn, uint8_t astStaLevel[3], RGN_STA_S
 int32_t HB_RGN_GetSta(const RGN_CHN_S *pstChn, uint16_t astStaValue[8][4]);
 ```
 【功能描述】
-> 设置指定最多8块区域，获取指定区域的亮度总和，需要区域attach到通道后使用；
+> 设置指定最多 8 块区域，获取指定区域的亮度总和，需要区域 attach 到通道后使用；
 
 【参数描述】
 
@@ -633,12 +633,12 @@ int32_t HB_RGN_GetSta(const RGN_CHN_S *pstChn, uint16_t astStaValue[8][4]);
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 1. 通道结构体不能为空；
-2. HB_RGN_SetSta与HB_RGN_GetSta需要成对出现；
-3. HB_RGN_SetSta用于设置最多8块区域信息，HB_RGN_GetSta获取指定区域亮度信息；
+2. HB_RGN_SetSta 与 HB_RGN_GetSta 需要成对出现；
+3. HB_RGN_SetSta 用于设置最多 8 块区域信息，HB_RGN_GetSta 获取指定区域亮度信息；
 
 【参考代码】
 ```c
@@ -679,14 +679,14 @@ if (ret < 0) {
 int32_t HB_RGN_AddToYUV(RGN_HANDLE Handle, hb_vio_buffer_t *vio_buffer, const RGN_CHN_ATTR_S *pstChnAttr);
 ```
 【功能描述】
-> 将区域叠加到一张yuv420格式的图片上；
+> 将区域叠加到一张 yuv420 格式的图片上；
 
 【参数描述】
 
 |  参数名称  |                    描述                     |
 | :--------: | :-----------------------------------------: |
 |   Handle   | 区域句柄号。取值范围：[0, RGN_HANDLE_MAX)。 |
-| vio_buffer |            yuv图片的buffer指针。            |
+| vio_buffer |            yuv 图片的 buffer 指针。            |
 | pstChnAttr |           区域通道显示属性指针。            |
 
 【返回值】
@@ -694,11 +694,11 @@ int32_t HB_RGN_AddToYUV(RGN_HANDLE Handle, hb_vio_buffer_t *vio_buffer, const RG
 | 返回值 |               描述 |
 | :----: | :-----------------|
 |   0    |               成功 |
-|  非0   | 失败，参见错误码。 |
+|  非 0   | 失败，参见错误码。 |
 
 【注意事项】
 1. 区域必须已创建；
-2. 图片buffer结构体指针及显示属性结构体指针不能为空；
+2. 图片 buffer 结构体指针及显示属性结构体指针不能为空；
 
 【参考代码】
 ```c
@@ -738,16 +738,16 @@ int32_t HB_RGN_SetDisplayLevel(RGN_HANDLE Handle, const RGN_CHN_S *pstChn, uint3
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 1. 区域必须已创建;
 2. 通道结构体指针不能为空；
-3. 设置等级范围为0-3，其中0默认硬件处理，如果超出硬件处理的个数或通道不支持则改为软件处理，1-3由软件处理；
+3. 设置等级范围为 0-3，其中 0 默认硬件处理，如果超出硬件处理的个数或通道不支持则改为软件处理，1-3 由软件处理；
 4. 同一通道上不同区域可设置不同显示等级；
 
 【参考代码】
-> 请参见HB_RGN_AttachToChn/HB_RGN_DetachFromChn举例
+> 请参见 HB_RGN_AttachToChn/HB_RGN_DetachFromChn 举例
 
 ## 数据结构
 ### RGN_SIZE_S
@@ -826,7 +826,7 @@ typedef struct HB_RGN_OVERLAY_ATTR_S {
 | :--------: | :------------------------------------------------------------------------------------------------------------- |
 | enPixelFmt | 像素格式                                                                                                       |
 | enBgColor  | 位图的背景色                                                                                                   |
-|   stSize   | 区域大小<br/>PIXEL_FORMAT_VGA_4:<br/>最小宽为32，最小高为2<br/>PIXEL_FORMAT_YUV420SP:<br/>最小宽为2，最小高为2 |
+|   stSize   | 区域大小<br/>PIXEL_FORMAT_VGA_4:<br/>最小宽为 32，最小高为 2<br/>PIXEL_FORMAT_YUV420SP:<br/>最小宽为 2，最小高为 2 |
 
 ### RGN_ATTR_S
 【结构定义】
@@ -863,7 +863,7 @@ typedef struct HB_RGN_CHN_S
 |     成员      |             含义             |
 | :-----------: | :--------------------------: |
 | s32PipelineId |          pipelineID          |
-|    enChnId    | 通道ID，范围[0，CHN_MAX_NUM) |
+|    enChnId    | 通道 ID，范围[0，CHN_MAX_NUM) |
 
 ### RGN_OVERLAY_CHN_S
 【结构定义】
@@ -895,7 +895,7 @@ typedef struct HB_RGN_COVER_CHN_ATTR_S {
 
 |   成员   |                 含义                  |
 | :------: | :-----------------------------------: |
-|  stRect  | 区域位置，宽高，最小宽为32，最小高为2 |
+|  stRect  | 区域位置，宽高，最小宽为 32，最小高为 2 |
 | u32Color |               区域颜色                |
 
 ### RGN_CHN_U
@@ -997,7 +997,7 @@ typedef struct HB_RGN_DRAW_WORD_PARAM_S {
 |    pAddr    |           绘制文字目标地址            |
 |   stSize    |            目标地址的尺寸             |
 |   stPoint   |          文字在位图中的位置           |
-|   pu8Str    | 绘制的字符串，仅支持GBK编码格式的字符 |
+|   pu8Str    | 绘制的字符串，仅支持 GBK 编码格式的字符 |
 | enFontColor |               字体颜色                |
 | enFontSize  |               字体大小                |
 |  bFlushEn   |        绘制时是否清空当前地址         |
@@ -1029,7 +1029,7 @@ typedef struct HB_RGN_DRAW_LINE_PARAM_S {
 |   u32Thick   |        线条宽度        |
 |   u32Color   |        线条颜色        |
 |   bFlushEn   | 绘制时是否清空当前地址 |
-（当使用批量绘制线条时则只有数组中第一个结构体的bFlushEn属性有效）
+（当使用批量绘制线条时则只有数组中第一个结构体的 bFlushEn 属性有效）
 
 ### RGN_STA_S
 【结构定义】
@@ -1050,8 +1050,8 @@ typedef struct HB_RGN_STA_ATTR_S {
 |   成员    |        含义         |
 | :-------: | :-----------------: |
 |  u8StaEn  |    区域是否使能     |
-| u16StartX | 区域起始位置的X坐标 |
-| u16StartY | 区域起始位置的Y坐标 |
+| u16StartX | 区域起始位置的 X 坐标 |
+| u16StartY | 区域起始位置的 Y 坐标 |
 | u16Width  | 区域宽度，（2,255） |
 | u16Height | 区域高度，（2,255） |
 
@@ -1090,19 +1090,19 @@ typedef enum HB_RGN_CHN_ID_ATTR_E
 }RGN_CHN_ID_E;
 ```
 【功能描述】
-> 定义通道ID
+> 定义通道 ID
 
 【成员说明】
 
 |      成员       |                             含义                             |
 | :-------------: | :----------------------------------------------------------: |
-|     CHN_US      |                            US通道                            |
-|     CHN_DS0     |                           DS0通道                            |
-|     CHN_DS1     |                           DS1通道                            |
-|     CHN_DS2     |                           DS2通道                            |
-|     CHN_DS3     |                           DS3通道                            |
-|     CHN_DS4     |                           DS4通道                            |
-|     CHN_GRP     | GROUP通道，如果使用此通道，因为group操作是在进ipu之前的，所以如果vps做了放大操作，那么osd也会跟着放大 |
+|     CHN_US      |                            US 通道                            |
+|     CHN_DS0     |                           DS0 通道                            |
+|     CHN_DS1     |                           DS1 通道                            |
+|     CHN_DS2     |                           DS2 通道                            |
+|     CHN_DS3     |                           DS3 通道                            |
+|     CHN_DS4     |                           DS4 通道                            |
+|     CHN_GRP     | GROUP 通道，如果使用此通道，因为 group 操作是在进 ipu 之前的，所以如果 vps 做了放大操作，那么 osd 也会跟着放大 |
 | CHANNEL_MAX_NUM |                           通道数量                           |
 
 ### RGN_FONT_SIZE_E
@@ -1152,7 +1152,7 @@ typedef enum HB_RGN_FONT_COLOR_ATTR_E
 }RGN_FONT_COLOR_E;
 ```
 【功能描述】
-> 定义字体颜色，当调用完HB_RGN_SetColorMap后此枚举失效；
+> 定义字体颜色，当调用完 HB_RGN_SetColorMap 后此枚举失效；
 
 【成员说明】
 
@@ -1191,8 +1191,8 @@ typedef enum HB_PIXEL_FORMAT_ATTR_E
 
 |         成员          |                                                  含义                                                   |
 | :-------------------: | :-----------------------------------------------------------------------------------------------------: |
-|  PIXEL_FORMAT_VGA_4   | 4bit的16色像素格式<br/>[此像素格式为每个像素占4个bit（0-15），作为颜色索引一一之后对应RGN_FONT_COLOR_E] |
-| PIXEL_FORMAT_YUV420SP |                                            YUV420SP像素格式                                             |
+|  PIXEL_FORMAT_VGA_4   | 4bit 的 16 色像素格式<br/>[此像素格式为每个像素占 4 个 bit（0-15），作为颜色索引一一之后对应 RGN_FONT_COLOR_E] |
+| PIXEL_FORMAT_YUV420SP |                                            YUV420SP 像素格式                                             |
 
 ### RGN_HANDLE
 【结构定义】
@@ -1227,14 +1227,14 @@ typedef int32_t RGN_HANDLEGROUP;
 > 定义最大批处理数量
 
 ## 错误码
-RGN错误码如下表：
+RGN 错误码如下表：
 
 |   错误码   | 宏定义                       | 描述             |
 | :--------: | :--------------------------- | :--------------- |
-| -268762113 | HB_ERR_RGN_INVALID_CHNID     | 通道ID错误       |
+| -268762113 | HB_ERR_RGN_INVALID_CHNID     | 通道 ID 错误       |
 | -268762114 | HB_ERR_RGN_ILLEGAL_PARAM     | 输入参数错误     |
-| -268762115 | HB_ERR_RGN_EXIST             | 区域Handle已存在 |
-| -268762116 | HB_ERR_RGN_UNEXIST           | 区域Handle不存在 |
+| -268762115 | HB_ERR_RGN_EXIST             | 区域 Handle 已存在 |
+| -268762116 | HB_ERR_RGN_UNEXIST           | 区域 Handle 不存在 |
 | -268762117 | HB_ERR_RGN_NULL_PTR          | 空指针           |
 | -268762118 | HB_ERR_RGN_NOMEM             | 内存不足         |
 | -268762119 | HB_ERR_RGN_OPEN_FILE_FAIL    | 打开字库文件失败 |
@@ -1242,4 +1242,4 @@ RGN错误码如下表：
 | -268762121 | HB_ERR_RGN_PROCESS_FAIL	OSD  | 处理失败         |
 
 ## 参考代码
-OSD部分示例代码可以参考，[sample_osd](./multimedia_samples#sample_osd)。
+OSD 部分示例代码可以参考，[sample_osd](./multimedia_samples#sample_osd)。

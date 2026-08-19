@@ -12,12 +12,19 @@ import {
   resolveCanonicalProductKeyForMatrix,
   resolveProductForVersion,
 } from './doc-scope-product-utils.js';
+import { compareVersions } from './doc-scope-version-utils.js';
 
 export { PRODUCT_VERSION_MATRIX, VERSION_PRODUCT_MATRIX } from './doc-scope-matrix.js';
 
-function getFirstVersionKey() {
+/** 取矩阵中最新版本（按 semver 比较） */
+function getLatestVersionKey() {
   const versions = Object.keys(VERSION_PRODUCT_MATRIX || {});
-  return versions.length > 0 ? versions[0] : '';
+  if (versions.length === 0) {
+    return '';
+  }
+  return versions.reduce((latest, cur) =>
+    compareVersions(cur, latest) > 0 ? cur : latest,
+  );
 }
 
 function getFirstProductForVersion(version) {
@@ -27,8 +34,8 @@ function getFirstProductForVersion(version) {
   return VERSION_PRODUCT_MATRIX[version][0];
 }
 
-/** 中英文统一默认到同一产品/版本（矩阵首项） */
-const DEFAULT_VERSION_ZH = getFirstVersionKey();
+/** 中英文统一默认到同一产品/版本（矩阵最新项） */
+const DEFAULT_VERSION_ZH = getLatestVersionKey();
 const DEFAULT_PRODUCT_ZH = getFirstProductForVersion(DEFAULT_VERSION_ZH);
 const DEFAULT_VERSION_EN = DEFAULT_VERSION_ZH;
 const DEFAULT_PRODUCT_EN = DEFAULT_PRODUCT_ZH;
@@ -66,7 +73,7 @@ export function useDocScopeFilter() {
 }
 
 function normalizeVersionFromQuery(v, locale) {
-  const fallback = defaultsForLocale(locale).version || getFirstVersionKey();
+  const fallback = defaultsForLocale(locale).version || getLatestVersionKey();
   if (v && VERSION_PRODUCT_MATRIX[v]) {
     return v;
   }
@@ -234,6 +241,51 @@ export function DocScopeFilterProvider({ children }) {
       ? productFromUrl
       : def.product;
   }, [productFromUrl, def.product]);
+
+  // 手册 URL 始终带 ?v=&p=：缺参、非法值、或与当前选中不一致时写回。
+  useEffect(() => {
+    if (hasBuildScope) {
+      return;
+    }
+
+    const next = new URLSearchParams(
+      location.search && location.search.startsWith('?')
+        ? location.search.slice(1)
+        : location.search || '',
+    );
+
+    const normalizedVersion = normalizeVersionFromQuery(version, locale);
+    const normalizedProduct = resolveProductForVersion(product, normalizedVersion);
+
+    const currentV = next.get('v');
+    const currentP = next.get('p');
+    const canonicalCurrentP = resolveCanonicalProductKeyForMatrix(currentP || '');
+    const canonicalExpectedP = resolveCanonicalProductKeyForMatrix(normalizedProduct || '');
+
+    let changed = false;
+    if (currentV !== normalizedVersion) {
+      next.set('v', normalizedVersion);
+      changed = true;
+    }
+    if (canonicalCurrentP !== canonicalExpectedP) {
+      next.set('p', normalizedProduct);
+      changed = true;
+    }
+
+    if (!changed) {
+      return;
+    }
+
+    replaceSearch(history, location, next.toString());
+  }, [
+    hasBuildScope,
+    history,
+    location.pathname,
+    location.search,
+    locale,
+    product,
+    version,
+  ]);
 
   useEffect(() => {
     if (hasBuildScope) {

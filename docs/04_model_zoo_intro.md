@@ -29,9 +29,9 @@ RDK Model Zoo 是一个社区开源共建项目。我们非常欢迎开发者贡
 ## 用户手册
 
 <DocScope versions=">= 3.0.0" products="RDK-X3">
-  [ModelZoo用户手册](https://developer.d-robotics.cc/model_zoo_doc/model_zoo_intro?v=3.0.0&p=RDK+X3)
+  [ModelZoo 用户手册](https://developer.d-robotics.cc/model_zoo_doc/model_zoo_intro?v=3.0.0&p=RDK+X3)
 </DocScope>
 
 <DocScope versions=">= 3.0.0" products="RDK-X5">
-  [ModelZoo用户手册](https://developer.d-robotics.cc/model_zoo_doc/model_zoo_intro?v=3.5.0&p=RDK+X5)
+  [ModelZoo 用户手册](https://developer.d-robotics.cc/model_zoo_doc/model_zoo_intro?v=3.5.0&p=RDK+X5)
 </DocScope>

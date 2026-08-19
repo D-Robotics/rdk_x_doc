@@ -5,7 +5,7 @@ sidebar_position: 6
 # 7.3.6 视频处理
 
 ## 概述
-`VPS（Video Process System）`是视频处理系统，支持对图像进行缩小、放大、裁剪、旋转、GDC矫正、帧率控制以及金字塔图像输出。
+`VPS（Video Process System）`是视频处理系统，支持对图像进行缩小、放大、裁剪、旋转、GDC 矫正、帧率控制以及金字塔图像输出。
 
 
 ## 功能描述
@@ -24,28 +24,28 @@ sidebar_position: 6
 
 ![Func Description Topology](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_ch5_func_description_topology.png)
 
-`VPS`硬件由一个`IPU`，一个`PYM`，两个`GDC`组成。共有7路输出`Channel`（chn0~chn6），chn0~chn4可以实现`downscale`，chn5可以实现`upscale`，chn0~chn5均可实现裁剪（ROI）、旋转、矫正、帧率控制，chn6为金字塔online Channel。虚框为硬件复用，其中`OSD`灰色块为CPU叠加，其余三个米色块为硬件叠加。
-- Upscale功能：
+`VPS`硬件由一个`IPU`，一个`PYM`，两个`GDC`组成。共有 7 路输出`Channel`（chn0~chn6），chn0~chn4 可以实现`downscale`，chn5 可以实现`upscale`，chn0~chn5 均可实现裁剪（ROI）、旋转、矫正、帧率控制，chn6 为金字塔 online Channel。虚框为硬件复用，其中`OSD`灰色块为 CPU 叠加，其余三个米色块为硬件叠加。
+- Upscale 功能：
 
   尺寸限制请参考下表
 
-  支持水平方向最大1.5倍放大，宽度需为4的倍数，最小32x32，最大4096
+  支持水平方向最大 1.5 倍放大，宽度需为 4 的倍数，最小 32x32，最大 4096
 
-  支持垂直方向最大1.5倍放大, 高度需为偶数，最小32x32，最大4096
+  支持垂直方向最大 1.5 倍放大, 高度需为偶数，最小 32x32，最大 4096
 
-  只有channel5支持Upscale功能
+  只有 channel5 支持 Upscale 功能
 
-- Downscale功能：
+- Downscale 功能：
 
   尺寸限制参考下表
 
-  水平方向最大缩小为原尺寸的1/8（大于1/8）, 最小32x32，最大4096
+  水平方向最大缩小为原尺寸的 1/8（大于 1/8）, 最小 32x32，最大 4096
 
-  垂直方向最大缩小为原尺寸的1/8（大于1/8）, 最小32x32，最大4096
+  垂直方向最大缩小为原尺寸的 1/8（大于 1/8）, 最小 32x32，最大 4096
 
-  Channel0~channel4支持Downscale功能
+  Channel0~channel4 支持 Downscale 功能
 
-- IPU各通道的尺寸限制如下：
+- IPU 各通道的尺寸限制如下：
 
 |Scaler| FIFO(bytes)| Resolution(pixel)|
 |:-:|:-:|:-:|
@@ -56,73 +56,73 @@ sidebar_position: 6
 |Scaler 4 (IPU DS4)| 1280 |1M|
 |Scaler 0 (IPU DS0)| 1280 |1M|
 
-- Crop功能：
+- Crop 功能：
 
-  `VPS`可以对输入的图形进行裁剪，选择裁剪后的ROI区域去做放大或者缩小
+  `VPS`可以对输入的图形进行裁剪，选择裁剪后的 ROI 区域去做放大或者缩小
 
-- PYM金字塔处理功能：
+- PYM 金字塔处理功能：
 
-  最大输入图像宽度4096，最大输入图像高度4096
+  最大输入图像宽度 4096，最大输入图像高度 4096
 
-  最小输入图像宽度64，最小输入图像高度64
+  最小输入图像宽度 64，最小输入图像高度 64
 
-  最大输出图像宽度4096，最大输出图像高度4096
+  最大输出图像宽度 4096，最大输出图像高度 4096
 
-  最小输出图像宽度48，最小输出图像高度32
+  最小输出图像宽度 48，最小输出图像高度 32
 
-  缩小图像层数24（0~23）层，其中0、4、8、12、16、20层为基础Base层，基础层每一层的size为上一层的1/2；其余层为ROI层，ROI层基于Base层作缩小（1、2、3层基于Base0层，5、6、7层基于Base4层，以此类推）各层可以单独使能，缩放区域、缩放系数可以配置放大图像层数为6（24~29）层，放大比例固定，分别为1.28、1.6、2、2.56、3.2、4倍。
+  缩小图像层数 24（0~23）层，其中 0、4、8、12、16、20 层为基础 Base 层，基础层每一层的 size 为上一层的 1/2；其余层为 ROI 层，ROI 层基于 Base 层作缩小（1、2、3 层基于 Base0 层，5、6、7 层基于 Base4 层，以此类推）各层可以单独使能，缩放区域、缩放系数可以配置放大图像层数为 6（24~29）层，放大比例固定，分别为 1.28、1.6、2、2.56、3.2、4 倍。
 
-  `PYM`通道也可以为0~5，此时为非online通道。
+  `PYM`通道也可以为 0~5，此时为非 online 通道。
   
-  每一个group下最多使用一个`PYM`。
+  每一个 group 下最多使用一个`PYM`。
 
 ### 注意事项
-- `PYM`硬件要求最少使能BASE0层与BASE4层；
+- `PYM`硬件要求最少使能 BASE0 层与 BASE4 层；
 
-- `PYM`在online输入（chn6）时，PYM ds所有层（0~23）累计输出数据量不得大于输入数据量的2.5倍，us层（24~29）累计宽之和不得超过输入宽，否则会有未知风险；
+- `PYM`在 online 输入（chn6）时，PYM ds 所有层（0~23）累计输出数据量不得大于输入数据量的 2.5 倍，us 层（24~29）累计宽之和不得超过输入宽，否则会有未知风险；
 
 - `IPU`绑定了`PYM`后，不能再绑定`VOT`/`VPS`/`VENC`等模块；
 
 - `Rotate`旋转功能：
 
-  `VPS`支持旋转90度、180度、270度，支持`Group旋转`与`Chnnel旋转`（二选一），`Group旋转`时`VPS`所有输出通道均旋转，`Chnnel旋转`可以将chn0~chn5中任意两路旋转，`PYM`处理过的通道不可以旋转。
+  `VPS`支持旋转 90 度、180 度、270 度，支持`Group旋转`与`Chnnel旋转`（二选一），`Group旋转`时`VPS`所有输出通道均旋转，`Chnnel旋转`可以将 chn0~chn5 中任意两路旋转，`PYM`处理过的通道不可以旋转。
 
 - `Gdc`矫正功能：
 
-  `VPS`支持输入矫正文件作图形畸变矫正，支持`Group矫正`与`Chnnel矫正`（二选一），`Group矫正`时`VPS`所有输出通道均作矫正，`Chnnel矫正`可以在chn0~chn5中任意两路作矫正。
+  `VPS`支持输入矫正文件作图形畸变矫正，支持`Group矫正`与`Chnnel矫正`（二选一），`Group矫正`时`VPS`所有输出通道均作矫正，`Chnnel矫正`可以在 chn0~chn5 中任意两路作矫正。
 
 - 帧率控制功能：
 
-  `VPS`的channel0~5支持帧率控制，可以输出小于等于输入帧率的任意帧率。
+  `VPS`的 channel0~5 支持帧率控制，可以输出小于等于输入帧率的任意帧率。
 
-## API参考
+## API 参考
 ### HB_VPS_CreateGrp
 【函数声明】
 ```c
 int HB_VPS_CreateGrp(int VpsGrp, const VPS_GRP_ATTR_S *grpAttr);
 ```
 【功能描述】
-> 创建一个VPS Group
+> 创建一个 VPS Group
 
 【参数描述】
 
 | 参数名称 | 描述          | 输入/输出 |
 | :------: | :------------ | :-------: |
-|  VpsGrp  | Group号       |   输入    |
-| grpAttr  | Group属性指针 |   输入    |
+|  VpsGrp  | Group 号       |   输入    |
+| grpAttr  | Group 属性指针 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> VPS最多可以创建8个Group；Group属性主要包含输入的宽、高和GDC的buf深度。
+> VPS 最多可以创建 8 个 Group；Group 属性主要包含输入的宽、高和 GDC 的 buf 深度。
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_DestroyGrp
 【函数声明】
@@ -130,23 +130,23 @@ int HB_VPS_CreateGrp(int VpsGrp, const VPS_GRP_ATTR_S *grpAttr);
 int HB_VPS_DestroyGrp(int VpsGrp);
 ```
 【功能描述】
-> 销毁一个VPS Group
+> 销毁一个 VPS Group
 
 【参数描述】
 
 | 参数名称 | 描述    | 输入/输出 |
 | :------: | :------ | :-------: |
-|  VpsGrp  | Group号 |   输入    |
+|  VpsGrp  | Group 号 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> Group必须已经创建
+> Group 必须已经创建
 
 【参考代码】
 > 无
@@ -157,26 +157,26 @@ int HB_VPS_DestroyGrp(int VpsGrp);
 int HB_VPS_StartGrp(int VpsGrp);
 ```
 【功能描述】
-> 启动VPS Group处理
+> 启动 VPS Group 处理
 
 【参数描述】
 
 | 参数名称 | 描述    | 输入/输出 |
 | :------: | :------ | :-------: |
-|  VpsGrp  | Group号 |   输入    |
+|  VpsGrp  | Group 号 |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> Group必须已经创建
+> Group 必须已经创建
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_StopGrp
 【函数声明】
@@ -184,26 +184,26 @@ int HB_VPS_StartGrp(int VpsGrp);
 int HB_VPS_StopGrp(int VpsGrp);
 ```
 【功能描述】
-> 停止VPS Group处理
+> 停止 VPS Group 处理
 
 【参数描述】
 
 | 参数名称 |    描述 | 输入/输出 |
 | :------: | ------: | --------: |
-|  VpsGrp  | Group号 |
+|  VpsGrp  | Group 号 |
 
 【返回值】
 
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> Group必须已经创建并且已经启动
+> Group 必须已经创建并且已经启动
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_GetGrpAttr
 【函数声明】
@@ -211,13 +211,13 @@ int HB_VPS_StopGrp(int VpsGrp);
 int HB_VPS_GetGrpAttr(int VpsGrp, VPS_GRP_ATTR_S *grpAttr);
 ```
 【功能描述】
-> 获取VPS Group属性
+> 获取 VPS Group 属性
 
 【参数描述】
 
 | 参数名称 | 描述           | 输入/输出 |
 | :------: | :------------- | :-------: |
-|  VpsGrp  | Group号        |   输入    |
+|  VpsGrp  | Group 号        |   输入    |
 | grpAttr  | 属性结构体指针 |   输出    |
 
 【返回值】
@@ -225,7 +225,7 @@ int HB_VPS_GetGrpAttr(int VpsGrp, VPS_GRP_ATTR_S *grpAttr);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
@@ -239,13 +239,13 @@ int HB_VPS_GetGrpAttr(int VpsGrp, VPS_GRP_ATTR_S *grpAttr);
 int HB_VPS_SetGrpAttr(int VpsGrp, const VPS_GRP_ATTR_S *grpAttr);
 ```
 【功能描述】
-> 设置VPS Group属性
+> 设置 VPS Group 属性
 
 【参数描述】
 
 | 参数名称 | 描述           | 输入/输出 |
 | :------: | :------------- | :-------: |
-|  VpsGrp  | Group号        |   输入    |
+|  VpsGrp  | Group 号        |   输入    |
 | grpAttr  | 属性结构体指针 |   输入    |
 
 【返回值】
@@ -253,13 +253,13 @@ int HB_VPS_SetGrpAttr(int VpsGrp, const VPS_GRP_ATTR_S *grpAttr);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_SetGrpRotate
 【函数声明】
@@ -267,13 +267,13 @@ int HB_VPS_SetGrpAttr(int VpsGrp, const VPS_GRP_ATTR_S *grpAttr);
 int HB_VPS_SetGrpRotate(int VpsGrp, ROTATION_E enRotation);
 ```
 【功能描述】
-> 设置VPS Group旋转功能，使VPS的所有输出都旋转
+> 设置 VPS Group 旋转功能，使 VPS 的所有输出都旋转
 
 【参数描述】
 
 |  参数名称  | 描述     | 输入/输出 |
 | :--------: | :------- | :-------: |
-|   VpsGrp   | Group号  |   输入    |
+|   VpsGrp   | Group 号  |   输入    |
 | enRotation | 旋转参数 |   输入    |
 
 【返回值】
@@ -281,13 +281,13 @@ int HB_VPS_SetGrpRotate(int VpsGrp, ROTATION_E enRotation);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> 该接口需要在HB_VPS_SetChnAttr之前调用，GroupRotate使能之后禁止使能ChnRotate；isp绑定ipu必须得是offline模式
+> 该接口需要在 HB_VPS_SetChnAttr 之前调用，GroupRotate 使能之后禁止使能 ChnRotate；isp 绑定 ipu 必须得是 offline 模式
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_GetGrpRotate
 【函数声明】
@@ -295,13 +295,13 @@ int HB_VPS_SetGrpRotate(int VpsGrp, ROTATION_E enRotation);
 int HB_VPS_Get GrpRotate(int VpsGrp, ROTATION_E *enRotation);
 ```
 【功能描述】
-> 获取VPS Group旋转功能属性
+> 获取 VPS Group 旋转功能属性
 
 【参数描述】
 
 |  参数名称  | 描述             | 输入/输出 |
 | :--------: | :--------------- | :-------: |
-|   VpsGrp   | Group号          |   输入    |
+|   VpsGrp   | Group 号          |   输入    |
 | enRotation | 旋转功能参数指针 |   输出    |
 
 【返回值】
@@ -309,7 +309,7 @@ int HB_VPS_Get GrpRotate(int VpsGrp, ROTATION_E *enRotation);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
@@ -323,13 +323,13 @@ int HB_VPS_Get GrpRotate(int VpsGrp, ROTATION_E *enRotation);
 int HB_VPS_SetGrpRotateRepeat(int VpsGrp, ROTATION_E enRotation);
 ```
 【功能描述】
-> 动态组旋转：该接口会保存当前group及后面绑定的多个VPS group所有通道配置，根据传的enRotation，自动重新计算旋转后所有通道的尺寸、roi区域，重新初始化group，重新绑定VIN；
+> 动态组旋转：该接口会保存当前 group 及后面绑定的多个 VPS group 所有通道配置，根据传的 enRotation，自动重新计算旋转后所有通道的尺寸、roi 区域，重新初始化 group，重新绑定 VIN；
 
 【参数描述】
 
 |  参数名称  | 描述     | 输入/输出 |
 | :--------: | :------- | :-------: |
-|   VpsGrp   | Group号  |   输入    |
+|   VpsGrp   | Group 号  |   输入    |
 | enRotation | 旋转参数 |   输入    |
 
 【返回值】
@@ -337,10 +337,10 @@ int HB_VPS_SetGrpRotateRepeat(int VpsGrp, ROTATION_E enRotation);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> 该接口暂时不支持配置过PYM的场景
+> 该接口暂时不支持配置过 PYM 的场景
 
 【参考代码】
 > 无
@@ -351,13 +351,13 @@ int HB_VPS_SetGrpRotateRepeat(int VpsGrp, ROTATION_E enRotation);
 int HB_VPS_SetGrpGdc(int VpsGrp, char* buf_addr, uint32_t buf_len, ROTATION_E enRotation)
 ```
 【功能描述】
-> 设置VPS Group GDC矫正功能，使VPS的所有输出都有矫正效果
+> 设置 VPS Group GDC 矫正功能，使 VPS 的所有输出都有矫正效果
 
 【参数描述】
 
 |  参数名称  | 描述         | 输入/输出 |
 | :--------: | :----------- | :-------: |
-|   VpsGrp   | Group号      |   输入    |
+|   VpsGrp   | Group 号      |   输入    |
 |  buf_addr  | 矫正文件地址 |   输入    |
 |  buf_len   | 矫正文件长度 |   输入    |
 | enRotation | 旋转参数     |   输入    |
@@ -367,13 +367,13 @@ int HB_VPS_SetGrpGdc(int VpsGrp, char* buf_addr, uint32_t buf_len, ROTATION_E en
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> 该接口需要在HB_VPS_SetChnAttr之前调用；根据不同的镜头，不同的畸变，不同的尺寸，需要传入不同矫正bin文件。
+> 该接口需要在 HB_VPS_SetChnAttr 之前调用；根据不同的镜头，不同的畸变，不同的尺寸，需要传入不同矫正 bin 文件。
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_SendFrame
 【函数声明】
@@ -381,28 +381,28 @@ int HB_VPS_SetGrpGdc(int VpsGrp, char* buf_addr, uint32_t buf_len, ROTATION_E en
 int HB_VPS_SendFrame(int VpsGrp, void* videoFrame, int ms);
 ```
 【功能描述】
-> 向VPS发送数据
+> 向 VPS 发送数据
 
 【参数描述】
 
 |  参数名称  | 描述                                                                                                      | 输入/输出 |
 | :--------: | :-------------------------------------------------------------------------------------------------------- | :-------: |
-|   VpsGrp   | Group号                                                                                                   |   输入    |
-| videoFrame | 图像数据指针；VPS回灌数据结构为hb_vio_buffer_t结构；                                                      |   输入    |
-|     ms     | 超时参数 ms设为-1 时，为阻塞接口；0 时为 非阻塞接口；大于 0 时为超时等待时间，超时时间的 单位为毫秒（ms） |   输入    |
+|   VpsGrp   | Group 号                                                                                                   |   输入    |
+| videoFrame | 图像数据指针；VPS 回灌数据结构为 hb_vio_buffer_t 结构；                                                      |   输入    |
+|     ms     | 超时参数 ms 设为-1 时，为阻塞接口；0 时为 非阻塞接口；大于 0 时为超时等待时间，超时时间的 单位为毫秒（ms） |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_SetChnAttr
 【函数声明】
@@ -410,13 +410,13 @@ int HB_VPS_SendFrame(int VpsGrp, void* videoFrame, int ms);
 int HB_VPS_SetChnAttr(int VpsGrp, int VpsChn, const VPS_CHN_ATTR_S *chnAttr);
 ```
 【功能描述】
-> 设置VPS通道属性（设置IPU某个通道的输出尺寸）
+> 设置 VPS 通道属性（设置 IPU 某个通道的输出尺寸）
 
 【参数描述】
 
 | 参数名称 | 描述         | 输入/输出 |
 | :------: | :----------- | :-------: |
-|  VpsGrp  | Group号      |   输入    |
+|  VpsGrp  | Group 号      |   输入    |
 |  VpsChn  | 通道号       |   输入    |
 | chnAttr  | 通道属性指针 |   输入    |
 
@@ -425,13 +425,13 @@ int HB_VPS_SetChnAttr(int VpsGrp, int VpsChn, const VPS_CHN_ATTR_S *chnAttr);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> 该接口支持动态配置IPU的输出尺寸，动态配置需要在StartGrp之后调用该接口，动态配置的新尺寸不可以比第一次初始化配置的尺寸大。如果需要启动以后从小尺寸改到大尺寸，那么需要在StartVps之前调用两次该接口，第一次传最大size，第二次传最小size。
+> 该接口支持动态配置 IPU 的输出尺寸，动态配置需要在 StartGrp 之后调用该接口，动态配置的新尺寸不可以比第一次初始化配置的尺寸大。如果需要启动以后从小尺寸改到大尺寸，那么需要在 StartVps 之前调用两次该接口，第一次传最大 size，第二次传最小 size。
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_GetChnAttr
 【函数声明】
@@ -439,13 +439,13 @@ int HB_VPS_SetChnAttr(int VpsGrp, int VpsChn, const VPS_CHN_ATTR_S *chnAttr);
 int HB_VPS_GetChnAttr(int VpsGrp, int VpsChn, VPS_CHN_ATTR_S *chnAttr);
 ```
 【功能描述】
-> 获取VPS通道属性
+> 获取 VPS 通道属性
 
 【参数描述】
 
 | 参数名称 | 描述         | 输入/输出 |
 | :------: | :----------- | :-------: |
-|  VpsGrp  | Group号      |   输入    |
+|  VpsGrp  | Group 号      |   输入    |
 |  VpsChn  | 通道号       |   输入    |
 | chnAttr  | 通道属性指针 |   输出    |
 
@@ -454,7 +454,7 @@ int HB_VPS_GetChnAttr(int VpsGrp, int VpsChn, VPS_CHN_ATTR_S *chnAttr);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
@@ -468,13 +468,13 @@ int HB_VPS_GetChnAttr(int VpsGrp, int VpsChn, VPS_CHN_ATTR_S *chnAttr);
 int HB_VPS_EnableChn(int VpsGrp, int VpsChn);
 ```
 【功能描述】
-> 启用VPS通道
+> 启用 VPS 通道
 
 【参数描述】
 
 | 参数名称 | 描述    | 输入/输出 |
 | :------: | :------ | :-------: |
-|  VpsGrp  | Group号 |   输入    |
+|  VpsGrp  | Group 号 |   输入    |
 |  VpsChn  | 通道号  |   输入    |
 
 【返回值】
@@ -482,13 +482,13 @@ int HB_VPS_EnableChn(int VpsGrp, int VpsChn);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> 如果未使能通道，GetChnFrame接口获取不到图像
+> 如果未使能通道，GetChnFrame 接口获取不到图像
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_DisableChn
 【函数声明】
@@ -496,13 +496,13 @@ int HB_VPS_EnableChn(int VpsGrp, int VpsChn);
 int HB_VPS_DisableChn(int VpsGrp, int VpsChn);
 ```
 【功能描述】
-> 禁用VPS通道
+> 禁用 VPS 通道
 
 【参数描述】
 
 | 参数名称 | 描述    | 输入/输出 |
 | :------: | :------ | :-------: |
-|  VpsGrp  | Group号 |   输入    |
+|  VpsGrp  | Group 号 |   输入    |
 |  VpsChn  | 通道号  |   输入    |
 
 【返回值】
@@ -510,13 +510,13 @@ int HB_VPS_DisableChn(int VpsGrp, int VpsChn);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_SetChnRotate
 【函数声明】
@@ -524,13 +524,13 @@ int HB_VPS_DisableChn(int VpsGrp, int VpsChn);
 int HB_VPS_SetChnRotate(int VpsGrp, int VpsChn, ROTATION_E enRotation);
 ```
 【功能描述】
-> 设置VPS通道图像固定角度旋转
+> 设置 VPS 通道图像固定角度旋转
 
 【参数描述】
 
 |  参数名称  | 描述     | 输入/输出 |
 | :--------: | :------- | :-------: |
-|   VpsGrp   | Group号  |   输入    |
+|   VpsGrp   | Group 号  |   输入    |
 |   VpsChn   | 通道号   |   输入    |
 | enRotation | 旋转属性 |   输入    |
 
@@ -539,13 +539,13 @@ int HB_VPS_SetChnRotate(int VpsGrp, int VpsChn, ROTATION_E enRotation);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> SetChnRotate属性需要在SetChnAttr之后调用，最多同时支持两个CHN做旋转；启动以后也支持调用，可以动态控制通道旋转。
+> SetChnRotate 属性需要在 SetChnAttr 之后调用，最多同时支持两个 CHN 做旋转；启动以后也支持调用，可以动态控制通道旋转。
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_GetChnRotate
 【函数声明】
@@ -553,13 +553,13 @@ int HB_VPS_SetChnRotate(int VpsGrp, int VpsChn, ROTATION_E enRotation);
 int HB_VPS_GetChnRotate(int VpsGrp, int VpsChn, ROTATION_E *enRotation);
 ```
 【功能描述】
-> 获取VPS通道图像旋转属性
+> 获取 VPS 通道图像旋转属性
 
 【参数描述】
 
 |  参数名称  | 描述     | 输入/输出 |
 | :--------: | :------- | :-------: |
-|   VpsGrp   | Group号  |   输入    |
+|   VpsGrp   | Group 号  |   输入    |
 |   VpsChn   | 通道号   |   输入    |
 | enRotation | 旋转属性 |   输出    |
 
@@ -568,7 +568,7 @@ int HB_VPS_GetChnRotate(int VpsGrp, int VpsChn, ROTATION_E *enRotation);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
@@ -582,14 +582,14 @@ int HB_VPS_GetChnRotate(int VpsGrp, int VpsChn, ROTATION_E *enRotation);
 int HB_VPS_SetChnGdc(int VpsGrp, int VpsChn, char* buf_addr, uint32_t buf_len, ROTATION_E enRotation)
 ```
 【功能描述】
-> 设置VPS chn GDC矫正功能
+> 设置 VPS chn GDC 矫正功能
 
 【参数描述】
 
 |  参数名称  | 描述         | 输入/输出 |
 | :--------: | :----------- | :-------: |
-|   VpsGrp   | Group号      |   输入    |
-|   VpsChn   | Channel号    |   输入    |
+|   VpsGrp   | Group 号      |   输入    |
+|   VpsChn   | Channel 号    |   输入    |
 |  buf_addr  | 矫正文件地址 |   输入    |
 |  buf_len   | 矫正文件长度 |   输入    |
 | enRotation | 旋转参数     |   输入    |
@@ -599,13 +599,13 @@ int HB_VPS_SetChnGdc(int VpsGrp, int VpsChn, char* buf_addr, uint32_t buf_len, R
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> 该接口需要在HB_VPS_SetChnAttr之后调用，最多同时支持两个CHN做矫正；根据不同的镜头，不同的畸变，不同的尺寸，需要传入不同矫正bin文件。
+> 该接口需要在 HB_VPS_SetChnAttr 之后调用，最多同时支持两个 CHN 做矫正；根据不同的镜头，不同的畸变，不同的尺寸，需要传入不同矫正 bin 文件。
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_UpdateGdcSize
 【函数声明】
@@ -613,14 +613,14 @@ int HB_VPS_SetChnGdc(int VpsGrp, int VpsChn, char* buf_addr, uint32_t buf_len, R
 int HB_VPS_UpdateGdcSize(int VpsGrp, int VpsChn, uint16_t out_width, uint16_t out_height)
 ```
 【功能描述】
-> 设置VPS GDC矫正输出尺寸（GDC输入输出尺寸默认是一致的，可以用该接口改变GDC输出的尺寸）
+> 设置 VPS GDC 矫正输出尺寸（GDC 输入输出尺寸默认是一致的，可以用该接口改变 GDC 输出的尺寸）
 
 【参数描述】
 
 |  参数名称  | 描述      | 输入/输出 |
 | :--------: | :-------- | :-------: |
-|   VpsGrp   | Group号   |   输入    |
-|   VpsChn   | Channel号 |   输入    |
+|   VpsGrp   | Group 号   |   输入    |
+|   VpsChn   | Channel 号 |   输入    |
 | out_width  | 输出宽度  |   输入    |
 | out_height | 输出高度  |   输入    |
 
@@ -629,18 +629,18 @@ int HB_VPS_UpdateGdcSize(int VpsGrp, int VpsChn, uint16_t out_width, uint16_t ou
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> 该接口需要在HB_VPS_SetChnGdc和HB_VPS_SetGrpGdc之后调用，传入的输出尺寸需要与矫正bin文件对应；出入的尺寸不能比当前GDC输入的尺寸大
+> 该接口需要在 HB_VPS_SetChnGdc 和 HB_VPS_SetGrpGdc 之后调用，传入的输出尺寸需要与矫正 bin 文件对应；出入的尺寸不能比当前 GDC 输入的尺寸大
 
 【参考代码】
-> Group作gdc矫正时输出尺寸和输入尺寸不一致的场景：
+> Group 作 gdc 矫正时输出尺寸和输入尺寸不一致的场景：
 ```c
     ret = HB_VPS_SetGrpGdc(grp_id, bin_buf, buf_len, degree);
     ret = HB_VPS_UpdateGdcSize(grp_id, 0, 1280, 720);
 ```
-> channel作gdc矫正时输出尺寸和输入尺寸不一致的场景：
+> channel 作 gdc 矫正时输出尺寸和输入尺寸不一致的场景：
 ```c
     ret = HB_VPS_SetChnGdc(grp_id, chn_id, bin_buf, buf_len, degree);
     ret = HB_VPS_UpdateGdcSize(grp_id, 0, 1280, 720);
@@ -652,13 +652,13 @@ int HB_VPS_UpdateGdcSize(int VpsGrp, int VpsChn, uint16_t out_width, uint16_t ou
 int HB_VPS_SetChnCrop(int VpsGrp, int VpsChn, const VPS_CROP_INFO_S *cropInfo)
 ```
 【功能描述】
-> 设置VPS Chn裁剪功能
+> 设置 VPS Chn 裁剪功能
 
 【参数描述】
 
 | 参数名称 | 描述     | 输入/输出 |
 | :------: | :------- | :-------: |
-|  VpsGrp  | Group号  |   输入    |
+|  VpsGrp  | Group 号  |   输入    |
 |  VpsChn  | 通道号   |   输入    |
 | cropInfo | 裁剪属性 |   输入    |
 
@@ -667,13 +667,13 @@ int HB_VPS_SetChnCrop(int VpsGrp, int VpsChn, const VPS_CROP_INFO_S *cropInfo)
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> 需要在SetChnAttr之后调用；传入的ROI区域需要在IPU输入的size范围内；
+> 需要在 SetChnAttr 之后调用；传入的 ROI 区域需要在 IPU 输入的 size 范围内；
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_GetChnCrop
 【函数声明】
@@ -681,13 +681,13 @@ int HB_VPS_SetChnCrop(int VpsGrp, int VpsChn, const VPS_CROP_INFO_S *cropInfo)
 int HB_VPS_GetChnCrop(int VpsGrp, int VpsChn, VPS_CROP_INFO_S *cropInfo)
 ```
 【功能描述】
-> 获取VPS Chn固定角度旋转
+> 获取 VPS Chn 固定角度旋转
 
 【参数描述】
 
 | 参数名称 | 描述     | 输入/输出 |
 | :------: | :------- | :-------: |
-|  VpsGrp  | Group号  |   输入    |
+|  VpsGrp  | Group 号  |   输入    |
 |  VpsChn  | 通道号   |   输入    |
 | cropInfo | 裁剪属性 |   输出    |
 
@@ -696,7 +696,7 @@ int HB_VPS_GetChnCrop(int VpsGrp, int VpsChn, VPS_CROP_INFO_S *cropInfo)
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
@@ -710,13 +710,13 @@ int HB_VPS_GetChnCrop(int VpsGrp, int VpsChn, VPS_CROP_INFO_S *cropInfo)
 int HB_VPS_SetChnFrameRate(int VpsGrp, int VpsChn, FRAME_RATE_CTRL_S *frameRate)
 ```
 【功能描述】
-> 设置VPS通道帧率
+> 设置 VPS 通道帧率
 
 【参数描述】
 
 |         参数名称         | 描述    | 输入/输出 |
 | :----------------------: | :------ | :-------: |
-|          VpsGrp          | Group号 |   输入    |
+|          VpsGrp          | Group 号 |   输入    |
 |          VpsChn          | 通道号  |   输入    |
 | frameRate	帧率属性结构体 | 输入    |
 
@@ -725,7 +725,7 @@ int HB_VPS_SetChnFrameRate(int VpsGrp, int VpsChn, FRAME_RATE_CTRL_S *frameRate)
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
@@ -739,13 +739,13 @@ int HB_VPS_SetChnFrameRate(int VpsGrp, int VpsChn, FRAME_RATE_CTRL_S *frameRate)
 int HB_VPS_TriggerSnapFrame(int VpsGrp, int VpsChn, uint32_t frameCnt)
 ```
 【功能描述】
-> 抓拍帧；从当前帧开始标记frameCnt帧
+> 抓拍帧；从当前帧开始标记 frameCnt 帧
 
 【参数描述】
 
 | 参数名称 | 描述         | 输入/输出 |
 | :------: | :----------- | :-------: |
-|  VpsGrp  | Group号      |   输入    |
+|  VpsGrp  | Group 号      |   输入    |
 |  VpsChn  | 通道号       |   输入    |
 | frameCnt | 抓拍帧的个数 |   输入    |
 
@@ -754,7 +754,7 @@ int HB_VPS_TriggerSnapFrame(int VpsGrp, int VpsChn, uint32_t frameCnt)
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 启动以后才可以调用
@@ -774,23 +774,23 @@ int HB_VPS_GetChnFrame(int VpsGrp, int VpsChn, void *videoFrame, int ms);
 
 |  参数名称  | 描述                                                                                                                    | 输入/输出 |
 | :--------: | :---------------------------------------------------------------------------------------------------------------------- | :-------: |
-|   VpsGrp   | Group号                                                                                                                 |   输入    |
+|   VpsGrp   | Group 号                                                                                                                 |   输入    |
 |   VpsChn   | 通道号                                                                                                                  |   输入    |
 | videoFrame | 图像信息                                                                                                                |   输出    |
-|     ms     | 超时参数 <br/>ms设为-1 时，为阻塞接口；<br/>0 时为 非阻塞接口；<br/>大于 0 时为超时等待时间，超时时间的单位为毫秒（ms） |   输入    |
+|     ms     | 超时参数 <br/>ms 设为-1 时，为阻塞接口；<br/>0 时为 非阻塞接口；<br/>大于 0 时为超时等待时间，超时时间的单位为毫秒（ms） |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> 获取到的图像结构分为正常BUF结构（hb_vio_buffer_t）和金字塔BUF结构（pym_buffer_t）
+> 获取到的图像结构分为正常 BUF 结构（hb_vio_buffer_t）和金字塔 BUF 结构（pym_buffer_t）
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_GetChnFrame_Cond
 【函数声明】
@@ -804,24 +804,24 @@ int HB_VPS_GetChnFrame_Cond(int VpsGrp, int VpsChn, void *videoFrame, int ms, in
 
 |  参数名称  | 描述                                                                                                                    | 输入/输出 |
 | :--------: | :---------------------------------------------------------------------------------------------------------------------- | :-------: |
-|   VpsGrp   | Group号                                                                                                                 |   输入    |
+|   VpsGrp   | Group 号                                                                                                                 |   输入    |
 |   VpsChn   | 通道号                                                                                                                  |   输入    |
 | videoFrame | 图像信息                                                                                                                |   输出    |
-|     ms     | 超时参数 <br/>ms设为-1 时，为阻塞接口；<br/>0 时为 非阻塞接口；<br/>大于 0 时为超时等待时间，超时时间的单位为毫秒（ms） |   输入    |
-|    time    | 时间条件：为0表示从当前开始丢弃旧帧，等待获取新的一帧，其余值未作支持                                                   |   输入    |
+|     ms     | 超时参数 <br/>ms 设为-1 时，为阻塞接口；<br/>0 时为 非阻塞接口；<br/>大于 0 时为超时等待时间，超时时间的单位为毫秒（ms） |   输入    |
+|    time    | 时间条件：为 0 表示从当前开始丢弃旧帧，等待获取新的一帧，其余值未作支持                                                   |   输入    |
 
 【返回值】
 
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-> 获取到的图像结构分为正常BUF结构（hb_vio_buffer_t）和金字塔BUF结构（pym_buffer_t）
+> 获取到的图像结构分为正常 BUF 结构（hb_vio_buffer_t）和金字塔 BUF 结构（pym_buffer_t）
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_ReleaseChnFrame
 【函数声明】
@@ -835,7 +835,7 @@ int HB_VPS_ReleaseChnFrame(int VpsGrp, int VpsChn, void *videoFrame);
 
 |  参数名称  | 描述     | 输入/输出 |
 | :--------: | :------- | :-------: |
-|   VpsGrp   | Group号  |   输入    |
+|   VpsGrp   | Group 号  |   输入    |
 |   VpsChn   | 通道号   |   输入    |
 | videoFrame | 图像信息 |   输入    |
 
@@ -844,13 +844,13 @@ int HB_VPS_ReleaseChnFrame(int VpsGrp, int VpsChn, void *videoFrame);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_SetPymChnAttr
 【函数声明】
@@ -864,7 +864,7 @@ int HB_VPS_SetPymChnAttr(int VpsGrp, int VpsChn, const VPS_PYM_CHN_ATTR_S *pymCh
 
 |  参数名称  | 描述               | 输入/输出 |
 | :--------: | :----------------- | :-------: |
-|   VpsGrp   | Group号            |   输入    |
+|   VpsGrp   | Group 号            |   输入    |
 |   VpsChn   | 通道号             |   输入    |
 | pymChnAttr | 金字塔通道属性指针 |   输入    |
 
@@ -873,14 +873,14 @@ int HB_VPS_SetPymChnAttr(int VpsGrp, int VpsChn, const VPS_PYM_CHN_ATTR_S *pymCh
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
-1) 该接口支持动态配置PYM roi层的输出尺寸，需要在StartGrp之后调用该接口，动态配置的新roi size不可以比第一次初始化配置的size大。如果需要启动以后从小尺寸改到大尺寸，那么需要在StartVps之前调用两次该接口，第一次传最大size，第二次传最小size。
-2) 该接口同时支持动态配置PYM的输入尺寸，仅在PYM回灌时有效，支持StartGrp以后src尺寸从大改小。
+1) 该接口支持动态配置 PYM roi 层的输出尺寸，需要在 StartGrp 之后调用该接口，动态配置的新 roi size 不可以比第一次初始化配置的 size 大。如果需要启动以后从小尺寸改到大尺寸，那么需要在 StartVps 之前调用两次该接口，第一次传最大 size，第二次传最小 size。
+2) 该接口同时支持动态配置 PYM 的输入尺寸，仅在 PYM 回灌时有效，支持 StartGrp 以后 src 尺寸从大改小。
 
 【参考代码】
-> VPS参考代码
+> VPS 参考代码
 
 ### HB_VPS_GetPymChnAttr
 【函数声明】
@@ -894,7 +894,7 @@ int HB_VPS_GetPymChnAttr(int VpsGrp, int VpsChn, VPS_PYM_CHN_ATTR_S *pymChnAttr)
 
 |  参数名称  |               描述 | 输入/输出 |
 | :--------: | -----------------: | ---------: |
-|   VpsGrp   |            Group号 |       输入 |
+|   VpsGrp   |            Group 号 |       输入 |
 |   VpsChn   |             通道号 |       输入 |
 | pymChnAttr | 金字塔通道属性指针 |       输出 |
 
@@ -916,14 +916,14 @@ int HB_VPS_GetPymChnAttr(int VpsGrp, int VpsChn, VPS_PYM_CHN_ATTR_S *pymChnAttr)
 int HB_VPS_ChangePymUs(int VpsGrp, uint8_t us_num, uint8_t enable)
 ```
 【功能描述】
-> 使能或关闭pym的us某一层
+> 使能或关闭 pym 的 us 某一层
 
 【参数描述】
 
 | 参数名称 |       描述 | 输入/输出 |
 | :------: | ---------: | ---------: |
-|  VpsGrp  |    Group号 |       输入 |
-|  us_num  | 金字塔us层 |       输入 |
+|  VpsGrp  |    Group 号 |       输入 |
+|  us_num  | 金字塔 us 层 |       输入 |
 |  enable  |     是使能 |       输入 |
 
 【返回值】
@@ -944,13 +944,13 @@ int HB_VPS_ChangePymUs(int VpsGrp, uint8_t us_num, uint8_t enable)
 int HB_VPS_GetChnFd(int VpsGrp, int VpsChn);
 ```
 【功能描述】
-> 获取VPS通道对应的设备文件描述符，获得的fd可以作select监听，select返回后可以直接通过getChnFrame接口获得图像。
+> 获取 VPS 通道对应的设备文件描述符，获得的 fd 可以作 select 监听，select 返回后可以直接通过 getChnFrame 接口获得图像。
 
 【参数描述】
 
 | 参数名称 | 描述    | 输入/输出 |
 | :------: | :------ | :-------: |
-|  VpsGrp  | Group号 |   输入    |
+|  VpsGrp  | Group 号 |   输入    |
 |  VpsChn  | 通道号  |   输入    |
 
 【返回值】
@@ -972,7 +972,7 @@ int HB_VPS_GetChnFd(int VpsGrp, int VpsChn);
 int HB_VPS_CloseChnFd(void);
 ```
 【功能描述】
-> 关闭VPS内所有的通道fd。
+> 关闭 VPS 内所有的通道 fd。
 
 【参数描述】
 > 无
@@ -982,7 +982,7 @@ int HB_VPS_CloseChnFd(void);
 | 返回值 | 描述 |
 | :----: | ---: |
 |   0    | 成功 |
-|  非0   | 失败 |
+|  非 0   | 失败 |
 
 【注意事项】
 > 无
@@ -990,7 +990,7 @@ int HB_VPS_CloseChnFd(void);
 【参考代码】
 > 无
 
-### VPS参考代码
+### VPS 参考代码
 ```c
     grp_attr.maxW = 1280;
     grp_attr.maxH = 720;
@@ -1038,61 +1038,61 @@ int HB_VPS_CloseChnFd(void);
     ret = HB_VPS_DestroyGrp(grp_id);
 ```
 
-### VPS接口调用流程
-VPS初始化接口主要分为Group的初始化和Channel的初始化，Group的接口可视为全局配置，Group属性对整个VPS输出均生效，Channel的接口是用作对多个输出通道分别配置，配置的属性仅对当前channel有效；初始化时需要先配置Group属性，然后再分别配置每个channel属性。
+### VPS 接口调用流程
+VPS 初始化接口主要分为 Group 的初始化和 Channel 的初始化，Group 的接口可视为全局配置，Group 属性对整个 VPS 输出均生效，Channel 的接口是用作对多个输出通道分别配置，配置的属性仅对当前 channel 有效；初始化时需要先配置 Group 属性，然后再分别配置每个 channel 属性。
 
 ![image-20220329204239415](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/image-20220329204239415.png)
 
-### VPS场景使用说明
-VPS内部主要由一个IPU、一个PYM、两个GDC共四个模块组成，根据接口的调用顺序将不同的模块动态绑定在一起，可以单独一个模块运行，也可以多个模块组合运行，不同的链接关系对应的接口调用流程如下：
+### VPS 场景使用说明
+VPS 内部主要由一个 IPU、一个 PYM、两个 GDC 共四个模块组成，根据接口的调用顺序将不同的模块动态绑定在一起，可以单独一个模块运行，也可以多个模块组合运行，不同的链接关系对应的接口调用流程如下：
 
 ![VPS IPU](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_ipu.png)
 
-如果仅用IPU一个模块，在创建Group之后只调用HB_VPS_SetChnAttr，如果需要IPU输出多个通道，那么需要多次调用该接口。
+如果仅用 IPU 一个模块，在创建 Group 之后只调用 HB_VPS_SetChnAttr，如果需要 IPU 输出多个通道，那么需要多次调用该接口。
 
 ![VPS GDC](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_gdc.png)
 
-如果仅使用GDC一个模块，在创建Group之后调用HB_VPS_SetGrpGdc/Rotate接口。
+如果仅使用 GDC 一个模块，在创建 Group 之后调用 HB_VPS_SetGrpGdc/Rotate 接口。
 
 ![VPS PYM](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_pym.png)
 
-如果仅使用PYM一个模块，在创建Group之后调用HB_VPS_SetPymChnAttr接口。
+如果仅使用 PYM 一个模块，在创建 Group 之后调用 HB_VPS_SetPymChnAttr 接口。
 
 ![VPS IPU_PYM](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_ipu_pym.png)
 
-IPU作为第一个模块，PYM作为第二个模块，需要创建Group之后先调用HB_VPS_SetChnAttr，然后调用HB_VPS_SetPymChnAttr。
+IPU 作为第一个模块，PYM 作为第二个模块，需要创建 Group 之后先调用 HB_VPS_SetChnAttr，然后调用 HB_VPS_SetPymChnAttr。
 
 ![VPS GDC_IPU](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_gdc_ipu.png)
 
-GDC放在IPU之前，先调用HB_VPS_SetGrpGdc/Rotate，再调用HB_VPS_SetChnAttr。
+GDC 放在 IPU 之前，先调用 HB_VPS_SetGrpGdc/Rotate，再调用 HB_VPS_SetChnAttr。
 
 ![VPS GDC_PYM](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_gdc_pym.png)
 
-GDC放在PYM之前，先调用HB_VPS_SetGrpGdc/Rotate，再调用HB_VPS_SetPymChnAttr。
+GDC 放在 PYM 之前，先调用 HB_VPS_SetGrpGdc/Rotate，再调用 HB_VPS_SetPymChnAttr。
 
 ![VPS IPU_GDC](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_ipu_gdc.png)
 
-IPU放在GDC之前，先调用HB_VPS_SetChnAttr，再调用HB_VPS_SetChnGdc/Rotate。
+IPU 放在 GDC 之前，先调用 HB_VPS_SetChnAttr，再调用 HB_VPS_SetChnGdc/Rotate。
 
 ![VPS IPU_GDC_PYM](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_ipu_gdc_pym.png)
 
-先IPU然后GDC再PYM的话，需要先调用HB_VPS_SetChnAttr，再调用HB_VPS_SetChnGdc/Rotate，最后调用HB_VPS_SetPymChnAttr。
+先 IPU 然后 GDC 再 PYM 的话，需要先调用 HB_VPS_SetChnAttr，再调用 HB_VPS_SetChnGdc/Rotate，最后调用 HB_VPS_SetPymChnAttr。
 
 ![VPS IPU_GDC+PYM](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_ipu_gdc%2Bpym.png)
 
-如果需要IPU输出的多个通道分别接GDC和PYM，那么需要先调用HB_VPS_SetChnAttr(chnA)、HB_VPS_SetChnAttr(chnB)，然后HB_VPS_SetChnGdc/Rotate(chnA)，然后HB_VPS_SetPymChnAttr(chnB)。
+如果需要 IPU 输出的多个通道分别接 GDC 和 PYM，那么需要先调用 HB_VPS_SetChnAttr(chnA)、HB_VPS_SetChnAttr(chnB)，然后 HB_VPS_SetChnGdc/Rotate(chnA)，然后 HB_VPS_SetPymChnAttr(chnB)。
 
 ![VPS IPU_GDC_PYM+GDC](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_ipu%2Bgdc%2Bpym%2Bgdc.png)
 
-HB_VPS_SetChnAttr(chnA)、HB_VPS_SetChnAttr(chnB)，然后HB_VPS_SetChnGdc/Rotate(chnA)，然后HB_VPS_SetChnGdc/Rotate(chnB)，最后HB_VPS_SetPymChnAttr(chnB)。
+HB_VPS_SetChnAttr(chnA)、HB_VPS_SetChnAttr(chnB)，然后 HB_VPS_SetChnGdc/Rotate(chnA)，然后 HB_VPS_SetChnGdc/Rotate(chnB)，最后 HB_VPS_SetPymChnAttr(chnB)。
 
 ![VPS IPU+GDC+PYM+GDC](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_ipu%2Bgdc%2Bpym%2Bgdc.png)
 
-HB_VPS_SetChnAttr(chnA)、HB_VPS_SetChnAttr(chnB)、HB_VPS_SetChnAttr(chnC)，然后HB_VPS_SetChnGdc/Rotate(chnA) ， HB_VPS_SetPymChnAttr(chnB)，HB_VPS_SetChnGdc/Rotate(chnC)。
+HB_VPS_SetChnAttr(chnA)、HB_VPS_SetChnAttr(chnB)、HB_VPS_SetChnAttr(chnC)，然后 HB_VPS_SetChnGdc/Rotate(chnA) ， HB_VPS_SetPymChnAttr(chnB)，HB_VPS_SetChnGdc/Rotate(chnC)。
 
 ![VPS IPU_GDC_PYM_GDC](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/video_processing/ss_vps_ipu%2Bgdc%2Bpym%2Bgdc.png)
 
-如果需要VPS中四个模块串一起跑，需要HB_VPS_SetGrpGdc、HB_VPS_SetChnAttr(chnA)，HB_VPS_SetChnRotate(chnA)、HB_VPS_SetPymChnAttr(chnA)。
+如果需要 VPS 中四个模块串一起跑，需要 HB_VPS_SetGrpGdc、HB_VPS_SetChnAttr(chnA)，HB_VPS_SetChnRotate(chnA)、HB_VPS_SetPymChnAttr(chnA)。
 
 ## 数据结构
 ### HB_VPS_GRP_ATTR_S
@@ -1106,16 +1106,16 @@ typedef struct HB_VPS_GRP_ATTR_S {
 } VPS_GRP_ATTR_S;
 ```
 【功能描述】
-> VPS组的属性结构体
+> VPS 组的属性结构体
 
 【成员说明】
 
 |    成员     |                             含义                             |
 | :---------: | :----------------------------------------------------------: |
-|    maxW     |                     VPS输入图像最大宽度                      |
-|    maxH     |                     VPS输入图像最大高度                      |
-| frameDepth  | Gdc申请的buf个数，如果是vps绑定了vot，需要注意frameDepth不能大于6，iar输入的buffer个数实际是8，gdc的话是framedepth+2，iar里面会判断gdc送过来index（下标从0开始算）不能大于等于8 |
-| pixelFormat |       像素格式（VPS只支持nv12一种格式，当前参数预留）        |
+|    maxW     |                     VPS 输入图像最大宽度                      |
+|    maxH     |                     VPS 输入图像最大高度                      |
+| frameDepth  | Gdc 申请的 buf 个数，如果是 vps 绑定了 vot，需要注意 frameDepth 不能大于 6，iar 输入的 buffer 个数实际是 8，gdc 的话是 framedepth+2，iar 里面会判断 gdc 送过来 index（下标从 0 开始算）不能大于等于 8 |
+| pixelFormat |       像素格式（VPS 只支持 nv12 一种格式，当前参数预留）        |
 
 ### HB_RECT_S
 【结构定义】
@@ -1134,8 +1134,8 @@ typedef struct HB_RECT_S {
 
 |  成员  |   含义    |
 | :----: | :-------: |
-|   x    | 起始x坐标 |
-|   y    | 起始y坐标 |
+|   x    | 起始 x 坐标 |
+|   y    | 起始 y 坐标 |
 | width  |  图像宽   |
 | height |  图像高   |
 
@@ -1166,7 +1166,7 @@ typedef HB_FRAME_RATE_CTRL_S {
 } FRAME_RATE_CTRL_S;
 ```
 【功能描述】
-> 帧率控制信息结构体，dstFrameRate不得大于srcFrameRate
+> 帧率控制信息结构体，dstFrameRate 不得大于 srcFrameRate
 
 【成员说明】
 
@@ -1198,12 +1198,12 @@ typedef struct HB_VPS_CHN_ATTR_S {
 | :---------: | :----------------------------------------------------------: |
 |    width    |                          图像输出宽                          |
 |   height    |                          图像输出高                          |
-| pixelFormat |           像素格式（VPS目前输出只有nv12一种格式）            |
-|  enMirror   | 镜像使能,VPS不支持此功能，可以使用isp接口的HB_VIN_CtrlPipeMirror去水平镜像 |
-|   enFlip    |     翻转使能，VPS不支持此功能，需要使用sensor的上下翻转      |
+| pixelFormat |           像素格式（VPS 目前输出只有 nv12 一种格式）            |
+|  enMirror   | 镜像使能,VPS 不支持此功能，可以使用 isp 接口的 HB_VIN_CtrlPipeMirror 去水平镜像 |
+|   enFlip    |     翻转使能，VPS 不支持此功能，需要使用 sensor 的上下翻转      |
 |   enScale   |                           缩放使能                           |
 | frameDepth  |                         图像队列长度                         |
-|  frameRate  | 帧率控制（此帧率不生效，可以使用HB_VPS_SetChnFrameRate接口实现帧率控制） |
+|  frameRate  | 帧率控制（此帧率不生效，可以使用 HB_VPS_SetChnFrameRate 接口实现帧率控制） |
 
 ### HB_ROTATION_E
 【结构定义】
@@ -1224,9 +1224,9 @@ typedef enum HB_ROTATION_E {
 |     成员     |     含义     |
 | :----------: | :----------: |
 |  ROTATION_0  |    不旋转    |
-| ROTATION_90  |   旋转90度   |
-| ROTATION_180 |  旋转180度   |
-| ROTATION_270 |  旋转270度   |
+| ROTATION_90  |   旋转 90 度   |
+| ROTATION_180 |  旋转 180 度   |
+| ROTATION_270 |  旋转 270 度   |
 | ROTATION_MAX | 枚举的最大值 |
 
 ### DYNAMIC_SRC_INFO_S
@@ -1240,13 +1240,13 @@ typedef struct HB_VPS_DYNAMIC_SRC_INFO_S {
 ```
 
 【功能描述】
-> 金字塔动态改变输入size配置结构体
+> 金字塔动态改变输入 size 配置结构体
 
 【成员说明】
 
 |     成员      |       含义       |
 | :-----------: | :--------------: |
-| src_change_en | 使能输入size改变 |
+| src_change_en | 使能输入 size 改变 |
 |   new_width   |        宽        |
 |  new_height   |        高        |
 
@@ -1269,9 +1269,9 @@ typedef struct HB_PYM_SCALE_INFO_S {
 
 |    成员    |                             含义                             |
 | :--------: | :----------------------------------------------------------: |
-|   factor   | 缩放参数（1~63），对于缩小得层，缩放公式是factor/(factor+64),对于放大得层对应是64/factor，因为放大层是固定的倍数，也即对应放大层24的factor固定是50，25层的factor固定是40，26层factor固定是32，27层factor固定是25，28层factor固定是20，29层factor固定是16 |
-|   roi_x    |                          起始x坐标                           |
-|   roi_y    |                          起始y坐标                           |
+|   factor   | 缩放参数（1~63），对于缩小得层，缩放公式是 factor/(factor+64),对于放大得层对应是 64/factor，因为放大层是固定的倍数，也即对应放大层 24 的 factor 固定是 50，25 层的 factor 固定是 40，26 层 factor 固定是 32，27 层 factor 固定是 25，28 层 factor 固定是 20，29 层 factor 固定是 16 |
+|   roi_x    |                          起始 x 坐标                           |
+|   roi_y    |                          起始 y 坐标                           |
 | roi_width  |                            图像宽                            |
 | roi_height |                            图像高                            |
 
@@ -1300,15 +1300,15 @@ typedef struct HB_VPS_PYM_CHN_ATTR_S {
 
 |     成员     |         含义         |
 | :----------: | :------------------: |
-|   frame_id   |       帧ID使能       |
-| ds_uv_bypass |   DS层uv分量bypass   |
-| ds_layer_en  | DS层使能层数（4~23） |
-| us_layer_en  | US层使能层数（0~6）  |
-| us_uv_bypass |   US层uv分量bypass   |
+|   frame_id   |       帧 ID 使能       |
+| ds_uv_bypass |   DS 层 uv 分量 bypass   |
+| ds_layer_en  | DS 层使能层数（4~23） |
+| us_layer_en  | US 层使能层数（0~6）  |
+| us_uv_bypass |   US 层 uv 分量 bypass   |
 |   timeout    |       超时时间       |
 |  frameDepth  |     图像队列长度     |
-|   ds_info    |      DS缩放信息      |
-|   us_info    |      US缩放信息      |
+|   ds_info    |      DS 缩放信息      |
+|   us_info    |      US 缩放信息      |
 
 ### HB_DIS_MV_INFO_S
 【结构定义】
@@ -1329,8 +1329,8 @@ typedef struct HB_DIS_MV_INFO_S {
 | :-----: | :----------: |
 |  gmvX   | 横坐标偏移值 |
 |  gmvY   | 纵坐标偏移值 |
-| xUpdate |   X更新值    |
-| yUpdate |   Y更新值    |
+| xUpdate |   X 更新值    |
+| yUpdate |   Y 更新值    |
 
 ## 错误码
 
@@ -1342,7 +1342,7 @@ typedef struct HB_DIS_MV_INFO_S {
 | -268,696,580 |     HB_ERR_VPS_GROUP_UNEXIST |               组不存在 |
 | -268,696,581 |       HB_ERR_VPS_CHN_UNEXIST |             通道不存在 |
 | -268,696,582 |            HB_ERR_VPS_ROTATE |               旋转失败 |
-| -268,696,583 |         HB_ERR_VPS_NULL_PARA |           参数NULL指针 |
+| -268,696,583 |         HB_ERR_VPS_NULL_PARA |           参数 NULL 指针 |
 | -268,696,584 |           HB_ERR_VPS_BAD_ARG |               非法参数 |
 | -268,696,585 |       HB_ERR_VPS_UN_PREPARED |               未准备好 |
 | -268,696,586 |         HB_ERR_VPS_SENDFRAME |           回灌图像失败 |
@@ -1360,4 +1360,4 @@ typedef struct HB_DIS_MV_INFO_S {
 | -268,696,598 |        HB_ERR_VPS_FRAME_RATE |               帧率错误 |
 
 ## 参考代码
-VPS部分示例代码可以参考，[sample_vps](./multimedia_samples#sample_vps)和[sample_vps_zoom](./multimedia_samples#sample_vps_zoom)。
+VPS 部分示例代码可以参考，[sample_vps](./multimedia_samples#sample_vps)和[sample_vps_zoom](./multimedia_samples#sample_vps_zoom)。

@@ -92,7 +92,7 @@ python mipi_camera_web_yolov5x.py
 | 参数 | 说明 | 类型 | 默认值 |
 |------|------|------|--------|
 | `--model-path` | BPU 量化模型路径（`.bin`） | str | `/app/model/basic/yolov5x_672x672_nv12.bin` |
-| `--priority` | 推理优先级（0~255，255为最高） | int | `0` |
+| `--priority` | 推理优先级（0~255，255 为最高） | int | `0` |
 | `--bpu-cores` | BPU 核心索引列表（如 `0 1`） | int list | `[0]` |
 | `--label-file` | 类别标签文件路径 | str | `coco_classes.names` |
 | `--nms-thres` | 非极大值抑制的 IoU 阈值 | float | `0.45` |

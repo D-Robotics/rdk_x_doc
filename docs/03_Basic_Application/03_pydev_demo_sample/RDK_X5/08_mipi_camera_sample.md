@@ -21,7 +21,7 @@ root@ubuntu:/app/pydev_demo/08_mipi_camera_sample$ tree
 
 ## 效果展示
 
-### 01实时目标检测效果
+### 01 实时目标检测效果
 
 :::info 可视化检测效果
 
@@ -39,25 +39,25 @@ root@ubuntu:/app/pydev_demo/08_mipi_camera_sample$ tree
 
 ![output-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_08_mipi_camera_yolov5s_runing.jpg)
 
-### 02图像采集保存效果
+### 02 图像采集保存效果
 
 运行后会在脚本同级目录下保存多个 YUV 格式的图像文件，默认是 1920x1080 的分辨率。
 
 ![output-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_08_mipi_camera_dump.png)
 
-### 03图像缩放处理效果
+### 03 图像缩放处理效果
 
 运行后会在脚本同级目录下保存缩放后的 YUV 图像文件，默认是 640x360 的分辨率。
 
 ![output-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_08_mipi_camera_scale.png)
 
-### 04图像裁剪缩放效果
+### 04 图像裁剪缩放效果
 
 运行后会在脚本同级目录下保存裁剪并缩放后的 YUV 图像文件（NV12 格式），默认是裁剪缩放画面中心，我们调整一下裁剪位置，可以得到如下 YUV 图像。
 
 ![output-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_08_mipi_camera_crop_scale.png)
 
-### 05实时推流显示效果
+### 05 实时推流显示效果
 
 运行后通过 HDMI 屏幕实时显示摄像头画面（推流测试）, 注意 Desktop 版本需要先执行 `sudo systemctl stop lightdm` 关闭桌面服务。
 
@@ -157,7 +157,7 @@ MIPI 摄像头实时检测示例不需要命令行参数，直接运行即可。
 #### 03_mipi_camera_scale 示例参数说明
 | 参数 | 说明 | 类型 | 示例 |
 |------|------|------|--------|
-| `-i` | 输入YUV 文件路径 | str | `input.yuv` |
+| `-i` | 输入 YUV 文件路径 | str | `input.yuv` |
 | `-o` | 输出文件路径 | str | `output_scale.yuv` |
 | `-w` | 输出图像宽度 | int | `640` |
 | `-h` | 输出图像高度 | int | `360` |
@@ -298,7 +298,7 @@ MIPI 摄像头实时检测示例不需要命令行参数，直接运行即可。
 
 8. `model.set_scheduling_params(priority, bpu_cores)`
 
-   设置模型调度参数，输入：优先级(0-255)、BPU核心列表
+   设置模型调度参数，输入：优先级(0-255)、BPU 核心列表
 <!-- 9. `common.print_model_info(model)` - 打印模型信息（输入输出维度、量化参数等） -->
 
 9. `load_class_names(class_file)`
@@ -307,7 +307,7 @@ MIPI 摄像头实时检测示例不需要命令行参数，直接运行即可。
 
 10. `cam.get_img(chn, width, height)`
 
-      获取摄像头图像帧，输入：通道号（默认为2）、宽、高，返回：NV12 格式图像数据
+      获取摄像头图像帧，输入：通道号（默认为 2）、宽、高，返回：NV12 格式图像数据
 
 11. `split_nv12_bytes(img, width, height)`
 
@@ -343,7 +343,7 @@ MIPI 摄像头实时检测示例不需要命令行参数，直接运行即可。
 
 19. `draw_detections_on_disp(display, boxes, cls_ids, scores, class_names, color_map, chn)`
 
-      在显示层绘制检测结果，输入：显示对象、检测框、类别ID、置信度、类别列表、颜色映射、通道号
+      在显示层绘制检测结果，输入：显示对象、检测框、类别 ID、置信度、类别列表、颜色映射、通道号
 
 20. `srcampy.unbind(camera, display)`
    
@@ -395,7 +395,7 @@ MIPI 摄像头实时检测示例不需要命令行参数，直接运行即可。
 
 2. `vps.open_vps(grp_id, chn_id, input_w, input_h, output_w, output_h)`
 
-   打开 VPS 通道，输入：组ID、通道ID、输入宽高、输出宽高
+   打开 VPS 通道，输入：组 ID、通道 ID、输入宽高、输出宽高
 
 3. `file.read()`
 
@@ -429,7 +429,7 @@ MIPI 摄像头实时检测示例不需要命令行参数，直接运行即可。
 
 2. `vps.open_vps(grp_id, chn_id, input_w, input_h, output_w, output_h, crop_rect)`
 
-   打开 VPS 通道并设置裁剪区域，输入：组ID、通道ID、输入宽高、输出宽高、裁剪区域[x, y, w, h]
+   打开 VPS 通道并设置裁剪区域，输入：组 ID、通道 ID、输入宽高、输出宽高、裁剪区域[x, y, w, h]
 
 3. `file.read()`
 

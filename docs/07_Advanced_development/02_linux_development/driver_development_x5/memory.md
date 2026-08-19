@@ -29,7 +29,7 @@ Linux Kernel 的设备树中会保留部分内存，作为某些模块的专用�
 
 `free` 命令显示的可用内存已经排除了这部分保留内存，只反映内核可实际使用的内存容量。
 
-## ION内存
+## ION 内存
 
 ### 概述
 
@@ -51,4 +51,4 @@ RDK X5 中主要使用 3 个 ION 区域：cma_reserved、carveout、ion_cma
 
 ### ION 区域大小调整方法
 
-RDK X5 通过srpi-config工具来调整 ION 区域的大小，具体操作请参考 [srpi-config](../../../System_configuration/srpi-config) ，`ION memory`一节
+RDK X5 通过 srpi-config 工具来调整 ION 区域的大小，具体操作请参考 [srpi-config](../../../System_configuration/srpi-config) ，`ION memory`一节

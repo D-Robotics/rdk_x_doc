@@ -283,7 +283,7 @@ for any corresponding short options.
 ### FAQ 
 
 __Q：__ 示例为什么要使用 live555MediaServer ？\
-__A：__ 为了建立流媒体通路，首先我们要对数据流有一个认识，数据流大概是这样的："H.264文件 → live555MediaServer → 网络RTSP流 → rtsp2display → 解码 → 处理 → 显示
+__A：__ 为了建立流媒体通路，首先我们要对数据流有一个认识，数据流大概是这样的："H.264 文件 → live555MediaServer → 网络 RTSP 流 → rtsp2display → 解码 → 处理 → 显示
 " ， live555MediaServer 将静态的 H.264 文件转换成动态的 RTSP 视频流 ，rtsp2display 拿到网络 RTSP 流才能进行解码处理。
 
 __Q：__ live555MediaServer 可以更换吗？\

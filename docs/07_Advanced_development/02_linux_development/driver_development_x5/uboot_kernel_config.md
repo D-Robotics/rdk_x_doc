@@ -2,17 +2,17 @@
 sidebar_position: 2
 ---
 
-# 配置uboot和kernel选项参数
+# 配置 uboot 和 kernel 选项参数
 
-在系统软件开发中，经常需要对uboot和Kernel的功能选项进行配置，本章节介绍几个常用的配置方法，供用户参考使用。
+在系统软件开发中，经常需要对 uboot 和 Kernel 的功能选项进行配置，本章节介绍几个常用的配置方法，供用户参考使用。
 
-## 配置uboot选项参数
+## 配置 uboot 选项参数
 
 :::info 注意
 
 ​	以下说明以修改 `board_x5_rdk_ubuntu_nand_sdcard_debug_config`配置文件为例。
 
-​	Uboot具体使用的配置文件可以在`./xbuild.sh lunch`之后查看`bootloader/device/.board_config.mk`板级配置文件中 `HR_UBOOT_CONFIG_FILE`的变量值。
+​	Uboot 具体使用的配置文件可以在`./xbuild.sh lunch`之后查看`bootloader/device/.board_config.mk`板级配置文件中 `HR_UBOOT_CONFIG_FILE`的变量值。
 
 :::
 
@@ -28,7 +28,7 @@ sidebar_position: 2
 └── uboot # Uboot源代码
 ```
 
-`build/xbuild.sh`为主编译脚本，提供了以下命令帮助用户进行 Uboot 的选项配置，该命令会自动使用板级配置文件中设置的 Uboot 配置文件，在配置完成后，自动完成savedefconfig 和保存工作。
+`build/xbuild.sh`为主编译脚本，提供了以下命令帮助用户进行 Uboot 的选项配置，该命令会自动使用板级配置文件中设置的 Uboot 配置文件，在配置完成后，自动完成 savedefconfig 和保存工作。
 ```
 ./xbuild.sh uboot menuconfig
 ```
@@ -37,7 +37,7 @@ sidebar_position: 2
 
 ![image-20220518111319607](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/screenshot-20241120-201418.png)
 
-在menuconfig的配置界面上完成配置后，选择 `Exit`退出，根据提示选择 `Yes` 或者`No`保存修改到`.config`文件中。
+在 menuconfig 的配置界面上完成配置后，选择 `Exit`退出，根据提示选择 `Yes` 或者`No`保存修改到`.config`文件中。
 
 ![image-20220518111506018](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development/image-20220518111506018.png)
 
@@ -52,7 +52,7 @@ cp -f defconfig <板级配置文件中设置的Uboot配置文件>
 
 ### 手动配置
 
-首先进入`source/bootloader/uboot`目录，执行`make ARCH=arm64 hobot_x5_rdk_nand_defconfig `。因为`make`命令将首先执行顶级目录下的 Makefile 文件。其中对于以config结尾的目标都有一个共同的入口：
+首先进入`source/bootloader/uboot`目录，执行`make ARCH=arm64 hobot_x5_rdk_nand_defconfig `。因为`make`命令将首先执行顶级目录下的 Makefile 文件。其中对于以 config 结尾的目标都有一个共同的入口：
 
 ```makefile
 %config: scripts_basic outputmakefile FORCE
@@ -81,9 +81,9 @@ make ARCH=arm64 hobot_x5_rdk_nand_defconfig
 #
 ```
 
-然后就可以执行`make ARCH=arm64 menuconfig`打开图形化的配置界面进行uboot的选项参数配置。
+然后就可以执行`make ARCH=arm64 menuconfig`打开图形化的配置界面进行 uboot 的选项参数配置。
 
-在menuconfig的配置界面上完成配置后，选择 `Exit`退出，根据提示选择 `Yes` 或者`No`保存修改到`.config`文件中。
+在 menuconfig 的配置界面上完成配置后，选择 `Exit`退出，根据提示选择 `Yes` 或者`No`保存修改到`.config`文件中。
 
 保存配置后，可以执行命令 `diff .config configs/hobot_x5_rdk_nand_defconfig` 对比一下差异，再次确认一下修改是否符合预期。
 
@@ -96,19 +96,19 @@ make distclean
 make mrproper
 ```
 
-## 配置kernel选项参数
+## 配置 kernel 选项参数
 
 :::info 注意
 
 ​	以下说明以修改 `hobot_x5_rdk_ubuntu_defconfig`配置文件为例。
 
-​	kernel具体使用的配置文件可以查看 `mk_kernel.sh` 脚本中 `kernel_config_file` 的变量值。
+​	kernel 具体使用的配置文件可以查看 `mk_kernel.sh` 脚本中 `kernel_config_file` 的变量值。
 
 :::
 
 ### 通过 mk_kernel 命令配置
 
-`mk_kernel.sh`提供了以下命令帮助用户进行 Kernel 的选项配置，该命令会自动使用板级配置文件中设置的 Kernel 配置文件，在配置完成后，自动完成savedefconfig 和保存工作。
+`mk_kernel.sh`提供了以下命令帮助用户进行 Kernel 的选项配置，该命令会自动使用板级配置文件中设置的 Kernel 配置文件，在配置完成后，自动完成 savedefconfig 和保存工作。
 
 ```
 ./mk_kernel.sh menuconfig
@@ -118,7 +118,7 @@ make mrproper
 
 ![image-20220518111319607](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/screenshot-20241120-195703.png)
 
-在menuconfig的配置界面上完成配置后，选择 `Exit`退出，根据提示选择 `Yes` 或者`No`保存修改到`.config`文件中。
+在 menuconfig 的配置界面上完成配置后，选择 `Exit`退出，根据提示选择 `Yes` 或者`No`保存修改到`.config`文件中。
 
 ![image-20220518111506018](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development/image-20220518111506018.png)
 
@@ -169,11 +169,11 @@ make distclean
 make mrproper
 ```
 
-## 修改内核dts
+## 修改内核 dts
 
 本节介绍 RDK 产品的 DTS（Device Tree Source）文件结构，以及如何进行修改，以指导用户开展二次开发。
 
-内核dts文件位于`x5-rdk-gen/source/kernel/arch/arm64/boot/dts/hobot/`目录下。
+内核 dts 文件位于`x5-rdk-gen/source/kernel/arch/arm64/boot/dts/hobot/`目录下。
 
 :::info 注意
 - DTS 文件用于描述硬件资源分配（如 GPIO、I²C、SPI、中断号、内存地址等）。错误修改可能导致设备无法启动、驱动加载失败，甚至造成硬件损坏。
@@ -182,7 +182,7 @@ make mrproper
 
 ### Kernel 设备树
 
-| dts文件 | 作用 |
+| dts 文件 | 作用 |
 | ------- | ---------- |
 | pinmux-func.dtsi | 定义各个 PIN 的功能组。 |
 | pinmux-gpio.dtsi | 定义 GPIO 组。 |
@@ -194,11 +194,11 @@ make mrproper
 
 `x5-板级产品.dts` -> `x5-rdk.dtsi` -> `x5.dtsi` -> `(pinmux-func.dtsi and pinmux-gpio.dtsi)`
 
-### 板级dts介绍
+### 板级 dts 介绍
 
 硬件编号可以通过板卡上的丝印确认，也可以通过`hrut_boardid`命令获取`board_id`来辨认。
 
-| 硬件编号 | board_id | dts文件 |
+| 硬件编号 | board_id | dts 文件 |
 | ------- | ---------- | ----------- |
 | RDK X5 V0.1 | 0x301 | x5-rdk.dts |
 | RDK X5 V1.0 | 0x302 | x5-rdk-v1p0.dts |
@@ -216,12 +216,12 @@ make mrproper
 sudo ./mk_kernel.sh
 ```
 
-编译完成后，会在`x5-rdk-gen/deploy/kernel/dtb/`目录下生成dtb文件，可以拷贝到板端的`/boot/hobot/`目录下，系统启动时会自动加载。
+编译完成后，会在`x5-rdk-gen/deploy/kernel/dtb/`目录下生成 dtb 文件，可以拷贝到板端的`/boot/hobot/`目录下，系统启动时会自动加载。
 
-也可以执行以下命令把内核dtb文件打包成deb包，供系统安装使用。
+也可以执行以下命令把内核 dtb 文件打包成 deb 包，供系统安装使用。
 
 ```
 sudo ./mk_debs.sh hobot-dtb
 ```
 
-生成的deb包位于`x5-rdk-gen/deploy/deb_pkgs/hobot-dtb_version-data_arm64.deb`
+生成的 deb 包位于`x5-rdk-gen/deploy/deb_pkgs/hobot-dtb_version-data_arm64.deb`

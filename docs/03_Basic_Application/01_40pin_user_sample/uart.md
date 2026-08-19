@@ -10,13 +10,13 @@ import DocScope from '@site/src/components/DocScope';
 
 <DocScope versions=">= 3.0.0" products="RDK-X3">
 
-RDK X3 在 40PIN 上默认使能 UART3，物理管脚号 8 和 10，IO电压 3.3V。
+RDK X3 在 40PIN 上默认使能 UART3，物理管脚号 8 和 10，IO 电压 3.3V。
 
 </DocScope>
 
 <DocScope versions=">= 3.5.0" products="RDK-X5">
 
-RDK X5 在 40PIN 上默认使能 UART1，物理管脚号 8 和 10，IO电压 3.3V。
+RDK X5 在 40PIN 上默认使能 UART1，物理管脚号 8 和 10，IO 电压 3.3V。
 
 </DocScope>
 

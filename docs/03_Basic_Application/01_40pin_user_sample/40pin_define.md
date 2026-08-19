@@ -14,10 +14,10 @@ import DocScope from '@site/src/components/DocScope';
 
 ## 硬件使用说明
 
-- RDK上的40PIN，提供的GPIO均为3.3V逻辑信号，其最大耐压为3.46V。
-- RDK上的40PIN，其3.3V最大支持800mA输出，5V最大支持500mA输出。在上述最大输出电流下，要求RDK的输入适配器最小支持25W带载能力。
-- 当连接外设时，应当严格注意40PIN上的电源、地、信号电平的大小关系，任何过压、过流、ESD等事件，都有可能导致RDK受到不可逆的损伤。
-- 当使用杜邦线连接RDK和其他功能板卡时，应当确保RDK产品处于下电关机状态。
+- RDK 上的 40PIN，提供的 GPIO 均为 3.3V 逻辑信号，其最大耐压为 3.46V。
+- RDK 上的 40PIN，其 3.3V 最大支持 800mA 输出，5V 最大支持 500mA 输出。在上述最大输出电流下，要求 RDK 的输入适配器最小支持 25W 带载能力。
+- 当连接外设时，应当严格注意 40PIN 上的电源、地、信号电平的大小关系，任何过压、过流、ESD 等事件，都有可能导致 RDK 受到不可逆的损伤。
+- 当使用杜邦线连接 RDK 和其他功能板卡时，应当确保 RDK 产品处于下电关机状态。
 
 ## 管脚复用关系配置
 
@@ -46,7 +46,7 @@ sudo srpi-config
 
 复用功能示例如下：
 
-  | 接口功能1 | 接口功能2 | 
+  | 接口功能 1 | 接口功能 2 | 
   | ---- | ---- |
   | uart3 | i2c5 |
   | i2c0 | pwm2 |
@@ -63,13 +63,13 @@ sudo srpi-config
 
 ## 40PIN 管脚定义{#40pin_define}
 
-开发板提供40PIN标准接口，方便用户进行外围扩展，其中数字IO采用3.3V电平设计。40PIN接口定义如下：
+开发板提供 40PIN 标准接口，方便用户进行外围扩展，其中数字 IO 采用 3.3V 电平设计。40PIN 接口定义如下：
 
 <DocScope versions=">=3.0.0" products="RDK X3">
 
 ![image-20220828203147852](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/01_40pin_user_sample/image/40pin_user_sample/image-20220828203147852.png)
 
-开发板40PIN接口位置提供了丝印网表，方便用户对照操作，PIN1、PIN40位置如下：
+开发板 40PIN 接口位置提供了丝印网表，方便用户对照操作，PIN1、PIN40 位置如下：
 ![image-20220828203207798](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/01_40pin_user_sample/image/40pin_user_sample/image-20220828203207798.png)
 
 </DocScope>
@@ -92,7 +92,7 @@ sudo srpi-config
 
 Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=16
 
-开发板 `/app/40pin_samples/` 目录下，预置了多种40PIN管脚的功能测试代码，包括gpio的输入/输出测试、PWM、I2C、SPI、UART等测试。所有测试程序均使用python语言编写，详细信息可以查阅本章节其他模块。
+开发板 `/app/40pin_samples/` 目录下，预置了多种 40PIN 管脚的功能测试代码，包括 gpio 的输入/输出测试、PWM、I2C、SPI、UART 等测试。所有测试程序均使用 python 语言编写，详细信息可以查阅本章节其他模块。
 
 以`/app/40pin_samples/button_led.py`为例，该程序配置`37`号管脚为输入，配置`31`号管脚配置为输出，并根据`37`号管脚的输入状态来控制`31`号管脚的输出状态。
 

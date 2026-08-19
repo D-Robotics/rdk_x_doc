@@ -9,7 +9,7 @@ import DocScope from '@site/src/components/DocScope';
 ```
 
 
-RDK 使用配置文件`config.txt`来设置一些启动时候的系统配置。`config.txt` 会在`uboot`阶段被读取，支持修改设备树的配置，IO管脚状态，ION内存，CPU频率等。该文件通常可以从 Linux 访问`/boot/config.txt`，并且必须以`root`用户身份进行编辑。如果在`config.txt`配置设置，但是该文件还不存在，只需将其创建为新的文本文件即可。
+RDK 使用配置文件`config.txt`来设置一些启动时候的系统配置。`config.txt` 会在`uboot`阶段被读取，支持修改设备树的配置，IO 管脚状态，ION 内存，CPU 频率等。该文件通常可以从 Linux 访问`/boot/config.txt`，并且必须以`root`用户身份进行编辑。如果在`config.txt`配置设置，但是该文件还不存在，只需将其创建为新的文本文件即可。
 
 ## 注意事项
 
@@ -45,7 +45,7 @@ dtdebug=1
 dtoverlay=ion_resize,size=0x40000000
 ```
 
-【RDK X5】通过dtoverlay_spi5_spidev增加/dev/spidev5.0（注意：can设备也接到了spi5，spidev和can只能二选一）
+【RDK X5】通过 dtoverlay_spi5_spidev 增加/dev/spidev5.0（注意：can 设备也接到了 spi5，spidev 和 can 只能二选一）
 
 ```Shell
 dtoverlay=dtoverlay_spi5_spidev
@@ -55,7 +55,7 @@ dtoverlay=dtoverlay_spi5_spidev
 
 通过 ion_reserved_size，ion_carveout_size， ion_cma_size 修改 boot 环境变量，进而修改 ION 分区大小。
 
-| boot环境变量名         | dts标签        | dts compatible字符串 | 默认大小 |
+| boot 环境变量名         | dts 标签        | dts compatible 字符串 | 默认大小 |
 | ----------------- | ------------ | ----------------- | ---- |
 | ion_reserved_size | ion_reserved | ion-pool          | 320M |
 | ion_carveout_size | ion_carveout | ion-carveout      | 320M |
@@ -67,7 +67,7 @@ ion=ion_carveout_size=0x14000000
 ion=ion_cma_size=0x08000000
 ```
 
-可以通过启动信息查看各个ION区域的大小：
+可以通过启动信息查看各个 ION 区域的大小：
 
 ```Shell
 root@ubuntu:~# dmesg | grep "Reserved ion"
@@ -88,9 +88,9 @@ RDK X5 支持： uart1, uart2, uart3, uart6，spi1, spi2, i2c0, i2c1, i2c5, i2c4
 
 :::info 注意
 
-RDK X5需要注意管脚的复用关系，当一行的所有接口都为dsiable时，引脚为gpio功能脚
+RDK X5 需要注意管脚的复用关系，当一行的所有接口都为 dsiable 时，引脚为 gpio 功能脚
 
-  | 功能1 | 功能2 | 
+  | 功能 1 | 功能 2 | 
   | ---- | ---- |
   | uart3 | i2c5 |
   | i2c0 | pwm2 |
@@ -100,7 +100,7 @@ RDK X5需要注意管脚的复用关系，当一行的所有接口都为dsiable�
 
 :::
 
-例如关闭串口3：
+例如关闭串口 3：
 
 ```
 dtparam=uart3=off
@@ -112,11 +112,11 @@ dtparam=uart3=off
 dtparam=i2c5=on
 ```
 <DocScope versions=">= 3.0.0" products="RDK-X3">
-## X3 CPU频率
+## X3 CPU 频率
 
 ### arm_boost
 
-当设置为1时，开启超频，RDK v1.x 版本最高频率提高到 1.5GHz，RDK V2.0 和 RDK Module 最高频率提高到1.8GHz，通过 `cat /sys/devices/system/cpu/cpufreq/policy0/scaling_boost_frequencies` 获取使能 boost 后会开放哪些更高 CPU 频率。
+当设置为 1 时，开启超频，RDK v1.x 版本最高频率提高到 1.5GHz，RDK V2.0 和 RDK Module 最高频率提高到 1.8GHz，通过 `cat /sys/devices/system/cpu/cpufreq/policy0/scaling_boost_frequencies` 获取使能 boost 后会开放哪些更高 CPU 频率。
 
 默认不开启超频，设置`arm_boost` 为 `1`时开启，例如：
 
@@ -134,7 +134,7 @@ CPU 频率的调度方式，有 `conservative ondemand userspace powersave perfo
 governor=performance
 ```
 
-有关`CPU`调度方式的说明请查阅 [X3 CPU频率管理](frequency_management#cpu频率管理)。
+有关`CPU`调度方式的说明请查阅 [X3 CPU 频率管理](frequency_management#cpu频率管理)。
 
 ### frequency
 
@@ -149,15 +149,15 @@ frequency=1000000
 </DocScope>
 
 <DocScope versions=">= 3.5.0" products="RDK-X5">
-## X5 CPU频率
+## X5 CPU 频率
 
-有关`CPU`调度方式的说明请查阅 [X5 CPU频率管理](frequency_management#cpu频率管理-1)，若计划进行超频，请务必先阅读文档中`CPU 超频`一节，全面了解风险与注意事项。
+有关`CPU`调度方式的说明请查阅 [X5 CPU 频率管理](frequency_management#cpu频率管理-1)，若计划进行超频，请务必先阅读文档中`CPU 超频`一节，全面了解风险与注意事项。
 
 本处仅介绍通过`config.txt`进行的 配置方法，不包含调度策略或超频原理相关内容。
 
 ### arm_boost
 
-当设置为1时，开启超频，RDK RDK X5 最高频率提高到1.8GHz，通过 `cat /sys/devices/system/cpu/cpufreq/policy0/scaling_boost_frequencies` 获取使能 boost 后会开放哪些更高 CPU 频率。
+当设置为 1 时，开启超频，RDK RDK X5 最高频率提高到 1.8GHz，通过 `cat /sys/devices/system/cpu/cpufreq/policy0/scaling_boost_frequencies` 获取使能 boost 后会开放哪些更高 CPU 频率。
 
 默认不开启超频，设置`arm_boost` 为 `1`时开启，例如：
 
@@ -187,11 +187,11 @@ frequency=1200000
 ```
 </DocScope>
 
-## IO初始化
+## IO 初始化
 
 ### gpio
 
-支持设置IO的功能复用，输入、输出模式，输出高、低电平，上下拉模式，应选择 BOARD 编码 对应的 GPIO 编号。
+支持设置 IO 的功能复用，输入、输出模式，输出高、低电平，上下拉模式，应选择 BOARD 编码 对应的 GPIO 编号。
 
 ```shell
 gpio:
@@ -207,7 +207,7 @@ pn/np - No pull                        无上下拉
 
 ### 示例
 
-配置`40Pin`管脚上的 `GPIO5` 和 `GPIO6`为IO模式：
+配置`40Pin`管脚上的 `GPIO5` 和 `GPIO6`为 IO 模式：
 
 ```
 gpio=5=f3
@@ -241,7 +241,7 @@ gpio=6=op,dh,pu
 
 ### throttling_temp
 
-系统 CPU、BPU 降频温度点，温度超过该温度点时，CPU 和 BPU 会降低运行频率来减低功耗，CPU最低降到 240MHz，BPU 最低降到 400MHz。 
+系统 CPU、BPU 降频温度点，温度超过该温度点时，CPU 和 BPU 会降低运行频率来减低功耗，CPU 最低降到 240MHz，BPU 最低降到 400MHz。 
 
 例如设置降频温度为 `86℃`：
 
@@ -278,13 +278,13 @@ shutdown_temp=112000
 
 ### voltage_domain
 
-配置40pin管脚的电压域，支持配置为 3.3V 和 1.8V，不配置时默认3.3V。
+配置 40pin 管脚的电压域，支持配置为 3.3V 和 1.8V，不配置时默认 3.3V。
 
 本配置项需要配合硬件上的电压域切换的跳线帽使用。
 
 :::info 注意
 
-仅RDK Modelu支持本项配置。
+仅 RDK Modelu 支持本项配置。
 
 :::
 

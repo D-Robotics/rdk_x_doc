@@ -9,7 +9,7 @@ import DocScope from '@site/src/components/DocScope';
 # 微雪 Audio Driver HAT REV2
 
 ## 产品简介
-Audio Driver HAT REV2是由微雪电子生产的一款音频转接板，采用ES7210+ES8156双Codec方案，可实现环形4麦克风录音、双通道音频播放、音频信号回采等功能。转接板外观如下图：
+Audio Driver HAT REV2 是由微雪电子生产的一款音频转接板，采用 ES7210+ES8156 双 Codec 方案，可实现环形 4 麦克风录音、双通道音频播放、音频信号回采等功能。转接板外观如下图：
 
 ![image-audio-driver-hat](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/02_audio/image/image-audio-driver-hat.jpg)
 
@@ -18,10 +18,10 @@ Audio Driver HAT REV2是由微雪电子生产的一款音频转接板，采用ES
 ## 安装方法
 
 - ### 硬件部署
-1. 按照下图方式，将转接板接入RDK X5的40pin header。  
+1. 按照下图方式，将转接板接入 RDK X5 的 40pin header。  
 ![image-audio-driver-hat-setup](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/02_audio/image/image-audio-driver-hat-setup.jpg)
 
-2. 3个拨码开关全部拨到`OFF`位置。
+2. 3 个拨码开关全部拨到`OFF`位置。
 
 - ### 软件配置
 1. 使用`srpi-config`配置音频板  
@@ -75,21 +75,21 @@ root@ubuntu:~# cat /proc/asound/devices
 root@ubuntu:~# ls /dev/snd/
 by-path  controlC0  controlC1  pcmC0D0p  pcmC0D1c  pcmC1D0c  pcmC1D0p  timer
 ```
-通过上述查询，结合[板载 Earphone 音频口](in_board_es8326.md#运行)的介绍，可以确认，声卡0对应的是 `Audio Driver HAT REV2` 节点；设备也是存在的, 且设备号为 `0-0` 和 `0-1` , 实际我们操作的设备应该是`pcmC0D0p 和 pcmC0D1c`。
+通过上述查询，结合[板载 Earphone 音频口](in_board_es8326.md#运行)的介绍，可以确认，声卡 0 对应的是 `Audio Driver HAT REV2` 节点；设备也是存在的, 且设备号为 `0-0` 和 `0-1` , 实际我们操作的设备应该是`pcmC0D0p 和 pcmC0D1c`。
 
-板载声卡对应的是1，设备号为`1-0`，这里我们不会用到它。
+板载声卡对应的是 1，设备号为`1-0`，这里我们不会用到它。
 
 
 - ### 2. 录音操作
 
-- **2通道麦克风录音**  
-  使用tinycap录制2通道音频：
+- **2 通道麦克风录音**  
+  使用 tinycap 录制 2 通道音频：
 
   ```shell
   tinycap ./2chn_test.wav -D 0 -d 1 -c 2 -b 16 -r 48000 -p 512 -n 4 -t 5
   ```
 
-- **4通道麦克风录音**
+- **4 通道麦克风录音**
 
   ```shell
   tinycap ./4chn_test.wav -D 0 -d 1 -c 4 -b 16 -r 48000 -p 512 -n 4 -t 5
@@ -97,8 +97,8 @@ by-path  controlC0  controlC1  pcmC0D0p  pcmC0D1c  pcmC1D0c  pcmC1D0p  timer
 
 ### 3. 播放操作
 
-- **双通道音频播放（不支持播放4通道）**  
-  使用tinyplay播放录制好的音频文件：
+- **双通道音频播放（不支持播放 4 通道）**  
+  使用 tinyplay 播放录制好的音频文件：
 
   ```shell
   tinyplay ./2chn_test.wav -D 0 -d 0
@@ -106,11 +106,11 @@ by-path  controlC0  controlC1  pcmC0D0p  pcmC0D1c  pcmC1D0c  pcmC1D0p  timer
 
 ### 4. 音频回采测试
 
-<DocScope versions=">= 3.6.0" products="RDK-X5">
+<!-- <DocScope versions=">= 3.6.0" products="RDK-X5">
 音频回采功能可用于采集播放通道的信号，便于算法或者后续应用中进行处理。做回采时需要保证录制与播放格式对齐（例如 16 kHz、8 通道、16-bit）。
 
 由于 ES8156 仅支持 2 通道播放，无法直接用 `tinyplay` 播放 8 通道数据做格式对齐回采。板端在 `/app/cdev_demo/audio_echo_test` 提供了参考示例，安装与使用方法请参阅 [audio_echo_test 示例介绍](../../02_cdev_demo_sample/audio_echo_test.md)。
-</DocScope>
+</DocScope> -->
 
 
 <DocScope versions=">= 3.5.0" products="RDK-X5">

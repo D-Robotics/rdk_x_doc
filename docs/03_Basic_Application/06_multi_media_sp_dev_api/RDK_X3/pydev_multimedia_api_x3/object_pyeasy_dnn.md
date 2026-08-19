@@ -7,7 +7,7 @@ sidebar_position: 1
 
 ## 模块描述
 
-pyeasy_dnn 是底层 DNN 推理能力的 C++ 封装实现，对外暴露轻量的 Python 接口，核心包含模块级模型加载方法、Model 对象推理方法，以及TensorProperties 张量属性获取三类能力。该接口适配 RDK X3 以及 RDK X5 （软件版本3.5.0 之前）系列硬件平台的神经网络推理场景。
+pyeasy_dnn 是底层 DNN 推理能力的 C++ 封装实现，对外暴露轻量的 Python 接口，核心包含模块级模型加载方法、Model 对象推理方法，以及 TensorProperties 张量属性获取三类能力。该接口适配 RDK X3 以及 RDK X5 （软件版本 3.5.0 之前）系列硬件平台的神经网络推理场景。
 
 ## 基础规格
 - 硬件兼容：RDK 系列开发板（支持 NPU 硬件加速）
@@ -22,17 +22,17 @@ pyeasy_dnn 是底层 DNN 推理能力的 C++ 封装实现，对外暴露轻量�
 
 ## API 参考
 
-### 一、模块级方法
+### 模块级方法
 | API 接口 | 接口功能 |
 | ---- | ----- |
 | load | **加载模型文件，返回 Model 推理对象** |
 
-### 二、Model 对象方法
+### Model 对象方法
 | API 接口 | 接口功能 |
 | ---- | ----- |
 | forward | **执行模型推理，输入张量数据，返回输出张量对象** |
 
-### 三、TensorProperties 张量属性（只读）
+### TensorProperties 张量属性（只读）
 | API 接口 | 接口功能 |
 | ---- | ----- |
 | tensor_type | **获取张量类型（如输入 / 输出张量、中间张量等）** |
@@ -45,7 +45,7 @@ pyeasy_dnn 是底层 DNN 推理能力的 C++ 封装实现，对外暴露轻量�
 
 
 
-### 一、模块级方法
+### 模块级方法
 
 #### load
 
@@ -91,7 +91,7 @@ models = dnn.load('../models/efficientnasnet_m_300x300_nv12.bin')
 - 加载失败会抛出 RuntimeError 异常，需捕获处理；
 - 可选参数（kwargs）需匹配底层 Dnnpy_load 函数的关键字参数定义，无特殊需求可省略。
 
-### 二、Model 对象方法
+### Model 对象方法
 #### forward
 
 <font color='Blue'>【功能描述】</font>
@@ -126,7 +126,7 @@ output_tensors = model.forward(inputs, **kwargs)
 :::
 
 
-### 三、TensorProperties 张量属性（只读）
+### TensorProperties 张量属性（只读）
 TensorProperties 是封装张量元信息的对象，通过 getter 函数暴露以下只读属性，无独立方法，直接通过属性名访问
 
 

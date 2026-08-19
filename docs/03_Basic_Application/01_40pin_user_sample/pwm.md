@@ -14,15 +14,15 @@ import DocScope from '@site/src/components/DocScope';
 Hobot.GPIO 库仅在带有附加硬件 PWM 控制器的引脚上支持 PWM。与 RPi.GPIO 库不同，Hobot.GPIO 库不实现软件模拟 PWM。
 
 <DocScope versions=">= 3.0.0" products="RDK-X3">
-RDK X3 支持 2 个 PWM 通道，对应40pin引脚为33 32。
+RDK X3 支持 2 个 PWM 通道，对应 40pin 引脚为 33 32。
 
 </DocScope>
 
 <DocScope versions=">= 3.5.0" products="RDK-X5">
-RDK X5 支持 4组PWM，每组2路输出，共8个PWM输出, 如下表：
+RDK X5 支持 4 组 PWM，每组 2 路输出，共 8 个 PWM 输出, 如下表：
 </DocScope>
 
-| PMW组 | PWM 通道 | 40PIN 引脚 |
+| PMW 组 | PWM 通道 | 40PIN 引脚 |
 | --- | ---- | ---- |
 | PWM0 | LSIO_PWM_OUT0 | 29 |
 | PWM0 | LSIO_PWM_OUT1 | 31 |
@@ -33,14 +33,14 @@ RDK X5 支持 4组PWM，每组2路输出，共8个PWM输出, 如下表：
 | PWM3 | LSIO_PWM_OUT6 | 32 |
 | PWM3 | LSIO_PWM_OUT7 | 33 |
 
-RDK X5 默认使能PWM3，可以通过`srpi-config`系统配置工具，使能其他的PWM组，这会将对应的引脚复用为PWM输出，重启后生效。
+RDK X5 默认使能 PWM3，可以通过`srpi-config`系统配置工具，使能其他的 PWM 组，这会将对应的引脚复用为 PWM 输出，重启后生效。
 
 选择`3 Interface Options` -> `I3 Peripheral bus config`, 然后选择对应的`pwm`组,切换到`okay`。
 
 请参阅 `/app/40pin_samples/simple_pwm.py`了解如何使用 PWM 通道的详细信息。
 
 ## 测试代码
-打开 `output_pin` 指定的PWM通道，初始占空比 25%， 先每0.25秒增加5%占空比，达到100%之后再每0.25秒减少5%占空比，在正常输出波形时，可以通过示波器或者逻辑分析仪测量输出信号，观察波形。
+打开 `output_pin` 指定的 PWM 通道，初始占空比 25%， 先每 0.25 秒增加 5%占空比，达到 100%之后再每 0.25 秒减少 5%占空比，在正常输出波形时，可以通过示波器或者逻辑分析仪测量输出信号，观察波形。
 
 ```python
 #!/usr/bin/env python3

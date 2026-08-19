@@ -6,20 +6,20 @@ sidebar_position: 1
 
 `VIO` 模块提供操作 `MIPI` 摄像头和操作图像处理的功能。
 
-`VIO` API提供了以下的接口：
+`VIO` API 提供了以下的接口：
 
 | 函数 | 功能 |
 | ---- | ----- |
-| sp_init_vio_module | **初始化VIO对象** |
-| sp_release_vio_module | **销毁VIO对象** |
+| sp_init_vio_module | **初始化 VIO 对象** |
+| sp_release_vio_module | **销毁 VIO 对象** |
 | sp_open_camera | **打开摄像头** |
 | sp_open_camera_v2 | **指定分辨率打开摄像头** |
-| sp_open_vps | **打开VPS** |
+| sp_open_vps | **打开 VPS** |
 | sp_vio_close | **关闭摄像头** |
 | sp_vio_get_frame | **获取视频图像帧** |
-| sp_vio_set_frame | **发送视频图像帧给vps模块** |
-| sp_vio_get_raw | **获取摄像头raw图数据** |
-| sp_vio_get_yuv | **获取摄像头ISP模块的YUV数据** | 
+| sp_vio_set_frame | **发送视频图像帧给 vps 模块** |
+| sp_vio_get_raw | **获取摄像头 raw 图数据** |
+| sp_vio_get_yuv | **获取摄像头 ISP 模块的 YUV 数据** | 
 
 
 ## sp_init_vio_module  
@@ -66,15 +66,15 @@ sidebar_position: 1
 
 **【功能描述】**  
 
-初始化接入到RDK X3上的MIPI摄像头。
-设置输出分辨率，支持设置最多5组分辨率，其中只有1组可以放大，4组可以缩小。最大支持放大到原始图像的1.5倍，最小支持缩小到原始图像的1/8。
+初始化接入到 RDK X3 上的 MIPI 摄像头。
+设置输出分辨率，支持设置最多 5 组分辨率，其中只有 1 组可以放大，4 组可以缩小。最大支持放大到原始图像的 1.5 倍，最小支持缩小到原始图像的 1/8。
 
 **【参数】**
 
 - `obj`： 已经初始化的`VIO`对象指针
-- `pipe_id`：支持多组数据输入，建议填0
-- `video_index`：camera对应的host编号，-1表示自动探测，编号可以查看 /etc/board_config.json 配置文件
-- `chn_num`：设置输出多少种不同分辨率的图像，最大为5，最小为1。
+- `pipe_id`：支持多组数据输入，建议填 0
+- `video_index`：camera 对应的 host 编号，-1 表示自动探测，编号可以查看 /etc/board_config.json 配置文件
+- `chn_num`：设置输出多少种不同分辨率的图像，最大为 5，最小为 1。
 - `width`：配置输出宽度的数组地址
 - `height`：配置输出高度的数组地址
 
@@ -90,9 +90,9 @@ sidebar_position: 1
 
 **【功能描述】**  
 
-初始化接入到RDK X3上的MIPI摄像头。  
-支持指定摄像头原始输出RAW的分辨率大小，通过`sp_sensors_parameters`设置。  
-支持设置输出分辨率，支持设置最多5组分辨率，其中只有1组可以放大，4组可以缩小。最大支持放大到原始图像的1.5倍，最小支持缩小到原始图像的1/8。
+初始化接入到 RDK X3 上的 MIPI 摄像头。  
+支持指定摄像头原始输出 RAW 的分辨率大小，通过`sp_sensors_parameters`设置。  
+支持设置输出分辨率，支持设置最多 5 组分辨率，其中只有 1 组可以放大，4 组可以缩小。最大支持放大到原始图像的 1.5 倍，最小支持缩小到原始图像的 1/8。
 
 目前支持的摄像头分辨率见下表：
 
@@ -113,10 +113,10 @@ sidebar_position: 1
 **【参数】**
 
 - `obj`： 已经初始化的`VIO`对象指针
-- `pipe_id`：支持多组数据输入，建议填0
-- `video_index`：camera对应的host编号，-1表示自动探测，编号可以查看 /etc/board_config.json 配置文件
-- `chn_num`：设置输出多少种不同分辨率的图像，最大为5，最小为1。
-- `parameters`：camera RAW输出相关结构体，用于指定分辨率和帧率
+- `pipe_id`：支持多组数据输入，建议填 0
+- `video_index`：camera 对应的 host 编号，-1 表示自动探测，编号可以查看 /etc/board_config.json 配置文件
+- `chn_num`：设置输出多少种不同分辨率的图像，最大为 5，最小为 1。
+- `parameters`：camera RAW 输出相关结构体，用于指定分辨率和帧率
 - `width`：配置输出宽度的数组地址
 - `height`：配置输出高度的数组地址
 
@@ -124,15 +124,15 @@ sidebar_position: 1
 
 | 数据类型 | 成员 | 注释 |
 | ---- | ----- | ----- |
-|int32_t|raw_height|摄像头输出RAW的高度|
-|int32_t|raw_width|摄像头输出RAW的宽度|
+|int32_t|raw_height|摄像头输出 RAW 的高度|
+|int32_t|raw_width|摄像头输出 RAW 的宽度|
 |int32_t|fps|摄像头输出的帧率|
 
 :::info 注意！
 
 `X3`芯片对于`VPS`输出的宽度是有对齐需求的，如果您设置的宽度不满足**32**对齐，则会自动向上取整。例如您设置了  
 宽度为`720`，高度为`480`的输出，实际`VPS`输出的宽度会是`736`。**绑定情况**下这种情况会在调用库里面**自动**处理  
-对于**非绑定情况**下手动处理帧buffer时就要注意宽度对齐问题，以及在这种非对齐情况下将帧传给显示模块时会出现**花屏、绿线**的情况。
+对于**非绑定情况**下手动处理帧 buffer 时就要注意宽度对齐问题，以及在这种非对齐情况下将帧传给显示模块时会出现**花屏、绿线**的情况。
 
 :::
 
@@ -154,23 +154,23 @@ sidebar_position: 1
 
 - `obj`： 已经初始化的`VIO`对象指针
 - `pipe_id`：支持多次打开，通过`pipe_id`进行区分。
-- `chn_num`：设置输出图像数量，最大为5，与设置的目标高宽数组大小有关
-- `proc_mod`：处理模式，当前支持：`SP_VPS_SCALE` 仅缩放、`SP_VPS_SCALE_CROP` 缩放并裁剪、`SP_VPS_SCALE_ROTATE` 缩放并旋转、`SP_VPS_SCALE_ROTATE_CROP` 缩放之后旋转并裁剪, X5仅支持缩放和裁剪
+- `chn_num`：设置输出图像数量，最大为 5，与设置的目标高宽数组大小有关
+- `proc_mod`：处理模式，当前支持：`SP_VPS_SCALE` 仅缩放、`SP_VPS_SCALE_CROP` 缩放并裁剪、`SP_VPS_SCALE_ROTATE` 缩放并旋转、`SP_VPS_SCALE_ROTATE_CROP` 缩放之后旋转并裁剪, X5 仅支持缩放和裁剪
 - `src_width`：原始帧宽度
 - `src_height`：原始帧高度
 - `dst_width`：配置目标输出宽度的数组地址
 - `dst_height`：配置目标输出高度的数组地址
-- `crop_x`：裁剪区域的左上角x坐标集合，当`proc_mod`没有设置裁剪功能时，传入`NULL`
-- `crop_y`：裁剪区域的左上角y坐标集合，当`proc_mod`没有设置裁剪功能时，传入`NULL`
+- `crop_x`：裁剪区域的左上角 x 坐标集合，当`proc_mod`没有设置裁剪功能时，传入`NULL`
+- `crop_y`：裁剪区域的左上角 y 坐标集合，当`proc_mod`没有设置裁剪功能时，传入`NULL`
 - `crop_width`：裁剪区域的宽度，当`proc_mod`没有设置裁剪功能时，传入`NULL`
 - `crop_height`：裁剪区域的高度，当`proc_mod`没有设置裁剪功能时，传入`NULL`
-- `rotate`：旋转角度集合（仅X3支持），目前支持`ROTATION_90` 90°、`ROTATION_180` 180°和`ROTATION_270` 270°，当`proc_mod`没有设置旋转功能时，传入`NULL`
+- `rotate`：旋转角度集合（仅 X3 支持），目前支持`ROTATION_90` 90°、`ROTATION_180` 180°和`ROTATION_270` 270°，当`proc_mod`没有设置旋转功能时，传入`NULL`
 
 :::info 注意！
 
 `X3`芯片对于`VPS`输出的宽度是有对齐需求的，如果您设置的宽度不满足**32**对齐，则会自动向上取整。例如您设置了  
 宽度为`720`，高度为`480`的输出，实际`VPS`输出的宽度会是`736`。**绑定情况**下这种情况会在调用库里面**自动**处理  
-对于**非绑定情况**下手动处理帧buffer时就要注意宽度对齐问题，以及在这种非对齐情况下将帧传给显示模块时会出现**花屏、绿线**的情况。
+对于**非绑定情况**下手动处理帧 buffer 时就要注意宽度对齐问题，以及在这种非对齐情况下将帧传给显示模块时会出现**花屏、绿线**的情况。
 
 :::
 
@@ -180,10 +180,10 @@ sidebar_position: 1
 
 - 最大处理能力: 3840x2160@60fps
 - 支持输入裁剪，分别在水平和垂直方向上进行缩放，并且对色度和亮度分量进行单独处理
-- 5个 downscale 通道
+- 5 个 downscale 通道
 - - 最大分辨率支持分别为 4K/1080P/1080P/720P/720P
 - - 最小分辨率为 64x64，支持任意 downscale factor
-- 1个 upscale 通道
+- 1 个 upscale 通道
 - - 最大分辨率支持 4K，最大放大倍数 4X, 放大倍数支持 0 - 4
 
 
@@ -199,7 +199,7 @@ sidebar_position: 1
 
 **【功能描述】**  
 
-根据传入的 `obj` 是打开的 `camera` 还是 `vps`决定关闭camera还是vps模块。
+根据传入的 `obj` 是打开的 `camera` 还是 `vps`决定关闭 camera 还是 vps 模块。
 
 **【参数】**
 
@@ -222,53 +222,9 @@ sidebar_position: 1
 **【参数】**
 
 - `obj`： 已经初始化的`VIO`对象指针
-- `frame_buffer`：已经预分配内存的buffer指针，用于保存获取出来的图片，目前获取到的图像都是`NV12`格式，所以预分配内存大小可以由公式`高 * 宽 * 3 / 2 `，也可以利用提供的宏定义 `FRAME_BUFFER_SIZE(w, h)`进行内存大小计算
+- `frame_buffer`：已经预分配内存的 buffer 指针，用于保存获取出来的图片，目前获取到的图像都是`NV12`格式，所以预分配内存大小可以由公式`高 * 宽 * 3 / 2 `，也可以利用提供的宏定义 `FRAME_BUFFER_SIZE(w, h)`进行内存大小计算
 - `width`：`image_buffer`保存图片的宽，必须是在`sp_open_camera`或者`sp_open_vps`配置好的输出宽
 - `height`：`image_buffer`保存图片的高，必须是在`sp_open_camera`或者`sp_open_vps`配置好的输出高
-- `timeout`：获取图片的超时时间，单位为`ms`，一般设置为`2000`
-
-**【返回类型】**  
-
-成功返回 0，失败返回 -1 
-
-## sp_vio_get_raw  
-
-**【函数原型】**  
-
-`int32_t sp_vio_get_raw(void *obj, char *frame_buffer, int32_t width, int32_t height, const int32_t timeout)`
-
-**【功能描述】**  
-
-获取摄像头的raw图数据
-
-**【参数】**
-
-- `obj`： 已经初始化的`VIO`对象指针
-- `frame_buffer`：已经预分配内存的buffer指针，用于保存获取出来的raw图，预分配内存字节大小可以由公式`(高 * 宽 * 图像深度)/8`计算得出
-- `width`：获取raw图时传`NULL`
-- `height`：获取raw图时传`NULL`
-- `timeout`：获取图片的超时时间，单位为`ms`，一般设置为`2000`
-
-**【返回类型】**  
-
-成功返回 0，失败返回 -1 
-
-## sp_vio_get_yuv  
-
-**【函数原型】**  
-
-`int32_t sp_vio_get_yuv(void *obj, char *frame_buffer, int32_t width, int32_t height, const int32_t timeout)`
-
-**【功能描述】**  
-
-获取摄像头的ISP模块的YUV数据
-
-**【参数】**
-
-- `obj`： 已经初始化的`VIO`对象指针
-- `frame_buffer`：已经预分配内存的buffer指针，用于保存获取出来的图片，目前获取到的图像都是`NV12`格式，所以预分配内存大小可以由公式`高 * 宽 * 3 / 2 `，也可以利用提供的宏定义 `FRAME_BUFFER_SIZE(w, h)`进行内存大小计算
-- `width`：获取ISP的YUV数据时传`NULL`
-- `height`：获取ISP的YUV数据传`NULL`
 - `timeout`：获取图片的超时时间，单位为`ms`，一般设置为`2000`
 
 **【返回类型】**  
@@ -294,4 +250,50 @@ sidebar_position: 1
 **【返回类型】**  
 
 成功返回 0，失败返回 -1
+
+
+## sp_vio_get_raw  
+
+**【函数原型】**  
+
+`int32_t sp_vio_get_raw(void *obj, char *frame_buffer, int32_t width, int32_t height, const int32_t timeout)`
+
+**【功能描述】**  
+
+获取摄像头的 raw 图数据
+
+**【参数】**
+
+- `obj`： 已经初始化的`VIO`对象指针
+- `frame_buffer`：已经预分配内存的 buffer 指针，用于保存获取出来的 raw 图，预分配内存字节大小可以由公式`(高 * 宽 * 图像深度)/8`计算得出
+- `width`：获取 raw 图时传`NULL`
+- `height`：获取 raw 图时传`NULL`
+- `timeout`：获取图片的超时时间，单位为`ms`，一般设置为`2000`
+
+**【返回类型】**  
+
+成功返回 0，失败返回 -1 
+
+## sp_vio_get_yuv  
+
+**【函数原型】**  
+
+`int32_t sp_vio_get_yuv(void *obj, char *frame_buffer, int32_t width, int32_t height, const int32_t timeout)`
+
+**【功能描述】**  
+
+获取摄像头的 ISP 模块的 YUV 数据
+
+**【参数】**
+
+- `obj`： 已经初始化的`VIO`对象指针
+- `frame_buffer`：已经预分配内存的 buffer 指针，用于保存获取出来的图片，目前获取到的图像都是`NV12`格式，所以预分配内存大小可以由公式`高 * 宽 * 3 / 2 `，也可以利用提供的宏定义 `FRAME_BUFFER_SIZE(w, h)`进行内存大小计算
+- `width`：获取 ISP 的 YUV 数据时传`NULL`
+- `height`：获取 ISP 的 YUV 数据传`NULL`
+- `timeout`：获取图片的超时时间，单位为`ms`，一般设置为`2000`
+
+**【返回类型】**  
+
+成功返回 0，失败返回 -1 
+
 

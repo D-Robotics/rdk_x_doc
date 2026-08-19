@@ -9,10 +9,10 @@ sidebar_position: 1
 
 ## 有线网络：RDK X5（>= 3.3.0）RDK X3（>= 3.0.2）
 
-开发板有线网络默认采用静态IP配置，初始IP地址为`192.168.127.10`。用户可通过如下方法实现静态、DHCP模式的切换。
+开发板有线网络默认采用静态 IP 配置，初始 IP 地址为`192.168.127.10`。用户可通过如下方法实现静态、DHCP 模式的切换。
 
-### [shell]修改静态IP配置
-开发板静态网络配置保存在`/etc/NetworkManager/system-connections/netplan-eth0.nmconnection`文件中，通过修改`address1`字段，可完成对静态IP配置的修改，`route-metri`是网络优先级配置，设置为`700`是为了让有线网络的优先级更低，当有线和无线网络同时使能时优先会使用无线网络。
+### [shell]修改静态 IP 配置
+开发板静态网络配置保存在`/etc/NetworkManager/system-connections/netplan-eth0.nmconnection`文件中，通过修改`address1`字段，可完成对静态 IP 配置的修改，`route-metri`是网络优先级配置，设置为`700`是为了让有线网络的优先级更低，当有线和无线网络同时使能时优先会使用无线网络。
 
 ```shell
 sudo vim /etc/NetworkManager/system-connections/netplan-eth0.nmconnection
@@ -44,7 +44,7 @@ method=ignore
 
 修改完成后，命令行输入`sudo restart_network`命令让配置生效。
 
-### [shell]修改DHCP配置
+### [shell]修改 DHCP 配置
 
 修改`[ipv4]`字段，只保留`method=auto`和`route-metric=700`
 
@@ -54,9 +54,9 @@ method=auto
 route-metric=700
 ```
 
-修改完成后，命令行输入sudo restart_network命令让配置生效。
+修改完成后，命令行输入 sudo restart_network 命令让配置生效。
 
-### [shell]修改MAC地址配置
+### [shell]修改 MAC 地址配置
 
 修改`[ethernet]`字段，添加`cloned-mac-address=12:34:56:78:9A:BA`
 
@@ -66,9 +66,9 @@ cloned-mac-address=12:34:56:78:9A:BA
 wake-on-lan=0
 ```
 
-修改完成后，reboot重启让配置生效。
+修改完成后，reboot 重启让配置生效。
 
-### [桌面]修改静态IP配置
+### [桌面]修改静态 IP 配置
 
 ![image-edid](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/network/image-edid.png)
 
@@ -76,11 +76,11 @@ wake-on-lan=0
 
 ![image-setip](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/network/image-setip.png)
 
-### [桌面]修改DHCP配置
+### [桌面]修改 DHCP 配置
 
 ![image-dhcp](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/network/image-dhcp.png)
 
-### [桌面]修改MAC地址配置
+### [桌面]修改 MAC 地址配置
 
 ![image-mac](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/network/image-mac.png)
 
@@ -94,10 +94,10 @@ wake-on-lan=0
 
 Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=11
 
-开发板有线网络默认采用静态IP配置，初始IP地址为`192.168.127.10`。用户可通过如下方法实现静态、DHCP模式的切换。
+开发板有线网络默认采用静态 IP 配置，初始 IP 地址为`192.168.127.10`。用户可通过如下方法实现静态、DHCP 模式的切换。
 
-### 修改静态IP配置 
-开发板静态网络配置保存在`/etc/network/interfaces`文件中，通过修改`address`、`netmask`、`gateway`等字段，可完成对静态IP配置的修改，`metric`是网络优先级配置，设置为`700`是为了让有线网络的优先级更低，当有线和无线网络同时使能时优先会使用无线网络，例如：
+### 修改静态 IP 配置 
+开发板静态网络配置保存在`/etc/network/interfaces`文件中，通过修改`address`、`netmask`、`gateway`等字段，可完成对静态 IP 配置的修改，`metric`是网络优先级配置，设置为`700`是为了让有线网络的优先级更低，当有线和无线网络同时使能时优先会使用无线网络，例如：
 
 ```shell
 sudo vim /etc/network/interfaces
@@ -118,10 +118,10 @@ iface eth0 inet static
 
 修改完成后，命令行输入`sudo restart_network`命令让配置生效。
 
-### 修改DHCP配置
-DHCP(Dynamic Host Configuration Protocol，动态主机配置协议)通常被应用在局域网络环境中，主要作用是集中的管理、分配IP地址，使网络环境中的主机动态的获得IP地址、Gateway地址、DNS服务器地址等信息，并能够提升地址的使用率。
+### 修改 DHCP 配置
+DHCP(Dynamic Host Configuration Protocol，动态主机配置协议)通常被应用在局域网络环境中，主要作用是集中的管理、分配 IP 地址，使网络环境中的主机动态的获得 IP 地址、Gateway 地址、DNS 服务器地址等信息，并能够提升地址的使用率。
 
-开发板的DHCP网络配置保存在`/etc/network/interfaces`文件，通过修改eth0相关配置，可完成对DHCP模式的修改，例如：
+开发板的 DHCP 网络配置保存在`/etc/network/interfaces`文件，通过修改 eth0 相关配置，可完成对 DHCP 模式的修改，例如：
 
 ```shell
 sudo vim /etc/network/interfaces
@@ -138,8 +138,8 @@ iface eth0 inet dhcp
 
 修改完成后，命令行输入`sudo restart_network`命令让配置生效。
 
-### 修改MAC地址配置
-如需修改开发板默认MAC地址，可通过在`/etc/network/interfaces`文件中增加`pre-up`配置信息，指定用户需要的MAC地址，例如：
+### 修改 MAC 地址配置
+如需修改开发板默认 MAC 地址，可通过在`/etc/network/interfaces`文件中增加`pre-up`配置信息，指定用户需要的 MAC 地址，例如：
 
 ```shell
 sudo vim /etc/network/interfaces
@@ -165,17 +165,17 @@ iface eth0 inet static
 
 Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=12
 
-开发板集成了2.4GHz无线WiFi模块，支持Soft AP和Station两种模式，默认运行在Station模式下。下面介绍两种模式的使用方法。
+开发板集成了 2.4GHz 无线 WiFi 模块，支持 Soft AP 和 Station 两种模式，默认运行在 Station 模式下。下面介绍两种模式的使用方法。
 
-### Station模式
-Station模式下，开发板作为客户端，接入路由器无线热点进行联网。
+### Station 模式
+Station 模式下，开发板作为客户端，接入路由器无线热点进行联网。
 
-- 对于使用Ubuntu Desktop版本系统的用户，可点击桌面右上角Wi-Fi图标，选择对应热点并输入密码以完成网络配置，如下图：  
+- 对于使用 Ubuntu Desktop 版本系统的用户，可点击桌面右上角 Wi-Fi 图标，选择对应热点并输入密码以完成网络配置，如下图：  
 ![image-wifi-config](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/network/image-wifi-config.jpeg)
 
 
 
-- 对于使用Ubuntu Server版本系统的用户，可通过命令行完成无线网络配置，步骤如下：
+- 对于使用 Ubuntu Server 版本系统的用户，可通过命令行完成无线网络配置，步骤如下：
 
 1. 使用`sudo nmcli device wifi rescan`命令扫描热点。如返回如下信息，说明扫描过于频繁，需要稍后再试
     ```shell
@@ -197,9 +197,9 @@ Station模式下，开发板作为客户端，接入路由器无线热点进行�
     ```
     :::
 
-### Soft AP模式
+### Soft AP 模式
 
-开发板无线网络默认运行在Station模式下，如需使用Soft AP模式，请按照以下步骤进行配置。
+开发板无线网络默认运行在 Station 模式下，如需使用 Soft AP 模式，请按照以下步骤进行配置。
 
 1. 安装`hostapd` 和 `isc-dhcp-server`
 
@@ -250,7 +250,7 @@ Station模式下，开发板作为客户端，接入路由器无线热点进行�
     wpa_passphrase=12345678
     ```
 
-      - RDK X5 可以配置5G的热点，请在`hostapd.conf`文件修改`hw_mode`和`channel`字段：
+      - RDK X5 可以配置 5G 的热点，请在`hostapd.conf`文件修改`hw_mode`和`channel`字段：
 
     ```shell
     channel=36
@@ -302,11 +302,11 @@ Station模式下，开发板作为客户端，接入路由器无线热点进行�
     wlan0: interface state UNINITIALIZED->ENABLED
     wlan0: AP-ENABLED
    ```
-   - 通过`ifconfig`命令，配置无线接口`wlan0`的IP和网段，注意要跟第三步的配置保持一致
+   - 通过`ifconfig`命令，配置无线接口`wlan0`的 IP 和网段，注意要跟第三步的配置保持一致
     ```bash
     sudo ifconfig wlan0 10.5.5.1 netmask 255.255.255.0
     ```
-   - 最后开启`dhcp`服务器，连上热点会从`10.5.5.100`到`10.5.5.255`之间分配一个ip地址给客户端
+   - 最后开启`dhcp`服务器，连上热点会从`10.5.5.100`到`10.5.5.255`之间分配一个 ip 地址给客户端
     ```bash
     sudo ifconfig wlan0 10.5.5.1 netmask 255.255.255.0
     sudo systemctl start isc-dhcp-server
@@ -364,23 +364,23 @@ Station模式下，开发板作为客户端，接入路由器无线热点进行�
     wifi_connect "WiFi-Test" "12345678"
     ```
 
-### Soft AP模式（NetworkManager）：RDK X5（>= 3.3.0）RDK X3（>= 3.0.2）
+### Soft AP 模式（NetworkManager）：RDK X5（>= 3.3.0）RDK X3（>= 3.0.2）
 
-新版本系统也可以使用NetworkManager来建立您的wifi热点。
+新版本系统也可以使用 NetworkManager 来建立您的 wifi 热点。
 
 点击桌面右上角的无线网络图标，选择`Edit Connections...`
 
 ![image-wifi1](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/hardware_interface/image-wifi1.png)
 
-点击左下角+号，Connection Type选择`Wi-Fi`
+点击左下角+号，Connection Type 选择`Wi-Fi`
 
 ![image-wifi2](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/hardware_interface/image-wifi2.png)
 
-`Wi-Fi`标签下，填写SSID Mode Band
+`Wi-Fi`标签下，填写 SSID Mode Band
 
-SSID填写您希望的热点名称
+SSID 填写您希望的热点名称
 
-Mode选择`Hotspot`
+Mode 选择`Hotspot`
 
 Band 可以选择`Automatic`,`A(5 GHz)`或 `B/G（2.4 GHz)`
 
@@ -392,20 +392,20 @@ Band 可以选择`Automatic`,`A(5 GHz)`或 `B/G（2.4 GHz)`
 
 重启板卡，或者`restart_network`让配置生效
 
-## DNS服务
+## DNS 服务
 
 Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=13
 
-DNS(Domain Name Server)是进行域名(domain name)和与之相对应的IP地址转换的服务器。
+DNS(Domain Name Server)是进行域名(domain name)和与之相对应的 IP 地址转换的服务器。
 
-开发板DNS配置通过`/etc/systemd/resolved.conf`文件管理，用户可通过修改该文件完成DNS相关配置，步骤如下：
-1. 修改`resolved.conf`文件，添加DNS服务器地址，例如：
+开发板 DNS 配置通过`/etc/systemd/resolved.conf`文件管理，用户可通过修改该文件完成 DNS 相关配置，步骤如下：
+1. 修改`resolved.conf`文件，添加 DNS 服务器地址，例如：
 
     ```bash
     DNS=8.8.8.8 114.114.114.114
     ```
 
-2. 通过如下命令，使能DNS配置：
+2. 通过如下命令，使能 DNS 配置：
 
     ```bash
     sudo systemctl restart systemd-resolved
@@ -417,7 +417,7 @@ DNS(Domain Name Server)是进行域名(domain name)和与之相对应的IP地址
 ##  系统更新
 出于系统安全、稳定性的考虑，推荐用户安装完系统后，通过`apt`命令对系统进行更新。
 
-在`/etc/apt/source.list`文件中，保存了`apt`命令的软件源列表，在安装软件前，需要先通过`apt`命令更新package列表。
+在`/etc/apt/source.list`文件中，保存了`apt`命令的软件源列表，在安装软件前，需要先通过`apt`命令更新 package 列表。
 
 首先打开终端命令行，输入如下命令：
 ```bash
@@ -431,7 +431,7 @@ sudo apt full-upgrade
 :::tip
 推荐使用`full-upgrade`而不是`upgrade`选项，这样当相关依赖发生变动时，也会同步更新依赖包。
 
-当运行`sudo apt full-upgrade`命令时，系统会提示数据下载和磁盘占用大小，但是`apt`不会检查磁盘空间是否充足，建议用户通过`df -h`命令手动检查。此外，升级过程中下载的deb文件会保存在`/var/cache/apt/archives`目录中，用户可以通过`sudo apt clean`命令删除缓存文件以释放磁盘空间。
+当运行`sudo apt full-upgrade`命令时，系统会提示数据下载和磁盘占用大小，但是`apt`不会检查磁盘空间是否充足，建议用户通过`df -h`命令手动检查。此外，升级过程中下载的 deb 文件会保存在`/var/cache/apt/archives`目录中，用户可以通过`sudo apt clean`命令删除缓存文件以释放磁盘空间。
 :::
 
 执行`apt full-upgrade`命令后，可能会重新安装驱动、内核文件和部分系统软件，建议用户手动重启设备使更新生效，命令如下：
@@ -451,12 +451,12 @@ sudo reboot
 如果开发板蓝牙功能默认没有开启，`hciconfig`查看不到设备，可以执行 `/usr/bin/startbt.sh`脚本进行初始化，该脚本完成以下工作：
 
 - 完成蓝牙初始化
-- 执行 `hciconfig hci0 up`  完成蓝牙的Link Up
+- 执行 `hciconfig hci0 up`  完成蓝牙的 Link Up
 - 执行 `hciconfig hci0 piscan` 进行蓝牙扫描
 
 Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=9
 
-脚本执行成功后的log如下：
+脚本执行成功后的 log 如下：
 
 ![image-20220601172145987](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/hardware_interface/image-20220601172145987.png)
 
@@ -481,15 +481,15 @@ ps ax | grep "/usr/bin/dbus-daemon\|/usr/lib/bluetooth/bluetoothd"
 
 - ‌基础通信模式（UART Only）‌
 - - 接口引脚：`BT_RX` `BT_TX`
-- - 功能特性：基于UART的异步串行数据通信（如AT指令交互、低速率数据传输），无流控机制，在波特率超载或持续大数据量传输时，存在数据包丢失及缓冲区溢出风险。
+- - 功能特性：基于 UART 的异步串行数据通信（如 AT 指令交互、低速率数据传输），无流控机制，在波特率超载或持续大数据量传输时，存在数据包丢失及缓冲区溢出风险。
 - ‌增强型传输模式（增加硬件流控）‌
 - - 接口引脚：`BT_RX` `BT_TX` `BT_CTS` `BT_RTS`
-- - 功能特性：可有效避免数据包丢失及缓冲区溢出风险，支持A2DP高保真单向音频流传输。
-- 语音通信模式（PCM同步接口）
+- - 功能特性：可有效避免数据包丢失及缓冲区溢出风险，支持 A2DP 高保真单向音频流传输。
+- 语音通信模式（PCM 同步接口）
 - - 接口引脚：`PCM_SYNC` `PCM_DIN` `PCM_CLK` `PCM_DOUT`
-- - 功能特性：支持基于SCO链路的实时双向音频传输，比如HPF/HSP
+- - 功能特性：支持基于 SCO 链路的实时双向音频传输，比如 HPF/HSP
 
-### USB蓝牙
+### USB 蓝牙
 
 如需深入使用蓝牙功能，例如在 `SPP（蓝牙虚拟串口）` 模式下实现高速稳定通信、在 `PAN（蓝牙虚拟网卡）` 模式下保证带宽质量，或在 `A2DP（高保真单向音频流）` 模式下避免音频中断，建议优先使用 `USB 接口蓝牙模块`。
 

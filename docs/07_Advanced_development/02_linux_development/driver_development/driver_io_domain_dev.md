@@ -2,16 +2,16 @@
 sidebar_position: 6
 ---
 
-# IO-DOMAIN调试指南
+# IO-DOMAIN 调试指南
 
-IO-Domain用来配置X3J3部分模块的电压域，以RGMII接口为例，如果电路设计时外接电压域为3.3V，则需要配置RGMII模块的IO-DOMAIN为3.3V，如果电路设计时外接电压域为1.8V，则需要配置为1.8v，需要注意的是：
+IO-Domain 用来配置 X3J3 部分模块的电压域，以 RGMII 接口为例，如果电路设计时外接电压域为 3.3V，则需要配置 RGMII 模块的 IO-DOMAIN 为 3.3V，如果电路设计时外接电压域为 1.8V，则需要配置为 1.8v，需要注意的是：
 
--   外接电压域为3.3V而对应的IO-DOMAIN配置为1.8V时，可能会对芯片有损伤；
--   外接电压域为1.8V而对应的IO-DOMAIN配置为3.3V时，相应的模块可能无法正常工作；
+-   外接电压域为 3.3V 而对应的 IO-DOMAIN 配置为 1.8V 时，可能会对芯片有损伤；
+-   外接电压域为 1.8V 而对应的 IO-DOMAIN 配置为 3.3V 时，相应的模块可能无法正常工作；
 
 ## 管脚查询
 
-IO管脚的复用和配置可以在 [datasheets](https://archive.d-robotics.cc/downloads/datasheets/) 查阅《PL-2500-3-X3 PIN SW Reg-V1.2.xls》 和《RM-2500-5-X3M Register Reference Manual-GPIO&PIN-V1.1.pdf》。
+IO 管脚的复用和配置可以在 [datasheets](https://archive.d-robotics.cc/downloads/datasheets/) 查阅《PL-2500-3-X3 PIN SW Reg-V1.2.xls》 和《RM-2500-5-X3M Register Reference Manual-GPIO&PIN-V1.1.pdf》。
 
 在 《PL-2500-3-X3 PIN SW Reg-V1.2.xls》可以比较直观的查询到管脚的上电默认状态、复用、驱动能力、上下拉、施密特触发配置。
 
@@ -26,7 +26,7 @@ drivers/pinctrl/pinctrl-single.c # pinctrl 驱动代码源文件
 include/linux/platform_data/pinctrl-single.h # pinctrl 驱动代码头文件
 ```
 
-### IO-DOMAIN的DTS
+### IO-DOMAIN 的 DTS
 
 ```c
 /* arch/arm64/boot/dts/hobot/hobot-pinctrl-xj3.dtsi */
@@ -63,11 +63,11 @@ pinctrl_voltage: pinctrl_voltag@0xA6003000 {
 };
 ```
 
-由于IO-DOMAIN在Pinctrl-single的框架下实现，因此其DTS和Pinctrl的类似，在IO-DOMAIN的DTS里已经列出了所有模块1.8V和3.3V的配置组，客户一般不需要修改，在具体开发时根据实际情况选择使用即可。
+由于 IO-DOMAIN 在 Pinctrl-single 的框架下实现，因此其 DTS 和 Pinctrl 的类似，在 IO-DOMAIN 的 DTS 里已经列出了所有模块 1.8V 和 3.3V 的配置组，客户一般不需要修改，在具体开发时根据实际情况选择使用即可。
 
-### 驱动调用时DTS配置
+### 驱动调用时 DTS 配置
 
-和Pinctrl的使用方法类似，驱动在自己的DTS中引用需要配置的IO-DOMAIN，以bt1120驱动为例，配置如下：
+和 Pinctrl 的使用方法类似，驱动在自己的 DTS 中引用需要配置的 IO-DOMAIN，以 bt1120 驱动为例，配置如下：
 
 ```c
 xxx: xxx@0xA6000000 {
@@ -81,7 +81,7 @@ xxx: xxx@0xA6000000 {
 
 ### 驱动调用示例代码
 
-和Pinctrl调用方法一致，驱动先通过Pinctrl-names查找对应的pinctrl state，然后再切换到对应的state。
+和 Pinctrl 调用方法一致，驱动先通过 Pinctrl-names 查找对应的 pinctrl state，然后再切换到对应的 state。
 
 ```c
 static int hobot_xxx_probe(struct platform_device *pdev)
@@ -113,9 +113,9 @@ static int hobot_xxx_probe(struct platform_device *pdev)
 }
 ```
 
-## uboot下修改电压域
+## uboot 下修改电压域
 
-在uboot源码 board/hobot/xj3/xj3.c 文件中，根据硬件实际电压情况，调用init_io_vol接口配置电压域，如果硬件上面管脚的电源域是1.8v那么改管脚对应的位是1，如果是3.3v则该管脚对应的bit是0，最后面把拼成的16进制值value写入base+0x170和base+0x174中（base： 0xA6003000），寄存器详细说明可以查阅《RM-2500-5-X3 Register Reference Manual-GPIO&PIN-V1.1.pdf》
+在 uboot 源码 board/hobot/xj3/xj3.c 文件中，根据硬件实际电压情况，调用 init_io_vol 接口配置电压域，如果硬件上面管脚的电源域是 1.8v 那么改管脚对应的位是 1，如果是 3.3v 则该管脚对应的 bit 是 0，最后面把拼成的 16 进制值 value 写入 base+0x170 和 base+0x174 中（base： 0xA6003000），寄存器详细说明可以查阅《RM-2500-5-X3 Register Reference Manual-GPIO&PIN-V1.1.pdf》
 
 ```c
 int init_io_vol(void)

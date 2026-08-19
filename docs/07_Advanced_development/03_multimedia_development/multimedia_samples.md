@@ -3,12 +3,12 @@ sidebar_position: 2
 ---
 
 # 7.3.2 示例程序
-本章简述D-Robotics 多媒体应用示例，所涉及源码可以通过 sudo apt install hobot-multimedia-samples 获得，安装在 /app/multimedia_samples 目录下。
+本章简述 D-Robotics 多媒体应用示例，所涉及源码可以通过 sudo apt install hobot-multimedia-samples 获得，安装在 /app/multimedia_samples 目录下。
 ## get_sif_data 使用说明{#get_sif_data}
 
 ### 程序功能
 
-下图所示为X3M的视频数据通路框图，其中的专业名词解释请查看 [多媒体开发概述-术语约定](./overview#terminology)。
+下图所示为 X3M 的视频数据通路框图，其中的专业名词解释请查看 [多媒体开发概述-术语约定](./overview#terminology)。
 
 ![image-20220517184132422](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/multimedia_samples/image-20220517184132422.png)
 
@@ -39,7 +39,7 @@ sidebar_position: 2
 
 #### 编译
 
-当前代码通过一个Makefile文件配置编译
+当前代码通过一个 Makefile 文件配置编译
 
 进入源码目录，执行以下命令进行编译生成`get_sif_data`程序
 
@@ -53,11 +53,11 @@ $ ls
 get_sif_data  main.c  main.o  Makefile  module.c  module.h  module.o  Readme.md  sensor_handle.c  sensor_handle.h  sensor_handle.o  sensors  sensors.lds
 ```
 
-#### 添加新sensor
+#### 添加新 sensor
 
-如果有新sensor需要调试，请参考 sensors 目录下的源码文件，对应添加一个新的sensor配置即可。
+如果有新 sensor 需要调试，请参考 sensors 目录下的源码文件，对应添加一个新的 sensor 配置即可。
 
-以F37为例说明关键代码：
+以 F37 为例说明关键代码：
 
 ```c
 /* 
@@ -116,7 +116,7 @@ RDK X3 开发板通过`mipi host`接口用于连接`Sensor`模组，请根据当
 
 #### 程序部署
 
-按照上面的编译流程生成出`get_sif_data`后，执行该程序，根据提示选择当前连接在开发板上的sensor类别，比如当前连接的是 `F37 sensor`，则选择 1。 
+按照上面的编译流程生成出`get_sif_data`后，执行该程序，根据提示选择当前连接在开发板上的 sensor 类别，比如当前连接的是 `F37 sensor`，则选择 1。 
 
 如果初始化成功，会自动获取第一帧图像（pipe0_plane0_1920x1080_frame_001.raw）保存在程序运行的目录下（退出程序后执行 ls -l pipe0_plane0_1920x1080_frame_* 可以查看），并打印用户可以使用的命令，运行过程如下：
 
@@ -162,7 +162,7 @@ time cost 67 ms
 dumpToFile raw cost time 67 ms
 ```
 
-- l： 连续获取12帧图像，相当于输入12个 `g`
+- l： 连续获取 12 帧图像，相当于输入 12 个 `g`
 
 
 ```bash
@@ -211,15 +211,15 @@ quit
 
 请使用 [hobotplayer](https://archive.d-robotics.cc/downloads/hobotplayer/hobotplayerv.2.07.1.rar) 工具浏览图像，图像的参数配置说明如下：
 
-- 浏览RAW图
+- 浏览 RAW 图
 
-按照如下图所示步骤配置选项，其中`file config`里面关注`pic_type`、`raw_type`、 `pix_length` 、`width`和`height`的配置，F37 配置为（PIC_RAW、MIPI_RAW、RAW_BIT_10， 1920，1080），IMX415配置为（PIC_RAW、MIPI_RAW、RAW_BIT_12， 3840，2160）
+按照如下图所示步骤配置选项，其中`file config`里面关注`pic_type`、`raw_type`、 `pix_length` 、`width`和`height`的配置，F37 配置为（PIC_RAW、MIPI_RAW、RAW_BIT_10， 1920，1080），IMX415 配置为（PIC_RAW、MIPI_RAW、RAW_BIT_12， 3840，2160）
 
 ![image-20220517211101610](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/multimedia_samples/image-20220517211101610.png)
 
-- 浏览YUV图
+- 浏览 YUV 图
 
-按照如下图所示步骤配置选项，其中`file config`里面关注`pic_type`、`yuv_type`、`width`和`height`的配置，F37 配置为（PIC_YUV、YUV_NV12， 1920，1080），IMX415配置为（YUV_NV12， 3840，2160）
+按照如下图所示步骤配置选项，其中`file config`里面关注`pic_type`、`yuv_type`、`width`和`height`的配置，F37 配置为（PIC_YUV、YUV_NV12， 1920，1080），IMX415 配置为（YUV_NV12， 3840，2160）
 
 ![image-20220517212105959](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/multimedia_samples/image-20220517212105959.png)
 
@@ -227,13 +227,13 @@ quit
 
 ### 程序功能
 
-下图所示为X3M的视频数据通路框图，其中的专业名词解释请查看 [多媒体开发概述-术语约定](./overview#terminology)。
+下图所示为 X3M 的视频数据通路框图，其中的专业名词解释请查看 [多媒体开发概述-术语约定](./overview#terminology)。
 
 ![image-20220517184132422](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/multimedia_samples/image-20220517184132422.png)
 
 `get_isp_data` 完成 `sensor` 、`MIPI CSI`  `SIF` 和 `ISP` 模块的初始化，实现从`ISP`模块获取视频帧数据的功能，支持从`ISP`模块获取`YUV`格式的图像。
 
-`get_isp_data` 可以有效帮助用户调试`sensor`和`X3M`的ISP效果调试，在打通`sensor -> SIF -> ISP `的数据通路后，再调试其他模块的功能。
+`get_isp_data` 可以有效帮助用户调试`sensor`和`X3M`的 ISP 效果调试，在打通`sensor -> SIF -> ISP `的数据通路后，再调试其他模块的功能。
 
 ### 程序开发
 
@@ -258,7 +258,7 @@ quit
 
 #### 编译
 
-当前代码通过一个Makefile文件配置编译，进入源码目录，执行以下命令进行编译生成`get_isp_data`程序：
+当前代码通过一个 Makefile 文件配置编译，进入源码目录，执行以下命令进行编译生成`get_isp_data`程序：
 
 ```bash
 $ cd /app/multimedia_samples/get_sif_data
@@ -269,11 +269,11 @@ $ ls
 get_isp_data  main.c  main.o  Makefile  module.c  module.h  module.o  Readme.md  sensor_handle.c  sensor_handle.h  sensor_handle.o  sensors  sensors.lds
 ```
 
-#### 添加新sensor
+#### 添加新 sensor
 
-如果有新sensor需要调试，请参考 sensors 目录下的源码文件，对应添加一个新的sensor配置即可。
+如果有新 sensor 需要调试，请参考 sensors 目录下的源码文件，对应添加一个新的 sensor 配置即可。
 
-以F37为例说明关键代码：
+以 F37 为例说明关键代码：
 
 ```c
 /* 
@@ -334,7 +334,7 @@ RDK X3 开发板通过`mipi host`接口用于连接`Sensor`模组，请根据当
 
 #### 程序部署
 
-按照上面的编译流程生成出`get_isp_data`后，执行该程序，根据提示选择当前连接在开发板上的sensor类别，比如当前连接的是 `F37 sensor`，则选择 1。  
+按照上面的编译流程生成出`get_isp_data`后，执行该程序，根据提示选择当前连接在开发板上的 sensor 类别，比如当前连接的是 `F37 sensor`，则选择 1。  
 
 如果初始化成功，会自动获取第一帧图像（pipe0_1920x1080_frame_001.yuv）保存在程序运行的目录下（退出程序后执行 ls -l pipe0_1920x1080_frame_* 可以查看），并打印用户可以使用的命令，运行过程如下：
 
@@ -380,7 +380,7 @@ time cost 63 ms
 dumpToFile yuv cost time 63 ms
 ```
 
-- l： 连续获取12帧图像，相当于输入12个 `g`
+- l： 连续获取 12 帧图像，相当于输入 12 个 `g`
 
 
 ```bash
@@ -429,9 +429,9 @@ quit
 
 请使用 [hobotplayer](https://archive.d-robotics.cc/downloads/hobotplayer/hobotplayerv.2.07.1.rar) 工具浏览图像，图像的参数配置说明如下：
 
-- 浏览YUV图
+- 浏览 YUV 图
 
-按照如下图所示步骤配置选项，其中`file config`里面关注`pic_type`、`yuv_type`、`width`和`height`的配置，F37 配置为（PIC_YUV、YUV_NV12， 1920，1080），IMX415配置为（YUV_NV12， 3840，2160）
+按照如下图所示步骤配置选项，其中`file config`里面关注`pic_type`、`yuv_type`、`width`和`height`的配置，F37 配置为（PIC_YUV、YUV_NV12， 1920，1080），IMX415 配置为（YUV_NV12， 3840，2160）
 
 ![image-20220517212105959](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/multimedia_samples/image-20220517212105959.png)
 
@@ -455,7 +455,7 @@ quit
 
 #### 编译
 
-当前代码通过一个Makefile文件配置编译
+当前代码通过一个 Makefile 文件配置编译
 
 进入源码目录，执行以下命令进行编译生成 `sample_isp`
 ```
@@ -474,7 +474,7 @@ main.c  main.o  Makefile  sample_isp
 
 按照上面的编译流程生成出`sample_isp`后，运行该程序。
 
-注意此程序运行前需要有当前的sensor程序在运行中，sensor的程序可以直接使用`Sunrise_camera`, `sample_isp`运行过程如下
+注意此程序运行前需要有当前的 sensor 程序在运行中，sensor 的程序可以直接使用`Sunrise_camera`, `sample_isp`运行过程如下
 
 ```bash
 chmod +x sample_isp
@@ -528,85 +528,85 @@ ISP_TEST>
 ```
 #### 命令解释：
 
-- a： 获取/设置AE属性
+- a： 获取/设置 AE 属性
 
 - b： 示例中暂不支持
 
-- c:  获取/设置AWB属性
+- c:  获取/设置 AWB 属性
 
-- d:  获取/设置BlackLevel属性
+- d:  获取/设置 BlackLevel 属性
 
-- e:  获取/设置Demosaic属性
+- e:  获取/设置 Demosaic 属性
 
-- f:  获取/设置SHARPEN属性
+- f:  获取/设置 SHARPEN 属性
 
-- g:  获取/设置GAMMA属性
+- g:  获取/设置 GAMMA 属性
 
-- h:  获取/设置IRIDIX属性
+- h:  获取/设置 IRIDIX 属性
 
-- i:  获取/设置CNR属性
+- i:  获取/设置 CNR 属性
 
-- j:  获取/设置SINTER属性
+- j:  获取/设置 SINTER 属性
 
-- k:  获取/设置TEMPER属性
+- k:  获取/设置 TEMPER 属性
 
-- l:  获取/设置SCENE_MODES属性
+- l:  获取/设置 SCENE_MODES 属性
 
-- m:  获取/设置FWSTATE属性
+- m:  获取/设置 FWSTATE 属性
 
-- n:  获取/设置ModuleControl属性
+- n:  获取/设置 ModuleControl 属性
 
-- o:  获取/设置Register寄存器
+- o:  获取/设置 Register 寄存器
 
-- p:  注册AE回调接口
+- p:  注册 AE 回调接口
 
-- q:  注册AWB回调接口
+- q:  注册 AWB 回调接口
 
-- r:  注册AF回调接口
+- r:  注册 AF 回调接口
 
-- s:  获取AE统计信息
+- s:  获取 AE 统计信息
 
-- t:  获取AWB统计信息
+- t:  获取 AWB 统计信息
 
-- u:  获取AF统计信息
+- u:  获取 AF 统计信息
 
-- v:  获取AE_5BIN统计信息
+- v:  获取 AE_5BIN 统计信息
 
-- w:  获取最新的统计信息(代码里面默认获取AWB，可以仿照代码通过传参获取AE,AF统计信息)
+- w:  获取最新的统计信息(代码里面默认获取 AWB，可以仿照代码通过传参获取 AE,AF 统计信息)
 
-- x:  切换isp效果库(so库需要跟isp_test文件同一目录)
+- x:  切换 isp 效果库(so 库需要跟 isp_test 文件同一目录)
 
-- A:  获取/设置CSC属性
+- A:  获取/设置 CSC 属性
 
-- B:  获取/设置MESH_SHADING属性
+- B:  获取/设置 MESH_SHADING 属性
 
-- C:  获取/设置MESH SHADING LUT属性
+- C:  获取/设置 MESH SHADING LUT 属性
 
-- D:  获取/设置RADIAL SHADING属性
+- D:  获取/设置 RADIAL SHADING 属性
 
-- E:  获取/设置RADIAL SHADING LUT属性
+- E:  获取/设置 RADIAL SHADING LUT 属性
 
-- F:  获取/设置IRIDIX STRENGTH LEVEL属性
+- F:  获取/设置 IRIDIX STRENGTH LEVEL 属性
 
 - G:  获取帧同步开始/结束时间
 
-- H:  设置AWB_ZONE属性
+- H:  设置 AWB_ZONE 属性
 
-- I:  设置AF_ZONE属性
+- I:  设置 AF_ZONE 属性
 
-- L:  获取/设置AF_KERNEL_INFO属性
+- L:  获取/设置 AF_KERNEL_INFO 属性
 
-- M:  获取/设置AEROI信息
+- M:  获取/设置 AEROI 信息
 
-- N:  获取LUMA信息
+- N:  获取 LUMA 信息
 
-- O:  获取/设置AEParam信息
+- O:  获取/设置 AEParam 信息
 
-- J:  设置AE5BIN_ZONE属性
+- J:  设置 AE5BIN_ZONE 属性
 
-- K:  设置AEZONE属性
+- K:  设置 AEZONE 属性
 
-- P:  获取/设置AE额外属性
+- P:  获取/设置 AE 额外属性
 
 - y:  帮助信息
 
@@ -634,7 +634,7 @@ ISP_TEST>
 
 #### 编译
 
-当前代码通过一个Makefile文件配置编译
+当前代码通过一个 Makefile 文件配置编译
 
 进入源码目录，执行以下命令进行编译生成`sample_vps`
 
@@ -655,7 +655,7 @@ $ ls
 #### 运行效果说明
 `YUV` 图片通过回灌方式，利用 `vps` 进行裁剪，旋转，缩放等功能，保存对应处理后的 `YUV` 图像。
 * `grp_0_chn_1_out_1280_720.yuv` 为原图裁剪到 `1280x720` 分辨率；
-* `grp_0_chn_2_out_1088_1920.yuv` 为原图旋转90度的图像；
+* `grp_0_chn_2_out_1088_1920.yuv` 为原图旋转 90 度的图像；
 * `grp_0_chn_3_out_960_540.yuv` 为原图缩小到 `960x540` 分辨率；
 * `grp_0_chn_5_out_2880_1620.yuv` 为原图放大到 `2880x1620` 分辨率；
 
@@ -684,7 +684,7 @@ $ ls
 
 #### 编译
 
-当前代码通过一个Makefile文件配置编译
+当前代码通过一个 Makefile 文件配置编译
 
 进入源码目录，执行以下命令进行编译生成`sample_vps_zoom`程序：
 
@@ -707,7 +707,7 @@ $ ls
 
 #### 运行效果说明
 
-`YUV` 图片通过回灌方式，利用 `ipu`, `pym`, `venc` 模块编码成平滑放大的zoom `H264` 码流。效果如下所示。
+`YUV` 图片通过回灌方式，利用 `ipu`, `pym`, `venc` 模块编码成平滑放大的 zoom `H264` 码流。效果如下所示。
 
 ![vps_1_chn_5_venc_0.h264_20230523_143448](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/03_multimedia_development/multimedia_samples/vps_1_chn_5_venc_0.h264_20230523_143448.gif)
 
@@ -732,7 +732,7 @@ $ ls
 
 #### 编译
 
-当前代码通过一个Makefile文件配置编译
+当前代码通过一个 Makefile 文件配置编译
 
 进入源码目录，执行以下命令进行编译生成`sample_osd`程序
 
@@ -790,7 +790,7 @@ $ ls
 
 #### 编译
 
-当前代码通过一个Makefile文件配置编译
+当前代码通过一个 Makefile 文件配置编译
 
 进入源码目录，执行以下命令进行编译生成`sample_venc_basic`、`sample_vdec_basic`、`sample_vdec_two_channel`、`sample_venc_two_channel`程序
 
@@ -812,13 +812,13 @@ example_vdec_two_channel  example_venc_two_channel  README.md  sample_vdec_basic
 
 执行 `./sample_vdec_basic -w width -h height -t ecode_type -f file`
 
-其中width为图像宽所包含像素个数
+其中 width 为图像宽所包含像素个数
 
-height为为图像高所包含的像素格式
+height 为为图像高所包含的像素格式
 
-encode_type可以为h264\h265\jpeg
+encode_type 可以为 h264\h265\jpeg
 
-file为要解码的文件名
+file 为要解码的文件名
 
 #### sample_venc_basic
 
@@ -826,15 +826,15 @@ file为要解码的文件名
 
 执行 `./sample_venc_basic -w width -h height -t ecode_type -f file0 -g file1`
 
-其中width为图像宽所包含像素个数
+其中 width 为图像宽所包含像素个数
 
-height为为图像高所包含的像素格式
+height 为为图像高所包含的像素格式
 
-ecode_type可以为h264\h265\jpeg
+ecode_type 可以为 h264\h265\jpeg
 
-file0为要编码的文件名需要为NV12格式
+file0 为要编码的文件名需要为 NV12 格式
 
-file1为要编码的文件名需要为NV12格式，其width和height需要和file0保持一样
+file1 为要编码的文件名需要为 NV12 格式，其 width 和 height 需要和 file0 保持一样
 
 #### sample_vdec_two_channel
 
@@ -843,13 +843,13 @@ file1为要编码的文件名需要为NV12格式，其width和height需要和fil
 
 执行  `./sample_vdec_two_channel -w width -h height -t ecode_type -f file`
 
-其中width为图像宽所包含像素个数
+其中 width 为图像宽所包含像素个数
 
-height为为图像高所包含的像素格式
+height 为为图像高所包含的像素格式
 
-encode_type可以为h264\h265\jpeg
+encode_type 可以为 h264\h265\jpeg
 
-file为要解码的文件名
+file 为要解码的文件名
 
 #### sample_venc_two_channel
 
@@ -857,15 +857,15 @@ file为要解码的文件名
 
 执行   `./sample_venc_two_channel -w width -h height -t ecode_type -f file0 -g file1`
 
-其中width为图像宽所包含像素个数
+其中 width 为图像宽所包含像素个数
 
-height为为图像高所包含的像素格式
+height 为为图像高所包含的像素格式
 
-ecode_type可以为h264\h265\jpeg
+ecode_type 可以为 h264\h265\jpeg
 
-file0为要编码的文件名需要为NV12格式
+file0 为要编码的文件名需要为 NV12 格式
 
-file1为要编码的文件名需要为NV12格式，其width和height需要和file0保持一样
+file1 为要编码的文件名需要为 NV12 格式，其 width 和 height 需要和 file0 保持一样
 
 ### 运行效果说明
 
@@ -949,7 +949,7 @@ root@ubuntu:/app/multimedia_samples/sample_video_codec#
 ```
 上述效果我们可以看到使用命令 `./sample_venc_basic -w 1920 -h 1080 -t h265 -f 1080P_file1.nv12  -g 1080P_file2.nv12` 将 1080P_file1.nv12 和 1080P_file2.nv12 的图像编码成 h265 文件， 按下 `ctrl+c` 之后停止运行，中止循环编码过程，`HB_VENC_GetStream` 会获取不到数据，抛出应有的 LOG 打印。
 
-程序结束之后，在当前运行目录下生成sample_venc.h264/sample_venc.h265/sample_venc.jpg。H264/H265文件内容为交替显示是file1和file2
+程序结束之后，在当前运行目录下生成 sample_venc.h264/sample_venc.h265/sample_venc.jpg。H264/H265 文件内容为交替显示是 file1 和 file2
 #### sample_vdec_two_channel
 
 ```
@@ -1026,7 +1026,7 @@ Done
 root@ubuntu:/app/multimedia_samples/sample_video_codec#
 
 ```
-在 h264 文件符合要求的情况下，我们执行类似 `./sample_vdec_two_channel -w 1920 -h 1080 -t h264 -f 1920x1080.h264` 这样的命令，可以看到 LOG 显示，一直在解码，程序会通过两个解码通道分别执行，在按下 `ctrl + c` 之后，程序结束，并且会在当前运行目录下生成sample_decode_ch0.nv12和sample_decode_ch1.nv12，该文件内容随着解码内容更新。
+在 h264 文件符合要求的情况下，我们执行类似 `./sample_vdec_two_channel -w 1920 -h 1080 -t h264 -f 1920x1080.h264` 这样的命令，可以看到 LOG 显示，一直在解码，程序会通过两个解码通道分别执行，在按下 `ctrl + c` 之后，程序结束，并且会在当前运行目录下生成 sample_decode_ch0.nv12 和 sample_decode_ch1.nv12，该文件内容随着解码内容更新。
 
 #### sample_venc_two_channel
 
@@ -1060,13 +1060,13 @@ root@ubuntu:/app/multimedia_samples/sample_video_codec#
 
 ```
 上述效果我们可以看到使用命令 `./sample_venc_two_channel -w 1920 -h 1080 -t h264 -f 1080P_file1.nv12 -g 1080P_file2.nv12` 将 1080P_file1.nv12 和 1080P_file2.nv12 编码成 h265 文件，按下 `ctrl + c` 会结束编码，结束期间，会出现 `HB_VENC_GetStream` 的打印。\
-程序结束后会在当前运行目录下生成 sample_venc_ch0.h264（sample_venc_ch0.h265/sample_venc_ch0.jpg） 和 sample_venc_ch1.h264（sample_venc_ch1.h265/sample_venc_ch1.jpg）两个通道的文件。H264/H265文件内容为交替显示是file1和file2。
+程序结束后会在当前运行目录下生成 sample_venc_ch0.h264（sample_venc_ch0.h265/sample_venc_ch0.jpg） 和 sample_venc_ch1.h264（sample_venc_ch1.h265/sample_venc_ch1.jpg）两个通道的文件。H264/H265 文件内容为交替显示是 file1 和 file2。
 
 ## sample_vot 使用说明{#sample_vot}
 
 ### 程序功能
 
-`sample_vot程序`完成`VOT`模块的初始化，实现从当前目录读取一帧nv12的图片数据送到`VOT`的bt1120输出显示功能
+`sample_vot程序`完成`VOT`模块的初始化，实现从当前目录读取一帧 nv12 的图片数据送到`VOT`的 bt1120 输出显示功能
 
 ### 程序开发
 
@@ -1085,7 +1085,7 @@ root@ubuntu:/app/multimedia_samples/sample_video_codec#
 
 #### 编译
 
-当前代码通过一个Makefile文件配置编译
+当前代码通过一个 Makefile 文件配置编译
 
 进入源码目录，执行以下命令进行编译生成`sample_vot`
 
@@ -1158,7 +1158,7 @@ framesize:3110400
 
 ### 程序功能
 
-`sample_lcd程序`完成`VOT`模块的初始化，实现从当前目录读取一帧NV12的图片数据送到`VOT`的`midi-dsi`输出到lcd屏幕显示
+`sample_lcd程序`完成`VOT`模块的初始化，实现从当前目录读取一帧 NV12 的图片数据送到`VOT`的`midi-dsi`输出到 lcd 屏幕显示
 
 ### 程序开发
 
@@ -1176,7 +1176,7 @@ framesize:3110400
 
 #### 编译
 
-当前代码通过一个Makefile文件配置编译
+当前代码通过一个 Makefile 文件配置编译
 
 进入源码目录，执行以下命令进行编译生成`sample_lcd`程序
 

@@ -99,27 +99,27 @@ This document summarizes the download resources related to the D-Robotics RDK su
   <tbody>
     <tr>
       <td>📦 **SDK Source Package**</td>
-      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/board_support_package/platform_source_code.tar.gz">RDK X5 Module SDK Source</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/board_support_package/platform_source_code.tar.gz">RDK X5 Module SDK Source</a></td>
       <td>Complete Buildroot source package supporting kernel customization, driver development, and system building (approx. 3.1GB)</td>
     </tr>
     <tr>
       <td>💾 **eMMC Precompiled Images**</td>
-      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/board_support_package/firmwares/product_ddr_auto_detect_non-secure_release.zip">Non-secure Firmware</a> / <a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/board_support_package/firmwares/product_ddr_auto_detect_secure_release.zip">Secure Firmware</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/board_support_package/firmwares/product_ddr_auto_detect_non-secure_release.zip">Non-secure Firmware</a> / <a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/board_support_package/firmwares/product_ddr_auto_detect_secure_release.zip">Secure Firmware</a></td>
       <td>Precompiled system images for eMMC version built on Buildroot with DDR auto-detection support</td>
     </tr>
     <tr>
       <td>📚 **User Manual**</td>
-      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/user_manual/user_manual_v1.1.0.zip">SDK User Manual</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/user_manual/user_manual_v1.1.2.zip">SDK User Manual</a></td>
       <td>Comprehensive documentation including buildroot compilation guide, development environment setup, API reference (approx. 163MB)</td>
     </tr>
     <tr>
       <td>📋 **Release Notes**</td>
-      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/release_note_and_change_log/LNX6.1.83_PL5.1_V1.1.0%20ReleaseNotes.pdf">ReleaseNotes</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/release_note_and_change_log/LNX6.1.83_PL5.1_V1.1.2%20ReleaseNotes.pdf">ReleaseNotes</a></td>
       <td>SDK version updates, feature descriptions, known issues and solutions</td>
     </tr>
     <tr>
       <td>🛠️ **Flashing Tool**</td>
-      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.0/software_tools/download_tools/">xburn Download Tools</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/sdk/LNX6.1.83_PL5.1_V1.1.2/software_tools/download_tools/">xburn Download Tools</a></td>
       <td>Professional flashing tools supporting Linux, macOS, and Windows for firmware installation</td>
     </tr>
   </tbody>

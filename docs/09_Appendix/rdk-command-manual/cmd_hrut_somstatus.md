@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # hrut_somstatus
 
-**hrut_somstatus** 命令可以获取温度传感器温度、CPU\BPU的运行频率以及BPU负载。
+**hrut_somstatus** 命令可以获取温度传感器温度、CPU\BPU 的运行频率以及 BPU 负载。
 
 ## 语法说明
 
@@ -47,5 +47,5 @@ bpu status information---->
 - `min`：BPU 可运行的最低频率。
 - `cur`：BPU 的当前运行频率。
 - `max`：BPU 可运行的最大频率。
-- `ratio`：BPU运行时的负载率。
+- `ratio`：BPU 运行时的负载率。
 - 这些信息表示了 BPU 的频率范围，包括最小、当前和最大频率和负载。

@@ -10,7 +10,7 @@ sidebar_position: 5
 ## 安装方法
 
 - ### 硬件部署
-参考其余音频板卡，40pin 2 40pin进行连接
+参考其余音频板卡，40pin 2 40pin 进行连接
 
 - ### 软件配置
 1. 使用`srpi-config`配置音频板  
@@ -64,9 +64,9 @@ root@ubuntu:~# cat /proc/asound/devices
 root@ubuntu:~# ls /dev/snd/
 by-path  controlC0  controlC1  pcmC0D0p  pcmC0D1c  pcmC1D0c  pcmC1D0p  timer
 ```
-通过上述查询，结合[板载 Earphone 音频口](in_board_es8326.md#运行)的介绍，可以确认，声卡0对应的是 `Hiwonder Audio Driver HAT` 节点；设备也是存在的, 且设备号为 `0-0` 和 `0-1` , 实际我们操作的设备应该是`pcmC0D0p 和 pcmC0D1c`。
+通过上述查询，结合[板载 Earphone 音频口](in_board_es8326.md#运行)的介绍，可以确认，声卡 0 对应的是 `Hiwonder Audio Driver HAT` 节点；设备也是存在的, 且设备号为 `0-0` 和 `0-1` , 实际我们操作的设备应该是`pcmC0D0p 和 pcmC0D1c`。
 
-板载声卡对应的是1，设备号为`1-0`，这里我们不会用到它。
+板载声卡对应的是 1，设备号为`1-0`，这里我们不会用到它。
 
 
 - ### 录音
@@ -82,4 +82,4 @@ aplay -D hw:0,0 /userdata/record1.wav
 ```
 
 ## 常见问题
-[可以跳转到FQA部分查看](../../../08_FAQ/04_multimedia.md#audio-常见问题)
+[可以跳转到 FQA 部分查看](../../../08_FAQ/04_multimedia.md#audio-常见问题)
