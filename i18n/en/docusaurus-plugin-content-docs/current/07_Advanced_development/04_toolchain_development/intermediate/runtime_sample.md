@@ -131,7 +131,7 @@ To obtain the horizon_runtime_sample package, please refer to the [Deliverables 
 
 <DocScope products="RDK X5">
 
-1. After receiving the development board, please update the development board image to the latest version. For the upgrade method, please refer to the [**System Update**](../../../01_Quick_start/install_os/rdk_x5/01_system_burn.md) chapter.
+1. After receiving the development board, please update the development board image to the latest version. For the upgrade method, please refer to the [**System Update**](../../../01_Quick_start/system-burn/burn-sd-card.md) chapter.
 
 2. Ensure that the local development machine and the development board can be connected remotely.
 </DocScope>
@@ -139,7 +139,7 @@ To obtain the horizon_runtime_sample package, please refer to the [Deliverables 
 
 <DocScope products="RDK X5 Module">
 
-1. After receiving the development board, please update the development board image to the latest version. For the upgrade method, please refer to the [**System Update**](../../../01_Quick_start/install_os/rdk_x5_module/01_system_burn.md) chapter.
+1. After receiving the development board, please update the development board image to the latest version. For the upgrade method, please refer to the [**System Update**](../../../01_Quick_start/system-burn/burn-sd-card.md) chapter.
 
 2. Ensure that the local development machine and the development board can be connected remotely.
 </DocScope>

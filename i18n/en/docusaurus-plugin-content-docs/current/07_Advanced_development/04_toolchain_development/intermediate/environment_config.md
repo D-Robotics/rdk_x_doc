@@ -433,7 +433,7 @@ If the hb_mapper tool outputs logs normally, it means the environment has been s
 
 ### <span id="board_env_install"/>Development Board Deployment
 
-For development board deployment, you need to update the development board image to the latest version according to the flashing instructions. Please refer to the [**Install OS**](../../../../current/01_Quick_start/install_os/rdk_x5/01_system_burn.md) section for the upgrade method. After the upgrade is complete, copy the relevant supplementary files to the development board.
+For development board deployment, you need to update the development board image to the latest version according to the flashing instructions. Please refer to the [**Install OS**](../../../../current/01_Quick_start/system-burn/burn-sd-card.md) section for the upgrade method. After the upgrade is complete, copy the relevant supplementary files to the development board.
 
 Some supplementary tools of the algorithm toolchain are not included in the system image. These tools are placed in the ``horizon_x5_open_explorer_vX.X.X-XXXXXXX/package/`` installation package.
 Navigate to ``horizon_x5_open_explorer_vX.X.X-XXXXXXX/package/package/board`` and execute the install script.

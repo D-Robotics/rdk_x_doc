@@ -441,7 +441,7 @@ X5算法工具链要求的Docker基础环境信息如下：
 
 ### <span id="board_env_install"/>开发板部署
 
-开发板部署需要您按照刷机说明，将开发版镜像更新到最新版本，升级方法请参考[**安装系统**](../../../01_Quick_start/install_os/rdk_x5/01_system_burn.md) 章节内容， 升级完成后，再将相关补充文件拷贝到开发板中即可。
+开发板部署需要您按照刷机说明，将开发版镜像更新到最新版本，升级方法请参考[**安装系统**](../../../01_Quick_start/system-burn/burn-sd-card.md) 章节内容， 升级完成后，再将相关补充文件拷贝到开发板中即可。
 
 算法工具链的部分补充工具未包含在系统镜像中，这些工具已经放置在 ``horizon_x5_open_explorer_vX.X.X-XXXXXXX/package/`` 安装包中，
 进入到 ``horizon_x5_open_explorer_vX.X.X-XXXXXXX/package/package/board`` 执行install脚本。

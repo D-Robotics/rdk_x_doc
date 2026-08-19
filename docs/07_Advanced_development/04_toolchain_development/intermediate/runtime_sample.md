@@ -2015,7 +2015,7 @@ profile日志文件产生目录。
 
 <DocScope products="RDK X5">
 
-1. 拿到开发板后，请将开发版镜像更新到最新版本，升级方法请参考[**系统更新**](../../../01_Quick_start/install_os/rdk_x5/01_system_burn.md) 章节内容。
+1. 拿到开发板后，请将开发版镜像更新到最新版本，升级方法请参考[**系统更新**](../../../01_Quick_start/system-burn/burn-sd-card.md) 章节内容。
 
 2. 确保本地开发机和开发板可以远程连接。
 
@@ -2023,7 +2023,7 @@ profile日志文件产生目录。
 
 <DocScope products="RDK X5 Module">
 
-1. 拿到开发板后，请将开发版镜像更新到最新版本，升级方法请参考[**系统更新**](../../../01_Quick_start/install_os/rdk_x5_module/01_system_burn.md) 章节内容。
+1. 拿到开发板后，请将开发版镜像更新到最新版本，升级方法请参考[**系统更新**](../../../01_Quick_start/system-burn/burn-sd-card.md) 章节内容。
 
 2. 确保本地开发机和开发板可以远程连接。
 
@@ -2564,7 +2564,7 @@ profile日志文件产生目录。
 
 ##### 开发板准备
 
-1. 拿到开发板后，请将开发版镜像更新到最新版本，升级方法请参考[**安装系统**](../../../01_Quick_start/install_os/rdk_x5.md) 章节内容。
+1. 拿到开发板后，请将开发版镜像更新到最新版本，升级方法请参考[**安装系统**](../../../01_Quick_start/system-burn/burn-sd-card.md) 章节内容。
 
 2. 确保本地开发机和开发板可以远程连接。
 
