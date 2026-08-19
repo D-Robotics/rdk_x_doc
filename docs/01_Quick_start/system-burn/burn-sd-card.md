@@ -107,14 +107,9 @@ RDK Studio 支持 Windows 和 Mac 系统，可在线选择镜像后下载，也�
 
 Rufus 是 Windows 平台的免费开源工具，支持 SD 卡单独烧录和 SD 卡在板烧录。
 
-[单击此处](https://rufus.ie/zh/) 进入 Rufus 官网，根据使用平台选择工具版本。
+1. [单击此处](https://rufus.ie/zh/) 进入 Rufus 官网，根据使用平台选择工具版本。
 
-<img
-      src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/install_os/install_os_260408/zh/x5/rufus_install.png"
-      style={{ width: '100%', height: 'auto', align:'center'}}
-/>
-
-双击下载的 `.exe` 文件即可打开 Rufus。
+2. 双击下载的 `.exe` 文件即可打开 Rufus。
 
 #### SD 卡单独烧录 {#solo}
 
@@ -125,23 +120,15 @@ SD 卡单独烧录是指将 SD 卡从开发板取出，通过读卡器连接 PC 
 2. 打开 Rufus 工具，**设备** 下拉框中会自动识别到 Micro SD 卡。
 
     <img
-          src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/install_os/install_os_260408/zh/x5/rufus_select_device.png"
+          src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/install_os/install_os_260408/zh/x5/rufus_start.png"
+          alt="Rufus 设备识别"
           style={{ width: '50%', height: 'auto', align:'center'}}
     />
+
 
 3. 单击 **选择** 按钮，选择解压出来的 `.img` 文件作为烧录镜像。
 
-    <img
-          src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/install_os/install_os_260408/zh/x5/rufus_select_image.png"
-          style={{ width: '50%', height: 'auto', align:'center'}}
-    />
-
 4. 其他参数保持默认，单击 **开始** 按钮，等待烧录完成。
-
-    <img
-          src="https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/install_os/install_os_260408/zh/x5/rufus_start.png"
-          style={{ width: '50%', height: 'auto', align:'center'}}
-    />
 
 5. 烧录完成后，关闭 Rufus 并取出存储卡。
 
