@@ -19,6 +19,10 @@
     "message": "1.2 Install Operating System",
     "description": "The label for category 1.2 系统烧录 in sidebar tutorialSidebar"
   },
+  "sidebar.tutorialSidebar.category.系统烧录": {
+    "message": "System flashing",
+    "description": "The label for category 系统烧录 in sidebar tutorialSidebar"
+  },
   "sidebar.tutorialSidebar.category.1.5 显示屏使用": {
     "message": "1.5 Display Usage",
     "description": "The label for category 1.5 显示屏使用 in sidebar tutorialSidebar"
