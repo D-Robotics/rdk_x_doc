@@ -155,6 +155,36 @@ const config = {
         generateMarkdownRoutes: false,
       },
     ],
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        // 烧录手册从 install_os/<product> 迁到 system-burn 后，旧 URL 兜底重定向。
+        // from/to 都是 baseUrl（/rdk_x_doc/）之后的相对路径。i18n 下每个 locale 单独
+        // build，plugin 用各自 baseUrl（zh=/rdk_x_doc/、en=/rdk_x_doc/en/）拼 from/to，
+        // 故一份配置自动落 zh/en 两处，勿手写 /en/ 前缀。
+        // 旧 URL 分三类：
+        // - 目录索引页（_category_.json 显式 slug=/install_os/<product>）
+        // - 正文页（数字前缀剥离后 /Quick_start/install_os/<product>/<file>）
+        // - 02 文件名历史上由 nand_flash_firmware 改名为 burn，两个旧 URL 都兜底。
+        redirects: [
+          // 目录索引页
+          { from: "/install_os/rdk_x5", to: "/Quick_start/system-burn/overview" },
+          { from: "/install_os/rdk_x5_module", to: "/Quick_start/system-burn/overview" },
+          // RDK X5 正文页
+          { from: "/Quick_start/install_os/rdk_x5/system_burn", to: "/Quick_start/system-burn/burn-sd-card" },
+          { from: "/Quick_start/install_os/rdk_x5/nand_flash_firmware", to: "/Quick_start/system-burn/upgrade-miniboot" },
+          { from: "/Quick_start/install_os/rdk_x5/burn", to: "/Quick_start/system-burn/upgrade-miniboot" },
+          { from: "/Quick_start/install_os/rdk_x5/boot_system", to: "/Quick_start/system-burn/burn-sd-card" },
+          { from: "/Quick_start/install_os/rdk_x5/FAQ", to: "/Quick_start/system-burn/faq" },
+          // RDK X5 Module 正文页
+          { from: "/Quick_start/install_os/rdk_x5_module/system_burn", to: "/Quick_start/system-burn/burn-sd-card" },
+          { from: "/Quick_start/install_os/rdk_x5_module/nand_flash_firmware", to: "/Quick_start/system-burn/upgrade-miniboot" },
+          { from: "/Quick_start/install_os/rdk_x5_module/burn", to: "/Quick_start/system-burn/upgrade-miniboot" },
+          { from: "/Quick_start/install_os/rdk_x5_module/boot_system", to: "/Quick_start/system-burn/burn-sd-card" },
+          { from: "/Quick_start/install_os/rdk_x5_module/FAQ", to: "/Quick_start/system-burn/faq" },
+        ],
+      },
+    ],
   ],
   markdown: {
     mermaid: true,
