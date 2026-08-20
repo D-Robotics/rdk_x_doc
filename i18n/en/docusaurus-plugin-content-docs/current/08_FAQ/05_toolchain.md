@@ -1682,7 +1682,7 @@ If quantized.onnx and .bin model consistency verification fails, please contact 
 
 ##### RDK X3 Caffe Model Quantization yaml File Template{#rdk_x3_caffe_yaml_template}
 
-Please create a caffe_config.yaml file, copy the following content directly, then fill in only parameters marked as **``Required parameters``** to perform model conversion. For more parameter usage instructions, refer to the [yaml Configuration File Details](../07_Advanced_development/04_toolchain_development/intermediate/ptq_process.md#model_conversion) section.
+Please create a caffe_config.yaml file, copy the following content directly, then fill in only parameters marked as **``Required parameters``** to perform model conversion. For more parameter usage instructions, refer to the [yaml Configuration File Details](https://developer.d-robotics.cc/oe_x3_doc/en/oe_mapper/source/faststart/quickstart.html#yaml) section.
 
 ```python
 
@@ -1762,9 +1762,9 @@ compiler_parameters:
 
 ```
 
-##### RDK X5 ONNX Model Quantization yaml File Template{#rdk_x3_onnx_yaml_template}
+##### RDK X3 ONNX Model Quantization yaml File Template{#rdk_x3_onnx_yaml_template}
 
-Please create an onnx_config.yaml file, copy the following content directly, then fill in only parameters marked as **``Required parameters``** to perform model conversion. For more parameter usage instructions, refer to the [yaml Configuration File Details](../07_Advanced_development/04_toolchain_development/intermediate/ptq_process.md#model_conversion) section.
+Please create an onnx_config.yaml file, copy the following content directly, then fill in only parameters marked as **``Required parameters``** to perform model conversion. For more parameter usage instructions, refer to the [yaml Configuration File Details](https://developer.d-robotics.cc/oe_x3_doc/en/oe_mapper/source/faststart/quickstart.html#yaml) section.
 
 ```python
 
@@ -1842,7 +1842,7 @@ compiler_parameters:
 
 ##### RDK X5 Caffe Model Quantization yaml File Template{#rdk_x5_caffe_yaml_template}
 
-Please create a caffe_config.yaml file, copy the following content directly, then fill in only parameters marked as **``Required parameters``** to perform model conversion. For more parameter usage instructions, refer to the [yaml Configuration File Details](../07_Advanced_development/04_toolchain_development/intermediate/ptq_process.md#model_conversion) section.
+Please create a caffe_config.yaml file, copy the following content directly, then fill in only parameters marked as **``Required parameters``** to perform model conversion. For more parameter usage instructions, refer to the [yaml Configuration File Details](https://developer.d-robotics.cc/oe_x5_doc/en/oe_mapper/source/faststart/quickstart.html#yaml) section.
 
 ```python
 
@@ -1924,7 +1924,7 @@ compiler_parameters:
 
 ##### RDK X5 ONNX Model Quantization yaml File Template{#rdk_x5_onnx_yaml_template}
 
-Please create an onnx_config.yaml file, copy the following content directly, then fill in only parameters marked as **``Required parameters``** to perform model conversion. For more parameter usage instructions, refer to the [yaml Configuration File Details](../07_Advanced_development/04_toolchain_development/intermediate/ptq_process.md#model_conversion) section.
+Please create an onnx_config.yaml file, copy the following content directly, then fill in only parameters marked as **``Required parameters``** to perform model conversion. For more parameter usage instructions, refer to the [yaml Configuration File Details](https://developer.d-robotics.cc/oe_x5_doc/en/oe_mapper/source/faststart/quickstart.html#yaml) section.
 
 ```python
 
