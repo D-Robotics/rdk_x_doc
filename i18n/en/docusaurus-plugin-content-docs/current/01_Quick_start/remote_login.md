@@ -47,7 +47,7 @@ At this point, you can use the `ifconfig` command to query the IP address of the
 ```bash
 root@ubuntu:~# ifconfig
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 192.168.1.10  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet 192.168.127.10  netmask 255.255.255.0  broadcast 192.168.1.255
         inet6 fe80::211:22ff:feaa:7637  prefixlen 64  scopeid 0x20<link>
         ether 00:11:22:aa:76:37  txqueuelen 1000  (Ethernet)
         RX packets 767  bytes 54006 (54.0 KB)
@@ -107,13 +107,13 @@ The IP addresses corresponding to different versions of the images are as follow
 
 Before using remote login, it is necessary to confirm that the computer and development board are connected correctly.
 
-Configure the IP address of the computer to be on the same subnet as the development board. For example, the development board: `192.168.1.10` and the computer: `192.168.1.100`. Assigning an IP address depends on the Operating System of the computer. Taking the WIN10 system as an example, the method to modify the static IP of the computer is as follows:
+Configure the IP address of the computer to be on the same subnet as the development board. For example, the development board: `192.168.127.10` and the computer: `192.168.127.100`. Assigning an IP address depends on the Operating System of the computer. Taking the WIN10 system as an example, the method to modify the static IP of the computer is as follows:
 
 ![image-setstaticip-en](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/remote_login/image-setstaticip-en.png)
 
 If you want to configure the wired network of the development board to obtain IP dynamically via DHCP mode, please refer to the [Wired Network](../02_System_configuration/01_network_blueteeth.md) chapter for configuration.
 
-To confirm that the connection is working, execute `ping 192.168.1.10` from the computer (change the command to the IP address of the development board). If the `ping` command receives responses, then the connection is working; otherwise, check the network configurations are correct, and that the network firewall of the computer is turned off.
+To confirm that the connection is working, execute `ping 192.168.127.10` from the computer (change the command to the IP address of the development board). If the `ping` command receives responses, then the connection is working; otherwise, check the network configurations are correct, and that the network firewall of the computer is turned off.
 
 ## VNC Login
 
@@ -139,7 +139,7 @@ In addition to VNC login for remote desktop, you can also connect to the develop
 Commonly used terminal tools include `PuTTy`, `MobaXterm`, etc. Users can choose according to their own preferences. The configuration process for different tools is similar. The following example shows how to create a new SSH connection using `MobaXterm`:
 
 1. Open the `MobaXterm` tool, click on `Session`, then select `SSH`.
-2. Enter the development board IP address, for example: `192.168.1.10`.
+2. Enter the development board IP address, for example: `192.168.127.10`.
 3. Select `specify username`, enter `sunrise`.
 4. After clicking OK, enter the username (sunrise) and password (sunrise) to complete the login.
 
@@ -148,7 +148,7 @@ Commonly used terminal tools include `PuTTy`, `MobaXterm`, etc. Users can choose
 ### Command Line on PC
 Users can also use the command line to log in via SSH. The steps are as follows:
 
-1. Open the terminal window and enter the SSH login command, for example: `ssh sunrise@192.168.1.10`.
+1. Open the terminal window and enter the SSH login command, for example: `ssh sunrise@192.168.127.10`.
 2. A connection confirmation prompt will appear, enter YES.
 3. Enter the password (sunrise) to complete the login.
 
