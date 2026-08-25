@@ -83,6 +83,10 @@ const config = {
       src: "/rdk_x_doc/js/dify-config.js",
     },
     {
+      src: "/rdk_x_doc/js/umami-events.js",
+      async: true,
+    },
+    {
       src: "https://rdk.d-robotics.cc/embed.min.js",
       id: "rJYrxmxmjOkjEx2c",
       defer: true,
