@@ -300,20 +300,6 @@ body.plugin-id-os-rdk-s600        .navbar-version-dropdown--os-rdk-s600 {
   display: none !important;
 }
 
-/* 搜索关键词高亮样式 */
-mark.search-highlight {
-  background-color: #fff3a3;
-  color: inherit;
-  padding: 0.1em 0.2em;
-  border-radius: 2px;
-  box-shadow: 0 0 0 2px #fff3a3;
-}
-
-[data-theme="dark"] mark.search-highlight {
-  background-color: #8b7000;
-  box-shadow: 0 0 0 2px #8b7000;
-}
-
 @media (max-width: 996px) {
   .navbar__inner .doc-scope-selectors-nav-item,
   .navbar__inner .navbar-github-link,
