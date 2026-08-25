@@ -15,9 +15,10 @@
 
 # Misc
 .DS_Store
+.env
 .env.local
+scripts/_algolia_tmp/
 
-# Local Pagefind artifacts (dev/temporary)
 .env.development.local
 .env.test.local
 .env.production.local
