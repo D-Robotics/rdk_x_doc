@@ -8,7 +8,7 @@ Core features of the documentation site include:
 - Multilingual documentation (`zh-Hans` / `en`)
 - Document content filtering by product and version (`DOC_BUILD_PRODUCT`, `DOC_BUILD_VERSION`)
 - Automatic generation and monitoring of sidebar scope configuration
-- GitHub Pages build and deployment, as well as OSS synchronization
+- GitHub Pages build and deployment, OSS synchronization, and Algolia index refresh after the live site updates
 
 ## Repository Structure Overview
 
@@ -19,7 +19,7 @@ The main directories are described as follows:
 - `scripts/`: Maintenance and build helper scripts (numbering, link fixing, scope building, etc.)
 - `src/`: Theme customization, plugins, and remark extensions
 - `static/`: Static assets
-- `.github/workflows/`: CI/CD workflows (Pages deployment and OSS synchronization)
+- `.github/workflows/`: CI/CD workflows (Pages deployment, OSS synchronization, Algolia index update)
 - `docusaurus.config.js`: Main site configuration
 - `sidebars.js`: Entry point for document sidebar configuration
 

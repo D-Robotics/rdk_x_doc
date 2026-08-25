@@ -212,7 +212,7 @@ export default function DocItemWrapper(props) {
   return (
     <>
       <DocScopeHydration />
-      {/* <SearchHighlight /> — Pagefind 高亮，已改用 @easyops-cn/docusaurus-search-local */}
+      {/* 搜索高亮由 Algolia DocSearch 提供 */}
       <DocItem {...props} content={patchedContent || props.content} />
       <GiscusComments />
     </>

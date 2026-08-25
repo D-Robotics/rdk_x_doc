@@ -4,10 +4,8 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 import "dotenv/config";
-import { createRequire } from "module";
 import { themes as prismThemes } from "prism-react-renderer";
 
-const require = createRequire(import.meta.url);
 import remarkDirective from "remark-directive";
 import remarkDocScope from "./src/remark/remark-doc-scope.js";
 
@@ -253,29 +251,15 @@ const config = {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
       },
-    }),
-  themes: [
-    "@docusaurus/theme-mermaid",
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      {
-        // 性能优化
-        hashed: true, // 启用长期缓存
-        language: ["en", "zh"], // 中英文支持
-        highlightSearchTermsOnTargetPage: true,
-        explicitSearchResultPath: true,
-        docsRouteBasePath: ["/", "rdk_s"], // 支持多个文档路径
-
-        // 优化索引大小和加载速度
-        indexDocs: true,
-        indexBlog: false, // 禁用博客索引
-        indexPages: false, // 禁用页面索引
-
-        // 搜索行为优化
-        searchResultContextMaxLength: 50, // 减少上下文长度
+      algolia: {
+        appId: "1VU781LYTV",
+        apiKey: "fb65c6e54a52ce6fba0645bd2630e79b",
+        indexName: "rdk_x_doc",
+        contextualSearch: true,
+        searchPagePath: "search",
       },
-    ],
-  ],
+    }),
+  themes: ["@docusaurus/theme-mermaid"],
 };
 
 export default config;

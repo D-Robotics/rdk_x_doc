@@ -1,0 +1,66 @@
+# 在线上站点（OSS）更新成功后，抓取最新页面并刷新 Algolia 索引。
+# 仓库需配置 Secret：ALGOLIA_ADMIN_API_KEY（Admin 或 Write Key，不要用 Search Key）
+name: Update Algolia DocSearch index
+
+on:
+  workflow_run:
+    workflows: ["Sync gh-pages to OSS"]
+    types:
+      - completed
+  workflow_dispatch:
+
+concurrency:
+  group: algolia-index
+  cancel-in-progress: true
+
+jobs:
+  algolia-index:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: self-hosted
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Clean install dependencies
+        run: |
+          rm -rf node_modules
+          npm ci
+
+      - name: Fetch published sitemaps from gh-pages
+        run: |
+          mkdir -p build/en
+          git fetch origin gh-pages --depth=1
+          if ! git show origin/gh-pages:sitemap.xml > build/sitemap.xml; then
+            echo "zh sitemap not found on gh-pages; indexer will fall back to link crawl"
+            rm -f build/sitemap.xml
+          fi
+          if ! git show origin/gh-pages:en/sitemap.xml > build/en/sitemap.xml; then
+            echo "en sitemap not found on gh-pages; indexer will fall back to link crawl"
+            rm -f build/en/sitemap.xml
+          fi
+          echo "zh sitemap urls: $(grep -c '<loc>' build/sitemap.xml 2>/dev/null || echo 0)"
+          echo "en sitemap urls: $(grep -c '<loc>' build/en/sitemap.xml 2>/dev/null || echo 0)"
+
+      - name: Wait until live site is reachable
+        run: |
+          url="https://developer.d-robotics.cc/rdk_x_doc/RDK"
+          for i in $(seq 1 12); do
+            code=$(curl -sS -o /dev/null -w "%{http_code}" -L "$url" || true)
+            echo "Attempt $i: HTTP $code"
+            if [ "$code" = "200" ]; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Live site is not reachable: $url"
+          exit 1
+
+      - name: Crawl live site and update Algolia index
+        env:
+          ALGOLIA_ADMIN_API_KEY: ${{ secrets.ALGOLIA_ADMIN_API_KEY }}
+          ALGOLIA_APP_ID: 1VU781LYTV
+          ALGOLIA_INDEX_NAME: rdk_x_doc
+          ALGOLIA_SITE_URL: https://developer.d-robotics.cc/rdk_x_doc/
+        run: npm run algolia:index
