@@ -71,7 +71,7 @@ Check the actual device files in user space through the `ls /dev/snd/` command:
 root@ubuntu:~# ls /dev/snd/
 by-path  controlC0  controlC1  pcmC0D0p  pcmC0D1c  pcmC1D0c  pcmC1D0p  timer
 ```
-From the above, and with reference to the [Onboard Earphone Audio Port](in_board_es8326.md#运行), you can confirm that sound card 0 corresponds to the `Audio Driver HAT REV2` node; the devices exist, and the device numbers are `0-0` and `0-1`. The actual devices to operate are `pcmC0D0p` and `pcmC0D1c`.
+From the above, and with reference to the [Onboard Earphone Audio Port](in_board_es8326.md#operation), you can confirm that sound card 0 corresponds to the `Audio Driver HAT REV2` node; the devices exist, and the device numbers are `0-0` and `0-1`. The actual devices to operate are `pcmC0D0p` and `pcmC0D1c`.
 
 The onboard sound card corresponds to 1, with device number `1-0`, which is not used here.
 

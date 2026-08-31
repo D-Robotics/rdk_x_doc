@@ -64,7 +64,7 @@ To check actual device files in user space:
 root@ubuntu:~# ls /dev/snd/
 by-path  controlC0  controlC1  pcmC0D0p  pcmC0D1c  pcmC1D0c  pcmC1D0p  timer
 ```
-Based on the above and the [onboard Earphone audio port](in_board_es8326.md#运行) documentation, sound card 0 corresponds to the `Hiwonder Audio Driver HAT` node; the devices exist, with device numbers `0-0` and `0-1`. The actual devices to operate are `pcmC0D0p` and `pcmC0D1c`.
+Based on the above and the [onboard Earphone audio port](in_board_es8326.md#operation) documentation, sound card 0 corresponds to the `Hiwonder Audio Driver HAT` node; the devices exist, with device numbers `0-0` and `0-1`. The actual devices to operate are `pcmC0D0p` and `pcmC0D1c`.
 
 The onboard sound card corresponds to 1, with device number `1-0`, which is not used here.
 

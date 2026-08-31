@@ -134,7 +134,7 @@ CPU 频率的调度方式，有 `conservative ondemand userspace powersave perfo
 governor=performance
 ```
 
-有关`CPU`调度方式的说明请查阅 [X3 CPU 频率管理](frequency_management#cpu频率管理)。
+有关`CPU`调度方式的说明请查阅 [X3 CPU 频率管理](frequency_management#cpu-频率管理)。
 
 ### frequency
 
@@ -151,7 +151,7 @@ frequency=1000000
 <DocScope versions=">= 3.5.0" products="RDK-X5">
 ## X5 CPU 频率
 
-有关`CPU`调度方式的说明请查阅 [X5 CPU 频率管理](frequency_management#cpu频率管理-1)，若计划进行超频，请务必先阅读文档中`CPU 超频`一节，全面了解风险与注意事项。
+有关`CPU`调度方式的说明请查阅 [X5 CPU 频率管理](frequency_management#cpu-频率管理-1)，若计划进行超频，请务必先阅读文档中`CPU 超频`一节，全面了解风险与注意事项。
 
 本处仅介绍通过`config.txt`进行的 配置方法，不包含调度策略或超频原理相关内容。
 

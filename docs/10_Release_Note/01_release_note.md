@@ -173,7 +173,7 @@ RDK X5 V3.3.3 版本已同步至：
 
 - **20250610**  
   - 更新 ROS 仓库 GPG 签名密钥  
-  - 支持[实时内核切换](../Advanced_development/linux_development/realtime_kernel#x5系列板卡)  
+  - 支持[实时内核切换](../Advanced_development/linux_development/realtime_kernel#x5-系列板卡)  
   - 集成最新版 miniboot 固件，使用 `rdk-miniboot-update` 命令烧录 NAND 后，会释放更多内存给系统
 - **20250604**  
   - 修复配置幻尔载板系统启动失败的问题
@@ -346,7 +346,7 @@ RDK X5 V3.3.3 版本已同步至：
 
 ### TogetheROS-V2.x
 
-详见 TogetheROS.Bot[版本发布记录](/docs/05_Robot_development/01_quick_start/changelog.md)。
+详见 TogetheROS.Bot[版本发布记录](https://developer.d-robotics.cc/tros_doc/01_quick_start/changelog)。
 
 ---
 

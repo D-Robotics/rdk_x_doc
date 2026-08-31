@@ -122,7 +122,7 @@ This section shows how to load models and run inference with `hbm_runtime` in a 
 
 ### Prerequisites
 
-Install `hbm_runtime` as in [Installation](#installation), and have a `.bin` model file available.
+Install `hbm_runtime` as in [Installation](#installation-instructions), and have a `.bin` model file available.
 
 ### Examples
 
