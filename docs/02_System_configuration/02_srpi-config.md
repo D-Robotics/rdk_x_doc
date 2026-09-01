@@ -140,7 +140,7 @@ sudo srpi-config
 
   <DocScope products="RDK-X5">
 
-  `X5系列`有关`CPU`调度方式的说明请查阅 [X5 CPU 频率管理](./04_frequency_management.md#cpu频率管理-1)，若计划进行超频，请务必先阅读文档中`CPU 超频`一节，全面了解风险与注意事项。
+  `X5系列`有关`CPU`调度方式的说明请查阅 [X5 CPU 频率管理](./04_frequency_management.md#cpu-频率管理-1)，若计划进行超频，请务必先阅读文档中`CPU 超频`一节，全面了解风险与注意事项。
   
   ![image-20231123104553727](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/02_System_configuration/image/srpi-config/image-20231123104553727.png)
 

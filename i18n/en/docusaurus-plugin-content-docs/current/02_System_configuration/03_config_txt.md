@@ -135,7 +135,7 @@ For example, setting the CPU to run in performance mode:
 governor=performance
 ```
 
-Refer to [CPU Frequency Management](frequency_management#cpu频率管理) for more information on CPU scheduling methods.
+Refer to [CPU Frequency Management](frequency_management#cpu-frequency-management) for more information on CPU scheduling methods.
 
 ### frequency
 
@@ -152,7 +152,7 @@ frequency=1000000
 <DocScope versions=">=3.5.0" products="RDK-X5">
 ## X5 CPU Frequency
 
-For details about `CPU` scheduling methods, please refer to [X5 CPU Frequency Management](frequency_management#cpu频率管理-1). If you plan to `overclock`, be sure to read the section on CPU Overclocking in the document to fully understand the risks and precautions.  
+For details about `CPU` scheduling methods, please refer to [X5 CPU Frequency Management](frequency_management#cpu-frequency-management-1). If you plan to `overclock`, be sure to read the section on CPU Overclocking in the document to fully understand the risks and precautions.  
 
 This section only introduces the configuration method via `config.txt` and does not include content related to scheduling policies or the principles of overclocking.
 

@@ -171,7 +171,7 @@ This `vio_capture` example demonstrates the image capture of a `MIPI` camera and
 ![image-capture](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/04_multi_media/image/cdev_demo/image-capture.jpg)
 
 - **Preparation:**
-  - With the development board powered off, connect the `MIPI` camera to the board. Refer to the [MIPI Camera Connection Tutorial](../../../../01_Quick_start/hardware_introduction/rdk_ultra.md#mipi_port) for the connection method.
+  - With the development board powered off, connect the `MIPI` camera to the board. Refer to the [MIPI Camera Connection Tutorial](../../../../01_Quick_start/hardware_introduction/rdk_x3.md#mipi_port) for the connection method.
   - Connect the development board to a display monitor via an HDMI cable.
   - Power on the development board and log in via the command line interface.
   - **If you need to obtain raw data, please follow the steps below**:

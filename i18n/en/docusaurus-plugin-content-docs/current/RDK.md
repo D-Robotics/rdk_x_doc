@@ -195,7 +195,7 @@ Fix
 
 Mirror Update
 
-- **20250610** Updated the ROS repository GPG signing key; added support for [real-time kernel switching](./Advanced_development/linux_development/realtime_kernel#x5-series-board); integrated the latest version of the iniboot firmware. After burning the NAND using the `rdk-miniboot-update` command, more memory will be released to the system.
+- **20250610** Updated the ROS repository GPG signing key; added support for [real-time kernel switching](./Advanced_development/linux_development/realtime_kernel#x5-series-boards); integrated the latest version of the iniboot firmware. After burning the NAND using the `rdk-miniboot-update` command, more memory will be released to the system.
 - **20250604** Fixed the issue where system startup failed when configuring the Hiwonder carrier board.
 
 System updates:

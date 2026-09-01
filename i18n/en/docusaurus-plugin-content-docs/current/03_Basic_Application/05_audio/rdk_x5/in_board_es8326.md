@@ -84,6 +84,6 @@ Under normal circumstances, you should be able to hear the recently recorded sou
 
 
 ## FAQ
-[How to distinguish between USB sound card and on-board sound card](../../../08_FAQ/04_multimedia.md#q2-how-to-distinguish-and-use-usb-sound-cards-and-onboard-sound-cards-on-the-rdk-board-especially-when-multiple-audio-devices-are-connected)
+[How to distinguish between USB sound card and on-board sound card](../../../08_FAQ/04_multimedia.md#q2-how-to-distinguish-between-and-use-usb-sound-cards-and-onboard-sound-cards-on-an-rdk-board-especially-when-multiple-audio-devices-are-connected-simultaneously)
 
-[For more questions, see this link](../../../08_FAQ/04_multimedia.md#common-audio-questions)
+[For more questions, see this link](../../../08_FAQ/04_multimedia.md#audio-faqs)

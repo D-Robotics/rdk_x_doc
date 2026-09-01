@@ -274,7 +274,7 @@ sunrise@ubuntu:/media/sda1$
 
 ### Using a USB Serial Port Adapter
 
-The USB Type A interfaces (Interfaces 5 and 6) on the development board support USB serial port adapter functionality. They can automatically detect the USB serial port adapter and create device nodes `/dev/ttyUSB*` or `/dev/ttyACM*` (the asterisk represents a number starting from 0). Users can refer to the [UART Usage](../../03_Basic_Application/03_40pin_user_guide/uart.md#40pin_uart_usage) section for instructions on using the serial port.
+The USB Type A interfaces (Interfaces 5 and 6) on the development board support USB serial port adapter functionality. They can automatically detect the USB serial port adapter and create device nodes `/dev/ttyUSB*` or `/dev/ttyACM*` (the asterisk represents a number starting from 0). Users can refer to the [UART Usage](../../03_Basic_Application/01_40pin_user_sample/uart.md#uart-usage) section for instructions on using the serial port.
 
 </DocScope>
 
@@ -528,7 +528,7 @@ The development board has silk screen marking for the 40-pin interface, making i
 
 ![image-X3-PI-40Pin_Index](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/hardware_interface/image-X3-PI-40Pin_Index.jpg)
 
-For the usage of each function of the 40-pin interface, please refer to the [40-pin GPIO Function Usage](../../03_Basic_Application/03_40pin_user_guide/40pin_define.md) section.
+For the usage of each function of the 40-pin interface, please refer to the [40-pin GPIO Function Usage](../../03_Basic_Application/01_40pin_user_sample/40pin_define.md) section.
 
 </DocScope>
 

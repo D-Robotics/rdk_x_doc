@@ -225,7 +225,7 @@ TROS V2.4.3
 
 镜像更新
 
-- **20250610** 更新 ROS 仓库 GPG 签名密钥；支持[实时内核切换](./Advanced_development/linux_development/realtime_kernel#x5系列板卡)；集成了最新版的 iniboot 固件，使用 rdk-miniboot-update 命令烧录 nand 后，会释放更多内存给系统。
+- **20250610** 更新 ROS 仓库 GPG 签名密钥；支持[实时内核切换](./Advanced_development/linux_development/realtime_kernel#x5-系列板卡)；集成了最新版的 iniboot 固件，使用 rdk-miniboot-update 命令烧录 nand 后，会释放更多内存给系统。
 - **20250604** 修复了配置幻尔载板系统启动失败的问题。
 
 系统层更新

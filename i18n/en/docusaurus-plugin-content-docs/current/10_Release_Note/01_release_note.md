@@ -168,7 +168,7 @@ RDK X5 V3.3.3 version has been synchronized to:
 
 - **20250610**  
   - Updated ROS repository GPG signing key  
-  - Supports [real-time kernel switching](../Advanced_development/linux_development/realtime_kernel#x5系列板卡)  
+  - Supports [real-time kernel switching](../Advanced_development/linux_development/realtime_kernel#x5-series-boards)  
   - Integrated the latest miniboot firmware; after burning NAND with `rdk-miniboot-update`, more memory is released to the system
 - **20250604**  
   - Fixed system boot failure issue on Huaner carrier board

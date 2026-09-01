@@ -108,7 +108,7 @@ Double-click the `.exe` to install and launch.
 
 #### RDK Studio
 
-See [Flashing with RDK Studio](../../09_RDK_Studio/04_flashing.md).
+See [Flashing with RDK Studio](https://developer.d-robotics.cc/rdk_studio_doc/en/category/2-quick-start).
 
 #### Rufus
 
@@ -234,7 +234,7 @@ Before flashing on **Windows**, confirm drivers as follows.
 
 <!-- ##### RDK Studio
 
-At **Select storage device**, choose the USB drive. See [Flashing with RDK Studio](../../09_RDK_Studio/04_flashing.md).
+At **Select storage device**, choose the USB drive. See [Flashing with RDK Studio](https://developer.d-robotics.cc/rdk_studio_doc/en/category/2-quick-start).
 
 <img
       src="http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/install_os/install_os_260408/en/x3_module/studio_select_storage_refresh.png"
