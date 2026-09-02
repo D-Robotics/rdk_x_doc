@@ -20,6 +20,8 @@ Includes system images, hardware materials, toolchains, and all download resourc
 
 For details on how to use the suite, please refer to the [System Burning](/install_os) section.
 
+<DocScope products="RDK-X3">
+
 :::info RDK X3 Note
 
 - In this document, **RDK X3** refers to the 2.0 and 3.0 system versions. For users who still need the **Sunrise X3 Pi 1.0 system**, please refer to the following links:<br/>
@@ -32,6 +34,8 @@ For details on how to use the suite, please refer to the [System Burning](/insta
 To check your system version, use the command `cat /etc/version`. For version 2.1.0 and above, you can use the `rdkos_info` command for detailed version information.
 
 :::
+
+</DocScope>
 
 ## Overview of D-Robotics RDK Suite
 
@@ -54,6 +58,8 @@ This document details how to use the RDK Suite, including setting up the develop
 **RDK X3 Module (Sunrise X3 Module)** is a compact core module with the same specifications as RDK X3. Its size and interfaces are compatible with the Raspberry Pi CM4 module. With an expansion board, it provides efficient computing and communication capabilities for various applications.
 
 **RDK X5** is a full-featured development board with 10Tops edge inference performance and an 8-core ARM A55 processor. It supports 2 MIPI Camera inputs and 4 USB3.0 ports, offering flexible hardware expansion and connectivity options.
+
+**RDK X5 Module (Sunrise X5 Module)** integrates the D-Robotics Sunrise 5 intelligent computing chip along with key functional units such as PMIC, DDR, eMMC, QSPI NAND, and Wi-Fi/Bluetooth. It provides a 300-pin high-speed expansion interface to meet rapid deployment needs across various application scenarios.
 
 
 ![image-rdk-serials-en](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/image-rdk-serials-en.jpg)
@@ -108,6 +114,34 @@ Provides commonly used commands in RDK OS, including RDK-specific commands for q
 
 **10. Release Notes**
 It records the release information of the RDK OS, including the version number, release date, update content, etc., to help users understand the system updates and changes.
+
+## Ecosystem Project Docking Support
+
+For product development, industry deployment, or batch deployment projects based on the RDK platform, D-Robotics has established the **"D-Robotics Ecosystem Project Docking Center"** as a unified collaboration entry point.
+
+If you are involved in any of the following scenarios, we recommend submitting your project information through this entry point:
+
+- Productization or mass-production planning  
+- System architecture evaluation and solution confirmation  
+- Module adaptation and performance optimization support  
+- Commercial project joint development  
+- Technical confirmation before bulk procurement  
+
+After submission, we will respond in tiers based on the project stage, including:
+
+1. Technical requirements assessment  
+2. Solution docking and architecture recommendations  
+3. Module Owner collaborative support  
+4. Issue closure tracking  
+5. Product roadmap coordination (if applicable)  
+
+👉 Project docking entry:  
+[D-Robotics Ecosystem Project Docking Communication](https://horizonrobotics.feishu.cn/share/base/form/shrcnpxBa3PjdjFmtxZS3tBXw0e)
+
+:::note Note
+This entry point is intended for clear project or commercial deployment needs.  
+For day-to-day technical questions, we recommend using community Q&A or the FAQ section first.
+:::
 
 
 
