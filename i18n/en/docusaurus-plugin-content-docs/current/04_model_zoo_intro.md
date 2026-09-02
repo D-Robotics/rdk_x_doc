@@ -4,6 +4,10 @@ sidebar_position: 4
 
 # 4 Model Zoo
 
+```mdx-code-block
+import DocScope from '@site/src/components/DocScope';
+```
+
 ## Product overview
 
 This is the Model Zoo for RDK series boards: a collection of ready-to-deploy model examples for developers.
@@ -21,4 +25,10 @@ Through this repository you can access:
 
 ## User manual
 
-[Model Zoo user manual](https://developer.d-robotics.cc/model_zoo_doc/en/model_zoo_intro)
+<DocScope versions=">= 3.0.0" products="RDK-X3">
+  [Model Zoo User Manual](https://developer.d-robotics.cc/model_zoo_doc/en/model_zoo_intro?v=3.0.0&p=RDK+X3)
+</DocScope>
+
+<DocScope versions=">= 3.0.0" products="RDK-X5">
+  [Model Zoo User Manual](https://developer.d-robotics.cc/model_zoo_doc/en/model_zoo_intro?v=3.5.0&p=RDK+X5)
+</DocScope>
