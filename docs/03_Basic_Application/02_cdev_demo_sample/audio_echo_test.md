@@ -11,7 +11,7 @@ sidebar_products: "RDK X5"
 
 audio_echo_test 是一个位于 `/app/cdev_demo` 目录中的 **C 语言** 开发代码示例，用于演示如何在 **微雪 Audio Driver HAT REV2**（ES7210 + ES8156）上完成 **8 通道格式对齐的录音、播放与音频回采（echo / loopback）验证**。
 
-示例通过 ALSA 接口，以固定格式（8ch、16 kHz、16-bit）完成两阶段测试：先采集人声，再在 duplex 模式下回放并同步采集全通道数据，最终自动判定回采通路是否正常。硬件安装与驱动配置请参考 [微雪 Audio Driver HAT REV2](../05_audio/rdk_x5/audio_driver_hat2_rev2.md)。
+示例通过 ALSA 接口，以固定格式（8ch、16 kHz、16-bit）完成两阶段测试：先采集人声，再在 duplex 模式下回放并同步采集全通道数据，最终自动判定回采通路是否正常。硬件安装与驱动配置请参考 [微雪 Audio Driver HAT REV2](https://developer.d-robotics.cc/rdk_x_doc/Basic_Application/audio/rdk_x5/audio_driver_hat2_rev2)。
 
 ## 效果展示
 
