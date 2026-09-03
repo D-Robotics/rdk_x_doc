@@ -49,7 +49,7 @@ Code repository:  (https://github.com/D-Robotics/line_follower)
 </TabItem>
 <TabItem value="humble" label="Humble">
 
-   - Ubuntu 22.04 system and [ROS2 Humble Desktop Full](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
+   - Ubuntu 22.04 system and [ROS2 Humble Desktop Full](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html)
 
 </TabItem>
 </Tabs>
