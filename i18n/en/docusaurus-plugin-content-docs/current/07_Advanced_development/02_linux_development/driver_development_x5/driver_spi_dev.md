@@ -6,7 +6,11 @@ sidebar_position: 7
 
 ## SPI Hardware Support
 
-X5 supports a total of 7 SPI controllers, with 6 controllers (spi0-spi5) located in the LSIO subsystem and 1 controller (spi6) located in the DSP subsystem. All SPI controllers support both master and slave modes.
+Here's the translation:
+
+The X5 supports a total of 7 SPI controllers, of which 6 (SPI0–SPI5) are located in the LSIO subsystem and 1 (SPI6) is in the DSP subsystem. All SPI controllers support both master and slave modes.
+
+On the RDK X5, the pins brought out are mainly on the 40-pin header, specifically SPI1 and SPI2. Please refer to the [RDK X5 40-pin introduction](../../../03_Basic_Application/01_40pin_user_sample/40pin_define.md) for details. The other SPI ports are not available on the 40-pin header.
 
 ## Linux SPI Driver Framework Overview
 
@@ -166,48 +170,75 @@ The SPI external loopback test involves setting up one SPI Slave and one SPI Mas
 }
 ```
 
-Modify the SPI4 DTS to support Master functionality as follows:
+Modify the SPI1 DTS to support Master functionality: (SPI1 has two chip selects, so we define two device child nodes here. After the system starts up normally, this will be reflected in the file system as two devices, /dev/spi1.0 and /dev/spi1.1)
 
 
 ```c
-&spi4 {
+&spi1 {
 	status = "okay";
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_spi4>;
+	pinctrl-0 = <&pinctrl_spi1 &pinctrl_spi1_ssn1>;
 
 	spidev@0 {
 		compatible = "dr,x5-spidev";
 		spi-max-frequency = <32000000>;
 		reg = <0>;
 	};
-}
+
+	spidev@1 {
+		compatible = "dr,x5-spidev";
+		spi-max-frequency = <32000000>;
+		reg = <1>;
+	};
+};
 ```
 
-The test command and expected results are as follows (using SPI2 as the Slave and SPI4 as the Master):
-
+Translation: The test commands and results are as follows (with SPI2 as Slave and SPI1.1 as Master):
 
 ```c
-# ./spidev_tc -D /dev/spidev2.0 -v -s 1000000 -m 2 -e 10 -t 1&
-	bits per word: 8
-	max speed: 1000000 Hz (1000 KHz)
-	userspace spi write test, len=10 times=1
-	test, times=0
-	TX | 67 C6 69 73 51 FF 4A EC 29 CD __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
+1. Open one terminal and operate the SPI slave device:
 
-# ./spidev_tc -D /dev/spidev4.0 -v -s 1000000 -m 1 -e 10 -t 1&
-	spi mode: 0x0
-	bits per word: 8
-	max speed: 1000000 Hz (1000 KHz)
-	userspace spi read test, len=10 times=1
-	test, times=0
-	RX | 67 C6 69 73 51 FF 4A EC 29 CD __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
+root@ubuntu:~# /app/chip_base_test/05_spi_test/spidev_tc -D /dev/spidev2.0 -e 1 -v -S 64 -I 1
+spi mode: 0x0
+bits per word: 8
+max speed: 500000 Hz (500 kHz)
+Userspace spi read test, test_len=64 iterations=1
 
-[2]+  Done                       ./spidev_tc -D /dev/spidev2.0 -v -s 1000000 -m 1 -e 10 -t 1
-[1]+  Done                       ./spidev_tc -D /dev/spidev4.0 -v -s 1000000 -m 2 -e 10 -t 1
+(Note: After executing the above command, the program will keep waiting until it receives data sent from the SPI Master.)
+
+
+
+2. Open another terminal and operate the SPI master device:
+root@ubuntu:~# /app/chip_base_test/05_spi_test/spidev_tc -D /dev/spidev1.1 -e 2 -v -S 64 -I 1
+spi mode: 0x0
+bits per word: 8
+max speed: 500000 Hz (500 kHz)
+Userspace spi write test, test_len=64 iterations=1
+TX | 67 C6 69 73 51 FF 4A EC 29 CD BA AB F2 FB E3 46 7C C2 54 F8 1B E8 E7 8D 76 5A 2E 63 33 9F C9 9A  |g.isQ.J.)......F|.T.....vZ.c3...|
+TX | 66 32 0D B7 31 58 A3 5A 25 5D 05 17 58 E9 5E D4 AB B2 CD C6 9B B4 54 11 0E 82 74 41 21 3D DC 87  |f2..1X.Z%]..X.^.......T...tA!=..|
+Test times: 0
+root@ubuntu:~#
+
+(Note: After executing the above command, the SPI master sends data out immediately.)
+
+
+
+3. At this point, you can observe that the terminal of the SPI slave device will display the received data, with the overall status resembling the following result:
+
+root@ubuntu:~# /app/chip_base_test/05_spi_test/spidev_tc -D /dev/spidev2.0 -e 1 -v -S 64 -I 1
+spi mode: 0x0
+bits per word: 8
+max speed: 500000 Hz (500 kHz)
+Userspace spi read test, test_len=64 iterations=1
+RX | 67 C6 69 73 51 FF 4A EC 29 CD BA AB F2 FB E3 46 7C C2 54 F8 1B E8 E7 8D 76 5A 2E 63 33 9F C9 9A  |g.isQ.J.)......F|.T.....vZ.c3...|
+RX | 66 32 0D B7 31 58 A3 5A 25 5D 05 17 58 E9 5E D4 AB B2 CD C6 9B B4 54 11 0E 82 74 41 21 3D DC 87  |f2..1X.Z%]..X.^.......T...tA!=..|
+rate: tx 0.1kbps, rx 0.1kbps
+Test times: 0
+root@ubuntu:~#
 ```
 
 :::info Note
-When performing the external loopback test, the SPI Slave program should be executed first, followed by the SPI Master program. If the SPI Master program is executed first, followed by the SPI Slave program, data loss may occur due to desynchronization between the Master and Slave. Similarly, the `-t` parameter of `spidev_tc` should only be specified once. If multiple tests are needed, it is recommended to write a script to execute the test program multiple times to ensure synchronization between the Master and Slave.
+When performing external loopback testing, the SPI Slave program must be executed first, followed by the SPI Master program. If the SPI Master program is executed first and the SPI Slave program later, data loss may occur during SPI reception due to master-slave synchronization issues. For multiple test runs, you can write a script to execute the test program repeatedly to ensure synchronization between the Master and Slave.
 :::
 
 ## Appendix
@@ -1078,3 +1109,14 @@ ${OUT_DIR}/%.o: %.c
 clean :
 	rm -rf $(OBJS) $(OBJECT)
 ```
+
+## FAQ
+
+Q: All pins are connected and the program is executed, but the expected result is still not observed. What's wrong?
+
+A: You can use an oscilloscope or other signal measurement equipment to connect to the pins you want to measure and take measurements.
+For example, in the external loopback test mentioned above, after confirming that the wiring is correct, measure the chip select and clock signals. Refer to the following:
+
+![image-spidriver_spi-pin-connect](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/spidriver_spi-pin-connect.png)
+![image-spidriver_snn_clk_loop_1](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/spidriver_snn_clk_loop_1.png)
+![image-spidriver_snn_clk_loop_100](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development_x5/spidriver_snn_clk_loop_100.png)
