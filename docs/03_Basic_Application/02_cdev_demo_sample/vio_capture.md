@@ -5,14 +5,14 @@ sidebar_position: 4
 # vio_capture 示例介绍
 
 ## 示例简介
-vio_capture 是一个位于 /app/cdev_demo 中的 C 语言开发代码示例 \
+vio_capture 是一个位于 `/app/cdev_demo` 中的 C 语言开发代码示例 \
 本示例用于从摄像头捕获 YUV 格式图像和 RAW 原始数据，并保存为本地文件。
 
 ## 效果展示
-我们通过 vscode 执行本示例，观察摄像头捕获的图像
+我们通过 vscode 执行本示例，观察摄像头捕获的图像。
 ![connect-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/02_cdev_demo_sample/image/cdev_vio_capture_example_effect_1.png)
 
-捕获的图片我们用 yuvplayer 检查，看是否符合我们的预期。
+捕获的图片我们用 `yuvplayer` 检查，看是否符合我们的预期。
 
 ![connect-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/02_cdev_demo_sample/image/yuv0_img.png)
 
@@ -21,7 +21,7 @@ vio_capture 是一个位于 /app/cdev_demo 中的 C 语言开发代码示例 \
 
 ### 硬件连接
 
-该示例不需要鼠标和键盘，所以这里连接了摄像头 HDMI 显示屏，网线接口，电源线
+该示例不需要鼠标和键盘，所以这里连接了摄像头 HDMI 显示屏，网线接口，电源线。
 
 ![connect-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/02_cdev_demo_sample/image/cdev_vio_capture_hardware_connect.png)
 
@@ -36,7 +36,7 @@ root@ubuntu:/app/cdev_demo/vio_capture# tree
 ```
 
 ### 编译以及运行
-我们直接在该目录下使用 make 即可编译出 capture 可执行文件。
+我们直接在该目录下使用 `make` 即可编译出 `capture` 可执行文件。
 ```
 root@ubuntu:/app/cdev_demo/vio_capture# tree
 .
@@ -193,7 +193,7 @@ temp_ptr.data_size[0]:4147200
 root@ubuntu:/app/cdev_demo/vio_capture#
 ```
 
-我们使用 ls -la 命令检查是否有抓到 raw 和 yuv 图像
+我们使用 `ls -la` 命令检查是否有抓到 raw 和 yuv 图像
 
 ```
 root@ubuntu:/app/cdev_demo/vio_capture# ls -la
@@ -249,10 +249,10 @@ for any corresponding short options.
 ```
 
 示例程序参数选项说明 \
---width	 -w：是摄像头 sensor 的输出宽度 \
---height -h：是摄像头 sensor 的输出高度 \
---bit	-b：是 RAW 位深（通常 8/10/16 ）\
---count	-c：是捕获帧数
+`--width` (`-w`)：是摄像头 sensor 的输出宽度 \
+`--height` (`-h`)：是摄像头 sensor 的输出高度 \
+`--bit` (`-b`)：是 RAW 位深（通常 8/10/16 ）\
+`--count` (`-c`)：是捕获帧数
 
 我们这里可以列举一些标配 sensor 的示例参数，方便参考使用。
 | 型号   | 宽度 | 高度 | 位深 |
@@ -261,7 +261,7 @@ for any corresponding short options.
 
 
 ### 软件架构说明
-本示例主要是从摄像头捕获 YUV 和 RAW 图，逻辑相对简单，打开摄像头之后，调用 libspcdev 库提供的接口之后，可以直接获取到 YUV 和 RAW 图进行保存。
+本示例主要是从摄像头捕获 YUV 和 RAW 图，逻辑相对简单，打开摄像头之后，调用 `libspcdev` 库提供的接口之后，可以直接获取到 YUV 和 RAW 图进行保存。
 
 <center>
 ![software_arch](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/02_cdev_demo_sample/image/cdev_vio_capture_software_arch.png)
@@ -278,5 +278,5 @@ for any corresponding short options.
 
 ### FAQ
 __Q：__ 使用其他摄像头为什么不能抓到图像 \
-__A：__ 其他摄像头没有做过驱动适配， libspcdev 是调用了已经适配好的摄像头驱动去使用的，不同的摄像头参数不一样，所以其他摄像头不能抓到图像。
+__A：__ 其他摄像头没有做过驱动适配， `libspcdev` 是调用了已经适配好的摄像头驱动去使用的，不同的摄像头参数不一样，所以其他摄像头不能抓到图像。
 
