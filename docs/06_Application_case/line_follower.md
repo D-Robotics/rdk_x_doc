@@ -48,7 +48,7 @@ import TabItem from '@theme/TabItem';
 </TabItem>
 <TabItem value="humble" label="Humble">
 
-   - Ubuntu 22.04 系统和[ROS2 Humble 桌面版](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
+   - Ubuntu 22.04 系统和[ROS2 Humble 桌面版](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html)
 
 </TabItem>
 </Tabs>
