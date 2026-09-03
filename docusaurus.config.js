@@ -82,7 +82,7 @@ const config = {
     },
     {
       src: "/rdk_x_doc/js/umami-events.js",
-      async: true,
+      defer: true,
     },
     {
       src: "https://rdk.d-robotics.cc/embed.min.js",
