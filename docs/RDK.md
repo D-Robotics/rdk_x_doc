@@ -20,6 +20,8 @@ import DocScope from '@site/src/components/DocScope';
 
 欢迎用户使用，具体方法请参考**系统烧录**章节。
 
+<DocScope products="RDK-X3">
+
 :::info 注意
 
 - 本文档中**RDK X3**均使用 3.0 & 2.0 版本 Ubuntu 操作系统，对于仍需使用**旭日 X3 派 1.0 版本系统**的用户，可从下述链接中获取资料：<br/>
@@ -32,7 +34,7 @@ import DocScope from '@site/src/components/DocScope';
 用户如需确认系统版本号，可通过该命令查询 `cat /etc/version`, 2.1.0 及以上版本可以通过 `rdkos_info` 命令查看具体的版本信息。
 :::
 
-
+</DocScope>
 
 ## D-Robotics RDK 套件概述
 
@@ -41,7 +43,7 @@ import DocScope from '@site/src/components/DocScope';
 - RDK X3（旭日 X3 派）
 - RDK X3 Module（旭日 X3 模组）
 - RDK X5
-- RDK S100
+- RDK X5 Module（旭日 X5 模组）
 
 搭配 TogetheROS.Bot 机器人中间件，RDK 套件可以帮助开发者快速搭建机器人原型，开展评测和验证工作。
 
@@ -54,6 +56,8 @@ import DocScope from '@site/src/components/DocScope';
 **RDK X3 Module（旭日 X3 模组）** 是一款紧凑型核心模组，与 RDK X3 保持了同等规格，尺寸和接口兼容树莓派 CM4 模组。通过搭配扩展板，可以为各种应用场景提供高效的计算和通信能力。
 
 **RDK X5** 是一款全功能开发板，具有 10Tops 端侧推理算力与 8 核 ARM A55 处理能力，支持 2 路 MIPI Camera 接入，4 路 USB3.0 接口。通过搭配丰富的传感器和扩展组件，为开发者提供了灵活的硬件扩展和连接选项。
+
+**RDK X5 Module（旭日 X5 模组）** 集成了 D-Robotics Sunrise 5 智能计算芯片及 PMIC、DDR、eMMC、QSPI NAND、Wi-Fi/蓝牙等核心功能单元，可以提供 300 针高速扩展接口，满足各类应用场景的快速部署需求。
 
 ![image-rdk-serials](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/image-rdk-serials1.jpg)
 
