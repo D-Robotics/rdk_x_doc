@@ -6,7 +6,7 @@ sidebar_position: 8
 
 ## SPI Hardware Support
 
-The X5 supports a total of 7 SPI controllers, of which 6 (SPI0–SPI5) are located in the LSIO subsystem and 1 (SPI6) is in the DSP subsystem. All SPI controllers support both master and slave modes.
+The X5 supports a total of 7 SPI controllers, of which 6 (SPI0–SPI5) are located in the LSIO subsystem and 1 (SPI6) is in the DSP subsystem. All SPI controllers support both controller and device modes.
 
 On the RDK X5, the pins brought out are mainly on the 40-pin header, specifically SPI1 and SPI2. Please refer to the [RDK X5 40-pin introduction](../../../03_Basic_Application/01_40pin_user_sample/40pin_define.md) for details. The other SPI ports are not available on the 40-pin header.
 
@@ -28,17 +28,17 @@ drivers/spi/spi-dw-dma.c
 ```
 ### Controller Hardware Description
 
-All SPI controllers on the X5 can operate in Master/Slave modes. The operational limitations for Master and Slave modes are as follows:
+All SPI controllers on the X5 can operate in Controller/Device modes. The operational limitations for Controller and Device modes are as follows:
 
-- **SPI-Master**: Maximum frequency of 50MHz
-- **SPI-Slave**: Maximum frequency of 32MHz
+- **SPI-Controller**: Maximum frequency of 50MHz
+- **SPI-Device**: Maximum frequency of 32MHz
 
 All SPI controllers on the X5 can operate in either interrupt or DMA mode. The limitations for interrupt mode are as follows:
 
-- **SPI-Slave**:
+- **SPI-Device**:
     - **Rx**: With the CPU running at a fixed frequency of 1.5GHz, it can achieve up to 32MHz.
     - **Tx**: With the CPU running at a fixed frequency of 1.5GHz, it can achieve up to 16MHz.
-- **SPI-Master**: Normal communication is supported.
+- **SPI-Controller**: Normal communication is supported.
 
 ### DTS Configuration Description
 
@@ -115,7 +115,7 @@ CONFIG_SPI_SPIDEV=m
 ...
 ```
 
-Ensure that a dummy slave device has been created under the SPI controller node to be tested in the current hardware's DTS.
+Ensure that a dummy device has been created under the SPI controller node to be tested in the current hardware's DTS.
 
 
 ```c
@@ -130,7 +130,7 @@ Ensure that a dummy slave device has been created under the SPI controller node 
 
 ### SPI Internal Loopback Test
 
-The SPI internal loopback test is only supported by SPI Master. The principle is that the SPI hardware's TX FIFO sends data to the RX FIFO, forming a loopback.
+The SPI internal loopback test is only supported by SPI Controller. The principle is that the SPI hardware's TX FIFO sends data to the RX FIFO, forming a loopback.
 
 The test command and expected results are as follows:
 
@@ -150,7 +150,7 @@ The test command and expected results are as follows:
 
 ### SPI External Loopback Test
 
-The SPI external loopback test involves setting up one SPI Slave and one SPI Master, with corresponding wires connected for the test. 
+The SPI external loopback test involves setting up one SPI Device and one SPI Controller, with corresponding wires connected for the test. 
 
 
 ```c
@@ -168,7 +168,7 @@ The SPI external loopback test involves setting up one SPI Slave and one SPI Mas
 }
 ```
 
-Modify the SPI1 DTS to support Master functionality: (SPI1 has two chip selects, so we define two device child nodes here. After the system starts up normally, this will be reflected in the file system as two devices, /dev/spi1.0 and /dev/spi1.1)
+Modify the SPI1 DTS to support Controller functionality: (SPI1 has two chip selects, so we define two device child nodes here. After the system starts up normally, this will be reflected in the file system as two devices, /dev/spi1.0 and /dev/spi1.1)
 
 
 ```c
@@ -191,10 +191,10 @@ Modify the SPI1 DTS to support Master functionality: (SPI1 has two chip selects,
 };
 ```
 
-The test commands and results are as follows (with SPI2 as Slave and SPI1.1 as Master):
+The test commands and results are as follows (with SPI2 as Device and SPI1.1 as Controller):
 
 ```c
-1. Open one terminal and operate the SPI slave device:
+1. Open one terminal and operate the SPI device:
 
 root@ubuntu:~# /app/chip_base_test/05_spi_test/spidev_tc -D /dev/spidev2.0 -e 1 -v -S 64 -I 1
 spi mode: 0x0
@@ -202,11 +202,11 @@ bits per word: 8
 max speed: 500000 Hz (500 kHz)
 Userspace spi read test, test_len=64 iterations=1
 
-(Note: After executing the above command, the program will keep waiting until it receives data sent from the SPI Master.)
+(Note: After executing the above command, the program will keep waiting until it receives data sent from the SPI Controller.)
 
 
 
-2. Open another terminal and operate the SPI master device:
+2. Open another terminal and operate the SPI controller:
 root@ubuntu:~# /app/chip_base_test/05_spi_test/spidev_tc -D /dev/spidev1.1 -e 2 -v -S 64 -I 1
 spi mode: 0x0
 bits per word: 8
@@ -217,11 +217,11 @@ TX | 66 32 0D B7 31 58 A3 5A 25 5D 05 17 58 E9 5E D4 AB B2 CD C6 9B B4 54 11 0E 
 Test times: 0
 root@ubuntu:~#
 
-(Note: After executing the above command, the SPI master sends data out immediately.)
+(Note: After executing the above command, the SPI controller sends data out immediately.)
 
 
 
-3. At this point, you can observe that the terminal of the SPI slave device will display the received data, with the overall status resembling the following result:
+3. At this point, you can observe that the terminal of the SPI device will display the received data, with the overall status resembling the following result:
 
 root@ubuntu:~# /app/chip_base_test/05_spi_test/spidev_tc -D /dev/spidev2.0 -e 1 -v -S 64 -I 1
 spi mode: 0x0
@@ -236,7 +236,7 @@ root@ubuntu:~#
 ```
 
 :::info Note
-When performing external loopback testing, the SPI Slave program must be executed first, followed by the SPI Master program. If the SPI Master program is executed first and the SPI Slave program later, data loss may occur during SPI reception due to master-slave synchronization issues. For multiple test runs, you can write a script to execute the test program repeatedly to ensure synchronization between the Master and Slave.
+When performing external loopback testing, the SPI Device program must be executed first, followed by the SPI Controller program. If the SPI Controller program is executed first and the SPI Device program later, data loss may occur during SPI reception due to controller-device synchronization issues. For multiple test runs, you can write a script to execute the test program repeatedly to ensure synchronization between the Controller and Device.
 :::
 
 ## Appendix
