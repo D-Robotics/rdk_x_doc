@@ -1,12 +1,10 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # SPI Debugging Guide
 
 ## SPI Hardware Support
-
-Here's the translation:
 
 The X5 supports a total of 7 SPI controllers, of which 6 (SPI0–SPI5) are located in the LSIO subsystem and 1 (SPI6) is in the DSP subsystem. All SPI controllers support both master and slave modes.
 
@@ -193,7 +191,7 @@ Modify the SPI1 DTS to support Master functionality: (SPI1 has two chip selects,
 };
 ```
 
-Translation: The test commands and results are as follows (with SPI2 as Slave and SPI1.1 as Master):
+The test commands and results are as follows (with SPI2 as Slave and SPI1.1 as Master):
 
 ```c
 1. Open one terminal and operate the SPI slave device:
