@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useHistory, useLocation } from "@docusaurus/router";
 import { useDocsSidebar } from "@docusaurus/plugin-content-docs/client";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -121,6 +121,14 @@ export default function DocItemWrapper(props) {
   );
 
   const visible = skipSidebarScope || shouldShowDoc(docId, version, product);
+
+  // SSR（build）阶段无条件渲染正文，供搜索索引/SEO 抓取；浏览器 hydration 后再按 scope 隐藏。
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  const shouldRenderDoc = isMounted ? visible : true;
+
   const filteredRenumberedSidebar = useMemo(() => {
     if (!sidebar?.items || skipSidebarScope) return null;
     const filtered = filterItems(sidebar.items, version, product);
@@ -204,7 +212,7 @@ export default function DocItemWrapper(props) {
     }
   }, [visible, skipSidebarScope, currentDocDisplayNumber, docId]);
 
-  if (!visible) {
+  if (!shouldRenderDoc) {
     return null;
   }
 
