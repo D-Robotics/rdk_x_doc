@@ -475,7 +475,7 @@ RDK X3 Module 载板提供一组 40pin header 接口（接口 9），接口信�
 ![image-40pin-header](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/01_hardware_development/rdk_x3_module/image/rdk_x3_module/image-40pin-header.png)
 
 :::caution 注意
-默认情况下，RDK X3 Module 核心模组固件、载板电平配置为 3.3V，如需要切换 IO 电平时，请参考[IO 电平选择 header 接口](#io电平切换接口)。
+默认情况下，RDK X3 Module 核心模组固件、载板电平配置为 3.3V，如需要切换 IO 电平时，请参考[IO 电平选择 header 接口](#io-电平切换接口)。
 :::
 
 </DocScope>   
