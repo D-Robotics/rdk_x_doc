@@ -386,7 +386,7 @@ i2cdetect -y -r 3
 
 RDK X3 Module 载板提供一路 MIPI DSI 接口（接口 10），可以用于 LCD 显示屏等接入。接口采用 15pin FPC 连接器，可直接接入树莓派多款 LCD 显示屏。
 
-对于 MIPI DSI 接口的详细使用方法，可参考[MIPI DSI 显示屏使用](/hardware_development/rdk_x3_module/display)。
+对于 MIPI DSI 接口的详细使用方法，可参考[MIPI DSI 显示屏使用](../../07_Advanced_development/01_hardware_development/rdk_x3_module/display.md)。
 
 </DocScope>
 
@@ -532,7 +532,7 @@ RDK X3 Module 载板提供 IO 电平切换功能，用于控制 40pin header 电
 默认情况下，RDK X3 Module 核心模组固件、载板电平配置为 3.3V，如需要切换 IO 电平时，需要按如下步骤进行：
 
 1. 下载支持 1.8V 电平配置的启动固件，[固件下载地址](https://archive.d-robotics.cc/downloads/miniboot)。
-2. 使用官方烧录工具`hbupdate`，更新核心板启动固件，具体方法请参考[镜像烧录](../install_os)。
+2. 使用官方烧录工具`hbupdate`，更新核心板启动固件，具体方法请参考[镜像烧录](../install_os/rdk_x3/01_system_burn.md)。
 3. 设备断电，使用跳线帽将`vref`、`1.8V`信号短接后重新上电。
 :::
 
