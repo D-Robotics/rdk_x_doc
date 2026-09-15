@@ -11,10 +11,6 @@ import {
 
 type Props = React.ComponentProps<typeof DocPaginator>;
 
-function containsChinese(text: string): boolean {
-  return /[\u4e00-\u9fff]/.test(text);
-}
-
 type SidebarItem = {
   type?: string;
   label?: string;
@@ -23,74 +19,6 @@ type SidebarItem = {
   docId?: string;
   items?: SidebarItem[];
 };
-
-function titleCaseWord(word: string): string {
-  const lower = word.toLowerCase();
-  const acronymMap: Record<string, string> = {
-    faq: 'FAQs',
-    os: 'OS',
-    sdk: 'SDK',
-    api: 'API',
-    bpu: 'BPU',
-    cpu: 'CPU',
-    gpu: 'GPU',
-    ros: 'ROS',
-    tros: 'TROS',
-    rdk: 'RDK',
-    i2c: 'I2C',
-    spi: 'SPI',
-    uart: 'UART',
-    gpio: 'GPIO',
-  };
-  if (acronymMap[lower]) {
-    return acronymMap[lower];
-  }
-  if (/^x\d+$/i.test(word)) {
-    return word.toUpperCase();
-  }
-  return lower.charAt(0).toUpperCase() + lower.slice(1);
-}
-
-function deriveEnglishTitleFromPermalink(permalink: string): string | null {
-  const cleanPath = String(permalink || '')
-    .split('#')[0]
-    .split('?')[0]
-    .replace(/\/+$/, '');
-  if (!cleanPath) return null;
-
-  const segments = cleanPath.split('/').filter(Boolean);
-  if (segments.length === 0) return null;
-
-  let slug = segments[segments.length - 1];
-  if (slug === 'en' && segments.length > 1) {
-    slug = segments[segments.length - 2];
-  }
-
-  slug = decodeURIComponent(slug)
-    .replace(/\.(md|mdx|html)$/i, '')
-    .replace(/^\d+(?:[_-]\d+)*[_-]+/, '')
-    .trim();
-
-  if (!slug) return null;
-
-  const words = slug
-    .replace(/[_-]+/g, ' ')
-    .split(/\s+/)
-    .filter(Boolean)
-    .map(titleCaseWord);
-
-  if (words.length === 0) return null;
-  return words.join(' ');
-}
-
-function extractNumberPrefix(title: string): string | null {
-  const numbered = String(title || '').trim().match(/^(\d+(?:\.\d+)*)\s*[. ]\s*/);
-  return numbered?.[1] ?? null;
-}
-
-function looksLikeUnderscoreCodeTitle(title: string): boolean {
-  return /(?:^|\s)\d+_\d+_|[A-Za-z]_[A-Za-z]/.test(title);
-}
 
 function normalizePath(path: string | undefined): string {
   if (!path) return '';
@@ -142,41 +70,23 @@ function processSidebarItems(
 function collectVisibleDocLinks(items: SidebarItem[] | undefined, output: SidebarItem[] = []): SidebarItem[] {
   if (!Array.isArray(items)) return output;
   for (const item of items) {
-    if (item.type === 'link' && item.docId && (item.href || item.permalink)) {
-      output.push(item);
+    if (item.type === 'link') {
+      if (item.docId && (item.href || item.permalink)) {
+        output.push(item);
+      }
+      continue;
     }
-    if (item.type === 'category' && Array.isArray(item.items)) {
-      collectVisibleDocLinks(item.items, output);
+    if (item.type === 'category') {
+      // 分类索引页（generated-index / link.type=doc）在侧边栏中是可点击项，需纳入翻页顺序
+      if (item.href || item.permalink) {
+        output.push(item);
+      }
+      if (Array.isArray(item.items)) {
+        collectVisibleDocLinks(item.items, output);
+      }
     }
   }
   return output;
-}
-
-function normalizePaginatorTitle(
-  title: string | undefined,
-  permalink: string,
-  locale: string,
-): string | undefined {
-  if (!title) return title;
-  if (locale !== 'en') {
-    return title;
-  }
-
-  const problematic = containsChinese(title) || looksLikeUnderscoreCodeTitle(title);
-  if (!problematic) {
-    return title;
-  }
-
-  const derived = deriveEnglishTitleFromPermalink(permalink);
-  if (!derived) {
-    return title;
-  }
-
-  const numberPrefix = extractNumberPrefix(title);
-  if (numberPrefix) {
-    return `${numberPrefix}. ${derived}`;
-  }
-  return derived;
 }
 
 export default function DocPaginatorWrapper(props: Props): JSX.Element {
@@ -184,13 +94,6 @@ export default function DocPaginatorWrapper(props: Props): JSX.Element {
   const { previous, next } = props;
   const docsSidebar = useDocsSidebar();
   const { version, product } = useDocScopeFilter();
-  
-  const getCurrentLocale = () => {
-    if (pathname.includes('/en/')) return 'en';
-    return 'zh';
-  };
-  
-  const currentLocale = getCurrentLocale();
 
   const processedSidebarItems = processSidebarItems(
     (docsSidebar?.items as SidebarItem[] | undefined),
@@ -230,23 +133,10 @@ export default function DocPaginatorWrapper(props: Props): JSX.Element {
 
   // When current doc exists in filtered sidebar, trust filtered pagination result
   // (including null for first/last item) to avoid showing hidden next/previous docs.
+  // Titles always prefer sidebar labels; do not re-derive from filename/permalink.
   const hasFilteredPagination = orderedDocLinks.length > 0 && currentIndex >= 0;
-
-  const baseNext = hasFilteredPagination ? autoNext : next ?? null;
-  const customNext = baseNext
-    ? {
-        ...baseNext,
-        title: normalizePaginatorTitle(baseNext.title, baseNext.permalink, currentLocale),
-      }
-    : null;
-
-  const basePrevious = hasFilteredPagination ? autoPrevious : previous ?? null;
-  const customPrevious = basePrevious
-    ? {
-        ...basePrevious,
-        title: normalizePaginatorTitle(basePrevious.title, basePrevious.permalink, currentLocale),
-      }
-    : null;
+  const customNext = hasFilteredPagination ? autoNext : next ?? null;
+  const customPrevious = hasFilteredPagination ? autoPrevious : previous ?? null;
 
   return (
     <DocPaginator

@@ -29,17 +29,17 @@ drivers/spi/spi-dw-dma.c
 
 ### 控制器硬件说明
 
-X5 的所有 SPI 均控制器可以运行 Master/Slave 模式。Master 及 Slave 的运行限制如下：
+X5 的所有 SPI 控制器均可以运行 Controller/Device 模式。Controller 及 Device 的运行限制如下：
 
-- SPI-Master：最高频率 50MHz
-- SPI-Slave：最高频率 32MHz
+- SPI-Controller：最高频率 50MHz
+- SPI-Device：最高频率 32MHz
 
 X5 的所有 SPI 控制器均可以运行在中断/DMA 模式。中断模式运行限制如下：
 
-- SPI-Slave：
+- SPI-Device：
     - Rx：CPU 定频在 1.5GHz 时，可以达到 32MHz
     - Tx：CPU 定频在 1.5GHz 时，可以达到 16MHz
-- SPI-Master：均可正常通讯。
+- SPI-Controller：均可正常通讯。
 
 ### DTS 配置说明
 
@@ -112,7 +112,7 @@ CONFIG_SPI_SPIDEV=m
 ...
 ```
 
-确认在当前硬件的 DTS 内需要测试的 SPI 控制器节点下创建了一个 dummy 从设备：
+确认在当前硬件的 DTS 内需要测试的 SPI 控制器节点下创建了一个 dummy 设备：
 
 ```c
 &spi2 {
@@ -125,7 +125,7 @@ CONFIG_SPI_SPIDEV=m
 ```
 
 ### SPI 内部回环测试
-SPI 内部回环测试仅 SPI Master 支持，其原理是 SPI 硬件 IP 的 tx fifo 将数据发给 rx fifo 从而形成回环。
+SPI 内部回环测试仅 SPI Controller 支持，其原理是 SPI 硬件 IP 的 tx fifo 将数据发给 rx fifo 从而形成回环。
 
 测试命令及结果参考如下：
 
@@ -144,7 +144,7 @@ SPI 内部回环测试仅 SPI Master 支持，其原理是 SPI 硬件 IP 的 tx 
 
 ### SPI 外部回环测试
 
-SPI 外部回环测试是指定一个 SPI Slave，一个 SPI Master，对应线连接进行的测试。 我们基于 RDK X5 的硬件以 SPI2 作为 Slave，SPI1 作为 Master（使用双片选中的 SPI1.1）为例： 修改 SPI2 DTS 以支持 Slave 功能：
+SPI 外部回环测试是指定一个 SPI Device，一个 SPI Controller，对应线连接进行的测试。 我们基于 RDK X5 的硬件以 SPI2 作为 Device，SPI1 作为 Controller（使用双片选中的 SPI1.1）为例： 修改 SPI2 DTS 以支持 Device 功能：
 
 ```c
 &spi2 {
@@ -161,7 +161,7 @@ SPI 外部回环测试是指定一个 SPI Slave，一个 SPI Master，对应线�
 };
 ```
 
-修改 SPI1 DTS 以支持 Master 功能：（SPI1 具有两个片选，所以这里我们定义了两个设备子节点，系统正常启动之后，体现在文件系统中，就会有两个设备，/dev/spi1.0 和 /dev/spi1.1）
+修改 SPI1 DTS 以支持 Controller 功能：（SPI1 具有两个片选，所以这里我们定义了两个设备子节点，系统正常启动之后，体现在文件系统中，就会有两个设备，/dev/spi1.0 和 /dev/spi1.1）
 
 ```c
 &spi1 {
@@ -183,11 +183,11 @@ SPI 外部回环测试是指定一个 SPI Slave，一个 SPI Master，对应线�
 };
 ```
 
-测试命令及结果参考如下(以 SPI2 为 Slave，SPI1.1 为 Master)：
+测试命令及结果参考如下(以 SPI2 为 Device，SPI1.1 为 Controller)：
 
 ```c
 
-1、打开一个终端，操作 SPI 从设备：
+1、打开一个终端，操作 SPI 设备：
 
 root@ubuntu:~# /app/chip_base_test/05_spi_test/spidev_tc -D /dev/spidev2.0 -e 1 -v -S 64 -I 1
 spi mode: 0x0
@@ -195,11 +195,11 @@ bits per word: 8
 max speed: 500000 Hz (500 kHz)
 Userspace spi read test, test_len=64 iterations=1
 
-（说明：上述命令执行之后，程序会一直等待，直到接收到从 SPI Master 发送的数据。）
+（说明：上述命令执行之后，程序会一直等待，直到接收到从 SPI Controller 发送的数据。）
 
 
 
-2、打开另一个终端，操作 SPI 主设备：
+2、打开另一个终端，操作 SPI 控制器：
 root@ubuntu:~# /app/chip_base_test/05_spi_test/spidev_tc -D /dev/spidev1.1 -e 2 -v -S 64 -I 1
 spi mode: 0x0
 bits per word: 8
@@ -210,11 +210,11 @@ TX | 66 32 0D B7 31 58 A3 5A 25 5D 05 17 58 E9 5E D4 AB B2 CD C6 9B B4 54 11 0E 
 Test times: 0
 root@ubuntu:~#
 
-（说明：上述命令执行之后，SPI主设备就直接发送数据出去了）
+（说明：上述命令执行之后，SPI控制器就直接发送数据出去了）
 
 
 
-3、这个时候可以观察到 SPI 从设备的终端会显示接收到的数据，整体状态形如下述结果：
+3、这个时候可以观察到 SPI 设备的终端会显示接收到的数据，整体状态形如下述结果：
 
 root@ubuntu:~# /app/chip_base_test/05_spi_test/spidev_tc -D /dev/spidev2.0 -e 1 -v -S 64 -I 1
 spi mode: 0x0
@@ -231,7 +231,7 @@ root@ubuntu:~#
 ```
 
 :::info 备注
-在进行外部回环测试时，需要先执行 SPI Slave 程序，再执行 SPI Master 程序。假如先执行 SPI Master 程序，后执行 SPI Slave 程序，可能会由于 Master 与 Slave 不同步导致 SPI 接收数据出现丢失。如果想进行多次测试，可以写脚本多次执行测试程序，来保证 Master 与 Slave 之间的同步。
+在进行外部回环测试时，需要先执行 SPI Device 程序，再执行 SPI Controller 程序。假如先执行 SPI Controller 程序，后执行 SPI Device 程序，可能会由于 Controller 与 Device 不同步导致 SPI 接收数据出现丢失。如果想进行多次测试，可以写脚本多次执行测试程序，来保证 Controller 与 Device 之间的同步。
 :::
 
 ## 附录
