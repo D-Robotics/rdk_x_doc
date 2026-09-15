@@ -490,11 +490,12 @@ async function discoverUrls(siteUrl) {
 }
 
 function pickArticle($) {
+  // 只索引真正的文档正文页；兜底到裸 article 会命中 generated-index 目录页的卡片列表，
+  // 产生噪声记录并易被标错产品/版本（与 rdk_s_doc 的修复对齐）。
   const selectors = [
     'article .theme-doc-markdown',
     'article.markdown',
     '.theme-doc-markdown',
-    'article',
   ];
   for (const selector of selectors) {
     const node = $(selector).first();

@@ -2964,5 +2964,5 @@ VIN error codes are listed below:
 | -268565523   | HB_ERR_VIN_SWITCH_SNS_TABLE_FAIL            | Failed to switch ISP mode (linear/DOL)     |
 
 ## Reference Code
-Example code for the VIN part can be referred to in the [get_sif_data](./multimedia_samples/get_sif_data) and [get_isp_data](./multimedia_samples/get_isp_data) functions.
+Example code for the VIN part can be referred to in the [get_sif_data](./multimedia_samples#get_sif_data) and [get_isp_data](./multimedia_samples#get_isp_data) functions.
 
