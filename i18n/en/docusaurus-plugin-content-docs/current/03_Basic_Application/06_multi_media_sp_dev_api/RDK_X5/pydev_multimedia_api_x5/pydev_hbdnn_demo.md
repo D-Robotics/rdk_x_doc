@@ -83,10 +83,6 @@ There are two ways to install using a wheel package; choose either one.
   pip install hbm_runtime-x.x.x-cp310-cp310-manylinux_2_34_aarch64.whl
   ```
 
-- **Install from PyPI source**
-  ```bash
-  pip install hbm_runtime
-  ```
 
 #### Using a DEB Package
 There are two ways to install using a DEB package; choose either one.
