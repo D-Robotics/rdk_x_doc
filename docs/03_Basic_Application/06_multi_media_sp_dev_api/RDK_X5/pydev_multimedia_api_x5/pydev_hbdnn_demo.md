@@ -83,10 +83,6 @@ RDK X5 3.5.0 版本之后，使用 Python 进行算法推理、目标检测、�
   pip install hbm_runtime-x.x.x-cp310-cp310-manylinux_2_34_aarch64.whl
   ```
 
-- 从 pypi 源安装
-  ```bash
-  pip install hbm_runtime
-  ```
 
 #### 使用 .deb 包安装
   使用 deb 安装的方式有两种，选其一即可
