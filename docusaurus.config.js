@@ -186,6 +186,9 @@ const config = {
           { from: "/Quick_start/install_os/rdk_x5_module/burn", to: "/Quick_start/system-burn/upgrade-miniboot" },
           { from: "/Quick_start/install_os/rdk_x5_module/boot_system", to: "/Quick_start/system-burn/burn-sd-card" },
           { from: "/Quick_start/install_os/rdk_x5_module/FAQ", to: "/Quick_start/system-burn/faq" },
+          // Bing 大小写 404（小写→大写），2026-09-20
+          { from: "/rdk", to: "/RDK" },
+          { from: "/10_release_note", to: "/10_Release_Note" },
         ],
       },
     ],
