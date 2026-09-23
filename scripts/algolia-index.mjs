@@ -664,6 +664,126 @@ function recordsFromHtml(html, pageUrl, siteUrl, sidebarConfig) {
   });
 }
 
+function relativePathFromUrl(url) {
+  try {
+    return new URL(url).pathname;
+  } catch {
+    return url;
+  }
+}
+
+function deepestHeadingText(hierarchy) {
+  for (const lvl of ['lvl6', 'lvl5', 'lvl4', 'lvl3', 'lvl2', 'lvl1']) {
+    const text = normalizeText(hierarchy?.[lvl]);
+    if (text) {
+      return text;
+    }
+  }
+  return '';
+}
+
+/**
+ * 把 Algolia DocSearch records 映射成 easyops `search-index.json` 同构格式（5 shard），
+ * 供 rdk-docs-mcp 读取。MCP 的 compactDocusaurusIndex 只读 t/s/u/b/h，i/p 为 easyops
+ * 同构的占位字段（MCP 不读）。
+ *
+ * shard 语义对齐 easyops 现网产物：
+ *   shard0 = 页面级 {t,u,b}；shard1 = 标题级 {t,u,h,p}；shard2 = 页内短摘要 {t,s,u,p}；
+ *   shard3 = 空；shard4 = 正文摘要 {t,s,u,h,p}。
+ *
+ * 仅产出 zh-Hans（MCP 的 catalog 每仓只指向一个 zh indexPath，不读 /en/）。
+ */
+function buildEasyopsIndex(records) {
+  const zh = records.filter(
+    (r) => r.language === DEFAULT_LOCALE || r.language === 'zh-Hans',
+  );
+  const byPage = new Map();
+  for (const r of zh) {
+    const key = r.url_without_anchor;
+    if (!byPage.has(key)) {
+      byPage.set(key, []);
+    }
+    byPage.get(key).push(r);
+  }
+
+  const pages = [];
+  const headings = [];
+  const pageSnippets = [];
+  const contentSnippets = [];
+  let id = 0;
+  let pageSeq = 0;
+
+  for (const [url, recs] of byPage) {
+    pageSeq += 1;
+    const u = relativePathFromUrl(url);
+
+    let pageTitle = '';
+    for (const r of recs) {
+      if (r.type === 'lvl1' && r.hierarchy?.lvl1) {
+        pageTitle = normalizeText(r.hierarchy.lvl1);
+        break;
+      }
+    }
+    const breadcrumbs = (recs[0]?.hierarchy?.lvl0 || '')
+      .split(' / ')
+      .map((s) => normalizeText(s))
+      .filter(Boolean);
+    if (!pageTitle) {
+      pageTitle = breadcrumbs[breadcrumbs.length - 1] || '';
+    }
+    pages.push({i: ++id, t: pageTitle, u, b: breadcrumbs});
+
+    let firstHeading = '';
+    for (const r of recs) {
+      if (
+        r.type &&
+        r.type.startsWith('lvl') &&
+        r.type !== 'lvl1' &&
+        r.hierarchy?.[r.type]
+      ) {
+        firstHeading = normalizeText(r.hierarchy[r.type]);
+        break;
+      }
+    }
+    if (firstHeading) {
+      pageSnippets.push({i: ++id, t: firstHeading, s: pageTitle, u, p: pageSeq});
+    }
+
+    for (const r of recs) {
+      const type = r.type;
+      if (type && type.startsWith('lvl') && type !== 'lvl1') {
+        if (r.anchor) {
+          headings.push({
+            i: ++id,
+            t: normalizeText(r.hierarchy?.[type]),
+            u,
+            h: `#${r.anchor}`,
+            p: pageSeq,
+          });
+        }
+      } else if (type === 'content' && r.content) {
+        const doc = {i: ++id, t: normalizeText(r.content), u, p: pageSeq};
+        const source = deepestHeadingText(r.hierarchy);
+        if (source) {
+          doc.s = source;
+        }
+        if (r.anchor) {
+          doc.h = `#${r.anchor}`;
+        }
+        contentSnippets.push(doc);
+      }
+    }
+  }
+
+  return [
+    {documents: pages},
+    {documents: headings},
+    {documents: pageSnippets},
+    {documents: []},
+    {documents: contentSnippets},
+  ];
+}
+
 async function mapPool(items, concurrency, worker) {
   const results = [];
   let index = 0;
@@ -814,6 +934,16 @@ async function main() {
   const records = [...byId.values()];
   console.log(
     `Ready to index ${records.length} unique records from ${parsed} pages (${failed} failed).`,
+  );
+
+  const easyopsIndex = buildEasyopsIndex(records);
+  const easyopsPath = path.join(SITE_DIR, 'scripts/_algolia_tmp/search-index.json');
+  fs.mkdirSync(path.dirname(easyopsPath), {recursive: true});
+  fs.writeFileSync(easyopsPath, JSON.stringify(easyopsIndex));
+  console.log(
+    `Wrote easyops search-index.json (${easyopsIndex[0].documents.length} pages, ` +
+      `${easyopsIndex[1].documents.length} headings, ` +
+      `${easyopsIndex[4].documents.length} content snippets) to ${easyopsPath}`,
   );
 
   if (args.dryRun) {
