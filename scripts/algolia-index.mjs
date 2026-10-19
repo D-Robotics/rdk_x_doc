@@ -880,6 +880,98 @@ async function searchTest(appId, apiKey, indexName) {
   }
 }
 
+const ALGOLIA_CONTENT_CHUNK = 2000;
+
+// Identity of a "section": the page+anchor plus the product×version scope.
+// Scope is part of the key because a per-block <DocScope> can narrow the
+// product/version set of a single paragraph below that of its heading.
+function sectionScopeKey(record) {
+  const scope = (record.doc_scope || []).slice().sort().join(',');
+  return `${record.url_without_anchor}#${record.anchor || ''}|${scope}`;
+}
+
+// Collapse the per-node content records into one record per heading section.
+// The crawler emits a type:content record for every <p>/<li>/<td>, while
+// distinct:url already folds all of them under the same heading anchor into a
+// single search hit. Those fine-grained records are therefore never surfaced
+// independently and only inflate the record count. Merge each section's text
+// back into its heading record (chunking long sections), keep orphan content
+// (no matching heading) as chunked content records, then regenerate objectIDs.
+function buildAlgoliaRecords(records) {
+  const headingByKey = new Map();
+  const headings = [];
+  for (const r of records) {
+    if (r.type && r.type.startsWith('lvl')) {
+      const key = sectionScopeKey(r);
+      if (!headingByKey.has(key)) {
+        headingByKey.set(key, r);
+        headings.push(r);
+      }
+    }
+  }
+
+  const contentByKey = new Map();
+  const orphans = new Map();
+  for (const r of records) {
+    if (r.type !== 'content' || !r.content) {
+      continue;
+    }
+    const key = sectionScopeKey(r);
+    if (headingByKey.has(key)) {
+      contentByKey.set(key, `${contentByKey.get(key) || ''} ${r.content}`);
+    } else {
+      const existing = orphans.get(key);
+      if (existing) {
+        existing.text = `${existing.text} ${r.content}`;
+      } else {
+        orphans.set(key, {template: r, text: r.content});
+      }
+    }
+  }
+
+  const out = [];
+  for (const heading of headings) {
+    const text = (contentByKey.get(sectionScopeKey(heading)) || '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (!text) {
+      out.push(heading);
+      continue;
+    }
+    out.push({...heading, content: text.slice(0, ALGOLIA_CONTENT_CHUNK)});
+    for (let i = ALGOLIA_CONTENT_CHUNK; i < text.length; i += ALGOLIA_CONTENT_CHUNK) {
+      const part = text.slice(i, i + ALGOLIA_CONTENT_CHUNK);
+      out.push({
+        ...heading,
+        content: part,
+        type: 'content',
+        weight: {pageRank: 0, level: LEVEL_WEIGHT.content, position: 0},
+      });
+    }
+  }
+
+  for (const {template, text} of orphans.values()) {
+    const clean = text.replace(/\s+/g, ' ').trim();
+    if (!clean) {
+      continue;
+    }
+    for (let i = 0; i < clean.length; i += ALGOLIA_CONTENT_CHUNK) {
+      const part = clean.slice(i, i + ALGOLIA_CONTENT_CHUNK);
+      out.push({
+        ...template,
+        content: part,
+        type: 'content',
+        weight: {pageRank: 0, level: LEVEL_WEIGHT.content, position: 0},
+      });
+    }
+  }
+
+  for (const r of out) {
+    r.objectID = objectIdFor(r);
+  }
+  return out;
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const apiKey = process.env.ALGOLIA_ADMIN_API_KEY?.trim();
@@ -936,6 +1028,8 @@ async function main() {
     `Ready to index ${records.length} unique records from ${parsed} pages (${failed} failed).`,
   );
 
+  // MCP/easyops 侧保留细颗粒 content（buildEasyopsIndex 依赖 type:content），
+  // Algolia 侧改用聚合后的标题级记录，避免每个 p/li/td 一条造成索引膨胀。
   const easyopsIndex = buildEasyopsIndex(records);
   const easyopsPath = path.join(SITE_DIR, 'scripts/_algolia_tmp/search-index.json');
   fs.mkdirSync(path.dirname(easyopsPath), {recursive: true});
@@ -946,16 +1040,21 @@ async function main() {
       `${easyopsIndex[4].documents.length} content snippets) to ${easyopsPath}`,
   );
 
+  const algoliaRecords = buildAlgoliaRecords(records);
+  console.log(
+    `Aggregated to ${algoliaRecords.length} Algolia records (was ${records.length}).`,
+  );
+
   if (args.dryRun) {
     const samplePath = path.join(SITE_DIR, 'scripts/_algolia_tmp');
     fs.mkdirSync(samplePath, {recursive: true});
     const sampleFile = path.join(samplePath, 'sample-records.json');
-    fs.writeFileSync(sampleFile, JSON.stringify(records.slice(0, 20), null, 2));
+    fs.writeFileSync(sampleFile, JSON.stringify(algoliaRecords.slice(0, 20), null, 2));
     console.log(`Dry run: wrote sample records to ${sampleFile}`);
     return;
   }
 
-  if (records.length === 0) {
+  if (algoliaRecords.length === 0) {
     die('No records generated; aborting so the remote index is not cleared.');
   }
 
@@ -968,7 +1067,7 @@ async function main() {
   }
 
   console.log('Uploading records…');
-  await uploadRecords(appId, apiKey, indexName, records);
+  await uploadRecords(appId, apiKey, indexName, algoliaRecords);
   await searchTest(appId, apiKey, indexName);
   console.log('Done.');
 }
