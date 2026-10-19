@@ -189,6 +189,10 @@ const config = {
           // Bing 大小写 404（小写→大写），2026-09-20
           { from: "/rdk", to: "/RDK" },
           { from: "/10_release_note", to: "/10_Release_Note" },
+          // GSC 404 尾巴（2026-10）：.md 源文件 URL，301 到正确页面
+          { from: "/03_Basic_Application/03_40pin_user_guide/40pin_define.md", to: "/Basic_Application/01_40pin_user_sample/40pin_define" },
+          { from: "/Quick_start/09_RDK_Studio/04_flashing.md", to: "/Quick_start/rdk_studio" },
+          { from: "/05_Robot_development/03_boxs/spatial/stereo_imu_cam.md", to: "https://developer.d-robotics.cc/tros_doc/en/boxs/spatial/stereo_imu_cam" },
         ],
       },
     ],
