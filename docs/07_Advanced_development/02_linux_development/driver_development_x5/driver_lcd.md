@@ -272,7 +272,7 @@ RDK X5 上电后会加载显示相关驱动，显示 ubuntu 桌面，需要打�
 mv /etc/X11/xorg.conf.d/xorg_dsi_ignore.conf /etc/X11/xorg.conf.d/xorg_dsi_ignore.conf.disable
 mv /etc/X11/xorg.conf.d/xorg_hdmi_ignore.conf.disable /etc/X11/xorg.conf.d/xorg_hdmi_ignore.conf
 ```
-也可以通过 srpi-config 来选择输出方式，可以参考 [Dsiplay Chose DSI or HDMI](../../../System_configuration/srpi-config#display-options) 章节
+也可以通过 srpi-config 来选择输出方式，可以参考 [Dsiplay Chose DSI or HDMI](../../../02_System_configuration/02_srpi-config#display-options) 章节
 
 重启设备，就可以在 LCD 屏上看到系统桌面桌面了
 

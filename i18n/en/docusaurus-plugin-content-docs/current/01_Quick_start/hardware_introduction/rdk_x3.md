@@ -454,7 +454,7 @@ This interface is not available.
 
 The RDK X3 Module carrier board provides one MIPI DSI interface (Interface 10) that can be used for connecting LCD displays, etc. The interface uses a 15-pin FFC connector and can directly connect to various LCD displays for Raspberry Pi.
 
-For detailed instructions on how to use the MIPI DSI interface, please refer to [MIPI DSI Display Usage](/Advanced_development/hardware_development/rdk_x3_module/display).
+For detailed instructions on how to use the MIPI DSI interface, please refer to [MIPI DSI Display Usage](/07_Advanced_development/01_hardware_development/rdk_x3_module/display).
 
 </DocScope>
 

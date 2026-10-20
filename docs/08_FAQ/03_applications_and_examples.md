@@ -391,7 +391,7 @@ Date: 2023
 
     :::caution **注意**
     1.x 版本 tros.b**无法**通过`apt`命令直接升级到 2.x 或更新版本的 tros.b。如果需要使用新版 tros.b，必须先将 RDK 板卡的整个操作系统通过烧录镜像的方式升级到支持新版 tros.b 的 RDK OS 版本，然后再安装对应版本的 tros.b。
-    参考：[安装对应板卡系统](../01_Quick_start/install_os/rdk_x3/01_system_burn.md) (请将链接替换为实际有效的文档路径)
+    参考：[安装对应板卡系统](../01_Quick_start/install_os)
     :::
 
 * **功能差异：**
