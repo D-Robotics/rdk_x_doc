@@ -115,33 +115,7 @@ Provides commonly used commands in RDK OS, including RDK-specific commands for q
 **10. Release Notes**
 It records the release information of the RDK OS, including the version number, release date, update content, etc., to help users understand the system updates and changes.
 
-## Ecosystem Project Docking Support
 
-For product development, industry deployment, or batch deployment projects based on the RDK platform, D-Robotics has established the **"D-Robotics Ecosystem Project Docking Center"** as a unified collaboration entry point.
-
-If you are involved in any of the following scenarios, we recommend submitting your project information through this entry point:
-
-- Productization or mass-production planning  
-- System architecture evaluation and solution confirmation  
-- Module adaptation and performance optimization support  
-- Commercial project joint development  
-- Technical confirmation before bulk procurement  
-
-After submission, we will respond in tiers based on the project stage, including:
-
-1. Technical requirements assessment  
-2. Solution docking and architecture recommendations  
-3. Module Owner collaborative support  
-4. Issue closure tracking  
-5. Product roadmap coordination (if applicable)  
-
-👉 Project docking entry:  
-[D-Robotics Ecosystem Project Docking Communication](https://horizonrobotics.feishu.cn/share/base/form/shrcnpxBa3PjdjFmtxZS3tBXw0e)
-
-:::note Note
-This entry point is intended for clear project or commercial deployment needs.  
-For day-to-day technical questions, we recommend using community Q&A or the FAQ section first.
-:::
 
 
 
