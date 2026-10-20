@@ -149,6 +149,7 @@ const config = {
   ],
   plugins:  [
     require.resolve("./src/plugins/sidebar-scope-config-plugin"),
+    require.resolve("./src/plugins/locale-aware-404-plugin"),
     "docusaurus-plugin-image-zoom",
     [
       "docusaurus-plugin-copy-page-button",
