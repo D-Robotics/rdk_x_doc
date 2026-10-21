@@ -4,6 +4,8 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 import "dotenv/config";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { themes as prismThemes } from "prism-react-renderer";
 
 import remarkDirective from "remark-directive";
@@ -19,7 +21,82 @@ const copyrightYearLabel =
     ? `${COPYRIGHT_START_YEAR}-${currentYear}`
     : `${COPYRIGHT_START_YEAR}`;
 
-const localePrefix = process.env.DOCUSAURUS_CURRENT_LOCALE === "en" ? "/en" : "";
+const isEnglishBuild = process.env.DOCUSAURUS_CURRENT_LOCALE === "en";
+const localePrefix = isEnglishBuild ? "/en" : "";
+
+// 目录索引页的默认 URL 由中文 label slug 化而来（如 /category/37-配件使用说明）。
+// Docusaurus 不支持按语言覆盖 _category_.json，这里在英文构建时用英文 label
+// 重新生成 slug，保证英文站 URL 中不出现中文；中文构建的逻辑保持原样。
+/** @returns {Record<string, string>} */
+function loadEnglishCategoryLabels() {
+  try {
+    const translationsPath = fileURLToPath(
+      new URL(
+        "./i18n/en/docusaurus-plugin-content-docs/current.json",
+        import.meta.url,
+      ),
+    );
+    const messages = JSON.parse(readFileSync(translationsPath, "utf8"));
+    const labels = /** @type {Record<string, string>} */ ({});
+    for (const [key, value] of Object.entries(messages)) {
+      const match = key.match(/^sidebar\.[^.]+\.category\.(.+)$/);
+      if (!match || match[1].includes(".link.") || !value?.message) {
+        continue;
+      }
+      labels[match[1]] = value.message;
+    }
+    return labels;
+  } catch {
+    return /** @type {Record<string, string>} */ ({});
+  }
+}
+
+/** @type {Record<string, string>} */
+const englishCategoryLabels = isEnglishBuild
+  ? loadEnglishCategoryLabels()
+  : {};
+
+/** @param {string} label */
+function slugifyLabel(label) {
+  return String(label)
+    .trim()
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s-]/gu, "")
+    .replace(/[\s_]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * @param {any[]} items
+ * @returns {any[]}
+ */
+function applyEnglishCategorySlugs(items) {
+  return items.map((item) => {
+    if (item.type !== "category") {
+      return item;
+    }
+    const nextItems = Array.isArray(item.items)
+      ? applyEnglishCategorySlugs(item.items)
+      : item.items;
+    const englishLabel = englishCategoryLabels[item.label];
+    if (
+      englishLabel &&
+      item.link?.type === "generated-index" &&
+      !item.link.slug
+    ) {
+      const slug = slugifyLabel(englishLabel);
+      if (slug) {
+        return {
+          ...item,
+          link: { ...item.link, slug: `/category/${slug}` },
+          items: nextItems,
+        };
+      }
+    }
+    return nextItems === item.items ? item : { ...item, items: nextItems };
+  });
+}
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -137,8 +214,15 @@ const config = {
           sidebarPath: "./sidebars.js",
           showLastUpdateTime: true,
           remarkPlugins: [remarkDirective, remarkDocScope],
-
-          
+          sidebarItemsGenerator: async (generatorArgs) => {
+            const { defaultSidebarItemsGenerator, ...args } =
+              /** @type {any} */ (generatorArgs);
+            const items = await defaultSidebarItemsGenerator({
+              defaultSidebarItemsGenerator,
+              ...args,
+            });
+            return isEnglishBuild ? applyEnglishCategorySlugs(items) : items;
+          },
         },
         blog: { showReadingTime: true },
         pages: { exclude: ["/imager/**", "**/dl/**"] },
@@ -187,6 +271,13 @@ const config = {
           { from: "/Quick_start/install_os/rdk_x5_module/burn", to: "/Quick_start/system-burn/upgrade-miniboot" },
           { from: "/Quick_start/install_os/rdk_x5_module/boot_system", to: "/Quick_start/system-burn/burn-sd-card" },
           { from: "/Quick_start/install_os/rdk_x5_module/FAQ", to: "/Quick_start/system-burn/faq" },
+          // 英文目录索引页 slug 改为英文后，旧的中文 slug URL 兜底（仅英文构建）。
+          ...(isEnglishBuild
+            ? [
+                { from: "/category/37-配件使用说明", to: "/category/37-accessory-instructions" },
+                { from: "/category/371-配件使用说明", to: "/category/371-accessory-instructions" },
+              ]
+            : []),
         ],
       },
     ],
