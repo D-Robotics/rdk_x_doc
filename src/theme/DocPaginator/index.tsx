@@ -89,6 +89,26 @@ function collectVisibleDocLinks(items: SidebarItem[] | undefined, output: Sideba
   return output;
 }
 
+// Docusaurus 的 doc.previous/next.title 来自默认语言（中文）的文档元数据，
+// 分类链接页的标题不会随 current.json 翻译；这里用侧边栏里已翻译的 label
+// 按 permalink 覆盖，避免英文站翻页处出现中文标题。
+function collectLabelByPath(
+  items: SidebarItem[] | undefined,
+  output: Record<string, string> = {},
+): Record<string, string> {
+  if (!Array.isArray(items)) return output;
+  for (const item of items) {
+    const link = (item.href || item.permalink) as string | undefined;
+    if (link && item.label) {
+      output[normalizePath(link)] = item.label;
+    }
+    if (Array.isArray(item.items)) {
+      collectLabelByPath(item.items, output);
+    }
+  }
+  return output;
+}
+
 export default function DocPaginatorWrapper(props: Props): JSX.Element {
   const { pathname } = useLocation();
   const { previous, next } = props;
@@ -135,8 +155,25 @@ export default function DocPaginatorWrapper(props: Props): JSX.Element {
   // (including null for first/last item) to avoid showing hidden next/previous docs.
   // Titles always prefer sidebar labels; do not re-derive from filename/permalink.
   const hasFilteredPagination = orderedDocLinks.length > 0 && currentIndex >= 0;
-  const customNext = hasFilteredPagination ? autoNext : next ?? null;
-  const customPrevious = hasFilteredPagination ? autoPrevious : previous ?? null;
+
+  // 使用未经过版本/产品过滤的原始侧边栏：当前页可能不在过滤后的列表中，
+  // 但翻页目标分类仍需用其已翻译的 label 覆盖中文标题。
+  const labelByPath = collectLabelByPath(
+    (docsSidebar?.items as SidebarItem[] | undefined),
+    {},
+  );
+  const localizeTitle = (title: string, permalink?: string) =>
+    (permalink && labelByPath[normalizePath(permalink)]) || title;
+
+  const fallbackNext = next
+    ? {...next, title: localizeTitle(next.title, next.permalink)}
+    : null;
+  const fallbackPrevious = previous
+    ? {...previous, title: localizeTitle(previous.title, previous.permalink)}
+    : null;
+
+  const customNext = hasFilteredPagination ? autoNext : fallbackNext;
+  const customPrevious = hasFilteredPagination ? autoPrevious : fallbackPrevious;
 
   return (
     <DocPaginator
