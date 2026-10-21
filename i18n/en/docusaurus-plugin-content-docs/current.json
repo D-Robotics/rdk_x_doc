@@ -28,11 +28,11 @@
     "description": "The label for category 1.5 显示屏使用 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.RDK X3/X5（Python）": {
-    "message": "RDK X3/X5（Python）",
+    "message": "RDK X3/X5(Python)",
     "description": "The label for category RDK X3/X5（Python） in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.RDK X3/X5（C++）": {
-    "message": "RDK X3/X5（C++）",
+    "message": "RDK X3/X5(C++)",
     "description": "The label for category RDK X3/X5（C++） in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.2. 系统配置": {
@@ -252,7 +252,7 @@
     "description": "The label for category 3. 基础应用开发  in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3. 基础应用开发 .link.generated-index.description": {
-    "message": " Includes system introductory applications covering image input, audio input, and interface development, among which the system introductory applications include C dev interface examples (/app/cdev) and Python dev interface examples (/app/pydev).",
+    "message": "Includes system introductory applications covering image input, audio input, and interface development, among which the system introductory applications include C dev interface examples (/app/cdev) and Python dev interface examples (/app/pydev).",
     "description": "The generated-index page description for category 3. 基础应用开发  in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.1 40PIN管脚应用": {
@@ -316,11 +316,11 @@
     "description": "The generated-index page description for category 1.9.6 示例应用 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.RDK Ultra（Python）": {
-    "message": "RDK Ultra（Python）",
+    "message": "RDK Ultra(Python)",
     "description": "The label for category RDK Ultra（Python） in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category. RDK Ultra（C++）": {
-    "message": " RDK Ultra（C++）",
+    "message": "RDK Ultra(C++)",
     "description": "The label for category  RDK Ultra（C++） in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.1.2.1 RDK X3": {
@@ -380,7 +380,7 @@
     "description": "The label for category 3.2 参考示例(C语言) in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.3 参考示例(Python) ": {
-    "message": "3.3 Reference Example (Python) ",
+    "message": "3.3 Reference Example (Python)",
     "description": "The label for category 3.3 参考示例(Python)  in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.RDK X5": {
@@ -396,7 +396,7 @@
     "description": "The label for category RDK X3 / X3 MD in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.6 API 说明 ": {
-    "message": "3.6 API Documentation ",
+    "message": "3.6 API Documentation",
     "description": "The label for category 3.6 API 说明  in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Python 接口": {
@@ -446,5 +446,53 @@
   "sidebar.tutorialSidebar.category.IMU": {
     "message": "IMU",
     "description": "The label for category IMU in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.6.2 API 说明": {
+    "message": "3.6.2 API Documentation",
+    "description": "The label for category 3.6.2 API 说明 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.6.1 API 说明": {
+    "message": "3.6.1 API Documentation",
+    "description": "The label for category 3.6.1 API 说明 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.7.4.1 开发指南": {
+    "message": "7.4.1 Development Guide",
+    "description": "The label for category 7.4.1 开发指南 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.7.4.1 开发指南.link.generated-index.description": {
+    "message": "RDK X3 Algorithm Toolchain Development Guide",
+    "description": "The generated-index page description for category 7.4.1 开发指南 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.7.4.2 开发指南": {
+    "message": "7.4.2 Development Guide",
+    "description": "The label for category 7.4.2 开发指南 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.7.4.2 开发指南.link.generated-index.description": {
+    "message": "RDK X5 Algorithm Toolchain Development Guide",
+    "description": "The generated-index page description for category 7.4.2 开发指南 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.2 C DEV 接口示例": {
+    "message": "3.2 C DEV Interface Examples",
+    "description": "The label for category 3.2 C DEV 接口示例  in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.3 python dev 接口示例": {
+    "message": "3.3 Python dev Interface Examples",
+    "description": "The label for category 3.3 python dev 接口示例  in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.6 SP_dev API 说明": {
+    "message": "3.6 SP_dev API Documentation",
+    "description": "The label for category 3.6 SP_dev API 说明  in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RDK Ultra（C++）": {
+    "message": "RDK Ultra(C++)",
+    "description": "The label for category  RDK Ultra（C++） in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.3 参考示例(Python)": {
+    "message": "3.3 Reference Example (Python)",
+    "description": "The label for category 3.3 参考示例(Python)  in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.6 API 说明": {
+    "message": "3.6 API Documentation",
+    "description": "The label for category 3.6 API 说明  in sidebar tutorialSidebar"
   }
 }
