@@ -7,6 +7,7 @@ sidebar_position: 4
 ```mdx-code-block
 import DocScope from '@site/src/components/DocScope';
 ```
+
 本节主要解答与地瓜 RDK 板卡上视频编解码、音频处理以及其他多媒体功能相关的常见疑问。
 
 ## 视频编解码
