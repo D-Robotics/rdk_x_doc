@@ -15,7 +15,7 @@ The Certified Accessories List refers to third-party accessories that are offici
 | Power Supply | Weishi | ORD-PSU-5V3A-USB-C-US | Custom 5V/3A Type-C power supply | [Buy Now](https://www.waveshare.net/shop/ORD-PSU-5V3A-USB-C-US.htm)  |
 | Power Supply | Yabo | T03F-050300Z | Custom 5V/3A Type-C power supply | [Buy Now](https://detail.tmall.com/item.htm?abbucket=2&id=608661929691&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.154.4df82edcjJ7wap&skuId=4949624573441)  |
 | Enclosure | Yabo | N/A | Aluminum custom enclosure | [Buy Now](https://detail.tmall.com/item.htm?abbucket=2&id=6844a66941541&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.3-b-s.w4011-22651484606.138.4df82edcjJ7wap)  |
-| Enclosure | Lunc趣 | N/A | Aluminum custom enclosure | [Buy Now](https://detail.tmall.com/item.htm?abbucket=2&id=670534732857&rn=0b151aa6abd5b8d65e5533b8259449f1&spm=a1z10.3-b-s.w4011-24713677160.27.ef207988tOY0c9&skuId=5004448047864)  |
+| Enclosure | Wheeltec | N/A | Aluminum custom enclosure | [Buy Now](https://detail.tmall.com/item.htm?abbucket=2&id=670534732857&rn=0b151aa6abd5b8d65e5533b8259449f1&spm=a1z10.3-b-s.w4011-24713677160.27.ef207988tOY0c9&skuId=5004448047864)  |
 | Cooler | Weishi | N/A | Fan expansion board for cooling | [Buy Now](https://www.waveshare.net/shop/X3-PI-FAN-HAT.htm)  |
 | Cooler | Yabo | N/A | Mainboard fan with OLED display support | [Buy Now](https://detail.tmall.com/item.htm?de_count=1&id=607959748338)  |
 | Wi-Fi Antenna | Weishi | ORD-CM4-ANTENNA | SMA antenna supporting 2.4G/5G WiFi bands | [Buy Now](https://www.waveshare.net/shop/ORD-CM4-ANTENNA.htm)  |
@@ -32,7 +32,7 @@ The Certified Accessories List refers to third-party accessories that are offici
 | MIPI | Weishi | Camera Adapter Board | For use with Weishi cameras, 15pin to 24pin adapter | [Buy Now](https://www.waveshare.net/shop/X3-Pi-CSI-Adapter.htm)  |
 | MIPI | Yabo | IMX219 Camera | IMX219 sensor, 800W pixels, diagonal FOV 77 degrees | [Buy Now](https://detail.tmall.com/item.htm?abbucket=2&id=710344235988&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.110.4df82edcjJ7wap)  |
 | USB | Yabo | USB Camera | Plug-and-play USB microphone camera, 720p | [Buy Now](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o)  |
-| USB | Lunc趣 | USB Camera | Metal case, 1080p USB camera | [Buy Now](https://detail.tmall.com/item.htm?abbucket=12&id=666156389569&ns=1&spm=a230r.1.14.1.13e570f3eFF1sJ&skuId=4972914294771)  |
+| USB | Wheeltec | USB Camera | Metal case, 1080p USB camera | [Buy Now](https://detail.tmall.com/item.htm?abbucket=12&id=666156389569&ns=1&spm=a230r.1.14.1.13e570f3eFF1sJ&skuId=4972914294771)  |
 
 
 ### Displays

@@ -154,14 +154,14 @@ int32_t HB_RGN_SetAttr(RGN_HANDLE Handle, const RGN_ATTR_S *pstRegion);
 |     Handle     | Region handle number. Value range: [0, RGN_HANDLE_MAX).                         |
 |   pstRegion    | Pointer to region attribute.                                                    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description                          |
 | :----------: | :----------------------------------- |
 |      0       | Success                              |
 |    Non-zero  | Failure, see error code for details   |
 
-【Notes】
+Notes
 HB_RGN_GetAttr:
 1. The region must be created;
 2. The pointer to the region attribute cannot be empty;
@@ -173,30 +173,30 @@ HB_RGN_SetAttr:
 3. The region type must be Overlay, the Cover attribute is specified in HB_RGN_AttachToChn, and modified in HB_RGN_SetDisplayAttr;
 4. The region size cannot be modified after calling HB_RGN_AttachToChn;
 
-【Reference Code】
+Reference Code
 > Please refer to the examples of HB_RGN_Create/HB_RGN_Destory
 
 ### HB_RGN_SetBitMap
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_SetBitMap(RGN_HANDLE Handle, const RGN_BITMAP_S *pstBitmapAttr);
 ```
-【Function description】
+Function description
 > Set the bitmap to fill a region;
 
-【Parameter description】
+Parameter description
 
 | Parameter Name | Description                                                                      |
 | :------------: | :------------------------------------------------------------------------------- |
 |     Handle     | Region handle number. Value range: [0, RGN_HANDLE_MAX).                         |
 |   pstBitmap    | Pointer to bitmap attribute.                                                    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description                          |
 | :----------: | :----------------------------------- |
 |      0       | Success                              |
-|    Non-zero  | Failure, see error code for details   |【Notice】
+|    Non-zero  | Failure, see error code for details   | Notice
 1. The region must have been created;
 2. The size of the bitmap is not consistent with the size of the region;
 3. The bitmap is loaded from the (0, 0) of the region and automatically cropped when the bitmap is larger than the region;
@@ -206,7 +206,7 @@ int32_t HB_RGN_SetBitMap(RGN_HANDLE Handle, const RGN_BITMAP_S *pstBitmapAttr);
 7. This interface is only valid for Overlay type regions;
 8. After calling HB_RGN_GetCanvasInfo, calling this interface is invalid unless calling HB_RGN_UpdateCanvas to make the canvas effective.
 
-【Reference Code】
+Reference Code
 ```c
     RGN_HANDLE handle = 0;
     RGN_ATTR_S stRegion;
@@ -268,15 +268,15 @@ int32_t HB_RGN_SetBitMap(RGN_HANDLE Handle, const RGN_BITMAP_S *pstBitmapAttr);
 ```
 
 ### HB_RGN_AttachToChn/HB_RGN_DetachFromChn
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_AttachToChn(RGN_HANDLE Handle, const RGN_CHN_S *pstChn, const RGN_CHN_ATTR_S *pstChnAttr);
 int32_t HB_RGN_DetachFromChn(RGN_HANDLE Handle, const RGN_CHN_S *pstChn);
 ```
-【Function Description】
+Function Description
 >Attach or detach the region to or from the channel.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |                   Description                   |
 | :------------: | :---------------------------------------------: |
@@ -284,14 +284,14 @@ int32_t HB_RGN_DetachFromChn(RGN_HANDLE Handle, const RGN_CHN_S *pstChn);
 |    pstChn      |            Pointer to the channel structure.            |
 |   pstChnAttr   |      Pointer to the region channel display attribute.     |
 
-【Return Value】
+Return Value
 
 | Return Value |         Description          |
 | :----------: | :--------------------------: |
 |      0       |            Success           |
 |    Non-zero  | Failure, see error code. |
 
-【Notes】
+Notes
 HB_RGN_AttachToChn:
 1. The region must have been created.
 2. The pointer to the channel structure and the pointer to the display attribute structure cannot be NULL.3. Each channel can have up to 32 regions overlaid.
@@ -301,7 +301,7 @@ HB_RGN_DetachFromChn:
 1. The region must have been created.
 2. The channel structure pointer cannot be empty.
 
-【Reference Code】
+Reference Code
 ```c
     RGN_HANDLE handle = 0;
     int ret;
@@ -341,15 +341,15 @@ HB_RGN_DetachFromChn:
 ```
 
 ### HB_RGN_SetDisplayAttr/HB_RGN_GetDisplayAttr
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_SetDisplayAttr(RGN_HANDLE Handle, const RGN_CHN_S *pstChn, const RGN_CHN_ATTR_S *pstChnAttr);
 int32_t HB_RGN_GetDisplayAttr(RGN_HANDLE Handle, const RGN_CHN_S *pstChn, RGN_CHN_ATTR_S *pstChnAttr);
 ```
-【Function Description】
+Function Description
 > Get or set the display attribute of the region on the channel.
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name  |               Description                |
 | :--------------: | :--------------------------------------: |
@@ -357,14 +357,14 @@ int32_t HB_RGN_GetDisplayAttr(RGN_HANDLE Handle, const RGN_CHN_S *pstChn, RGN_CH
 |      pstChn      |        Pointer to the channel structure.         |
 |    pstChnAttr    |  Pointer to the display attribute of the region channel.    |
 
-【Return Value】
+Return Value
 
 | Return Value |               Description |
 | :----------: | :----------------------- |
 |      0       |          Success          |
 |   Non-zero   |     Failure, see error codes.   |
 
-【Notes】
+Notes
 HB_RGN_SetDisplayAttr:
 1. The region must be created first.
 2. It is recommended to get the attribute before setting.
@@ -376,41 +376,41 @@ HB_RGN_GetDisplayAttr:
 1. The region must be created first.
 2. The pointer to the channel structure and the pointer to the display attribute structure cannot be empty.
 
-【Reference Code】
+Reference Code
 > Please refer to the examples of HB_RGN_AttachToChn/HB_RGN_DetachFromChn.
 
 ### HB_RGN_GetCanvasInfo/HB_RGN_UpdateCanvas
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_GetCanvasInfo(RGN_HANDLE Handle, RGN_CANVAS_S *pstCanvasInfo);
 int32_t HB_RGN_UpdateCanvas(RGN_HANDLE Handle);
 ```
-【Function Description】
+Function Description
 > Get or update the display canvas.
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name  |               Description                |
 | :--------------: | :--------------------------------------: |
 |      Handle      |   Region handle number. Range: [0, RGN_HANDLE_MAX). |
-|  pstCanvasInfo   |        Information of the region display canvas.         |【Return Value】
+|  pstCanvasInfo   |        Information of the region display canvas.         | Return Value
 
 | Return Value | Description |
 | :----: | :-----------------|
 |   0    |               Success |
 |  Nonzero   | Failure, see error code. |
 
-【Notes】
+Notes
 HB_RGN_GetCanvasInfo:
-1. The region must have been created；
-2. Similar to HB_RGN_SetBitMap, used to update the bitmap data of the overlay type region; this interface can directly operate on the internal buffer to save one memory copy；
+1. The region must have been created;
+2. Similar to HB_RGN_SetBitMap, used to update the bitmap data of the overlay type region; this interface can directly operate on the internal buffer to save one memory copy;
 3. This interface is mutually exclusive with HB_RGN_SetBitMap. If this interface has been used, calling HB_RGN_SetBitMap will not take effect before calling HB_RGN_UpdateCanvas;
 
 HB_RGN_UpdateCanvas:
-1. The region must have been created；
-2. This interface is used with HB_RGN_GetCanvasInfo to switch buffer display after updating the data；
-3. Before using this interface every time, you need to call HB_RGN_GetCanvasInfo to get the information；
-【Reference Code】
+1. The region must have been created;
+2. This interface is used with HB_RGN_GetCanvasInfo to switch buffer display after updating the data;
+3. Before using this interface every time, you need to call HB_RGN_GetCanvasInfo to get the information;
+Reference Code
 ```c
     RGN_HANDLE handle = 0;
     RGN_ATTR_S stRegion;
@@ -436,44 +436,44 @@ HB_RGN_UpdateCanvas:
 ```
 
 ### HB_RGN_DrawWord
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_DrawWord(RGN_HANDLE Handle, const RGN_DRAW_WORD_S *pstRgnDrawWord);
 ```
-【Function Description】
-> Generate a bitmap from the given string and address.【Parameter Description】
+Function Description
+> Generate a bitmap from the given string and address. Parameter Description
 
 |    Parameter Name    |                  Description                   |
 | :------------------: | :--------------------------------------------: |
 |        Handle        |       Region handle number. Range: [0, RGN_HANDLE_MAX).   |
 |   pstRgnDrawWord   |    Pointer to the parameters for drawing text.  |
 
-【Return Value】
+Return Value
 
 | Return Value |               Description                 |
 | :----------: | :---------------------------------------: |
 |       0       |                    Success                   |
 |     Non-zero        |     Failed, see error code.       |
 
-【Notes】
+Notes
 1. The region must have been created;
 2. The pointer to the structure of attribute information and the pointer to the address cannot be empty;
 3. The value of attribute information needs to be valid;
 4. The write format is PIXEL_FORMAT_VGA_4;
 
-【Sample Code】
+Sample Code
 > Please refer to the example of HB_RGN_SetBitMap.
 
 ### HB_RGN_DrawLine/HB_RGN_DrawLineArray
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_DrawLine(RGN_HANDLE Handle, const RGN_DRAW_LINE_S *pstRgnDrawLine);
 int32_t HB_RGN_DrawLineArray(RGN_HANDLE Handle,const RGN_DRAW_LINE_S astRgnDrawLine[],uint32_t u32ArraySize);
 ```
-【Function Description】
+Function Description
 > Draw a line or draw multiple lines at once.
 
-【Parameter Description】
+Parameter Description
 
 |    Parameter Name    |                  Description                   |
 | :------------------: | :--------------------------------------------: |
@@ -481,31 +481,31 @@ int32_t HB_RGN_DrawLineArray(RGN_HANDLE Handle,const RGN_DRAW_LINE_S astRgnDrawL
 |   pstRgnDrawLine   |   Pointer or array of parameters for drawing lines.   |
 |   u32ArraySize  |            Number of lines to draw.          |
 
-【Return Value】
+Return Value
 
 | Return Value |               Description     |
 | :----------: | :---------------------------: |
 |       0       |                Success               |
 |     Non-zero       |     Failed, see error code.       |
 
-【Notes】
+Notes
 1. The region must have been created;2. The pointer to attribute information structure and the pointer to address must not be empty;
 3. The number of array elements in the HB_RGN_DrawLineArray interface must match the array;
 4. The writing format is PIXEL_FORMAT_VGA_4 format;
 
-【Reference Code】
+Reference Code
 > Please refer to the example of HB_RGN_SetBitMap
 
 ### HB_RGN_BatchBegin/HB_RGN_BatchEnd
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_BatchBegin(RGN_HANDLEGROUP *pu32Group, uint32_t u32Num, const RGN_HANDLE handle[]);
 int32_t HB_RGN_BatchEnd(RGN_HANDLEGROUP u32Group);
 ```
-【Function Description】
+Function Description
 > Batch update regions;
 
-【Parameter Description】
+Parameter Description
 
 |     Parameter Name    |                              Description                              |
 | :-------------------: | :-------------------------------------------------------------------: |
@@ -513,20 +513,20 @@ int32_t HB_RGN_BatchEnd(RGN_HANDLEGROUP u32Group);
 |         u32Num        |                  Number of regions to be batch processed.              |
 |         handle        |                 Array of region handles to be batch processed.         |
 
-【Return Value】
+Return Value
 
 | Return Value |                     Description                     |
 | :----------: | :-----------------------------------------------: |
 |       0      |                      Success                      |
 |    Non-zero  |                 Failure, see error code.           |
 
-【Notes】
+Notes
 1. Regions must have been created;
 2. The number of handles set by HB_RGN_BatchBegin must be equal to the length of the array and not exceed the maximum value;
 3. The region type must be Overlay;
 4. HB_RGN_BatchBegin must appear in pairs with HB_RGN_BatchEnd;
 
-【Reference Code】
+Reference Code
 ```c
     RGN_HANDLE handle_batch[3];
     int ret = 0;
@@ -558,36 +558,36 @@ int32_t HB_RGN_BatchEnd(RGN_HANDLEGROUP u32Group);
 
 ### HB_RGN_SetColorMap
 
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_SetColorMap(const RGN_CHN_S *pstChn, uint32_t aColorMap[15]);
 ```
 
-【Description】
+Description
 > Set the color palette for using colors. After use, the enumeration RGN_FONT_COLOR_E is invalid. It needs to be used after the region is attached to the channel.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter |          Description           |
 | :-------: | :----------------------------- |
 |  pstChn   | Pointer to the channel struct. |
 | aColorMap | The set color palette, the set color value is in RGB format. |
 
-【Return Value】
+Return Value
 
 | Return Value |          Description |
 | :----------: | :------------------- |
 |      0       |        Success       |
 |    Non-zero  | Failure, see error code. |
 
-【Notes】
+Notes
 1. The pointer to the channel struct cannot be empty.
 2. The channel in the vps module needs to be enabled.
 3. Set once for all channels to share.
 4. The input color value is in the RGB color space.
 5. CHN_GRP cannot be passed as a parameter.
 
-【Example Code】
+Example Code
 ```c
     RGN_CHN_S stChn;
     stChn.s32PipelineId = 0;
@@ -605,16 +605,16 @@ int32_t HB_RGN_SetColorMap(const RGN_CHN_S *pstChn, uint32_t aColorMap[15]);
 
 ### HB_RGN_SetSta/HB_RGN_GetSta
 
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_SetSta(const RGN_CHN_S *pstChn, uint8_t astStaLevel[3], RGN_STA_S astStaAttr[8]);
 int32_t HB_RGN_GetSta(const RGN_CHN_S *pstChn, uint16_t astStaValue[8][4]);
 ```
 
-【Description】
+Description
 > Set up to 8 areas and obtain the sum of brightness of the specified region. The region needs to be attached to the channel for use;
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name |                        Description                        |
 | :-------------: | :-------------------------------------------------------: |
@@ -623,19 +623,19 @@ int32_t HB_RGN_GetSta(const RGN_CHN_S *pstChn, uint16_t astStaValue[8][4]);
 |   astStaAttr   |          Properties of the brightness region to be obtained.             |
 |  astStaValue  | Number of pixels within the specified range. |
 
-【Return Value】
+Return Value
 
 | Return Value |           Description |
 | :----------: | :-----------------|
 |      0      |           Successful |
 |   Non-zero   | Failure, see error code. |
 
-【Precautions】
+Precautions
 1. The channel structure cannot be empty;
 2. HB_RGN_SetSta and HB_RGN_GetSta must appear in pairs;
 3. HB_RGN_SetSta is used to set up to 8 area information, and HB_RGN_GetSta obtains brightness information for the specified area;
 
-【Reference Code】
+Reference Code
 ```c
 RGN_CHN_S stChn;
 stChn.s32PipelineId = 0;
@@ -675,15 +675,15 @@ if (ret != 0) {
 
 ### HB_RGN_AddToYUV
 
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_AddToYUV(RGN_HANDLE Handle, hb_vio_buffer_t *vio_buffer, const RGN_CHN_ATTR_S *pstChnAttr);
 ```
 
-【Function Description】
+Function Description
 > Overlay the region onto a yuv420 format image.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |                    Description                     |
 | :------------: | :------------------------------------------------: |
@@ -691,17 +691,17 @@ int32_t HB_RGN_AddToYUV(RGN_HANDLE Handle, hb_vio_buffer_t *vio_buffer, const RG
 |  vio_buffer    |              Buffer pointer of yuv image.              |
 |   pstChnAttr   |           Pointer to the channel attribute of the region.           |
 
-【Return Value】
+Return Value
 
 | Return Value |               Description |
 | :----------: | :-----------------------: |
 |      0       |               Success |
 |   Non-zero   | Failure, see the error code. |
 
-【Precautions】
+Precautions
 1. The region must have been created.2. The pointer to the image buffer structure and the pointer to the display attribute structure cannot be empty.
 
-【Reference Code】
+Reference Code
 ```c
     RGN_HANDLE handle;
     int ret;
@@ -719,14 +719,14 @@ int32_t HB_RGN_AddToYUV(RGN_HANDLE Handle, hb_vio_buffer_t *vio_buffer, const RG
 ```
 
 ### HB_RGN_SetDisplayLevel
-【Function Declaration】
+Function Declaration
 ```c
 int32_t HB_RGN_SetDisplayLevel(RGN_HANDLE Handle, const RGN_CHN_S *pstChn, uint32_t osd_level);
 ```
-【Function Description】
+Function Description
 > Set the display level of the region.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |                Description                |
 | :------------: | :---------------------------------------: |
@@ -734,35 +734,35 @@ int32_t HB_RGN_SetDisplayLevel(RGN_HANDLE Handle, const RGN_CHN_S *pstChn, uint3
 |     pstChn     |          Channel structure pointer.       |
 |   osd_level    | Display level of the region on the channel [0, 3]. |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :--------: |
 |      0       |  Success   |
 |    Non-zero   |  Failure   |
 
-【Notes】
+Notes
 1. The region must have been created.
 2. The pointer to the channel structure cannot be empty.
 3. The level ranges from 0 to 3, with 0 being the default hardware processing. If it exceeds the number of hardware processing or the channel does not support it, it will be changed to software processing. Levels 1 to 3 are processed by software.
 4. Different regions on the same channel can have different display levels.
 
-【Reference Code】
+Reference Code
 > Please refer to examples of HB_RGN_AttachToChn/HB_RGN_DetachFromChn.
 
 ## Data Structure
 ### RGN_SIZE_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_RGN_SIZE_ATTR_S {
     uint32_t u32Width;
     uint32_t u32Height;
 } RGN_SIZE_S;
 ```
-【Description】
+Description
 > Defines the structure for size information.
 
-【Member Description】
+Member Description
 
 | Member    | Meaning |
 | --------- | ------- |
@@ -770,17 +770,17 @@ typedef struct HB_RGN_SIZE_ATTR_S {
 | u32Height | Height  |
 
 ### RGN_POINT_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_RGN_POINT_ATTR_S {
     uint32_t u32X;
     uint32_t u32Y;
 } RGN_POINT_S;
 ```
-【Description】
+Description
 > Defines the structure for coordinate information.
 
-【Member Description】
+Member Description
 
 | Member | Meaning  |
 | ------ | -------- |
@@ -788,7 +788,7 @@ typedef struct HB_RGN_POINT_ATTR_S {
 | u32Y   | Y-axis   |
 
 ### RGN_RECT_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_RGN_RECT_ATTR_S {
     uint32_t u32X;
@@ -797,8 +797,8 @@ typedef struct HB_RGN_RECT_ATTR_S {
     uint32_t u32Height;
 } RGN_RECT_S;
 ```
-【Description】
-> Defines the structure for rectangle information.【Member Description】
+Description
+> Defines the structure for rectangle information. Member Description
 
 |   Member   |  Meaning  |
 | :-------: | :----: |
@@ -808,7 +808,7 @@ typedef struct HB_RGN_RECT_ATTR_S {
 | u32Height |  Height  |
 
 ### RGN_OVERLAY_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_RGN_OVERLAY_ATTR_S {
     RGN_PIXEL_FORMAT_E enPixelFmt;
@@ -816,10 +816,10 @@ typedef struct HB_RGN_OVERLAY_ATTR_S {
     RGN_SIZE_S stSize;
 } RGN_OVERLAY_S;
 ```
-【Function Description】
+Function Description
 > Defines the structure of overlay region attributes
 
-【Member Description】
+Member Description
 
 |    Member    | Meaning                                                                                                           |
 | :--------: | :------------------------------------------------------------------------------------------------------------- |
@@ -828,17 +828,17 @@ typedef struct HB_RGN_OVERLAY_ATTR_S {
 |   stSize   | Size of the region<br/>PIXEL_FORMAT_VGA_4:<br/>Minimum width is 32, minimum height is 2<br/>PIXEL_FORMAT_YUV420SP:<br/>Minimum width is 2, minimum height is 2 |
 
 ### RGN_ATTR_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_RGN_ATTR_S {
     RGN_TYPE_E enType;
     RGN_OVERLAY_S stOverlayAttr;
 } RGN_ATTR_S;
 ```
-【Function Description】
+Function Description
 > Defines the structure of region information
 
-【Member Description】
+Member Description
 
 |     Member      |      Meaning      |
 | :-----------: | :------------: |
@@ -846,7 +846,7 @@ typedef struct HB_RGN_ATTR_S {
 | stOverlayAttr | Attributes of the overlay region |
 
 ### RGN_CHN_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_RGN_CHN_S
 {
@@ -854,10 +854,10 @@ typedef struct HB_RGN_CHN_S
     int32_t enChnId;
 } RGN_CHN_S;
 ```
-【Function Description】
+Function Description
 > Defines the structure for data stream channel.
 
-【Member Description】
+Member Description
 
 |    Member    |            Meaning           |
 | :----------: | :--------------------------: |
@@ -865,33 +865,33 @@ typedef struct HB_RGN_CHN_S
 |   enChnId    | Channel ID within [0, CHN_MAX_NUM) range |
 
 ### RGN_OVERLAY_CHN_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_RGN_OVERLAY_CHN_ATTR_S {
     RGN_POINT_S stPoint;
 } RGN_OVERLAY_CHN_S;
 ```
-【Function Description】
+Function Description
 > Defines the structure for attributes of overlay region display.
 
-【Member Description】
+Member Description
 
 |  Member  |   Meaning   |
 | :------: | :---------: |
 | stPoint  | Region position |
 
 ### RGN_COVER_CHN_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_RGN_COVER_CHN_ATTR_S {
     RGN_RECT_S stRect;
     uint32_t u32Color;
 } RGN_COVER_CHN_S;
 ```
-【Function Description】
+Function Description
 > Defines the structure for attributes of covering region display.
 
-【Member Description】
+Member Description
 
 |   Member   |                 Meaning                 |
 | :--------: | :--------------------------------------: |
@@ -899,17 +899,17 @@ typedef struct HB_RGN_COVER_CHN_ATTR_S {
 | u32Color   |              Region color                |
 
 ### RGN_CHN_U
-【Structure Definition】
+Structure Definition
 ```c
 typedef union HB_RGN_CHN_ATTR_U {
     RGN_OVERLAY_CHN_S stOverlayChn;
     RGN_COVER_CHN_S stCoverChn;
 } RGN_CHN_U;
 ```
-【Function Description】
+Function Description
 > Define a union for the display attributes of the region channel.
 
-【Member Description】
+Member Description
 
 |   Member    |      Meaning      |
 | :---------: | :---------------: |
@@ -918,7 +918,7 @@ typedef union HB_RGN_CHN_ATTR_U {
 
 
 ### RGN_CANVAS_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_RGN_CANVAS_INFO_S {
     void *pAddr;
@@ -926,10 +926,10 @@ typedef struct HB_RGN_CANVAS_INFO_S {
     RGN_PIXEL_FORMAT_E enPixelFmt;
 } RGN_CANVAS_S;
 ```
-【Function Description】
+Function Description
 > Define a structure for the information of the canvas.
 
-【Member Description】
+Member Description
 
 |   Member   |    Meaning    |
 | :--------: | :-----------: |
@@ -1180,7 +1180,7 @@ typedef enum HB_RGN_FONT_COLOR_ATTR_E {
 
 
 ### RGN_PIXEL_FORMAT_E
-【Structure Definition】
+Structure Definition
 ```c
 typedef enum HB_PIXEL_FORMAT_ATTR_E
 {
@@ -1188,10 +1188,10 @@ typedef enum HB_PIXEL_FORMAT_ATTR_E
     PIXEL_FORMAT_YUV420SP
 } RGN_PIXEL_FORMAT_E;
 ```
-【Function Description】
+Function Description
 > Define pixel formats.
 
-【Member Description】
+Member Description
 
 |        Member         |                              Meaning                              |
 | :-------------------: | :---------------------------------------------------------------: |
@@ -1199,37 +1199,37 @@ typedef enum HB_PIXEL_FORMAT_ATTR_E
 | PIXEL_FORMAT_YUV420SP |                          YUV420SP pixel format                          |
 
 ### RGN_HANDLE
-【Structure Definition】
+Structure Definition
 ```c
 typedef int32_t RGN_HANDLE;
 ```
 
 
-【Function Description】
+Function Description
 > Define the region handle.
 
 ### RGN_HANDLE_MAX
-【Structure Definition】
+Structure Definition
 ```c
 #define RGN_HANDLE_MAX 256
 ```
-【Function Description】
+Function Description
 > Define the maximum number of region handles.
 
 ### RGN_HANDLEGROUP
-【Structure Definition】
+Structure Definition
 ```c
 typedef int32_t RGN_HANDLEGROUP;
 ```
-【Function Description】
+Function Description
 > Define the batch processing group number.
 
 ### RGN_GROUP_MAX
-【Structure Definition】
+Structure Definition
 ```c
 #define RGN_GROUP_MAX 8
 ```
-【Function Description】
+Function Description
 > Define the maximum number of batch processing.
 
 ## Error Codes

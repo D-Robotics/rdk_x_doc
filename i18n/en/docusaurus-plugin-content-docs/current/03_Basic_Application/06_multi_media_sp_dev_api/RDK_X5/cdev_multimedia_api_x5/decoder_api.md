@@ -16,51 +16,51 @@ The `DECODER` API provides the following interfaces:
 
 ## sp_init_decoder_module  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `void *sp_init_decoder_module()`
 
-**【Description】**  
+** Description**  
 
 Initialize the decoder module object. You need to call this function to obtain the handle when using the decoder module. It supports H264, H265, and Mjpeg formats of video streams.
 
-**【Parameters】**
+** Parameters**
 
 None.
 
-**【Return Type】** 
+** Return Type** 
 
 If successful, it returns a `DECODER` object. If failed, it returns NULL.
 
 ## sp_release_decoder_module  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `void sp_release_decoder_module(void *obj)`
 
-**【Description】**  
+** Description**  
 
 Destroy the decoder module object.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: The object pointer obtained when calling the initialization interface.
 
-**【Return Type】**
+** Return Type**
 
 None
 
 ## sp_start_decode  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `int32_t sp_start_decode(void *obj, const char *stream_file, int32_t video_chn, int32_t type, int32_t width, int32_t height)`
 
-**【Description】**  
+** Description**  
 
 Create a decoding channel and set the channel number, the type of the decoding stream, and the resolution of the image frame.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Pointer to the initialized `DECODER` object
 - `stream_file`: When `stream_file` is set to the name of a stream file, it means that the stream file needs to be decoded, for example, setting the stream file of H264 as "stream.h264". When `stream_file` is set to an empty string, it means that the decoding data stream needs to be passed in by calling `sp_decoder_set_image`.
@@ -69,31 +69,31 @@ Create a decoding channel and set the channel number, the type of the decoding s
 - `width`: Width of the decoded image frame resolution
 - `height`: Height of the decoded image frame resolution
 
-**【Return Type】** 
+** Return Type** 
 
 Returns 0 if successful, -1 if failure.
 
 ## sp_stop_decode  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `int32_t sp_stop_decode(void *obj)`
 
-**【Description】**  
+** Description**  
 
 Close the decoding channel.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Pointer to the initialized `DECODER` object
 
-**【Return Type】** 
+** Return Type** 
 
 Returns 0 if successful, -1 if failure.
 
 ## sp_decoder_get_image  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `int32_t sp_decoder_get_image(void *obj, char *image_buffer)`
 

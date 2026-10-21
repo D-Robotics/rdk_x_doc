@@ -16,94 +16,94 @@ The `BPU` API provides the following interfaces:
 
 ## sp_init_bpu_module
 
-**【Function Prototype】**
+** Function Prototype**
 
 `bpu_module *sp_init_bpu_module(const char *model_file_name)`
 
-**【Description】**
+** Description**
 
 Open the algorithm model specified by `model_file_name` and initialize an algorithm inference task.
 
-**【Parameters】**
+** Parameters**
 
 - `model_file_name`: Algorithm model file, which needs to be converted by D-Robotics AI algorithm toolchain or trained fixed-point model.
 
-**【Return Type】**
+** Return Type**
 
 AI algorithm inference task object.
 
 ## sp_bpu_start_predict
 
-**【Function Prototype】**
+** Function Prototype**
 
 `int32_t sp_bpu_start_predict(bpu_module *bpu_handle, char *addr)`
 
-**【Function Description】**
+** Function Description**
 
 Passes in image data to complete AI algorithm inference and returns the algorithm result.
 
-**【Parameters】**
+** Parameters**
 
 - `bpu_handle`: Object for the AI inference task.
 - `addr`: Input address of the image data.
 
-**【Return Type】**
+** Return Type**
 
 None.
 
 ## sp_init_bpu_tensors
 
-**【Function Prototype】**
+** Function Prototype**
 
 `int32_t sp_init_bpu_tensors(bpu_module *bpu_handle, hbDNNTensor *output_tensors)`
 
-**【Function Description】**
+** Function Description**
 
 Initializes and allocates memory for the passed-in `tensor`.
 
-**【Parameters】**
+** Parameters**
 
 - `bpu_handle`: Object for the AI inference task.
 - `output_tensors`: Address of the `tensor`.
 
-**【Return Type】**
+** Return Type**
 
 None.
 
 ## sp_deinit_bpu_tensor 
 
-**【Function Prototype】**
+** Function Prototype**
 
 `int32_t sp_deinit_bpu_tensor(hbDNNTensor *tensor, int32_t len)`
 
-**【Function Description】**
+** Function Description**
 
 Release and reclaim memory for the input `tensor`.
 
-**【Parameters】**
+** Parameters**
 
 - `tensor`: Pointer to the `tensor`
 - `len`: Length of the `tensor`
 
-**【Return Type】**
+** Return Type**
 
 None.
 
 ## sp_release_bpu_module  
 
-**【Function Prototype】**
+** Function Prototype**
 
 `int32_t sp_release_bpu_module(bpu_module *bpu_handle)`
 
-**【Function Description】**
+** Function Description**
 
 Release the BPU module.
 
-**【Parameters】**
+** Parameters**
 
 - `bpu_handle`: BPU module object
 
-**【Return Type】**
+** Return Type**
 
 Return 0 if successful, -1 if failed.
 

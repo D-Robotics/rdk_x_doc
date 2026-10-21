@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 ---
-# Reference Example （C++）
+# Reference Example (C++)
 
 This chapter introduces various functional examples for multimedia library development, including camera image capture, video encoding and decoding, video display, algorithm inference, and more.
 
@@ -321,25 +321,25 @@ sp_module_bind(vio -> encoder) success!
 This example `decoder2display` implements video file decoding and outputs it through the `HDMI` interface for previewing on a monitor. The flowchart of the example is as follows:  
 ![image-decoder_to_display](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/04_multi_media/image/cdev_demo/image-decoder_to_display.jpg)
 
-- **Preparation：** 
+- **Preparation: ** 
   - Connect the development board to the monitor using an HDMI cable.
   - Power on the development board and log in via the command line.
   - Prepare the video file `stream.h264` as the input.
 
-- **Running：**
+- **Running: **
     The sample code is provided in source code form. You need to use the `make` command to compile and then run. The steps are as follows:
     ```bash
     sunrise@ubuntu:~$ cd /app/cdev_demo/decode2display
     sunrise@ubuntu:/app/cdev_demo/decode2display$ sudo make
     sunrise@ubuntu:/app/cdev_demo/decode2display$ sudo ./decoder2display -w 1920 -h 1080 -i stream.h264
     ```
-    Parameter description：
+    Parameter description:
     - -h: height of the video file
     - -w: width of the video file
     - -i: the path of the video file
 
 
- - **Expected result：** 
+ - **Expected result: ** 
     After the program is running correctly, the video image will be output through the `HDMI` interface of the development board, and the user can preview the video image on the monitor. The running log is as follows:
     ```bash
     sunrise@ubuntu:/app/cdev_demo/decode2display$ sudo ./decoder2display -w 1920 -h 1080 -i stream.h264

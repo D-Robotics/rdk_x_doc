@@ -45,30 +45,30 @@ Refer to the `01_basic_sample/test_efficientnasnet_m.py` example for an introduc
 
 #### load
 
-<font color='Blue'>【Function Declaration】</font>  
+<font color='Blue'>Function Declaration</font>  
 
 ```python
 model = dnn.load(model_path, **kwargs)
 ```
 
-<font color='Blue'>【Function Description】</font>  
+<font color='Blue'>Function Description</font>  
 
 Loads a deep learning model file from the specified path, completes model parsing, hardware adaptation, and memory allocation, and returns a `Model` object capable of performing inference.
 
-<font color='Blue'>【Parameter Description】</font>  
+<font color='Blue'>Parameter Description</font>  
 
 | Parameter Name | Description | Value Range |
 | ----------- | ------------------------ | -------- |
 | model_path     | Absolute/relative path to the model file | Valid file path; supports RKNN/ONNX, etc. (depends on the underlying library) |
 | **kwargs | Optional parameters (extended based on underlying implementation) | e.g., `core_num` (number of inference cores), `precision` (inference precision); pass empty if none |
 
-<font color='Blue'>【Return Value】</font>  
+<font color='Blue'>Return Value</font>  
 
 | Return Value | Description |
 | ------ | ----- |
 | model  | The initialized `Model` object, containing inference capabilities and tensor attributes |
 
-<font color='Blue'>【Usage Example】</font> 
+<font color='Blue'>Usage Example</font> 
 
 ```python
 from hobot_dnn import pyeasy_dnn as dnn
@@ -76,7 +76,7 @@ from hobot_dnn import pyeasy_dnn as dnn
 models = dnn.load('../models/efficientnasnet_m_300x300_nv12.bin')
 ```
 
-<font color='Blue'>【Notes】</font> 
+<font color='Blue'>Notes</font> 
 
 - The model path must point to an existing model file, and the model must be compatible with the current RDK hardware platform;
 - A `RuntimeError` exception is thrown if loading fails; it should be caught and handled;
@@ -85,24 +85,24 @@ models = dnn.load('../models/efficientnasnet_m_300x300_nv12.bin')
 ### Model Object Methods
 #### forward
 
-<font color='Blue'>【Function Description】</font>
+<font color='Blue'>Function Description</font>
 
 Based on the loaded model, this method receives input tensor data, invokes the underlying inference interface to perform forward computation, and returns a list of `TensorProperties` objects containing the output tensor data and attributes.
 
-<font color='Blue'>【Function Declaration】</font>  
+<font color='Blue'>Function Declaration</font>  
 
 ```python
 output_tensors = model.forward(inputs, **kwargs)
 ```
 
-<font color='Blue'>【Parameter Description】</font>  
+<font color='Blue'>Parameter Description</font>  
 
 | Parameter Name | Description | Value Range |
 | ----------- | ------------------------ | -------- |
 | inputs    | List of input data for model inference | Each element in the list is a numpy array/byte stream; shape and data type must match the model's input tensor definition |
 | **kwargs  | Optional inference parameters (extended based on underlying implementation) | e.g., `batch_size` (batch size); pass empty if none |
 
-<font color='Blue'>【Return Value】</font>  
+<font color='Blue'>Return Value</font>  
 
 | Return Value | Description |                 
 | ------ | ----- |
@@ -146,7 +146,7 @@ output_tensor = model.forward(inputs=[input_data])[0]
 print(f"Output tensor data type: {output_tensor.dtype}")
 ```
 
-<font color='Blue'>【Notes】</font> 
+<font color='Blue'>Notes</font> 
 
 - All attributes are read-only and cannot be modified directly; input data preprocessing must match the tensor attributes;
 - `alignedShape` is the memory-aligned shape at the RDK hardware level (e.g., the X3 chip requires width alignment to 32); the actual data storage size follows this attribute;

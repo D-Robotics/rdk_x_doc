@@ -280,7 +280,7 @@ The contents in MEM are divided into two parts: data provided to the algorithm l
 |            | zoom_step_info                                  |                                   |
 | **Gamma**  | stats_data[ISP_FULL_HISTOGRAM_SIZE]             | gamma_gain                        ||             | fullhist_sum                                     | gamma_offset        |
 |             |                                                  | frame_id            |
-| **Iridix**  | N/A（using AE statistics data from AE algorithm）| strength_target     |
+| **Iridix**  | N/A(using AE statistics data from AE algorithm)| strength_target     |
 |             |                                                  | iridix_dark_enh     |
 |             |                                                  | iridix_global_DG    |
 |             |                                                  | iridix_contrast     |
@@ -421,47 +421,47 @@ return 0;
 
 ## API Reference
 
-### HB_ISP_SetFWState/HB_ISP_GetFWState【Function Declaration】
+### HB_ISP_SetFWState/HB_ISP_GetFWState Function Declaration
 ```c
 int HB_ISP_SetFWState(uint8_t pipeId, const ISP_FW_STATE_E enState);
 
 int HB_ISP_GetFWState(uint8_t pipeId, ISP_FW_STATE_E *penState);
 ```
-【Function Description】
+Function Description
 
 Set/Get the state of ISP Firmware.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description         | Input/Output |
 |----------------|---------------------|--------------|
 | pipeId         | Pipeline index number | Input        |
 | penState       | ISP Firmware state   | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetRegister/HB_ISP_GetRegister
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetRegister(uint8_t pipeId, uint32_t u32Addr, uint32_t u32Value);
 
 int HB_ISP_GetRegister(uint8_t pipeId, uint32_t u32Addr, uint32_t *pu32Value);
 ```
-【Function Description】
+Function Description
 
 Set/Get ISP register.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description       | Input/Output |
 |----------------|-------------------|--------------|
@@ -469,151 +469,151 @@ Set/Get ISP register.
 | u32Addr        | ISP register address | Input        |
 | u32Value       | Value to set      | Input        |
 
-【Return Value】
+Return Value
 
 | Parameter name | Description                     | Input/Output |
 |----------------|---------------------------------|--------------|
 | pipeId         | Pipeline index number           | Input        |
 | cname          | Calibration library information | Input        |
 
-【Return value】
+Return value
 
 | Return value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Important points】
+Important points
 
-【Reference code】
+Reference code
 
 ### HB_ISP_SetModuleControl/ HB_ISP_GetModuleControl
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_SetModuleControl(uint8_t pipeId, const ISP_MODULE_CTRL_U *punModCtrl);
 
 int HB_ISP_GetModuleControl(uint8_t pipeId, ISP_MODULE_CTRL_U *punModCtrl);
 ```
-【Function description】
+Function description
 
 Set/get the bypass status of each module inside ISP.
 
-【Parameter description】
+Parameter description
 
 | Parameter name | Description                     | Input/Output |
 |----------------|---------------------------------|--------------|
 | pipeId         | Pipeline index number           | Input        |
 | punModCtrl     | Bypass control of each module inside ISP | Input        |
 
-【Return value】
+Return value
 
 | Return value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Important points】
+Important points
 
-【Reference code】
+Reference code
 
 ### HB_ISP_SwitchScence
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_SwitchScence(uint8_t pipeId, const char *cname);
 ```
-【Function description】
+Function description
 
 Set calibration library.
 
-【Parameter description】
+Parameter description
 
 | Parameter  | Description         | Input/Output |
 |------------|---------------------|--------------|
 | pipeId     | Pipeline index number | Input        |
 | cname      | Calibration library path | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_StartI2CBus/HB_ISP_StopI2CBus
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_StartI2CBus(uint8_t pipeId);
 
 void HB_ISP_StopI2CBus(uint8_t pipeId);
 ```
-【Function Description】
+Function Description
 
 Starts, stops writing to I2C bus.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter  | Description    | Input/Output |
 |------------|----------------|--------------|
 | pipeId     | Pipeline index number | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】Before StartI2CBus, HB_ISP_GetSetInit initialization and sensor initialization are required.
+NotesBefore StartI2CBus, HB_ISP_GetSetInit initialization and sensor initialization are required.
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SendI2CData
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SendI2CData(ISP_I2C_DATA_S data);
 ```
-【Function Description】
+Function Description
 
 Write I2C data.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description       | Input/Output |
 |----------------|-------------------|--------------|
 | data           | data to be sent   | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Note】
+Note
 
 HB_ISP_StartI2CBus interface should be called before using it to start the I2C write thread.
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_AELibRegCallback
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_AELibRegCallback(uint8_t pipeId, char *name, ISP_AE_FUNC_S *pstAeFunc);
 ```
-【Function Description】
+Function Description
 
 Register AE algorithm library.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description               | Input/Output |
 |----------------|---------------------------|--------------|
@@ -621,29 +621,29 @@ Register AE algorithm library.
 | name           | Library name, fixed 20 chars length | Input, optional |
 | pstAeFunc      | AE algorithm callback function pointer | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
-| Non-zero     | Failure     |【Caution】
+| Non-zero     | Failure     | Caution
 
 HB_VIN_StartPipe will start the ISP algorithm and the algorithm registration should be done before calling the HB_VIN_StartPipe function.
 
-【Reference code】see [Algorithm Registration Example](#example-of-algorithm-registration)
+Reference codesee [Algorithm Registration Example](#example-of-algorithm-registration)
 
 ### HB_ISP_AWBLibRegCallback
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_AWBLibRegCallback(uint8_t pipeId, char *name,
 ISP_AWB_FUNC_S *pstAWBFunc);
 ```
-【Function description】
+Function description
 
 Register the AWB algorithm library.
 
-【Parameter description】
+Parameter description
 
 | Parameter name | Description              | Input/Output |
 |----------------|--------------------------|--------------|
@@ -651,31 +651,31 @@ Register the AWB algorithm library.
 | name           | Library name, fixed 20 characters | Input Reserved item, can be omitted |
 | pstAWBFunc     | AWB algorithm callback function pointer     | Input        |
 
-【Return value】
+Return value
 
 | Return value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Caution】
+Caution
 
 HB_VIN_StartPipe will start the ISP algorithm and the algorithm registration should be done before calling the HB_VIN_StartPipe function.
 
-【Reference code】see [Algorithm Registration Example](#example-of-algorithm-registration)
+Reference codesee [Algorithm Registration Example](#example-of-algorithm-registration)
 
 ### HB_ISP_AFLibRegCallback
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_AFLibRegCallback(uint8_t pipeId, char *name,
 ISP_AF_FUNC_S *pstAFFunc);
 ```
-【Function description】
+Function description
 
 Register the AF algorithm library.
 
-【Parameter description】
+Parameter description
 
 | Parameter Name | Description                                 | Input/Output |
 |----------------|---------------------------------------------|--------------|
@@ -683,106 +683,106 @@ Register the AF algorithm library.
 | name           | Library name, fixed-copy 20 characters long | Input        |
 | pstAFFunc      | AF algorithm callback function pointer       | Input        |
 
-【Return value】
+Return value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Caution】
+Caution
 
 HB_VIN_StartPipe will start the ISP algorithm, and algorithm registration needs to be done before calling HB_VIN_StartPipe function.
 
 
-【Reference code】
+Reference code
 
 See [Algorithm Registration Example](#example-of-algorithm-registration)
 
 ### HB_ISP_AELibUnRegCallback
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_AELibUnRegCallback(uint8_t pipeId);
 ```
-【Description】
+Description
 
 Unregister AE algorithm library.
 
-【Description】
+Description
 
 | Parameter Name | Description       | Input/Output |
 |----------------|-------------------|--------------|
 | pipeId         | Pipeline index number | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Caution】
+Caution
 
-【Reference code】
+Reference code
 
 ### HB_ISP_AWBLibUnRegCallback
 
-【Function Declaration】
+Function Declaration
 
 ```c
 int HB_ISP_AWBLibUnRegCallback(uint8_t pipeId);
 ```
 
-【Description】
+Description
 
 Unregister the AWB algorithm library.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description      | Input/Output |
 |----------------|------------------|--------------|
 | pipeId         | Pipeline index number | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_AFLibUnRegCallback
 
-【Function Declaration】
+Function Declaration
 
 ```c
 int HB_ISP_AFLibUnRegCallback(uint8_t pipeId);
 ```
 
-【Description】
+Description
 
 Unregister the AF algorithm library.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description      | Input/Output |
 |----------------|------------------|--------------|
 | pipeId         | Pipeline index number | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
 Note:
 
@@ -792,136 +792,136 @@ Note:
 
 ### HB_ISP_GetSetInit/HB_ISP_GetSetExit
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetSetInit(void);
 
 int HB_ISP_GetSetExit(void);
 ```
-【Description】
+Description
 
 Initialization before getting/setting parameters.
 
-【Parameter Description】None
+Parameter DescriptionNone
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------|------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Notes】
+Notes
 
 Only need to call once in the same process, before calling all Get/Set functions, first call HB_ISP_GetSetInit for initialization.
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetAeAttr/HB_ISP_GetAeAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetAeAttr(uint8_t pipeId, const ISP_AE_ATTR_S *pstAeAttr);
 
 int HB_ISP_GetAeAttr(uint8_t pipeId, ISP_AE_ATTR_S *pstAeAttr);
 ```
-【Description】
+Description
 
 Set AE algorithm attributes.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description      | Input/Output |
 |----------------|------------------|--------------|
 | pipeId         | Pipeline index   | Input        |
 | pstAeAttr      | Pointer to AE parameters | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
 set is only for manual mode, when getting different modes, pass the corresponding mode value.
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetAfAttr/HB_ISP_GetAfAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetAfAttr(uint8_t pipeId, ISP_AF_ATTR_S *pstAfAttr);
 
 int HB_ISP_GetAfAttr(uint8_t pipeId, ISP_AF_ATTR_S *pstAfAttr);
 ```
-【Function Description】
+Function Description
 
 Set AF-ZOOM attribute.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description      | Input/Output |
 |----------------|------------------|--------------|
 | pipeId         | Pipeline index   | Input        |
 | pstAfAttr      | Pointer to AF parameters | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
-### HB_ISP_SetAwbAttr/HB_ISP_GetAwbAttr【Function Declaration】
+### HB_ISP_SetAwbAttr/HB_ISP_GetAwbAttr Function Declaration
 ```c
 int HB_ISP_SetAwbAttr(uint8_t pipeId, const ISP_AWB_ATTR_S *pstAwbAttr);
 
 int HB_ISP_GetAwbAttr(uint8_t pipeId, ISP_AWB_ATTR_S *pstAwbAttr);
 ```
-【Description】
+Description
 
 Set AWB algorithm attributes.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description         | Input/Output |
 |----------------|---------------------|--------------|
 | pipeId         | Pipeline index number| Input        |
 | pstAwbAttr     | Pointer to AWB parameters | Input    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
 Set is only for manual mode. When getting, pass different modes to obtain corresponding values.
 
-【Referenced Code】
+Referenced Code
 
 ### HB_ISP_SetBlackLevelAttr/HB_ISP_GetBlackLevelAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetBlackLevelAttr(uint8_t pipeId, const ISP_BLACK_LEVEL_ATTR_S *pstBlackLevelAttr);
 
 int HB_ISP_GetBlackLevelAttr(uint8_t pipeId, ISP_BLACK_LEVEL_ATTR_S *pstBlackLevelAttr);
 ```
-【Description】
+Description
 
 Set black level attributes.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name    | Description         | Input/Output |
 |-------------------|---------------------|--------------|
@@ -979,7 +979,7 @@ Set demosaic module attributes.
 
 ### HB_ISP_SetSharpenAttr/HB_ISP_GetSharpenAttr
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_SetSharpenAttr(uint8_t pipeId, const
 ISP_SHARPEN_ATTR_S *pstSharpenAttr);
@@ -987,31 +987,31 @@ ISP_SHARPEN_ATTR_S *pstSharpenAttr);
 int HB_ISP_GetSharpenAttr(uint8_t pipeId,
 ISP_SHARPEN_ATTR_S *pstSharpenAttr);
 ```
-【Description】
+Description
 
 Set the sharpen attribute.
 
-【Parameter description】
+Parameter description
 
 | Parameter name | Description       | Input/Output |
 |----------------|-------------------|--------------|
 | pipeId         | Pipeline index    | Input        |
 | pstSharpenAttr | Pointer to sharpen attribute | Input  |
 
-【Return value】
+Return value
 
 | Return value | Description |
 |--------|------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Notes】
+Notes
 
-【Reference code】
+Reference code
 
 ### HB_ISP_SetGammaAttr/HB_ISP_GetGammaAttr
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_SetGammaAttr(uint8_t pipeId, const
 ISP_GAMMA_ATTR_S *pstGammaAttr);
@@ -1019,154 +1019,154 @@ ISP_GAMMA_ATTR_S *pstGammaAttr);
 int HB_ISP_GetGammaAttr(uint8_t pipeId,
 ISP_GAMMA_ATTR_S *pstGammaAttr);
 ```
-【Description】
+Description
 
 Set the gamma attribute.
 
-【Parameter description】
+Parameter description
 
 | Parameter Name | Description          | Input/Output |
 |--------------|---------------------|-----------|
 | pipeId       | Pipeline Index         | Input      |
 | pstGammaAttr | Pointer to Gamma Parameters | Input      |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------|------|
 | 0      | Success   |
 | Non-zero    | Failure |
 
-【Note】
+Note
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetIridixAttr/HB_ISP_GetIridixAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetIridixAttr(uint8_t pipeId, const ISP_IRIDIX_ATTR_S *pstIridixAttr);
 
 int HB_ISP_GetIridixAttr(uint8_t pipeId,
 ISP_IRIDIX_ATTR_S *pstIridixAttr);
 ```
-【Function Description】
+Function Description
 
 Set Iridix module attributes.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description          | Input/Output |
 |--------------|---------------------|-----------|
 | pipeId       | Pipeline Index         | Input      |
 | pstIridixAttr | Pointer to Iridix Parameters | Input      |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------|------|
 | 0      | Success   |
 | Non-zero    | Failure |
 
-【Note】
+Note
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetIridixStrengthLevel/HB_ISP_GetIridixStrengthLevel
 
-【Function Declaration】
+Function Declaration
 
 ```c
 int HB_ISP_SetIridixStrengthLevel(uint8_t pipeId, uint16_t level);
 
 int HB_ISP_GetIridixStrengthLevel(uint8_t pipeId, uint16_t *level);
 ```
-【Function Description】
+Function Description
 
 Set the Iridix strength level.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                   | Input/Output |
 |----------------|-------------------------------|--------------|
 | pipeId         | Pipeline index number         | Input        |
 | level          | Strength level, range [0, 255] | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | non-zero     | Failure     |
 
-【Note】
+Note
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetCnrAttr/HB_ISP_GetCnrAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetCnrAttr(uint8_t pipeId, const ISP_CNR_ATTR_S *pstCnrAttr);
 
 int HB_ISP_GetCnrAttr(uint8_t pipeId, ISP_CNR_ATTR_S *pstCnrAttr);
 ```
-【Function Description】
+Function Description
 
 Set the chroma noise reduction module attributes.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                      | Input/Output |
 |----------------|----------------------------------|--------------|
 | pipeId         | Pipeline index number            | Input        |
 | pstCnrAttr     | Pointer to chroma noise reduction parameters | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0      | Success |
 | Non-zero | Failure |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetSinterAttr/HB_ISP_GetSinterAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetSinterAttr(uint8_t pipeId, const ISP_SINTER_ATTR_S *pstSinterAttr);
 
 int HB_ISP_GetSinterAttr(uint8_t pipeId,
 ISP_SINTER_ATTR_S *pstSinterAttr);
 ```
-【Function Description】
+Function Description
 
 Set the attributes of the spatial noise reduction module.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                       | Input/Output |
 |----------------|-----------------------------------|--------------|
 | pipeId         | Pipeline index number              | Input        |
 | pstSinterAttr  | Pointer to the spatial noise reduction parameter | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetTemperAttr/HB_ISP_GetTemperAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetTemperAttr(uint8_t pipeId, const
 ISP_TEMPER_ATTR_S *pstTemperAttr);
@@ -1174,29 +1174,29 @@ ISP_TEMPER_ATTR_S *pstTemperAttr);
 int HB_ISP_GetTemperAttr(uint8_t pipeId,
 ISP_TEMPER_ATTR_S *pstTemperAttr);
 ```
-【Function Description】【Setting the temporal domain denoising module properties】
+Function Description Setting the temporal domain denoising module properties
 
-【Parameter description】
+Parameter description
 
 | Parameter Name   | Description              | Input/Output |
 |------------------|--------------------------|--------------|
 | pipeId           | Pipeline index number     | Input        |
 | pstTemperAttr    | Pointer to denoising parameters in the temporal domain | Input        |
 
-【Return value】
+Return value
 
 | Return value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference code】
+Reference code
 
 ### HB_ISP_SetMeshShadingAttr/HB_ISP_GetMeshShadingAttr
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_SetMeshShadingAttr(uint8_t pipeId, const
 MESH_SHADING_ATTR_S *pstMeshShadingAttr);
@@ -1204,60 +1204,60 @@ MESH_SHADING_ATTR_S *pstMeshShadingAttr);
 int HB_ISP_GetMeshShadingAttr(uint8_t pipeId,
 MESH_SHADING_ATTR_S *pstMeshShadingAttr);
 ```
-【Function description】
+Function description
 
 Set the properties of the Mesh Shading module.
 
-【Parameter description】
+Parameter description
 
 | Parameter Name       | Description                           | Input/Output |
 |----------------------|---------------------------------------|--------------|
 | pipeId               | Pipeline index number                 | Input        |
 | pstMeshShadingAttr   | Pointer to Mesh Shading parameters     | Input        |
 
-【Return value】
+Return value
 
 | Return value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
 ### HB_ISP_SetMeshShadingLUT/HB_ISP_GetMeshShadingLUT
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetMeshShadingLUT(uint8_t pipeId, const
 MESH_SHADING_LUT_S *pstMeshShadingLUT);
 
 int HB_ISP_GetMeshShadingLUT(uint8_t pipeId, MESH_SHADING_LUT_S *pstMeshShadingLUT);
 ```
-【Function Description】
+Function Description
 
 Set the LUT table of the Mesh Shading module.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name    | Description                  | Input/Output |
 |-------------------|------------------------------|--------------|
 | pipeId            | Pipeline index number        | Input        |
 | pstMeshShadingLUT | Pointer to the MeshShading LUT table | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetRadialShadingAttr/HB_ISP_GetRadialShadingAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetRadialShadingAttr(uint8_t pipeId, const
 RADIAL_SHADING_ATTR_S *pstRadialShadingAttr);
@@ -1265,31 +1265,31 @@ RADIAL_SHADING_ATTR_S *pstRadialShadingAttr);
 int HB_ISP_GetRadialShadingAttr(uint8_t pipeId,
 RADIAL_SHADING_ATTR_S *pstRadialShadingAttr);
 ```
-【Function Description】
+Function Description
 
 Set the attributes of the Radial Shading module.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name        | Description                         | Input/Output |
 |-----------------|----------------------|----------|
 | pipeId          | Pipeline index       | Input    |
 | pstRadialShadingAttr | Pointer to Radial Shading parameters | Input    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetRadialShadingLUT/HB_ISP_GetRadialShadingLUT
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetRadialShadingLUT(uint8_t pipeId, const
 RADIAL_SHADING_LUT_S *pstRadialShadingLUT);
@@ -1297,79 +1297,79 @@ RADIAL_SHADING_LUT_S *pstRadialShadingLUT);
 int HB_ISP_GetRadialShadingLUT(uint8_t pipeId,
 RADIAL_SHADING_LUT_S *pstRadialShadingLUT);
 ```
-【Function Description】
+Function Description
 
 Set the LUT table for Radial Shading module.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name     | Description          | Input/Output |
 |--------------------|----------------------|--------------|
 | pipeId             | Pipeline index       | Input        |
 | pstRadialShadingLUT | Pointer to Radial Shading LUT table | Input    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetCSCAttr/HB_ISP_GetCSCAttr
 
-【Function Declaration】
+Function Declaration
 
 ```c
 int HB_ISP_SetCSCAttr(uint8_t pipeId, const ISP_CSC_ATTR_S *pstCSCAttr);
 
 int HB_ISP_GetCSCAttr(uint8_t pipeId, ISP_CSC_ATTR_S *pstCSCAttr);
 ```
-【Function Description】
+Function Description
 
 Set the attributes of the Color Space Conversion (CSC) module.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description      | Input/Output |
 |----------------|------------------|--------------|
 | pipeId         | Pipeline index   | Input        |
 | pstCSCAttr     | Pointer to CSC attributes | Input   |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetSceneModesAttr/HB_ISP_GetSceneModesAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetSceneModesAttr(uint8_t pipeId, const ISP_SCENE_MODES_ATTR_S *pstSceneModesAttr);
 
 int HB_ISP_GetSceneModesAttr(uint8_t pipeId, ISP_SCENE_MODES_ATTR_S *pstSceneModesAttr);
 ```
-【Function Description】
+Function Description
 
 Set the scene modes.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name      | Description          | Input/Output |
 |----------------------|----------------------|--------------|
 | pipeId               | Pipeline index       | Input        |
 | pstSceneModesAttr    | Pointer to scene mode parameters | Input   |
 
-【Return Value】
+Return Value
 Translate the Chinese parts in the following content into English while preserving the original format and content:
 
 | Return Value | Description |
@@ -1377,49 +1377,49 @@ Translate the Chinese parts in the following content into English while preservi
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Precautions】
+Precautions
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetAwbZoneInfo/HB_ISP_GetAwbZoneInfo
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetAwbZoneInfo(uint8_t pipeId, ISP_ZONE_ATTR_S *awbZoneInfo);
 
 int HB_ISP_SetAwbZoneInfo(uint8_t pipeId, ISP_ZONE_ATTR_S awbZoneInfo);
 ```
-【Description】
+Description
 
 Get/Set AWB zone information.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                                          | Input/Output |
 |----------------|----------------------------------------------------------------------|--------------|
 | pipeId         | Pipeline index                                                       | Input        |
 | awbZoneInfo    | Pointer to AWB zone information (for Get); AWB zone information data structure (for Set) | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Precautions】None
+PrecautionsNone
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_SetAfZoneInfo/HB_ISP_GetAfZoneInfo
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetAfZoneInfo(uint8_t pipeId, ISP_ZONE_ATTR_S *afZoneInfo);
 
 int HB_ISP_SetAfZoneInfo(uint8_t pipeId, ISP_ZONE_ATTR_S *afZoneInfo);
 ```
-【Description】Access/Set AF zones information.
+DescriptionAccess/Set AF zones information.
 
 [Parameter Description]
 
@@ -1471,35 +1471,35 @@ Access/Set AE 5bin zones information.
 
 ### HB_ISP_SetAfKernelInfo/HB_ISP_GetAfKernelInfo
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetAfKernelInfo(uint8_t pipeId, uint32_t *af_kernel);
 
 int HB_ISP_SetAfKernelInfo(uint8_t pipeId, uint32_t af_kernel);
 ```
-【Description】
+Description
 
 Get/Set AF KERNEL information.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                                  | Input/Output |
 |----------------|--------------------------------------------------------------|--------------|
 | pipeId         | Pipeline index number                                        | Input        |
 | af_kernel      | Pointer to af_kernel pointer (for getting); af_kernel data information (for setting) | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
 This interface is mainly used for applications to obtain or modify current af statistical data kernel.
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_SetAeParam/HB_ISP_GetAeParam
 
@@ -1595,33 +1595,33 @@ Sets or retrieves the AWB statistical data area range.
 
 ### HB_ISP_GetAeFullHist
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetAeFullHist(uint8_t pipeId, uint32_t *pu32AeFullHist);
 ```
-【Description】
+Description
 
 Get AE statistical data.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name   | Description              | Input/Output |
 |------------------|--------------------------|--------------|
 | pipeId           | Pipeline index number     | Input        |
 | pu32AeFullHist   | Pointer to AE statistical data  | Output       |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------|------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Notes】
+Notes
 
 This interface is mainly for application use. If some strategy judgments are made based on statistical information, the 3A algorithm library does not need to use this interface.
 
-【Reference Code】
+Reference Code
 ```c
 #define HB_ISP_FULL_HISTOGRAM_SIZE 1024
 
@@ -1648,66 +1648,66 @@ for (i = 0; i \< HB_ISP_FULL_HISTOGRAM_SIZE; i++) {
 
 ### HB_ISP_GetAwbZoneHist
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetAwbZoneHist(uint8_t pipeId,
 ISP_STATISTICS_AWB_ZONE_ATTR_S
 *pstAwbZonesAttr);
 ```
-【Function Description】
+Function Description
 
 Get AWB statistical data.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name  | Description        | Input/Output |
 |-----------------|-----------------------|-----------|
 | pipeId          | Pipeline index       | Input      || pstAwbZonesAttr | Pointer to AWB statistical data | Output |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------|------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Notes】
+Notes
 
 This interface is mainly for application use, such as using statistical information for certain strategy judgments. The 3A algorithm library does not need to use this interface.
 
-【Reference Code】
+Reference Code
 
 ### HB_ISP_GetAe5binZoneHist
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetAe5binZoneHist(uint8_t
 pipeId, ISP_STATISTICS_AE_5BIN_ZONE_ATTR_S
 *pst32Ae5bin);
 ```
-【Function Description】
+Function Description
 
 Gets AE 5bin statistical data.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name    | Description                      | Input/Output |
 |-------------|---------------------------|-----------|
 | pipeId      | Pipeline index number            | Input      |
 | pst32Ae5bin | Pointer to AE 5bin statistical data | Output      |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------|------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Notes】
+Notes
 
 This interface is mainly for application use, such as using statistical information for certain strategy judgments. The 3A algorithm library does not need to use this interface.
 
-【Reference Code】
+Reference Code
 ```c
 
 ISP_STATISTICS_AE_5BIN_ZONE_ATTR_S ae_5bin[HB_ISP_MAX_AE_5BIN_ZONES];ISP_ZONE_ATTR_S ae5binZoneInfo;
@@ -1762,17 +1762,17 @@ af.zones_stats = (uint32_t *)&af_data;HB_ISP_GetAfZoneHist(ctx_idx, &af);
 
 ### HB_ISP_GetMeteringData
 
-【Function Declaration】
+Function Declaration
 
 ```c
 int HB_ISP_GetMeteringData(uint8_t pipeId, void *data, ISP_METERING_DATA_TYPE_E type, int latest_flag);
 ```
 
-【Description】
+Description
 
 Get AF/LUMVAR statistics data.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                        | Input/Output |
 | -------------- | ---------------------------------- | ------------ |
@@ -1781,14 +1781,14 @@ Get AF/LUMVAR statistics data.
 | type           | Type of statistics data (AF/LUMVAR) | Input        |
 | latest_flag    | Flag indicating whether to get the latest data | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | ------------ | ---------------------- |
 | 0            | Success |
 | Non-zero     | Failure |
 
-【Note】
+Note
 
 1. The value fv obtained from this interface can be directly used for focusing calculation.
 
@@ -1796,15 +1796,15 @@ Get AF/LUMVAR statistics data.
 
 ### HB_ISP_GetVDTTimeOut
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetVDTTimeOut(uint8_t pipeId, uint8_t vdt_type, uint64_t timeout);
 ```
-【Description】
+Description
 
 Get ISP FRAME_START or FRAME_END information.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description   | Input/Output |
 |----------|--------------------------------------|-----------|
@@ -1812,112 +1812,112 @@ Get ISP FRAME_START or FRAME_END information.
 | vdt_type | Select for getting ISP frame_start or frame_end | Input      |
 | timeout  | Timeout return time                         | Input      |
 
-【Return Value】
+Return Value
 
 | Return Value | Description       |
 |--------|------------|
 | 0      | FS/FE Synchronization |
 | Non-zero   | Timeout return   |
 
-【Notes】
+Notes
 
 This interface is mainly used by applications for timing synchronization.
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_GetLumaZoneHist
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetLumaZoneHist(uint8_t pipeId, ISP_STATISTICS_LUMVAR_ZONE_ATTR_S
 *pst32Luma);
 ```
-【Function Description】
+Function Description
 
 Get the mean and variance of LUMVAR statistical information.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name  | Description                      | Input/Output |
 |-----------|---------------------------|-----------|
 | pipeId    | Pipeline index            | Input      |
 | pst32Luma | Pointer to lumvar statistical information | Output      |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------|------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Notes】
+Notes
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_SetAEControl/ HB_ISP_GetAEControl
 
-【Function Declaration】
+Function Declaration
 
 ```c
 int HB_ISP_SetAEControl(uint8_t pipeId, const ISP_AE_CONTROL *pstAeControl);
 
 int HB_ISP_GetAEControl(uint8_t pipeId, ISP_AE_CONTROL *pstAeControl);
 ```
-【Function Description】
+Function Description
 
 Set/Get AE control information
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                   | Input/Output |
 |----------------|-------------------------------|-------------|
 | pipeId         | Pipeline index number         | Input       |
 | pstAeControl   | Pointer to AE control information | Input       |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failed      |
 
-【Note】
+Note
 
-【Reference Code】N/A
+Reference CodeN/A
 
 ### HB_ISP_SetAECorrection/ HB_ISP_GetAECorrection
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetAECorrection(uint8_t pipeId, const ISP_AE_CORRECTION *pstAeCorrection);
 
 int HB_ISP_GetAECorrection(uint8_t pipeId, ISP_AE_CORRECTION *pstAeCorrection);
 ```
-【Function Description】
+Function Description
 
 Set/Get AE correction information
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name   | Description                   | Input/Output |
 |-------------------|-------------------------------|-------------|
 | pipeId            | Pipeline index number         | Input       |
 | pstAeCorrection   | Pointer to AE correction information | Input       |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------|------|
 | 0      | Success |
 | non-0  | Failed |
 
-【Attention】
+Attention
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_Set_AE_5bin_Hist/ HB_ISP_Get_AE_5bin_Hist
 
-【Function Declaration】
+Function Declaration
 
 ```c
 int HB_ISP_Set_AE_5bin_Hist(uint8_t pipeId, const ISP_5BIN_HIST * pAe5binHist);
@@ -1925,42 +1925,42 @@ int HB_ISP_Set_AE_5bin_Hist(uint8_t pipeId, const ISP_5BIN_HIST * pAe5binHist);
 int HB_ISP_Get_AE_5bin_Hist(uint8_t pipeId, ISP_5BIN_HIST * pAe5binHist);
 ```
 
-【Function Description】
+Function Description
 
 Set/Get the 5bin statistical information of AE
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                 | Input/Output |
 | -------------- | --------------------------- | ------------ |
 | pipeId         | Pipeline index number       | Input        |
 | pAe5binHist    | Pointer to AE 5bin statistics information  | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | ------------ | ----------- |
 | 0            | Success     |
 | non-0        | Failed      |
 
-【Attention】
+Attention
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_SetExposureRatioAdjustment/ HB_ISP_GetExposureRatioAdjustment
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetExposureRatioAdjustment(uint8_t pipeId, const ISP_EXP_RATIO_ADJ *pstExpRatioAdj);
 
 int HB_ISP_GetExposureRatioAdjustment(uint8_t pipeId, ISP_EXP_RATIO_ADJ *pstExpRatioAdj);
 ```
 
-【Function Description】
+Function Description
 
 Set/Get Exposure Ratio Adjustment
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description        | Input/Output |
 |----------------|--------------------|--------------|
@@ -1968,19 +1968,19 @@ Set/Get Exposure Ratio Adjustment
 | pstExpRatioAdj | Pointer to ratio   | Input        |
 |                | of exposure        |              |
  
-【Return Value】
+Return Value
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_SetExposurePartitionLuts/ HB_ISP_GetExposurePartitionLuts
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetExposurePartitionLuts(uint8_t pipeId, const ISP_EXP_PAT_LUTS
 *pstExpPatLuts);
@@ -1988,11 +1988,11 @@ int HB_ISP_SetExposurePartitionLuts(uint8_t pipeId, const ISP_EXP_PAT_LUTS
 int HB_ISP_SetExposurePartitionLuts(uint8_t pipeId, ISP_EXP_PAT_LUTS
 *pstExpPatLuts);
 ```
-【Function Description】
+Function Description
 
 Set/Get LUT information for exposure partition
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description            | Input/Output |
 |----------------|------------------------|--------------|
@@ -2000,20 +2000,20 @@ Set/Get LUT information for exposure partition
 | pstExpPatLuts  | Pointer to partition   | Input        |
 |                | LUT table              |              |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | non-zero     | Failure     |
 
-【注意事项】
+Notes
 
-【参考代码】无
+Reference Code None
 
 ### HB_ISP_SetAwbBgMaxGain/HB_ISP_GetAwbBgMaxGain
 
-【函数声明】
+Function Declaration
 ```c
 int HB_ISP_SetAwbBgMaxGain(uint8_t pipeId, const ISP_AWB_BG_MAX_GAIN
 *pstAwbBgMaxGain) ;
@@ -2021,31 +2021,31 @@ int HB_ISP_SetAwbBgMaxGain(uint8_t pipeId, const ISP_AWB_BG_MAX_GAIN
 int HB_ISP_GetAwbBgMaxGain(uint8_t pipeId, ISP_AWB_BG_MAX_GAIN
 *pstAwbBgMaxGain);
 ```
-【功能描述】
+Function Description
 
 Set/Get AWB BG maximum gain.
 
-【参数描述】
+Parameter Description
 
-| 参数名称        | 描述                     | 输入/输出 |
+| Parameter Name        | Description                     | Input/Output |
 |-----------------|--------------------------|-----------|
 | pipeId          | Pipeline index           | Input     |
 | pstAwbBgMaxGain | Pointer to the maximum gain of AWB BG | Input      |
 
-【返回值】
+Return Value
 
-| 返回值 | 描述 |
+| Return Value | Description |
 |--------|------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【注意事项】
+Notes
 
-【参考代码】无
+Reference Code None
 
 ### HB_ISP_SetCcmSaturationStrength/ HB_ISP_GetCcmSaturationStrength
 
-【函数声明】
+Function Declaration
 ```c
 int HB_ISP_SetCcmSaturationStrength(uint8_t pipeId, const ISP_CCM_SATURA_STRENG
 *pstCcmSatStre);
@@ -2053,178 +2053,178 @@ int HB_ISP_SetCcmSaturationStrength(uint8_t pipeId, const ISP_CCM_SATURA_STRENG
 int HB_ISP_GetCcmSaturationStrength(uint8_t pipeId, ISP_CCM_SATURA_STRENG
 *pstCcmSatStre);
 ```
-【功能描述】
+Function Description
 
-Set/Get CCM saturation strength information.【Parameter Description】
+Set/Get CCM saturation strength information. Parameter Description
 
 | Parameter Name | Description          | Input/Output |
 |----------------|----------------------|--------------|
 | pipeId         | Pipeline index number | Input        |
 | pstCcmSatStre  | Pointer to CCM saturation strength | Input       |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_SetCcmMtLs/ HB_ISP_GetCcmMtLs
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetCcmMtLs(uint8_t pipeId, const ISP_MT_ABSOLUTE_LS *pstMtAbsoluteLs);
 
 int HB_ISP_GetCcmMtLs(uint8_t pipeId, ISP_MT_ABSOLUTE_LS *pstMtAbsoluteLs);
 ```
-【Function Description】
+Function Description
 
 Set/Get CCM Mt Ls
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description          | Input/Output |
 |----------------|----------------------|--------------|
 | pipeId         | Pipeline index number | Input        |
 | pstMtAbsoluteLs  | Pointer to CCM Mt Ls | Input       |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】None
+Reference CodeNone
 
-### HB_ISP_SetCcmAttr/HB_ISP_GetCcmAttr【Function Declaration】
+### HB_ISP_SetCcmAttr/HB_ISP_GetCcmAttr Function Declaration
 ```c
 int HB_ISP_SetCcmAttr(uint8_t pipeId, const ISP_CCM_ONE_GAIN_THRESHOLD *pstOneGainThreshold);
 
 int HB_ISP_GetCcmAttr(uint8_t pipeId, ISP_CCM_ONE_GAIN_THRESHOLD *pstOneGainThreshold);
 ```
-【Function Description】
+Function Description
 
 Set/Get CCM attributes
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name      | Description            | Input/Output |
 |---------------------|------------------------|--------------|
 | pipeId              | Pipeline index number  | Input        |
 | pstOneGainThreshold | Pointer to CCM attribute | Input       |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 None
 
-【Reference Code】
+Reference Code
 N/A
 
 ### HB_ISP_SetGammaEv1/HB_ISP_GetGammaEv1
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetGammaEv1(uint8_t pipeId, const ISP_GAMMA_EV1 *pstGammaEv1);
 
 int HB_ISP_GetGammaEv1(uint8_t pipeId, ISP_GAMMA_EV1 *pstGammaEv1);
 ```
-【Function Description】
+Function Description
 
 Set/Get Gamma Ev1 properties
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description              | Input/Output |
 |----------------|--------------------------|--------------|
 | pipeId         | Pipeline index number    | Input        |
-| pstGammaEv1    | Pointer to Gamma Ev1     | Input        |【Return Value】
+| pstGammaEv1    | Pointer to Gamma Ev1     | Input        | Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notice】
+Notice
 
-【Reference Code】N/A
+Reference CodeN/A
 
 ### HB_ISP_SetGammaEv2 / HB_ISP_GetGammaEv2
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetGammaEv2(uint8_t pipeId, const ISP_GAMMA_EV2 *pstGammaEv2);
 
 int HB_ISP_GetGammaEv2(uint8_t pipeId, ISP_GAMMA_EV2 *pstGammaEv2);
 ```
-【Function Description】
+Function Description
 
 Set/Get the Gamma Ev2 property.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description        | Input/Output |
 |----------------|--------------------|--------------|
 | pipeId         | Pipeline index     | Input        |
 | pstGammaEv2    | Pointer to Gamma Ev2| Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notice】
+Notice
 
-【Reference Code】N/A
+Reference CodeN/A
 
 ### HB_ISP_SetGammaThreshold / HB_ISP_GetGammaThreshold
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetGammaThreshold(uint8_t pipeId, const ISP_GAMMA_THRESHOLD *pstGammaThd);
 
 int HB_ISP_GetGammaThreshold(uint8_t pipeId, ISP_GAMMA_THRESHOLD *pstGammaThd);
 ```
 
-【Function Description】
+Function Description
 
 Set/Get Gamma threshold
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description          | Input/Output |
 |----------------|----------------------|--------------|
 | pipeId         | Pipeline index number | Input        |
 | pstGammaThd    | Pointer to Gamma threshold | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Caution】
+Caution
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_GetEvToLuxStatustAttr/ HB_ISP_SetEvToLuxStatustAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetEvToLuxStatustAttr(uint8_t pipeId, uint8_t
 *pstEvToLuxStatustAttr);
@@ -2232,90 +2232,90 @@ int HB_ISP_GetEvToLuxStatustAttr(uint8_t pipeId, uint8_t
 int HB_ISP_SetEvToLuxStatustAttr(uint8_t pipeId, const uint8_t
 *pstEvToLuxStatustAttr);
 ```
-【Function Description】
+Function Description
 
 Get evtolux attribute
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name         | Description             | Input/Output |
 |------------------------|-------------------------|--------------|
 | pipeId                 | Pipeline index number   | Input        |
 | pstEvToLuxStatustAttr  | Pointer to evtolux attribute  | Output       |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
-| Non-zero     | Failure     |【Notice】
+| Non-zero     | Failure     | Notice
 
-【Reference code】None
+Reference codeNone
 
 ### HB_ISP_SetCctCtrlAttr/ HB_ISP_GetCctCtrlAttr
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_SetCctCtrlAttr(uint8_t pipeId, const ISP_AWB_CCT_CTRL_S
 *pstCctAttr);
 
 int HB_ISP_GetCctCtrlAttr(uint8_t pipeId, ISP_AWB_CCT_CTRL_S *pstCctAttr);
 ```
-【Description】
+Description
 
 Set/Get CCT attributes
 
-【Parameter description】
+Parameter description
 
 | Parameter name | Description       | Input/Output |
 |----------------|-------------------|--------------|
 | pipeId         | Pipeline index    | Input        |
 | pstCctAttr     | Pointer to CCT attributes | Input        |
 
-【Return value】
+Return value
 
 | Return     | Description |
 |------------|-------------|
 | 0          | Success     |
 | Non-zero   | Failure     |
 
-【Notice】
+Notice
 
-【Reference code】None
+Reference codeNone
 
 ### HB_ISP_SetAwbAvgCoeff/HB_ISP_GetAwbAvgCoeff
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_SetAwbAvgCoeff(uint8_t pipeId, uint8_t Coeff);
 
 int HB_ISP_GetAwbAvgCoeff(uint8_t pipeId, uint8_t *Coeff);
 ```
-【Description】
+Description
 
 Set AWB average coefficients
 
-【Parameter description】
+Parameter description
 
 | Parameter name | Description                | Input/Output |
 |--------|-----------------------------|-----------------------------|
 | pipeId | Pipeline index              |Input|
 | Coeff  | Pointer to AWB average coefficients, smaller values result in fewer convergence steps, larger values result in more convergence steps          |Input|
 
-【Return value】
+Return value
 
 | Return value | Description |
 |--------------|-------------|
 |  0           | Success     |
 | Non-zero     | Failure     |
 
-【Note】
+Note
 
-【Reference code】N/A
+Reference codeN/A
 
 ### HB_ISP_SetMixLightAttr/HB_ISP_GetMixLightAttr
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_SetMixLightAttr(uint8_t pipeId, const ISP_MIX_LIGHT_PARAM_S
 *pstMixLightAttr);
@@ -2323,31 +2323,31 @@ int HB_ISP_SetMixLightAttr(uint8_t pipeId, const ISP_MIX_LIGHT_PARAM_S
 int HB_ISP_GetMixLightAttr(uint8_t pipeId, ISP_MIX_LIGHT_PARAM_S
 *pstMixLightAttr);
 ```
-【Description】
+Description
 
 Set MIX LIGHT attributes
 
-【Parameter description】
+Parameter description
 
 | Parameter name | Description              | Input/Output |
 |----------------|--------------------------|--------------|
 | pipeId         | Pipeline index           | Input        |
 | pstMixLightAttr| Pointer to MIX LIGHT attributes | Input     |
 
-【Return value】
+Return value
 
 | Return value | Description |
 |--------------|-------------|
 |  0           | Success     |
 | Non-zero     | Failure     |
 
-【Note】
+Note
 
-【Reference code】N/A
+Reference codeN/A
 
 ### HB_ISP_SetSkyCtrlAttr/ HB_ISP_GetSkyCtrlAttr
 
-【Function declaration】
+Function declaration
 
 ```c
 int HB_ISP_SetSkyCtrlAttr(uint8_t pipeId, const ISP_SKY_PARAM_S *pstSkyCtrlAttr);
@@ -2355,40 +2355,40 @@ int HB_ISP_SetSkyCtrlAttr(uint8_t pipeId, const ISP_SKY_PARAM_S *pstSkyCtrlAttr)
 int HB_ISP_GetSkyCtrlAttr(uint8_t pipeId, ISP_SKY_PARAM_S *pstSkyCtrlAttr);
 ```
 
-【Function Description】
+Function Description
 
 Set outdoor daylight attributes
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                  | Input/Output |
 |----------------|----------------------------------------------|--------------|
 | pipeId         | Pipeline index number                        | Input        |
 | pstSkyCtrlAttr | Pointer to outdoor daylight attribute         | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】N/A
+Reference CodeN/A
 
 ### HB_ISP_ApiCtrl
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_ApiCtrl(uint8_t pipeId, uint8_t direction, int type, int cmd,
 uint32_t *val);
 ```
-【Function Description】
+Function Description
 
 Api Control
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                | Input/Output |
 |----------------|----------------------------|--------------|
@@ -2398,50 +2398,50 @@ Api Control
 | cmd            | Minor Type                 | Input        |
 | val            | Value for Get/Set operation | Input        |
 
-【Return Value】
+Return Value
 
 | Return | Description |
 |--------|------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Notes】
+Notes
 
-【Reference code】N/A
+Reference codeN/A
 
 ### HB_ISP_GetTempLut/ HB_ISP_SetTempLut
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_GetTempLut(uint8_t pipeId, TEMPER_NP_LUT_S *pstTemperLUT);
 
 int HB_ISP_SetTempLut(uint8_t pipeId, TEMPER_NP_LUT_S *pstTemperLUT);
 ```
-【Function description】
+Function description
 
 Set / Get the temper lut table
 
-【Parameter description】
+Parameter description
 
 | Parameter name     | Description                           | Input/Output |
 |--------------|--------------------------------|-----------|
 | pipeId       | Pipeline index                 | Input      |
 | pstTemperLUT | Pointer to the temper lut table. | Input      |
 
-【Return】
+Return
 
 | Return | Description |
 |--------|------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Notes】
+Notes
 
-【Reference code】N/A
+Reference codeN/A
 
 ### HB_ISP_SetAwbRgBgWeightAttr/ HB_ISP_GetAwbRgBgWeightAttr
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_SetAwbRgBgWeightAttr(uint8_t pipeId, const ISP_MESH_RGBG_WEIGHT_S
 *pstWeightAttr);
@@ -2449,57 +2449,57 @@ int HB_ISP_SetAwbRgBgWeightAttr(uint8_t pipeId, const ISP_MESH_RGBG_WEIGHT_S
 int HB_ISP_GetAwbRgBgWeightAttr(uint8_t pipeId, ISP_MESH_RGBG_WEIGHT_S
 *pstWeightAttr);
 ```
-【Function description】Setting/Getting AWB RG BG weight table
+Function descriptionSetting/Getting AWB RG BG weight table
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                             | Input/Output |
 |----------------|-----------------------------------------|--------------|
 | pipeId         | Pipeline index number                    | Input        |
 | pstWeightAttr  | Pointer to Plank curve weight table      | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_GetAwbLsWeightAtt/ HB_ISP_SetAwbLsWeightAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetAwbLsWeightAttr(uint8_t pipeId, ISP_MESH_LS_WEIGHT_S *pstWeightAttr);
 
 int HB_ISP_SetAwbLsWeightAttr(uint8_t pipeId, const ISP_MESH_LS_WEIGHT_S *pstWeightAttr);
 ```
-【Function Description】
+Function Description
 
 Setting/Getting AWB LS weight attribute
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                         | Input/Output |
 |----------------|-------------------------------------|--------------|
 | pipeId         | Pipeline index number               | Input        |
 | pstWeightAttr  | Pointer to isolated light source     | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
 ### HB_ISP_GetAwbDefultParmAttr/ HB_ISP_SetAwbDefultParmAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_GetAwbDefultParmAttr(uint8_t pipeId, ISP_AWB_DEFAULT_PARAM_S
 *pstAwbAttr);
@@ -2507,31 +2507,31 @@ int HB_ISP_GetAwbDefultParmAttr(uint8_t pipeId, ISP_AWB_DEFAULT_PARAM_S
 int HB_ISP_SetAwbDefultParmAttr(uint8_t pipeId, const ISP_AWB_DEFAULT_PARAM_S
 *pstAwbAttr);
 ```
-【Description】
+Description
 
 Set/Get the CALIBRATION_CT30POS parameter
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                    | Input/Output |
 |----------------|--------------------------------|--------------|
 | pipeId         | Pipeline index number          | Input        |
 | pstAwbAttr     | Pointer to the awb U30 array id| Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Note】
+Note
 
-【Reference Code】N/A
+Reference CodeN/A
 
 ### HB_ISP_SetAwbColorTempWeightAttr/ HB_ISP_GetAwbColorTempWeightAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetAwbColorTempWeightAttr(uint8_t pipeId, const
 ISP_MESH_COLOR_TEMP_WEIGHT_S *pstWeightAttr);
@@ -2539,37 +2539,37 @@ ISP_MESH_COLOR_TEMP_WEIGHT_S *pstWeightAttr);
 int HB_ISP_GetAwbColorTempWeightAttr(uint8_t pipeId,
 ISP_MESH_COLOR_TEMP_WEIGHT_S *pstWeightAttr);
 ```
-【Description】
+Description
 
 Set/Get the CALIBRATION_MESH_COLOR_TEMPERATURE attribute
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description             | Input/Output |
 |----------------|-------------------------|--------------|
 | pipeId         | Pipeline index number   | Input        |
 | pstWeightAttr  | Pointer to the weight table for color temperature | Input      |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Note】
+Note
 
-【Reference Code】N/A
+Reference CodeN/A
 
 ### HB_ISP_SetAwbPosStatusAttr/ HB_ISP_GetAwbPosStatusAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetAwbPosStatusAttr(uint8_t pipeId, const ISP_AWB_POS_STATUS_S *pstPosAttr);
 
 int HB_ISP_GetAwbPosStatusAttr(uint8_t pipeId, ISP_AWB_POS_STATUS_S *pstPosAttr);
 ```
-【Function Description】
+Function Description
 
 Set/Get AWB position status
 
@@ -2577,31 +2577,31 @@ CALIBRATION_RG_POS
 
 CALIBRATION_BG_POS
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                | Input/Output |
 |----------------|----------------------------|--------------|
 | pipeId         | Pipeline index number      | Input        |
 | pstPosAttr     | Pointer to rgain/bgain array | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Note】【Reference code】None
+Note Reference codeNone
 
 ### HB_ISP_SetAwbLightSourceAttr/ HB_ISP_GetAwbLightSourceAttr
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_SetAwbLightSourceAttr(uint8_t pipeId, const ISP_AWB_LIGHT_SOURCE_S *pstLightAttr);
 
 int HB_ISP_GetAwbLightSourceAttr(uint8_t pipeId, ISP_AWB_LIGHT_SOURCE_S *pstLightAttr);
 ```
-【Description】
+Description
 
 Set/get awb light source attributes
 
@@ -2611,69 +2611,69 @@ CT_RG_POS_CALC
 
 CT_BG_POS_CALC
 
-【Parameter description】
+Parameter description
 
 | Parameter name | Description                  | Input/Output |
 |----------------|------------------------------|--------------|
 | pipeId         | Pipeline index               | Input        |
 | pstLightAttr   | Pointer to light source attribute | Input        |
 
-【Return value】
+Return value
 
 | Return value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference code】None
+Reference codeNone
 
 ### HB_ISP_GetWdrOffsetAttr/ HB_ISP_SetWdrOffsetAttr
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_GetWdrOffsetAttr(uint8_t pipeId, ISP_WDR_OFFSET_S *pstWdrOffsetAttr);
 
 int HB_ISP_SetWdrOffsetAttr(uint8_t pipeId, ISP_WDR_OFFSET_S *pstWdrOffsetAttr);
 
-【Function Description】
+Function Description
 ```
 
 Set/Get WDR Offset Attribute
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name  | Description               | Input/Output |
 |-----------------|---------------------------|--------------|
 | pipeId          | Pipeline index number     | Input        |
 | pstWdrOffsetAttr | Pointer to WDR offset attribute | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Nonzero      | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】None
+Reference CodeNone
 
 
 ### HB_ISP_SetHdrAexpTypeAttr
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetHdrAexpTypeAttr(uint8_t pipeId, ISP_HDR_AEXP_S *pstAexpTypeAttr,
 uint32_t scale_bottom, uint32_t scale_top);
 ```
 
-【Function Description】
+Function Description
 
 Set HDR AE1024bin weight attribute
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name  | Description        | Input/Output |
 |-----------------|--------------------|--------------|
@@ -2682,52 +2682,52 @@ Set HDR AE1024bin weight attribute
 | scale_bottom    | Scaling at low bin  | Input        |
 | scale_top       | Stop at high bin    | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
-| Nonzero      | Failure     |【注意事项】
+| Nonzero      | Failure     | Notes
 
-【参考代码】无
+Reference Code None
 
 ### HB_ISP_GetAfStatus
 
-【函数声明】
+Function Declaration
 ```c
 int HB_ISP_GetAfStatus(uint8_t pipeId, ISP_AF_STATUS_E *pstAfStatusAttr);
 ```
-【功能描述】
+Function Description
 
-获取af状态
+Get AF status
 
-【参数描述】
+Parameter Description
 
-| 参数名称        | 描述             | 输入/输出 |
+| Parameter Name        | Description             | Input/Output |
 |-----------------|------------------|-----------|
-| pipeId          | Pipeline index   | 输入      |
-| pstAfStatusAttr | Pointer to AF status | 输出      |
+| pipeId          | Pipeline index   | Input      |
+| pstAfStatusAttr | Pointer to AF status | Output      |
 
-【返回值】
+Return Value
 
-| 返回值 | 描述 |
+| Return Value | Description |
 |--------|------|
-| 0      | 成功 |
-| Nonzero    | 失败 |
+| 0      | Success |
+| Nonzero    | Failure |
 
-【注意事项】
+Notes
 
-【参考代码】无
+Reference Code None
 
 ### HB_ISP_GetAfInfo
 
-【函数声明】
+Function Declaration
 ```c
 int HB_ISP_GetAfInfo(uint8_t pipeId, ISP_AF_LENS_INFO_S *ptrLenInfo);
 ```
-【功能描述】
+Function Description
 
-获取af信息
+Get AF information
 
 AF_MANUAL_CONTROL
 
@@ -2735,35 +2735,35 @@ AF_RANGE_LOW
 
 AF_RANGE_HIGH
 
-【参数描述】
+Parameter Description
 
 | Parameter Name | Description                 | Input/Output |
 |----------------|-----------------------------|--------------|
 | pipeId         | Pipeline index number       | Input        |
 | ptrLenInfo     | Pointer to af information   | Output       |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Sample Code】N/A
+Sample CodeN/A
 
 ### HB_ISP_SetAfManualPos
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetAfManualPos(uint8_t pipeId, ISP_AF_MODE_E stAfModeAttr, uint32_t pos);
 ```
-【Function Description】
+Function Description
 
 Set af mode
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                    | Input/Output |
 |----------------|--------------------------------|--------------|
@@ -2771,30 +2771,30 @@ Set af mode
 | stAfModeAttr   | Pointer to af mode type        | Input        |
 | pos            | Effective only in manual mode  | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Sample Code】N/A
+Sample CodeN/A
 
 ### HB_ISP_SetFlickerStatus/HB_ISP_GetFlickerStatus
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetFlickerStatus(uint8_t pipeId, uint32_t flicker_enable, uint32_t flicker_frequency);
 
 int HB_ISP_GetFlickerStatus(uint8_t pipeId, uint32_t *flicker_enable, uint32_t flicker_frequency);
 ```
-【Function Description】
+Function Description
 
 Set/Get flicker status
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name   | Description     | Input/Output |
 |------------------|-----------------|--------------|
@@ -2802,209 +2802,209 @@ Set/Get flicker status
 | flicker_enable   | Enable flicker  | Input        |
 | flicker_frequency| flicker frequency | Input      |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------------|-------------|
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Note】
+Note
 
 flicker_frequency is the frequency value, e.g., input 50 for 50Hz and input 60 for 60Hz. Under 50Hz, flicker limits the exposure time to 10ms. If the exposure time is less than 10ms due to high brightness of the light source, flicker will not be increased to 10ms again. You can use HB_ISP_SetAeMinIntertime(uint8_t pipeId, uint32_t stAeMinTime) to fix the minimum time at 10ms.
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_SetAeAttrEx/HB_ISP_GetAeAttrEx
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetAeAttrEx(uint8_t pipeId, const ISP_AE_ATTR_EX_S *pstAeAttrEx);
 
 int HB_ISP_GetAeAttrEx(uint8_t pipeId, ISP_AE_ATTR_EX_S *pstAeAttrEx);
 ```
-【Function Description】
+Function Description
 
 Set ae attributes
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description         | Input/Output |
 |----------------|---------------------|--------------|
 | pipeId         | Pipeline index      | Input        |
 | pstAeAttrEx    | Pointer to ae parameters | Output        |
 
-【Returns】
+Returns
 
 | Returns | Description |
 |--------|------|
 | 0      | Successful |
 | Non-zero    | Failed |
 
-【Notes】
+Notes
 
-【Reference code】None
+Reference codeNone
 
 ### HB_ISP_GetAeWeight/HB_ISP_SetAeWeight
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_GetAeWeight(uint8_t pipeId, AE_ZONES_WEIGHT_S *pstAeWeightLUT);
 
 int HB_ISP_SetAeWeight(uint8_t pipeId, AE_ZONES_WEIGHT_S *pstAeWeightLUT);
 ```
-【Description】
+Description
 
 Set/Get ae weight
 
-【Parameter description】
+Parameter description
 
 | Parameter name       | Description                  | Input/Output |
 |----------------|-----------------------|-----------|
 | pipeId         | Pipeline index        | Input      |
 | pstAeWeightLUT | Pointer to ae weight table | Output      |
 
-【Returns】
+Returns
 
 | Returns | Description |
 |--------|------|
 | 0      | Successful |
 | Non-zero    | Failed |
 
-【Notes】
+Notes
 
-【Reference code】None
+Reference codeNone
 
 ### HB_ISP_GetAeMinIntertime/HB_ISP_SetAeMinIntertime
 
-【Function declaration】
+Function declaration
 ```c
 int HB_ISP_GetAeMinIntertime(uint8_t pipeId, uint32_t *pstAeMinTime);
 
 int HB_ISP_SetAeMinIntertime(uint8_t pipeId, uint32_t stAeMinTime);
 ```
-【Description】Setting/Getting ae minimum intertime
+DescriptionSetting/Getting ae minimum intertime
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description          | Input/Output |
 | -------------- | -------------------- | ------------ |
 | pipeId         | Pipeline index number | Input        |
 | pstAeMinTime   | Pointer to minimum intertime, in lines | Output       |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | ------------ | ----------- |
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
 This interface is valid for both auto exposure and manual exposure functions.
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_GetAwbTemperatureInfo
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_GetAwbTemperatureInfo(uint8_t pipeId, uint32_t *temper);
 ```
-【Function Description】
+Function Description
 
 Get awb temperature information.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description     | Input/Output |
 | -------------- | --------------- | ------------ |
 | pipeId         | Pipeline index number | Input        |
 | temper         | Pointer to temperature | Output       |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | ------------ | ----------- |
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_SetAwbTolerance
 
-【Function Declaration】
+Function Declaration
 
 ```c
 int HB_ISP_SetAwbTolerance(uint8_t pipeId, uint8_t Tolerance);
 ```
 
-【Function Description】
+Function Description
 
 Set awb tolerance information.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                  | Input/Output |
 | -------------- | ---------------------------- | ------------ |
 | pipeId         | Pipeline index number        | Input        |
 | Tolerance      | awb tolerance value, [1, 50] | Input        |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | ------------ | ----------- |
 | 0            | Success     |
 | Non-zero     | Failure     |
 
-【Notes】
+Notes
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_GetAwbModeInfo/HB_SetAwbModeInfo
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_GetAwbModeInfo(uint8_t pipeId, ISP_AWB_MODE_E *ptrAwbMode);
 
 int HB_SetAwbModeInfo(uint8_t pipeId, ISP_AWB_MODE_E AwbMode);
 ```
 
-【Function Description】
+Function Description
 
 Set/Get awb mode information.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                     | Input/Output |
 | -------------- | ------------------------------- | ------------ |
 | pipeId         | Pipeline index number           | Input        |
-| ptrAwbMode     | Pointer to the awb mode         | Input        |【Return Value】
+| ptrAwbMode     | Pointer to the awb mode         | Input        | Return Value
 
 | Return Value | Description |
 |--------|------|
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Note】
+Note
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_GetAwbGainByTemp
 
-【Function Declaration】
+Function Declaration
 
 ```c
 int HB_GetAwbGainByTemp(uint8_t pipeId, uint16_t ColorTemp, int16_t Shift, ISP_AWB_ATTR_S *pstAwbAttr);
 ```
 
-【Description】
+Description
 
 Get rgain and bgain calculated by the plank curve formula of awb color temperature.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name   | Description                                           | Input/Output |
 | ---------- | ---------------------------------------------- | --------- |
@@ -3013,48 +3013,48 @@ Get rgain and bgain calculated by the plank curve formula of awb color temperatu
 | Shift      | The position and distance between the white point and the Planckian curve, range [-64~64] | Input      |
 | pstAwbAttr | Pointer to AwbAttr                                | Input      |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | ------ | ---- |
 | 0      | Success |
 | Non-zero    | Failure |
 
-【Note】
+Note
 
-【Reference Code】None
+Reference CodeNone
 
 ### HB_ISP_SetAfSpeed
 
-【Function Declaration】
+Function Declaration
 ```c
 int HB_ISP_SetAfSpeed(uint8_t pipeId, uint32_t speed);
 ```
-【Description】Set AF focus steps
+DescriptionSet AF focus steps
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description | Input/Output |
 |------------|-------------------|-----------|
 | pipeId | Pipeline index number | Input |
 | speed | AF focus steps | Input |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |--------|------|
 | 0 | Success |
 | non-zero | Failure |
 
-【Notes】
+Notes
 
-【Reference Code】None
+Reference CodeNone
 
 ## Data Structure
 
 ### HB_ISP_FW_STATE_E
 
-【Structure Definition】
+Structure Definition
 ```c
 typedef enum HB_ISP_FW_STATE_E {
 
@@ -3065,9 +3065,9 @@ typedef enum HB_ISP_FW_STATE_E {
 } ISP_FW_STATE_E;
 ```
 
-【Function Description】
+Function Description
 
-【Member Explanation】
+Member Explanation
 
 | Member | Meaning |
 |--------|---------|
@@ -3076,7 +3076,7 @@ typedef enum HB_ISP_FW_STATE_E {
 
 ### HB_ISP_MODULE_CTRL_U
 
-【Structure Definition】
+Structure Definition
 ```c
 typedef union HB_ISP_MODULE_CTRL_U {
 
@@ -3132,7 +3132,7 @@ uint64_t u64Value;
 
 ```
 
-【Structure Definition】
+Structure Definition
 
 ```c
 typedef union HB_ISP_MODULE_CTRL_U {
@@ -3213,11 +3213,11 @@ typedef union HB_ISP_MODULE_CTRL_U {
 } ISP_MODULE_CTRL_U;
 ```
 
-【Description】This structure defines the bit fields for controlling the bypass of different modules.
+DescriptionThis structure defines the bit fields for controlling the bypass of different modules.
 
 ### HB_ISP_I2C_DATA_S
 
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_ISP_I2C_DATA_S {
 
@@ -3240,9 +3240,9 @@ typedef struct HB_ISP_I2C_DATA_S {
 } ISP_I2C_DATA_S;
 ```
 
-【Function Description】
+Function Description
 
-【Member Description】
+Member Description
 
 | Member          | Meaning                       |
 |-----------------|-------------------------------|
@@ -3257,7 +3257,7 @@ typedef struct HB_ISP_I2C_DATA_S {
 
 ### HB_ISP_AE_FUNC_S
 
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_ISP_AE_FUNC_S {
 
@@ -3269,11 +3269,11 @@ typedef struct HB_ISP_AE_FUNC_S {
 
 } ISP_AE_FUNC_S;
 ```
-【Function Description】
+Function Description
 
 Define the callback function structure of AE algorithm library.
 
-【Member Description】
+Member Description
 
 | Member      | Meaning                                 |
 |-------------|-----------------------------------------|
@@ -3617,7 +3617,7 @@ This defines the structure for AWB zone statistical information.
 
 ### awb_input_data_t
 
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct _awb_input_data_ {
 
@@ -3627,11 +3627,11 @@ typedef struct _awb_input_data_ {
 
 } awb_input_data_t;
 ```
-【Function Description】
+Function Description
 
 Defines the structure of input parameters for AWB algorithm.
 
-【Member Description】
+Member Description
 
 | Member          | Meaning                                                     |
 |-----------------|-------------------------------------------------------------|
@@ -3640,7 +3640,7 @@ Defines the structure of input parameters for AWB algorithm.
 
 ### awb_acamera_input_t
 
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct _awb_acamera_input_ {
 
@@ -3650,7 +3650,7 @@ typedef struct _awb_acamera_input_ {
 
 } awb_acamera_input_t;
 ```
-【Function Description】Parameters passed to AWB algorithm.
+Function DescriptionParameters passed to AWB algorithm.
 
 Including the following structures:
 
@@ -4183,7 +4183,7 @@ typedef struct HB_ISP_CTRL_PARAMA_ATTR_S {
 
 ### HB_ISP_SHARPEN_ATTR_S
 
-【Structure Definition】
+Structure Definition
 
 ```c
 typedef struct HB_ISP_SHARPEN_AUTO_ATTR_S {
@@ -4220,9 +4220,9 @@ typedef struct HB_ISP_SHARPEN_ATTR_S {
     ISP_OP_TYPE_E enOpType;
 } ISP_SHARPEN_ATTR_S;
 ```
-【Function Description】
+Function Description
 
-【Member Descriptions】
+Member Descriptions
 
 | Member                | Meaning                                                                                   |
 |---------------------|---------------------------------------------------------------------------------------------|

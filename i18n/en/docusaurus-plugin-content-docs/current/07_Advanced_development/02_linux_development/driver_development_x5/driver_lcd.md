@@ -246,7 +246,7 @@ Add the following properties to the `mipi_dsi0` node:
 
 ```
 
-添加dsi_backlight节点：
+Add the dsi_backlight node:
 ```
 &dsi_backlight {
     status = "okay";

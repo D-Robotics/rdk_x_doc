@@ -13,7 +13,7 @@ The decoding specifications supported by X3 are as follows:
 
 | Hardware Decoding Module | Maximum Number of Channels | Supported Protocols                       | Resolution Support                                           | Maximum Performance                                          |
 | ----------------------- | ------------------------- | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| VPU<br/>JPU              | 32                        | **VPU:**<br/>H.264/H.265<br/>**JPU:**<br/>JPEG/MJPEG | **VPU:**<br/>- H264:<br/>max 8192×8192<br/>min：32×32<br/>- H265:<br/>max 8192×8192<br/>Min: 8×8<br/>**JPU:**<br/>- JPEG/MJPEG:<br/>max 32768×32768<br/>min:16×16 | **H264/H265:**<br/>3840×2160 @60fps<br/>**JPEG/MJPEG:**<br/>YUV4:2:0 290M pixel/sec<br/> |
+| VPU<br/>JPU              | 32                        | **VPU:**<br/>H.264/H.265<br/>**JPU:**<br/>JPEG/MJPEG | **VPU:**<br/>- H264:<br/>max 8192×8192<br/>min: 32×32<br/>- H265:<br/>max 8192×8192<br/>Min: 8×8<br/>**JPU:**<br/>- JPEG/MJPEG:<br/>max 32768×32768<br/>min:16×16 | **H264/H265:**<br/>3840×2160 @60fps<br/>**JPEG/MJPEG:**<br/>YUV4:2:0 290M pixel/sec<br/> |
 
 ### Bitstream Transmission Mode
 
@@ -98,44 +98,44 @@ int32_t HB_VDEC_CreateChn(VDEC_CHN VdChn, const VDEC_CHN_ATTR_S *pstAttr)
 |  VdChn   | Channel number for encoding.<br/>Valid range: [0, VDEC_MAX_CHN_NUM). |   Input    |
 | pstAttr  |                 Pointer to the channel attribute of the decoder.                 |   Input    |
 
-【Return Value】
+Return Value
 
 | Return Value |              Description |
 | :----: | :-----------------|
 |   0    |               Success |
 |  Non-zero   | Failure, returns error code. |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 > Reference code for HB_VDEC_ResetChn.
 
 ### HB_VDEC_DestroyChn
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VDEC_DestroyChn(VDEC_CHN VdChn);
 ```
-【Function Description】
+Function Description
 > Destroy video decoding channel.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |                        Description                        | Input/Output |
 | :------: | :------------------------------------------------: | :-------: |
 |  VdChn   | Channel number for encoding.<br/>Valid range: [0, VDEC_MAX_CHN_NUM). |   Input    |
 
-【Return Value】
+Return Value
 
 | Return Value |              Description |
 | :----: | :-----------------|
 |   0    |               Success |
 |  Non-zero   | Failure, returns error code. |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 > Reference code for HB_VDEC_ResetChn.
 
 
@@ -342,31 +342,31 @@ int32_t HB_VDEC_ReleaseFrame(VDEC_CHN VdChn, const VIDEO_FRAME_S *pstFrameInfo);
 
 
 ### HB_VDEC_GetFd
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VDEC_GetFd(VDEC_CHN VdChn, int32_t *fd);
 ```
-【Function Description】
+Function Description
 > Get the device file handle corresponding to the decoding channel.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |                        Description                        | Input/Output |
 | :------: | :------------------------------------------------: | :-------: |
 |  VdChn   | Encoding channel number.<br/>Range: [0, VDEC_MAX_CHN_NUM) |   Input    |
 |    fd    |               Returns the file handle of the encoding channel.               |   Output    |
 
-【Return Value】
+Return Value
 
 | Return Value |               Description |
 | :----: | :-----------------|
 |   0    |               Success |
 |  Non-zero   | Failure, returns error code. |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 ```C
     VDEC_CHN VDEC_Chn = 0;
     int32_t fd = 0;
@@ -374,7 +374,7 @@ int32_t HB_VDEC_GetFd(VDEC_CHN VdChn, int32_t *fd);
     int32_t Width = 1920;
     int32_t Height = 1080;
     VDEC_CHN_ATTR_S m_VdecChnAttr ;
-    memset(&m_VdecChnAttr , 0, sizeof(VDEC_CHN_ATTR_S));
+    memset(&m_VdecChnAttr, 0, sizeof(VDEC_CHN_ATTR_S));
     m_VdecChnAttr.enType = PT_H264;
     m_VdecChnAttr.enMode = VIDEO_MODE_FRAME;
     m_VdecChnAttr.enPixelFormat = HB_PIXEL_FORMAT_NV12;
@@ -404,31 +404,31 @@ int32_t HB_VDEC_GetFd(VDEC_CHN VdChn, int32_t *fd);
 ```
 
 ### HB_VDEC_CloseFd
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VDEC_CloseFd(VDEC_CHN VdChn, int32_t fd);
 ```
-【Function Description】
+Function Description
 > Close the device file handle corresponding to the decoding channel.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |                      Description                      | Input/Output |
 | :------------: | :---------------------------------------------------: | :----------: |
 |     VdChn      |         Encoding channel number.<br/>Range: [0, VDEC_MAX_CHN_NUM).        |    Input     |
 |       fd       |                 Set the encoding channel file handle.                |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value |                         Description                          |
 | :----------: | :----------------------------------------------------------: |
 |       0      |                           Success                            |
 |     Non-zero    |      Failed, returns error code.     |
 
-【Precautions】
+Precautions
 > None
 
-【Reference Code】
+Reference Code
 > Reference code for HB_VDEC_GetFd
 
 
@@ -581,55 +581,55 @@ int32_t HB_VDEC_GetUserData(VDEC_CHN VdChn, VDEC_USERDATA_S *pstUserData, int32_
 
 
 ### HB_VDEC_ReleaseUserData
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VDEC_ReleaseUserData(VDEC_CHN VdChn, VDEC_USERDATA_S *pstUserData);
 ```
-【Function Description】
+Function Description
 > Release user data for decoding channel.
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name |                  Description                 | Input/Output |
 | :-------------: | :-----------------------------------------: | :----------: |
 |     VdChn       | Encoding channel ID.<br/>Range: [0, VDEC_MAX_CHN_NUM). |    Input     |
 |  pstUserData    |          Pointer to user data             |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value |          Description         |
 | :----------: | :---------------------------: |
 |      0       |             Success             |
 |    Non-zero   | Failure, returning error code |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】Please refer to the code of HB_VDEC_GetFd.
+Reference CodePlease refer to the code of HB_VDEC_GetFd.
 
 ## Data Structures
 ### VIDEO_MODE_E
-【Description】
+Description
 > Defines the method of sending video stream.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef enum HB_VIDEO_MODE_E {
     VIDEO_MODE_FRAME = 1,
     VIDEO_MODE_BUTT
 } VIDEO_MODE_E;
 ```
-【Member Description】
+Member Description
 
 |       Member      |            Meaning             |
 | :---------------: | :----------------------------: |
 | VIDEO_MODE_FRAME  | Send the video stream by frame. |
 
 ### VIDEO_OUTPUT_ORDER_E
-【Description】
+Description
 > Defines the enumeration of video decoding output order.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef enum HB_VIDEO_OUTPUT_ORDER_E {
     VIDEO_OUTPUT_ORDER_DISP = 0,
@@ -637,7 +637,7 @@ typedef enum HB_VIDEO_OUTPUT_ORDER_E {
     VIDEO_OUTPUT_ORDER_BUTT
 } VIDEO_OUTPUT_ORDER_E;
 ```
-【Member Description】
+Member Description
 
 |      Member     |   Meaning   |
 | :-------------: | :---------: |
@@ -645,10 +645,10 @@ typedef enum HB_VIDEO_OUTPUT_ORDER_E {
 | VIDEO_OUTPUT_ORDER_DEC  | Decoding order output. |
 
 ### VIDEO_DEC_MODE_E
-【Description】
+Description
 > Defines the enumeration of video decoding modes.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef enum HB_VIDEO_DEC_MODE_E {
     VIDEO_DEC_MODE_NORMAL = 0,
@@ -760,7 +760,7 @@ typedef struct HB_VDEC_ATTR_JPEG_S {
 ### VDEC_CHN_ATTR_S
 [Description]> Definition of decoding channel attributes.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef struct HB_VDEC_CHN_ATTR_S {
     PAYLOAD_TYPE_E enType;
@@ -768,7 +768,7 @@ typedef struct HB_VDEC_CHN_ATTR_S {
     PIXEL_FORMAT_E enPixelFormat;
     uint32_t u32StreamBufSize;
     uint32_t u32StreamBufCnt;
-    HB_BOOL bExternalBitStreamBuf；
+    HB_BOOL bExternalBitStreamBuf;
     uint32_t u32FrameBufCnt;
     uint32_t vlc_buf_size;
     union {
@@ -779,7 +779,7 @@ typedef struct HB_VDEC_CHN_ATTR_S {
     };
 } VDEC_CHN_ATTR_S;
 ```
-【Member Description】
+Member Description
 
 |          Member         |            Meaning             |
 | :---------------------: | :----------------------------: |
@@ -794,10 +794,10 @@ typedef struct HB_VDEC_CHN_ATTR_S {
 | stAttrH264/stAttrH265<br/>stAttrMjpeg/stAttrJpeg |   Encoder attributes for different protocols    |
 
 ### HB_VDEC_USERDATA_S
-【Description】
+Description
 > Definition of decoding user data structure.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef struct HB_VDEC_USERDATA_S {
     HB_BOOL  bValid;
@@ -806,7 +806,7 @@ typedef struct HB_VDEC_USERDATA_S {
     uint8_t*   pu8Addr;
 } VDEC_USERDATA_S;
 ```
-【Member Description】|   Member   |        Meaning         |
+Member Description|   Member   |        Meaning         |
 | :--------: | :--------------------: |
 |  bValid    |     Enable/Disable     |
 |  u32Len    |    Length of Data      |
@@ -814,10 +814,10 @@ typedef struct HB_VDEC_USERDATA_S {
 |  pu8Addr   |  Virtual Address of Data |
 
 ### HB_VDEC_CHN_STATUS_S
-【Description】
+Description
 > Define the structure of the decoding channel status.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef struct HB_VDEC_CHN_STATUS_S {
 	uint32_t cur_input_buf_cnt;
@@ -832,7 +832,7 @@ typedef struct HB_VDEC_CHN_STATUS_S {
 	int32_t channel_port_id;
 } VDEC_CHN_STATUS_S;
 ```
-【Member Description】
+Member Description
 
 |       Member       |          Meaning           |
 | :----------------: | :------------------------: |

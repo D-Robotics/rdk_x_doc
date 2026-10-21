@@ -221,7 +221,7 @@ mount -t debugfs none /sys/kernel/debug
 ```
 
 Once `debugfs` is successfully mounted, the user can view Pinctrl information under the `debugfs` directory in user space. 
-For example, for the LSIO subsystem, the debugfs node path is：`/sys/kernel/debug/pinctrl/34180000.lsio_iomuxc/`
+For example, for the LSIO subsystem, the debugfs node path is: `/sys/kernel/debug/pinctrl/34180000.lsio_iomuxc/`
 
 The nodes under this directory can view the Pinctrl information of the lsio domain pins (the following command output is for reference only; specific nodes are subject to the Linux kernel code):
 ```shell

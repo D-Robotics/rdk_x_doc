@@ -80,7 +80,7 @@ Additionally, an RTC that is not being charged must not be used for power supply
 
 <DocScope versions=">=3.5.0" products="RDK X5">
 
-None。
+None.
 
 </DocScope>
 <DocScope versions=">=3.5.0" products="RDK X5 Module">
@@ -386,7 +386,7 @@ The RDK X5 provides a CAN FD interface for CAN and CAN FD communication. Refer t
 
 The RDK X5 Module development board provides a CAN FD interface (interface No. 15) and a CAN termination resistor switch (interface No. 14). 
 For high-speed communication, both termination resistors should be enabled to prevent signal reflections and improve noise immunity. 
-This setup supports both CAN and CAN FD communication. For detailed information, please refer to the relevant documentation. [CAN使用](../../07_Advanced_development/01_hardware_development/rdk_x5/can.md)
+This setup supports both CAN and CAN FD communication. For detailed information, please refer to the relevant documentation. [CAN usage](../../07_Advanced_development/01_hardware_development/rdk_x5/can.md)
 
 </DocScope>
 

@@ -21,51 +21,51 @@ The `VIO` API provides the following interfaces:
 
 ## sp_init_vio_module  
 
-**【Function prototype】**  
+** Function prototype**  
 
 `void *sp_init_vio_module()`
 
-**【Description】**  
+** Description**  
 
 Initialize the `VIO` object and create the operation handle. This must be called before calling other interfaces.
 
-**【Parameters】**
+** Parameters**
 
 None
 
-**【Return type】**  
+** Return type**  
 
 If successful, returns a pointer to the `VIO` object. If failed, returns `NULL`.
 
 ## sp_release_vio_module  
 
-**【Function prototype】**  
+** Function prototype**  
 
 `void sp_release_vio_module(void *obj)`
 
-**【Description】**  
+** Description**  
 
-Destroy the `VIO` object.**【Parameters】**
+Destroy the `VIO` object.** Parameters**
 
 - `obj`: Pointer to the `VIO` object obtained when calling the initialization interface.
 
-**【Return Type】**
+** Return Type**
 
 Void
 
 ## sp_open_camera  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `int32_t sp_open_camera(void *obj, const int32_t pipe_id, const int32_t video_index, int32_t chn_num, int32_t *width, int32_t *height)`
 
-**【Description】**  
+** Description**  
 
 Initialize the MIPI camera connected to RDK X3.  
 Set the output resolution, supporting up to 5 sets of resolutions, where only 1 set can enlarge and 4 sets can shrink.  
 The maximum enlargement is 1.5 times the original image, and the minimum shrinkage is 1/8 of the original image.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Pointer to the initialized `VIO` object.
 - `pipe_id`: Supports multiple sets of input data, it is recommended to fill in 0.
@@ -74,17 +74,17 @@ The maximum enlargement is 1.5 times the original image, and the minimum shrinka
 - `width`: Array address for configuring the output width.
 - `height`: Array address for configuring the output height.
 
-**【Return Type】**
+** Return Type**
 
 Returns 0 if successful, -1 if failed.
 
 ## sp_open_camera_v2  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `int32_t sp_open_camera_v2(void *obj, const int32_t pipe_id, const int32_t video_index, int32_t chn_num, sp_sensors_parameters *parameters, int32_t *width, int32_t *height)`
 
-**【Description】**  
+** Description**  
 
 Initialize the MIPI camera connected to RDK X3.  
 Support specifying the resolution size of the original RAW output of the camera by setting `sp_sensors_parameters`.  
@@ -107,7 +107,7 @@ Switching from `1080P` resolution to other resolutions for `IMX477` requires man
 
 :::
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Pointer to the initialized `VIO` object
 - `pipe_id`: Supports multiple sets of input data, recommended to fill in 0
@@ -131,21 +131,21 @@ The `X3` chip has alignment requirements for the width of the `VPS` output. If t
 
 :::
 
-**【Return Type】** 
+** Return Type** 
 
 Returns 0 if successful, -1 if failed
 
 ## sp_open_vps  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `int32_t sp_open_vps(void *obj, const int32_t pipe_id, int32_t chn_num, int32_t proc_mode, int32_t src_width, int32_t src_height, int32_t *dst_width, int32_t *dst_height, int32_t *crop_x, int32_t *crop_y, int32_t *crop_width, int32_t *crop_height, int32_t *rotate)`
 
-**【Function Description】**  
+** Function Description**  
 
 Opens an image processing module, supports resizing, zooming, rotating, and cropping tasks for the input image.
 
-**【Parameters】** 
+** Parameters** 
 
 - `obj`: Initialized `VIO` object pointer
 - `pipe_id`: Differentiates multiple openings through `pipe_id`.
@@ -180,37 +180,37 @@ The `X5` chip's VPS channel characteristics are as follows:
 - 1 upscale channel  
   - Maximum resolution supported: 4K, with a maximum scaling factor of 4X, supporting scaling factors from 0 to 4
 
-【Return Type】  
+Return Type  
 Return 0 if successful, -1 if failed
 
 ## sp_vio_close  
 
-【Function Prototype】  
+Function Prototype  
 
 `int32_t sp_vio_close(void *obj)`
 
-【Function Description】  
+Function Description  
 
 Determines whether to close the camera or the VPS module based on the input `obj`.
 
-【Parameters】
+Parameters
 
 - `obj`: Initialized `VIO` object pointer  
 
-【Return Type】  
+Return Type  
 Return 0 if successful, -1 if failed
 
 ## sp_vio_get_frame  
 
-【Function Prototype】
+Function Prototype
 
 `int32_t sp_vio_get_frame(void *obj, char *frame_buffer, int32_t width, int32_t height, const int32_t timeout)`
 
-**【Description】**  
+** Description**  
 
 Get the image frame data with the specified resolution (the resolution needs to be passed in when opening the module, otherwise the retrieval will fail). The returned data format is YUV image in NV12 format.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Initialized VIO object pointer
 - `frame_buffer`: Pre-allocated buffer pointer for saving the retrieved image. The size of the pre-allocated memory can be calculated using the formula `height * width * 3 / 2` or using the provided macro definition `FRAME_BUFFER_SIZE(w, h)`.
@@ -218,21 +218,21 @@ Get the image frame data with the specified resolution (the resolution needs to 
 - `height`: Height of the image to be saved in `frame_buffer`. It must be the output height configured in `sp_open_camera` or `sp_open_vps`.
 - `timeout`: Timeout for retrieving the image, in milliseconds. Generally set to 2000.
 
-**【Return Type】**  
+** Return Type**  
 
 Returns 0 on success, -1 on failure.
 
 ## sp_vio_get_raw  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `int32_t sp_vio_get_raw(void *obj, char *frame_buffer, int32_t width, int32_t height, const int32_t timeout)`
 
-**【Description】**  
+** Description**  
 
 Get the raw image data from the camera.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Initialized VIO object pointer.
 - `frame_buffer`: Pre-allocated buffer pointer for saving the retrieved raw image. The size of the pre-allocated memory can be calculated using the formula `(height * width * bit depth)/8`.
@@ -240,21 +240,21 @@ Get the raw image data from the camera.
 - `height`: Null for getting raw image.
 - `timeout`: Timeout for retrieving the image, in milliseconds. Generally set to 2000.
 
-**【Return Type】**  
+** Return Type**  
 
 Returns 0 on success, -1 on failure.
 
 ## sp_vio_get_yuv  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `int32_t sp_vio_get_yuv(void *obj, char *frame_buffer, int32_t width, int32_t height, const int32_t timeout)`
 
-**【Description】**  
+** Description**  
 
 Get the YUV data from the ISP module of the camera.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Initialized pointer to the `VIO` object
 - `frame_buffer`: Pointer to the pre-allocated buffer used to save the captured image. Currently, the captured images are in `NV12` format, so the buffer size can be calculated using the formula `height * width * 3 / 2`, or by utilizing the provided macro definition `FRAME_BUFFER_SIZE(w, h)`.
@@ -262,26 +262,26 @@ Get the YUV data from the ISP module of the camera.
 - `height`: Set to `NULL` when fetching ISP's YUV data
 - `timeout`: Timeout period for capturing the image, in milliseconds. Generally set to `2000`.
 
-**【Return Type】**  
+** Return Type**  
 
 Returns 0 on success, -1 on failure.
 
 ## sp_vio_set_frame  
 
-**【Function Prototype】**  
+** Function Prototype**  
 
 `int32_t sp_vio_set_frame(void *obj, void *frame_buffer, int32_t size)`
 
-**【Function Description】**  
+** Function Description**  
 
 When using the functionality of the `vps` module, the raw data needs to be passed in through this interface. The data in `frame_buffer` must be in the `NV12` format and have the same resolution as the original frame resolution when calling the `sp_open_vps` interface.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Initialized pointer to the `VIO` object
 - `image_buffer`: Image frame data to be processed. It must be in the `NV12` format and have the same resolution as the original frame resolution when calling the `sp_open_vps` interface.
 - `size`: Size of the frame
 
-**【Return Type】**  
+** Return Type**  
 
 Returns 0 on success, -1 on failure.

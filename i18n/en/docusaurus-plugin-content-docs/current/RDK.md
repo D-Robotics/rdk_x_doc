@@ -134,7 +134,7 @@ After a system update, execute the rdk-miniboot-update command to burn the lates
 - **‌Upgrade Verification Mechanism‌‌** 
 Starting from hobot-miniboot_3.0.3, the rdk-miniboot-update tool automatically displays both the current NAND firmware version and the target upgrade version, reducing upgrade risks and ensuring operational safety.
 
-####  Version：3.4.1
+####  Version: 3.4.1
 
 1. Overview
 This release is a major update for the RDK X5 system. The underlying platform software has been fully aligned and synchronized with the latest X5 SDK 1.1.1. Compared with the previous release (based on X5 SDK 1.0.17), this update primarily addresses boot stability and media pipeline issues, and includes a comprehensive restructuring of the development documentation.
@@ -160,7 +160,7 @@ After in-depth adaptation and system trimming, all core capabilities have been f
 - ROS component fixes: Fixed runtime loading failures caused by incorrect installation paths of ROS component shared objects for MIPI cameras and algorithm modules.
 - hobot_codec optimization: Optimized image codec module configurations by removing invalid parameters and adding new debug-related options.
 
-####  TROS Algorithm Upgrade & Version：3.3.3
+####  TROS Algorithm Upgrade & Version: 3.3.3
 
 - Added driver support for the Yuguang SC132GS stereo camera module.
 - srpi-config enhancements: Added support for automatic pin multiplexing for interfaces, and introduced MIPI display selection.

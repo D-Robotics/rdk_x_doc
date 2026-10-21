@@ -21,16 +21,16 @@ Autonomous Mobile Robot (AMR) is a type of robot that can autonomously navigate 
 |  Name                     | Number      | notes    |
 | -------------------------| ---------| --------|
 | RDK X5                   | 1        | D-robotics     |
-| AMR chassis（Steering wheel）+ Screws and Parts| 1  | YUHESEN     |
+| AMR chassis(Steering wheel)+ Screws and Parts| 1  | YUHESEN     |
 | Single line LiDAR               | 1        | KRUISEE   |
 | TOFcamera                 | 1        | DEPTRUM   |
-| Binocular camera（230ai）        | 1        |  D-robotics  |
-| IMU（BMI088）             | 1        | D-robotics  |
+| Binocular camera(230ai)        | 1        |  D-robotics  |
+| IMU(BMI088)             | 1        | D-robotics  |
 | Network cable(0.3m)        | 1        |    |
 | 12v to 5V4A(MAX 5A)        | 1        |    |
-| TOF camera stand（3D Printing）        | 1        |    |
-| Binocular camera stand（3D Printing）        | 1        |    |
-| Cover board（3D Printing）              | 1        |    |
+| TOF camera stand(3D Printing)        | 1        |    |
+| Binocular camera stand(3D Printing)        | 1        |    |
+| Cover board(3D Printing)              | 1        |    |
 | M2*16 Screws + M2 nuts           | 1        |    |
 
 ### 2.2 Assembly steps explanation
@@ -120,7 +120,7 @@ ping ip of Lidar
 #Start the CAN device, please set it according to the specific CAN device number and baud rate
 ip link set can1 up type can bitrate 500000
 
-#Checking the equipment will result in the following outputs：can1: <NOARP,UP,LOWER_UP> mtu 16 qdisc mq state UP mode DEFAULT group default qlen 10link/can 
+#Checking the equipment will result in the following outputs: can1: <NOARP,UP,LOWER_UP> mtu 16 qdisc mq state UP mode DEFAULT group default qlen 10link/can 
 ip link show can1
 
 #Check if CAN data can be obtained, please set according to the specific CAN device number
@@ -163,7 +163,7 @@ git clone https://github.com/wunuo1/voxel_filter.git
 #Specify location navigation
 git clone https://github.com/wunuo1/pose_setter.git
 
-#双目深度
+#Stereo depth
 git clone https://github.com/D-Robotics/hobot_stereonet.git
 ```
 
@@ -195,7 +195,7 @@ colcon build
 ###### i. Download Docker files(Baidu Netdisk)
 Link: https://pan.baidu.com/s/1oXegKORgWi8Kzf4kdQXL2g?pwd=ur2z 
 
-Extracted code：ur2z
+Extracted code: ur2z
 ###### ii. Create environment
 ```shell
 #Load Docker
@@ -435,7 +435,7 @@ After calibration, check the calibration results (when dJ converges and drops be
 # storage-results-imucam.txt 
 vim storage-results-imucam.txt
 ```
-The external reference results are as follows：
+The external reference results are as follows:
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/06_Application_case/amr/imu_cam_trans.jpg)
 
 #### 3.5.6 Other
@@ -444,7 +444,7 @@ The external reference results are as follows：
 #####    3.  The transformation of bask_link imu (for tofSLAM) can be obtained by multiplying the transformation matrices of tof_cam imu and tof_cam bask_link
 
 ### 3.6 Change configuration file (for tofSLAM)
-Modify the mapping.yaml file in the config folder and pay attention to the parameters with explanations，the output file is obtained from the attachment at the end of the article
+Modify the mapping.yaml file in the config folder and pay attention to the parameters with explanations, the output file is obtained from the attachment at the end of the article
 ```yaml
 YAML: 1.0
 
@@ -468,15 +468,15 @@ mapping:
   extrinsic_est_en: true
   #The change from TOF to IMU can be obtained by referring to the calibration instructions
   tof2imu_extrinsic_T: [ -0.0039799203111821468, -0.027189542185995823831, -0.14001955020902342461]
-  tof2imu_extrinsic_R: [-0.993063627638373553564 ,0.052518963674774226572 ,-0.01498737732389914978, 
-                        -0.033814436045461613632 ,-0.016796566829113524293 ,-0.99928717438014507495, 
-                        -0.00801808196977665167 ,-0.99847864521832871386  ,0.03465425204866725379]
+  tof2imu_extrinsic_R: [-0.993063627638373553564,0.052518963674774226572,-0.01498737732389914978, 
+                        -0.033814436045461613632,-0.016796566829113524293,-0.99928717438014507495, 
+                        -0.00801808196977665167,-0.99847864521832871386 ,0.03465425204866725379]
   
   #The change from bsak_link to IMU can be obtained by referring to the calibration instructions
   robot2imu_extrinsic_T: [0.12588064308116462841, 0.008162559660163853708, 0.20705414746130172184]
   robot2imu_extrinsic_R: [0.052268869631951098023, -0.93852017660344945467, 0.033846560965168889575, 
                           0.93808656435923075909, -0.051737213472478319612, 0.015014368436287678477, 
-                          0.033019704102458273174        , 0.01675474093936925155, 0.99931446977489903968]
+                          0.033019704102458273174       , 0.01675474093936925155, 0.99931446977489903968]
 
 
 delay_time: 0.3
@@ -720,12 +720,12 @@ https://github.com/wunuo1/TofSLAM_ros2
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/06_Application_case/amr/tofslam_framework_en.jpg)
 
 #### 5.1.3 detailed description:
-#####  1. ESKF（Error State Kalman Filter）
+#####  1. ESKF(Error State Kalman Filter)
 The error state Kalman filter is an algorithm for sensor fusion. It is based on the classical Kalman Filter (KF) principle and has been improved to better handle error propagation in nonlinear systems
 
-*state quantity*：p、R、v、bg、ba、g
+*state quantity*: p, R, v, bg, ba, g
 
-*prediction model*：IMU
+*prediction model*: IMU
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/06_Application_case/amr/imu_model.png)
 
 *Observation (update) model 1 *: Chassis wheel speed&chassis IMU pose calculated through EKF - loose coupling (R, p update)
@@ -749,7 +749,7 @@ For each key point:
     3. Calculate the distance between key points and the plane where neighboring points are located, and add ICP optimization for point pairs with distances less than the threshold.
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/06_Application_case/amr/point_icp.jpg)
 
-#####  5. CT_SCP algorithm（CT-ICP: Real-time Elastic LiDAR Odometry with Loop Closure）
+#####  5. CT_SCP algorithm(CT-ICP: Real-time Elastic LiDAR Odometry with Loop Closure)
 ######    1. Front end pose estimation
 The overall framework of the front-end part of the CTICP algorithm uses two poses to describe each frame:
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/06_Application_case/amr/ct_icp_pose.jpg)
@@ -814,7 +814,7 @@ https://github.com/wunuo1/pose_setter.git
 
 ## 6. Annex
 
-Link：https://pan.baidu.com/s/1uHSifO6fOIqhKUgP3yYUzw?pwd=ttfn
-Extracted code：ttfn
+Link: https://pan.baidu.com/s/1uHSifO6fOIqhKUgP3yYUzw?pwd=ttfn
+Extracted code: ttfn
 
 

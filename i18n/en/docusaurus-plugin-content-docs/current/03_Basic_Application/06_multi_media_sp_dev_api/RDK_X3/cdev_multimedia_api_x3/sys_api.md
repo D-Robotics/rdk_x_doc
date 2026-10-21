@@ -50,13 +50,13 @@ Returns 0 on success, and other values on failure.
 
 This interface completes the unbinding of two modules that have already been bound. The unbinding needs to be completed before the module exits.
 
-**【Parameters】**
+** Parameters**
 
 - `src`: Object pointer of the data source module (obtained by calling various module initialization interfaces)
 - `src_type`: Type of the source data module, supports `SP_MTYPE_VIO` and `SP_MTYPE_DECODER`
 - `dst`: Object pointer of the target module (obtained by calling various module initialization interfaces)
 - `dst_type`: Type of the target data module, supports `SP_MTYPE_ENCODER` and `SP_MTYPE_DISPLAY`
 
-**【Return】**  
+** Return**  
 
 Returns 0 on success, returns other values on failure.

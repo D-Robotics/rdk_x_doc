@@ -409,42 +409,42 @@ int32_t HB_VENC_SetChnAttr(VENC_CHN VeChn, const VENC_CHN_ATTR_S *pstChnAttr);
 
 
 ### HB_VENC_GetChnAttr
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_GetChnAttr(VENC_CHN VeChn, VENC_CHN_ATTR_S *pstChnAttr);
 ```
-【Function Description】
+Function Description
 > Get the encoding attributes of the encoding channel.
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name  | Description                                       |  Input/Output  |
 | :--------------: | :------------------------------------------------ | :------------: |
 |      VeChn       | Encoding channel number.<br/>Value range: [0, VENC_MAX_CHN_NUM) |     Input      |
 |   pstChnAttr     | Pointer to encoding channel attributes            |     Input      |
 
-【Return Value】
+Return Value
 
 |  Return Value  |      Description     |
 | :------------: | :------------------: |
 |       0        |        Success       |
 |  Non-zero      |    Failure. Refer to error code.  |
 
-【Notes】
+Notes
 > None
 
-【Reference code】
+Reference code
 > Reference code for HB_VENC_GetStream
 
 ### HB_VENC_GetStream
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_GetStream(VENC_CHN VeChn, VIDEO_STREAM_S *pstStream, int32_t s32MilliSec);
 ```
-【Function Description】
+Function Description
 > Get the encoding stream.
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name   | Description                                                                                     |  Input/Output  |
 | :---------------: | :--------------------------------------------------------------------------------------------- | :------------: |
@@ -452,15 +452,15 @@ int32_t HB_VENC_GetStream(VENC_CHN VeChn, VIDEO_STREAM_S *pstStream, int32_t s32
 |    pstStream      | Pointer to the stream structure                                                                |     Input      |
 |    s32MilliSec    | Timeout for getting the stream.<br/>Value range: [-1, + ∞ )<br/> -1: Block.<br/> 0: Non-block.<br/> Greater than 0: Timeout duration. |     Input      |
 
-【Return Value】| Return Value | Description       |
+Return Value| Return Value | Description       |
 | :----------: | :---------------- |
 |      0       | Success           |
 |    Non-zero  | Failure, see error code. |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 ```C
     VENC_CHN VeChn = 0;
     int32_t s32Ret = 0;
@@ -580,43 +580,43 @@ if (inFile) fclose(inFile);
 ```
 
 ### HB_VENC_ReleaseStream
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_ReleaseStream(VENC_CHN VeChn, VIDEO_STREAM_S *pstStream);
 ```
-【Function Description】
+Function Description
 > Release stream buffer.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter | Description                                        | Input/Output |
 | :-------: | :------------------------------------------------- | :----------: |
 |   VeChn   | Encoding channel number. <br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 | pstStream | Pointer of stream structure                       |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value |            Description |
 | :----------: | :-------------------- |
 |      0       |            Success |
 |   Non-zero   | Fail, see error code |
 
-【Notes】Please translate the following Chinese parts into English, while keeping the original format and content:
+NotesPlease translate the following Chinese parts into English, while keeping the original format and content:
 
 > None
 
-【Reference Code】
+Reference Code
 > HB_VENC_GetStream reference code
 
 ### HB_VENC_SendFrame
-【Function Declaration】
+Function Declaration
 ```C
-int32_t HB_VENC_SendFrame(VENC_CHN VeChn, VIDEO_FRAME_S *pstFrame ,int32_t s32MilliSec);
+int32_t HB_VENC_SendFrame(VENC_CHN VeChn, VIDEO_FRAME_S *pstFrame,int32_t s32MilliSec);
 ```
-【Function Description】
+Function Description
 > Supports sending original images for encoding.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter | Description                                                                                            | Input/Output |
 | :-------: | :---------------------------------------------------------------------------------------------------- | :----------: |
@@ -624,17 +624,17 @@ int32_t HB_VENC_SendFrame(VENC_CHN VeChn, VIDEO_FRAME_S *pstFrame ,int32_t s32Mi
 | pstFrame  | Pointer to the structure of the original image information.                                            |    Input     |
 |s32MilliSec| Timeout for obtaining the bitstream.<br/>Range: [-1, +∞)<br/>-1: Block.<br/> 0: Non-block.<br/> >0: Timeout.|    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value |                Description |
 | :----------: | :------------------------ |
 |      0       |            Success        |
 |   Non-zero   | Failure, see error code.  |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 > HB_VENC_GetStream reference code
 
 
@@ -990,31 +990,31 @@ int32_t HB_VENC_GetH264IntraPred(VENC_CHN VeChn, VENC_H264_INTRA_PRED_S *pstH264
 
 
 ### HB_VENC_SetH264Trans
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_SetH264Trans(VENC_CHN VeChn, const VENC_H264_TRANS_S *pstH264Trans);
 ```
-【Function Description】
+Function Description
 > Sets the transform and quantization configuration for H.264 encoding.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                             | Input/Output |
 | :------------: | :------------------------------------------------------ | :----------: |
 |     VeChn      | Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 | pstH264Trans   | Transform and quantization attributes for the H.264 protocol encoding channel |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description          |
 | :----------: | :------------------- |
 |      0       | Success              |
 |    Non-zero  | Failure, see error codes. |
 
-【Precautions】
+Precautions
 > None
 
-【Sample Code】
+Sample Code
 ```C
     int32_t s32Ret = 0;
     VENC_CHN VeChn = 0;
@@ -1057,59 +1057,59 @@ int32_t HB_VENC_SetH264Trans(VENC_CHN VeChn, const VENC_H264_TRANS_S *pstH264Tra
 ```
 
 ### HB_VENC_GetH264Trans
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_GetH264Trans(VENC_CHN VeChn, VENC_H264_TRANS_S *pstH264Trans);
 ```
-【Function Description】
+Function Description
 > Gets the transform and quantization configuration for H.264 encoding.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                             | Input/Output |
 | :------------: | :------------------------------------------------------ | :----------: |
 |     VeChn      | Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 | pstH264Trans   | Transform and quantization attributes for the H.264 protocol encoding channel |    Output    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description          |
 | :----------: | :------------------- |
 |      0       | Success              |
 |    Non-zero  | Failure, see error codes. |
 
-【Precautions】
+Precautions
 > None
 
-【Sample Code】
+Sample Code
 > Sample code from HB_VENC_SetH264Trans
 
 ### HB_VENC_SetH264Entropy
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_SetH264Entropy(VENC_CHN VeChn, const VENC_H264_ENTROPY_S *pstH264EntropyEnc);
 ```
-【Function Description】
+Function Description
 > Sets the entropy encoding configuration for H.264 encoding.
 
-【Parameter Description】
+Parameter Description
 
 |   Parameter Name    | Description                                             | Input/Output |
 | :-----------------: | :------------------------------------------------------ | :----------: |
 |        VeChn        | Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 | pstH264EntropyEnc   | Entropy encoding mode for the H.264 protocol encoding channel |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description          |
 | :----------: | :------------------- |
 |      0       | Success              |
 |    Non-zero  | Failure, see error codes. |
 
-【Precautions】
+Precautions
 > None
 
-【Sample Code】
+Sample Code
 ```C
     int32_t s32Ret = 0;
     VENC_CHN VeChn = 0;
@@ -1149,59 +1149,59 @@ int32_t HB_VENC_SetH264Entropy(VENC_CHN VeChn, const VENC_H264_ENTROPY_S *pstH26
 ```
 
 ### HB_VENC_GetH264Entropy
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_GetH264Entropy(VENC_CHN VeChn, VENC_H264_ENTROPY_S *pstH264EntropyEnc);
 ```
-【Function Description】
+Function Description
 > Gets the entropy encoding configuration for H.264 encoding.
 
-【Parameter Description】
+Parameter Description
 
 |   Parameter Name    | Description                                             | Input/Output |
 | :-----------------: | :------------------------------------------------------ | :----------: |
 |        VeChn        | Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 | pstH264EntropyEnc   | Entropy encoding mode for the H.264 protocol encoding channel |    Output    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description          |
 | :----------: | :------------------- |
 |      0       | Success              |
 |    Non-zero  | Failure, see error codes. |
 
-【Precautions】
+Precautions
 > None
 
-【Sample Code】
+Sample Code
 > Sample code from HB_VENC_SetH264Entropy
 
 ### HB_VENC_SetH264Dblk
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_SetH264Dblk(VENC_CHN VeChn, const VENC_H264_DBLK_S *pstH264Dblk);
 ```
-【Function Description】
+Function Description
 > Sets the deblocking configuration for H.264 encoding.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                             | Input/Output |
 | :------------: | :------------------------------------------------------ | :----------: |
 |     VeChn      | Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 |  pstH264Dblk   | Deblocking parameters for the H.264 protocol encoding channel |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description          |
 | :----------: | :------------------- |
 |      0       | Success              |
 |    Non-zero  | Failure, see error codes. |
 
-【Precautions】
+Precautions
 > None
 
-【Sample Code】
+Sample Code
 ```C
     int32_t s32Ret = 0;
     VENC_CHN VeChn = 0;
@@ -1243,59 +1243,59 @@ int32_t HB_VENC_SetH264Dblk(VENC_CHN VeChn, const VENC_H264_DBLK_S *pstH264Dblk)
 ```
 
 ### HB_VENC_GetH264Dblk
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_GetH264Dblk(VENC_CHN VeChn, VENC_H264_DBLK_S *pstH264Dblk);
 ```
-【Function Description】
+Function Description
 > Gets the deblocking configuration for H.264 encoding.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                             | Input/Output |
 | :------------: | :------------------------------------------------------ | :----------: |
 |     VeChn      | Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 |  pstH264Dblk   | Deblocking parameters for the H.264 protocol encoding channel |    Output    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description          |
 | :----------: | :------------------- |
 |      0       | Success              |
 |    Non-zero  | Failure, see error codes. |
 
-【Precautions】
+Precautions
 > None
 
-【Sample Code】
+Sample Code
 > Sample code from HB_VENC_GetH264Dblk
 
 ### HB_VENC_SetH264Vui
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_SetH264Vui(VENC_CHN VeChn, const VENC_H264_VUI_S *pstH264Vui);
 ```
-【Function Description】
+Function Description
 > Sets the VUI configuration for H.264 encoding.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                             | Input/Output |
 | :------------: | :------------------------------------------------------ | :----------: |
 |     VeChn      | Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 |   pstH264Vui   | VUI parameters for the H.264 protocol encoding channel |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description          |
 | :----------: | :------------------- |
 |      0       | Success              |
 |    Non-zero  | Failure, see error codes. |
 
-【Precautions】
+Precautions
 > VUI parameters are static and can only be called before HB_VENC_SetChnAttr.
 
-【Sample Code】
+Sample Code
 ```C
     int32_t s32Ret = 0;
     VENC_CHN VeChn = 0;
@@ -1338,31 +1338,31 @@ int32_t HB_VENC_SetH264Vui(VENC_CHN VeChn, const VENC_H264_VUI_S *pstH264Vui);
 ```
 
 ### HB_VENC_GetH264Vui  
-【Function Declaration】  
+Function Declaration  
 ```C
 int32_t HB_VENC_GetH264Vui(VENC_CHN VeChn, VENC_H264_VUI_S *pstH264Vui);
 ```  
-【Function Description】  
+Function Description  
 > Retrieves the VUI configuration for H.264 encoding.  
 
-【Parameter Description】  
+Parameter Description  
 
 | Parameter Name | Description                                             | Input/Output |
 | :------------: | :------------------------------------------------------- | :----------: |
 |     VeChn      | Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 |  pstH264Vui    | VUI parameters for the H.264 protocol encoding channel  |    Output    |
 
-【Return Value】  
+Return Value  
 
 | Return Value | Description               |
 | :----------: | :------------------------- |
 |      0       | Success                   |
 |    Non-zero  | Failure, refer to error codes. |
 
-【Precautions】  
+Precautions  
 > None  
 
-【Reference Code】  
+Reference Code  
 > Refer to the code for `HB_VENC_SetH264Vui`.
 
 ### HB_VENC_SetH265Vui
@@ -2211,31 +2211,31 @@ int32_t HB_VENC_GetIntraRefresh(VENC_CHN VeChn, VENC_INTRA_REFRESH_S *pstIntraRe
 
 
 ### HB_VENC_SetCuPrediction
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_SetCuPrediction(VENC_CHN VeChn, const VENC_CU_PREDICTION_S * pstCuPrediction);
 ```
-【Function Description】
+Function Description
 > Set the tendency of CU mode prediction.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                         | Input/Output |
 | :------------: | :-------------------------------------------------- | :----------: |
 |     VeChn      | Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 | pstCuPrediction   | Parameters for selecting the tendency of CU mode     |    Input    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :---------- |
 |      0       | Success     |
 |    Non-zero  | Failure, see error code. |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 ```
     int32_t s32Ret = 0;
     VENC_CHN VeChn = 0;
@@ -2335,57 +2335,57 @@ int32_t HB_VENC_SetJpegParam(VENC_CHN VeChn, const VENC_JPEG_PARAM_S * pstJpegPa
 
 
 ### HB_VENC_GetJpegParam
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_GetJpegParam(VENC_CHN VeChn, VENC_JPEG_PARAM_S * pstJpegParam);
 ```
-【Description】
-> Get the advanced parameter settings for JPEG protocol encoding channel.【Parameter Description】
+Description
+> Get the advanced parameter settings for JPEG protocol encoding channel. Parameter Description
 
 |   Parameter Name   | Description                                             | Input/Output |
 | :----------------: | :------------------------------------------------------ | :----------: |
 |      VeChn         | Channel number of the encoding.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 |   pstJpegParam     | Pointer to the encoding channel attributes                 |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :--------- |
 |      0       | Success     |
 |   Non-zero   | Failure, see error code |
 
-【Note】
+Note
 > None
 
-【Reference Code】
+Reference Code
 > Reference code for HB_VENC_SetJpegParam
 
 ### HB_VENC_SetMjpegParam
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_SetJpegParam(VENC_CHN VeChn, const VENC_MJPEG_PARAM_S * pstMjpegParam);
 ```
-【Description】
+Description
 > Set advanced parameters of MJPEG protocol encoding channel.
 
-【Parameter Description】
+Parameter Description
 
 |   Parameter Name    | Description                                             | Input/Output |
 | :-----------------: | :------------------------------------------------------ | :----------: |
 |       VeChn         | Channel number of the encoding.<br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 |   pstMjpegParam     | Pointer to the encoding channel attributes                 |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :--------- |
 |      0       | Success     |
 |   Non-zero   | Failure, see error code |
 
-【Note】
+Note
 > None
 
-【Reference Code】
+Reference Code
 ```C
     int32_t s32Ret = 0;
     VENC_CHN VeChn0 = 0;
@@ -2442,31 +2442,31 @@ int32_t HB_VENC_SetJpegParam(VENC_CHN VeChn, const VENC_MJPEG_PARAM_S * pstMjpeg
 ```
 
 ### HB_VENC_GetMjpegParam
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_GetMjpegParam(VENC_CHN VeChn, VENC_MJPEG_PARAM_S *pstMjpegParam);
 ```
-【Function Description】
+Function Description
 > Get advanced parameter settings of MJPEG protocol encoding channel.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                               | Input/Output |
 | :------------: | :-------------------------------------------------------- | :-----------: |
 |     VeChn      | Encoding channel number. <br/>Range: [0, VENC_MAX_CHN_NUM) |     Input     |
 | pstMjpegParam  | Pointer to the attributes of encoding channel             |     Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description     |
 | :----------: | :-------------- |
 |      0       | Success         |
 |     Non-0     | Failed, see error code |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 > Reference code of HB_VENC_SetMjpegParam
 
 
@@ -2624,122 +2624,122 @@ int32_t HB_VENC_InserUserData(VENC_CHN VeChn, uint8_t *pu8Data,
 
 
 ### HB_VENC_SetChnParam
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_SetChnParam(VENC_CHN VeChn, const VENC_CHN_PARAM_S *pstChnParam)
 ```
-【Function Description】
+Function Description
 > Set frame rate control parameters for the encoding channel.
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name  | Description                                                | Input/Output |
 | :--------------: | :-------------------------------------------------------- | :----------: |
 |      VeChn       | Encoding channel number.<br/>Value Range: [0, VENC_MAX_CHN_NUM) |     Input    |
 |   pstChnParam    | Frame rate control parameters                             |     Input    |
 
-【Return Value】
+Return Value
 
 | Return Value |       Description      |
 | :----------: | :--------------------- |
 |      0       |        Success         |
-|     Non-0    | Failure, see error code. |【Notice】
+|     Non-0    | Failure, see error code. | Notice
 >  N/A
 
-【Reference Code】
+Reference Code
 > N/A
 
 ### HB_VENC_GetChnParam
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_GetChnParam(VENC_CHN VeChn, VENC_CHN_PARAM_S *pstChnParam)
 ```
-【Function Description】
+Function Description
 > Get frame rate control parameters of the encoding channel.
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name  |                   Description                        |   Input/Output   |
 | :--------------: | :-------------------------------------------------- | :--------------: |
 |      VeChn       |        Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM)     |       Input       |
 |   pstChnParam    |        Frame rate control parameters        |      Output       |
 
-【Return Value】
+Return Value
 
 | Return Value |                   Description                    |
 | :----------: | :---------------------------------------------- |
 |      0       |                     Success                      |
 |   Non-zero   |              Failure, see error code.              |
 
-【Notice】
+Notice
 >  N/A
 
-【Reference Code】
+Reference Code
 > N/A
 
 ### HB_VENC_SetModParam
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_SetModParam(VENC_CHN VeChn, const VENC_PARAM_MOD_S *pstModParam)
 ```
-【Function Description】
+Function Description
 > Set whether VPS, SPS, PPS, and IDR of the encoding channel are output in one frame.
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name  |                   Description                        |   Input/Output   |
 | :--------------: | :-------------------------------------------------- | :--------------: |
 |      VeChn       |        Encoding channel number.<br/>Range: [0, VENC_MAX_CHN_NUM)     |       Input       |
-|   pstModParam    |        Pointer to ModParam                |       Input       |【Return Value】
+|   pstModParam    |        Pointer to ModParam                |       Input       | Return Value
 
 | Return Value | Description |
 | :----------: | :---------- |
 |     0        | Success     |
 |   Non-zero   | Failure, see error code. |
 
-【Note】
+Note
 
 > None
 
-【Reference Code】
+Reference Code
 
 ### HB_VENC_GetModParam
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_GetModParam(VENC_CHN VeChn, VENC_PARAM_MOD_S *pstModParam)
 ```
-【Function Description】
+Function Description
 > Get whether the encoding channel VPS, SPS, PPS, IDR output in one frame.
 
-【Parameter Description】
+Parameter Description
 
 |   Parameter Name   | Description                                    | Input/Output |
 | :---------------:  | :--------------------------------------------  | :-----------:|
 |       VeChn        | Encoding channel number. <br/>Range: [0, VENC_MAX_CHN_NUM) |    Input     |
 |    pstModParam     | Pointer to ModParam                            |   Output     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :---------- |
 |     0        | Success     |
 |   Non-zero   | Failure, see error code. |
 
-【Note】
+Note
 
 > None
 
-【Reference Code】
+Reference Code
 
 ### HB_VENC_SendFrameEx
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_SendFrameEx(VENC_CHN VeChn, const USER_FRAME_INFO_S *pstFrame, int32_t s32MilliSec)
 ```
-【Function Description】
+Function Description
 > User sends the original image and its QpMap table for encoding.
 
-【Parameter Description】
+Parameter Description
 
 |   Parameter Name   | Description | Input/Output |
 | :---------: | :----------------------------------------------- | :-------: |
@@ -2747,51 +2747,51 @@ int32_t HB_VENC_SendFrameEx(VENC_CHN VeChn, const USER_FRAME_INFO_S *pstFrame, i
 |  pstFrame   | Pointer to the structure of original image information.                           |   Input    |
 | s32MilliSec | Timeout                                     |   Input    |
 
-【Return Value】
+Return Value
 
 | Return Value |               Description |
 | :----: | :-----------------|
 |   0    |               Success |
 |  Non-zero   | Failure, see error code. |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 
 ### HB_VENC_SetAverageQp
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_SetAverageQp(VENC_CHN VeChn, int averageQp)
 ```
-【Functional Description】
+Functional Description
 > Set relative Qpmap averageQp.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name  | Description                                             | Input/Output |
 | :-------: | :----------------------------------------------- | :-------: |
 |   VeChn   | Channel number for encoding. <br/>Value range: [0, VENC_MAX_CHN_NUM) |   Input    |
 | averageQp | Relative QPMAP averageqp                              |   Input    |
 
-【Return Value】
+Return Value
 
 | Return Value |               Description |
 | :----: | :-----------------|
 |   0    |               Success |
 |  Non-zero   | Failure, see error code. |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 
 ### HB_VENC_GetAverageQp
-【Function Declaration】
+Function Declaration
 ```C
 int32_t HB_VENC_GetAverageQp(VENC_CHN VeChn, int *averageQp)
 ```
-【Functional Description】> Obtain the relative QPmap average QP.
+Functional Description> Obtain the relative QPmap average QP.
 
 [Parameter Description]
 
@@ -2840,40 +2840,40 @@ int32_t HB_VENC_Set3DNRParam(VENC_CHN VeChn, VENC_3DNR_PARAMS *param)
 [Sample Code]
 
 ### HB_VENC_Get3DNRParam
-[Function Declaration]【Function Description】
+[Function Declaration] Function Description
 ```C
 int32_t HB_VENC_Get3DNRParam(VENC_CHN VeChn, VENC_3DNR_PARAMS *param)
 ```
-【Description】
+Description
 > Get the H265 3DNR parameters.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description                                              | Input/Output |
 | :------------: | :------------------------------------------------------- | :----------: |
 |     VeChn      | Encoding channel number. <br/>Value range: [0, VENC_MAX_CHN_NUM) |     Input    |
 |     param      | 3DNR parameter pointer                                   |     Input    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :--------- |
 |      0       |   Success   |
 |     non-zero     | Failure, see error code |
 
-【Notes】
+Notes
 > None.
 
-【Reference Code】
+Reference Code
 
 ## Data Structure
 Variables in the structure cannot be adjusted dynamically and need to be set before HB_VENC_SetChnAttr. Variables that can be set dynamically can be set at any time.
 
 ### HB_PIXEL_FORMAT_E
-【Description】
+Description
 > Definition of the enumeration of encoder input image types.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef enum HB_PIXEL_FORMAT_E {
     HB_PIXEL_FORMAT_NONE = -1,
@@ -2899,10 +2899,10 @@ typedef enum HB_PIXEL_FORMAT_E {
 
 
 ### PAYLOAD_TYPE_E
-【Description】
+Description
 > Defines the enumeration of encoder types.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef enum {
     PT_PCMU = 0,
@@ -2984,13 +2984,13 @@ typedef enum {
 } PAYLOAD_TYPE_E;
 ```
 
-【Member Description】
+Member Description
 
 ### HB_ROTATION_E
-【Description】
+Description
 > Define the rotation angle enumeration.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef enum HB_CODEC_ROTATION_S {
     CODEC_ROTATION_0 = 0,```CODEC_ROTATION_90 = 1,
@@ -2999,7 +2999,7 @@ typedef enum HB_CODEC_ROTATION_S {
     ROTATION_BUTT
 } CODEC_ROTATION_E;
 ```
-【Member explanation】
+Member explanation
 
 |       Member        |       Meaning       |
 | :-----------------: | :-----------------: |
@@ -3009,10 +3009,10 @@ typedef enum HB_CODEC_ROTATION_S {
 | CODEC_ROTATION_270  |     270 degrees rotation.     |
 
 ### MIRROR_FLIP_E
-【Description】
+Description
 > Defines an enumeration of mirror flip methods.
 
-【Structure definition】
+Structure definition
 ```C
 typedef enum HB_MIRROR_FLIP_E {
     DIRECTION_NONE = 0,
@@ -3022,7 +3022,7 @@ typedef enum HB_MIRROR_FLIP_E {
     DIRECTION_BUTT,
 } MIRROR_FLIP_E;
 ```
-【Member explanation】
+Member explanation
 
 |    Member    |        Meaning       |
 | :----------: | :------------------: |
@@ -3032,10 +3032,10 @@ typedef enum HB_MIRROR_FLIP_E {
 |   HOR_VER     | Mirror operation along both horizontal and vertical directions |
 
 ### HB_VENC_H264_PROFILE_E
-【Description】
+Description
 > Defines H264 profile enumeration.
 
-【Structure definition】
+Structure definition
 ```C
 typedef enum HB_VENC_H264_PROFILE_E {
     HB_H264_PROFILE_UNSPECIFIED,
@@ -3051,10 +3051,10 @@ typedef enum HB_VENC_H264_PROFILE_E {
 
 
 ### HB_VENC_H264_LEVEL
-【Description】
+Description
 > Defines the H264 level enumeration.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef enum HB_VENC_H264_LEVEL {
 	HB_H264_LEVEL_UNSPECIFIED,
@@ -3079,10 +3079,10 @@ typedef enum HB_VENC_H264_LEVEL {
 ```
 
 ### HB_VENC_H265_LEVEL
-【Description】
+Description
 > Defines the H265 level enumeration.
 
-【Structure Definition】
+Structure Definition
 ```C
 typedef enum HB_VENC_H265_LEVEL {
     HB_H265_LEVEL_UNSPECIFIED,

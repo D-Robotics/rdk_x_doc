@@ -62,107 +62,107 @@ Note: The HB_SYS_SetVINVPSMode interface is used to set the operation mode betwe
 - HB_VP_DmaCopy: Copy physical memory through DMA.
 
 ### HB_SYS_Init
-【Function Declaration】
+Function Declaration
 ```c
 int HB_SYS_Init(void);
 ```
-【Function Description】
+Function Description
 > Reserved interface, currently has no effect.
 
-【Parameter Description】
+Parameter Description
 > None
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |:------------:|:-----------:|
 |      0       |   Success   |
 |     Non-zero |   Failure   |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 > None
 
 ### HB_SYS_Exit
-【Function Declaration】
+Function Declaration
 ```c
 int HB_SYS_Exit(void);
 ```
-【Function Description】
+Function Description
 > Reserved interface, currently has no effect.
 
-【Parameter Description】
-> None【Return Value】
+Parameter Description
+> None Return Value
 
 | Returns | Description |
 |:------:|:----:|
 |    0   | Success |
 |   Non-zero  | Failure |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 > None
 
 ### HB_SYS_Bind
-【Function Declaration】
+Function Declaration
 ```c
 int HB_SYS_Bind(const SYS_MOD_S *pstSrcMod, const SYS_MOD_S *pstDstMod);
 ```
-【Function Description】
+Function Description
 > Establishes a binding relationship between VIN pipelines, channels, VPS groups/channels, VO channels, and VENC channels.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description | Input/Output |
 | :-------: | :----------: | :-------: |
 | pstSrcMod | Source module pointer |   Input    |
 | pstDstMod | Destination module pointer |   Input    |
 
-【Return Value】
+Return Value
 
 | Returns | Description |
 |:------:|:----:|
 |    0   | Success |
 |   Non-zero  | Failure |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 > None
 
 ### HB_SYS_UnBind
-【Function Declaration】
+Function Declaration
 ```c
 int HB_SYS_UnBind(const SYS_MOD_S *pstSrcMod, const SYS_MOD_S *pstDstMod);
 ```
-【Function Description】
+Function Description
 > Unbinds the binding relationship between VIN pipelines, channels, VPS groups/channels, VO channels, and VENC channels.
 
-【Function Description】
+Function Description
 > Get the working mode of the VIN, VPS module of the specified pipe ID.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description | Input/Output |
 | :------------: | :---------: | :----------: |
 |    pipeId      | Pipe number |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value |       Description       |
 | :----------: | :---------------------: |
 |     `>=0`      | SYS_VIN_VPS_MODE_E enum |
 |      `<0`      |        Failed           |
 
-【Notice】
+Notice
 > None
 
-【Reference Code】
+Reference Code
 > None
 
 ### HB_SYS_SetVINVPSMode
@@ -223,350 +223,350 @@ int HB_SYS_GetVINVPSMode(int pipeId);
 Video Cache Pool
 
 ### HB_VP_SetConfig
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_SetConfig(VP_CONFIG_S *VpConfig);
 ```
-【Function Description】
+Function Description
 > Set the attributes of the Video Pool video buffer pool.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |          Description          | Input/Output |
 | :------------: | :---------------------------: | :----------: |
 |    vpConfig    | Pointer to video buffer pool properties |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |:------------:|:-----------:|
 |      0       |    Success  |
 |   Non-zero   |    Failed   |
 
-【Notice】
-> None【Reference Code】
+Notice
+> None Reference Code
 > VideoPool Reference Code
 
 ### HB_VP_GetConfig
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_GetConfig(VP_CONFIG_S *VpConfig);
 ```
-【Description】
+Description
 > Get the properties of the Video Pool video buffer pool.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |     Description     | Input/Output |
 | :------------: | :-----------------: | :----------: |
 |    vpConfig    | Video buffer pool property pointer |    Output    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :---------: |
 |      0       |   Success   |
 |    Non-zero  |   Failure   |
 
-【Note】
+Note
 > None
 
-【Reference Code】
+Reference Code
 > None
 
 ### HB_VP_Init
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_Init(void);
 ```
-【Description】
+Description
 > Initialize the video buffer pool.
 
-【Parameter Description】
+Parameter Description
 > None
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :---------: |
 |      0       |   Success   |
 |    Non-zero  |   Failure   |
 
-【Note】
-> It is necessary to call HB_VP_SetConfig to configure the cache pool properties before initializing the cache pool, otherwise it will fail.【Reference code】
+Note
+> It is necessary to call HB_VP_SetConfig to configure the cache pool properties before initializing the cache pool, otherwise it will fail. Reference code
 > Reference code for VideoPool
 
 ### HB_VP_Exit
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_Exit(void);
 ```
-【Function Description】
+Function Description
 > Uninitialize the video pool
 
-【Parameter Description】
+Parameter Description
 > None
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |:------:|:----:|
 |    0   | Success |
 |   Non-zero  | Failure |
 
-【Notes】
+Notes
 > None
 
-【Reference code】
+Reference code
 > Reference code for VideoPool
 
 ### HB_VP_CreatePool
-【Function Declaration】
+Function Declaration
 ```c
 uint32_t HB_VP_CreatePool(VP_POOL_CONFIG_S *VpPoolCfg);
 ```
-【Function Description】
+Function Description
 > Create a video pool
 
-【Parameter Description】
+Parameter Description
 
 | Parameter | Description | Input/Output |
 | :-------: | :--------------------: | :-------: |
 | VpPoolCfg | Pointer to cache pool configuration attributes  |   Input    |
 
-【Return Value】
+Return Value
 
 |       Return Value        |       Description       |
 | :-----------------: | :--------------: |
 | Non-VP_INVALID_POOLID | Valid pool ID number |
 |  VP_INVALID_POOLID  |  Failed to create pool  |
 
-【Notes】【Reference code】
+Notes Reference code
 > Reference code for VideoPool
 
 ### HB_VP_DestroyPool
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_DestroyPool(uint32_t Pool);
 ```
-【Function Description】
+Function Description
 > Destroy a video buffer pool
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |     Description     | Input/Output |
 | :------------: | :-----------------: | :----------: |
 |      Pool      | ID of the pool     |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :---------: |
 |       0      |   Success   |
 |    Non-zero  |   Failure   |
 
-【Note】
+Note
 > N/A
 
-【Reference code】
+Reference code
 > Reference code for VideoPool
 
 ### HB_VP_GetBlock
-【Function Declaration】
+Function Declaration
 ```c
 uint32_t HB_VP_GetBlock(uint32_t Pool, uint64_t u64BlkSize);
 ```
-【Function Description】
+Function Description
 > Obtain a buffer block
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name   |    Description     | Input/Output |
 | :---------------: | :----------------: | :----------: |
 |       Pool        |     ID of pool     |    Input     |
 |    u64BlkSize     |    Size of block   |    Input     |
 
-【Return Value】
+Return Value
 
 |    Return Value   |     Description    |### Translation
 | :-----------------: | :------------: |
 | Non-VP_INVALID_HANDLE | Valid buffer block id |
 | VP_INVALID_HANDLE | Failed to get buffer block |
 
-【Notes】
+Notes
 > u64BlkSize must be less than or equal to the buffer block size specified when creating the cache pool
 
-【Reference code】
+Reference code
 > VideoPool reference code
 
 ### HB_VP_ReleaseBlock
-【Function declaration】
+Function declaration
 ```c
 int HB_VP_ReleaseBlock(uint32_t Block);
 ```
-【Function description】
+Function description
 > Release a buffer block that has been acquired
 
-【Parameter description】
+Parameter description
 
 | Parameter name | Description | Input/Output |
 | :------: | :------: | :-------: |
 |  Block   | Buffer block id |   Input    |
 
-【Return value】
+Return value
 
 | Return value | Description |
 |:------:|:----:|
 |    0   | Success |
 |   Non-zero  | Failed |
 
-【Notes】
+Notes
 > None
 
-【Reference code】
+Reference code
 > VideoPool reference code
 
 ### HB_VP_PhysAddr2Block
-【Function declaration】
+Function declaration
 ```c
 uint32_t HB_VP_PhysAddr2Block(uint64_t u64PhyAddr);
 ```
-【Function description】
+Function description
 > Get the buffer block id through the physical address of the buffer block
 
-【Parameter description】
+Parameter description
 
 |  Parameter name  |      Description      | Input/Output |
 | :--------: | :------------: | :-------: |
-| u64PhyAddr | Physical address of the buffer block |   Input    |【返回值】
+| u64PhyAddr | Physical address of the buffer block |   Input    | Return Value
 
 | Return Value | Description |
 |:------------:|:-----------:|
 |      0       |   Success   |
 |     Non-zero      |   Failure   |
 
-【Notes】
+Notes
 > None
 
-【Reference code】
+Reference code
 > VideoPool reference code
 
 ### HB_VP_Block2PhysAddr
-【Function description】
+Function description
 ```c
 uint64_t HB_VP_Block2PhysAddr(uint32_t Block);
 ```
-【Function description】
+Function description
 > Get the physical address of a buffer block
 
-【Parameter description】
+Parameter description
 
 | Parameter Name | Description | Input/Output |
 | :------------: | :---------: | :----------: |
 |     Block      | Buffer block id |    Input     |
 
-【返回值】
+Return Value
 
 | Return Value |        Description        |
 | :----------: | :-----------------------: |
 |      0       |   Invalid return value    |
 |   Non-zero    |    Valid physical address   |
 
-【Notes】
+Notes
 > None
 
-【Reference code】
+Reference code
 > VideoPool reference code
 
 ### HB_VP_Block2PoolId
-【Function description】
+Function description
 ```c
 uint32_t HB_VP_Block2PoolId(uint32_t Block);
 ```
-【Function description】
+Function description
 > Get the buffer pool id through the buffer block id
 
-【Parameter description】| Parameter Name | Description | Input/Output |
+Parameter description| Parameter Name | Description | Input/Output |
 | :------------: | :---------: | :----------: |
 |     Block      | Buffer block ID |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value |     Description      |
 | :----------: | :------------------: |
 |  Non-negative integer |  Valid buffer pool ID  |
 |    Negative integer   |  Invalid buffer pool ID  |
 
-【Note】
+Note
 > None
 
-【Reference Code】
+Reference Code
 > Reference code for VideoPool
 
 ### HB_VP_MmapPool
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_MmapPool(uint32_t Pool);
 ```
-【Function Description】
+Function Description
 > Map user-space virtual address for a buffer pool
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description | Input/Output |
 | :------------: | :---------: | :----------: |
 |     Pool       | Buffer pool ID |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value |     Description      |
 | :----------: | :------------------: |
 |       0      |         Success          |
 |    Non-zero  |         Failure          |
 
-【Note】
+Note
 > None
 
-【Reference Code】
+Reference Code
 > Reference code for VideoPool
 
 ### HB_VP_MunmapPool
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_MunmapPool(uint32_t Pool);
 ```
 
-【Function Description】
+Function Description
 > Remove user-mode mapping for a buffer pool
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |      Description      | Input/Output |
 | :------------: | :------------------: | :----------: |
 |      Pool      | Buffer pool ID number |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :---------: |
 |       0      |   Success   |
 |     Non-zero     |   Failure   |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 > Reference code for VideoPool
 
 ### HB_VP_GetBlockVirAddr
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_GetBlockVirAddr(uint32_t Pool, uint64_t u64PhyAddr, void **ppVirAddr);
 ```
-【Function Description】
+Function Description
 > Get the user-mode virtual address of a cache block in a video buffer pool
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name  |      Description       | Input/Output |
 | :--------------: | :-------------------: | :----------: |
@@ -574,78 +574,78 @@ int HB_VP_GetBlockVirAddr(uint32_t Pool, uint64_t u64PhyAddr, void **ppVirAddr);
 |    u64PhyAddr    |   Buffer pool physical address |    Input     |
 |    ppVirAddr    |   Buffer pool virtual address |    Output     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :---------: |
 |       0      |   Success   |
 |     Non-zero     |   Failure   |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 > Reference code for VideoPool
 
 ### HB_VP_InquireUserCnt
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_InquireUserCnt(uint32_t Block);
 ```
-【Function Description】
+Function Description
 > Check if the buffer block is being used.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |  Description | Input/Output |
 | :------: | :------: | :-------: |
 |  Block   | Buffer block ID |   Input    |
 
-【Return Value】
+Return Value
 
 |    Return Value     |   Description   |
 | :-----------------: | :------: |
 |  VP_INVALID_HANDLE  | Query failed |
 | Non-VP_INVALID_HANDLE | Reference count |
 
-【Note】
+Note
 > None
 
-【Reference Code】
+Reference Code
 > None
 
 ### HB_VP_SetAuxiliaryConfig
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_SetAuxiliaryConfig (const VP_AUXILIARY_CONFIG_S *pstAuxiliaryConfig);
 ```
-【Function Description】
+Function Description
 > Set the auxiliary configuration of the video buffer pool.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |             Description             | Input/Output |
 | :----------------: | :--------------------------: | :-------: |
 | pstAuxiliaryConfig | Configuration structure for auxiliary information of video buffer pool |   Input    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |:------:|:----:|
 |    0   | Success |
 |   Non-zero  | Failure |
 
-【Note】
+Note
 
 ### HB_SYS_Alloc
-【Function Declaration】
+Function Declaration
 ```c
 int HB_SYS_Alloc(uint64_t *pu64PhyAddr, void **ppVirAddr, uint32_t u32Len);
 ```
-【Description】
+Description
 > Allocate memory in user mode.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description | Input/Output |
 | :------------: | :---------: | :----------: |
@@ -653,17 +653,17 @@ int HB_SYS_Alloc(uint64_t *pu64PhyAddr, void **ppVirAddr, uint32_t u32Len);
 |   ppVirAddr   |    Pointer to virtual address    |    Output    |
 |    u32Len    |    Size of memory allocation    |    Input    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |:------:|:----:|
 |    0   | Success |
 |  Non-zero  | Failure |
 
-【Notes】
+Notes
 > Need to call HB_VP_Init to initialize video buffer pool.
 
-【Sample Code】
+Sample Code
 ```c
     ret = HB_SYS_Alloc(&paddr, &vaddr, 0x1000);
     if (ret == 0) {
@@ -676,12 +676,12 @@ int HB_SYS_Alloc(uint64_t *pu64PhyAddr, void **ppVirAddr, uint32_t u32Len);
 ```
 
 ### HB_SYS_AllocCached
-【Function Declaration】
+Function Declaration
 ```c
 int HB_SYS_AllocCached(uint64_t *pu64PhyAddr, void **ppVirAddr, uint32_t u32Len);
 ```
-【Description】
-> Allocate cached memory in user mode.【Parameter Description】
+Description
+> Allocate cached memory in user mode. Parameter Description
 
 | Parameter Name |       Description        | Input/Output |
 | :------------: | :----------------------: | :----------: |
@@ -689,45 +689,45 @@ int HB_SYS_AllocCached(uint64_t *pu64PhyAddr, void **ppVirAddr, uint32_t u32Len)
 |   ppVirAddr    | Pointer to Virtual Address |    Output    |
 |    u32Len      |    Size of Memory Block   |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value |  Description |
 | :----------: | :----------: |
 |       0      |     Success  |
 |    Non-zero  |    Failure   |
 
-【Note】
+Note
 > Need to call HB_VP_Init to initialize the video buffer pool
 
-【Reference Code】
+Reference Code
 > None
 
 ### HB_SYS_Free
-【Function Declaration】
+Function Declaration
 ```c
 int HB_SYS_Free(uint64_t u64PhyAddr, void *pVirAddr);
 ```
-【Function Description】
+Function Description
 > Free Memory Block
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |    Description     | Input/Output |
 | :------------: | :----------------: | :----------: |
 |  u64PhyAddr    |    Physical Address  |    Input     |
 |   pVirAddr     | Pointer to Virtual Address  |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value |  Description |
 | :----------: | :----------: |
 |       0      |     Success  |
 |    Non-zero  |    Failure   |
 
-【Note】
+Note
 > None
 
-【Reference Code】
+Reference Code
 > Refer to HB_SYS_Alloc
 
 ### HB_SYS_CacheInvalidate
@@ -789,14 +789,14 @@ int HB_SYS_CacheFlush(uint64_t pu64PhyAddr, void *pVirAddr, uint32_t u32Len);
 > N/A
 
 ### HB_VP_DmaCopy
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VP_DmaCopy(void *dstPaddr, void *srcPaddr, uint32_t len);
 ```
-【Function Description】
+Function Description
 > Copy physical memory through DMA.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name |     Description     | Input/Output |
 | :------------: | :-----------------: | :----------: |
@@ -804,17 +804,17 @@ int HB_VP_DmaCopy(void *dstPaddr, void *srcPaddr, uint32_t len);
 |   srcPaddr     |    Source address   |    Input     |
 |      len       |       Length        |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 |:------------:|:-----------:|
 |      0       |   Success   |
 |   Non-zero   |   Failed    |
 
-【Notes】
+Notes
 > dstPaddr and srcPaddr should be continuous physical addresses.
 
-【Reference Code】
+Reference Code
 > None
 
 ## Data Types
@@ -936,23 +936,23 @@ struct HB_VP_CONFIG_S {
 |   pubPool   | Structure defining the properties of a public buffer pool           |
 
 ### HB_VP_AUXILIARY_CONFIG_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_VP_AUXILIARY_CONFIG_S {
     int u32AuxiliaryConfig;
 } VP_AUXILIARY_CONFIG_S;
 ```
-【Functional Description】
+Functional Description
 > Structure for configuring additional information for video buffer pools
 
-【Member Description】
+Member Description
 
 |     Member      | Meaning       |
 | :-------------: | :------------ |
 | AuxiliaryConfig | Additional information type |
 
 ### hb_vio_buffer_t
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct hb_vio_buffer_s {
     image_info_t img_info;
@@ -960,10 +960,10 @@ typedef struct hb_vio_buffer_s {
 } hb_vio_buffer_t;
 ```
 
-【Functional Description】
+Functional Description
 > Structure for regular buffer information, representing one frame of image
 
-【Member Description】
+Member Description
 
 |    Member   | Meaning           |
 | :---------: | :---------------- |

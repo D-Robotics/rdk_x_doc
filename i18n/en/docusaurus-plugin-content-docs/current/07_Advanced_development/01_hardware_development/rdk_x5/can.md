@@ -284,30 +284,30 @@ int main() {
     struct sockaddr_can addr;
     struct can_frame frame;
 
-    // 创建 Socket
+    // Create socket
     sock = socket(PF_CAN, SOCK_RAW, CAN_RAW);
     if (sock < 0) {
         perror("Socket");
         return 1;
     }
 
-    // 获取 can0 接口
+    // Get the can0 interface
     struct ifreq ifr;
     strcpy(ifr.ifr_name, "can0");
     ioctl(sock, SIOCGIFINDEX, &ifr);
 
-    // 绑定 Socket
+    // Bind the socket
     addr.can_family = PF_CAN;
     addr.can_ifindex = ifr.ifr_ifindex;
     bind(sock, (struct sockaddr *)&addr, sizeof(addr));
 
-    // 发送消息
+    // Send a message
     frame.can_id = 0x123;
     frame.can_dlc = 4;
     memcpy(frame.data, "\xde\xad\xbe\xef", 4);
     write(sock, &frame, sizeof(struct can_frame));
 
-    // 接收消息
+    // Receive a message
     while (1) {
         int nbytes = read(sock, &frame, sizeof(struct can_frame));
         if (nbytes > 0) {

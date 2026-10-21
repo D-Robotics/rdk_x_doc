@@ -14,7 +14,7 @@ RDK uses the configuration file `config.txt` to set system configurations during
 
 :::info Note
 
-1. The `config.txt` configuration file is only applicable to the `RDK X3`、`RDK X5` and `RDK X3 Module` development boards and not for the `RDK Ultra` development board.
+1. The `config.txt` configuration file is only applicable to the `RDK X3`, `RDK X5` and `RDK X3 Module` development boards and not for the `RDK Ultra` development board.
 
 2. The system version must be at least `2.1.0`.
 
@@ -44,7 +44,7 @@ Supports device tree overlays, providing a more flexible way to adjust the devic
 dtoverlay=ion_resize,size=0x40000000
 ```
 
-[RDK X5] Use dtoverlay_spi5_spidev to add /dev/spidev5.0（Note: The CAN device has also received SPI5, so Spidev and CAN can only choose one from the other）
+[RDK X5] Use dtoverlay_spi5_spidev to add /dev/spidev5.0(Note: The CAN device has also received SPI5, so Spidev and CAN can only choose one from the other)
 
 ```Shell
 dtoverlay=dtoverlay_spi5_spidev
@@ -52,7 +52,7 @@ dtoverlay=dtoverlay_spi5_spidev
 
 ### RDK X5 configuration ION
 
-use ion_reserved_size、 ion_carveout_size 、ion_cma_size  to modify the ION partition size.
+use ion_reserved_size, ion_carveout_size, ion_cma_size  to modify the ION partition size.
 
 | boot name       | dts name        | dts compatible | size |
 | ----------------- | ------------ | ----------------- | ---- |
@@ -246,7 +246,7 @@ gpio=6=op,dl,pu
 
 The temperature point at which the system CPU and BPU will throttle. When the temperature exceeds this point, the CPU and BPU will reduce their operating frequency to reduce power consumption. The CPU can go as low as 240MHz, while the BPU can go as low as 400MHz.  
 
-For example, set the downclock temperature to `86℃`：
+For example, set the downclock temperature to `86℃`:
 
 ```
 throttling_temp=86000
@@ -256,7 +256,7 @@ throttling_temp=86000
 
 Shutdown temperature point of the system. If the temperature exceeds this point, the system will automatically shut down to protect the chip and hardware. It is recommended to perform heat dissipation treatment on the device to avoid system shutdown, as the device will not restart automatically after shutdown.  
 
-For example, set the shutdown temperature to  `112℃`：
+For example, set the shutdown temperature to  `112℃`:
 
 ```
 shutdown_temp=112000

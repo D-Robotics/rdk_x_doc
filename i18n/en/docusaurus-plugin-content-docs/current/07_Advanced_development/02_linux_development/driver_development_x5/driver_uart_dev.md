@@ -130,7 +130,7 @@ This is receive test 2 times
 ### Check the received data is correct ###
 ```
 
-uart_duplex命令是测试uart的，可以阅读它的帮助信息获取更多使用方法。
+The `uart_duplex` command tests UART. Read its help information for more usage details.
 
 ## Appendix (Test Code)
 
