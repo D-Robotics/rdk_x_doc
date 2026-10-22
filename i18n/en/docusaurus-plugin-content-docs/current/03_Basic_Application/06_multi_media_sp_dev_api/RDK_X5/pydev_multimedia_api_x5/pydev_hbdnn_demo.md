@@ -36,7 +36,7 @@ This interface encapsulates the underlying model runtime details, allowing Pytho
   - Supports the `QuantParams` structure for quantization parameters, the `hbDNNDataType` enumeration, the `SchedParam` object for model scheduling parameters, and the `hbDNNQuantiType` enumeration for quantization types, providing type-safe property access.
 
 ## Installation Instructions
-The `hbm_runtime` module is a high-performance inference runtime Python interface implemented in C++, depending on `pybind11` and the underlying inference libraries (such as `libdnn`) provided by Horizon. It can be installed via system DEB packages (`.deb`) and supports Python 3.10 and above.
+The `hbm_runtime` module is a high-performance inference runtime Python interface implemented in C++, depending on `pybind11` and the underlying inference libraries (such as `libdnn`) provided by Horizon Robotics. It can be installed via system DEB packages (`.deb`) and supports Python 3.10 and above.
 
 ### System Dependencies
 | Dependency          | Minimum Version | Description                                                                                   |
@@ -45,7 +45,7 @@ The `hbm_runtime` module is a high-performance inference runtime Python interfac
 | pip                 | ≥ 22.0         | Required for installing wheel packages                                                        |
 | pybind11            | Any            | Used during build; not required for installation                                              |
 | scikit-build-core   | ≥ 0.7          | Used for building wheel packages (source build only)                                          |
-| Horizon Base Libraries | Platform-dependent | Such as `libdnn.so`, typically provided by the BSP (Board Support Package)                 |
+| Horizon Robotics Base Libraries | Platform-dependent | Such as `libdnn.so`, typically provided by the BSP (Board Support Package)                 |
 
 ### Building the Wheel Package
 There are two ways to build the wheel package. (The `hbm_runtime` is installed by default after RDK X5 software version 3.5.0)
@@ -214,7 +214,7 @@ For multi-input models, quantization metadata, and more, see [API reference](#mo
 
 ## Modules, classes, and functions (API reference)
 
-The `hbm_runtime` module is a PyBind11 binding to Horizon BIN inference on top of `libdnn`. It provides model loading, I/O introspection, and `run()`, including multi-model loads, multi-input inference, per-model selection, BPU core binding, and priorities.
+The `hbm_runtime` module is a PyBind11 binding to Horizon Robotics BIN inference on top of `libdnn`. It provides model loading, I/O introspection, and `run()`, including multi-model loads, multi-input inference, per-model selection, BPU core binding, and priorities.
 
 ### Enumerations
 

@@ -13,7 +13,7 @@ sidebar_position: 7
 | Heat Sink | Waveshare | CM4-HEATSINK             | Heat Sink with Fan            | [Purchase Link](https://www.waveshare.net/shop/CM4-FAN-3007-5V.htm) |
 | Wi-Fi Antenna | Waveshare | ORD-CM4-ANTENNA          | SMA Antenna for 2.4G/5G WiFi  | [Purchase Link](https://www.waveshare.net/shop/ORD-CM4-ANTENNA.htm) |
 | 4G Communication Module | Waveshare | SIM7600G-H 4G DTU | Industrial-grade 4G communication module, supports USB/UART/RS232/RS485 interfaces, 4G/3G/2G networks and GNSS positioning | [Purchase Link](https://www.waveshare.net/shop/SIM7600G-H-4G-DTU.htm) |
-| Board Connector | Guasei | DF40C-100DS-0.4V(51)     | Board Connector               | N/A                                                          |
+| Board Connector | Hirose | DF40C-100DS-0.4V(51)     | Board Connector               | N/A                                                          |
 
 ## <span id="camera"/>Camera
 
@@ -22,9 +22,9 @@ sidebar_position: 7
 | MIPI | Waveshare | OV5647 Camera  | OV5647 Sensor, 5MP, FOV 160 degrees    | [Purchase Link](https://www.waveshare.net/shop/RPi-Camera-G.htm)  |
 | MIPI | Waveshare | IMX219 Camera  | IMX219 Sensor, 8MP, FOV 200 degrees    | [Purchase Link](https://www.waveshare.net/shop/IMX219-200-Camera.htm) |
 | MIPI | Waveshare | IMX477 Camera  | IMX477 Sensor, 12.3MP, FOV 160 degrees | [Purchase Link](https://www.waveshare.net/shop/IMX477-160-12.3MP-Camera.htm) |
-| MIPI | Yabo     | IMX219 Camera  | IMX219 Sensor, 8MP, FOV 77 degrees     | [Purchase Link](https://detail.tmall.com/item.htm?abbucket=2&id=710344235988&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.110.4df82edcjJ7wap) |
-| USB  | Yabo     | USB Camera     | Driver-free USB Microphone Camera, 720p | [Purchase Link](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o) |
-| USB  | Lunqu    | USB Camera     | Driver-free USB Camera, Metal Casing, 1080p | [Purchase Link](https://detail.tmall.com/item.htm?abbucket=12&id=666156389569&ns=1&spm=a230r.1.14.1.13e570f3eFF1sJ&skuId=4972914294771) |
+| MIPI | YAHBOOM     | IMX219 Camera  | IMX219 Sensor, 8MP, FOV 77 degrees     | [Purchase Link](https://detail.tmall.com/item.htm?abbucket=2&id=710344235988&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.110.4df82edcjJ7wap) |
+| USB  | YAHBOOM     | USB Camera     | Driver-free USB Microphone Camera, 720p | [Purchase Link](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o) |
+| USB  | Wheeltec    | USB Camera     | Driver-free USB Camera, Metal Casing, 1080p | [Purchase Link](https://detail.tmall.com/item.htm?abbucket=12&id=666156389569&ns=1&spm=a230r.1.14.1.13e570f3eFF1sJ&skuId=4972914294771) |
 
 
 ## Display

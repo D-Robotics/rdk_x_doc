@@ -10,7 +10,7 @@ sidebar_position: 2
 **A:** Supported on development board versions V1.2 and above. You can usually confirm the version by checking the silkscreen information on the PCB. Please operate with caution and ensure your board version supports this feature—incorrect power supply may cause hardware damage.
 
 #### Q2: Can I control the 40-pin GPIO interface using C/C++?
-**A:** Yes, it is supported. Refer to relevant articles and code samples in the Horizon Developer Community, such as:
+**A:** Yes, it is supported. Refer to relevant articles and code samples in the D-Robotics Developer Community, such as:
 * [Sunrise X3Pi WiringPi](https://developer.d-robotics.cc/forumDetail/109609560406362634) (a C/C++ GPIO library adapted for RDK X3)
 * Check the official documentation for your RDK model for chapters on GPIO development, which usually provide low-level operation methods or recommended libraries.
 
@@ -105,7 +105,7 @@ sidebar_position: 2
 ### USB Interface
 
 #### Q8: What is the default device node for a USB camera on the board?
-**A:** On Horizon RDK boards (e.g., RDK X3 series), when you connect a standard UVC (USB Video Class) camera, the video device node in Linux is usually **not** `/dev/video0` as on PCs.
+**A:** On D-Robotics RDK boards (e.g., RDK X3 series), when you connect a standard UVC (USB Video Class) camera, the video device node in Linux is usually **not** `/dev/video0` as on PCs.
 * **Default device node is usually:** `/dev/video8`
 * It may also be `/dev/video9`, `/dev/video10`, etc., if there are other video devices or multiple USB cameras.
 

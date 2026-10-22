@@ -8,7 +8,7 @@ This section addresses frequently asked questions about developing and using Tog
 
 ### Q1: What are the recommended troubleshooting steps if TROS-related packages fail to run?
 **A:**
-1.  **Ensure your TROS packages are up to date:** Many issues may have been fixed in newer versions. After confirming that the official Horizon APT sources (such as `sunrise.horizon.cc` or the latest `archive.d-robotics.cc`) are correctly configured, update all TROS-related packages:
+1.  **Ensure your TROS packages are up to date:** Many issues may have been fixed in newer versions. After confirming that the official D-Robotics APT sources (such as `sunrise.horizon.cc` or the latest `archive.d-robotics.cc`) are correctly configured, update all TROS-related packages:
     ```bash
     sudo apt update && sudo apt upgrade
     ```
@@ -29,11 +29,11 @@ This section addresses frequently asked questions about developing and using Tog
 ### Q2: What are the differences between TROS and standard ROS2? How to upgrade TROS Foxy to TROS Humble?
 **A:**
 * **Relationship between TROS and ROS2:**
-    * TROS (TogetheROS.Bot) is Horizon's robot operating system, optimized and adapted from open-source ROS2 for its RDK hardware platform.
+    * TROS (TogetheROS.Bot) is D-Robotics' robot operating system, optimized and adapted from open-source ROS2 for its RDK hardware platform.
     * It is usually built on a ROS2 LTS version, for example:
         * On RDK OS 2.x (Ubuntu 20.04), TROS is based on **ROS2 Foxy Fitzroy**.
         * On RDK OS 3.x (Ubuntu 22.04), TROS is based on **ROS2 Humble Hawksbill**.
-    * TROS integrates Horizon hardware drivers (BPU, VPU, JPU, sensors, etc.), hardware acceleration libraries, and optimized solutions and examples for common robotics functions.
+    * TROS integrates D-Robotics hardware drivers (BPU, VPU, JPU, sensors, etc.), hardware acceleration libraries, and optimized solutions and examples for common robotics functions.
     * TROS is **fully compatible** with the core APIs and communication mechanisms of the corresponding ROS2 version, meaning nodes and services developed for standard ROS2 Foxy/Humble can usually run on TROS with little or no modification, and vice versa.
 
 * **TROS version upgrade (e.g., Foxy to Humble):**
@@ -55,13 +55,13 @@ This section addresses frequently asked questions about developing and using Tog
 ### Q3: How is TROS installed on the RDK board? Is manual installation required?
 **A:**
 * TROS is **pre-installed** on the board when you flash the official RDK OS system image. You do not need to manually install TROS after flashing.
-* You can update or incrementally install TROS packages via the APT package manager. With the official Horizon APT source configured, `sudo apt update && sudo apt upgrade` will update installed TROS packages.
+* You can update or incrementally install TROS packages via the APT package manager. With the official D-Robotics APT source configured, `sudo apt update && sudo apt upgrade` will update installed TROS packages.
 * Older tools like `hhp` or manual symlink steps are generally no longer needed in newer TROS versions.
 
 ### Q4: Where can I find the source code for TROS-related packages?
 **A:**
 * **TROS Manual:** The official TROS user manual usually provides GitHub repository links for core packages or examples.
-* **NodeHub:** If a package is provided via NodeHub (the Horizon robotics app store/component platform), its introduction page usually includes a source code link.
+* **NodeHub:** If a package is provided via NodeHub (the D-Robotics robotics app store/component platform), its introduction page usually includes a source code link.
 * **GitHub D-Robotics Organization:** Most open-source TROS packages are hosted under the **D-Robotics** organization ([https://github.com/D-Robotics](https://github.com/D-Robotics)). Search for the package name to find its repository.
 * **README:** Each TROS package repository typically contains a detailed `README.md` with build instructions, usage, parameters, dependencies, etc.
 
@@ -209,9 +209,9 @@ This way, compute-intensive visualization and simulation run on the PC, while th
 
 ### Q12: The RDK X3 kernel is old. Can it still support RealSense D435i? How to install?
 **A:**
-* **Support:** Although RDK X3's Linux kernel may be old (e.g., 4.14.x), Horizon usually **pre-integrates required kernel patches and drivers** for common peripherals (like Intel RealSense cameras) in the official RDK OS image.
-* **Installation:** You **do not need** to build kernel modules from RealSense SDK source. Horizon provides APT packages for RealSense drivers and tools.
-    * **Official guide:** Refer to the Horizon developer community or RDK X3 manual for "Sensor Demo" or "Peripheral Support" sections on RealSense D435i.
+* **Support:** Although RDK X3's Linux kernel may be old (e.g., 4.14.x), D-Robotics usually **pre-integrates required kernel patches and drivers** for common peripherals (like Intel RealSense cameras) in the official RDK OS image.
+* **Installation:** You **do not need** to build kernel modules from RealSense SDK source. D-Robotics provides APT packages for RealSense drivers and tools.
+    * **Official guide:** Refer to the D-Robotics developer community or RDK X3 manual for "Sensor Demo" or "Peripheral Support" sections on RealSense D435i.
         For example: [RDK Docs - RealSense Image Acquisition](https://developer.d-robotics.cc/rdk_doc/Robot_development/quick_demo/demo_sensor#realsense%E5%9B%BE%E5%83%8F%E9%87%87%E9%9B%86).
     * **APT install:** After configuring the official APT source, install with:
         ```bash
@@ -224,7 +224,7 @@ This way, compute-intensive visualization and simulation run on the PC, while th
 **A:** Zero-copy is a technique to optimize large data (e.g., images) transfer between ROS2 nodes by avoiding unnecessary memory copies, often via shared memory. TROS (based on ROS2) supports zero-copy.
 
 * **TROS Foxy (ROS2 Foxy):**
-    * ROS2 Foxy has limited zero-copy support. Horizon may provide a custom shared memory solution (e.g., `hobot_shm` package).
+    * ROS2 Foxy has limited zero-copy support. D-Robotics may provide a custom shared memory solution (e.g., `hobot_shm` package).
     * Refer to the TROS Foxy documentation or `hobot_shm` README for details.
 
 * **TROS Humble (ROS2 Humble):**
@@ -238,10 +238,10 @@ This way, compute-intensive visualization and simulation run on the PC, while th
         export ROS_DISABLE_LOANED_MESSAGES=0
         ```
 * **General reference:**
-    * Horizon's official docs on TROS communication optimization or specific demos (e.g., image transfer) usually include zero-copy configuration guides.
+    * D-Robotics' official docs on TROS communication optimization or specific demos (e.g., image transfer) usually include zero-copy configuration guides.
         For example: [RDK Docs - ROS Communication - Zero-Copy Configuration](https://developer.d-robotics.cc/rdk_doc/Robot_development/quick_demo/demo_communication) (verify link validity).
 
-### Q14: Besides the official Horizon APT source, are there other public ROS2 sources available?
+### Q14: Besides the official D-Robotics APT source, are there other public ROS2 sources available?
 **A:** Yes. Standard ROS2 distributions (Foxy, Humble, Iron, etc.) have official APT sources maintained by Open Robotics (now Intrinsic).
 * **ROS2 official source:**
     * Usually at `http://packages.ros.org/ros2/ubuntu`.
@@ -271,4 +271,4 @@ This way, compute-intensive visualization and simulation run on the PC, while th
 * **China mirror sources:**
     * For faster downloads, some Chinese universities/institutions (e.g., TUNA, USTC LUG, SJTUG) provide ROS2 mirror sources. Replace `packages.ros.org` with the mirror address as needed.
 
-**Note:** When both Horizon TROS and ROS2 official sources are present, `apt` will choose packages based on version and priority. TROS packages are usually optimized for RDK hardware.
+**Note:** When both D-Robotics TROS and ROS2 official sources are present, `apt` will choose packages based on version and priority. TROS packages are usually optimized for RDK hardware.

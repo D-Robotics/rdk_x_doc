@@ -109,7 +109,7 @@ Each pin on the X5 chip supports up to four functions. When configuring a partic
 
 Each pin on the X5 chip supports configuring the maximum output current. The default configuration can be set in `arch/arm64/boot/dts/hobot/pinmux-func.dtsi`, and this configuration is then referenced when configuring individual pins. 
 
-X5 pins are categorized into two types: **GPIO type** and **SDIO type**. The same bit configuration represents different drive current levels depending on the pin type. For detailed information on the types and the drive current corresponding to the drive bits, please consult with Horizon Robotics support.
+X5 pins are categorized into two types: **GPIO type** and **SDIO type**. The same bit configuration represents different drive current levels depending on the pin type. For detailed information on the types and the drive current corresponding to the drive bits, please consult with D-Robotics support.
 
 
 ```c

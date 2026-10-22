@@ -209,7 +209,7 @@ Mirror Update
 System updates:
 
 - **Desktop Display Optimization:** Ubuntu desktop now supports 3D GPU acceleration for smoother visuals.
-- **Audio Sub-board Support:** Added support for Waveshare WM8960 Audio HAT and Huaner carrier board for faster voice solution integration.
+- **Audio Sub-board Support:** Added support for Waveshare WM8960 Audio HAT and Hiwonder carrier board for faster voice solution integration.
 - **WiFi Driver Upgrade:** Improved connection stability in weak signal environments and optimized auto-reconnect during sleep/wake.
 - **Sensor Acquisition Framework Expansion:** Integrated V4L2 framework, supporting imx477, ov5647, imx219 sensors, with more to come.
 - **Network & Remote Optimization:** Default to iptables legacy mode, improved VNC display smoothness, and lag-free remote desktop.

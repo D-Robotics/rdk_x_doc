@@ -33,7 +33,7 @@ Code repository:  (https://github.com/D-Robotics/line_follower)
 
 ### D-Robotics RDK
 
-1. D-Robotics RDK has been flashed with the  Ubuntu 20.04/22.04 system image provided by Horizon.
+1. D-Robotics RDK has been flashed with the  Ubuntu 20.04/22.04 system image provided by D-Robotics.
 
 2. TogetheROS.Bot has been successfully installed on the D-Robotics RDK.
 
@@ -162,7 +162,7 @@ Use the right mouse button to click on the center of the black guiding line in t
 
 #### Model Selection
 
-Taking into account the maturity of the model, the hardware requirements of the CPU/GPU for training the model, ResNet network is chosen as the backbone here. Residual Neural Network (ResNet) was proposed by researchers from Microsoft Research Institute including Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. It won the championship in the 2015 ILSVRC (ImageNet Large Scale Visual Recognition Challenge). ResNet cleverly uses shortcut connections to solve the problem of model degradation in deep networks. It is one of the most widely used CNN feature extraction networks. The structure of [ResNet18](https://huggingface.co/microsoft/resnet-18) is as follows:
+Taking into account the maturity of the model, the hardware requirements of the CPU/GPU for training the model, ResNet network is chosen as the backbone here. Residual Neural Network (ResNet) was proposed by researchers from Microsoft Research including Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. It won the championship in the 2015 ILSVRC (ImageNet Large Scale Visual Recognition Challenge). ResNet cleverly uses shortcut connections to solve the problem of model degradation in deep networks. It is one of the most widely used CNN feature extraction networks. The structure of [ResNet18](https://huggingface.co/microsoft/resnet-18) is as follows:
 
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/06_Application_case/line_follower/model.png)
 

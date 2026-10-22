@@ -608,17 +608,17 @@ By default, the firmware of the core module of RDK X3 Module and the level confi
 
 | Connector  | Model  |   Vendor   |  Description   |
 | --- | ------ | ------- | ------- |
-| J34 | AFC01-S24FCA-00 | jushuodz | MIPI CSI Connector  |
-| E1 | U.FL-R-SMT-1(10) | hirose | Wi-Fi Antenna Connector  |
+| J34 | AFC01-S24FCA-00 | JUSHUO | MIPI CSI Connector  |
+| E1 | U.FL-R-SMT-1(10) | Hirose | Wi-Fi Antenna Connector  |
 
 </DocScope>
 <DocScope versions=">=3.0.0" products="RDK X3 Module">
 
 | Connector  | Model  |   Vendor   |  Description   |
 | --- | ------ | ------- | ------- |
-| J710 | AFA07-S15FCA-00 | jushuodz | MIPI DSI Connector  |
-| U100/U101 | AFA07-S15FCA-00 | jushuodz | CAM0/CAM2 Connector  |
-| J27 | AFA07-S15FCA-00 | jushuodz | CAM1 Connector  |
+| J710 | AFA07-S15FCA-00 | JUSHUO | MIPI DSI Connector  |
+| U100/U101 | AFA07-S15FCA-00 | JUSHUO | CAM0/CAM2 Connector  |
+| J27 | AFA07-S15FCA-00 | JUSHUO | CAM1 Connector  |
 
 </DocScope>
 

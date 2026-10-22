@@ -16,7 +16,7 @@ import DocScope from '@site/src/components/DocScope';
 **A:** 开发板 V1.2 及以上版本可以支持。版本号通常可以通过查看开发板 PCB 板上的丝印信息来确认。请务必谨慎操作，并确认您的板卡版本确实支持此功能，错误的供电方式可能导致硬件损坏。
 
 #### Q2: 开发板是否支持通过 C/C++语言操作 40PIN GPIO 接口？
-**A:** 是的，支持。您可以参考地平线开发者社区论坛中的相关文章和代码示例，例如：
+**A:** 是的，支持。您可以参考地瓜开发者社区论坛中的相关文章和代码示例，例如：
 * [旭日 X3 派 WiringPi](https://developer.d-robotics.cc/forumDetail/109609560406362634) (一个适配 RDK X3 的 C/C++ GPIO 库)
 * 查阅对应 RDK 型号的官方文档中关于 GPIO 开发的章节，通常会提供底层的操作方法或推荐的库。
 
@@ -113,7 +113,7 @@ import DocScope from '@site/src/components/DocScope';
 ### USB 接口
 
 #### Q8: 开发板接入 USB 摄像头后，默认的设备节点是什么？
-**A:** 在地平线 RDK 板卡（如 RDK X3 系列）上，当您接入一个标准的 UVC (USB Video Class) 摄像头后，它在 Linux 系统中创建的视频设备节点通常**不是**像 PC 上常见的 `/dev/video0`。
+**A:** 在地瓜 RDK 板卡（如 RDK X3 系列）上，当您接入一个标准的 UVC (USB Video Class) 摄像头后，它在 Linux 系统中创建的视频设备节点通常**不是**像 PC 上常见的 `/dev/video0`。
 * **默认设备节点通常是：`/dev/video8`**
 * 也可能是 `/dev/video9`, `/dev/video10` 等，如果系统中有其他视频设备或多个 USB 摄像头。
 

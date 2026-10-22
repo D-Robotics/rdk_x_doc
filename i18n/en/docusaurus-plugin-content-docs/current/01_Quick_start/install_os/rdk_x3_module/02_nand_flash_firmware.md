@@ -114,8 +114,8 @@ Run `hbupdate.exe`:
 
 1. **Board model** (required):
 
-    - **RDK_X3_2GB**: RDK X3 (Horizon X3 Pi), 2GB—minimal image only.
-    - **RDK_X3_4GB**: RDK X3 (Horizon X3 Pi), 4GB—minimal image only.
+    - **RDK_X3_2GB**: RDK X3 (Sunrise X3 Pi), 2GB—minimal image only.
+    - **RDK_X3_4GB**: RDK X3 (Sunrise X3 Pi), 4GB—minimal image only.
     - **RDK_X3_MD_2GB**: RDK X3 Module, 2GB.
     - **RDK_X3_MD_4GB**: RDK X3 Module, 4GB.
 
