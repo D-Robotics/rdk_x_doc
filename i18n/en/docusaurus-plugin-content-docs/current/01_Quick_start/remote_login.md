@@ -111,7 +111,7 @@ Configure the IP address of the computer to be on the same subnet as the develop
 
 ![image-setstaticip-en](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/remote_login/image-setstaticip-en.png)
 
-If you want to configure the wired network of the development board to obtain IP dynamically via DHCP mode, please refer to the [Wired Network](../02_System_configuration/01_network_blueteeth.md) chapter for configuration.
+If you want to configure the wired network of the development board to obtain IP dynamically via DHCP mode, please refer to the [Wired Network](../02_System_configuration/01_network_bluetooth.md) chapter for configuration.
 
 To confirm that the connection is working, execute `ping 192.168.127.10` from the computer (change the command to the IP address of the development board). If the `ping` command receives responses, then the connection is working; otherwise, check the network configurations are correct, and that the network firewall of the computer is turned off.
 
