@@ -193,6 +193,8 @@ const config = {
           { from: "/03_Basic_Application/03_40pin_user_guide/40pin_define.md", to: "/Basic_Application/01_40pin_user_sample/40pin_define" },
           { from: "/Quick_start/09_RDK_Studio/04_flashing.md", to: "/Quick_start/rdk_studio" },
           { from: "/05_Robot_development/03_boxs/spatial/stereo_imu_cam.md", to: "https://developer.d-robotics.cc/tros_doc/en/boxs/spatial/stereo_imu_cam" },
+          // 2026-10-22：源文件名拼写错误 blueteeth → bluetooth，旧 URL 301 到新 URL
+          { from: "/System_configuration/network_blueteeth", to: "/System_configuration/network_bluetooth" },
         ],
       },
     ],
