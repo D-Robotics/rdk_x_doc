@@ -51,4 +51,4 @@ RDK X5 中主要使用 3 个 ION 区域：cma_reserved、carveout、ion_cma
 
 ### ION 区域大小调整方法
 
-RDK X5 通过 srpi-config 工具来调整 ION 区域的大小，具体操作请参考 [srpi-config](../../../02_System_configuration/02_srpi-config) ，`ION memory`一节
+RDK X5 通过 srpi-config 工具来调整 ION 区域的大小，具体操作请参考 [srpi-config](../../../02_System_configuration/02_srpi-config.md) ，`ION memory`一节

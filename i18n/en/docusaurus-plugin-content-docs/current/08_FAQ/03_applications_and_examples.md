@@ -376,7 +376,7 @@ Date: 2023
 
     :::caution **Note**
     1.x tros.b **cannot** be upgraded directly to 2.x or newer via `apt`. To use the new version, you must first upgrade the entire RDK board OS to a version that supports the new tros.b by flashing the image, then install the corresponding tros.b version.
-    See: [Install the corresponding board OS](../01_Quick_start/install_os)
+    See: [Install the corresponding board OS](/install_os)
     :::
 
 * **Feature differences:**
