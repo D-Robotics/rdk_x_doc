@@ -8,17 +8,18 @@ name: Check external links
 #   - --scheme http --scheme https：只查 http/https，file://、mailto 等跳过；
 #   - --root-dir ${{ github.workspace }}：站内 /xxx 根相对路径先解析成 file://，再被 scheme 跳过；
 #   - --exclude-all-private：内网/私有 IP、localhost 等占位符；
-#   - --exclude 占位符：http://ip/、proxy_server_address；
+#   - --exclude 占位符：http://ip/、proxy_server_address、device-ip、development-board-ip、xn--ip-*；
 #   - --exclude 图片：.png/.jpg/.gif/.svg/.webp/.ico（图片先不查，只查文字外链）；
 #   - --exclude '.hobot.cc'：境外 runner 连不上（Connection failed、非 404），GitHub 上无信号可采，
 #     本机实测 200 正常；China 侧可达性校验另议。
 # --accept 里的 412/429/530：反爬/限流/异常状态码（服务器有响应、资源存在），非 404，视为可达。
+# --max-concurrency 16：限制单仓并发（lychee 默认 128），避免把自家域名打出 timeout。
 # 注意不能用 --include '^https?://' 做白名单：lychee 里 include 一旦匹配会覆盖 exclude。
 
 on:
   schedule:
-    # 每天 UTC 03:37（北京时间 11:37），避开整点
-    - cron: "37 3 * * *"
+    # 每天 UTC 03:44（北京时间 11:44），与本批其他仓错开 7 分钟，避免同时扫描同一批域名
+    - cron: "44 3 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -39,6 +40,7 @@ jobs:
           fail: false
           args: >-
             --no-progress
+            --max-concurrency 16
             --scheme http
             --scheme https
             --root-dir ${{ github.workspace }}
@@ -49,7 +51,7 @@ jobs:
             --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             --exclude-all-private
             --exclude '\.hobot\.cc'
-            --exclude '(?i)^https?://(ip|proxy_server_address)([^a-z0-9]|$)'
+            --exclude '(?i)^https?://(ip|device-ip|development-board-ip|proxy_server_address|xn--ip-[a-z0-9-]+)([^a-z0-9-]|$)'
             --exclude '\.(png|jpe?g|gif|svg|webp|ico)(\?.*)?$'
             'docs/**/*.md'
             'docs/**/*.mdx'
