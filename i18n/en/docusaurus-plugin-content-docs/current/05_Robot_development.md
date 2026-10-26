@@ -57,4 +57,4 @@ Apps are end-to-end examples built with Communication and Boxs—covering sensin
 
 ## User manual
 
-[TogetheROS.Bot user manual](https://developer.d-robotics.cc/tros_x_doc/en/tros/)
+[TogetheROS.Bot user manual](https://developer.d-robotics.cc/tros_doc/en/tros/)
