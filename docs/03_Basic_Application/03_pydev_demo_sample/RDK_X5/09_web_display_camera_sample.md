@@ -78,7 +78,7 @@ python mipi_camera_web_yolov5x.py
 
 运行后，程序会启动 Web 服务，可以通过浏览器访问开发板的 IP 地址查看实时视频流和目标检测结果。
 
-在浏览器中访问 http:// 开发板 IP ，默认的是 http://192.168.127.10。
+在浏览器中访问开发板 IP 地址（默认 `http://192.168.127.10`）。
 ![pydev_05_wb_disp_web_img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_05_wb_disp_web_img.png)
 
 点击浏览器中显示的 `web Display` ，即可看到实时视频流和目标检测结果，效果可以查看文章开头的 [效果展示小节](#效果展示)
