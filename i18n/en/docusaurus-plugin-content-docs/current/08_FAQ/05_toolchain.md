@@ -49,14 +49,14 @@ This section mainly answers common questions related to AI model deployment, alg
 ### Q3: What community algorithm resources and toolchain manuals are available for the RDK X3 (Sunrise X3 Pi) platform?
 **A:** For algorithm development on the RDK X3 platform, you can refer to the following OpenExplorer community resources:
 * **RDK X3 Algorithm Toolchain Community Manual (OpenExplorer):**
-    [https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html](https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html)
+    [https://developer-legacy.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html](https://developer-legacy.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html)
 * **RDK X3 OpenExplore Product Release and Related Resources Post:**
     [https://developer.d-robotics.cc/forumDetail/136488103547258769](https://developer.d-robotics.cc/forumDetail/136488103547258769)
 
 ### Q4: What community algorithm resources and toolchain manuals are available for the RDK X5 platform?
 **A:** For algorithm development on the RDK X5 platform, you can refer to the following OpenExplorer community resources:
 * **RDK X5 Algorithm Toolchain Community Manual (OpenExplorer):**
-    [https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html](https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html) (Please note the document version number; use the latest version)
+    [https://developer-legacy.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html](https://developer-legacy.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html) (Please note the document version number; use the latest version)
 * **RDK X5 OpenExplore Product Release and Related Resources Post:**
     [https://developer.d-robotics.cc/forumDetail/251934919646096384](https://developer.d-robotics.cc/forumDetail/251934919646096384)
 

@@ -49,14 +49,14 @@ sidebar_position: 5
 ### Q3: RDK X3（旭日 X3 派）平台有哪些社区算法资源和工具链手册？
 **A:** 针对 RDK X3 平台的算法开发，可以参考以下 OpenExplorer 社区资源：
 * **RDK X3 算法工具链社区手册 (OpenExplorer)：**
-    [https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html](https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html)
+    [https://developer-legacy.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html](https://developer-legacy.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html)
 * **RDK X3 OpenExplore 产品发布及相关资源帖：**
     [https://developer.d-robotics.cc/forumDetail/136488103547258769](https://developer.d-robotics.cc/forumDetail/136488103547258769)
 
 ### Q4: RDK X5 平台有哪些社区算法资源和工具链手册？
 **A:** 针对 RDK X5 平台的算法开发，可以参考以下 OpenExplorer 社区资源：
 * **RDK X5 算法工具链社区手册 (OpenExplorer)：**
-    [https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html](https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html) (请注意文档版本号，以最新为准)
+    [https://developer-legacy.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html](https://developer-legacy.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html) (请注意文档版本号，以最新为准)
 * **RDK X5 OpenExplore 产品发布及相关资源帖：**
     [https://developer.d-robotics.cc/forumDetail/251934919646096384](https://developer.d-robotics.cc/forumDetail/251934919646096384)
 

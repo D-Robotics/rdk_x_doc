@@ -714,7 +714,7 @@ RDK X3/X5 相关配件、扩展产品的完整规格书资料，提供详细的�
     </tr>
     <tr>
       <td>💾 **镜像烧录工具**</td>
-      <td><a href="https://developer.d-robotics.cc/api/v1/static/fileData/1650948745611.rar">Rufus</a><br/><a href="https://developer.d-robotics.cc/rdkstudio">RDK Studio</a></td>
+      <td><a href="https://developer-legacy.d-robotics.cc/api/v1/static/fileData/1650948745611.rar">Rufus</a><br/><a href="https://developer.d-robotics.cc/rdkstudio">RDK Studio</a></td>
       <td>用于将镜像文件写入到 SD 卡的软件工具，支持多种镜像格式</td>
     </tr>
     <tr>
@@ -724,7 +724,7 @@ RDK X3/X5 相关配件、扩展产品的完整规格书资料，提供详细的�
     </tr>
     <tr>
       <td>⚙️ **相关驱动**</td>
-      <td><a href="https://developer.d-robotics.cc/api/v1/static/fileData/1651770860901.zip">串口驱动（CP210x）</a> <br/> <a href="https://developer.d-robotics.cc/api/v1/static/fileData/1651120312998.rar">android_hobot</a></td>
+      <td><a href="https://developer-legacy.d-robotics.cc/api/v1/static/fileData/1651770860901.zip">串口驱动（CP210x）</a> <br/> <a href="https://developer-legacy.d-robotics.cc/api/v1/static/fileData/1651120312998.rar">android_hobot</a></td>
       <td>必要的系统驱动程序，确保设备正常连接和通信</td>
     </tr>
   </tbody>
