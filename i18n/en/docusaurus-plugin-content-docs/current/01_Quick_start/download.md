@@ -703,7 +703,7 @@ Providing comprehensive hardware design support materials for module customers t
     </tr>
     <tr>
       <td>💾 **Image Burning Tool**</td>
-      <td><a href="https://developer.d-robotics.cc/api/v1/static/fileData/1650948745611.rar">Rufus</a><br/><a href="https://developer.d-robotics.cc/en/rdkstudio">RDK Studio</a></td>
+      <td><a href="https://developer-legacy.d-robotics.cc/api/v1/static/fileData/1650948745611.rar">Rufus</a><br/><a href="https://developer.d-robotics.cc/en/rdkstudio">RDK Studio</a></td>
       <td>Software tool for writing image files to SD cards, supporting multiple image formats.</td>
     </tr>
     <tr>
@@ -713,7 +713,7 @@ Providing comprehensive hardware design support materials for module customers t
     </tr>
     <tr>
       <td>⚙️ **Related Drivers**</td>
-      <td><a href="https://developer.d-robotics.cc/api/v1/static/fileData/1651770860901.zip">Serial Port Driver (CP210x)</a> <br/> <a href="https://developer.d-robotics.cc/api/v1/static/fileData/1651120312998.rar">android_hobot</a></td>
+      <td><a href="https://developer-legacy.d-robotics.cc/api/v1/static/fileData/1651770860901.zip">Serial Port Driver (CP210x)</a> <br/> <a href="https://developer-legacy.d-robotics.cc/api/v1/static/fileData/1651120312998.rar">android_hobot</a></td>
       <td>Necessary system drivers to ensure normal device connection and communication.</td>
     </tr>
   </tbody>

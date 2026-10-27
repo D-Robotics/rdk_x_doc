@@ -9,6 +9,8 @@ name: Check external links
 #   - --root-dir ${{ github.workspace }}：站内 /xxx 根相对路径先解析成 file://，再被 scheme 跳过；
 #   - --exclude-all-private：内网/私有 IP、localhost 等占位符；
 #   - --exclude 占位符：http://ip/、proxy_server_address、device-ip、development-board-ip、xn--ip-*；
+#   - --exclude YouTube：数据中心 IP 被判 404，视频本身正常（2026-10-26 逐个核验未删除）；
+#   - --exclude waveshare.com / blog.csdn.net：反爬，runner 得 503/521，真实用户与本机实测 200；
 #   - --exclude 图片：.png/.jpg/.gif/.svg/.webp/.ico（图片先不查，只查文字外链）；
 #   - --exclude '.hobot.cc'：境外 runner 连不上（Connection failed、非 404），GitHub 上无信号可采，
 #     本机实测 200 正常；China 侧可达性校验另议。
@@ -51,6 +53,9 @@ jobs:
             --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             --exclude-all-private
             --exclude '\.hobot\.cc'
+            --exclude '(?i)^https?://([a-z0-9-]+\.)?(youtube\.com|youtu\.be)/'
+            --exclude '(?i)^https?://([a-z0-9-]+\.)?waveshare\.com/'
+            --exclude '(?i)^https?://blog\.csdn\.net/'
             --exclude '(?i)^https?://(ip|device-ip|development-board-ip|proxy_server_address|xn--ip-[a-z0-9-]+)([^a-z0-9-]|$)'
             --exclude '\.(png|jpe?g|gif|svg|webp|ico)(\?.*)?$'
             'docs/**/*.md'

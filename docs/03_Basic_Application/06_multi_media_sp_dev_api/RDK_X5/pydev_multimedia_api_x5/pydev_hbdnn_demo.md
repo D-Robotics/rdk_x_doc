@@ -413,7 +413,7 @@ print("版本:", HB_HBMRuntime.version)
     print(model.input_strides)
     # 输出：{'yolov5x_672x672_nv12': {'data_uv': [-1, -1, 2, 1], 'data_y': [-1, -1, 1, 1]}}
     ```
-    注意： stride 的详细含义可参考[OE文档](https://developer.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html?highlight=stride#hbdnntensorproperties)中 hbDNNTensorProperties 中的描述；
+    注意： stride 的详细含义可参考[OE文档](https://developer-legacy.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html?highlight=stride#hbdnntensorproperties)中 hbDNNTensorProperties 中的描述；
 - output_counts: Dict[str, int]
   - 功能说明：
     - 每个模型输出张量数量。
@@ -502,7 +502,7 @@ print("版本:", HB_HBMRuntime.version)
     print(model.output_strides)
     # 输出：{'yolov5x_672x672_nv12': {'1310': [1806336, 43008, 1024, 4], '1312': [451584, 21504, 1024, 4], 'output': [7225344, 86016, 1024, 4]}}
     ```
-    注意： stride 的详细含义可参考[OE文档](https://developer.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html?highlight=stride#hbdnntensorproperties)中 hbDNNTensorProperties 中的描述；
+    注意： stride 的详细含义可参考[OE文档](https://developer-legacy.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html?highlight=stride#hbdnntensorproperties)中 hbDNNTensorProperties 中的描述；
 
 - sched_params: Dict[str, SchedParam]
   - 功能说明：

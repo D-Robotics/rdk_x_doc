@@ -25,9 +25,9 @@ For details on how to use the suite, please refer to the [System Burning](/insta
 :::info RDK X3 Note
 
 - In this document, **RDK X3** refers to the 2.0 and 3.0 system versions. For users who still need the **Sunrise X3 Pi 1.0 system**, please refer to the following links:<br/>
-    [Sunrise X3 Pi User Manual](https://developer.d-robotics.cc/api/v1/fileData/documents_pi/index.html)<br/>
+    [Sunrise X3 Pi User Manual](https://developer-legacy.d-robotics.cc/api/v1/fileData/documents_pi/index.html)<br/>
     [Sunrise X3 Pi Ubuntu Images](https://archive.d-robotics.cc/downloads/os_images/), select images under the 1.x.x directory<br/>
-    [Sunrise X3 Pi Resource Package](https://developer.d-robotics.cc/api/v1/static/fileData/X3%E6%B4%BE%E8%B5%84%E6%96%99%E5%8C%85_20220711175326.zip)<br/>
+    [Sunrise X3 Pi Resource Package](https://developer-legacy.d-robotics.cc/api/v1/static/fileData/X3%E6%B4%BE%E8%B5%84%E6%96%99%E5%8C%85_20220711175326.zip)<br/>
 
 - **RDK X3 Module** comes with a pre-flashed test system image. To ensure you are using the latest system version, it is recommended to refer to this document to complete [the burning of the latest version of the system image](./01_Quick_start/install_os/rdk_x3_module/01_system_burn.md).
 
