@@ -733,7 +733,7 @@ For example, the updated version info may look like (date and version will vary)
         # Then run colcon build or other build commands
         ```
 
-3.  **For `hb_mapper` (Horizon model conversion tool):**
+3.  **For `hb_mapper` (D-Robotics model conversion tool):**
     * In the model conversion `yaml` config file, look for options like `compiler_parameters` -> `jobs: 1` to limit the number of parallel processes during model compilation (e.g., ONNX to BIN model). Check the latest algorithm toolchain docs for specific parameter names.
 
 4.  **Close unnecessary background services and applications:**
@@ -769,7 +769,7 @@ Which method(s) to use depends on the specific error, available resources, and b
 **A:**
 1.  **Docker images (e.g., for algorithm toolchains, cross-compilation environments):**
     * **Official sources:** Docker images are usually released on Docker Hub. D-Robotics may also provide some key images on their own servers or in specific developer community resource posts.
-    * **Network issues:** If pulling from Docker Hub is slow or fails, it may be due to network restrictions or international bandwidth. Try configuring Docker to use a domestic mirror accelerator service (e.g., Alibaba Cloud, DaoCloud, NetEase, etc. provide such services).
+    * **Network issues:** If pulling from Docker Hub is slow or fails, it may be due to network restrictions or international bandwidth. Try configuring Docker to use a domestic mirror accelerator service (e.g., Alibaba Cloud, DaoCloud, NetEase CloudComb, etc. provide such services).
     * **Community resources:** Check the D-Robotics developer community announcements or resource download area, which may provide image acquisition solutions for domestic users. For example, this post once provided related resources: [D-Robotics Developer Community Forum Post](https://developer.d-robotics.cc/forumDetail/136488103547258769) (check the latest validity).
 2.  **OE (OpenEmbedded) packages / BSP (Board Support Package):**
     * OE build environment packages or full BSPs (including kernel source, drivers, filesystem build scripts, etc.) are usually large. If provided directly by the official site, ensure your network is stable and has enough bandwidth.

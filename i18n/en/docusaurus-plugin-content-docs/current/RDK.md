@@ -115,33 +115,7 @@ Provides commonly used commands in RDK OS, including RDK-specific commands for q
 **10. Release Notes**
 It records the release information of the RDK OS, including the version number, release date, update content, etc., to help users understand the system updates and changes.
 
-## Ecosystem Project Docking Support
 
-For product development, industry deployment, or batch deployment projects based on the RDK platform, D-Robotics has established the **"D-Robotics Ecosystem Project Docking Center"** as a unified collaboration entry point.
-
-If you are involved in any of the following scenarios, we recommend submitting your project information through this entry point:
-
-- Productization or mass-production planning  
-- System architecture evaluation and solution confirmation  
-- Module adaptation and performance optimization support  
-- Commercial project joint development  
-- Technical confirmation before bulk procurement  
-
-After submission, we will respond in tiers based on the project stage, including:
-
-1. Technical requirements assessment  
-2. Solution docking and architecture recommendations  
-3. Module Owner collaborative support  
-4. Issue closure tracking  
-5. Product roadmap coordination (if applicable)  
-
-👉 Project docking entry:  
-[D-Robotics Ecosystem Project Docking Communication](https://horizonrobotics.feishu.cn/share/base/form/shrcnpxBa3PjdjFmtxZS3tBXw0e)
-
-:::note Note
-This entry point is intended for clear project or commercial deployment needs.  
-For day-to-day technical questions, we recommend using community Q&A or the FAQ section first.
-:::
 
 
 
@@ -160,7 +134,7 @@ After a system update, execute the rdk-miniboot-update command to burn the lates
 - **‌Upgrade Verification Mechanism‌‌** 
 Starting from hobot-miniboot_3.0.3, the rdk-miniboot-update tool automatically displays both the current NAND firmware version and the target upgrade version, reducing upgrade risks and ensuring operational safety.
 
-####  Version：3.4.1
+####  Version: 3.4.1
 
 1. Overview
 This release is a major update for the RDK X5 system. The underlying platform software has been fully aligned and synchronized with the latest X5 SDK 1.1.1. Compared with the previous release (based on X5 SDK 1.0.17), this update primarily addresses boot stability and media pipeline issues, and includes a comprehensive restructuring of the development documentation.
@@ -186,7 +160,7 @@ After in-depth adaptation and system trimming, all core capabilities have been f
 - ROS component fixes: Fixed runtime loading failures caused by incorrect installation paths of ROS component shared objects for MIPI cameras and algorithm modules.
 - hobot_codec optimization: Optimized image codec module configurations by removing invalid parameters and adding new debug-related options.
 
-####  TROS Algorithm Upgrade & Version：3.3.3
+####  TROS Algorithm Upgrade & Version: 3.3.3
 
 - Added driver support for the Yuguang SC132GS stereo camera module.
 - srpi-config enhancements: Added support for automatic pin multiplexing for interfaces, and introduced MIPI display selection.
@@ -235,7 +209,7 @@ Mirror Update
 System updates:
 
 - **Desktop Display Optimization:** Ubuntu desktop now supports 3D GPU acceleration for smoother visuals.
-- **Audio Sub-board Support:** Added support for Waveshare WM8960 Audio HAT and Huaner carrier board for faster voice solution integration.
+- **Audio Sub-board Support:** Added support for Waveshare WM8960 Audio HAT and Hiwonder carrier board for faster voice solution integration.
 - **WiFi Driver Upgrade:** Improved connection stability in weak signal environments and optimized auto-reconnect during sleep/wake.
 - **Sensor Acquisition Framework Expansion:** Integrated V4L2 framework, supporting imx477, ov5647, imx219 sensors, with more to come.
 - **Network & Remote Optimization:** Default to iptables legacy mode, improved VNC display smoothness, and lag-free remote desktop.

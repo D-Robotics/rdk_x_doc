@@ -101,4 +101,4 @@ tail /userdata/bpu-stress.log
 
 ![image-20220324193250187](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/driver_development/image-20220324193250187.png)
 
-13、check `bpu test result`, if  `error`, `system hung` ,etc, appeared in `bpu_stress.log`, it means the test has failed.
+13, check `bpu test result`, if  `error`, `system hung`,etc, appeared in `bpu_stress.log`, it means the test has failed.

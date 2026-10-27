@@ -85,7 +85,7 @@ First, define the special voltage domain configuration for the current hardware 
 ```
 
 Similar to the usage of pinctrl, the driver references the IO-Domain that needs to be configured in its own DTS. For example, for the PWM driver, the configuration is as follows:
-：
+:
 
 ```c
 &pwm0 {

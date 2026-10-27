@@ -17,4 +17,4 @@ sidebar_position: 3
 
 ## 附录
 
-测试源码以及编译可以参考[UART 驱动调试指南](
+测试源码以及编译可以参考 [UART 驱动调试指南](../driver_development/driver_uart_dev.md)。

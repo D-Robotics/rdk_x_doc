@@ -7,10 +7,12 @@ sidebar_position: 6
 import DocScope from '@site/src/components/DocScope';
 ```
 
-This chapter aims to describe how to enable real-time kernel (Preempt-RT kernel) on `RDK X3` and `RDK X3 Module`, and provide the corresponding commands for users to use. Real-time kernel is an operating system kernel that can provide more precise and reliable response time, and is commonly used in applications with high time sensitivity requirements, such as robot control and industrial automation. The following are the related commands for enabling and disabling real-time kernel, as well as some common use cases and testing methods.
+This chapter aims to describe how to enable real-time kernel (Preempt-RT kernel) on `RDK X3`, `RDK X3 Module`, `RDK X5`, and `RDK X5 Module`, and provide the corresponding commands for users to use. Real-time kernel is an operating system kernel that can provide more precise and reliable response time, and is commonly used in applications with high time sensitivity requirements, such as robot control and industrial automation. The following are the related commands for enabling and disabling real-time kernel, as well as some common use cases and testing methods.
 
 <DocScope versions=">=3.0.0" products="RDK-X3">
-## Command to Enable Real-Time Kernel
+## X3 Series Boards
+
+### Real-Time Kernel Enablement Commands
 
 To enable real-time kernel on RDK X3, please execute the following commands:
 
@@ -24,7 +26,7 @@ These commands will install kernel headers, kernel files, drivers, and BPU drive
 
 ![image-20230914142401210](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/02_linux_development/image/realtime_kernel/image-20230914142401210.png)
 
-## Command to Restore to Standard Kernel
+### Command to Restore to Standard Kernel
 
 If you need to restore to the standard kernel, you can execute the following commands:
 
@@ -35,11 +37,11 @@ sudo reboot
 
 These commands will uninstall the components related to the real-time kernel and install the components corresponding to the standard kernel. After completion, restart the system to switch back to the standard kernel.
 
-## Real-Time Performance Testing
+### Real-Time Performance Testing
 
 When you need to test the performance of the real-time kernel, a commonly used performance testing tool is `rt-tests`, which includes multiple test programs that can be used to test the performance of the real-time kernel. Here is an example of performing performance testing with `rt-tests`:
 
-### Installing the rt-tests Tool
+#### Installing the rt-tests Tool
 
 If the `rt-tests` tool has not been installed yet, you can use the following command to install it:
 
@@ -47,7 +49,7 @@ If the `rt-tests` tool has not been installed yet, you can use the following com
 sudo apt install rt-tests
 ```
 
-### Running the cyclictest Test
+#### Running the cyclictest Test
 
 The `cyclictest` test is a commonly used test in `rt-tests`, which is used to evaluate the timing behavior and response time of the system. Execute the following command to run the `cyclictest` test:
 
@@ -66,7 +68,7 @@ This command will run a real-time performance test with the following options:
 
 The test results will display the minimum, maximum, and average latency of the system, as well as some other performance statistics.
 
-### Analyzing Test Results
+#### Analyzing Test Results
 
 Analyze the `cyclictest` test results to assess the performance of the real-time kernel. Pay attention to the minimum and maximum latencies to ensure they are within an acceptable range. Smaller maximum latency and more consistent latency indicate better performance of the real-time kernel. The following graphs show the results of the test when using a real-time kernel and running the `/app/pydev_demo/03_mipi_camera_sample` example.
 

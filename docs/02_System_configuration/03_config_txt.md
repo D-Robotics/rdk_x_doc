@@ -84,7 +84,7 @@ root@ubuntu:~# dmesg | grep "Reserved ion"
 
 RDK X3 支持： uart3, spi0, spi1, spi2, i2c0, i2c1, i2c2, i2c3, i2c4, i2c5, i2s0, i2s1
 
-RDK X5 支持： uart1, uart2, uart3, uart6，spi1, spi2, i2c0, i2c1, i2c5, i2c4, i2c5, dw_i2s1
+RDK X5 支持： uart1, uart2, uart3, uart6, spi1, spi2, i2c0, i2c1, i2c4, i2c5, dw_i2s1
 
 :::info 注意
 

@@ -4,6 +4,10 @@ sidebar_position: 5
 
 # 8.5 AI 模型、算法与工具链
 
+```mdx-code-block
+import DocScope from '@site/src/components/DocScope';
+```
+
 :::tip 🛠️ 工具链和系统下载指引
 
 工具链问题建议优先使用最新版本。相关下载资源请参考：[下载资源汇总](../01_Quick_start/download.md)
@@ -46,12 +50,18 @@ sidebar_position: 5
 3.  **地瓜开发者社区 - 资源中心：** 社区的资源中心板块通常会汇总各类开发资源，包括工具链、SDK、示例代码、技术文档、教程视频等。
     * 社区资源中心入口：[https://developer.d-robotics.cc/resource](https://developer.d-robotics.cc/resource)
 
+<DocScope products="RDK-X3">
+
 ### Q3: RDK X3（旭日 X3 派）平台有哪些社区算法资源和工具链手册？
 **A:** 针对 RDK X3 平台的算法开发，可以参考以下 OpenExplorer 社区资源：
 * **RDK X3 算法工具链社区手册 (OpenExplorer)：**
     [https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html](https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html)
 * **RDK X3 OpenExplore 产品发布及相关资源帖：**
     [https://developer.d-robotics.cc/forumDetail/136488103547258769](https://developer.d-robotics.cc/forumDetail/136488103547258769)
+
+</DocScope>
+
+<DocScope products="RDK-X5">
 
 ### Q4: RDK X5 平台有哪些社区算法资源和工具链手册？
 **A:** 针对 RDK X5 平台的算法开发，可以参考以下 OpenExplorer 社区资源：
@@ -60,6 +70,8 @@ sidebar_position: 5
 * **RDK X5 OpenExplore 产品发布及相关资源帖：**
     [https://developer.d-robotics.cc/forumDetail/251934919646096384](https://developer.d-robotics.cc/forumDetail/251934919646096384)
 
+</DocScope>
+
 ### Q5: 算法工具链的 Docker 镜像是基于 Ubuntu 20.04 制作的，这会影响转换产物（如.bin 或.hbm 模型文件）在 RDK 板端 Ubuntu 22.04 系统上运行吗？
 **A:** 通常**不会影响**。
 地瓜机器人 OpenExplorer 提供的算法工具链 Docker 镜像虽然可能基于 Ubuntu 20.04 制作，但其主要作用是提供一个隔离的、包含所有必要转换工具和依赖库的**模型转换环境**。
@@ -67,6 +79,8 @@ sidebar_position: 5
 
 ### Q6: 如何在 RDK 平台上部署 YOLO 系列模型（如 YOLOv5, YOLOv8, YOLOv10）？
 **A:** 地瓜机器人官方和社区提供了丰富的 YOLO 系列模型在 RDK 平台上的部署教程和示例。
+
+<DocScope products="RDK-X3">
 
 * **YOLOv5 在 RDK X3 平台的部署：**
     * **全流程部署教程：** [YOLOv5 在 RDK X3 上的全流程部署](https://developer.d-robotics.cc/forumDetail/198686198578007656)
@@ -78,8 +92,14 @@ sidebar_position: 5
 * **YOLOv8 在 RDK X3 平台的部署：**
     * **Python 多进程刷满 30fps 参考：** [CSDN 博客 - YOLOv8 RDK X3 部署](https://blog.csdn.net/SA2672873269/article/details/139780749)
 
+</DocScope>
+
+<DocScope products="RDK-X5">
+
 * **YOLOv10 在 Bayes 架构平台（如 RDK X5）的部署：**
     * **Python 多线程刷满 30fps 参考：** [CSDN 博客 - YOLOv10 Bayes 平台部署](https://blog.csdn.net/SA2672873269/article/details/139224272)
+
+</DocScope>
 
 * **通用资源：** 强烈建议查阅 **RDK Model Zoo** ([https://github.com/D-Robotics/rdk_model_zoo](https://github.com/D-Robotics/rdk_model_zoo))，其中包含了多种 YOLO 版本（及其他主流模型）的官方部署示例、预处理/后处理代码、以及性能优化技巧。
 
@@ -134,6 +154,8 @@ sidebar_position: 5
     * **推荐使用 RDK Model Zoo 中的后处理：** 对于 YOLOv5 等模型的验证和部署，强烈建议参考或直接使用 **RDK Model Zoo** ([https://github.com/D-Robotics/rdk_model_zoo](https://github.com/D-Robotics/rdk_model_zoo)) 中提供的后处理代码。Model Zoo 中的实现通常更健壮、更优化，并且与工具链的配合更紧密。
     * **检查参数传递：** 如果您坚持使用板载示例的后处理，请仔细检查示例代码，确保所有必要的参数（如类别数、输入分辨率、anchors、置信度阈值、NMS 阈值等）都已正确配置并传递给了后处理函数或类。
 
+<DocScope products="RDK-X3">
+
 ### Q12: 运行 RDK 板载的 `/app/pydev_demo/07_yolov5_sample` 示例时，如果使用自己的模型，报 `Segmentation fault` (段错误)，怎么办？
 **A:**
 * **原因：** 板载的官方示例程序（如 `07_yolov5_sample`）通常是**针对其自带的预转换好的 `.bin` 模型进行适配和测试的**。这个示例的预处理、模型加载、BPU 推理调用以及后处理逻辑，都是围绕那个特定的自带模型设计的。
@@ -142,6 +164,8 @@ sidebar_position: 5
     1.  **不要直接替换 bin 文件就期望能运行：** 原则上，对于自己训练和转换的模型，您需要编写或修改与之配套的完整推理程序（包括预处理、BPU 推理接口调用、后处理）。
     2.  **参考 RDK Model Zoo：** 对于 YOLOv5 这类常见模型，强烈建议参考 **RDK Model Zoo** ([https://github.com/D-Robotics/rdk_model_zoo](https://github.com/D-Robotics/rdk_model_zoo)) 中对应模型的部署示例。Model Zoo 通常会提供更通用、更清晰的预处理和后处理代码实现，您可以基于这些代码来适配您自己的模型。
     3.  **理解后处理：** 仔细学习 YOLOv5 的后处理原理（包括 anchors 解码、置信度过滤、NMS 等），并确保您的后处理代码与您模型输出特征图的格式、维度、内容完全对应。
+
+</DocScope>
 
 ### Q13: 模型推理检测不出任何结果，或者结果远差于预期，应该从哪些方面进行排查（Pipeline 检查流程）？
 **A:** 
@@ -1679,6 +1703,8 @@ hb_model_verifier 工具（详细介绍可参考）的使用方法，请参考 P
 
 #### 模型量化 yaml 配置文件模板
 
+<DocScope products="RDK-X3">
+
 ##### RDK X3 Caffe 模型量化 yaml 文件模板{#rdk_x3_caffe_yaml_template}
 
 请新建 caffe_config.yaml 文件，并直接拷贝以下内容，然后只需填写标记为 **``必选参数``** 的参数即可进行模型转换，若需了解更多参数的使用说明，可参考 [yaml 配置文件详解](https://developer.d-robotics.cc/oe_x3_doc/cn/oe_mapper/source/faststart/quickstart.html#yaml) 章节内容。
@@ -1838,6 +1864,10 @@ compiler_parameters:
   optimize_level: 'O3'
 
 ```
+
+</DocScope>
+
+<DocScope products="RDK-X5">
 
 ##### RDK X5 Caffe 模型量化 yaml 文件模板{#rdk_x5_caffe_yaml_template}
 
@@ -1999,9 +2029,15 @@ compiler_parameters:
 ```
 
 
+</DocScope>
+
+<DocScope products="RDK-X3">
+
 #### X3 多核 BPU 使用说明
 
 因 X3 中有 2 颗 BPU 核，所以在 BPU 使用中存在单核模型和双核模型的情况，多核 BPU 的使用注意事项参考文档：[X3 多核 BPU 的合理使用技巧与建议](https://developer.d-robotics.cc/forumDetail/136488103547258549)
+
+</DocScope>
 
 #### 定点.bin 模型上板多 batch 使用说明
 

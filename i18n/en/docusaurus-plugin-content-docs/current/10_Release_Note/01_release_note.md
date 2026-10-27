@@ -124,7 +124,7 @@ Building on the RDK Ubuntu 22.04 and TROS Robot Operating System experience, thi
 
 **(1) System and Driver Updates**
 
-- **Added YuGuang-SC132GS stereo camera module driver**
+- **Added Yuguang-SC132GS stereo camera module driver**
 - **srpi-config functionality enhancement**: Supports automatic interface pin multiplexing, added MIPI screen selection
 - **GPU desktop stability improvements**
 - **Wi-Fi driver upgraded to 2025_0410**, improving wireless connection stability
@@ -171,12 +171,12 @@ RDK X5 V3.3.3 version has been synchronized to:
   - Supports [real-time kernel switching](../Advanced_development/linux_development/realtime_kernel#x5-series-boards)  
   - Integrated the latest miniboot firmware; after burning NAND with `rdk-miniboot-update`, more memory is released to the system
 - **20250604**  
-  - Fixed system boot failure issue on Huaner carrier board
+  - Fixed system boot failure issue on Hiwonder carrier board
 
 #### System Layer Updates
 
 - **Desktop Display Optimization**: Ubuntu desktop now supports 3D GPU accelerated rendering for a smoother visual experience
-- **Audio Sub-board Adaptation Added**: Supports Waveshare WM8960 Audio HAT and Huaner carrier board, accelerating voice solution integration
+- **Audio Sub-board Adaptation Added**: Supports Waveshare WM8960 Audio HAT and Hiwonder carrier board, accelerating voice solution integration
 - **WIFI Driver Upgrade**: Enhanced connection stability in weak signal environments, optimized auto-reconnection during sleep/wake
 - **Sensor Acquisition Framework Expansion**: Integrated V4L2 framework, adapted for imx477, ov5647, imx219; more sensor support coming soon
 - **Network & Remote Optimization**: Default switched to iptables legacy mode, improved VNC display smoothness, remote desktop is lag-free
@@ -610,7 +610,7 @@ This release brings many anticipated features and improvements for a better deve
 - Optimized TF card compatibility.
 - Added car line-following, auto-parking samples.
 - Added more camera adaptations.
-- Added Sunyu RGBD module adaptation.
+- Added Sunny Optical RGBD module adaptation.
 - hobot_codec fixed image crash.
 - Supports output frame rate control.
 - Added EDID detection, adaptive resolution.

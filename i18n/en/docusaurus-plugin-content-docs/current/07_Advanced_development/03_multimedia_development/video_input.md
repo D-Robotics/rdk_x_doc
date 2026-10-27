@@ -88,7 +88,7 @@ int HB_VIN_SetChnAttr(uint32_t pipeId, uint32_t chnId);
 int HB_VIN_DestroyChn(uint32_t pipeId, uint32_t chnId);
 int HB_VIN_GetChnFrame(uint32_t pipeId, uint32_t chnId, void *pstVideoFrame, int32_t millSec);
 int HB_VIN_ReleaseChnFrame(uint32_t pipeId, uint32_t chnId, void *pstVideoFrame);
-int HB_VIN_SendPipeRaw(uint32_t pipeId, void *pstVideoFrame，int32_t millSec);
+int HB_VIN_SendPipeRaw(uint32_t pipeId, void *pstVideoFrame, int32_t millSec);
 int HB_VIN_SetPipeAttr(uint32_t pipeId, VIN_PIPE_ATTR_S *stVinPipeAttr);
 int HB_VIN_GetPipeAttr(uint32_t pipeId, VIN_PIPE_ATTR_S *stVinPipeAttr);
 int HB_VIN_CtrlPipeMirror(uint32_t pipeId, uint8_t on);
@@ -2432,7 +2432,7 @@ typedef struct HB_VIN_DEV_ATTR_EX_S {
 
 
 ### VIN_PIPE_SENSOR_MODE_E
-【Structure Definition】
+Structure Definition
 ```c
 typedef enum HB_VIN_PIPE_SENSOR_MODE_E {
     SENSOR_NORMAL_MODE = 1,
@@ -2443,14 +2443,14 @@ typedef enum HB_VIN_PIPE_SENSOR_MODE_E {
     SENSOR_INVAILD_MODE
 } VIN_PIPE_SENSOR_MODE_E;
 ```
-【Function Description】
+Function Description
 > Sensor operation mode
 
-【Member Descriptions】
+Member Descriptions
 > Normal mode, DOL2 mode, DOL3 mode, PWL mode (compressed mode)
 
 ### VIN_PIPE_CFA_PATTERN_E
-【Structure Definition】
+Structure Definition
 ```c
 typedef enum HB_VIN_PIPE_CFA_PATTERN_E {
     PIPE_BAYER_RGGB = 0,
@@ -2460,14 +2460,14 @@ typedef enum HB_VIN_PIPE_CFA_PATTERN_E {
     PIPE_MONOCHROME,
 } VIN_PIPE_CFA_PATTERN_E;
 ```
-【Function Description】
+Function Description
 > Data format layout
 
-【Member Descriptions】
+Member Descriptions
 > Different data storage formats
 
 ### VIN_PIPE_SIZE_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_VIN_PIPE_SIZE_S {
     uint32_t  format;
@@ -2475,10 +2475,10 @@ typedef struct HB_VIN_PIPE_SIZE_S {
     uint32_t  height;
 } VIN_PIPE_SIZE_S;
 ```
-【Function Description】
+Function Description
 > Defines pipe size data information
 
-【Member Descriptions】
+Member Descriptions
 
 |  Member  | Meaning         |
 | :------: | :------------- |
@@ -2487,17 +2487,17 @@ typedef struct HB_VIN_PIPE_SIZE_S {
 | height  | Data height    |
 
 ### VIN_PIPE_CALIB_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_VIN_PIPE_CALIB_S {
     uint32_t mode;
     unsigned char *lname;
 } VIN_PIPE_CALIB_S;
 ```
-【Function Description】
+Function Description
 > Sensor calibration data loading
 
-【Member Descriptions】
+Member Descriptions
 
 | Member   | Meaning                          |
 | :------- | :------------------------------- |
@@ -2505,7 +2505,7 @@ typedef struct HB_VIN_PIPE_CALIB_S {
 | lname    | Calibration library name pointer |
 
 ### VIN_PIPE_ATTR_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_VIN_PIPE_ATTR_S {
     uint32_t  ddrOutBufNum;
@@ -2523,10 +2523,10 @@ typedef struct HB_VIN_PIPE_ATTR_S {
     VIN_PIPE_CALIB_S calib;
 } VIN_PIPE_ATTR_S;
 ```
-【Function Description】
+Function Description
 > Defines pipe attribute information
 
-【Member Descriptions】
+Member Descriptions
 
 |       Member       | Meaning                                                      |
 | :----------------: | :----------------------------------------------------------- |
@@ -2544,7 +2544,7 @@ typedef struct HB_VIN_PIPE_ATTR_S {
 | calib             | Calibration data loading status, 1 enabled, 0 disabled         |
 
 ### VIN_LDC_PATH_SEL_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_VIN_LDC_PATH_SEL_S {
     uint32_t rg_y_only:1;
@@ -2555,10 +2555,10 @@ typedef struct HB_VIN_LDC_PATH_SEL_S {
     uint32_t reserved0:16;
 } VIN_LDC_PATH_SEL_S;
 ```
-【Function Description】
+Function Description
 > Defines LDC attribute information
 
-【Member Descriptions】
+Member Descriptions
 
 | Member   | Meaning                         |
 | :------- | :------------------------------ |

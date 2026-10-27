@@ -50,7 +50,7 @@ Here is an example of querying the multiplexing, direction control, and data reg
 
 
 ```bash
-kernel/drivers/gpio/gpio-dwapb.c # gpio驱动源文件
+kernel/drivers/gpio/gpio-dwapb.c # GPIO driver source file
 ```
 ### Kernel Configuration
 

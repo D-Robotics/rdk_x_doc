@@ -80,7 +80,7 @@ Additionally, an RTC that is not being charged must not be used for power supply
 
 <DocScope versions=">=3.5.0" products="RDK X5">
 
-None。
+None.
 
 </DocScope>
 <DocScope versions=">=3.5.0" products="RDK X5 Module">
@@ -386,7 +386,7 @@ The RDK X5 provides a CAN FD interface for CAN and CAN FD communication. Refer t
 
 The RDK X5 Module development board provides a CAN FD interface (interface No. 15) and a CAN termination resistor switch (interface No. 14). 
 For high-speed communication, both termination resistors should be enabled to prevent signal reflections and improve noise immunity. 
-This setup supports both CAN and CAN FD communication. For detailed information, please refer to the relevant documentation. [CAN使用](../../07_Advanced_development/01_hardware_development/rdk_x5/can.md)
+This setup supports both CAN and CAN FD communication. For detailed information, please refer to the relevant documentation. [CAN usage](../../07_Advanced_development/01_hardware_development/rdk_x5/can.md)
 
 </DocScope>
 
@@ -413,8 +413,8 @@ All IO pins on the 40-pin header support switching between 3.3V and 1.8V voltage
 | Connector  | Model  |   Vendor   |  Description   |
 | --- | ------ | ------- | ------- |
 | J1 | HDGC1002WV-S-2P | HDGC | RTC Battery Interface |
-| J14/J15 | AFC11-S22ICA-00 | jushuodz | MIPI Camera Interface |
-| J16 | AFC01-S22FCA-00 | jushuodz | LCD Display Interface |
+| J14/J15 | AFC11-S22ICA-00 | JUSHUO | MIPI Camera Interface |
+| J16 | AFC01-S22FCA-00 | JUSHUO | LCD Display Interface |
 | J18 | HDGC1002WV-S-3P | HDGC | CAN FD Interface |
 
      </DocScope>
@@ -422,8 +422,8 @@ All IO pins on the 40-pin header support switching between 3.3V and 1.8V voltage
 
 | Connector  | Model  |   Vendor   |  Description   |
 | --- | ------ | ------- | ------- |
-| J1/J21 | DF40C-100DS-0.4V(51) | hirose | 100P Connector |
-| J3 | DF40C-60DS-0.4V(51) | hirose | 60P Connector |
+| J1/J21 | DF40C-100DS-0.4V(51) | Hirose | 100P Connector |
+| J3 | DF40C-60DS-0.4V(51) | Hirose | 60P Connector |
 | J4 | PZ254V-12-10P | XFCN | Function Control IO Header |
 | J5 | WAFER-SH1.0-2PLB | XFCN | RTC Battery Interface |
 | J7/J8/J10 | FPC-05F-22PH20 | XUNPU | CAM Interface, MIPI DSI |

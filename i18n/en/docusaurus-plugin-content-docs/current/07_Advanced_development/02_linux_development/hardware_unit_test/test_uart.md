@@ -17,4 +17,4 @@ sidebar_position: 3
 
 ## Appendix
 
-The test source code and compilation can refer to the [UART Driver Debugging Guide].
+The test source code and compilation can refer to the [UART Driver Debugging Guide](../driver_development/driver_uart_dev.md).

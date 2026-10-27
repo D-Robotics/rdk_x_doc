@@ -12,7 +12,7 @@ For cross-compilation and deployment, please refer to [Cross-compilation Environ
 **A:**
 * **Direct installation on the board:** If the third-party library provides a precompiled package for ARM architecture (such as a `.deb` file), or can be installed directly via a package manager (like `apt`), you can install it directly on the RDK board. For Python libraries, if there is a corresponding arm64 wheels package on Pypi, you can also use `pip install` directly.
 * **Cross-compilation:** If the third-party library needs to be compiled from source, it is recommended to cross-compile on the PC development host and then deploy the compiled artifacts to the RDK board.
-    * **Environment setup:** For detailed steps on setting up the cross-compilation environment, please refer to the tutorial on the Horizon Developer Community: [Cross-compilation Environment Deployment](https://developer.d-robotics.cc/forumDetail/112555549341653662)
+    * **Environment setup:** For detailed steps on setting up the cross-compilation environment, please refer to the tutorial on the D-Robotics Developer Community: [Cross-compilation Environment Deployment](https://developer.d-robotics.cc/forumDetail/112555549341653662)
     * **Compilation steps:** Usually, you need to configure a CMake Toolchain file, specify the cross-compiler, target system Sysroot, etc.
 
 ### Q2: When compiling large programs (such as C++ projects or ROS packages), if the system prompts that the compilation process is "killed" or there are error logs related to insufficient memory, how to solve it?
@@ -51,7 +51,7 @@ Edit the `/etc/fstab` file and add the following line at the end (assuming your 
 **Reference tutorial:** [Swap Usage Tutorial](https://developer.d-robotics.cc/forumDetail/98129467158916281)
 
 ### Q3: How to run the GC4633 MIPI camera sample program?
-**A:** Horizon officially provides AI algorithm samples (such as FCOS object detection) based on common MIPI cameras (such as F37, GC4663). These samples usually automatically detect the connected camera model and perform algorithm inference.
+**A:** D-Robotics officially provides AI algorithm samples (such as FCOS object detection) based on common MIPI cameras (such as F37, GC4663). These samples usually automatically detect the connected camera model and perform algorithm inference.
 
 **Example steps (using `/app/ai_inference/03_mipi_camera_sample` as an example):**
 1.  Make sure the GC4663 (or other compatible MIPI camera) is properly connected to the RDK board's MIPI CSI interface and the board is powered on.
@@ -84,12 +84,12 @@ Edit the `/etc/fstab` file and add the following line at the end (assuming your 
         * **Send compressed images:** Consider compressing the raw image (such as RGB888) to JPEG or PNG format on the RDK board before publishing via ROS topic. This will significantly reduce the data volume per frame. You can subscribe to the compressed image topic on the PC and use `rqt_image_view` (or a custom node) to decompress and display.
         * **Reduce resolution or frame rate:** If the application allows, appropriately reducing the published image resolution or frame rate can also effectively reduce network load.
 
-### Q5: Does the Linux image provided by Horizon (specifically the minimal system, not the full Ubuntu Desktop/Server) support direct compilation on the board?
-**A:** Some Linux images provided by Horizon for RDK, especially those with a minimal rootfs (root filesystem) for embedded deployment, may **not include** a complete compilation toolchain (such as GCC, G++, make, CMake, etc.) and the required header files and libraries.
+### Q5: Does the Linux image provided by D-Robotics (specifically the minimal system, not the full Ubuntu Desktop/Server) support direct compilation on the board?
+**A:** Some Linux images provided by D-Robotics for RDK, especially those with a minimal rootfs (root filesystem) for embedded deployment, may **not include** a complete compilation toolchain (such as GCC, G++, make, CMake, etc.) and the required header files and libraries.
 * **Conclusion:** Such minimal Linux images usually **cannot or are not suitable** for complex source code compilation directly on the board.
 * **Recommended practice:** For applications that need to run on RDK, it is recommended to use **cross-compilation**. That is, configure a cross-compilation environment for the RDK target platform on a PC development host (such as Ubuntu PC), complete the compilation on the PC, and then deploy the generated executables and dependencies to the RDK board.
 
-### Q6: How to run the official manual examples (usually demonstrated in Ubuntu system environment) on the minimal Linux image provided by Horizon?
+### Q6: How to run the official manual examples (usually demonstrated in Ubuntu system environment) on the minimal Linux image provided by D-Robotics?
 **A:** The official manual examples (especially TROS/ROS-related examples) are usually demonstrated in a more complete Ubuntu system environment. To run these examples (especially C++ ROS nodes) on a minimal Linux image (which may not have a pre-installed Python interpreter or a complete ROS environment), some adjustments are needed:
 
 * **Differences between Ubuntu system and Linux image when starting examples:**
@@ -262,7 +262,7 @@ find /opt/tros/ -name dnn_node_example.launch.py
 **A:** Compiling all packages of tros.b does take a long time (for example, about 20 minutes on an 8-core CPU, 32GB RAM PC). Here are two ways to speed up compilation:
 
 1.  **Use the minimal build script:**
-    * The tros.b build scripts provided by Horizon usually include a `minimal_build.sh` option in addition to `all_build.sh` (full build).
+    * The tros.b build scripts provided by D-Robotics usually include a `minimal_build.sh` option in addition to `all_build.sh` (full build).
     * Minimal build usually skips compiling algorithm examples and test cases, significantly reducing build time.
     * **Usage:** In your cross-compilation configuration steps, replace the original `./robot_dev_config/all_build.sh` command with `./robot_dev_config/minimal_build.sh`.
 
@@ -286,7 +286,7 @@ find /opt/tros/ -name dnn_node_example.launch.py
 
 ### Q9: After installing the official tros.b on the RDK board, can I still install and use other versions of ROS (such as ROS1 or different ROS2 distributions)?
 **A:** **Yes.**
-* After installing Horizon's tros.b (e.g., based on ROS2 Humble) on the RDK board, you can still try to install other versions of ROS, including ROS1 (such as Noetic, Melodic) or other ROS2 distributions (such as Foxy, Galactic, etc., if they support ARM64 and you can find or build the packages).
+* After installing D-Robotics' tros.b (e.g., based on ROS2 Humble) on the RDK board, you can still try to install other versions of ROS, including ROS1 (such as Noetic, Melodic) or other ROS2 distributions (such as Foxy, Galactic, etc., if they support ARM64 and you can find or build the packages).
 * Different ROS versions can coexist on the system, usually installed in different paths (e.g., ROS1 in `/opt/ros/noetic/`, ROS2 Humble in `/opt/ros/humble/`, tros.b may be in `/opt/tros/humble/`).
 
     :::caution **Important Note**
@@ -297,7 +297,7 @@ find /opt/tros/ -name dnn_node_example.launch.py
     :::
 
 * **tros.b and ROS2 Foxy/Humble compatibility:**
-    * Horizon's tros.b is usually built and optimized based on a specific ROS2 LTS version (such as Foxy or Humble) and maintains API compatibility. This means if your tros.b is based on Humble, you can usually use tools and libraries developed for standard ROS2 Humble directly, without installing ROS2 Humble separately (unless you need specific tools from the full ROS2 Desktop not included in tros.b).
+    * D-Robotics' tros.b is usually built and optimized based on a specific ROS2 LTS version (such as Foxy or Humble) and maintains API compatibility. This means if your tros.b is based on Humble, you can usually use tools and libraries developed for standard ROS2 Humble directly, without installing ROS2 Humble separately (unless you need specific tools from the full ROS2 Desktop not included in tros.b).
 
 ### Q10: When compiling a ROS2 package with `colcon build`, an error `AttributeError: module 'pyparsing' has no attribute 'operatorPrecedence'` occurs. How to solve it?
 **A:** This error is usually caused by an outdated version of `python3-catkin-pkg` (a Python library for parsing ROS package.xml files), which is incompatible with the installed version of `pyparsing`, or due to incomplete functionality in `python3-catkin-pkg`.
@@ -359,7 +359,7 @@ Apt-Sources: http://archive.d-robotics.cc/ubuntu-ports focal/main arm64 Packages
 Date: 2023
 ```
 
-### Q12: What are the main notes and differences between Horizon tros.b 1.x and 2.x (and newer) versions?
+### Q12: What are the main notes and differences between D-Robotics tros.b 1.x and 2.x (and newer) versions?
 **A:**
 * **Correspondence with system version and RDK hardware:**
     * **2.x tros.b (and later, such as 3.x):**
@@ -376,12 +376,12 @@ Date: 2023
 
     :::caution **Note**
     1.x tros.b **cannot** be upgraded directly to 2.x or newer via `apt`. To use the new version, you must first upgrade the entire RDK board OS to a version that supports the new tros.b by flashing the image, then install the corresponding tros.b version.
-    See: [Install the corresponding board OS](../01_Quick_start/install_os/rdk_x3/01_system_burn.md) (replace with the actual valid doc path)
+    See: [Install the corresponding board OS](/install_os)
     :::
 
 * **Feature differences:**
     * The core ROS2 functionality is the same between compatible versions.
-    * Horizon's hardware-optimized features, new specific packages, and the latest AI algorithm support are usually prioritized or only provided in 2.x and newer tros.b versions.
+    * D-Robotics' hardware-optimized features, new specific packages, and the latest AI algorithm support are usually prioritized or only provided in 2.x and newer tros.b versions.
 * **Package management differences:**
     * **1.x tros.b:** May use a large monolithic installation package.
     * **2.x tros.b (and newer):** Usually splits tros.b into multiple finer-grained Debian packages (such as `tros-ros-base`, `tros-dnn-node`, `tros-mipi-cam`, etc.), allowing users to install as needed. For developers, installing via `apt install tros` (meta-package) or `apt install <specific_tros_package>` is similar.
@@ -464,10 +464,10 @@ Date: 2023
     ```
     For details, see the ROS2 or Fast DDS documentation, e.g.:
     * [ROS 2 using Fast DDS middleware](https://fast-dds.docs.eprosima.com/en/latest/fastdds/ros2/ros2.html)
-    * Horizon official `hobot_shm` README: [hobot_shm README_cn.md](https://github.com/D-Robotics/hobot_shm/blob/develop/README_cn.md)
+    * D-Robotics official `hobot_shm` README: [hobot_shm README_cn.md](https://github.com/D-Robotics/hobot_shm/blob/develop/README_cn.md)
 
 2.  **Start ROS nodes that support zero-copy:**
-    * Both the publisher and subscriber nodes need to support and use the loaned message API in their code. Some Horizon TROS packages (such as `mipi_cam`, `hobot_codec`, etc.) may already support zero-copy.
+    * Both the publisher and subscriber nodes need to support and use the loaned message API in their code. Some D-Robotics TROS packages (such as `mipi_cam`, `hobot_codec`, etc.) may already support zero-copy.
     * For example, start the `mipi_cam` node to publish shared memory images:
         ```bash
         # Source TROS Humble environment first

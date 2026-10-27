@@ -582,28 +582,29 @@ static void transfer2(int fd, uint8_t const *tx, uint8_t const *rx, size_t len)
 static void print_usage(const char *prog)
 {
     printf("Usage: %s [-DsbdlHOLC3vpNR24SImet]\n", prog);
-    puts("  -D --device   设备使用地址（默认 /dev/spidev1.1）\n"
-            "  -s --speed    最大速度（Hz）\n"
-            "  -d --delay    延迟时间（微秒）\n"
-            "  -b --bpw      字长\n"
-            "  -i --input    从文件中输入数据（例如 \"test.bin\"）\n"
-            "  -o --output   输出数据到文件（例如 \"results.bin\"）\n"
-            "  -l --loop     环回测试\n"
-            "  -H --cpha     时钟相位\n"
-            "  -O --cpol     时钟极性\n"
-            "  -L --lsb      最低有效位\n"
-            "  -C --cs-high  片选信号激活高电平\n"
-            "  -3 --3wire    SI/SO信号共用\n""  -v --verbose  Verbose (show tx buffer)\n" -> "-v --verbose  详细信息（显示发送缓冲区）\n"
-            "  -p            Send data (e.g. \"1234\\xde\\xad\")\n" -> "  -p            发送数据（例如\"1234\\xde\\xad\"）\n"
-            "  -N --no-cs    no chip select\n" -> "  -N --no-cs    不使用芯片选择\n"
-            "  -R --ready    slave pulls low to pause\n" -> "  -R --ready    从机拉低以暂停\n"
-            "  -2 --dual     dual transfer\n" -> "  -2 --dual     双通道传输\n"
-            "  -4 --quad     quad transfer\n" -> "  -4 --quad     四通道传输\n"
-            "  -S --size     transfer size\n" -> "  -S --size     传输大小\n"
-            "  -I --iter     iterations\n" -> "  -I --iter     迭代次数\n"
-            "  -m --rw-mode  1 read, 2 write, 3 write and read\n" -> "  -m --rw-mode  1 读取， 2 写入， 3 写入和读取\n"
-            "  -e --rw-len   read or write len\n" -> "  -e --rw-len   读取或写入长度\n"
-            "  -t --rw-times read or write times\n" -> "  -t --rw-times 读取或写入次数\n");
+    puts("  -D --device   device to use (default /dev/spidev1.1)\n"
+            "  -s --speed    max speed (Hz)\n"
+            "  -d --delay    delay (usec)\n"
+            "  -b --bpw      bits per word\n"
+            "  -i --input    input data from a file (e.g. \"test.bin\")\n"
+            "  -o --output   output data to a file (e.g. \"results.bin\")\n"
+            "  -l --loop     loopback\n"
+            "  -H --cpha     clock phase\n"
+            "  -O --cpol     clock polarity\n"
+            "  -L --lsb      least significant bit first\n"
+            "  -C --cs-high  chip select active high\n"
+            "  -3 --3wire    SI/SO signals shared\n"
+            "  -v --verbose  verbose (show tx buffer)\n"
+            "  -p            send data (e.g. \"1234\\xde\\xad\")\n"
+            "  -N --no-cs    no chip select\n"
+            "  -R --ready    slave pulls low to pause\n"
+            "  -2 --dual     dual transfer\n"
+            "  -4 --quad     quad transfer\n"
+            "  -S --size     transfer size\n"
+            "  -I --iter     iterations\n"
+            "  -m --rw-mode  1 read, 2 write, 3 write and read\n"
+            "  -e --rw-len   read or write len\n"
+            "  -t --rw-times read or write times\n");
     exit(1);
 }
 
@@ -858,7 +859,7 @@ static void transfer_read_write(int fd)
         pabort("can't allocate rx buffer");
 
     for (j = 0; j < rw_times; j++) {
-        memset(tx, 0 ,len);
+        memset(tx, 0,len);
         memset(rx, 0, len);
 
         if (rw_mode >> 1) {

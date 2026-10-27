@@ -10,7 +10,7 @@ sidebar_position: 2
 **A:** Supported on development board versions V1.2 and above. You can usually confirm the version by checking the silkscreen information on the PCB. Please operate with caution and ensure your board version supports this feature—incorrect power supply may cause hardware damage.
 
 #### Q2: Can I control the 40-pin GPIO interface using C/C++?
-**A:** Yes, it is supported. Refer to relevant articles and code samples in the Horizon Developer Community, such as:
+**A:** Yes, it is supported. Refer to relevant articles and code samples in the D-Robotics Developer Community, such as:
 * [Sunrise X3Pi WiringPi](https://developer.d-robotics.cc/forumDetail/109609560406362634) (a C/C++ GPIO library adapted for RDK X3)
 * Check the official documentation for your RDK model for chapters on GPIO development, which usually provide low-level operation methods or recommended libraries.
 
@@ -52,7 +52,7 @@ sidebar_position: 2
     * Use `ifconfig` or `ip addr` to check interface status and IP configuration.
     * Use `route -n` to view the routing table.
     * Use `ping <gateway IP>` to test connectivity to the gateway.
-5.  **Refer to Official Docs:** For detailed steps and troubleshooting, see the "[Network Configuration](../02_System_configuration/01_network_blueteeth.md)" section (replace with the actual valid doc path).
+5.  **Refer to Official Docs:** For detailed steps and troubleshooting, see the "[Network Configuration](../02_System_configuration/01_network_blueteeth.md)" section.
 
 #### Q5: Unable to connect to the board via SSH. What could be the reason?
 **A:**
@@ -64,7 +64,7 @@ sidebar_position: 2
         3.  Try `ping <board IP>` from your PC. If unreachable, resolve network issues first (check IP config, cables, Wi-Fi, router, firewall, etc.).
         4.  Ensure the SSH service (`sshd`) is running on the board. Log in via serial and run `sudo systemctl status ssh` or `ps aux | grep sshd`. If not running, start it: `sudo systemctl start ssh`.
         5.  Check if any firewall is blocking port 22.
-    * **Reference:** See the [SSH Login](../01_Quick_start/remote_login.md) section (replace with the actual valid doc path).
+    * **Reference:** See the [SSH Login](../01_Quick_start/remote_login.md) section.
 
 * **Error: `Authentication failed` or `Permission denied, please try again.`:**
     * **Reason:** The network connection is established, but the username or password is incorrect.
@@ -105,7 +105,7 @@ sidebar_position: 2
 ### USB Interface
 
 #### Q8: What is the default device node for a USB camera on the board?
-**A:** On Horizon RDK boards (e.g., RDK X3 series), when you connect a standard UVC (USB Video Class) camera, the video device node in Linux is usually **not** `/dev/video0` as on PCs.
+**A:** On D-Robotics RDK boards (e.g., RDK X3 series), when you connect a standard UVC (USB Video Class) camera, the video device node in Linux is usually **not** `/dev/video0` as on PCs.
 * **Default device node is usually:** `/dev/video8`
 * It may also be `/dev/video9`, `/dev/video10`, etc., if there are other video devices or multiple USB cameras.
 
@@ -153,7 +153,7 @@ After plugging in the camera, run `ls /dev/video*` to check the actual device no
     * **FPC cable direction:** Ensure the FPC cable is inserted in the correct direction (usually the blue stiffener faces the connector latch, or follow board/camera markings). Incorrect insertion prevents communication.
     * **Connector lock:** Make sure the FPC cable is fully inserted and the connector latches are locked.
     * **Interface mapping:** If the board has multiple MIPI CSI interfaces, ensure the camera is connected to the one specified in software/device tree.
-    * **Reference docs:** Check your board's hardware manual or quick start guide for the "[MIPI Camera](../01_Quick_start/hardware_introduction/rdk_x3.md)" section (replace with the actual valid doc path) for connection details.
+    * **Reference docs:** Check your board's hardware manual or quick start guide for the "[MIPI Camera](../01_Quick_start/hardware_introduction/rdk_x3.md)" section for connection details.
 2.  **No hot-plugging:** **Never plug/unplug MIPI cameras while powered on!** Doing so may cause short circuits and damage.
 3.  **I2C bus and address:** Ensure you use the correct `<bus_number>` in `i2cdetect -y -r <bus_number>`, and know the camera's I2C address.
 4.  **Camera power/clock:** Ensure the camera module is powered and the MIPI clock is present.
@@ -186,7 +186,7 @@ After plugging in the camera, run `ls /dev/video*` to check the actual device no
     * Newer RDK OS versions (e.g., RDK X3 v2.1.0+) may support more resolutions and refresh rates.
     * Higher-end boards (e.g., RDK X5) may support higher resolutions (e.g., 4K).
 * **How to check:**
-    1.  **Official docs:** The most accurate info is in your board's User Manual or Hardware Specification, in the "[HDMI Interface](../01_Quick_start/hardware_introduction/rdk_x3.md)" or display subsystem section (replace with the actual valid doc path).
+    1.  **Official docs:** The most accurate info is in your board's User Manual or Hardware Specification, in the "[HDMI Interface](../01_Quick_start/hardware_introduction/rdk_x3.md)" or display subsystem section.
     2.  **In-system (if display connected):**
         * If the board is running Linux with a display, use `xrandr` (in X Window) to see supported modes.
         * Check kernel logs (`dmesg | grep -i hdmi` or `dmesg | grep -i drm`) for detected display modes.

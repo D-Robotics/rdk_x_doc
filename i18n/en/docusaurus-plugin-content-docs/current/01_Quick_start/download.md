@@ -827,7 +827,7 @@ Providing comprehensive hardware design support materials for module customers t
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X5_MD/MIC/D-ROBOTICS 211-250814 MIC Radio Certificate.pdf">📄 MIC</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X5_MD/SRRC/RDK_X5_MD_SRRC.pdf">📄 SRRC</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X5_MD/KCC/RDKX5MD108064_KCC.pdf">📄 KCC</a></td>
-      <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X5_MD/UKCA/AOC for UKCA 证书.pdf">📄 UKCA</a></td>
+      <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X5_MD/UKCA/AOC for UKCA %E8%AF%81%E4%B9%A6.pdf">📄 UKCA</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X5_MD/ROHS/AOC 2501X28112E-13.pdf">📄 RoHS</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X5_MD/REACH/AiTSZ-26012001401-REACH-RDKX5MD002000-REPORT.pdf">📄 REACH</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X5_MD/HF/AiTSZ-26012001402-HF-RDKX5MD002000-REPORT.pdf">📄 HF</a></td>

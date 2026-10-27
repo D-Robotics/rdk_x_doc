@@ -21,7 +21,7 @@ root@ubuntu:/app/pydev_demo/07_usb_camera_sample$ tree -L 1
 ## Effect Demonstration
 > **Note**: Since this example pops up a window to display detection results, it needs to be run in a graphical environment. For server version images, it is recommended to use remote tools that support X11 forwarding, such as **MobaXterm**, to connect to the development board, allowing the pop-up display window to appear on your local computer.
 
-The example reads the USB camera feed in real time, detects objects in the画面, and overlays bounding boxes, class labels, and confidence scores on the window in real time.
+The example reads the USB camera feed in real time, detects objects in the frame, and overlays bounding boxes, class labels, and confidence scores on the window in real time.
 
 ![output-img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_07_usb_camera_sample_running.png)
 

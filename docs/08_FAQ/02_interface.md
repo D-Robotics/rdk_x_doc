@@ -16,7 +16,7 @@ import DocScope from '@site/src/components/DocScope';
 **A:** 开发板 V1.2 及以上版本可以支持。版本号通常可以通过查看开发板 PCB 板上的丝印信息来确认。请务必谨慎操作，并确认您的板卡版本确实支持此功能，错误的供电方式可能导致硬件损坏。
 
 #### Q2: 开发板是否支持通过 C/C++语言操作 40PIN GPIO 接口？
-**A:** 是的，支持。您可以参考地平线开发者社区论坛中的相关文章和代码示例，例如：
+**A:** 是的，支持。您可以参考地瓜开发者社区论坛中的相关文章和代码示例，例如：
 * [旭日 X3 派 WiringPi](https://developer.d-robotics.cc/forumDetail/109609560406362634) (一个适配 RDK X3 的 C/C++ GPIO 库)
 * 查阅对应 RDK 型号的官方文档中关于 GPIO 开发的章节，通常会提供底层的操作方法或推荐的库。
 
@@ -58,7 +58,7 @@ import DocScope from '@site/src/components/DocScope';
     * 使用 `ifconfig` 或 `ip addr` 查看网络接口状态和 IP 配置。
     * 使用 `route -n` 查看路由表信息。
     * 使用 `ping <网关IP>` 测试到网关的连通性。
-5.  **参考官方文档：** 详细的网络配置步骤和故障排除方法，请参考官方文档中[网络配置](../System_configuration/network_blueteeth)
+5.  **参考官方文档：** 详细的网络配置步骤和故障排除方法，请参考官方文档中[网络配置](../02_System_configuration/01_network_blueteeth.md)
    
 
 
@@ -72,7 +72,7 @@ import DocScope from '@site/src/components/DocScope';
         3.  在您的电脑上尝试 `ping <开发板IP地址>`，看是否能 ping 通。如果 ping 不通，则先解决网络连接问题（检查 IP 配置、网线、Wi-Fi 连接、路由器设置、防火墙等）。
         4.  确认开发板上的 SSH 服务 (`sshd`) 正在运行。可以尝试通过串口登录后，执行 `sudo systemctl status ssh` 或 `ps aux | grep sshd` 查看。如果未运行，尝试启动：`sudo systemctl start ssh`。
         5.  检查电脑或网络中是否有防火墙阻止了到开发板 22 端口的连接。
-    * **参考：** [SSH 登录](../01_Quick_start/remote_login.md)章节 (请将链接替换为实际有效的文档路径)。
+    * **参考：** [SSH 登录](../01_Quick_start/remote_login.md)章节。
 
 * **提示 `Authentication failed` 或 `Permission denied, please try again.`：**
     * **原因：** 这表示网络连接已建立，但您提供的用户名或密码不正确，SSH 服务器拒绝了您的登录请求。
@@ -113,7 +113,7 @@ import DocScope from '@site/src/components/DocScope';
 ### USB 接口
 
 #### Q8: 开发板接入 USB 摄像头后，默认的设备节点是什么？
-**A:** 在地平线 RDK 板卡（如 RDK X3 系列）上，当您接入一个标准的 UVC (USB Video Class) 摄像头后，它在 Linux 系统中创建的视频设备节点通常**不是**像 PC 上常见的 `/dev/video0`。
+**A:** 在地瓜 RDK 板卡（如 RDK X3 系列）上，当您接入一个标准的 UVC (USB Video Class) 摄像头后，它在 Linux 系统中创建的视频设备节点通常**不是**像 PC 上常见的 `/dev/video0`。
 * **默认设备节点通常是：`/dev/video8`**
 * 也可能是 `/dev/video9`, `/dev/video10` 等，如果系统中有其他视频设备或多个 USB 摄像头。
 
@@ -209,7 +209,7 @@ import DocScope from '@site/src/components/DocScope';
     * 较新版本的 RDK OS（如 RDK X3 的 2.1.0 及以上版本）可能会引入对更多分辨率和刷新率组合的支持。
     * RDK X5 等更高性能的板卡，其 HDMI 输出能力（如是否支持 4K 分辨率）也会更强。
 * **查询方法：**
-    1.  **官方文档：** 最准确的信息来源是查阅您所使用的具体 RDK 板卡型号和系统版本的官方《用户手册》或《硬件规格说明书》中关于“[HDMI 接口](../01_Quick_start/hardware_introduction/rdk_x3.md)”或显示子系统的章节 (请将链接替换为实际有效的文档路径)。
+    1.  **官方文档：** 最准确的信息来源是查阅您所使用的具体 RDK 板卡型号和系统版本的官方《用户手册》或《硬件规格说明书》中关于“[HDMI 接口](../01_Quick_start/hardware_introduction/rdk_x3.md)”或显示子系统的章节。
     2.  **系统内查询（如果已连接显示器）：**
         * 如果板卡已连接显示器并能进入 Linux 系统（例如 Desktop 版），有时可以通过 `xrandr` 命令（在 X Window 环境下）查看当前活动输出支持的分辨率模式。
         * 查看内核启动日志 (`dmesg | grep -i hdmi` 或 `dmesg | grep -i drm`)，有时会打印出显示驱动初始化时检测到的显示器支持模式。

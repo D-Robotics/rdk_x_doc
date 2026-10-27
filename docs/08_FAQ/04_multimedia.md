@@ -4,6 +4,10 @@ sidebar_position: 4
 
 # 8.4 多媒体处理与应用
 
+```mdx-code-block
+import DocScope from '@site/src/components/DocScope';
+```
+
 本节主要解答与地瓜 RDK 板卡上视频编解码、音频处理以及其他多媒体功能相关的常见疑问。
 
 ## 视频编解码
@@ -129,6 +133,8 @@ sidebar_position: 4
 
 通过以上方法，您可以准确地识别并控制连接到 RDK 板卡上的不同音频设备。
 
+<DocScope products="RDK-X3">
+
 ### Q3: RDK X3 系列的音频子板如何与 USB 声卡共存并同时使用（例如，让 PulseAudio 识别和管理它们）？
 **A:** 如果您希望在 RDK X3 上同时使用板载的音频子板（例如基于 WM8960 芯片的）和外接的 USB 声卡，并且让 PulseAudio 等上层音频服务能够识别和管理它们，您可能需要进行一些配置。
 
@@ -201,5 +207,7 @@ sidebar_position: 4
     * 或者，尝试重启 PulseAudio 服务（如果知道如何操作且系统支持，例如 `systemctl --user restart pulseaudio.service` 或 `pulseaudio -k && pulseaudio --start`，但这可能不如重启板卡干净）。
 
 重启后，您应该可以在系统的声音设置（如果使用桌面环境）或通过 `pactl list sources` / `pactl list sinks` 命令看到两个声卡的输入和输出设备，并能选择使用它们。
+
+</DocScope>
 
 

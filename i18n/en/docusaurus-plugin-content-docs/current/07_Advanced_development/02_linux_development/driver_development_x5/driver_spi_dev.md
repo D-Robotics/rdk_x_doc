@@ -18,7 +18,7 @@ On the RDK X5, the pins brought out are mainly on the 40-pin header, specificall
 
 ### Code Path
 
-X5 uses the NewThink (新思) SSI controller, and the driver code is located in the `drivers/spi` directory. The main files are as follows:
+X5 uses the NewThink (Synopsys) SSI controller, and the driver code is located in the `drivers/spi` directory. The main files are as follows:
 
 
 ```bash
@@ -960,7 +960,7 @@ static void transfer_heart_pack(int fd)
 		pabort("can't allocate rx buffer");
 
 	while (1) {
-		memset(tx, 0 ,len);
+		memset(tx, 0,len);
 		memset(rx, 0, len);
 
 		p = tx;
@@ -1076,7 +1076,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-**附录2 测试用例源码：Makefile**
+**Appendix 2: Test case source code: Makefile**
 
 ```shell
 OUT_DIR = $(shell pwd)/_build/

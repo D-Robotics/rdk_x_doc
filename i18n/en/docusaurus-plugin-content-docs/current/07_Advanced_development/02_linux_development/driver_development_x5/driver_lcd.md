@@ -246,7 +246,7 @@ Add the following properties to the `mipi_dsi0` node:
 
 ```
 
-添加dsi_backlight节点：
+Add the dsi_backlight node:
 ```
 &dsi_backlight {
     status = "okay";
@@ -290,7 +290,7 @@ Since the RDK X5 system defaults to HDMI output, you need to switch to the MIPI 
 mv /etc/X11/xorg.conf.d/xorg_dsi_ignore.conf /etc/X11/xorg.conf.d/xorg_dsi_ignore.conf.disable
 mv /etc/X11/xorg.conf.d/xorg_hdmi_ignore.conf.disable /etc/X11/xorg.conf.d/xorg_hdmi_ignore.conf
 ```
-You can also choose the display output method using `raspi-config`. For details, refer to the [Display Choose DSI or HDMI](../../../System_configuration/srpi-config#display-options) section.
+You can also choose the display output method using `raspi-config`. For details, refer to the [Display Choose DSI or HDMI](../../../02_System_configuration/02_srpi-config.md#display-options) section.
 
 After rebooting the device, you should see the system desktop on the LCD screen.
 

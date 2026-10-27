@@ -23,7 +23,7 @@ The following shows the effect of using FCOS for inference. The monitor displays
 
 ### Hardware Connection
 
-(1) YOLOv5 inference with camera
+(1) yolov5 inference with camera
 
 This example does not require a mouse or keyboard, so only a camera, HDMI display, Ethernet port, and power cable are connected here:
 
@@ -60,12 +60,12 @@ root@ubuntu:/app/cdev_demo/bpu/src/bin# tree
 
 ```
 
-We need to execute in the `/app/cdev_demo/bpu/src/bin` directory. Here, we use the YOLOv5 inference with camera as the execution example.
+We need to execute in the `/app/cdev_demo/bpu/src/bin` directory. Here, we use the yolov5 inference with camera as the execution example.
 
 ### Execution Effect
 (1) Use the `systemctl stop lightdm` command to close the graphical interface service.
 
-(2) YOLOv5 inference with camera  
+(2) yolov5 inference with camera  
 
 In the directory `root@ubuntu:/app/cdev_demo/bpu/src/bin#`, run the command `./sample -f /app/model/basic/yolov5s_672x672_nv12.bin -m 0`.
 ```
@@ -119,7 +119,7 @@ You will see the same effect as shown in the image at the beginning of the docum
 
 
 ## Detailed Introduction
-This sample code is relatively extensive, but there are fixed correspondences during execution. Our YOLOv5 is paired with a camera.
+This sample code is relatively extensive, but there are fixed correspondences during execution. Our yolov5 is paired with a camera.
 
 ### Sample Program Parameter Options Description
 

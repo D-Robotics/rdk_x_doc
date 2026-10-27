@@ -186,7 +186,7 @@ quit
 [  256.853922] [S0][V0]sif_video_streamoff
 [  256.855476] hobot_dmcfreq_target: dmcfreq->rate:2666000000, target_rate:2666000000
 [  256.856460] buf:performance
-[  256.856460] , powersave_rate:2666000000, dmcfreq->pre_state:0
+[  256.856460], powersave_rate:2666000000, dmcfreq->pre_state:0
 [  256.857610] [S0][V0]x3_sif_close SIF last process close 
 [  256.858301] SIF close node 0
 [  256.858807] [isp_drv]: camera_sys_stream_off: camera_sys_stream_off success line 1549 dev_name port_0
@@ -397,7 +397,7 @@ quit
 [  256.853922] [S0][V0]sif_video_streamoff
 [  256.855476] hobot_dmcfreq_target: dmcfreq->rate:2666000000, target_rate:2666000000
 [  256.856460] buf:performance
-[  256.856460] , powersave_rate:2666000000, dmcfreq->pre_state:0
+[  256.856460], powersave_rate:2666000000, dmcfreq->pre_state:0
 [  256.857610] [S0][V0]x3_sif_close SIF last process close 
 [  256.858301] SIF close node 0
 [  256.858807] [isp_drv]: camera_sys_stream_off: camera_sys_stream_off success line 1549 dev_name port_0

@@ -454,7 +454,7 @@ This interface is not available.
 
 The RDK X3 Module carrier board provides one MIPI DSI interface (Interface 10) that can be used for connecting LCD displays, etc. The interface uses a 15-pin FFC connector and can directly connect to various LCD displays for Raspberry Pi.
 
-For detailed instructions on how to use the MIPI DSI interface, please refer to [MIPI DSI Display Usage](/Advanced_development/hardware_development/rdk_x3_module/display).
+For detailed instructions on how to use the MIPI DSI interface, please refer to [MIPI DSI Display Usage](../../Advanced_development/hardware_development/rdk_x3_module/display).
 
 </DocScope>
 
@@ -608,17 +608,17 @@ By default, the firmware of the core module of RDK X3 Module and the level confi
 
 | Connector  | Model  |   Vendor   |  Description   |
 | --- | ------ | ------- | ------- |
-| J34 | AFC01-S24FCA-00 | jushuodz | MIPI CSI Connector  |
-| E1 | U.FL-R-SMT-1(10) | hirose | Wi-Fi Antenna Connector  |
+| J34 | AFC01-S24FCA-00 | JUSHUO | MIPI CSI Connector  |
+| E1 | U.FL-R-SMT-1(10) | Hirose | Wi-Fi Antenna Connector  |
 
 </DocScope>
 <DocScope versions=">=3.0.0" products="RDK X3 Module">
 
 | Connector  | Model  |   Vendor   |  Description   |
 | --- | ------ | ------- | ------- |
-| J710 | AFA07-S15FCA-00 | jushuodz | MIPI DSI Connector  |
-| U100/U101 | AFA07-S15FCA-00 | jushuodz | CAM0/CAM2 Connector  |
-| J27 | AFA07-S15FCA-00 | jushuodz | CAM1 Connector  |
+| J710 | AFA07-S15FCA-00 | JUSHUO | MIPI DSI Connector  |
+| U100/U101 | AFA07-S15FCA-00 | JUSHUO | CAM0/CAM2 Connector  |
+| J27 | AFA07-S15FCA-00 | JUSHUO | CAM1 Connector  |
 
 </DocScope>
 

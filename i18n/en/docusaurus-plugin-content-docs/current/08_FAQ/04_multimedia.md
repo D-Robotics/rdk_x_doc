@@ -4,6 +4,10 @@ sidebar_position: 4
 
 # 8.4 Multimedia Processing and Applications
 
+```mdx-code-block
+import DocScope from '@site/src/components/DocScope';
+```
+
 This section mainly answers frequently asked questions related to video codec, audio processing, and other multimedia functions on the D-Robotics RDK board.
 
 ## Video Codec
@@ -129,6 +133,8 @@ Below are some commonly used `tinyalsa` commands and their parameter meanings:
 
 Using the methods above, you can accurately identify and control different audio devices connected to your RDK board.
 
+<DocScope products="RDK-X3">
+
 ### Q3: How can the audio daughter board of the RDK X3 series coexist and be used simultaneously with a USB sound card (e.g., having PulseAudio recognize and manage them)?
 **A:** If you wish to use both the onboard audio daughter board (e.g., based on the WM8960 chip) and an external USB sound card simultaneously on the RDK X3, and have higher-level audio services like PulseAudio recognize and manage them, some configuration may be necessary.
 
@@ -202,3 +208,4 @@ The following steps use the WM8960 audio daughter board and a USB full-duplex so
 
 After rebooting, you should be able to see input and output devices for both sound cards in the system's sound settings (if using a desktop environment) or via `pactl list sources` / `pactl list sinks`, and select which one to use.
 
+</DocScope>

@@ -19,82 +19,82 @@ The `DISPLAY` API provides the following interfaces:
 
 ## sp_init_display_module
 
-**【Function prototype】**
+** Function prototype**
 
 `void *sp_init_display_module()`
 
-**【Description】**
+** Description**
 
 Initialize the display module object. This module supports displaying video image data on a display connected to the `HDMI` interface, and provides functions to draw rectangles and text on the display.
 
-**【Parameters】**
+** Parameters**
 
 None
 
-**【Return type】**
+** Return type**
 
 Returns a pointer to the `DISPLAY` object if successful, or NULL if failed.
 
 ## sp_release_display_module
 
-**【Function prototype】**
+** Function prototype**
 
 `void sp_release_display_module(void *obj)`
 
-**【Description】**
+** Description**
 
 Destroy the `DISPLAY` object.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Pointer to the initialized `DISPLAY` object.
 
-**【Return Type】** 
+** Return Type** 
 
 None
 
 ## sp_start_display 
 
-**【Function Prototype】** 
+** Function Prototype** 
 
 `int32_t sp_start_display(void *obj, int32_t chn, int32_t width, int32_t height)`
 
-**【Function Description】** 
+** Function Description** 
 
 Create a display channel. The RDK X3 development board supports 4 channels, including 2 video layers and 2 graphic layers. The maximum supported resolution is `1920 x 1080` with a maximum frame rate of `60fps`.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Initialized `DISPLAY` object pointer
 - `chn`: Channel number, supports 0-3. If using a desktop system, channel 0 is used for the graphical system, so applications should use channel 1. Channels 2 and 3 are generally used to draw rectangles or overlay text information.
 - `width`: Display output resolution - width
 - `height`: Display output resolution - height
 
-**【Return Type】** 
+** Return Type** 
 
 Successful: 0, Failure: -1
 
 ## sp_stop_display 
 
-**【Function Prototype】** 
+** Function Prototype** 
 
 `int32_t sp_stop_display(void *obj)`
 
-**【Function Description】** 
+** Function Description** 
 
 Stop the display channel.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Initialized `DISPLAY` object pointer
 
-**【Return Type】** 
+** Return Type** 
 
 Successful: 0, Failure: -1
 
 ## sp_display_set_image 
 
-**【Function Prototype】** 
+** Function Prototype** 
 
 `int32_t sp_display_set_image(void *obj, char *addr, int32_t size, int32_t chn)`
 
@@ -149,7 +149,7 @@ Returns 0 on success, -1 on failure.
 
 Draws a string in the graphics layer of the display module.
 
-**【Parameters】**
+** Parameters**
 
 - `obj`: Initialized `DISPLAY` object pointer
 - `x`: x-value of the starting coordinate for drawing the string
@@ -160,25 +160,25 @@ Draws a string in the graphics layer of the display module.
 - `color`: Color of the rectangle (color format in ARGB8888)
 - `line_width`: Line width of the text
 
-**【Return Type】** 
+** Return Type** 
 
 Returns 0 if successful, -1 if failed
 
 ## sp_get_display_resolution
 
-**【Function Prototype】** 
+** Function Prototype** 
 
 `void sp_get_display_resolution(int32_t *width, int32_t *height)`
 
-**【Description】** 
+** Description** 
 
 Gets the resolution of the connected display.
 
-**【Parameters】**
+** Parameters**
 
 - `width`: Width of the resolution to be obtained
 - `height`: Height of the resolution to be obtained
 
-**【Return Type】** 
+** Return Type** 
 
 None.

@@ -214,88 +214,88 @@ int HB_VPS_StopGrp(int VpsGrp);
 
 
 ### HB_VPS_GetGrpAttr
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VPS_GetGrpAttr(int VpsGrp, VPS_GRP_ATTR_S *grpAttr);
 ```
-【Function Description】
+Function Description
 > Get the attributes of VPS Group.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description              | Input/Output |
 | :------------: | :----------------------- | :----------: |
 |    VpsGrp      | Group Number             |    Input     |
 |    grpAttr     | Pointer to attribute struct |    Output    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | ----------- |
 |      0       | Success     |
 |   Non-zero   | Failure     |
 
-【Note】
+Note
 > None
 
-【Reference Code】
+Reference Code
 > None
 
 ### HB_VPS_SetGrpAttr
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VPS_SetGrpAttr(int VpsGrp, const VPS_GRP_ATTR_S *grpAttr);
 ```
-【Function Description】
+Function Description
 > Set the attributes of VPS Group.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description              | Input/Output |
 | :------------: | :----------------------- | :----------: |
 |    VpsGrp      | Group Number             |    Input     |
-|    grpAttr     | Pointer to attribute struct |    Input    |【Return Value】
+|    grpAttr     | Pointer to attribute struct |    Input    | Return Value
 
 | Return Value | Description |
 | :----------: | ----------- |
 |      0       | Success     |
 |   Non-zero   | Failure     |
 
-【Notes】
+Notes
 
 > No
 
-【Reference Code】
+Reference Code
 
 > VPS Reference Code
 
 ### HB_VPS_SetGrpRotate
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VPS_SetGrpRotate(int VpsGrp, ROTATION_E enRotation);
 ```
-【Function Description】
+Function Description
 > Set the rotation function for VPS Group, rotate all outputs of VPS
 
-【Parameter Description】
+Parameter Description
 
 |   Parameter Name   |  Description   | Input/Output |
 | :----------------: | :------------ | :----------: |
 |      VpsGrp        |   Group number |    Input     |
 |    enRotation      |  Rotation parameter |   Input    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | ----------- |
 |      0       | Success     |
 |   Non-zero   | Failure     |
 
-【Notes】
+Notes
 
 > This interface needs to be called before HB_VPS_SetChnAttr, disable ChnRotate after enabling GroupRotate; isp binding ipu must be in offline mode
 
-【Reference Code】
+Reference Code
 
 > VPS Reference Code
 
@@ -418,14 +418,14 @@ int HB_VPS_SendFrame(int VpsGrp, void* videoFrame, int ms);
 
 
 ### HB_VPS_SetChnAttr
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VPS_SetChnAttr(int VpsGrp, int VpsChn, const VPS_CHN_ATTR_S *chnAttr);
 ```
-【Function Description】
+Function Description
 > Set the attributes of VPS channel (set the output size of a specific channel in IPU)
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description       | Input/Output |
 | :------------: | :---------------- | :----------: |
@@ -433,72 +433,72 @@ int HB_VPS_SetChnAttr(int VpsGrp, int VpsChn, const VPS_CHN_ATTR_S *chnAttr);
 |     VpsChn     | Channel number    |    Input     |
 |    chnAttr     | Channel attribute |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :---------: |
 |      0       |   Success   |
 |    Non-zero  |   Failure   |
 
-【Notice】
+Notice
 > This interface supports dynamically configuring the output size of IPU. Dynamic configuration needs to call this interface after StartGrp. The new size for dynamic configuration cannot be larger than the initial configuration size. If you need to change from a smaller size to a larger size after starting, you need to call this interface twice before StartVps, passing the maximum size for the first time and the minimum size for the second time.
 
-【Reference Code】
+Reference Code
 > VPS reference code
 
 ### HB_VPS_GetChnAttr
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VPS_GetChnAttr(int VpsGrp, int VpsChn, VPS_CHN_ATTR_S *chnAttr);
 ```
-【Function Description】
+Function Description
 > Get the attributes of VPS channel
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description       | Input/Output |
 | :------------: | :---------------- | :----------: |
 |     VpsGrp     | Group number      |    Input     |
 |     VpsChn     | Channel number    |    Input     |
-|    chnAttr     | Channel attribute |    Output    |【Return Value】
+|    chnAttr     | Channel attribute |    Output    | Return Value
 
 | Return Value | Description |
 | :----------: | :---------: |
 |      0       |  Successful |
 |    Non-zero  |   Failed    |
 
-【Notes】
+Notes
 > None
 
-【Reference Code】
+Reference Code
 > None
 
 ### HB_VPS_EnableChn
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VPS_EnableChn(int VpsGrp, int VpsChn);
 ```
-【Function Description】
+Function Description
 > Enable the VPS channel
 
-【Parameter Description】
+Parameter Description
 
 |  Parameter Name |   Description   |  Input/Output  |
 | :-------------: | :-------------: | :------------: |
 |     VpsGrp      |   Group number  |      Input     |
 |     VpsChn      |   Channel number|      Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :---------: |
 |      0       |  Successful |
 |    Non-zero  |   Failed    |
 
-【Notes】
+Notes
 > If the channel is not enabled, the GetChnFrame interface cannot obtain images.
 
-【Reference Code】
+Reference Code
 > VPS reference code
 
 
@@ -847,14 +847,14 @@ int HB_VPS_GetChnFrame_Cond(int VpsGrp, int VpsChn, void *videoFrame, int ms, in
 
 
 ### HB_VPS_ReleaseChnFrame
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VPS_ReleaseChnFrame(int VpsGrp, int VpsChn, void *videoFrame);
 ```
-【Function Description】
+Function Description
 > Release a frame of channel image.
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description | Input/Output |
 | :------------: | :------- | :--------: |
@@ -862,26 +862,26 @@ int HB_VPS_ReleaseChnFrame(int VpsGrp, int VpsChn, void *videoFrame);
 |     VpsChn     | Channel number |   Input    |
 |   videoFrame   | Image information |   Input    |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | :--------- |
 |       0      | Success    |
 |   Non-zero   | Failure    |
 
-【Note】
-> None.【Reference Code】
+Note
+> None. Reference Code
 > VPS reference code
 
 ### HB_VPS_SetPymChnAttr
-【Function Declaration】
+Function Declaration
 ```c
 int HB_VPS_SetPymChnAttr(int VpsGrp, int VpsChn, const VPS_PYM_CHN_ATTR_S *pymChnAttr);
 ```
-【Function Description】
+Function Description
 > Set pyramid channel attributes
 
-【Parameter Description】
+Parameter Description
 
 | Parameter Name | Description           | Input/Output |
 | :------------: | :-------------------- | :----------: |
@@ -889,18 +889,18 @@ int HB_VPS_SetPymChnAttr(int VpsGrp, int VpsChn, const VPS_PYM_CHN_ATTR_S *pymCh
 |    VpsChn      | Channel number        |    Input     |
 |  pymChnAttr    | Pyramid channel attributes pointer |    Input     |
 
-【Return Value】
+Return Value
 
 | Return Value | Description |
 | :----------: | ----------- |
 |     0        | Success     |
 |   Non-zero   | Failure     |
 
-【Notes】
+Notes
 1) This interface supports dynamically configuring the output size of PYM roi layer. It needs to be called after StartGrp, and the new roi size configured dynamically cannot be larger than the size configured for the first initialization. If it is necessary to change from a smaller size to a larger size after startup, this interface needs to be called twice before StartVps, passing the maximum size the first time and the minimum size the second time.
 2) This interface also supports dynamically configuring the input size of PYM, which is only valid during PYM feedback and supports changing the src size from large to small after StartGrp.
 
-【Reference Code】
+Reference Code
 > VPS reference code
 
 
@@ -1121,7 +1121,7 @@ If all four modules in VPS need to be run together, you need to call HB_VPS_SetG
 
 ## Data Structure
 ### HB_VPS_GRP_ATTR_S
-【Structure Definition】
+Structure Definition
 ```c
 // Define the structure of VPS group attributes
 typedef struct HB_VPS_GRP_ATTR_S {
@@ -1132,10 +1132,10 @@ typedef struct HB_VPS_GRP_ATTR_S {
 } VPS_GRP_ATTR_S;
 ```
 
-【Function Description】
+Function Description
 > Structure for VPS group attributes
 
-【Member Description】
+Member Description
 
 |   Member   |                        Description                        |
 | :--------: | :-------------------------------------------------------: |
@@ -1145,7 +1145,7 @@ typedef struct HB_VPS_GRP_ATTR_S {
 | pixelFormat |   Pixel format (VPS only supports nv12 format, current parameter reserved)   |
 
 ### HB_RECT_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef struct HB_RECT_S {
     uint16_t    x;
@@ -1154,10 +1154,10 @@ typedef struct HB_RECT_S {
     uint16_t    height;
 } RECT_S;
 ```
-【Function Description】
+Function Description
 > Define a rectangular region
 
-【Member Description】
+Member Description
 
 |  Member  |  Description  |
 | :------: | :-----------: |
@@ -1167,14 +1167,14 @@ typedef struct HB_RECT_S {
 |  height  |  Image height  |
 
 ### HB_VPS_CROP_INFO_S
-【Structure Definition】
+Structure Definition
 ```c
 typedef HB_VPS_CROP_INFO_S {
     bool        en;
     RECT_S      cropRect;
 } VPS_CROP_INFO_S;
 ```
-【Function Description】【Member Description】
+Function Description Member Description
 
 |   Member   |                  Meaning                  |
 | :--------: | :---------------------------------------: |

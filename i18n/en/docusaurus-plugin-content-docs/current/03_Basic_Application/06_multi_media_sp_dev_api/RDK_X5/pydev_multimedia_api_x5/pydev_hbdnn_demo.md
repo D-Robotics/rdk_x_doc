@@ -36,7 +36,7 @@ This interface encapsulates the underlying model runtime details, allowing Pytho
   - Supports the `QuantParams` structure for quantization parameters, the `hbDNNDataType` enumeration, the `SchedParam` object for model scheduling parameters, and the `hbDNNQuantiType` enumeration for quantization types, providing type-safe property access.
 
 ## Installation Instructions
-The `hbm_runtime` module is a high-performance inference runtime Python interface implemented in C++, depending on `pybind11` and the underlying inference libraries (such as `libdnn`) provided by Horizon. It can be installed via system DEB packages (`.deb`) and supports Python 3.10 and above.
+The `hbm_runtime` module is a high-performance inference runtime Python interface implemented in C++, depending on `pybind11` and the underlying inference libraries (such as `libdnn`) provided by Horizon Robotics. It can be installed via system DEB packages (`.deb`) and supports Python 3.10 and above.
 
 ### System Dependencies
 | Dependency          | Minimum Version | Description                                                                                   |
@@ -45,7 +45,7 @@ The `hbm_runtime` module is a high-performance inference runtime Python interfac
 | pip                 | ≥ 22.0         | Required for installing wheel packages                                                        |
 | pybind11            | Any            | Used during build; not required for installation                                              |
 | scikit-build-core   | ≥ 0.7          | Used for building wheel packages (source build only)                                          |
-| Horizon Base Libraries | Platform-dependent | Such as `libdnn.so`, typically provided by the BSP (Board Support Package)                 |
+| Horizon Robotics Base Libraries | Platform-dependent | Such as `libdnn.so`, typically provided by the BSP (Board Support Package)                 |
 
 ### Building the Wheel Package
 There are two ways to build the wheel package. (The `hbm_runtime` is installed by default after RDK X5 software version 3.5.0)
@@ -214,7 +214,7 @@ For multi-input models, quantization metadata, and more, see [API reference](#mo
 
 ## Modules, classes, and functions (API reference)
 
-The `hbm_runtime` module is a PyBind11 binding to Horizon BIN inference on top of `libdnn`. It provides model loading, I/O introspection, and `run()`, including multi-model loads, multi-input inference, per-model selection, BPU core binding, and priorities.
+The `hbm_runtime` module is a PyBind11 binding to Horizon Robotics BIN inference on top of `libdnn`. It provides model loading, I/O introspection, and `run()`, including multi-model loads, multi-input inference, per-model selection, BPU core binding, and priorities.
 
 ### Enumerations
 
@@ -222,22 +222,22 @@ The `hbm_runtime` module is a PyBind11 binding to Horizon BIN inference on top o
 
 ##### Tensor data types:
 - Y: 1-bit unsigned
-- S4：4-bit signed
-- U4：4-bit unsigned
-- S8：8-bit signed
-- U8：8-bit unsigned
+- S4: 4-bit signed
+- U4: 4-bit unsigned
+- S8: 8-bit signed
+- U8: 8-bit unsigned
 - NV12: 12-bit unsigned
-- F16：16-bit float
-- S16：16-bit signed
-- U16：16-bit unsigned
+- F16: 16-bit float
+- S16: 16-bit signed
+- U16: 16-bit unsigned
 - NV12_SEPARATE: 16-bit unsigned
 - YUV444: 24-bit unsigned
-- F32：32-bit float
-- S32：32-bit signed
-- U32：32-bit unsigned
-- F64：64-bit float
-- S64：64-bit signed
-- U64：64-bit unsigned
+- F32: 32-bit float
+- S32: 32-bit signed
+- U32: 32-bit unsigned
+- F64: 64-bit float
+- S64: 64-bit signed
+- U64: 64-bit unsigned
 - MAX: sentinel / reserved
 
 ##### Example
@@ -295,14 +295,14 @@ All properties below are read-only.
     - Library version string.
   - Structure:
     - `str`
-  - Example：
+  - Example:
 print("version:", HB_HBMRuntime.version)
 - model_names: List[str]
   - Description:
     - Loaded model names.
   - Structure:
     - `List[str]`
-  - Example：
+  - Example:
     ```python
     print(model.model_names)
     # ->['model_1', 'model_2']
@@ -312,7 +312,7 @@ print("version:", HB_HBMRuntime.version)
     - Number of loaded models.
   - Structure:
     - `int`
-  - Example：
+  - Example:
     ```python
     print(model.model_count)
     # ->2
@@ -322,7 +322,7 @@ print("version:", HB_HBMRuntime.version)
     - Per-model description strings embedded in the model (from the compiler).
   - Structure:
     - `Dict[str, str]` — model name → description
-  - Example：
+  - Example:
     ```python
     # Print model descriptions
     print(model.model_descs)
@@ -334,7 +334,7 @@ print("version:", HB_HBMRuntime.version)
     - Notes or metadata strings for each loaded HBM file path.
   - Structure:
     - `Dict[str, str]` — file path → comment string
-  - Example：
+  - Example:
     ```python
     # Print per-file HBM descriptions
     print(model.hbm_descs)
@@ -345,7 +345,7 @@ print("version:", HB_HBMRuntime.version)
     - Number of input tensors per model.
   - Structure:
     - `Dict[str, int]` — model name → input count
-  - Example：
+  - Example:
     ```python
     print(model.input_counts)
     # ->{'yolov5x_672x672_nv12': 2}
@@ -355,7 +355,7 @@ print("version:", HB_HBMRuntime.version)
     - Input tensor names per model.
   - Structure:
     - Outer `Dict` keyed by model name; inner `List[str]` of input names
-  - Example：
+  - Example:
     ```python
     print(model.input_names)
     # ->{'yolov5x_672x672_nv12': ['data_y', 'data_uv']}
@@ -365,7 +365,7 @@ print("version:", HB_HBMRuntime.version)
     - Optional per-input descriptions.
   - Structure:
     - Outer key: model name; inner: input name → description
-  - Example：
+  - Example:
     ```python
     print(model.input_descs)
     # ->{'yolov5x_672x672_nv12': {'data_uv': 'xxx', 'data_y': 'xxx'}}
@@ -375,7 +375,7 @@ print("version:", HB_HBMRuntime.version)
     - Input tensor shapes per model.
   - Structure:
     - Outer key: model name; inner: input name → shape
-  - Example：
+  - Example:
     ```python
     model.input_shapes
     # ->{'yolov5x_672x672_nv12': {'data_uv': [1, 336, 336, 2], 'data_y': [1, 672, 672, 1]}}
@@ -385,7 +385,7 @@ print("version:", HB_HBMRuntime.version)
     - Input tensor dtypes per model.
   - Structure:
     - Outer key: model name; inner: input name → `hbDNNDataType`
-  - Example：
+  - Example:
     ```python
     print(model.input_dtypes)
     # ->{'yolov5x_672x672_nv12': {'data_uv': <hbDNNDataType.U8: 3>, 'data_y': <hbDNNDataType.U8: 3>}}
@@ -401,7 +401,7 @@ print("version:", HB_HBMRuntime.version)
       - `zero_point: np.ndarray`
       - `quant_type: hbDNNQuantiType`
       - `axis: int` — quantization axis when per-channel
-  - Example：
+  - Example:
     ```python
     quanti_info = model.input_quants
     for model, inputs in quanti_info.items():
@@ -418,7 +418,7 @@ print("version:", HB_HBMRuntime.version)
     - Per-input tensor strides.
   - Structure:
     - Outer key: model name; inner: input name → stride list
-  - Example：
+  - Example:
     ```python
     print(model.input_strides)
     # ->{'yolov5x_672x672_nv12': {'data_uv': [-1, -1, 2, 1], 'data_y': [-1, -1, 1, 1]}}
@@ -429,7 +429,7 @@ print("version:", HB_HBMRuntime.version)
     - Number of output tensors per model.
   - Structure:
     - `Dict[str, int]` — model name → output count
-  - Example：
+  - Example:
     ```python
     print(model.output_counts)
     # ->{'yolov5x_672x672_nv12': 3}
@@ -439,7 +439,7 @@ print("version:", HB_HBMRuntime.version)
     - Output tensor names per model.
   - Structure:
     - Outer key: model name; inner: `List[str]` of output names
-  - Example：
+  - Example:
     ```python
     print(model.output_names)
     # ->{'yolov5x_672x672_nv12': ['output', '1310', '1312']}
@@ -449,7 +449,7 @@ print("version:", HB_HBMRuntime.version)
     - Optional per-output descriptions.
   - Structure:
     - Outer key: model name; inner: output name → description
-  - Example：
+  - Example:
     ```python
     print(model.output_descs)
     # ->{'yolov5x_672x672_nv12': {'1310': 'xxx', '1312': 'xxx', 'output': 'xxx'}}
@@ -459,7 +459,7 @@ print("version:", HB_HBMRuntime.version)
     - Output tensor shapes per model.
   - Structure:
     - Outer key: model name; inner: output name → shape
-  - Example：
+  - Example:
     ```python
     print(model.output_shapes)
     # ->{'yolov5x_672x672_nv12': {'1310': [1, 42, 42, 255], '1312': [1, 21, 21, 255], 'output': [1, 84, 84, 255]}}
@@ -469,7 +469,7 @@ print("version:", HB_HBMRuntime.version)
     - Output tensor dtypes per model.
   - Structure:
     - Outer key: model name; inner: output name → `hbDNNDataType`
-  - Example：
+  - Example:
     ```python
     print(model.output_dtypes)
     # ->{'yolov5x_672x672_nv12': {'1310': <hbDNNDataType.S32: 8>, '1312': <hbDNNDataType.S32: 8>, 'output': <hbDNNDataType.S32: 8>}}
@@ -480,7 +480,7 @@ print("version:", HB_HBMRuntime.version)
   - Structure:
     - Outer key: model name; inner: output name → `QuantParams`
     - `QuantParams` fields: same as for inputs (`scale`, `zero_point`, `quant_type`, `axis`)
-  - Example：
+  - Example:
     ```python
     output_quanti = model.output_quants
     for model, outputs in output_quanti.items():
@@ -497,7 +497,7 @@ print("version:", HB_HBMRuntime.version)
     - Per-output tensor strides.
   - Structure:
     - Outer key: model name; inner: output name → stride list
-  - Example：
+  - Example:
     ```python
     print(model.output_strides)
     # ->{'yolov5x_672x672_nv12': {'1310': [1806336, 43008, 1024, 4], '1312': [451584, 21504, 1024, 4], 'output': [7225344, 86016, 1024, 4]}}
@@ -524,7 +524,7 @@ print("version:", HB_HBMRuntime.version)
           )
       }
       ```
-  - Example：
+  - Example:
     ```python
     params = model.sched_params
     for name, sched in params.items():
@@ -667,7 +667,7 @@ print("version:", HB_HBMRuntime.version)
   - model_name
     - Type: `str` (model name)
     - Selects which model to run; must be one of the loaded models. For the first two `run` overloads, omit when only one model is loaded; required when multiple models exist. For the third overload, omit to run all models in `multi_input_tensors`, or set to run one model only.
-    - Example：
+    - Example:
         ```python
         outputs = model.run(input_tensor, model_name="resnet18")
         ```
@@ -693,7 +693,7 @@ print("version:", HB_HBMRuntime.version)
 
   - Returns
     `None`
-  - Example：
+  - Example:
     ```python
     # Set scheduling
     model.set_scheduling_params(
