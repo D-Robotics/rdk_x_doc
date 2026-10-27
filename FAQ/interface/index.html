@@ -6,6 +6,7 @@
 <title data-rh="true">8.2 接口、外设与驱动 | RDK X3/X5 DOC</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://developer.d-robotics.cc/rdk_x_doc/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://developer.d-robotics.cc/rdk_x_doc/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://developer.d-robotics.cc/rdk_x_doc/FAQ/interface"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="8.2 接口、外设与驱动 | RDK X3/X5 DOC"><meta data-rh="true" name="description" content="40PIN 接口"><meta data-rh="true" property="og:description" content="40PIN 接口"><link data-rh="true" rel="icon" href="/rdk_x_doc/img/logo.png"><link data-rh="true" rel="canonical" href="https://developer.d-robotics.cc/rdk_x_doc/FAQ/interface"><link data-rh="true" rel="alternate" href="https://developer.d-robotics.cc/rdk_x_doc/FAQ/interface" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://developer.d-robotics.cc/rdk_x_doc/en/FAQ/interface" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.d-robotics.cc/rdk_x_doc/FAQ/interface" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://1VU781LYTV-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"8 常见问题","item":"https://developer.d-robotics.cc/rdk_x_doc/FAQ"},{"@type":"ListItem","position":2,"name":"8.2 接口、外设与驱动","item":"https://developer.d-robotics.cc/rdk_x_doc/FAQ/interface"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="RDK X3/X5 DOC" href="/rdk_x_doc/opensearch.xml">
 
 
+
 <script>window.__COPY_PAGE_BUTTON_OPTIONS__={customStyles:{},enabledActions:["copy","view","claude"],generateMarkdownRoutes:!1,placement:"auto",mcpServer:null,id:"default"}</script>
 
 
@@ -15,8 +16,8 @@
 <script src="/rdk_x_doc/js/dify-config.js"></script>
 <script src="/rdk_x_doc/js/umami-events.js" defer="defer"></script>
 <script src="https://rdk.d-robotics.cc/embed.min.js" id="rJYrxmxmjOkjEx2c" defer="defer"></script><link rel="stylesheet" href="/rdk_x_doc/assets/css/styles.962ed942.css">
-<script src="/rdk_x_doc/assets/js/runtime~main.5347b8a6.js" defer="defer"></script>
-<script src="/rdk_x_doc/assets/js/main.03c3d63b.js" defer="defer"></script>
+<script src="/rdk_x_doc/assets/js/runtime~main.9e5241d1.js" defer="defer"></script>
+<script src="/rdk_x_doc/assets/js/main.1bb1adc5.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
@@ -28,7 +29,7 @@
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="q1-开发板是否支持将-40pin-中的-vdd_5v-作为电源输入">Q1: 开发板是否支持将 40PIN 中的 VDD_5V 作为电源输入？<a href="#q1-开发板是否支持将-40pin-中的-vdd_5v-作为电源输入" class="hash-link" aria-label="Q1: 开发板是否支持将 40PIN 中的 VDD_5V 作为电源输入？的直接链接" title="Q1: 开发板是否支持将 40PIN 中的 VDD_5V 作为电源输入？的直接链接">​</a></h4>
 <p><strong>A:</strong> 开发板 V1.2 及以上版本可以支持。版本号通常可以通过查看开发板 PCB 板上的丝印信息来确认。请务必谨慎操作，并确认您的板卡版本确实支持此功能，错误的供电方式可能导致硬件损坏。</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="q2-开发板是否支持通过-cc语言操作-40pin-gpio-接口">Q2: 开发板是否支持通过 C/C++语言操作 40PIN GPIO 接口？<a href="#q2-开发板是否支持通过-cc语言操作-40pin-gpio-接口" class="hash-link" aria-label="Q2: 开发板是否支持通过 C/C++语言操作 40PIN GPIO 接口？的直接链接" title="Q2: 开发板是否支持通过 C/C++语言操作 40PIN GPIO 接口？的直接链接">​</a></h4>
-<p><strong>A:</strong> 是 的，支持。您可以参考地平线开发者社区论坛中的相关文章和代码示例，例如：</p>
+<p><strong>A:</strong> 是 的，支持。您可以参考地瓜开发者社区论坛中的相关文章和代码示例，例如：</p>
 <ul>
 <li><a href="https://developer.d-robotics.cc/forumDetail/109609560406362634" target="_blank" rel="noopener noreferrer">旭日 X3 派 WiringPi</a> (一个适配 RDK X3 的 C/C++ GPIO 库)</li>
 <li>查阅对应 RDK 型号的官方文档中关于 GPIO 开发的章节，通常会提供底层的操作方法或推荐的库。</li>
@@ -75,7 +76,7 @@
 </li>
 <li><strong>IP 地址配置：</strong>
 <ul>
-<li><strong>DHCP  自动获取：</strong> 大多数情况下，网络应配置为通过 DHCP 自动获取 IP 地址。检查路由器 DHCP 服务是否正常，以及板卡是否成功获取到 IP 地址 (<code>ifconfig</code> 或 <code>ip addr</code> 命令查看)。</li>
+<li><strong>DHCP 自 动获取：</strong> 大多数情况下，网络应配置为通过 DHCP 自动获取 IP 地址。检查路由器 DHCP 服务是否正常，以及板卡是否成功获取到 IP 地址 (<code>ifconfig</code> 或 <code>ip addr</code> 命令查看)。</li>
 <li><strong>静态 IP：</strong> 如果您配置了静态 IP 地址，请确保 IP 地址、子网掩码、网关地址和 DNS 服务器地址都配置正确，并且与您的局域网环境相符。</li>
 </ul>
 </li>
@@ -100,7 +101,7 @@
 <li>
 <p><strong>提示 <code>Connection timed out</code>：</strong></p>
 <ul>
-<li><strong>原因：</strong> 这通常表示  网络通讯层面存在问题，您的电脑无法在网络上找到或连接到开发板的 SSH 服务端口（默认为 22）。</li>
+<li><strong>原因：</strong> 这通常表示网  络通讯层面存在问题，您的电脑无法在网络上找到或连接到开发板的 SSH 服务端口（默认为 22）。</li>
 <li><strong>排查：</strong>
 <ol>
 <li>确认开发板已开机并成功连接到网络（有线或无线）。</li>
@@ -110,7 +111,7 @@
 <li>检查电脑或网络中是否有防火墙阻止了到开发板 22 端口的连接。</li>
 </ol>
 </li>
-<li><strong>参考：</strong> <a href="/rdk_x_doc/Quick_start/remote_login">SSH 登录</a>章节 (请将链接替换为实际有效的文档路径)。</li>
+<li><strong>参考：</strong> <a href="/rdk_x_doc/Quick_start/remote_login">SSH 登录</a>章节。</li>
 </ul>
 </li>
 <li>
@@ -147,7 +148,7 @@
 <li><strong>网络负载：</strong> 检查局域网内是否有其他设备占用了大量带宽。</li>
 <li><strong>2.4GHz vs 5GHz：</strong> 如果您的开发板和路由器都支持 5GHz Wi-Fi，尝试连接到 5GHz 频段，通常干扰较少且速度更快（但穿墙能力弱于 2.4GHz）。</li>
 </ol>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="q7-开发板无线网络无法使用使用ifconfig命令查询不到wlan0设备或类似无线网络接口名如何处理">Q7: 开发板无线网络无法使用，使用<code>ifconfig</code>命令查询不到<code>wlan0</code>设备（或类似无线网络接口名），如何处理？<a href="#q7-开发板无线网络无法使用使用ifconfig命令查询不到wlan0设备或类似无线网络接口名如何处理" class="hash-link" aria-label="q7-开发板无线网络无法使用使用ifconfig命令查询不到wlan0设备或类似无线网络接口名如何处理的直接链接" title="q7-开发板无线网络无法使用使用ifconfig命令查询不到wlan0设备或类似无线网络接口名如何处理的直接链接">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="q7-开发板无线网络无法使用使用ifconfig命令查询不到wlan0设备或类似无线网络接口名如何处理">Q7: 开发板无线网络无法使用，使用<code>ifconfig</code>命令查询不到<code>wlan0</code>设备（或类似无线网络接口名），如何处理？<a href="#q7-  开发板无线网络无法使用使用ifconfig命令查询不到wlan0设备或类似无线网络接口名如何处理" class="hash-link" aria-label="q7-开发板无线网络无法使用使用ifconfig命令查询不到wlan0设备或类似无线网络接口名如何处理的直接链接" title="q7-开发板无线网络无法使用使用ifconfig命令查询不到wlan0设备或类似无线网络接口名如何处理的直接链接">​</a></h4>
 <p><strong>A:</strong> 如果 <code>ifconfig</code> 或 <code>ip addr</code> 命令的输出中没有显示无线网络接口（如 <code>wlan0</code>），可能的原因及解决方法：</p>
 <ol>
 <li><strong>无线模块被软禁用 (RFKill)：</strong>
@@ -169,13 +170,13 @@
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="usb-接口">USB 接口<a href="#usb-接口" class="hash-link" aria-label="USB 接口的直接链接" title="USB 接口的直接链接">​</a></h3>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="q8-开发板接入-usb-摄像头后默认的设备节点是什么">Q8: 开发板接入 USB 摄像头后，默认的设备节点是什么？<a href="#q8-开发板接入-usb-摄像头后默认的设备节点是什么" class="hash-link" aria-label="Q8: 开发板接入 USB 摄像头后，默认的设备节点是什么？的直接链接" title="Q8: 开发板接入 USB 摄像头后，默认的设备节点是什么？的直接链接">​</a></h4>
-<p><strong>A:</strong> 在地平线 RDK 板卡（如 RDK X3 系列）上，当您接入一个标准的 UVC (USB Video Class) 摄像头后，它在 Linux 系统中创建的视频设备节点通常<strong>不是</strong>像 PC 上常见的 <code>/dev/video0</code>。</p>
+<p><strong>A:</strong> 在地瓜 RDK 板卡（如 RDK X3 系列）上，当您接入一个标准的 UVC (USB Video Class) 摄像头后，它在 Linux 系统中创建的视频设备节点通常<strong>不是</strong>像 PC 上常见的 <code>/dev/video0</code>。</p>
 <ul>
 <li><strong>默认设备节点通常是：<code>/dev/video8</code></strong></li>
 <li>也可能是 <code>/dev/video9</code>, <code>/dev/video10</code> 等，如果系统中有其他视频设备或多个 USB 摄像头。</li>
 </ul>
 <p>您可以在接入 USB 摄像头后，执行 <code>ls /dev/video*</code> 来查看实际生成的设备节点。在 OpenCV 等程序中使用摄像头时，需要指定这个正确的设备节点号（例如，<code>cv2.VideoCapture(8)</code>）。</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="q9-开发板插入-usb-摄像头后没有生成预期的-devvideo8或其他设备节点怎么办">Q9: 开发板插入 USB 摄像头后，没有生成预期的 <code>/dev/video8</code>（或其他）设备节点，怎么办？<a href="#q9-开发板插入-usb-摄像头后没有生成预期的-devvideo8或其他设备节点怎么办" class="hash-link" aria-label="q9-开发板插入-usb-摄像头后没有生成预期的-devvideo8或其他设备节点怎么办的直接链接" title="q9-开发板插入-usb-摄像头后没有生成预期的-devvideo8或其他设备节点怎么办的直接链接">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="q9-开发板插入-usb-摄像头后没有生成预期的-devvideo8或其他设备节点怎么办">Q9: 开发板插入 USB 摄像头后，没有生成预期的 <code>/dev/video8</code>（或其他）设备节点，怎么办？<a href="#q9-开发板插入-usb-摄像头后没有生成预期的-devvideo8或其他 设备节点怎么办" class="hash-link" aria-label="q9-开发板插入-usb-摄像头后没有生成预期的-devvideo8或其他设备节点怎么办的直接链接" title="q9-开发板插入-usb-摄像头后没有生成预期的-devvideo8或其他设备节点怎么办的直接链接">​</a></h4>
 <p><strong>A:</strong></p>
 <ol>
 <li><strong>确认 USB 摄像头本身是否正常：</strong>
@@ -202,7 +203,7 @@
 </li>
 <li><strong>USB 供电问题：</strong>
 <ul>
-<li>部分功耗较大的 USB 摄像头可能需要 USB 接口提供足够的电流。如果开发板 USB 口供电不足（虽然不常见于标准 UVC 摄像头），可能会导致识  别失败。可以尝试通过一个带独立供电的 USB Hub 来连接摄像头。</li>
+<li>部分功耗较大的 USB 摄像头可能需要 USB 接口提供足够的电流。如果开发板 USB 口供电不足（虽然不常见于标准 UVC 摄像头），可能会导致识别失败。可以尝试通过一个带独立供电的 USB Hub 来连接摄像头。</li>
 </ul>
 </li>
 <li><strong>驱动兼容性：</strong>
@@ -236,7 +237,7 @@
 <ul>
 <li><strong>FPC 排线方向：</strong> MIPI 摄像头通过 FPC 软排线连接。请务必确认排线的插入方向是否正确（通常排线两端的蓝色加强筋面需要朝向连接器卡扣的扳手面，或遵循板卡和摄像头模组上的标记）。错误的插入方向会导致无法通信。</li>
 <li><strong>连接器锁紧：</strong> 确保 FPC 排线已完全插入连接器，并且连接器两端的卡扣已牢固锁紧。</li>
-<li><strong>接口对应：</strong> 如果板卡有多个 MIPI CSI 接口，确保摄像头连接到了您在软件配置或设备树中指定的那个接口。</li>
+<li><strong>接口对应：</strong> 如果板卡有多个 MIPI CSI 接口，确保摄 像头连接到了您在软件配置或设备树中指定的那个接口。</li>
 <li><strong>参考文档：</strong> 仔细查阅您所使用的 RDK 板卡型号对应的硬件手册或快速入门指南中关于“MIPI 摄像头”连接的章节，确认连接细节。<!-- -->
 <div class="doc-scope" data-doc-scope="{&quot;versions&quot;:[{&quot;operator&quot;:&quot;&gt;=&quot;,&quot;version&quot;:&quot;3.0.0&quot;}],&quot;products&quot;:[&quot;RDK X3&quot;]}"><p><a href="/rdk_x_doc/Quick_start/hardware_introduction/rdk_x3">RDK X3 MIPI 摄像头</a></p></div>
 <div class="doc-scope" data-doc-scope="{&quot;versions&quot;:[{&quot;operator&quot;:&quot;&gt;=&quot;,&quot;version&quot;:&quot;3.5.0&quot;}],&quot;products&quot;:[&quot;RDK X5&quot;]}"><p><a href="/rdk_x_doc/Quick_start/hardware_introduction/rdk_x5">RDK X5 MIPI 摄像头</a></p></div>
@@ -262,7 +263,7 @@
 <p><strong>A:</strong> 这个报错信息 <code>ValueError: invalid literal for int() with base 10: b&#x27;open device /dev/lt8618_ioctl failed\ndevice not open\n1080&#x27;</code> 通常表明程序在尝试解析一个期望是纯数字的字符串时，收到了一个包含错误信息和数字混合的字符串。在这个特定的例子中，<code>b&#x27;open device /dev/lt8618_ioctl failed\ndevice not open\n1080&#x27;</code> 这部分，程序可能期望只获取到分辨率相关的数字（如&#x27;1080&#x27;），但由于打开显示相关的设备 (<code>/dev/lt8618_ioctl</code>，这似乎是一个 HDMI 相关的控制接口）失败，导致返回了错误信息。</p>
 <p><strong>主要原因及解决方法：</strong></p>
 <ul>
-<li><strong>权限不足：</strong> 许多与硬件直接交互的操作（如打开设备节点、配置显示参数等）需要 root 权限。如果您是使用普通用户（如 <code>sunrise</code>）运行示例程序，可能会因为权限不足而导致打 开设备失败。<!-- -->
+<li><strong>权限不足：</strong> 许多与硬件直接交互的操作（如打开设备节点、配置显示参数等）需要 root 权限。如果您是使用普通用户（如 <code>sunrise</code>）运行示例程序，可能会因为权限不足而导致打开设备失败。<!-- -->
 <ul>
 <li><strong>解决方法：</strong> 尝试使用 <code>sudo</code> 以 root 权限运行示例程序：<!-- -->
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo python3 mipi_camera.py</span><br></span></code></pre></div></div>
@@ -299,7 +300,7 @@
 <li>
 <p><strong>查询方法：</strong></p>
 <ol>
-<li><strong>官方文档：</strong> 最准确的信息来源是查阅您所使用的具体 RDK 板卡型号和系统版本的官方《用户手册》或《硬件规格说明书》中关于“<a href="/rdk_x_doc/Quick_start/hardware_introduction/rdk_x3">HDMI 接口</a>”或显示子系统的章节 (请将链接替换为实际有效的文档路径)。</li>
+<li><strong>官方文档：</strong> 最准确的信息来源是查阅您所使用的具体 RDK 板卡型号和系统版本的官方《用户手册》或《硬件规格说明书》中关于“<a href="/rdk_x_doc/Quick_start/hardware_introduction/rdk_x3">HDMI 接口</a>”或显示子系统的章节。</li>
 <li><strong>系统内查询（如果已连接显示器）：</strong>
 <ul>
 <li>如果板卡已连接显示器并能进入 Linux 系统（例如 Desktop 版），有时可以通过 <code>xrandr</code> 命令（在 X Window 环境下）查看当前活动输出支持的分辨率模式。</li>
@@ -310,6 +311,6 @@
 </ol>
 <p>如果您遇到特定显示器不兼容的问题，除了检查分辨率，还需要考虑显示器的 EDID 信息是否能被板卡正确解析。</p>
 </li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">最后<!-- -->于 <b><time datetime="2026-10-26T09:10:14.000Z" itemprop="dateModified">2026年10月26日</time></b> <!-- -->更新</span></div></div></footer></article><nav class="pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/rdk_x_doc/FAQ/hardware_and_system"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">8.1 硬件、系统与环境配置</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/rdk_x_doc/FAQ/applications_and_examples"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">8.3 应用开发、编译与示例</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#40pin-接口" class="table-of-contents__link toc-highlight">40PIN 接口</a><ul><li><a href="#q1-开发板是否支持将-40pin-中的-vdd_5v-作为电源输入" class="table-of-contents__link toc-highlight">Q1: 开发板是否支持将 40PIN 中的 VDD_5V 作为电源输入？</a></li><li><a href="#q2-开发板是否支持通过-cc语言操作-40pin-gpio-接口" class="table-of-contents__link toc-highlight">Q2: 开发板是否支持通过 C/C++语言操作 40PIN GPIO 接口？</a></li></ul></li><li><a href="#串口" class="table-of-contents__link toc-highlight">串口</a><ul><li><a href="#q3-开发板上电后调试串口无任何日志显示怎么办" class="table-of-contents__link toc-highlight">Q3: 开发板上电后，调试串口无任何日志显示，怎么办？</a></li></ul></li><li><a href="#网络接口" class="table-of-contents__link toc-highlight">网络接口</a><ul><li><a href="#q4-开发板连接网络后无法上网如何处理" class="table-of-contents__link toc-highlight">Q4: 开发板连接网络后无法上网，如何处理？</a></li><li><a href="#q5-开发板无法通过-ssh-远程连接可能是什么原因" class="table-of-contents__link toc-highlight">Q5: 开发板无法通过 SSH 远程连接，可能是什么原因？</a></li><li><a href="#q6-开发板使用无线网络时连接不稳定传输速度慢怎么办" class="table-of-contents__link toc-highlight">Q6: 开发板使用无线网络时，连接不稳定、传输速度慢，怎么办？</a></li><li><a href="#q7-开发板无线网络无法使用使用ifconfig命令查询不到wlan0设备或类似无线网络接口名如何处理" class="table-of-contents__link toc-highlight">Q7: 开发板无线网络无法使用，使用<code>ifconfig</code>命令查询不到<code>wlan0</code>设备（或类似无线网络接口名），如何处理？</a></li></ul></li><li><a href="#usb-接口" class="table-of-contents__link toc-highlight">USB 接口</a><ul><li><a href="#q8-开发板接入-usb-摄像头后默认的设备节点是什么" class="table-of-contents__link toc-highlight">Q8: 开发板接入 USB 摄像头后，默认的设备节点是什么？</a></li><li><a href="#q9-开发板插入-usb-摄像头后没有生成预期的-devvideo8或其他设备节点怎么办" class="table-of-contents__link toc-highlight">Q9: 开发板插入 USB 摄像头后，没有生成预期的 <code>/dev/video8</code>（或其他）设备节点，怎么办？</a></li><li><a href="#q10-开发板接入-usb-遥控手柄gamepadjoystick后无法使用没有生成-devinputjs0-设备节点如何解决" class="table-of-contents__link toc-highlight">Q10: 开发板接入 USB 遥控手柄（Gamepad/Joystick）后无法使用，没有生成 <code>/dev/input/js0</code> 设备节点，如何解决？</a></li></ul></li><li><a href="#mipi-csi-接口" class="table-of-contents__link toc-highlight">MIPI CSI 接口</a><ul><li><a href="#q11-开发板接入-mipi-摄像头后无法使用i2cdetect命令无法检测到摄像头的-i2c-地址是什么原因" class="table-of-contents__link toc-highlight">Q11: 开发板接入 MIPI 摄像头后无法使用，<code>i2cdetect</code>命令无法检测到摄像头的 I2C 地址，是什么原因？</a></li><li><a href="#q12-运行-mipi-摄像头示例程序时报错-valueerror-invalid-literal-for-int-with-base-10-bopen-device-devlt8618_ioctl-failedndevice-not-openn1080如何解决" class="table-of-contents__link toc-highlight">Q12: 运行 MIPI 摄像头示例程序时报错 <code>ValueError: invalid literal for int() with base 10: b&#39;open device /dev/lt8618_ioctl failed\ndevice not open\n1080&#39;</code>，如何解决？</a></li></ul></li><li><a href="#显示接口" class="table-of-contents__link toc-highlight">显示接口</a><ul><li><a href="#q13-开发板的-hdmi-接口可以支持哪些分辨率" class="table-of-contents__link toc-highlight">Q13: 开发板的 HDMI 接口可以支持哪些分辨率？</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">友情链接</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.guyuehome.com/" target="_blank" rel="noopener noreferrer" class="footer__link-item">古月居<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">联系我们</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/D-Robotics" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://space.bilibili.com/437998606" target="_blank" rel="noopener noreferrer" class="footer__link-item">BiLiBiLi<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024-2026 D-Robotics.</div></div></div></footer></div>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">最后<!-- -->于 <b><time datetime="2026-10-27T06:31:45.000Z" itemprop="dateModified">2026年10月27日</time></b> <!-- --> 更新</span></div></div></footer></article><nav class="pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/rdk_x_doc/FAQ/hardware_and_system"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">8.1 硬件、系统与环境配置</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/rdk_x_doc/FAQ/applications_and_examples"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">8.3 应用开发、编译与示例</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#40pin-接口" class="table-of-contents__link toc-highlight">40PIN 接口</a><ul><li><a href="#q1-开发板是否支持将-40pin-中的-vdd_5v-作为电源输入" class="table-of-contents__link toc-highlight">Q1: 开发板是否支持将 40PIN 中的 VDD_5V 作为电源输入？</a></li><li><a href="#q2-开发板是否支持通过-cc语言操作-40pin-gpio-接口" class="table-of-contents__link toc-highlight">Q2: 开发板是否支持通过 C/C++语言操作 40PIN GPIO 接口？</a></li></ul></li><li><a href="#串口" class="table-of-contents__link toc-highlight">串口</a><ul><li><a href="#q3-开发板上电后调试串口无任何日志显示怎么办" class="table-of-contents__link toc-highlight">Q3: 开发板上电后，调试串口无任何日志显示，怎么办？</a></li></ul></li><li><a href="#网络接口" class="table-of-contents__link toc-highlight">网络接口</a><ul><li><a href="#q4-开发板连接网络后无法上网如何处理" class="table-of-contents__link toc-highlight">Q4: 开发板连接网络后无法上网，如何处理？</a></li><li><a href="#q5-开发板无法通过-ssh-远程连接可能是什么原因" class="table-of-contents__link toc-highlight">Q5: 开发板无法通过 SSH 远程连接，可能是什么原因？</a></li><li><a href="#q6-开发板使用无线网络时连接不稳定传输速度慢怎么办" class="table-of-contents__link toc-highlight">Q6: 开发板使用无线网络时，连接不稳定、传输速度慢，怎么办？</a></li><li><a href="#q7-开发板无线网络无法使用使用ifconfig命令查询不到wlan0设备或类似无线网络接口名如何处理" class="table-of-contents__link toc-highlight">Q7: 开发板无线网络无法使用，使用<code>ifconfig</code>命令查询不到<code>wlan0</code>设备（或类似无线网络接口名），如何处理？</a></li></ul></li><li><a href="#usb-接口" class="table-of-contents__link toc-highlight">USB 接口</a><ul><li><a href="#q8-开发板接入-usb-摄像头后默认的设备节点是什么" class="table-of-contents__link toc-highlight">Q8: 开发板接入 USB 摄像头后，默认的设备节点是什么？</a></li><li><a href="#q9-开发板插入-usb-摄像头后没有生成预期的-devvideo8或其他设备节点怎么办" class="table-of-contents__link toc-highlight">Q9: 开发板插入 USB 摄像头后，没有生成预期的 <code>/dev/video8</code>（或其他）设备节点，怎么办？</a></li><li><a href="#q10-开发板接入-usb-遥控手柄gamepadjoystick后无法使用没有生成-devinputjs0-设备节点如何解决" class="table-of-contents__link toc-highlight">Q10: 开发板接入 USB 遥控手柄（Gamepad/Joystick）后无法使用，没有生成 <code>/dev/input/js0</code> 设备节点，如何解决？</a></li></ul></li><li><a href="#mipi-csi-接口" class="table-of-contents__link toc-highlight">MIPI CSI 接口</a><ul><li><a href="#q11-开发板接入-mipi-摄像头后无法使用i2cdetect命令无法检测到摄像头的-i2c-地址是什么原因" class="table-of-contents__link toc-highlight">Q11: 开发板接入 MIPI 摄像头后无法使用，<code>i2cdetect</code>命令无法检测到摄像头的 I2C 地址，是什么原因？</a></li><li><a href="#q12-运行-mipi-摄像头示例程序时报错-valueerror-invalid-literal-for-int-with-base-10-bopen-device-devlt8618_ioctl-failedndevice-not-openn1080如何解决" class="table-of-contents__link toc-highlight">Q12: 运行 MIPI 摄像头示例程序时报错 <code>ValueError: invalid literal for int() with base 10: b&#39;open device /dev/lt8618_ioctl failed\ndevice not open\n1080&#39;</code>，如何解决？</a></li></ul></li><li><a href="#显示接口" class="table-of-contents__link toc-highlight">显示接口</a><ul><li><a href="#q13-开发板的-hdmi-接口可以支持哪些分辨率" class="table-of-contents__link toc-highlight">Q13: 开发板的 HDMI 接口可以支持哪些分辨率？</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">友情链接</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.guyuehome.com/" target="_blank" rel="noopener noreferrer" class="footer__link-item">古月居<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">联系我们</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/D-Robotics" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://space.bilibili.com/437998606" target="_blank" rel="noopener noreferrer" class="footer__link-item">BiLiBiLi<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024-2026 D-Robotics.</div></div></div></footer></div>
 </body>
 </html>
