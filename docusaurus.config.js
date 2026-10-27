@@ -285,14 +285,11 @@ const config = {
           { from: "/03_Basic_Application/03_40pin_user_guide/40pin_define.md", to: "/Basic_Application/01_40pin_user_sample/40pin_define" },
           { from: "/Quick_start/09_RDK_Studio/04_flashing.md", to: "/Quick_start/rdk_studio" },
           { from: "/05_Robot_development/03_boxs/spatial/stereo_imu_cam.md", to: "https://developer.d-robotics.cc/tros_doc/en/boxs/spatial/stereo_imu_cam" },
-<<<<<<< HEAD
           // GSC 404 尾巴（2026-10）：版本号写成点号，实际页面用下划线
           { from: "/Advanced_development/toolchain_development/rdk_x5/oe_toolchain_v1.2.8", to: "/Advanced_development/toolchain_development/rdk_x5/oe_toolchain_v1_2_8" },
           { from: "/Advanced_development/toolchain_development/rdk_x3/oe_toolchain_v2.6.6", to: "/Advanced_development/toolchain_development/rdk_x3/oe_toolchain_v2_6_6" },
-=======
           // 2026-10-22：源文件名拼写错误 blueteeth → bluetooth，旧 URL 301 到新 URL
           { from: "/System_configuration/network_blueteeth", to: "/System_configuration/network_bluetooth" },
->>>>>>> 973b62074 (fix: 源文件名拼写错误 network_blueteeth → network_bluetooth)
         ],
       },
     ],
