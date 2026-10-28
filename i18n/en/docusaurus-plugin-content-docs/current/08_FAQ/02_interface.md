@@ -52,8 +52,7 @@ sidebar_position: 2
     * Use `ifconfig` or `ip addr` to check interface status and IP configuration.
     * Use `route -n` to view the routing table.
     * Use `ping <gateway IP>` to test connectivity to the gateway.
-5.  **Refer to Official Docs:** For detailed steps and troubleshooting, see the "[Network Configuration](../02_System_configuration/01_network_blueteeth.md)" section.
-
+5.  **Refer to Official Docs:** For detailed steps and troubleshooting, see the "[Network Configuration](../02_System_configuration/01_network_bluetooth.md)" section.
 #### Q5: Unable to connect to the board via SSH. What could be the reason?
 **A:**
 * **Error: `Connection timed out`:**

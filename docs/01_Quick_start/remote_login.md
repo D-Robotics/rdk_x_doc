@@ -126,7 +126,7 @@ Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=3
 
 ![image-setstaticip](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/01_Quick_start/image/remote_login/image-setstaticip.png)
 
-如需将开发板有线网络配置为动态获取 DHCP 模式，可参考[有线网络](../02_System_configuration/01_network_blueteeth.md)章节进行配置。
+如需将开发板有线网络配置为动态获取 DHCP 模式，可参考[有线网络](../02_System_configuration/01_network_bluetooth.md)章节进行配置。
 
 ## VNC 登录
 

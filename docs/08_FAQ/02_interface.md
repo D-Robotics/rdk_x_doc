@@ -58,7 +58,7 @@ import DocScope from '@site/src/components/DocScope';
     * 使用 `ifconfig` 或 `ip addr` 查看网络接口状态和 IP 配置。
     * 使用 `route -n` 查看路由表信息。
     * 使用 `ping <网关IP>` 测试到网关的连通性。
-5.  **参考官方文档：** 详细的网络配置步骤和故障排除方法，请参考官方文档中[网络配置](../02_System_configuration/01_network_blueteeth.md)
+5.  **参考官方文档：** 详细的网络配置步骤和故障排除方法，请参考官方文档中[网络配置](../02_System_configuration/01_network_bluetooth.md)
    
 
 

@@ -288,6 +288,8 @@ const config = {
           // GSC 404 尾巴（2026-10）：版本号写成点号，实际页面用下划线
           { from: "/Advanced_development/toolchain_development/rdk_x5/oe_toolchain_v1.2.8", to: "/Advanced_development/toolchain_development/rdk_x5/oe_toolchain_v1_2_8" },
           { from: "/Advanced_development/toolchain_development/rdk_x3/oe_toolchain_v2.6.6", to: "/Advanced_development/toolchain_development/rdk_x3/oe_toolchain_v2_6_6" },
+          // 2026-10-22：源文件名拼写错误 blueteeth → bluetooth，旧 URL 301 到新 URL
+          { from: "/System_configuration/network_blueteeth", to: "/System_configuration/network_bluetooth" },
         ],
       },
     ],
