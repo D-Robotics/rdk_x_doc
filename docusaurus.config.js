@@ -100,7 +100,10 @@ function applyEnglishCategorySlugs(items) {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "RDK X3/X5 DOC",
+  title:
+    process.env.DOCUSAURUS_CURRENT_LOCALE === "en"
+      ? "RDK X3/X5 User Manual"
+      : "RDK X3/X5 用户手册",
   // tagline: 'Dinosaurs are cool',
   favicon: "img/logo.png",
   // Set the production url of your site here
@@ -321,7 +324,7 @@ const config = {
       navbar: {
         title: "D-Robotics",
         logo: {
-          alt: "地瓜机器人社区 logo",
+          alt: "地瓜 logo",
           src: "img/logo.png",
           href: "https://d-robotics.cc/", // 修改为文档根路径
         },
@@ -374,7 +377,7 @@ const config = {
                 href: "https://github.com/D-Robotics",
               },
               {
-                label: "BiLiBiLi",
+                label: "Bilibili",
                 href: (() => {
                   if (process.env.DOCUSAURUS_CURRENT_LOCALE === "en") {
                     return "https://www.youtube.com/@D-Robotics";
@@ -392,9 +395,9 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
       algolia: {
-        appId: "1VU781LYTV",
-        apiKey: "fb65c6e54a52ce6fba0645bd2630e79b",
-        indexName: "rdk_x_doc",
+        appId: process.env.ALGOLIA_APP_ID || "1VU781LYTV",
+        apiKey: process.env.ALGOLIA_SEARCH_API_KEY || "fb65c6e54a52ce6fba0645bd2630e79b",
+        indexName: process.env.ALGOLIA_INDEX_NAME || "rdk_x_doc",
         contextualSearch: true,
         searchPagePath: "search",
       },
