@@ -545,17 +545,17 @@ RDK X3 Module 载板提供 IO 电平切换功能，用于控制 40pin header 电
 
 | 连接器 | 型号 |   厂商  |  描述  |
 | --- | ------ | ------- | ------- |
-| J34 | AFC01-S24FCA-00 | JS (钜硕电子) | MIPI CSI 摄像头接口 |
-| E1 | U.FL-R-SMT-1(10) | HRS(广濑) | Wi-Fi 天线接口 |
+| J34 | AFC01-S24FCA-00 | 钜硕电子 | MIPI CSI 摄像头接口 |
+| E1 | U.FL-R-SMT-1(10) | 广濑 | Wi-Fi 天线接口 |
 
 </DocScope>
 <DocScope versions=">=3.0.0" products="RDK X3 Module">
 
 | 连接器 | 型号 |   厂商  |  描述  |
 | --- | ------ | ------- | ------- |
-| J710 | AFA07-S15FCA-00 | JS (钜硕电子) | MIPI DSI 接口 |
-| U100/U101 | AFA07-S15FCA-00 | JS (钜硕电子) | CAM0 接口，CAM2 接口 |
-| J27 | AFA07-S15FCA-00 | JS (钜硕电子) | CAM1 接口 |
+| J710 | AFA07-S15FCA-00 | 钜硕电子 | MIPI DSI 接口 |
+| U100/U101 | AFA07-S15FCA-00 | 钜硕电子 | CAM0 接口，CAM2 接口 |
+| J27 | AFA07-S15FCA-00 | 钜硕电子 | CAM1 接口 |
 
 </DocScope>
 
