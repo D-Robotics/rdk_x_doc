@@ -63,6 +63,90 @@ jobs:
             'i18n/en/docusaurus-plugin-content-docs/current/**/*.md'
             'i18n/en/docusaurus-plugin-content-docs/current/**/*.mdx'
 
+      # 过渡域回迁探测：文档里指向 developer-legacy 的链接，是「新站没有、旧站才有」的临时方案。
+      # 这里每次巡检顺手查一遍新站同路径，一旦从 404 变成 200，说明资源已迁回主域，开 issue 提示改回来。
+      # 链接清单从文档里实时 grep，不维护白名单；改完链接后该路径自动消失，issue 下次自动关闭。
+      - name: Probe legacy links on main site
+        id: legacy
+        run: |
+          set -uo pipefail
+          NEW_SITE="https://developer.d-robotics.cc"
+          DETAIL=./legacy-ready.md
+          READY=0
+          TOTAL=0
+          : > "$DETAIL"
+
+          PATHS=$(grep -rhoE 'https://developer-legacy\.d-robotics\.cc[^ ()"<>`]*' docs i18n 2>/dev/null \
+            | sed 's/].*//' \
+            | sed 's#^https://developer-legacy\.d-robotics\.cc##' \
+            | sed 's/[.,;]*$//' \
+            | sort -u || true)
+
+          if [ -z "$PATHS" ]; then
+            echo "文档里没有指向 developer-legacy 的链接，跳过回迁探测"
+          else
+            while IFS= read -r p; do
+              [ -z "$p" ] && continue
+              TOTAL=$((TOTAL+1))
+              code=$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 "${NEW_SITE}${p}" || true)
+              code="${code:-000}"
+              echo "- \`${p}\` → ${code}" >> "$DETAIL"
+              [ "$code" = "200" ] && READY=$((READY+1))
+            done <<< "$PATHS"
+          fi
+
+          echo "探测 ${TOTAL} 个 legacy 路径，其中 ${READY} 个新站已可达"
+          {
+            echo "### legacy 回迁探测"
+            echo ""
+            echo "共 ${TOTAL} 个路径，新站已可达 ${READY} 个。"
+            echo ""
+            echo "| 路径 | 新站状态 |"
+            echo "| --- | --- |"
+            sed -nE 's/^- `(.*)` → (.*)$/| `\1` | \2 |/p' "$DETAIL" || true
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          echo "ready=$READY" >> "$GITHUB_OUTPUT"
+
+      - name: Create or update legacy migration issue
+        if: success() && steps.legacy.outputs.ready != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TITLE="chore: legacy 链接可回迁（自动探测）"
+          LABEL="tech-debt"
+          gh label create "$LABEL" --color 0e8a16 2>/dev/null || true
+
+          BODY="## legacy 链接可回迁"$'\n\n'
+          BODY+="> 探测时间：$(date -u '+%Y-%m-%d %H:%M UTC')"$'\n\n'
+          BODY+="文档里有链接指向 \`developer-legacy.d-robotics.cc\`（新站没迁这些资源时的临时方案），而新站 \`developer.d-robotics.cc\` 的同路径现在返回 200——资源已经迁到主域，可以改回来了。"$'\n\n'
+          BODY+="$(grep '→ 200' ./legacy-ready.md || true)"$'\n\n'
+          BODY+="> 改完之后该路径会自动从探测清单里消失，本 issue 下次巡检自动关闭。"
+
+          NUM=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$NUM" ]; then
+            gh issue edit "$NUM" --body "$BODY"
+            echo "已更新 issue #$NUM"
+          else
+            gh issue create --title "$TITLE" --label "$LABEL" --body "$BODY"
+            echo "已创建 issue"
+          fi
+
+      - name: Close legacy migration issue when nothing to migrate
+        if: success() && steps.legacy.outputs.ready == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TITLE="chore: legacy 链接可回迁（自动探测）"
+          NUM=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --body "✅ 本次探测没有可回迁的链接，已关闭。"
+            gh issue close "$NUM"
+            echo "已关闭 issue #$NUM"
+          fi
+
       - name: Create or update issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
