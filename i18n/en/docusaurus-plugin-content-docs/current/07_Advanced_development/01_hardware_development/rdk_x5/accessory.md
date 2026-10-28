@@ -22,9 +22,9 @@ The certified accessories list refers to third-party accessories that have been 
 | MIPI | Waveshare | OV5647 Camera | OV5647 sensor, 5MP, 160° diagonal FOV | [Buy Link](https://www.waveshare.net/shop/RPi-Camera-G.htm) |
 | MIPI | Waveshare | IMX219 Camera | Optimized image library, IMX219 sensor, 8MP, 160° diagonal FOV | [Buy Link](https://www.waveshare.net/shop/IMX219-160-Camera.htm) |
 | MIPI | Waveshare | IMX477 Camera | IMX477 sensor, 12.3MP, 160° diagonal FOV | [Buy Link](https://www.waveshare.net/shop/IMX477-160-12.3MP-Camera.htm) |
-| MIPI | YAHBOOM | IMX219 Camera | IMX219 sensor, 8MP, 77° diagonal FOV | [Buy Link](https://detail.tmall.com/item.htm?abbucket=2&id=710344235988&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.110.4df82edcjJ7wap) |
-| USB | YAHBOOM | USB Camera | Driver-free USB microphone camera, 720p | [Buy Link](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o) |
-| USB | Wheeltec | USB Camera | Driver-free USB camera, metal case, 1080p | [Buy Link](https://detail.tmall.com/item.htm?abbucket=12&id=666156389569&ns=1&spm=a230r.1.14.1.13e570f3eFF1sJ&skuId=4972914294771) |
+| MIPI | Yahboom | IMX219 Camera | IMX219 sensor, 8MP, 77° diagonal FOV | [Buy Link](https://detail.tmall.com/item.htm?abbucket=2&id=710344235988&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.110.4df82edcjJ7wap) |
+| USB | Yahboom | USB Camera | Driver-free USB microphone camera, 720p | [Buy Link](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o) |
+| USB | WHEELTEC | USB Camera | Driver-free USB camera, metal case, 1080p | [Buy Link](https://detail.tmall.com/item.htm?abbucket=12&id=666156389569&ns=1&spm=a230r.1.14.1.13e570f3eFF1sJ&skuId=4972914294771) |
 
 ## Displays
 
