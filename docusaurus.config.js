@@ -122,7 +122,7 @@ const config = {
           },
 
           feedbackFloat: {
-            enabled: true,
+            enabled: false,
                 questionnaireUrl: "https://horizonrobotics.feishu.cn/share/base/form/shrcnLQ9OfYQO03cebdkNfOmkCh",
                 questionnaireUrlByLocale: {
                   "zh-Hans": "https://horizonrobotics.feishu.cn/share/base/form/shrcnLQ9OfYQO03cebdkNfOmkCh",
@@ -156,18 +156,12 @@ const config = {
       async: true,
     },
     // Dify Chatbot Configuration
-    {
-      src: "/rdk_x_doc/js/dify-config.js",
-    },
+
     {
       src: `/rdk_x_doc${localePrefix}/js/umami-events.js`,
       defer: true,
     },
-    {
-      src: "https://rdk.d-robotics.cc/embed.min.js",
-      id: "rJYrxmxmjOkjEx2c",
-      defer: true,
-    },
+
   ],
   headTags: [
     {
@@ -203,6 +197,7 @@ const config = {
     },
   },
 
+
   presets: [
     [
       "classic",
@@ -232,6 +227,7 @@ const config = {
     ],
   ],
   plugins:  [
+    '@d-robotics/docusaurus-plugin-guaji',
     require.resolve("./src/plugins/sidebar-scope-config-plugin"),
     require.resolve("./src/plugins/locale-aware-404-plugin"),
     "docusaurus-plugin-image-zoom",
