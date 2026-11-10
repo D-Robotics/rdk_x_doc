@@ -9,7 +9,7 @@ The **hrut_socid** command prints the Unique Identifier (UID) of the current SOC
 ## Syntax
 
 ```
-hrut_socid
+hrut_socuid
 ```
 
 ## Common Commands

@@ -38,10 +38,10 @@ import DocScope from '@site/src/components/DocScope';
 | 类型| 适配产品 | 供应商 | 型号 | 描述  |购买链接 |
 | --- | --------- | -------- | --------------- | --------- |----------|
 | 电源 | RDK X3 | 微雪 | ORD-PSU-5V3A-USB-C-US | Type-C 接口 5V/3A 定制电源|[购买链接](https://www.waveshare.net/shop/ORD-PSU-5V3A-USB-C-US.htm)  |
-| 电源 | RDK X3 | 亚博 | T03F-050300Z | Type-C 接口 5V/3A 定制电源 | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=608661929691&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.154.4df82edcjJ7wap&skuId=4949624573441) |
+| 电源 | RDK X3 | 亚博智能 | T03F-050300Z | Type-C 接口 5V/3A 定制电源 | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=608661929691&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.154.4df82edcjJ7wap&skuId=4949624573441) |
 | 电源  |RDK X3 Module | 微雪 | ORD-PSU-12V2A-5.5-2.1-US | 12V/2A 定制电源  | [购买链接](https://www.waveshare.net/shop/ORD-PSU-12V2A-5.5-2.1-US.htm) |
 | 散热器 | RDK X3 |微雪 | N/A | 散热风扇扩展板 | [购买链接](https://www.waveshare.net/shop/X3-PI-FAN-HAT.htm)  |
-| 散热器 | RDK X3 |亚博 | N/A | 主板风扇，支持 OLED 显示 | [购买链接](https://detail.tmall.com/item.htm?de_count=1&id=607959748338)  |
+| 散热器 | RDK X3 |亚博智能 | N/A | 主板风扇，支持 OLED 显示 | [购买链接](https://detail.tmall.com/item.htm?de_count=1&id=607959748338)  |
 | 散热器  | RDK X3 Module| 微雪   | CM4-HEATSINK-B           | 散热器                       | [购买链接](https://www.waveshare.net/shop/CM4-HEATSINK-B.htm) |
 | 散热器  | RDK X3 Module| 微雪   | CM4-HEATSINK             | 散热器带风扇                 | [购买链接](https://www.waveshare.net/shop/CM4-FAN-3007-5V.htm) |
 | Wi-Fi 天线|RDK X3<br/>RDK X3 Module | 微雪 | ORD-CM4-ANTENNA | SMA 天线 支持 2.4G/5G WiFi 频段 | [购买链接](https://www.waveshare.net/shop/ORD-CM4-ANTENNA.htm)  |
@@ -63,8 +63,8 @@ import DocScope from '@site/src/components/DocScope';
 | MIPI | RDK X3<br/>RDK X3 Module | 微雪 | IMX219 摄像头 | IMX219 传感器，800W 像素，FOV 对角 200 度 | 1920x1080@30fps(default),<br/> 640x480@30fps,<br/> 1632x1232@30fps,<br/> 3264x2464@15fps(max) | [购买链接](https://www.waveshare.net/shop/IMX219-200-Camera.htm)  |
 | MIPI | RDK X3<br/>RDK X3 Module | 微雪 | IMX477 摄像头 | IMX477 传感器，1230W 像素，FOV 对角 160 度 | 1920x1080@50fps(default), <br/>1280x960@120fps,<br/> 2016x1520@40fps,<br/> 4000x3000@10fps(max) | [购买链接](https://www.waveshare.net/shop/IMX477-160-12.3MP-Camera.htm)  |
 | MIPI | RDK X3 | 微雪 | 摄像头转接板 | 搭配微雪摄像头使用，15pin 转 24pin 转接板 | N/A | [购买链接](https://www.waveshare.net/shop/X3-Pi-CSI-Adapter.htm)  |
-| MIPI | RDK X3 <br/>RDK X3 Module | 亚博 | IMX219 摄像头 | IMX219 传感器，800W 像素，FOV 对角 77 度 | 1920x1080@30fps(default),<br/> 640x480@30fps,<br/> 1632x1232@30fps,<br/> 3264x2464@15fps(max) | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=710344235988&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.110.4df82edcjJ7wap)  |
-| USB | RDK X3 <br/>RDK X3 Module | 亚博 | USB 摄像头 | 免驱 USB 麦克风摄像头，720p | 1280x720@30fps | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o)  |
+| MIPI | RDK X3 <br/>RDK X3 Module | 亚博智能 | IMX219 摄像头 | IMX219 传感器，800W 像素，FOV 对角 77 度 | 1920x1080@30fps(default),<br/> 640x480@30fps,<br/> 1632x1232@30fps,<br/> 3264x2464@15fps(max) | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=710344235988&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.110.4df82edcjJ7wap)  |
+| USB | RDK X3 <br/>RDK X3 Module | 亚博智能 | USB 摄像头 | 免驱 USB 麦克风摄像头，720p | 1280x720@30fps | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o)  |
 | USB | RDK X3 <br/>RDK X3 Module | 轮趣 | USB 摄像头 | 免驱 USB 摄像头，金属外壳，1080p | 1920x1080@30fps | [购买链接](https://detail.tmall.com/item.htm?abbucket=12&id=666156389569&ns=1&spm=a230r.1.14.1.13e570f3eFF1sJ&skuId=4972914294771)  |
 
 ### 显示屏
@@ -100,7 +100,7 @@ import DocScope from '@site/src/components/DocScope';
 | 4G 通信模块 | 微雪 | SIM7600G-H 4G DTU | 工业级 4G 通信模块，支持 USB/UART/RS232/RS485 接口，4G/3G/2G 网络及 GNSS 定位 | [购买链接](https://www.waveshare.net/shop/SIM7600G-H-4G-DTU.htm)  |
 | 4G 通信模块 | 微雪 | SIM7600G-H 4G DONGLE | 工业级 4G 通信模块，支持 USB/UART 接口，4G/3G/2G 网络及 GNSS 定位 | [购买链接](https://www.waveshare.net/shop/SIM7600G-H-4G-DONGLE.htm)  |
 | 外壳 | 地瓜机器人 | RDK X5 Case | 全金属黑色外壳 | [购买链接](https://item.taobao.com/item.htm?abbucket=11&id=623862263232&mi_id=0000TakHYTmsuMbPUMYV_dByLYk8Z3qEoQjHCjwjgpyQD58&ns=1&priceTId=213e032717694105383204838e131d&skuId=5633976856940&spm=a21n57.1.hoverItem.8&utparam=%7B%22aplus_abtest%22%3A%224d58468e1aea4fb2bc2fb94fb4afe5db%22%7D&xxc=taobaoSearch)  |
-| 外壳 | 亚博 | RDK X5 外壳 | 全金属黑色外壳 | [购买链接](https://item.taobao.com/item.htm?abbucket=11&id=623862263232&mi_id=0000TakHYTmsuMbPUMYV_dByLYk8Z3qEoQjHCjwjgpyQD58&ns=1&priceTId=213e032717694105383204838e131d&skuId=5633976856940&spm=a21n57.1.hoverItem.8&utparam=%7B%22aplus_abtest%22%3A%224d58468e1aea4fb2bc2fb94fb4afe5db%22%7D&xxc=taobaoSearch)  |
+| 外壳 | 亚博智能 | RDK X5 外壳 | 全金属黑色外壳 | [购买链接](https://item.taobao.com/item.htm?abbucket=11&id=623862263232&mi_id=0000TakHYTmsuMbPUMYV_dByLYk8Z3qEoQjHCjwjgpyQD58&ns=1&priceTId=213e032717694105383204838e131d&skuId=5633976856940&spm=a21n57.1.hoverItem.8&utparam=%7B%22aplus_abtest%22%3A%224d58468e1aea4fb2bc2fb94fb4afe5db%22%7D&xxc=taobaoSearch)  |
 | 以太网供电模块 | 微雪 | RDK X5 PoE Module | 40PIN GPIO 接口连接，兼容 IEEE 802.3af/at 网络标准，全隔离开关电源（SMPS）设计，<br/>具备板载高转速主动散热风扇和金属散热片|[购买链接](https://www.waveshare.net/shop/RDK-PoE-Module.htm)  |
 
 
@@ -120,8 +120,8 @@ import DocScope from '@site/src/components/DocScope';
 | MIPI | 微雪 | IMX219 摄像头 | Pi5，IMX219 传感器，800W 像素，FOV 对角 120 度(需要先使用 srpi-config 切换效果库)| 1920x1080@30fps(default), <br/>1632x1232@30fps,<br/> 3264x2464@15fps(max) | [购买链接](https://e.tb.cn/h.7lIWpbM80XTnoFu?tk=28dmU3MVDG4)  |
 | MIPI | 微雪 | IMX477 摄像头 | IMX477 传感器，1230W 像素，FOV 对角 160 度 | 1920x1080@50fps(default), <br/>1280x960@120fps,<br/> 2016x1520@40fps,<br/> 4000x3000@10fps(max) | [购买链接](https://www.waveshare.net/shop/IMX477-160-12.3MP-Camera.htm)  |
 | MIPI | 第三方 | IMX415 摄像头 | IMX415 传感器，800W 像素，FOV 对角 123 度，22PIN 无需转接板 | 待测试 | [购买链接](https://e.tb.cn/h.hNHZxXLFdgg6oHj?tk=b1Id4UgKNVn)  |
-| MIPI | 亚博 | IMX219 摄像头 | IMX219 传感器，800W 像素，FOV 对角 77 度 | 1920x1080@30fps(default), <br/>640x480@30fps,<br/> 1632x1232@30fps,<br/> 3264x2464@15fps(max) | [购买链接](https://detail.tmall.com/item.htm?abbucket=11&id=839183655358&mi_id=0000mJPS-aUaSa1zzO5CvcLhQYgkjpazBFmo9ZGQ9_-A15E&ns=1&priceTId=2147801e17695881044207950e13fd&skuId=5770242754444&spm=a21n57.1.hoverItem.3&utparam=%7B%22aplus_abtest%22%3A%22ad38bcc0b3e9545ae7b168f9b42eb0eb%22%7D&xxc=taobaoSearch)  |
-| USB | 亚博 | USB 摄像头 | 免驱 USB 麦克风摄像头，720p | 1280x720@30fps | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o)  |
+| MIPI | 亚博智能 | IMX219 摄像头 | IMX219 传感器，800W 像素，FOV 对角 77 度 | 1920x1080@30fps(default), <br/>640x480@30fps,<br/> 1632x1232@30fps,<br/> 3264x2464@15fps(max) | [购买链接](https://detail.tmall.com/item.htm?abbucket=11&id=839183655358&mi_id=0000mJPS-aUaSa1zzO5CvcLhQYgkjpazBFmo9ZGQ9_-A15E&ns=1&priceTId=2147801e17695881044207950e13fd&skuId=5770242754444&spm=a21n57.1.hoverItem.3&utparam=%7B%22aplus_abtest%22%3A%22ad38bcc0b3e9545ae7b168f9b42eb0eb%22%7D&xxc=taobaoSearch)  |
+| USB | 亚博智能 | USB 摄像头 | 免驱 USB 麦克风摄像头，720p | 1280x720@30fps | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o)  |
 | USB | 轮趣 | USB 摄像头 | 免驱 USB 摄像头，金属外壳，1080p | 1920x1080@30fps | [购买链接](https://detail.tmall.com/item.htm?abbucket=12&id=666156389569&ns=1&spm=a230r.1.14.1.13e570f3eFF1sJ&skuId=4972914294771)  |
 
 ### 双目摄像头
