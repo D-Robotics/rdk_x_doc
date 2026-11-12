@@ -8,17 +8,20 @@ name: Check external links
 #   - --scheme http --scheme https：只查 http/https，file://、mailto 等跳过；
 #   - --root-dir ${{ github.workspace }}：站内 /xxx 根相对路径先解析成 file://，再被 scheme 跳过；
 #   - --exclude-all-private：内网/私有 IP、localhost 等占位符；
-#   - --exclude 占位符：http://ip/、proxy_server_address；
+#   - --exclude 占位符：http://ip/、proxy_server_address、device-ip、development-board-ip、xn--ip-*；
+#   - --exclude YouTube：数据中心 IP 被判 404，视频本身正常（2026-10-26 逐个核验未删除）；
+#   - --exclude waveshare.com / blog.csdn.net：反爬，runner 得 503/521，真实用户与本机实测 200；
 #   - --exclude 图片：.png/.jpg/.gif/.svg/.webp/.ico（图片先不查，只查文字外链）；
 #   - --exclude '.hobot.cc'：境外 runner 连不上（Connection failed、非 404），GitHub 上无信号可采，
 #     本机实测 200 正常；China 侧可达性校验另议。
 # --accept 里的 412/429/530：反爬/限流/异常状态码（服务器有响应、资源存在），非 404，视为可达。
+# --max-concurrency 16：限制单仓并发（lychee 默认 128），避免把自家域名打出 timeout。
 # 注意不能用 --include '^https?://' 做白名单：lychee 里 include 一旦匹配会覆盖 exclude。
 
 on:
   schedule:
-    # 每天 UTC 03:37（北京时间 11:37），避开整点
-    - cron: "37 3 * * *"
+    # 每天 UTC 03:44（北京时间 11:44），与本批其他仓错开 7 分钟，避免同时扫描同一批域名
+    - cron: "44 3 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -39,6 +42,7 @@ jobs:
           fail: false
           args: >-
             --no-progress
+            --max-concurrency 16
             --scheme http
             --scheme https
             --root-dir ${{ github.workspace }}
@@ -49,12 +53,99 @@ jobs:
             --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             --exclude-all-private
             --exclude '\.hobot\.cc'
-            --exclude '(?i)^https?://(ip|proxy_server_address)([^a-z0-9]|$)'
+            --exclude '(?i)^https?://([a-z0-9-]+\.)?(youtube\.com|youtu\.be)/'
+            --exclude '(?i)^https?://([a-z0-9-]+\.)?waveshare\.com/'
+            --exclude '(?i)^https?://blog\.csdn\.net/'
+            --exclude '(?i)^https?://(ip|device-ip|development-board-ip|proxy_server_address|xn--ip-[a-z0-9-]+)([^a-z0-9-]|$)'
             --exclude '\.(png|jpe?g|gif|svg|webp|ico)(\?.*)?$'
             'docs/**/*.md'
             'docs/**/*.mdx'
             'i18n/en/docusaurus-plugin-content-docs/current/**/*.md'
             'i18n/en/docusaurus-plugin-content-docs/current/**/*.mdx'
+
+      # 过渡域回迁探测：文档里指向 developer-legacy 的链接，是「新站没有、旧站才有」的临时方案。
+      # 这里每次巡检顺手查一遍新站同路径，一旦从 404 变成 200，说明资源已迁回主域，开 issue 提示改回来。
+      # 链接清单从文档里实时 grep，不维护白名单；改完链接后该路径自动消失，issue 下次自动关闭。
+      - name: Probe legacy links on main site
+        id: legacy
+        run: |
+          set -uo pipefail
+          NEW_SITE="https://developer.d-robotics.cc"
+          DETAIL=./legacy-ready.md
+          READY=0
+          TOTAL=0
+          : > "$DETAIL"
+
+          PATHS=$(grep -rhoE 'https://developer-legacy\.d-robotics\.cc[^ ()"<>`]*' docs i18n 2>/dev/null \
+            | sed 's/].*//' \
+            | sed 's#^https://developer-legacy\.d-robotics\.cc##' \
+            | sed 's/[.,;]*$//' \
+            | sort -u || true)
+
+          if [ -z "$PATHS" ]; then
+            echo "文档里没有指向 developer-legacy 的链接，跳过回迁探测"
+          else
+            while IFS= read -r p; do
+              [ -z "$p" ] && continue
+              TOTAL=$((TOTAL+1))
+              code=$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 "${NEW_SITE}${p}" || true)
+              code="${code:-000}"
+              echo "- \`${p}\` → ${code}" >> "$DETAIL"
+              [ "$code" = "200" ] && READY=$((READY+1))
+            done <<< "$PATHS"
+          fi
+
+          echo "探测 ${TOTAL} 个 legacy 路径，其中 ${READY} 个新站已可达"
+          {
+            echo "### legacy 回迁探测"
+            echo ""
+            echo "共 ${TOTAL} 个路径，新站已可达 ${READY} 个。"
+            echo ""
+            echo "| 路径 | 新站状态 |"
+            echo "| --- | --- |"
+            sed -nE 's/^- `(.*)` → (.*)$/| `\1` | \2 |/p' "$DETAIL" || true
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          echo "ready=$READY" >> "$GITHUB_OUTPUT"
+
+      - name: Create or update legacy migration issue
+        if: success() && steps.legacy.outputs.ready != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TITLE="chore: legacy 链接可回迁（自动探测）"
+          LABEL="tech-debt"
+          gh label create "$LABEL" --color 0e8a16 2>/dev/null || true
+
+          BODY="## legacy 链接可回迁"$'\n\n'
+          BODY+="> 探测时间：$(date -u '+%Y-%m-%d %H:%M UTC')"$'\n\n'
+          BODY+="文档里有链接指向 \`developer-legacy.d-robotics.cc\`（新站没迁这些资源时的临时方案），而新站 \`developer.d-robotics.cc\` 的同路径现在返回 200——资源已经迁到主域，可以改回来了。"$'\n\n'
+          BODY+="$(grep '→ 200' ./legacy-ready.md || true)"$'\n\n'
+          BODY+="> 改完之后该路径会自动从探测清单里消失，本 issue 下次巡检自动关闭。"
+
+          NUM=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$NUM" ]; then
+            gh issue edit "$NUM" --body "$BODY"
+            echo "已更新 issue #$NUM"
+          else
+            gh issue create --title "$TITLE" --label "$LABEL" --body "$BODY"
+            echo "已创建 issue"
+          fi
+
+      - name: Close legacy migration issue when nothing to migrate
+        if: success() && steps.legacy.outputs.ready == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TITLE="chore: legacy 链接可回迁（自动探测）"
+          NUM=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --body "✅ 本次探测没有可回迁的链接，已关闭。"
+            gh issue close "$NUM"
+            echo "已关闭 issue #$NUM"
+          fi
 
       - name: Create or update issue
         env:
