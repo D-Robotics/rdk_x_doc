@@ -177,13 +177,13 @@ jobs:
                 echo "清单无变化，跳过更新（不打扰订阅者）"
               else
                 gh issue edit "$NUM" --body "$BODY" \
-                  --add-assignee Paka-418 --add-assignee liqinglian
-                echo "已更新 issue #$NUM 并指派 Paka-418/liqinglian"
+                  --add-assignee Paka-418 --add-assignee liqinglian01
+                echo "已更新 issue #$NUM 并指派 Paka-418/liqinglian01"
               fi
             else
               gh issue create --title "$TITLE" --label "$LABEL" --body "$BODY" \
-                --assignee Paka-418,liqinglian
-              echo "已创建 issue 并指派 Paka-418/liqinglian"
+                --assignee Paka-418,liqinglian01
+              echo "已创建 issue 并指派 Paka-418/liqinglian01"
             fi
           else
             NUM="$(issue_num)"
