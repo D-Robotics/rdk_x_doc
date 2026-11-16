@@ -230,7 +230,7 @@ const config = {
     ],
   ],
   plugins:  [
-    '@d-robotics/docusaurus-plugin-guaji',
+    ['@d-robotics/docusaurus-plugin-guaji', { assistantOrigin: process.env.GUAJI_ASSISTANT_ORIGIN?.trim() || undefined }],
     require.resolve("./src/plugins/sidebar-scope-config-plugin"),
     require.resolve("./src/plugins/locale-aware-404-plugin"),
     "docusaurus-plugin-image-zoom",
