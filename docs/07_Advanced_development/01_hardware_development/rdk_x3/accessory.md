@@ -12,11 +12,11 @@ sidebar_position: 3
 | 类型 | 供应商 | 型号 | 描述 | 购买链接 |
 | --- | --------- | -------- | --------------- | --------- |
 | 电源 | 微雪 | ORD-PSU-5V3A-USB-C-US | Type-C 接口 5V/3A 定制电源 | [购买链接](https://www.waveshare.net/shop/ORD-PSU-5V3A-USB-C-US.htm)  |
-| 电源 | 亚博 | T03F-050300Z | Type-C 接口 5V/3A 定制电源 | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=608661929691&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.154.4df82edcjJ7wap&skuId=4949624573441)  |
-| 外壳 | 亚博 | N/A | 铝合金定制外壳 | [购买链接](https://detail.tmall.com/item.htm?abbucket=12&id=684466941541&mi_id=0000PLEQT62T_Np1N3BL9CgPql-Vl9KYFYm0g339d5STQ5g&ns=1&skuId=4890111988477&spm=a21n57.1.hoverItem.1&utparam=%7B%22aplus_abtest%22%3A%224306038429178a697db9630f4094face%22%7D&xxc=taobaoSearch)  |
+| 电源 | 亚博智能 | T03F-050300Z | Type-C 接口 5V/3A 定制电源 | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=608661929691&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.154.4df82edcjJ7wap&skuId=4949624573441)  |
+| 外壳 | 亚博智能 | N/A | 铝合金定制外壳 | [购买链接](https://detail.tmall.com/item.htm?abbucket=12&id=684466941541&mi_id=0000PLEQT62T_Np1N3BL9CgPql-Vl9KYFYm0g339d5STQ5g&ns=1&skuId=4890111988477&spm=a21n57.1.hoverItem.1&utparam=%7B%22aplus_abtest%22%3A%224306038429178a697db9630f4094face%22%7D&xxc=taobaoSearch)  |
 | 外壳 | 轮趣 | N/A | 铝合金定制外壳 | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=670534732857&rn=0b151aa6abd5b8d65e5533b8259449f1&spm=a1z10.3-b-s.w4011-24713677160.27.ef207988tOY0c9&skuId=5004448047864)  |
 | 散热器 | 微雪 | N/A | 散热风扇扩展板 | [购买链接](https://www.waveshare.net/shop/X3-PI-FAN-HAT.htm)  |
-| 散热器 | 亚博 | N/A | 主板风扇，支持 OLED 显示 | [购买链接](https://detail.tmall.com/item.htm?de_count=1&id=607959748338)  |
+| 散热器 | 亚博智能 | N/A | 主板风扇，支持 OLED 显示 | [购买链接](https://detail.tmall.com/item.htm?de_count=1&id=607959748338)  |
 | Wi-Fi 天线 | 微雪 | ORD-CM4-ANTENNA | SMA 天线 支持 2.4G/5G WiFi 频段 | [购买链接](https://www.waveshare.net/shop/ORD-CM4-ANTENNA.htm)  |
 | 4G 通信模块 | 微雪 | SIM7600G-H 4G DTU | 工业级 4G 通信模块，支持 USB/UART/RS232/RS485 接口，4G/3G/2G 网络及 GNSS 定位 | [购买链接](https://www.waveshare.net/shop/SIM7600G-H-4G-DTU.htm)  |
 
@@ -30,8 +30,8 @@ sidebar_position: 3
 | MIPI | 微雪 | IMX219 摄像头 | IMX219 传感器，800W 像素，FOV 对角 200 度 | [购买链接](https://www.waveshare.net/shop/IMX219-200-Camera.htm)  |
 | MIPI | 微雪 | IMX477 摄像头 | IMX477 传感器，1230W 像素，FOV 对角 160 度 | [购买链接](https://www.waveshare.net/shop/IMX477-160-12.3MP-Camera.htm)  |
 | MIPI | 微雪 | 摄像头转接板 | 搭配微雪摄像头使用，15pin 转 24pin 转接板 | [购买链接](https://www.waveshare.net/shop/X3-Pi-CSI-Adapter.htm)  |
-| MIPI | 亚博 | IMX219 摄像头 | IMX219 传感器，800W 像素，FOV 对角 77 度 | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=710344235988&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.110.4df82edcjJ7wap)  |
-| USB | 亚博 | USB 摄像头 | 免驱 USB 麦克风摄像头，720p | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o)  |
+| MIPI | 亚博智能 | IMX219 摄像头 | IMX219 传感器，800W 像素，FOV 对角 77 度 | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=710344235988&rn=f64e2bbcef718a13a9f9c261124febd2&spm=a1z10.5-b-s.w4011-22651484606.110.4df82edcjJ7wap)  |
+| USB | 亚博智能 | USB 摄像头 | 免驱 USB 麦克风摄像头，720p | [购买链接](https://detail.tmall.com/item.htm?abbucket=2&id=633040443710&rn=ed9c7f0eecc103e742248e32a32ba62e&spm=a1z10.5-b-s.w4011-22651484606.152.c3406a83G6l62o)  |
 | USB | 轮趣 | USB 摄像头 | 免驱 USB 摄像头，金属外壳，1080p | [购买链接](https://detail.tmall.com/item.htm?abbucket=12&id=666156389569&ns=1&spm=a230r.1.14.1.13e570f3eFF1sJ&skuId=4972914294771)  |
 
 

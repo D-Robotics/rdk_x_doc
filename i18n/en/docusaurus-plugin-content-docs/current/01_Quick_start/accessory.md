@@ -39,7 +39,7 @@ This section summarizes the third-party accessory list officially certified by D
 | --- | --------- | -------- | --------------- | --------- |--------- |-------|
 | Power | RDK X3|Waveshare | ORD-PSU-5V3A-USB-C-US | Type-C interface 5V/3A custom power supply | [Purchase Link](https://www.waveshare.com/catalogsearch/result/?q=ORD-PSU-5V3A-USB-C-US)  |-|
 | Power | RDK X3 Module|Waveshare   | ORD-PSU-12V2A-5.5-2.1-US | 12V/2A custom power supply              | [Purchase Link](https://www.waveshare.com/ord-psu-12v2a-5.5-2.1.htm?sku=19175) |-|
-| Case | RDK X3|YAHBOOM | N/A | Aluminum alloy custom case | [Purchase Link](https://category.yahboom.net/products/rdk-x5-case?_pos=1&_sid=d9e5fbc8f&_ss=r)  |-|
+| Case | RDK X3|Yahboom | N/A | Aluminum alloy custom case | [Purchase Link](https://category.yahboom.net/products/rdk-x5-case?_pos=1&_sid=d9e5fbc8f&_ss=r)  |-|
 | Case | RDK X3|NTREX | RDK X3 Case | Made of ferrous metal, it is sturdy and offers <br/>excellent heat dissipation performance | [Purchase Link](https://www.devicemart.co.kr/goods/view?no=15617174)  |Korea region|
 | Case | RDK X3|Switch Science | RDK X3 Case | Frosted black finish. The I/O interface and antenna area <br/>feature precision openings and are secured with four screws. | [Purchase Link](https://www.switch-science.com/products/9837?_pos=3&_sid=8abe13fe9&_ss=r)  |Japan region|
 | Heat Sink | RDK X3|Waveshare | N/A | Cooling fan expansion board | [Purchase Link](https://www.waveshare.com/x3-pi-fan-hat.htm)  |-|
@@ -56,8 +56,8 @@ This section summarizes the third-party accessory list officially certified by D
 | MIPI | RDK X3<br/>RDK X3 Module|Waveshare | IMX219 Camera | IMX219 sensor, 8MP, FOV diagonal 200° | 1920x1080@30fps(default), <br/>640x480@30fps, <br/>1632x1232@30fps, <br/>3264x2464@15fps(max) | [Purchase Link](https://www.waveshare.com/imx219-160-camera.htm?sku=16679)  |
 | MIPI | RDK X3<br/>RDK X3 Module|Waveshare | IMX477 Camera | IMX477 sensor, 12.3MP, FOV diagonal 160° | 1920x1080@50fps(default), <br/>1280x960@120fps, <br/>2016x1520@40fps, <br/>4000x3000@10fps(max) | [Purchase Link](https://www.waveshare.com/imx477-160-12.3mp-camera.htm)  |
 | MIPI | RDK X3|Waveshare | Camera Adapter | For use with Waveshare cameras, 15pin to 24pin adapter | N/A | [Purchase Link](https://www.waveshare.com/x3-pi-csi-adapter.htm)  |
-| MIPI | RDK X3<br/>RDK X3 Module|YAHBOOM | IMX219 Camera | IMX219 sensor, 8MP, FOV diagonal 77° | 1920x1080@30fps(default), <br/>640x480@30fps, <br/>1632x1232@30fps, <br/>3264x2464@15fps(max) | [Purchase Link](https://category.yahboom.net/products/rdk-x3-camera?_pos=3&_sid=0071c72e5&_ss=r)  |
-| USB | RDK X3<br/>RDK X3 Module|YAHBOOM | USB Camera | Driver-free USB microphone camera, 720p | 1280x720@30fps | [Purchase Link](https://category.yahboom.net/products/camera-mic?_pos=2&_sid=77f956b6d&_ss=r)  |
+| MIPI | RDK X3<br/>RDK X3 Module|Yahboom | IMX219 Camera | IMX219 sensor, 8MP, FOV diagonal 77° | 1920x1080@30fps(default), <br/>640x480@30fps, <br/>1632x1232@30fps, <br/>3264x2464@15fps(max) | [Purchase Link](https://category.yahboom.net/products/rdk-x3-camera?_pos=3&_sid=0071c72e5&_ss=r)  |
+| USB | RDK X3<br/>RDK X3 Module|Yahboom | USB Camera | Driver-free USB microphone camera, 720p | 1280x720@30fps | [Purchase Link](https://category.yahboom.net/products/camera-mic?_pos=2&_sid=77f956b6d&_ss=r)  |
 
 
 ### Displays
@@ -105,8 +105,8 @@ This section summarizes the third-party accessory list officially certified by D
 | MIPI | Waveshare | OV5647 Camera | OV5647 sensor, 5MP, FOV diagonal 160° | 1920x1080@30fps(default), <br/>640x480@60fps, <br/>1280x960@30fps, <br/>2592x1944@15fps(max) | [Purchase Link](https://www.waveshare.com/rpi-camera-g.htm)  |
 | MIPI | Waveshare | IMX219 Camera | Effect library optimized, IMX219 sensor, 8MP, FOV diagonal 160°| 1920x1080@30fps(default), <br/>640x480@30fps, <br/>1632x1232@30fps, <br/>3264x2464@15fps(max) | [Purchase Link](https://www.waveshare.com/imx219-160-camera.htm?sku=16662)  |
 | MIPI | Waveshare | IMX477 Camera | IMX477 sensor, 12.3MP, FOV diagonal 160° | 1920x1080@50fps(default), <br/>1280x960@120fps, <br/>2016x1520@40fps, <br/>4000x3000@10fps(max) | [Purchase Link](https://www.waveshare.com/imx477-160-12.3mp-camera.htm)  |
-| MIPI | YAHBOOM | IMX219 Camera | IMX219 sensor, 8MP, FOV diagonal 77° | 1920x1080@30fps(default), <br/>640x480@30fps, <br/>1632x1232@30fps, <br/>3264x2464@15fps(max) | [Purchase Link](https://category.yahboom.net/products/rdk-x5-camera?_pos=4&_sid=eea3cf7b9&_ss=r)  |
-| USB | YAHBOOM | USB Camera | Driver-free USB microphone camera, 720p | 1280x720@30fps | [Purchase Link](https://category.yahboom.net/products/camera-mic?_pos=2&_sid=272c303b0&_ss=r)  |
+| MIPI | Yahboom | IMX219 Camera | IMX219 sensor, 8MP, FOV diagonal 77° | 1920x1080@30fps(default), <br/>640x480@30fps, <br/>1632x1232@30fps, <br/>3264x2464@15fps(max) | [Purchase Link](https://category.yahboom.net/products/rdk-x5-camera?_pos=4&_sid=eea3cf7b9&_ss=r)  |
+| USB | Yahboom | USB Camera | Driver-free USB microphone camera, 720p | 1280x720@30fps | [Purchase Link](https://category.yahboom.net/products/camera-mic?_pos=2&_sid=272c303b0&_ss=r)  |
 
 
 ### Stereo Cameras
