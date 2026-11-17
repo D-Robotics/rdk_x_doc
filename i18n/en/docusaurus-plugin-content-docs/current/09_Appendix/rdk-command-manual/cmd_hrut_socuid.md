@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# hrut_socid
+# hrut_socuid
 
-The **hrut_socid** command prints the Unique Identifier (UID) of the current SOC chip.
+The **hrut_socuid** command prints the Unique Identifier (UID) of the current SOC chip.
 
 ## Syntax
 
