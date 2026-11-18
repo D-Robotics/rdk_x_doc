@@ -9,7 +9,7 @@ on:
 
 jobs:
   sync-gh-pages:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: self-hosted
 
     steps:
@@ -32,10 +32,17 @@ jobs:
           OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
           OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
         run: |
+          set +e
           ~/ossutil cp -r . oss://cn-rdk-front-prod/rdk_x_doc/ \
-          -e https://d-robotics.cc \
+          -e https://developer.d-robotics.cc \
           -i $OSS_ACCESS_KEY_ID \
           -k $OSS_ACCESS_KEY_SECRET \
           --region cn-beijing \
           --update \
           --retry-times=3
+          rc=$?
+          if [ $rc -ne 0 ]; then
+            echo "=== ossutil report ==="
+            cat ossutil_output/*.report 2>/dev/null | head -120
+          fi
+          exit $rc
