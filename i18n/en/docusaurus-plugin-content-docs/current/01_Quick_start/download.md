@@ -755,7 +755,7 @@ Providing comprehensive hardware design support materials for module customers t
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3/FCC/D-ROBOTICS%202BGUG-RDKX3K%20FCC%20Grant%20-%20DTS.PDF">📄 FCC</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3/MIC/D-ROBOTICS%20211-240607%20MIC%20Radio%20Certificate.pdf">📄 MIC</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3/SRRC/SRRC_Approval_RDK_X3.pdf">📄 SRRC</a></td>
-      <td>-</td>
+      <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3/KC/RDK_X3_4G_KC_Certificate_R-R-ZeG-RDKX3K.pdf">📄 KC</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3/UKCA/C34-AOC2402T78337EA1-for-UK-x3.pdf">📄 UKCA</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3/RoHS/P-2401V86686E%20RDK%20X3.pdf">📄 RoHS</a></td>
       <td>-</td>
@@ -770,7 +770,7 @@ Providing comprehensive hardware design support materials for module customers t
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3_MD/FCC/D-ROBOTICS%202BGUG-RDKX3M%20FCC%20Grant%20-%20DTS.PDF">📄 FCC</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3_MD/MIC/D-ROBOTICS%20211-240608%20MIC%20Radio%20Certificate.pdf">📄 MIC</a></td>
       <td>-</td>
-      <td>-</td>
+      <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3_MD/KC/RDK_X3_MD_104064_KC_Certificate_R-R-ZeG-RDKX3M.pdf">📄 KC (Module)</a><br/><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3_MD/KC/RDK_X3_MD_Carrier_Board_KC_Certificate_R-R-ZeG-RDKX3MC.pdf">📄 KC (Carrier Board)</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/certification/RDK_X3_MD/UKCA/C34-AOC2402T78342EA1-for-UK-x3-md.pdf">📄 UKCA</a></td>
       <td>-</td>
       <td>-</td>
