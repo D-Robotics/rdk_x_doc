@@ -33,7 +33,7 @@ jobs:
           OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
         run: |
           ~/ossutil cp -r . oss://cn-rdk-front-prod/rdk_x_doc/ \
-          -e https://d-robotics.cc \
+          -e https://developer.d-robotics.cc \
           -i $OSS_ACCESS_KEY_ID \
           -k $OSS_ACCESS_KEY_SECRET \
           --region cn-beijing \
