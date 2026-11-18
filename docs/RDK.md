@@ -25,9 +25,9 @@ import DocScope from '@site/src/components/DocScope';
 :::info 注意
 
 - 本文档中**RDK X3**均使用 3.0 & 2.0 版本 Ubuntu 操作系统，对于仍需使用**旭日 X3 派 1.0 版本系统**的用户，可从下述链接中获取资料：<br/>
-     [旭日 X3 派用户手册](https://developer.d-robotics.cc/api/v1/fileData/documents_pi/index.html)<br/>
+     [旭日 X3 派用户手册](https://developer-legacy.d-robotics.cc/api/v1/fileData/documents_pi/index.html)<br/>
      [旭日 X3 派 Ubuntu 镜像](https://archive.d-robotics.cc/downloads/os_images/)，选择 1.x.x 版本目录下的镜像<br/>
-     [旭日 X3 派资料包](https://developer.d-robotics.cc/api/v1/static/fileData/X3%E6%B4%BE%E8%B5%84%E6%96%99%E5%8C%85_20220711175326.zip)<br/>
+     [旭日 X3 派资料包](https://developer-legacy.d-robotics.cc/api/v1/static/fileData/X3%E6%B4%BE%E8%B5%84%E6%96%99%E5%8C%85_20220711175326.zip)<br/>
 
 -  **RDK X3 Module**出厂已经烧写测试版本系统镜像，为确保使用最新版本的系统，建议参考本文档完成[系统烧录](./01_Quick_start/install_os/rdk_x3_module/01_system_burn.md)章节。
 

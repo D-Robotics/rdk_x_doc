@@ -774,7 +774,7 @@ https://github.com/D-Robotics/hobot_stereonet.git
 
 ### 5.3 目标检测与分割
 #### 5.3.1 代码仓库:
-https://github.com/D-Robotics/hobot_dnn/tree/
+https://github.com/D-Robotics/hobot_dnn
 
 #### 5.3.2 工程逻辑框架:
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/06_Application_case/amr/detection_framework.jpg)

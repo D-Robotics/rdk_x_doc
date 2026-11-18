@@ -441,24 +441,24 @@ RDK X5 Module 开发板提供 1 路 40PIN 接口，方便用户扩展外围接�
 
 | 连接器 | 型号 |   厂商  |  描述  |
 | --- | ------ | ------- | ------- |
-| J1 | HDGC1002WV-S-2P | HDGC (华德共创) | RTC 电池接口 |
-| J14/J15 | AFC11-S22ICA-00 | JS (钜硕电子) | MIPI Camera 接口 |
-| J16 | AFC01-S22FCA-00 | JS (钜硕电子) | LCD 显示接口 |
-| J18 | HDGC1002WV-S-3P | HDGC (华德共创) | CAN FD 高速接口 |
+| J1 | HDGC1002WV-S-2P | 华德共创 | RTC 电池接口 |
+| J14/J15 | AFC11-S22ICA-00 | 钜硕电子 | MIPI Camera 接口 |
+| J16 | AFC01-S22FCA-00 | 钜硕电子 | LCD 显示接口 |
+| J18 | HDGC1002WV-S-3P | 华德共创 | CAN FD 高速接口 |
 
 </DocScope>
 <DocScope versions=">=3.5.0" products="RDK X5 Module">
 
 | 连接器 | 型号 |   厂商  |  描述  |
 | --- | ------ | ------- | ------- |
-| J1/J21 | DF40C-100DS-0.4V(51) | HRS(广濑) | 100P 连接器 |
-| J3 | DF40C-60DS-0.4V(51) | HRS(广濑) | 60P 连接器 |
-| J4 | PZ254V-12-10P | XFCN(兴飞) | 功能控制 IO header |
-| J5 | WAFER-SH1.0-2PLB | XFCN(兴飞) | RTC 电池接口 |
-| J7/J8/J10 | FPC-05F-22PH20 | XUNPU(讯普) | CAM 接口，MIPI DSI 接口 |
-| J15 | WAFER-SH1.0-4PLB | XUNPU(讯普) | 风扇接口 |
-| J18 | WAFER-SH1.0-3PLB | XUNPU(讯普) | CAN 总线接口 |
-| J20 | PH2.54-01-02PZS | XUNPU(讯普) | POE 接口 |
+| J1/J21 | DF40C-100DS-0.4V(51) | 广濑 | 100P 连接器 |
+| J3 | DF40C-60DS-0.4V(51) | 广濑 | 60P 连接器 |
+| J4 | PZ254V-12-10P | 兴飞 | 功能控制 IO header |
+| J5 | WAFER-SH1.0-2PLB | 兴飞 | RTC 电池接口 |
+| J7/J8/J10 | FPC-05F-22PH20 | 讯普 | CAM 接口，MIPI DSI 接口 |
+| J15 | WAFER-SH1.0-4PLB | 讯普 | 风扇接口 |
+| J18 | WAFER-SH1.0-3PLB | 讯普 | CAN 总线接口 |
+| J20 | PH2.54-01-02PZS | 讯普 | POE 接口 |
 
 </DocScope>
 

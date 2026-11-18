@@ -788,7 +788,7 @@ https://github.com/D-Robotics/hobot_stereonet.git
 
 ### 5.3 Object detection and segmentation
 #### 5.3.1 Repositories:
-https://github.com/D-Robotics/hobot_dnn/tree/
+https://github.com/D-Robotics/hobot_dnn
 
 #### 5.3.2 Code Engineering Logic Framework:
 ![](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/06_Application_case/amr/detection_framework_en.jpg)

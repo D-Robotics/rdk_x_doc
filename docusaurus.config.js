@@ -100,7 +100,10 @@ function applyEnglishCategorySlugs(items) {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "RDK X3/X5 DOC",
+  title:
+    process.env.DOCUSAURUS_CURRENT_LOCALE === "en"
+      ? "RDK X3/X5 User Manual"
+      : "RDK X3/X5 用户手册",
   // tagline: 'Dinosaurs are cool',
   favicon: "img/logo.png",
   // Set the production url of your site here
@@ -122,7 +125,7 @@ const config = {
           },
 
           feedbackFloat: {
-            enabled: true,
+            enabled: false,
                 questionnaireUrl: "https://horizonrobotics.feishu.cn/share/base/form/shrcnLQ9OfYQO03cebdkNfOmkCh",
                 questionnaireUrlByLocale: {
                   "zh-Hans": "https://horizonrobotics.feishu.cn/share/base/form/shrcnLQ9OfYQO03cebdkNfOmkCh",
@@ -156,18 +159,12 @@ const config = {
       async: true,
     },
     // Dify Chatbot Configuration
-    {
-      src: "/rdk_x_doc/js/dify-config.js",
-    },
+
     {
       src: `/rdk_x_doc${localePrefix}/js/umami-events.js`,
       defer: true,
     },
-    {
-      src: "https://rdk.d-robotics.cc/embed.min.js",
-      id: "rJYrxmxmjOkjEx2c",
-      defer: true,
-    },
+
   ],
   headTags: [
     {
@@ -203,6 +200,7 @@ const config = {
     },
   },
 
+
   presets: [
     [
       "classic",
@@ -232,6 +230,7 @@ const config = {
     ],
   ],
   plugins:  [
+    '@d-robotics/docusaurus-plugin-guaji',
     require.resolve("./src/plugins/sidebar-scope-config-plugin"),
     require.resolve("./src/plugins/locale-aware-404-plugin"),
     "docusaurus-plugin-image-zoom",
@@ -285,6 +284,11 @@ const config = {
           { from: "/03_Basic_Application/03_40pin_user_guide/40pin_define.md", to: "/Basic_Application/01_40pin_user_sample/40pin_define" },
           { from: "/Quick_start/09_RDK_Studio/04_flashing.md", to: "/Quick_start/rdk_studio" },
           { from: "/05_Robot_development/03_boxs/spatial/stereo_imu_cam.md", to: "https://developer.d-robotics.cc/tros_doc/en/boxs/spatial/stereo_imu_cam" },
+          // GSC 404 尾巴（2026-10）：版本号写成点号，实际页面用下划线
+          { from: "/Advanced_development/toolchain_development/rdk_x5/oe_toolchain_v1.2.8", to: "/Advanced_development/toolchain_development/rdk_x5/oe_toolchain_v1_2_8" },
+          { from: "/Advanced_development/toolchain_development/rdk_x3/oe_toolchain_v2.6.6", to: "/Advanced_development/toolchain_development/rdk_x3/oe_toolchain_v2_6_6" },
+          // 2026-10-22：源文件名拼写错误 blueteeth → bluetooth，旧 URL 301 到新 URL
+          { from: "/System_configuration/network_blueteeth", to: "/System_configuration/network_bluetooth" },
         ],
       },
     ],
@@ -316,7 +320,7 @@ const config = {
       navbar: {
         title: "D-Robotics",
         logo: {
-          alt: "地瓜机器人社区 logo",
+          alt: "地瓜 logo",
           src: "img/logo.png",
           href: "https://d-robotics.cc/", // 修改为文档根路径
         },
@@ -369,7 +373,7 @@ const config = {
                 href: "https://github.com/D-Robotics",
               },
               {
-                label: "BiLiBiLi",
+                label: "Bilibili",
                 href: (() => {
                   if (process.env.DOCUSAURUS_CURRENT_LOCALE === "en") {
                     return "https://www.youtube.com/@D-Robotics";
@@ -387,9 +391,9 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
       algolia: {
-        appId: "1VU781LYTV",
-        apiKey: "fb65c6e54a52ce6fba0645bd2630e79b",
-        indexName: "rdk_x_doc",
+        appId: process.env.ALGOLIA_APP_ID || "1VU781LYTV",
+        apiKey: process.env.ALGOLIA_SEARCH_API_KEY || "fb65c6e54a52ce6fba0645bd2630e79b",
+        indexName: process.env.ALGOLIA_INDEX_NAME || "rdk_x_doc",
         contextualSearch: true,
         searchPagePath: "search",
       },

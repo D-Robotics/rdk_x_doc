@@ -423,7 +423,7 @@ print("version:", HB_HBMRuntime.version)
     print(model.input_strides)
     # ->{'yolov5x_672x672_nv12': {'data_uv': [-1, -1, 2, 1], 'data_y': [-1, -1, 1, 1]}}
     ```
-    Note: See stride details in the [OE documentation](https://developer.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html?highlight=stride#hbdnntensorproperties) for `hbDNNTensorProperties`.
+    Note: See stride details in the [OE documentation](https://developer-legacy.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html?highlight=stride#hbdnntensorproperties) for `hbDNNTensorProperties`.
 - output_counts: Dict[str, int]
   - Description:
     - Number of output tensors per model.
@@ -502,7 +502,7 @@ print("version:", HB_HBMRuntime.version)
     print(model.output_strides)
     # ->{'yolov5x_672x672_nv12': {'1310': [1806336, 43008, 1024, 4], '1312': [451584, 21504, 1024, 4], 'output': [7225344, 86016, 1024, 4]}}
     ```
-    Note: See stride details in the [OE documentation](https://developer.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html?highlight=stride#hbdnntensorproperties) for `hbDNNTensorProperties`.
+    Note: See stride details in the [OE documentation](https://developer-legacy.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/runtime/source/bpu_sdk_api/source/bpu_sdk_api_doc.html?highlight=stride#hbdnntensorproperties) for `hbDNNTensorProperties`.
 
 - sched_params: Dict[str, SchedParam]
   - Description:

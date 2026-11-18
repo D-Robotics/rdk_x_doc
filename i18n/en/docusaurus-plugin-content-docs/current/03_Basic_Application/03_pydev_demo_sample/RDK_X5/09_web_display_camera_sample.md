@@ -76,7 +76,7 @@ python mipi_camera_web_yolov5x.py
 
 After running, the program starts a web service. You can access the development board's IP address via a browser to view the real-time video stream and object detection results.
 
-In the browser, visit http://development-board-IP, defaulting to http://192.168.127.10.
+In the browser, visit the development board's IP address (default: `http://192.168.127.10`).
 ![pydev_05_wb_disp_web_img](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/03_pydev_demo_sample/image/RDK_X5_Newly/pydev_05_wb_disp_web_img.png)
 
 Click on `web Display` shown in the browser to see the real-time video stream and object detection results. The effect can be seen in the [Effect Demonstration section](#effect-demonstration) at the beginning of the article.
